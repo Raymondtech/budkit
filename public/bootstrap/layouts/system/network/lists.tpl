@@ -32,39 +32,28 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                 </div>
-                <table class="table table-striped">
-                    <!-- Colgroup -->  
-                    <colgroup>  
-                        <col class="col-odd" />  
-                        <col class="col-even" />  
-                        <col class="col-odd" />  
-                        <col class="col-even" />  
-                    </colgroup> 
-                    <thead>
-                        <tr>
-                            <th scope="col" ><input type="checkbox" /></th>
-                            <th scope="col" class="span1">&nbsp;</th>
-                            <th scope="col" class="span6">Full Name</th>
-                            <th scope="col" class="span2">User Name</th>
-                            <th scope="col" class="span2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                    </tfoot>
-                    <tbody>
-                        <?php for ($i = 0; $i < 30; $i++): ?>
-                        <tr>
-                            <td><input type="checkbox" /></td>
-                            <td><img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" width="48" height="48" /></td>
-                            <td><a href="#">Livingstone Kimbi Fatele Fultang</a></td>                  
-                            <td>Category</td>
-                            <td>Tags</td>
-                        </tr>
-                        <?php endfor ; ?>
-                    </tbody>
-                </table>
+                <ul class="grid-list grid-list-striped">
+
+                    <li class="row-fluid grid-list-head">
+                        <div class="span1" align="center"><input type="checkbox" /></div>
+                        <div class="span1">&nbsp;</div>
+                        <div class="span6">Full Name</div>
+                        <div class="span2">User Name</div>
+                        <div class="span2">Actions</div>
+                    </li>
+
+                    <?php for ($i = 0; $i < 30; $i++): ?>
+                    <li class="row-fluid">
+                        <div class="span1" align="center"><input type="checkbox" /></div>
+                        <div class="span1"><img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" width="48" height="48" /></div>
+                        <div class="span6"><a href="#">Livingstone Kimbi Fatele Fultang</a></div>                  
+                        <div class="span2">Category</div>
+                        <div class="span2">Tags</div>
+                    </li>
+                    <?php endfor ; ?>
+                </ul>
             </div>
             <div class="row-fluid">
                 <div class="span3">

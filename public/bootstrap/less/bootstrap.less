@@ -12,13 +12,15 @@
 @import "fonts.less" ;
 @import "reset.less" ;
 
+// Modify this for custom colors, font-sizes, etc
 // Core variables and mixins
-@import "variables.less"; // Modify this for custom colors, font-sizes, etc
+@import "variables.less"; 
 @import "mixins.less";
 
 // Grid system and page structure
 @import "scaffolding.less";
 @import "grid.less";
+@import "grid-list.less";
 @import "layouts.less";
 
 // Base CSS
@@ -34,10 +36,11 @@
 @import "component-animations.less";
 @import "close.less";
 
+// Note: alerts share common CSS with buttons and thus have styles in buttons.less
 // Components: Buttons & Alerts
 @import "buttons.less";
 @import "button-groups.less";
-@import "alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
+@import "alerts.less";
 
 // Components: Nav
 @import "navs.less";
@@ -60,8 +63,9 @@
 @import "carousel.less";
 @import "hero-unit.less";
 
+// Has to be last to override when necessary
 // Utility classes
-@import "utilities.less"; // Has to be last to override when necessary
+@import "utilities.less"; 
 @import "responsive.less";
 
 
@@ -69,3 +73,4 @@
 @import "timeline.less";
 @import "wizard.less";
 @import "administrator.less";
+

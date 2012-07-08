@@ -60,6 +60,89 @@ $(function () {
     [1.3264128e+12, 172],
     [1.3264992e+12, 150],
     [1.3265856e+12, 189]
+    ],
+    options = {
+         series: {
+             //shadowSize: 1,
+             bars: {
+                 show: true,
+                 barWidth: 25*60*60*300,
+                 align: 'center'
+             }
+         },
+         grid:{
+             borderWidth: 0
+         },
+         yaxis: {
+             min: 0,
+             tickLength: 0,
+             show: false
+         },
+         xaxis: {
+             mode: 'time',
+             timeformat: "%b %d",
+             minTickSize: [1, "month"],
+             tickSize: [5, "day"]
+             //autoscaleMargin: .10
+         }
+     },
+     data = [
+        {
+            label: "Product 1",
+            data: a,
+            bars: {
+                show: true,
+                barWidth: 25*60*60*300,
+                fill: true,
+                lineWidth: 1,
+                order: 1,
+                fillColor:  "#AA4643",
+                 align: 'center'
+            },
+            color: "#AA4643"
+        },
+        {
+            label: "Product 2",
+            data: b,
+            bars: {
+                show: true,
+                barWidth: 25*60*60*300,
+                fill: true,
+                lineWidth: 1,
+                order: 2,
+                fillColor:  "#89A54E",
+                 align: 'center'
+            },
+            color: "#89A54E"
+        },
+        {
+            label: "Product 3",
+            data: c,
+            bars: {
+                show: true,
+                barWidth: 25*60*60*300,
+                fill: true,
+                lineWidth: 1,
+                order: 3,
+                fillColor:  "#4572A7",
+                 align: 'center'
+            },
+            color: "#4572A7"
+        },
+        {
+            label: "Product 4",
+            data: d,
+            bars: {
+                    show: true,
+                barWidth: 25*60*60*300,
+                fill: true,
+                lineWidth: 1,
+                order: 4,
+                fillColor:  "#80699B",
+                 align: 'center'
+            },
+            color: "#80699B"
+        }
     ];
     // first correct the timestamps - they are recorded as the daily
     // midnights in UTC+0100, but Flot always displays dates in UTC
@@ -70,154 +153,6 @@ $(function () {
     for (var i = 0; i < a.length; ++i) {
         a[i][0] += 60 * 60 * 1000;
     }
-
-    // helper for returning the weekends in a period
-    function weekendAreas(axes) {
-        var markings = [];
-        var d = new Date(axes.xaxis.min);
-        // go to the first Saturday
-        d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7))
-        d.setUTCSeconds(0);
-        d.setUTCMinutes(0);
-        d.setUTCHours(0);
-        var i = d.getTime();
-        do {
-            // when we don't set yaxis, the rectangle automatically
-            // extends to infinity upwards and downwards
-            markings.push({
-                xaxis: {
-                    from: i,
-                    to: i + 2 * 24 * 60 * 60 * 1000
-                }
-            });
-            i += 7 * 24 * 60 * 60 * 1000;
-        } while (i < axes.xaxis.max);
-
-        return markings;
-    }
-
-    var options = {
-        xaxis: {
-            mode: "time"
-        },
-        selection: {
-            mode: "x"
-        },
-        crosshair: {
-            mode: "x"
-        },
-        lines: {
-            steps: false
-        },
-        legend: {
-            position: "nw"
-        },
-        grid: {
-            hoverable: true,
-            clickable: true,
-            borderWidth: 0,
-            borderColor: null
-        },
-        series: {
-            lines: {
-                show: true,
-                fill: 0.1,
-                lineWidth: 3
-            },
-            points: {
-                show: false,
-                radius: 4,
-                symbol: "circle"
-            }
-        },
-        colors: ["green", "rgb(94, 134, 231)", "rgb(87, 147, 189)", "rgb(0, 136, 204)"]
-    };
-
-    var plot = $.plot($("#placeholder"), [{
-        data: d,
-        color: 3
-    }, {
-        data: b,
-        color: 0
-    }], options);
-
-    function showTooltip(x, y, contents) {
-        $('<div id="tooltip">' + contents + '</div>').css({
-            position: 'absolute',
-            display: 'none',
-            top: y + 5,
-            left: x + 5,
-            border: '1px solid #fdd',
-            padding: '2px',
-            'background-color': '#fee',
-            opacity: 0.80
-        }).appendTo("body").fadeIn(200);
-    }
-
-    var previousPoint = null;
-    $("#placeholder").bind("plothover", function (event, pos, item) {
-        $("#x").text(pos.x.toFixed(2));
-        $("#y").text(pos.y.toFixed(2));
-
-        if (item) {
-            if (previousPoint != item.datapoint) {
-                previousPoint = item.datapoint;
-
-                $("#tooltip").remove();
-                var x = item.datapoint[0].toFixed(0),
-                y = item.datapoint[1].toFixed(0),
-                date = new Date(x / 1000),
-                day = date.getDay(),
-                month = date.getMonth(),
-                year = date.getYear(),
-                hours = date.getHours(),
-                minutes = date.getMinutes(),
-                seconds = date.getSeconds(),
-                formattedTime = day + '/' + month + '/' + year + ' at ' + hours + ' hours : ' + minutes + ' mins : ' + seconds + ' sec';
-
-                showTooltip(item.pageX, item.pageY, y + " " + item.series.label);
-            }
-        } else {
-            $("#tooltip").remove();
-            previousPoint = null;
-        }
-
-    });
-
-    $("#placeholder").bind("plotclick", function (event, pos, item) {
-        if (item) {
-            //alert("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
-            plot.highlight(item.series, item.datapoint);
-        }
-    });
-
-    // now connect the two
-    $("#placeholder").bind("plotselected", function (event, ranges) {
-        // do the zooming
-        plot = $.plot($("#placeholder"), [{
-            data: a,
-            label: "page views",
-            color: 0
-        }, {
-            data: b,
-            label: "new members",
-            color: 1
-        }, {
-            data: c,
-            label: "time on site",
-            color: 2
-        }, {
-            data: d,
-            label: "status updates",
-            color: 3
-        }], $.extend(true, {}, options, {
-            xaxis: {
-                min: ranges.xaxis.from,
-                max: ranges.xaxis.to
-            }
-        }));
-
-    // don't fire event on the overview to prevent eternal loop
-    //overview.setSelection(ranges, true);
-    });
+ 
+    $.plot($('#placeholder'), data, options);
 });

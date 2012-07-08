@@ -18,27 +18,7 @@
                             <span class="help-block">A unique catchy name to identify your website. This will show as the default page titles</span>
                         </div>
                     </div>                   
-                    <div class="control-group">
-                        <label class="control-label" for="options[site-offline-message]"> <?php echo _('Offline message'); ?></label>
-                        <div class="controls">
-                            <textarea name="options[site-offline-message]" class="wysiwyg input-xxxlarge" rows="6" placeholder="<?php echo _('This message will be displayed when the site is offline'); ?>" ></textarea>
-                            <span class="help-block"><?php echo _('Brief maintenance message to be displayed to all other users'); ?></span>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Maintenance mode</label>
-                        <div class="controls">
-                            <label class="radio">
-                                <input type="radio" name="options[site-offline]" id="site-offline1" value="1" />
-                                Put site offline for maintenance
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="options[site-offline]" id="site-offline2" value="0" checked="" />
-                                Make site accessible to all
-                            </label>
-                            <span class="help-block">NOTE: An offline site is not accessible by anyone except special users.</span>
-                        </div>
-                    </div>        
+                          
                     <div class="control-group">
                         <label class="control-label" for="options[site-page-title]"> <?php echo _('Website page titles'); ?></label>
                         <div class="controls">
