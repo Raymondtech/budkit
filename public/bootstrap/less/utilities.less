@@ -26,8 +26,20 @@
     margin:0;
 }
 
+.fix-left-gutter{
+    margin-left: @gridGutterWidth !important;
+}
+
+.no-padding{
+    padding:0;
+}
+
 .no-top-margin{
     margin-top: 0;
+}
+
+.no-bottom-margin{
+    margin-bottom: 0;
 }
 
 .container-fixed{
@@ -40,57 +52,3 @@
     }
 }
 
-.has-admin-warning{
-    border-top: 3px solid #AF1010
-}
-
-.admin-main-tabs{
-    background: #F9F9F9;
-    padding: 3px 3px 0;
-    margin-top: -7px;
-    a{ cursor: pointer; }
-}
-
-.admin-menu-lists{
-    list-style: none;
-    margin: 0;
-    li{
-        padding: 5px 10px;
-        border: 1px solid #eee;
-        background: #fcfcfc;
-        margin: 4px 0;
-        cursor: move;
-    }
-    ul{ list-style: none;}
-}
-
-.panel-date{
-    float: right;
-    font-size: 10px;
-    line-height: 48px;
-}
-
-.tree-indent{
-    display: inline-block;
-    width: @baseLineHeight*0.7;
-    height: @baseLineHeight*0.7;
-    background: url("../img/indent-bg.png") no-repeat scroll 0 -4px;
-    border-left: 1px dotted #ccc;
- }
-
-.authority-name{ 
-    color: @grayLighter;
-    span{
-        color: @textColor;
-    }
-}
-
-.permission-allow{
-    //background: @successBackground;
-    color: @successText;
-}
-
-.permission-deny{
-    //background: @errorBackground;
-    color: @errorText;
-}

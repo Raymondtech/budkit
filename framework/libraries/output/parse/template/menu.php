@@ -66,6 +66,7 @@ class Menu extends Parse\Template {
             return null;
         
         $menuType = (isset($tag['TYPE'])) ? trim( $tag['TYPE'] ) : "nav-pills" ;
+        $menuLtr  = (isset($tag['POSITION'])) ? trim( $tag['POSITION'] ) : "right" ;
 
         $database = Library\Database::getInstance();
         $uniqueId = $tag['ID'];
@@ -78,9 +79,10 @@ class Menu extends Parse\Template {
         //print_R($menuItems);
         unset($tag['NAMESPACE']);
         unset($tag['TYPE']);
+        //unset($tag['POSITION']);
         
         $tag['ELEMENT'] = 'ul';
-        $tag['CLASS'] = "nav $menuType";
+        $tag['CLASS'] = "nav $menuType $menuLtr";
         $tag['CHILDREN'] = static::element( (array)$menuItems , $menuType );
         
         //print_R($tag);
