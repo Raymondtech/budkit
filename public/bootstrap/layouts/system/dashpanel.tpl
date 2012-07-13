@@ -32,7 +32,13 @@
     </fieldset>
 </form>
 
+<script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/charts/jquery.flot.js"></script>
+<script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/charts/excanvas.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/charts/jquery.flot.orderBars.js"></script>
+<script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/charts/jquery.flot.pie.js"></script>
+<script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/charts/jquery.flot.resize.js"></script>
+<script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/charts/jquery.sparkline.min.js"></script>
 
-<script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/jquery.flot.min.js"></script>
+
 <script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/administrator.js"></script>
 </tpl:layout>

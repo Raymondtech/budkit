@@ -50,7 +50,6 @@ class Menu extends Parse\Template {
      */
 
     static $instance;
-    
 
     /**
      * Execute the layout
@@ -64,116 +63,119 @@ class Menu extends Parse\Template {
         //We must have the menu id
         if (!isset($tag['ID']))
             return null;
-        
-        $menuType = (isset($tag['TYPE'])) ? trim( $tag['TYPE'] ) : "nav-pills" ;
-        $menuLtr  = (isset($tag['POSITION'])) ? trim( $tag['POSITION'] ) : "right" ;
+
+        $menuType = (isset($tag['TYPE'])) ? trim($tag['TYPE']) : "nav-pills";
+        $menuLtr = (isset($tag['POSITION'])) ? trim($tag['POSITION']) : "right";
+        $menuDepth = (isset($tag['LEVEL'])) ? trim($tag['LEVEL']) : null;
 
         $database = Library\Database::getInstance();
         $uniqueId = $tag['ID'];
 
         //1. Get all menu items for this menu id from the table
         $menuItems = \Platform\Navigator::menu($uniqueId);
-   
-        if(empty($menuItems)) return null;
+
+        if (empty($menuItems))
+            return null;
 
         //print_R($menuItems);
         unset($tag['NAMESPACE']);
         unset($tag['TYPE']);
         //unset($tag['POSITION']);
-        
+
         $tag['ELEMENT'] = 'ul';
         $tag['CLASS'] = "nav $menuType $menuLtr";
-        $tag['CHILDREN'] = static::element( (array)$menuItems , $menuType );
-        
+        $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuLtr);
+
         //print_R($tag);
-     
         //Always return the modified element
         return $tag;
     }
-    
+
     /**
      * Create element
      * 
      * @param type $menuItems
      * @return type 
      */
-    public static function element( $menuItems , $menuType = "nav-pill" ) {
-        
-        $li         = array();
+    public static function element($menuItems, $menuType = "nav-pill", $menuDepth = null, $menuPosition = 'right', $menuLevelParent = null) {
+
+        $li = array();
+        $parent = 0;
+        $id = 0;
+
         //$hasActive  = false;
-        
         foreach ($menuItems as $item) {
-            
-            
+
+
             //@TODO Menu Plugins
             //Search for all plugin placemarkers in menu item names
             //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
-            if( preg_match_all('/(?:(?<=\%\{)).*?(?=\})/i', $item['menu_title'], $matches) ){
-      
-                $placemarkers   = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
-                
-                foreach($placemarkers as $k=>$dataid){
+            if (preg_match_all('/(?:(?<=\%\{)).*?(?=\})/i', $item['menu_title'], $matches)) {
+
+                $placemarkers = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
+
+                foreach ($placemarkers as $k => $dataid) {
                     //@TODO Now call all menu items plugins
                     $item['menu_title'] = $dataid;
                 }
-                
                 //Replace with data;
-                continue;    
+                continue;
             }
 
             //@TODO check if this is the current menu item and set it as active
-            $query   = \Library\Uri::getInstance()->getQuery();
-            $active  = ( \Library\Uri::internal( $item['menu_url'] ) <> \Library\Uri::internal( $query ) ) ? false : true;
+            $query = \Library\Uri::getInstance()->getQuery();
+            $active = ( \Library\Uri::internal($item['menu_url']) <> \Library\Uri::internal($query) ) ? false : true;
             //$hasActive = $active;
-            $link  = array(
+
+            $link = array(
                 "ELEMENT" => 'li',
-                "CLASS"=> ((isset($item['menu_classes'])&&!empty($item['menu_classes'])) ?  $item['menu_classes'] : "link").(($active)?" active":""),
+                "CLASS" => ((isset($item['menu_classes']) && !empty($item['menu_classes'])) ? $item['menu_classes'] : "link") . (($active) ? " active" : ""),
                 "CHILDREN" => array(
                     array(
-                        "ELEMENT" => "a",                          
-                        "HREF" => !empty($item['menu_url'] ) ? \Library\Uri::internal( $item['menu_url']) : '#',
+                        "ELEMENT" => "a",
+                        "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
                         "CDATA" => $item['menu_title']
                     )
                 )
-            );  
+            );
             //Ammend active path if tab is active;
             //@TODO am i a child? who is my parent?
-            
-            
             //@TODO build a tag
-            $id     = $item['menu_id'];
-            $parent = $item['menu_parent_id'];
-            
+            if ($active):
+                $id = $item['menu_id'];
+                $parent = $item['menu_parent_id'];
+            endif;
+
+
             //Count children
-            if(isset($item['children']) && count($item['children'])>0){
-                
+            if (isset($item['children']) && count($item['children']) > 0 && ( is_null($menuDepth) || $menuDepth > 1 )) {
+
                 //Close active path
                 //static::$has_active = false;
-                
+
                 $dropdown = array(
-                    "CLASS"=> "dropdown-toggle",
-                    "DATA-TOGGLE"=>"dropdown",
-                    "HREF"  => "#"
+                    "CLASS" => "dropdown-toggle",
+                    "DATA-TOGGLE" => "dropdown",
+                    "HREF" => "#"
                 );
                 $link['CLASS'] .= ' dropdown';
-                
-                $link['CHILDREN'][0] = array_merge( $link['CHILDREN'][0]  , $dropdown );
+
+                $link['CHILDREN'][0] = array_merge($link['CHILDREN'][0], $dropdown);
                 unset($link['CHILDREN'][0]['HREF']);
                 $title = $link['CHILDREN'][0]['CDATA'];
                 unset($link['CHILDREN'][0]['CDATA']);
-                $link['CHILDREN'][0]['CDATA'] = $title.(( $menuType <> "nav-block") ? '<b class="caret"></b>': ""); 
+                $link['CHILDREN'][0]['CDATA'] = $title . (( $menuType <> "nav-block") ? '<b class="caret"></b>' : "");
                 //Move children to the very end of the array
-                
-                $link['CHILDREN'][]  = array(
-                    "ELEMENT"   =>'ul',
-                    "CLASS"     =>'dropdown-menu',
-                    "CHILDREN"  =>static::element( $item['children'] )
-                ); 
+                $link['CHILDREN'][] = array(
+                    "ELEMENT" => 'ul',
+                    "CLASS" => 'dropdown-menu',
+                    "CHILDREN" => static::element($item['children'])
+                );
             }
-            
+
             $li[] = $link;
         }
-        
+
         return $li;
     }
 

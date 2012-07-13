@@ -30,14 +30,14 @@
                 <tpl:block data="page.block.alerts" /> 
                 
                 <div class="sidebar-icons">
-                    <tpl:menu id="adminlaunchbar" type="nav-icons" />
+                    <tpl:menu id="adminmenu" type="nav-icons" level="1"  />
                 </div>
                 <section class="layout-block has-sidebar-btns grey-background no-padding no-bottom-margin">
                     <div class="row-fluid">
 
                         <div class="span2">
 
-                            <tpl:menu id="adminmenu" type="nav-block" position="left" />
+                            <tpl:menu id="adminmenu" type="nav-block" position="left" level="2" />
 
 
 
