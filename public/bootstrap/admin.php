@@ -29,10 +29,7 @@
                 <tpl:import layout="system/adminbar" />
                 <tpl:block data="page.block.alerts" /> 
                 
-                <div class="sidebar-icons">
-                    <tpl:menu id="adminmenu" type="nav-icons" level="1"  />
-                </div>
-                <section class="layout-block has-sidebar-btns grey-background no-padding no-bottom-margin">
+                <section class="layout-block grey-background no-padding no-bottom-margin">
                     <div class="row-fluid">
 
                         <div class="span2">

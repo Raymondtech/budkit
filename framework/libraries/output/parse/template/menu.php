@@ -134,7 +134,7 @@ class Menu extends Parse\Template {
                     array(
                         "ELEMENT" => "a",
                         "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
-                        "CDATA" => $item['menu_title']
+                        "CDATA" => (( strtolower($menuType) === "nav-icons") ? '<i class="icon icon-'.str_replace(array(" ","(",")","-","&","%",",","#" ), '-', strtolower($item['menu_title'])).'"></i>' : "").$item['menu_title']
                     )
                 )
             );
@@ -164,7 +164,7 @@ class Menu extends Parse\Template {
                 unset($link['CHILDREN'][0]['HREF']);
                 $title = $link['CHILDREN'][0]['CDATA'];
                 unset($link['CHILDREN'][0]['CDATA']);
-                $link['CHILDREN'][0]['CDATA'] = $title . (( $menuType <> "nav-block") ? '<b class="caret"></b>' : "");
+                $link['CHILDREN'][0]['CDATA'] = $title. (( $menuType <> "nav-block") ? '<b class="caret"></b>' : "");
                 //Move children to the very end of the array
                 $link['CHILDREN'][] = array(
                     "ELEMENT" => 'ul',

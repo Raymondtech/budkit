@@ -117,6 +117,41 @@
   margin-right: 2px;
 }
 
+//NAV ICONS
+//-------------------------
+
+.nav-icons {
+  margin: 0;
+}
+.nav-icons > li > a,
+.nav-icons .nav-header {
+  cursor: pointer;
+}
+.nav-icons > li{
+background: none;
+border-top: 1px solid #222;
+border-bottom: 1px solid #000;
+    &.open{ 
+         
+    }
+}
+.nav-icons > li > a {
+    text-align: center;
+    background: none !important;
+    height: 70px;
+}
+.nav-icons .active > a,
+.nav-icons .active > a:hover {
+    background: none;
+}
+
+
+
+.nav-icons [class^="icon-"], .nav-icons [class*=" icon-"] {
+  display: block !important;
+}
+
+
 
 
 // TABS AND PILLS
