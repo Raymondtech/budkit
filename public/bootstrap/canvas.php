@@ -39,7 +39,7 @@
                     <tpl:import layout="console" />                
                 </section>
             </div>
-            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.js" type="text/javascript"></script>
         </body>
     </html>
 </tpl:layout>

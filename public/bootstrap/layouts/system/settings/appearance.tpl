@@ -41,30 +41,7 @@
                         </tbody>
                     </table>
                     <hr />
-                    <div class="control-group">
-                        <label class="control-label" for="appearance[navigation-name]"> <?php echo _('Add Navigation Group Name'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="appearance[navigation-name]"  class="input-xxxlarge" />
-                            <span class="help-block">To create a new navigation group, enter its name/title here. To add multiple navigations use comma seperators, e.g Menu1 Title, Menu2 Title, etc</span>
-                        </div>
-                    </div>   
-
-
-                    <hr />
-                    <div class="control-group">
-                        <label class="control-label">Maintenance mode</label>
-                        <div class="controls">
-                            <label class="radio">
-                                <input type="radio" name="options[site-offline]" id="site-offline1" value="1" />
-                                Put site offline for maintenance
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="options[site-offline]" id="site-offline2" value="0" checked="" />
-                                Make site accessible to all
-                            </label>
-                            <span class="help-block">NOTE: An offline site is not accessible by anyone except special users.</span>
-                        </div>
-                    </div>  
+                      
                 </fieldset>
                 <div class="btn-toolbar">
                     <button class="btn pull-left btn-danger" type="reset">Reset Form</button>

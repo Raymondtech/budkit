@@ -1,99 +1,69 @@
 $(function () {
-    var previousPoint;
- 
-    var d1 = [];
-    for (var i = 0; i <= 30; i += 1)
-        d1.push([i, parseInt(Math.random() * 100)]);
- 
-    var d2 = [];
-    for (var i = 0; i <= 30; i += 1)
-        d2.push([i, parseInt(Math.random() * 100)]);
- 
-    var d3 = [];
-    for (var i = 0; i <= 30; i += 1)
-        d3.push([i, parseInt(Math.random() * 100)]);
- 
-    var ds = new Array();
- 
-    ds.push({
-        data:d1,
-        bars: {
-            show: true, 
-            barWidth: 0.2, 
-            order: 1
+    //random data generator
+    var data = [], totalPoints = 200;
+    
+    function getRandomData( reset ) {
+        
+        if(reset){
+            data = [];
         }
-    });
-    ds.push({
-        data:d2,
-        bars: {
-            show: true, 
-            barWidth: 0.2, 
-            order: 2
-        }
-    });
-    ds.push({
-        data:d3,
-        bars: {
-            show: true, 
-            barWidth: 0.2, 
-            order: 3
-        }
-    });
-                
-    //tooltip function
-    function showTooltip(x, y, contents, areAbsoluteXY) {
-        var rootElt = 'body';
+        if (data.length > 0)
+            data = data.slice(1);
 	
-        $('<div id="tooltip2" class="tooltip">' + contents + '</div>').css( {
-            position: 'absolute',
-            display: 'none',
-            top: y - 35,
-            left: x - 5,
-            'z-index': '9999',
-            'color': '#fff',
-            'font-size': '11px',
-            opacity: 0.8
-        }).prependTo(rootElt).show();
+        // do a random walk
+        while (data.length < totalPoints) {
+            var prev = data.length > 0 ? data[data.length - 1] : 50, y = prev + Math.random() * 10 - 5;
+            if (y < 0)
+                y = 0;
+            if (y > 100)
+                y = 100;
+            data.push(y);
+        }
+	
+        // zip the generated y values with the x values
+        var res = [];
+        for (var i = 0; i < data.length; ++i)
+            res.push([i, data[i]])
+        return res;
     }
                 
-    //Display graph
-    $.plot($("#placeholder"), ds, {
-        grid:{
-            hoverable:true
+    // setup plot
+    var options = {
+        yaxis: {
+            min: 0, 
+            ticks:[[0,""],[20,""],[40,""],[60,""],[80,""],[100,""]],
+            max: 100
         },
-        legend: true
-    });
-
- 
-    //add tooltip event
-    $("#placeholder").bind("plothover", function (event, pos, item) {
-        if (item) {
-            if (previousPoint != item.datapoint) {
-                previousPoint = item.datapoint;
- 
-                //delete de prÐ“Â©cÐ“Â©dente tooltip
-                $('.tooltip').remove();
- 
-                var x = item.datapoint[0];
- 
-                //All the bars concerning a same x value must display a tooltip with this value and not the shifted value
-                if(item.series.bars.order){
-                    for(var i=0; i < item.series.data.length; i++){
-                        if(item.series.data[i][3] == item.datapoint[0])
-                            x = item.series.data[i][0];
-                    }
-                }
- 
-                var y = item.datapoint[1];
- 
-                showTooltip(item.pageX+5, item.pageY+5,x + " = " + y);
- 
+        xaxis: {
+            min: 0, 
+            ticks:[[0,""],[20,""],[40,""],[60,""],[80,""],[100,""]],
+            max: 100
+        },
+        colors: ["#519BC8"],
+        series: {
+            lines: { 
+                lineWidth: 2, 
+                fill: true,
+                fillColor: {
+                    colors: [ {
+                        opacity: 0.2
+                    }, {
+                        opacity: 0
+                    } ]
+                },
+                //"#dcecf9"
+                steps: false
+	
             }
         }
-        else {
-            $('.tooltip').remove();
-            previousPoint = null;
-        }
- 
-    });
+    };
+    //Plot the graph
+    $.plot( $("#placeholder1"), [ getRandomData() ], options );
+    $.plot( $("#placeholder2"), [ getRandomData(true) ], options );
+    $.plot( $("#placeholder3"), [ getRandomData(true) ], options );
+    $.plot( $("#placeholder4"), [ getRandomData(true) ], options );
+    
+    options.colors = ["#D14836"];
+    
+    $.plot( $("#placeholder5"), [ getRandomData(true) ], options );
 });

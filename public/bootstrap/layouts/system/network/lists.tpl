@@ -10,34 +10,11 @@
     <form class="form-horizontal">
         <fieldset class="no-margin">
             <div class="content-list">
-                <div class="row-fluid">
-                    <div class="span5">
-                        <div class="btn-group">
-                            <button class="btn">Bulk Actions</button>
-                            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="span7">
-                        <div class="pagination no-margin pull-right">
-                            <ul>
-                                <li class="active"><a href="#"><i class="icon  icon-th-list"></i> List</a></li>
-                                <li><a href="#"><i class="icon  icon-th"></i> Grid</a></li>
-                            </ul>
-                        </div>
-                    </div>
 
-                </div>
                 <ul class="grid-list grid-list-striped">
 
                     <li class="row-fluid grid-list-head">
-                        <div class="span1" align="center"><input type="checkbox" /></div>
+                        <div class="span left-pad" align="center"><input type="checkbox" data-check="member" /></div>
                         <div class="span1">&nbsp;</div>
                         <div class="span6">Full Name</div>
                         <div class="span2">User Name</div>
@@ -46,7 +23,7 @@
 
                     <?php for ($i = 0; $i < 30; $i++): ?>
                     <li class="row-fluid">
-                        <div class="span1" align="center"><input type="checkbox" /></div>
+                        <div class="span left-pad" align="center"><input type="checkbox" data-selector="member" /></div>
                         <div class="span1"><img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" width="48" height="48" /></div>
                         <div class="span6"><a href="#">Livingstone Kimbi Fatele Fultang</a></div>                  
                         <div class="span2">Category</div>
@@ -56,20 +33,18 @@
                 </ul>
             </div>
             <div class="row-fluid">
-                <div class="span3">
+                <div class="span2">
                     <div class="btn-group pull-left">
-                        <button class="btn">Bulk Actions</button>
+                        <button class="btn">Apply Actions</button>
                         <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Delete</a></li>
+                            <li><a href="#">Move Somewhere</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="span7">
+                <div class="span8">
                     <div class="pagination no-margin" align="center">
                         <ul>
                             <li class="disabled"><a href="#">«</a></li>
@@ -84,16 +59,12 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="span2">
-                    <div class="btn-group pull-right">
-                        <button class="btn">Length</button>
-                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                    <div class="pagination no-margin pull-right">
+                        <ul>
+                            <li class="active"><a href="#"><i class="icon  icon-th-list"></i> List</a></li>
+                            <li><a href="#"><i class="icon  icon-th"></i> Grid</a></li>
                         </ul>
                     </div>
                 </div>

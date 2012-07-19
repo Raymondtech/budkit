@@ -1,43 +1,16 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+    <ul class="nav nav-tabs admin-main-tabs" id="systemPreferences">
+        <li><a data-target="#live" data-toggle="tab">Add New</a></li>
+        <li><a data-target="#live" data-toggle="tab">Upload Files</a></li>
+        <li class="active"><a data-target="#aPanel" data-toggle="tab">Published</a></li>
+        <li><a data-target="#notifications" data-toggle="tab">Drafts</a></li>
+        <li><a data-target="#moderation" data-toggle="tab">Pending Review</a></li>
+        <li><a data-target="#live" data-toggle="tab">Trash</a></li>
+    </ul>
     <form class="form-horizontal">
         <fieldset class="no-margin">
             <div class="content-list">
-                <div class="row-fluid">
-                    <div class="span3">
-                        <div class="btn-group pull-left">
-                            <button class="btn">Bulk Actions</button>
-                            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="span7">
-                        <div class="pagination no-margin" align="center">
-                            <ul>
-                                <li class="active"><a href="#"><i class="icon  icon-th-list"></i> List</a></li>
-                                <li><a href="#"><i class="icon  icon-th"></i> Grid</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <div class="btn-group pull-right">
-                            <button class="btn">Length</button>
-                            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
                 <table class="table table-striped">
                     <!-- Colgroup -->  
                     <colgroup>  
@@ -48,11 +21,9 @@
                     </colgroup> 
                     <thead>
                         <tr>
-                            <th scope="col" id="post_selector"><input type="checkbox" /></th>
+                            <th scope="col" id="post_selector"><input type="checkbox" data-check="content" /></th>
                             <th scope="col" id="post_title">Title</th>
                             <th scope="col" id="post_author">Author</th>
-                            <th scope="col" id="post_category">Category</th>
-                            <th scope="col" id="post_tags">Tags</th>
                             <th scope="col" id="post_comments">Comments</th>
                             <th scope="col" id="post_date">Date</th>
                         </tr>
@@ -62,33 +33,29 @@
                     <tbody>
                         <?php for ($i = 0; $i < 30; $i++): ?>
                         <tr>
-                            <td><input type="checkbox" /></td>
-                            <td>Post Title and a summary</td>
-                            <td>Author</td>
-                            <td>Category</td>
-                            <td>Tags</td>
-                            <td>Comments</td>
-                            <td>Date</td>
+                            <td width="1%"><input type="checkbox"  data-selector="content" /></td>
+                            <td class="span7"><a href="#">This is a quite relatively long but yet simple, and minimal Post Title and a summary</a></td>
+                            <td class="span2"><a href="#">Livingstone Fultang</a></td>
+                            <td class="span1">43</td>
+                            <td class="span1">Date</td>
                         </tr>
                         <?php endfor ; ?>
                     </tbody>
                 </table>
             </div>
             <div class="row-fluid">
-                <div class="span3">
+                <div class="span2">
                     <div class="btn-group pull-left">
-                        <button class="btn">Bulk Actions</button>
+                        <button class="btn">Apply Actions</button>
                         <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Delete</a></li>
+                            <li><a href="#">Move Somewhere</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="span7">
+                <div class="span8">
                     <div class="pagination no-margin" align="center">
                         <ul>
                             <li class="disabled"><a href="#">«</a></li>
@@ -103,16 +70,12 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="span2">
-                    <div class="btn-group pull-right">
-                        <button class="btn">Length</button>
-                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                    <div class="pagination no-margin pull-right">
+                        <ul>
+                            <li class="active"><a href="#"><i class="icon  icon-th-list"></i> List</a></li>
+                            <li><a href="#"><i class="icon  icon-th"></i> Grid</a></li>
                         </ul>
                     </div>
                 </div>

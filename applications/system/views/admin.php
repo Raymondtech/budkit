@@ -49,7 +49,7 @@ final class Admin extends Platform\View {
         $dashpanel  = $this->output->layout("dashpanel");
         $dashbanner = $this->output->layout("dashbanner");
         
-        $this->output->addToPosition("banner" , $dashbanner );
+        //$this->output->addToPosition("banner" , $dashbanner );
         $this->output->addToPosition("body" , $dashpanel );
         
     }

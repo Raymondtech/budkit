@@ -25,18 +25,33 @@
 
         <body class="white-background admin-body">
             <div class="container-fixed">  
-                
+
                 <tpl:import layout="system/adminbar" />
-                <tpl:block data="page.block.alerts" /> 
                 
+
                 <section class="layout-block grey-background no-padding no-bottom-margin">
                     <div class="row-fluid">
 
                         <div class="span2">
+                            <div class="btn-toolbar admin-quickbuttons no-margin">
+                                <div class="btn-group">
+                                    <a class="btn btn-danger" href="/member/settings/account"><i class="icon icon-plus icon-eye-close icon-white"></i> Go Offline</a>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-success"><i class="icon icon-plus icon-white"></i> Add</button>
+                                    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">New Member</a></li>
+                                        <li><a href="#">New Member Group</a></li>
+                                        <li><a href="#">New Announcement</a></li>
+                                        <li><a href="#">New Email</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">New Extension</a></li>
+                                    </ul>
+                                </div>
+                            </div>
 
                             <tpl:menu id="adminmenu" type="nav-block" position="left" level="2" />
-
-
 
                             <tpl:block data="page.block.side">Sidebar</tpl:block>
 
@@ -92,6 +107,7 @@
                                         </a>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
@@ -101,12 +117,13 @@
                                 <div class="page-header no-margin">
                                     <h1><tpl:element type="text" data="page.title">Administrator</tpl:element><small class="panel-date"><?php echo \Library\Date::today(); ?></small></h1>
                                 </div>
+                                <tpl:block data="page.block.alerts" /> 
                                 <tpl:condition  data="page.block.banner" test="isset" value="1" >
-                                    <div class="row-fluid layout-banner bottom-pad bordered">
+                                    <div class="row-fluid layout-banner bottom-pad">
                                         <tpl:block data="page.block.banner">Banner</tpl:block>
                                     </div>
                                 </tpl:condition>
-                                <div class="top-pad">
+                                <div>
                                     <tpl:block data="page.block.body" />
                                 </div>
                             </div>
