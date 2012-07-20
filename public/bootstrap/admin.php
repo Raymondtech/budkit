@@ -35,10 +35,10 @@
                         <div class="span2">
                             <div class="btn-toolbar admin-quickbuttons no-margin">
                                 <div class="btn-group">
-                                    <a class="btn btn-danger" href="/member/settings/account"><i class="icon icon-plus icon-eye-close icon-white"></i> Go Offline</a>
+                                    <a class="btn btn-danger" href="/member/settings/account">Go Offline</a>
                                 </div>
                                 <div class="btn-group">
-                                    <button class="btn btn-success"><i class="icon icon-plus icon-white"></i> Add</button>
+                                    <button class="btn btn-success">Add..</button>
                                     <button class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">New Member</a></li>
