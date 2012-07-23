@@ -202,11 +202,11 @@ final class Schema extends Platform\Model {
         ");
         static::$database->query(
             "INSERT INTO `?menu_group` (`menu_group_id`, `menu_group_title`, `menu_group_order`, `menu_group_uid`, `menu_group_iscore`) VALUES
-            (1, 'Admin Navigation', 1, 'adminmenu', 1),
+            (1, 'AdminPanel Menu', 1, 'adminmenu', 1),
             (2, 'Settings Menu', 2, 'settingsmenu', 1),
             (3, 'Dashboard Menu', 0, 'dashboardmenu', 1),
             (4, 'Messages menu', 0, 'messagesmenu', 1),
-            (5, 'Profile menu', 0, 'profilemenu', 0);"
+            (5, 'Profile menu', 0, 'profilemenu', 1);"
         );
     }
     

@@ -69,7 +69,7 @@
 
         </div>
         <div class="span4">
-            <div id="addauthority-widget">
+            <div id="addauthority-widget" class="well">
                 <h4 class="bottom-pad">Add New Authority Group</h4>
                 <form method="POST" action="/system/admin/network/authorities/edit">
                     <fieldset class="no-margin">
@@ -111,7 +111,7 @@
                 </form>
             </div> 
             <hr />
-            <div  id="addauthorityrole-widget" >
+            <div  id="addauthorityrole-widget" class="well">
                 <h4 class="bottom-pad">Add New Permission</h4>
                 <form method="POST" action="/system/admin/network/authorities/permissions/add">
 

@@ -54,71 +54,98 @@
 
         </div>
         <div class="span4">
-            <form action="/" class="clearfix">
-                <fieldset class="no-margin">
-                    <div class="control-group">
-                        <label class="control-label" for="appearance[navigation-name]"> <?php echo _('Add Navigation Group Name'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="appearance[navigation-name]"  class="input-xxxlarge" />
-                            <span class="help-block">To create a new navigation group, enter its name/title here. To add multiple navigations use comma seperators, e.g Menu1 Title, Menu2 Title, etc</span>
+            <div class="well">
+                <form action="/" class="clearfix">
+                    <fieldset class="no-margin">
+                        <legend>Add New Menu Item</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="appearance[navigation-name]"> <?php echo _('Title'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="appearance[navigation-name]"  class="input-xxxlarge" />
+                                <span class="help-block">Keep it short and descriptive</span>
+                            </div>
                         </div>
-                    </div>   
+                        <div class="control-group">
+                            <label class="control-label" for="options[site-page-title]"> <?php echo _('Type'); ?></label>
+                            <div class="controls">
+                                <select name="options[site-page-title]" class="input-xxxlarge">
+                                    <option value="0"><?php echo _('Link'); ?></option>
+                                    <option value="1"><?php echo _('Method/Callback'); ?></option>
+                                    <option value="2"><?php echo _('Placeholder'); ?></option>
+                                    <option value="2"><?php echo _('Divider'); ?></option>
+                                </select>
+                                <span class="help-block">By default the page title is the website name.</span>
+                            </div>
+                        </div> 
+                        <div class="control-group">
+                            <label class="control-label" for="appearance[navigation-name]"> <?php echo _('URL or Callback'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="appearance[navigation-name]"  class="input-xxxlarge" />
+                                <span class="help-block">A page or other resource link</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="appearance[navigation-name]"> <?php echo _('Classes'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="appearance[navigation-name]"  class="input-xxxlarge" />
+                                <span class="help-block">Some themes require additional classes for your links</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="options[site-page-title]"> <?php echo _('Add to Menu'); ?></label>
+                            <div class="controls">
+                                <select name="options[site-page-title]" class="input-xxxlarge">
+                                    <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
+                                        <option value="<?php echo $group['menu_group_uid']; ?>"><?php echo $group['menu_group_title']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <span class="help-block">The menu group to add item to. If Item is child of another, you will only be able to set its parent, by dragging to parent after the item has been saved</span>
+                            </div>
+                        </div>
+                    </fieldset>
 
                     <hr />
-                    <div class="control-group">
-                        <label class="control-label">Maintenance mode</label>
-                        <div class="controls">
-                            <label class="radio">
-                                <input type="radio" name="options[site-offline]" id="site-offline1" value="1" />
-                                Put site offline for maintenance
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="options[site-offline]" id="site-offline2" value="0" checked="" />
-                                Make site accessible to all
-                            </label>
-                            <span class="help-block">NOTE: An offline site is not accessible by anyone except special users.</span>
-                        </div>
-                    </div>  
-                </fieldset>
-
-                
-                <div class="btn-toolbar">        
-                    <button type="submit" class="btn pull-left">Add Custom Navigation Group</button>
-                </div>
-            </form>
+                    <div class="btn-toolbar">        
+                        <button type="submit" class="btn pull-left">Add Menu Item</button>
+                    </div>
+                </form>
+            </div>
             <hr />
-            <form action="/">
-                <fieldset class="no-margin">
-                    <div class="control-group">
-                        <label class="control-label" for="appearance[navigation-name]"> <?php echo _('Add Menu Item'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="appearance[navigation-name]"  class="input-xxxlarge" />
-                            <span class="help-block">To create a new navigation group, enter its name/title here. To add multiple navigations use comma seperators, e.g Menu1 Title, Menu2 Title, etc</span>
-                        </div>
-                    </div>   
+            <div class="well clearfix">
+                <form action="/">
+                    <fieldset class="no-margin">
+                        <legend>Add New Menu Group</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="appearance[navigation-name]"> <?php echo _('Add Menu Item'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="appearance[navigation-name]"  class="input-xxxlarge" />
+                                <span class="help-block">To create a new navigation group, enter its name/title here. To add multiple navigations use comma seperators, e.g Menu1 Title, Menu2 Title, etc</span>
+                            </div>
+                        </div>   
+
+                        <hr />
+                        <div class="control-group">
+                            <label class="control-label">Maintenance mode</label>
+                            <div class="controls">
+                                <label class="radio">
+                                    <input type="radio" name="options[site-offline]" id="site-offline1" value="1" />
+                                    Put site offline for maintenance
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="options[site-offline]" id="site-offline2" value="0" checked="" />
+                                    Make site accessible to all
+                                </label>
+                                <span class="help-block">NOTE: An offline site is not accessible by anyone except special users.</span>
+                            </div>
+                        </div>  
+                    </fieldset>
 
                     <hr />
-                    <div class="control-group">
-                        <label class="control-label">Maintenance mode</label>
-                        <div class="controls">
-                            <label class="radio">
-                                <input type="radio" name="options[site-offline]" id="site-offline1" value="1" />
-                                Put site offline for maintenance
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="options[site-offline]" id="site-offline2" value="0" checked="" />
-                                Make site accessible to all
-                            </label>
-                            <span class="help-block">NOTE: An offline site is not accessible by anyone except special users.</span>
-                        </div>
-                    </div>  
-                </fieldset>
-
-                <hr />
-                <div class="btn-toolbar">        
-                    <button type="submit" class="btn pull-left">Add Custom Navigation Group</button>
-                </div>
-            </form>
+                    <div class="btn-toolbar">        
+                        <button type="submit" class="btn pull-left">Add Custom Navigation Group</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <script type="text/javascript">

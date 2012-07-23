@@ -2,16 +2,35 @@
 // -----
 
 .well {
-  min-height: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #F0F8FF;
-  border: 2px solid #D9EDF7 ;
-  //border: 1px solid rgba(0,0,0,.05);
-  .border-radius(1px);
-  //.box-shadow(inset 0 0 1px 1px rgb(217, 237, 247));
-  blockquote {
-    border-color: #ddd;
-    border-color: rgba(0,0,0,.15);
-  }
+    min-height: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #F0F8FF;
+    border: 1px solid #D9EDF7 ;
+    //border: 1px solid rgba(0,0,0,.05);
+    .border-radius(1px);
+    //.box-shadow(inset 0 0 1px 1px rgb(217, 237, 247));
+    blockquote {
+      border-color: #ddd;
+      border-color: rgba(0,0,0,.15);
+    }
+    hr{
+        border-top: 1px solid #DEF2F7;
+    }
+    &.well-warning{
+        background-color: @warningBackground;
+        border: 1px solid @warningBorder;
+        hr{  border-top: 1px solid #F5EAD6; }
+    }
+    &.well-danger{
+        background-color: @errorBackground;
+        border: 1px solid @errorBorder;
+        hr{  border-top: 1px solid #D5BEC1; }
+    }
+    &.well-success{
+        background-color: @successBackground;
+        border: 1px solid @successBorder;
+        hr{  border-top: 1px solid #D2DDC8; }
+    }
 }
+

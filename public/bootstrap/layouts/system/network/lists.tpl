@@ -1,6 +1,6 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <ul class="nav nav-tabs admin-main-tabs" id="systemPreferences">
-        <li class="active"><a data-target="#lists" data-toggle="tab">All Members</a></li>
+        <li class="active"><a data-target="#lists" data-toggle="tab"><i class="icon icon-user"></i> All Members</a></li>
         <li><a data-target="#types" data-toggle="tab">Member Types</a></li>
         <li><a data-target="#attributes" data-toggle="tab">Attributes</a></li>
         <li><a data-target="#connectionrules" data-toggle="tab">Relationships</a></li>

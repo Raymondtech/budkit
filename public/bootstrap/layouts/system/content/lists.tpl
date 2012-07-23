@@ -1,11 +1,11 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <ul class="nav nav-tabs admin-main-tabs" id="systemPreferences">
-        <li><a data-target="#live" data-toggle="tab">Add New</a></li>
-        <li><a data-target="#live" data-toggle="tab">Upload Files</a></li>
-        <li class="active"><a data-target="#aPanel" data-toggle="tab">Published</a></li>
-        <li><a data-target="#notifications" data-toggle="tab">Drafts</a></li>
-        <li><a data-target="#moderation" data-toggle="tab">Pending Review</a></li>
-        <li><a data-target="#live" data-toggle="tab">Trash</a></li>
+        <li><a data-target="#live" data-toggle="tab"><i class="icon icon-plus"></i> Add New</a></li>
+        <li><a data-target="#live" data-toggle="tab"><i class="icon icon-upload"></i> Upload Files</a></li>
+        <li class="active"><a data-target="#aPanel" data-toggle="tab"><i class="icon icon-ok-sign"></i> Published</a></li>
+        <li><a data-target="#notifications" data-toggle="tab"><i class="icon icon-plus-sign"></i> Drafts</a></li>
+        <li><a data-target="#moderation" data-toggle="tab"><i class="icon icon-question-sign"></i> Pending Review</a></li>
+        <li><a data-target="#live" data-toggle="tab"><i class="icon icon-trash"></i> Trash</a></li>
     </ul>
     <form class="form-horizontal">
         <fieldset class="no-margin">
