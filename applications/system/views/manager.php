@@ -29,20 +29,42 @@ class Manager extends Platform\View {
     public function lists() {
 
         //To set the pate title use
-        $this->output->setPageTitle("Administrator | Tasks & To-Do lists");
+        $this->output->setPageTitle("Tasks & To-Do lists");
 
         $dashboard = $this->output->layout("manager/lists");
 
 
         $this->display($dashboard);
     }
+    
+            public function groups() {
+
+        //To set the pate title use
+        $this->output->setPageTitle("Group manager");
+
+        $categories = $this->output->layout("manager/groups");
+
+
+        $this->display($categories);
+    }
+    
+        public function categories() {
+
+        //To set the pate title use
+        $this->output->setPageTitle("Category manager");
+
+        $categories = $this->output->layout("manager/categories");
+
+
+        $this->display($categories);
+    }
 
     public function emails() {
 
         //To set the pate title use
-        $this->output->setPageTitle("Edit &amp; Send Emails");
+        $this->output->setPageTitle("Create and Send Emails");
 
-        $dashboard = $this->output->layout("manager/announcements");
+        $dashboard = $this->output->layout("manager/emails");
 
 
         $this->display($dashboard);
@@ -65,7 +87,7 @@ class Manager extends Platform\View {
         //To set the pate title use
         $this->output->setPageTitle("Manage post types");
 
-        $dashboard = $this->output->layout("manager/log");
+        $dashboard = $this->output->layout("manager/fields");
 
 
         $this->display($dashboard);

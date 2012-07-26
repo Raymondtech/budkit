@@ -72,6 +72,7 @@ class Network extends System\Admin {
     }
 
     public function relationships() {
+        
         $view = $this->load->view('network');
 
         //$this->set("user2", "livingstone");

@@ -12,42 +12,7 @@
                 <form class="form-horizontal">
                     <fieldset class="no-margin">
                         <div class="content-list">
-                            <div class="row-fluid">
-                                <div class="span3">
-                                    <div class="btn-group pull-left">
-                                        <button class="btn">Bulk Actions</button>
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="span7">
-                                    <div class="pagination no-margin" align="center">
-                                        <ul>
-                                            <li><a href="#"><i class="icon  icon-th-list"></i> List</a></li>
-                                            <li><a href="#"><i class="icon  icon-th"></i> Grid</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="span2">
-                                    <div class="btn-group pull-right">
-                                        <button class="btn">Length</button>
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+
                             <table class="table table-striped">
                                 <!-- Colgroup -->  
                                 <colgroup>  
@@ -85,20 +50,18 @@
                             </table>
                         </div>
                         <div class="row-fluid">
-                            <div class="span3">
+                            <div class="span2">
                                 <div class="btn-group pull-left">
-                                    <button class="btn">Bulk Actions</button>
+                                    <button class="btn">Apply Actions</button>
                                     <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="#">Edit</a></li>
+                                        <li><a href="#">Delete</a></li>
+                                        <li><a href="#">Move Somewhere</a></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="span7">
+                            <div class="span8">
                                 <div class="pagination no-margin" align="center">
                                     <ul>
                                         <li class="disabled"><a href="#">«</a></li>
@@ -113,16 +76,12 @@
                                     </ul>
                                 </div>
                             </div>
+
                             <div class="span2">
-                                <div class="btn-group pull-right">
-                                    <button class="btn">Length</button>
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
+                                <div class="pagination no-margin pull-right">
+                                    <ul>
+                                        <li class="active"><a href="#"><i class="icon  icon-th-list"></i> List</a></li>
+                                        <li><a href="#"><i class="icon  icon-th"></i> Grid</a></li>
                                     </ul>
                                 </div>
                             </div>

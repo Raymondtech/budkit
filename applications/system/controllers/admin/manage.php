@@ -54,7 +54,7 @@ class Manage extends System\Admin {
         $view = $this->load->view('manager');
 
         //die;
-        //$view->information(); //sample call;        
+        $view->categories(); //sample call;        
         //$this->output();
     }
 
@@ -62,7 +62,7 @@ class Manage extends System\Admin {
         $view = $this->load->view('manager');
 
         //die;
-        //$view->information(); //sample call;        
+        $view->groups(); //sample call;        
         //$this->output();
     }
 

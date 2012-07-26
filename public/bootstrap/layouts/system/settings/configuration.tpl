@@ -2,9 +2,19 @@
     <form method="POST" action="/system/admin/settings/save" class="form-vertical">
 
         <ul class="nav nav-tabs admin-main-tabs" id="systemPreferences">
-            <li class="active"><a data-target="#general" data-toggle="tab">General Preferences</a></li>
-            <li><a data-target="#server" data-toggle="tab">Server Configurations</a></li>
+            <li class="active"><a data-target="#general" data-toggle="tab">General</a></li>
+            <li><a data-target="#server" data-toggle="tab">Server</a></li>
+            <li><a data-target="#storage" data-toggle="tab">Storage</a></li>
+            <li><a data-target="#profile" data-toggle="tab">Profile</a></li>
+            <li><a data-target="#content" data-toggle="tab">Content</a></li>
+            <li><a data-target="#intergration" data-toggle="tab">Intergration</a></li>
             <li><a data-target="#localization" data-toggle="tab">Localization</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-plus"></i> Applications</a>
+                <ul class="dropdown-menu">
+                    <li><a data-target="#applications" data-toggle="tab">Application 1</a></li>
+                </ul>
+            </li>
             <li><a data-target="#information" data-toggle="tab">Information</a></li>
         </ul>
 
@@ -18,7 +28,7 @@
                             <span class="help-block">A unique catchy name to identify your website. This will show as the default page titles</span>
                         </div>
                     </div>                   
-                          
+
                     <div class="control-group">
                         <label class="control-label" for="options[site-page-title]"> <?php echo _('Website page titles'); ?></label>
                         <div class="controls">
@@ -54,9 +64,10 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" for="options[site-address]"> <?php echo _('Website URL'); ?></label>
+                        <label class="control-label" for="options[site-address]"> <?php echo _('Static file URL'); ?></label>
                         <div class="controls">
                             <input type="text" name="options[site-address]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" />
+                            <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
                         </div>
                     </div>
                     <div class="control-group">
@@ -174,8 +185,8 @@
         </div>
         <hr />
         <div class="btn-toolbar">
-            <button class="btn pull-left btn-danger" type="reset">Reset Form</button>
-            <button type="submit" class="btn btn-success pull-right">Save Preferences</button>
+            <button class="btn pull-right" type="reset">Reset Form</button>
+            <button type="submit" class="btn">Save Preferences</button>
         </div>
     </form>
 </tpl:layout>
