@@ -18,7 +18,6 @@
 */
 namespace Platform;
 
-
 /*
 |---------------------------------------------------------------
 | PHP ERROR REPORTING LEVEL
