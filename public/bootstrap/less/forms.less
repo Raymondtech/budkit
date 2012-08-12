@@ -169,6 +169,85 @@ input[type="hidden"] {
 }
 
 
+// Core
+select {
+
+ //-webkit-appearance: none;
+
+-webkit-appearance: none; /* WebKit */
+-moz-appearance: none; /* Mozilla */
+-o-appearance: none; /* Opera */
+-ms-appearance: none; /* Internet Explorer */
+appearance: none; /* CSS3 */
+
+  /* OVERRIDE */
+  
+  background-position: right center;
+  background-repeat: no-repeat;
+
+  display: inline-block;
+  padding: 4px 10px 4px;
+  margin-bottom: 0; // For input.btn
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+  color: @grayDark;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255,255,255,.75);
+  vertical-align: middle;
+
+  .buttonBackground(@white, darken(@white, 10%));
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  .border-radius(1px);
+
+    background-image: url(../img/format-bullet-list.png);
+    background-position: 5px 50%;
+    padding-left: 25px;
+    background-repeat: no-repeat;
+    
+  cursor: pointer;
+  // Give IE7 some love
+  .reset-filter();
+  .ie7-restore-left-whitespace();
+}
+
+
+
+// Hover state
+select:hover, select:active {
+  color: @grayDark;
+  text-decoration: none;
+  background-color: darken(@white, 10%);
+  //background-position: 0 -15px;
+
+    background-image: url(../img/format-bullet-list.png);
+    background-position: 5px 50%;
+    padding-left: 25px;
+    background-repeat: no-repeat;
+
+  // transition is only when going to hover, otherwise the background
+  // behind the gradient (there for IE<=9 fallback) gets mismatched
+  //.transition(background-position .1s linear);
+}
+
+// Focus state for keyboard and accessibility
+select:focus {
+  .tab-focus();
+}
+
+
+// Disabled state
+select.disabled,
+select[disabled] {
+  cursor: default;
+  background-image: none;
+  background-color: darken(@white, 10%);
+  .opacity(65);
+  .box-shadow(none);
+    color: @grayLight;
+}
+
+
 
 // CHECKBOXES & RADIOS
 // -------------------
