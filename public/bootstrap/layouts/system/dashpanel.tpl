@@ -1,10 +1,9 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 
-    <ul class="nav nav-tabs admin-main-tabs" id="systemPreferences">
-        <li class="active"><a data-target="#aPanel" data-toggle="tab">AdminPanel</a></li>
-        <li><a data-target="#notifications" data-toggle="tab">Notifications</a></li>
-        <li><a data-target="#moderation" data-toggle="tab">Moderation Queue</a></li>
-        <li><a data-target="#live" data-toggle="tab">Live Analytics</a></li>
+    <ul class="nav nav-tabs admin-main-tabs" id="systemPreferences">    
+        <li class="active"><a data-target="#moderation" data-toggle="tab"><i class="icon icon-tasks"></i> Tasks <span class="label label-important">10</span></a></li>
+        <li><a data-target="#notifications" data-toggle="tab"><i class="icon icon-inbox"></i> Messages <span class="label label-important">34</span></a></li>
+        <li><a data-target="#live" data-toggle="tab"><i class="icon icon-asterisk"></i> Live Analytics</a></li>
     </ul>
 
     <div class="row-fluid">
@@ -12,10 +11,10 @@
             <div class="tab-content">
                 <div class="tab-pane" id="notifications">
                     
-                    <div class="alert alert-state alert-empty">
+<!--                    <div class="alert alert-state alert-empty">
                         <h1>Nothing to Report</h1>
                         <p>We will fill this page with alerts, once we come across anything worth reporting</p>
-                    </div>
+                    </div>-->
                     
                     <div class="alert">
                         <a class="close" data-dismiss="alert">×</a>
@@ -147,7 +146,7 @@
                     </div>
 
                 </div>
-                <div class="tab-pane" id="moderation">
+                <div class="tab-pane active" id="moderation">
 
                     <div class="alert alert-state alert-empty">
                         <h1>Nothing Here at the momment</h1>
@@ -155,7 +154,7 @@
                     </div>
 
                 </div>
-                <div class="tab-pane active" id="aPanel">Admin Panel</div>
+               
                 <div class="tab-pane" id="live">
                     <div class="row-fluid">
                         <div class="span12">
