@@ -7,15 +7,9 @@
             <li><a data-target="#storage" data-toggle="tab">Storage</a></li>
             <li><a data-target="#profile" data-toggle="tab">Profile</a></li>
             <li><a data-target="#content" data-toggle="tab">Content</a></li>
-            <li><a data-target="#intergration" data-toggle="tab">Intergration</a></li>
+            <li><a data-target="#intergration" data-toggle="tab">Extensions</a></li>
             <li><a data-target="#localization" data-toggle="tab">Localization</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-plus"></i> Applications</a>
-                <ul class="dropdown-menu">
-                    <li><a data-target="#applications" data-toggle="tab">Application 1</a></li>
-                </ul>
-            </li>
-            <li><a data-target="#information" data-toggle="tab">Information</a></li>
+
         </ul>
 
         <div class="tab-content">
@@ -63,13 +57,7 @@
                         </div>
                     </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="options[site-address]"> <?php echo _('Static file URL'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[site-address]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" />
-                            <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
-                        </div>
-                    </div>
+     
                     <div class="control-group">
                         <label class="control-label" for="options[site-allow-registration]">Registration</label>
                         <div class="controls">
@@ -92,30 +80,118 @@
             <div class="tab-pane" id="server">
                 <fieldset>
                     <div class="control-group">
-                        <label class="control-label" for="options[mail-address]"> <?php echo _('System E-Mail'); ?></label>
+                        <label class="control-label" for="options[mail-address]"> <?php echo _('Outgoing E-Mail'); ?></label>
                         <div class="controls">
-                            <input type="text" name="options[mail-address]" class="input-xlarge" placeholder="e.g info@mydomain.com" />
+                            <input type="text" name="options[mail-address]" class="input-xxxlarge" placeholder="e.g info@mydomain.com" />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="options[mail-server]"> <?php echo _('System Mail Server'); ?></label>
+                        <label class="control-label" for="options[mail-server]"> <?php echo _('Outgoing Mail Server'); ?></label>
                         <div class="controls">
-                            <input type="text" name="options[mail-server]" class="input-xlarge" placeholder="e.g http://webmail.mydomain.com" />
+                            <input type="text" name="options[mail-server]" class="input-xxxlarge" placeholder="e.g http://webmail.mydomain.com" />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="options[mail-server-username]"> <?php echo _('Mail Server Username'); ?></label>
+                        <label class="control-label" for="options[mail-server-username]"> <?php echo _('Outgoing Mail Server Username'); ?></label>
                         <div class="controls">
-                            <input type="text" name="options[mail-server-username]" class="input-xlarge" />
+                            <input type="text" name="options[mail-server-username]" class="input-xxlarge" />
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="options[mail-server-password]"> <?php echo _('Mail Server Password'); ?></label>
+                        <label class="control-label" for="options[mail-server-password]"> <?php echo _('Outgoing Mail Server Password'); ?></label>
                         <div class="controls">
-                            <input type="text" name="options[mail-server-password]" class="input-xlarge" />
+                            <input type="text" name="options[mail-server-password]" class="input-xxlarge" />
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="control-group  row-fluid">
+                        <div class="span8">
+                            <label class="control-label" for="options[proxy-server]"> <?php echo _('Proxy Server'); ?></label>
+                            <div class="controls">
+
+                                <input type="text" name="options[proxy-server]" class="input-xxxlarge" placeholder="e.g http://proxy.mydomain.com" />
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <label class="control-label" for="options[proxy-server-port]"> <?php echo _('Proxy Server Port'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="options[proxy-server-port]" class="input-xxxlarge" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="options[proxy-server-username]"> <?php echo _('Proxy Server Username'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[proxy-server-username]" class="input-xxlarge" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="options[proxy-server-password]"> <?php echo _('Proxy Server Password'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[proxy-server-password]" class="input-xxlarge" />
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="control-group">
+                        <label class="control-label" for="options[site-enable-xmlrpc]">Protocols</label>
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox" name="options[site-enable-xmlrpc]" value="1" />
+                                Enable XML-RPC Protocol?
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="options[site-enable-restful]" value="1" />
+                                Enable RESTful Protocol.
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="options[site-verify-protocol]" value="1" />
+                                Require Authentication to use protocol
+                            </label>
                         </div>
                     </div>
                 </fieldset>
+            </div>
+            <div class="tab-pane" id="content">
+                
+                <div class="control-group">
+                    <label class="control-label" for="options[mail-address]"> <?php echo _('Incoming E-Mail'); ?></label>
+                    <div class="controls">
+                        <input type="text" name="options[mail-address]" class="input-xxxlarge" placeholder="e.g info@mydomain.com" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[mail-server]"> <?php echo _('Incoming Mail Server'); ?></label>
+                    <div class="controls">
+                        <input type="text" name="options[mail-server]" class="input-xxxlarge" placeholder="e.g http://webmail.mydomain.com" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[mail-server-username]"> <?php echo _('Incoming Mail Server Username'); ?></label>
+                    <div class="controls">
+                        <input type="text" name="options[mail-server-username]" class="input-xxlarge" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[mail-server-password]"> <?php echo _('Incoming Mail Server Password'); ?></label>
+                    <div class="controls">
+                        <input type="text" name="options[mail-server-password]" class="input-xxlarge" />
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="profile">
+                Profile settings
+            </div>
+            <div class="tab-pane" id="storage">
+                <div class="control-group">
+                        <label class="control-label" for="options[site-address]"> <?php echo _('Static file URL'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[site-address]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" />
+                            <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
+                        </div>
+                    </div>
+            </div>
+            <div class="tab-pane" id="intergration">
+                Extensions and Application settings
             </div>
             <div class="tab-pane" id="localization">
                 <fieldset>
@@ -157,23 +233,25 @@
                             </select>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="options[locale-language]"> <?php echo _('Locale language'); ?></label>
-                        <div class="controls">
-                            <select name="options[locale-language]" class="input-xlarge">
-                                <option value="en_GB"><?php echo _('English - United Kingdom (en_GB)'); ?></option>
-                                <option value="fr_FR"><?php echo _('French - France (fr_FR)'); ?></option>
-                                <option value="de_DE"><?php echo _('German - Germany (de_DE)'); ?></option>
-                            </select>
+                    <div class="control-group row-fluid">
+                        <div class="span6">
+                            <label class="control-label" for="options[locale-language]"> <?php echo _('Locale language'); ?></label>
+                            <div class="controls">
+                                <select name="options[locale-language]" class="input-xxxlarge">
+                                    <option value="en_GB"><?php echo _('English - United Kingdom (en_GB)'); ?></option>
+                                    <option value="fr_FR"><?php echo _('French - France (fr_FR)'); ?></option>
+                                    <option value="de_DE"><?php echo _('German - Germany (de_DE)'); ?></option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="options[locale-dateformat]"> <?php echo _('Date format'); ?></label>
-                        <div class="controls">
-                            <select name="options[locale-dateformat]" class="input-xlarge">
-                                <option value="default"><?php echo _('Time difference'); ?></option>
-                                <option value="locale"><?php echo _('Locale time format'); ?></option>
-                            </select>
+                        <div class="span6">
+                            <label class="control-label" for="options[locale-dateformat]"> <?php echo _('Date format'); ?></label>
+                            <div class="controls">
+                                <select name="options[locale-dateformat]" class="input-xxxlarge">
+                                    <option value="default"><?php echo _('Time difference'); ?></option>
+                                    <option value="locale"><?php echo _('Locale time format'); ?></option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -183,7 +261,7 @@
                 <p class="alert alert-info">This page displays the existing configurations. Updated settings will be displayed here when saved</p>
             </div>
         </div>
-        <hr />
+
         <div class="btn-toolbar">
             <button class="btn pull-right" type="reset">Reset Form</button>
             <button type="submit" class="btn">Save Preferences</button>

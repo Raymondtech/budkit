@@ -35,18 +35,18 @@
                         <div class="span2">
                             <div class="btn-toolbar admin-quickbuttons no-margin">
                                 <div class="btn-group">
-                                    <a class="btn btn-danger" href="/member/settings/account">Go Offline</a>
+                                    <a class="btn" href="/member/settings/account">Put Offline</a>
                                 </div>
                                 <div class="btn-group">
-                                    <button class="btn btn-success">Add..</button>
-                                    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                                    <button class="btn ">Add ...</button>
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">New Member</a></li>
-                                        <li><a href="#">New Member Group</a></li>
-                                        <li><a href="#">New Announcement</a></li>
-                                        <li><a href="#">New Email</a></li>
+                                        <li><a href="#">Member</a></li>
+                                        <li><a href="#">Group</a></li>
+                                        <li><a href="#">Announcement</a></li>
+                                        <li><a href="#">Site</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="#">New Extension</a></li>
+                                        <li><a href="#">Extension</a></li>
                                     </ul>
                                 </div>
                             </div>
