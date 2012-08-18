@@ -24,17 +24,6 @@
                     </div>                   
 
                     <div class="control-group">
-                        <label class="control-label" for="options[site-page-title]"> <?php echo _('Website page titles'); ?></label>
-                        <div class="controls">
-                            <select name="options[site-page-title]" class="input-xlarge">
-                                <option value="0"><?php echo _('Leave as is'); ?></option>
-                                <option value="1"><?php echo _('Prepend website name'); ?></option>
-                                <option value="2"><?php echo _('Append website name'); ?></option>
-                            </select>
-                            <span class="help-block">By default the page title is the website name.</span>
-                        </div>
-                    </div>
-                    <div class="control-group">
                         <label class="control-label" for="options[site-address]"> <?php echo _('Website URL'); ?></label>
                         <div class="controls">
                             <input type="text" name="options[site-address]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" />
@@ -57,7 +46,7 @@
                         </div>
                     </div>
 
-     
+
                     <div class="control-group">
                         <label class="control-label" for="options[site-allow-registration]">Registration</label>
                         <div class="controls">
@@ -75,10 +64,79 @@
                             </label>
                         </div>
                     </div>
+                    <hr />
+                    <div class="control-group  row-fluid">
+                        <div class="span6">
+                            <label class="control-label" for="options[site-cookie-domain]"> <?php echo _('Cookie Domain'); ?></label>
+                            <div class="controls">
+
+                                <input type="text" name="options[site-cookie-network]" class="input-xxxlarge" value="network" />
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <label class="control-label" for="options[site-cookie-path]"> <?php echo _('Cokie Path'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="options[site-cookie-path]" class="input-xxxlarge" value="/" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="control-group row-fluid">
+                        <div class="span6">
+                            <label class="control-label" for="options[site-page-title]"> <?php echo _('Website page titles'); ?></label>
+                            <div class="controls">
+                                <select name="options[site-page-title]" class="input-xxxlarge">
+                                    <option value="0"><?php echo _('Leave as is'); ?></option>
+                                    <option value="1"><?php echo _('Prepend website name'); ?></option>
+                                    <option value="2"><?php echo _('Append website name'); ?></option>
+                                </select>
+                                <span class="help-block">By default the page title is the website name.</span>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <label class="control-label" for="options[site-robots]"> <?php echo _('Robot Instructions'); ?></label>
+                            <div class="controls">
+                                <select name="options[site-robots]" class="input-xxxlarge">
+                                    <option value="0"><?php echo _('Index, Follow'); ?></option>
+                                    <option value="1"><?php echo _('No Index, Follow'); ?></option>
+                                    <option value="2"><?php echo _('Index, No Follow'); ?></option>
+                                    <option value="2"><?php echo _('No Index, No Follow'); ?></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="options[site-seo]">Search Engine Optimization</label>
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox" name="options[site-url-suffix]" value="1" />
+                                Add output format suffix to URLs?
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="options[site-unicode-aliases]" value="1" />
+                                Use Unicode Aliasis.
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="options[site-force-clearn-url]" value="1" />
+                                Force clean URLs, even without mod_rewrite
+                            </label>
+                        </div>
+                    </div>
                 </fieldset>
             </div>
             <div class="tab-pane" id="server">
                 <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="options[content-editor]"> <?php echo _('Mail Handler'); ?></label>
+                        <div class="controls">
+                            <select name="options[content-editor]" class="input-xlarge">
+                                <option value="0"><?php echo _('PHP Mail'); ?></option>
+                                <option value="1"><?php echo _('Send Mail'); ?></option>
+                                <option value="2"><?php echo _('SMTP'); ?></option>
+                            </select>
+                            <span class="help-block">The Outgoing mail handler. Leave as is if not sure or ask your host provider.</span>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <label class="control-label" for="options[mail-address]"> <?php echo _('Outgoing E-Mail'); ?></label>
                         <div class="controls">
@@ -149,10 +207,51 @@
                             </label>
                         </div>
                     </div>
+                    <hr />
+                    <div class="control-group  row-fluid">
+                        <div class="span8">
+                            <label class="control-label" for="options[proxy-server]"> <?php echo _('System ErrorLog'); ?></label>
+                            <div class="controls">
+
+                                <input type="text" name="options[proxy-server]" class="input-xxxlarge" />
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <label class="control-label" for="options[proxy-server-port]"> <?php echo _('Help Server'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="options[proxy-server-port]" class="input-xxxlarge" placeholder="e.g http://api.helpserver.com" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="options[site-enable-xmlrpc]">Error Reporting</label>
+                        <div class="controls">
+                            <label class="checkbox">
+                                <input type="checkbox" name="options[site-enable-xmlrpc]" value="1" />
+                                Display debug console
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="options[site-enable-xmlrpc]" value="1" />
+                                Send Errors to Developers to help improve platform
+                            </label>
+                        </div>
+                    </div>
                 </fieldset>
             </div>
             <div class="tab-pane" id="content">
-                
+
+                <div class="control-group">
+                    <label class="control-label" for="options[content-editor]"> <?php echo _('Content Editor'); ?></label>
+                    <div class="controls">
+                        <select name="options[content-editor]" class="input-xlarge">
+                            <option value="0"><?php echo _('None'); ?></option>
+                            <option value="1"><?php echo _('TinyMCE'); ?></option>
+                            <option value="2"><?php echo _('CodeMiror'); ?></option>
+                        </select>
+                        <span class="help-block">By default the page title is the website name.</span>
+                    </div>
+                </div>
+                <hr />
                 <div class="control-group">
                     <label class="control-label" for="options[mail-address]"> <?php echo _('Incoming E-Mail'); ?></label>
                     <div class="controls">
@@ -183,12 +282,12 @@
             </div>
             <div class="tab-pane" id="storage">
                 <div class="control-group">
-                        <label class="control-label" for="options[site-address]"> <?php echo _('Static file URL'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[site-address]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" />
-                            <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
-                        </div>
+                    <label class="control-label" for="options[site-address]"> <?php echo _('Static file URL'); ?></label>
+                    <div class="controls">
+                        <input type="text" name="options[site-address]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" />
+                        <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
                     </div>
+                </div>
             </div>
             <div class="tab-pane" id="intergration">
                 Extensions and Application settings

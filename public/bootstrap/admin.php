@@ -115,7 +115,7 @@
                         <div class="span10 fix-left-gutter">  
                             <div class="left-pad top-pad bottom-pad white-background right-pad clearfix admin-panel"> 
                                 <div class="page-header no-margin">
-                                    <h1><tpl:element type="text" data="page.title">Administrator</tpl:element><small class="panel-date"><?php echo \Library\Date::today(); ?></small></h1>
+                                    <h1 class="emphasis"><tpl:element type="text" data="page.title">Administrator</tpl:element><small class="panel-date"><?php echo \Library\Date::today(); ?></small></h1>
                                 </div>
                                 <tpl:block data="page.block.alerts" /> 
                                 <tpl:condition  data="page.block.banner" test="isset" value="1" >

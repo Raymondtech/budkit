@@ -152,7 +152,7 @@ final class Schema extends Platform\Model {
                 (17, 13, 'Messaging', '/system/admin/manage/emails', '', 17, 1, 'link', '', 29, 32, 1),
                 (18, 13, '%{ext:extensionlist}', '/system/admin/manage/:extensions', '', 18, 1, 'method', 'lookup', 30, 31, 1),
                 (19, 0, 'Settings', '/system/admin/settings/configuration', '', 19, 1, 'link', '', 37, 48, 1),
-                (20, 19, 'Preferences', '/system/admin/settings/configuration', '', 20, 1, 'link', '', 38, 47, 1),
+                (20, 19, 'Configuration', '/system/admin/settings/configuration', '', 20, 1, 'link', '', 38, 47, 1),
                 (21, 19, 'Appearance', '/system/admin/settings/appearance', '', 21, 1, 'link', '', 39, 46, 1),
                 (22, 19, 'Maintenance', '/system/admin/settings/maintenance', '', 22, 1, 'link', '', 40, 45, 1),
                 (23, 19, 'Navigation', '/system/admin/settings/navigation', '', 23, 1, 'link', '', 41, 44, 1),
