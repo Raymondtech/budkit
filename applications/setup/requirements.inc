@@ -22,7 +22,6 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-
 $requirements = array(
     "modules" => array(
         "gd" => array(
@@ -41,10 +40,10 @@ $requirements = array(
             "loaded" => true
         ),
         "tokenizer" => array(
-            "title" => _('Rokenizer'),
+            "title" => _('Tokenizer'),
             "installed" => true,
             "loaded" => true
-        ),    
+        ),
         "pcre" => array(
             "title" => _('Perl Compatible RegEx'),
             "installed" => true,
@@ -80,6 +79,11 @@ $requirements = array(
             "installed" => true,
             "loaded" => true
         ),
+        "zlib" => array(
+            "title" => _('Zlib Compression'),
+            "installed" => true,
+            "loaded" => true
+        ),
         "mysqli" => array(
             "title" => _('Database Management with MySQLi'),
             "installed" => true,
@@ -93,10 +97,10 @@ $requirements = array(
                         "sqlite3" => array(
                             "title" => _('sQLite3 Library'),
                             "installed" => true,
-                            "loaded"    => true,
-                          //"terminal"  => true || If we get tot his stage, then the error is terminal
-                      )
-                   )
+                            "loaded" => true,
+                        //"terminal"  => true || If we get to this stage, then the error is terminal
+                        )
+                    )
                 )
             )
         ),
@@ -114,8 +118,20 @@ $requirements = array(
             "status" => false,
             "terminal" => true,
         ),
+        "magic_quotes_gpc" => array(
+            "status" => false,
+            "terminal" => true,
+        ),
+        "magic_quotes_runtime" => array(
+            "status" => false,
+            "terminal" => true,
+        ),
         "session.auto_start" => array(
             "status" => false,
+            "terminal" => false,
+        ),
+        "output_buffering" => array(
+            "status" => true,
             "terminal" => false,
         ),
         "register_globals" => array(
@@ -139,13 +155,13 @@ $requirements = array(
         "config" => array(
             "title" => "Configuration folder",
             "writable" => true,
-            "path" => FSPATH."config",
+            "path" => FSPATH . "config",
             "terminal" => true,
         ),
         "session" => array(
             "title" => "Sessions folder",
             "writable" => true,
-            "path" => APPPATH."setup".DS.'sessions',
+            "path" => APPPATH . "setup" . DS . 'sessions',
             "terminal" => true,
         )
     )

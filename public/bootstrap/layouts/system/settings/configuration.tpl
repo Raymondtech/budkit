@@ -143,10 +143,26 @@
                             <input type="text" name="options[mail-address]" class="input-xxxlarge" placeholder="e.g info@mydomain.com" />
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="options[mail-server]"> <?php echo _('Outgoing Mail Server'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[mail-server]" class="input-xxxlarge" placeholder="e.g http://webmail.mydomain.com" />
+                    <div class="control-group row-fluid">
+                        <div class="span4">
+                            <label class="control-label" for="options[mail-server]"> <?php echo _('Outgoing Mail Server'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="options[mail-server]" class="input-xxxlarge" placeholder="e.g http://webmail.mydomain.com" />
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <label class="control-label" for="options[proxy-server-port]"> <?php echo _('Outgoing Mail Server Port'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="options[proxy-server-port]" class="input-xxxlarge" value="25" />
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <label class="control-label" for="options[proxy-server-port]"> <?php echo _('Outgoing Mail Server Security'); ?></label>
+                            <select name="options[content-editor]" class="input-xxxlarge">
+                                <option value="0"><?php echo _('None'); ?></option>
+                                <option value="1"><?php echo _('SSL'); ?></option>
+                                <option value="2"><?php echo _('TSL'); ?></option>
+                            </select>
                         </div>
                     </div>
                     <div class="control-group">
@@ -276,6 +292,27 @@
                         <input type="text" name="options[mail-server-password]" class="input-xxlarge" />
                     </div>
                 </div>
+                <hr />
+                <div class="control-group">
+                    <label class="control-label" for="options[site-meta-keywords]"> <?php echo _('Content Rights'); ?></label>
+                    <div class="controls">
+                        <textarea name="options[site-meta-keywords]" class="wysiwyg input-xxxlarge" ></textarea>
+                        <span class="help-block">A brief copyright notice displayed at the bottom of your content</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[site-allow-registration]">Content Display</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input type="checkbox" name="options[site-allow-registration]" value="1" />
+                            Display Content Rights?
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="options[site-inviteonly]" value="1" />
+                            Show Author meta-tag.
+                        </label>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane" id="profile">
                 Profile settings
@@ -286,6 +323,40 @@
                     <div class="controls">
                         <input type="text" name="options[site-address]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" />
                         <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
+                    </div>
+                </div>
+                <hr />
+                <div class="control-group  row-fluid">
+                    <div class="span8">
+                        <label class="control-label" for="options[proxy-server]"> <?php echo _('FTP Server Host'); ?></label>
+                        <div class="controls">
+
+                            <input type="text" name="options[proxy-server]" class="input-xxxlarge" placeholder="e.g http://proxy.mydomain.com" />
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <label class="control-label" for="options[proxy-server-port]"> <?php echo _('FTP Server Port'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[proxy-server-port]" class="input-xxxlarge" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[proxy-server-username]"> <?php echo _('FTP Username'); ?></label>
+                    <div class="controls">
+                        <input type="text" name="options[proxy-server-username]" class="input-xxlarge" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[proxy-server-password]"> <?php echo _('FTP Password'); ?></label>
+                    <div class="controls">
+                        <input type="text" name="options[proxy-server-password]" class="input-xxlarge" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[proxy-server-password]"> <?php echo _('FTP Root Path'); ?></label>
+                    <div class="controls">
+                        <input type="text" name="options[proxy-server-password]" class="input-xxlarge" value="/" />
                     </div>
                 </div>
             </div>

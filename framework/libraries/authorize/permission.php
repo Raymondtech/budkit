@@ -53,7 +53,7 @@ final class Permission extends Library\Authorize implements \Library\Authorize\A
     }
 
     /**
-     * Asserts a user has permission
+     * Asserts an authority has permission
      * 
      * @param type $authority
      * @param type $args 
