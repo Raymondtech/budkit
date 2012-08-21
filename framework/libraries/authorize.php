@@ -38,7 +38,7 @@ namespace Library;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Authorize extends \Library\Object {
+class Authorize extends \Library\Observer {
 
     /**
      * The user ID, whose authority and permission is being evaluated

@@ -72,9 +72,6 @@ final class Dispatcher extends \Library\Object {
         //Determines the referer
     }
 
-    public static function isDispatchable( $Route , $Dispatcher) {
-        
-    }
 
     public function isAuthenticated() {
 
@@ -173,7 +170,8 @@ final class Dispatcher extends \Library\Object {
             }
         }
         //Before Dispatch Event
-        static::isDispatchable($route, $this);
+        //static::isDispatchable($route, $this);
+        
         Library\Event::trigger('onBeforeDispatch', $route);
         
         \call_user_func_array(array($this->task, $method), (array) $argmts);

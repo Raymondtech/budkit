@@ -93,7 +93,8 @@ abstract class Controller extends Library\Object {
             'load' => '\Platform\Loader',
             'user'  => '\Platform\User',
             'validate' => 'Library\Validate',
-            'output' => 'Library\Output'
+            'output' => 'Library\Output',
+            'observer' => 'Library\Observer'
         );
         
         foreach ($classes as $var => $class) {
@@ -111,7 +112,7 @@ abstract class Controller extends Library\Object {
         $this->authhandler = "dbauth";
         
         $this->output->set("user", $this->user );
-        
+        $this->observer->attach(); //The Permission class
 
         $installed      =  $this->config->getParam("installed", false ,"database");
         $application    =  $this->application;

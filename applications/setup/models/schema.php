@@ -86,7 +86,7 @@ final class Schema extends Platform\Model {
             (1, 'PUBLIC', 0, 'PUBLIC', 'All unregistered nodes, users and applications', 1, 8),
             (2, 'Registered Users', 1, 'REGISTEREDUSERS', 'All registered nodes with a known unique identifier', 2, 7),
             (3, 'Moderators', 2, 'MODERATORS', 'System moderators, Users allowed to manage user generated import', 3, 6),
-            (4, 'Master Administrators', 3, 'MASTERADMINISTRATORS', 'Special users with awesome powers', 4, 5);"
+            (4, 'Super Administrators', 3, 'MASTERADMINISTRATORS', 'Special users with awesome powers', 4, 5);"
         );
     }
     
