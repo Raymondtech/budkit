@@ -233,13 +233,19 @@ class Config extends Object {
                         if ($_INI->readParams($ini) !== FALSE) {
                             //print_R($INI);
                             $params = $_INI->getParams($ini);
-                            $config = array_merge($config, $params);
+                            $config = static::mergeParams($config, $params);
                         }
                     }
                 }
             //continue;
             endforeach;
+            
+            //print_R($config);
 
+            //Get database configs
+            $_DB    = static::getDatabase();
+            $params = $_DB->getParams();
+            $config = static::mergeParams($config, $params);
 
             //Find all the config files in apps
             $configs = \Library\Folder::itemizeFind("config.inc", APPPATH, 0, TRUE, 1);
@@ -260,6 +266,25 @@ class Config extends Object {
             $configarray = & $config;
         }
         return $configarray;
+    }
+    
+    /**
+     * Recursively Merges two params arrays, overwriting values in params1 with those in params2
+     * 
+     * @param type $params1
+     * @param type $params2
+     */
+    public static function mergeParams($params1, $params2){
+        
+        foreach($params2 as $key=>$value){
+            if(array_key_exists($key, $params1)&& is_array($value)):
+                $params1[$key] = static::mergeParams($params1[$key], $params2[$key]);
+            else:
+                $params1[$key] = $value;
+            endif;
+        }
+        
+        return $params1;
     }
 
     /**

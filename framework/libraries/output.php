@@ -61,8 +61,7 @@ class Output extends Object {
      * @var string
      */
     protected $layout = 'index';
-    
-    
+
     /**
      * Defines the layout to be used
      * @var string
@@ -122,26 +121,25 @@ class Output extends Object {
      * @return void
      */
     final public function __construct() {
-       
+
 
         $this->variables = array();
-        $this->config   = Config::getInstance();
-        $this->router   = Router::getInstance();
+        $this->config = Config::getInstance();
+        $this->router = Router::getInstance();
         $this->template = $this->config->getParam('template', 'default');
-        
+
         //$this->pageTitle = $this->config->getParam('');
         //$this->user     = \Platform\User::getInstance(); //Cannot use this here, because the output class is loaded way before auth and session
         //The Router defined format;
-        $this->format   = $this->router->getFormat();
-        
+        $this->format = $this->router->getFormat();
     }
-    
+
     /**
-    * Returns all the protected output variables
-    * @return array;
-    */
-    final public function getVariables(){
-    	return $this->variables;
+     * Returns all the protected output variables
+     * @return array;
+     */
+    final public function getVariables() {
+        return $this->variables;
     }
 
     /**
@@ -162,7 +160,7 @@ class Output extends Object {
             //$newAlerts = is_array($this->get("alerts")) ? $this->get("alerts") : array();
             //$alerts = array_merge($oldAlerts, $newAlerts);
             //The set method will merge automatically
-            $this->set("alerts" , $oldAlerts );
+            $this->set("alerts", $oldAlerts);
             //echo $this->session->getId();
             //Remove all the old alerts
             $this->session->remove("alerts");
@@ -193,9 +191,8 @@ class Output extends Object {
         if (!ob_start("ob_gzhandler"))
             ob_start();
     }
-    
-    
-    final public static function stopBuffer(){
+
+    final public static function stopBuffer() {
         ob_end_flush();
     }
 
@@ -205,13 +202,12 @@ class Output extends Object {
      * @param type $href
      * @return type
      */
-    final public function link($url, $ssl=null) {
-        
-        $Uri    = Uri::getInstance();
+    final public function link($url, $ssl = null) {
+
+        $Uri = Uri::getInstance();
         $Router = Router::getInstance();
-        
+
         return $Uri::_($url);
-        
     }
 
     /**
@@ -221,8 +217,8 @@ class Output extends Object {
      * @param type $status
      * @return void
      */
-    final public function displayError($format='xhtml', $status='404') {
-        
+    final public function displayError($format = 'xhtml', $status = '404') {
+
         //anything that had previously been printed
         $printed = ob_get_contents();
         $this->addToPosition("body", $printed, '', true);
@@ -236,37 +232,38 @@ class Output extends Object {
         //$this->toConsole();
 
         static::$prints = $this->restartBuffer();
-        
+
         $this->layout = "splash";
-        $this->display($format, 404 , "splash");
+        $this->display($format, 404, "splash");
 
         //Stop any further execution?
         $this->abort();
     }
-    
+
     /**
      * Outputs a menu  item to the output buffer 
      * 
      * @param type $menuid
      * @param type $menutype 
      */
-    final public function navigation($menuId="", $menuType = "nav-block"){
-        
-        $menuItems = \Platform\Navigator::menu( $menuId );
-        
-        if(empty($menuItems)) return null;
+    final public function navigation($menuId = "", $menuType = "nav-block") {
+
+        $menuItems = \Platform\Navigator::menu($menuId);
+
+        if (empty($menuItems))
+            return null;
 
         //print_R($menuItems);
         $tag = array();
-        
+
         $tag['ELEMENT'] = 'ul';
         $tag['CLASS'] = "nav $menuType";
-        $tag['CHILDREN'] = Output\Parse\Template\Menu::element( (array)$menuItems , $menuType );
+        $tag['CHILDREN'] = Output\Parse\Template\Menu::element((array) $menuItems, $menuType);
 
         //Get the parser;
-        $parser = Folder\Files\Xml\Parser::getInstance();  
-        $parsed = $parser->toXml( $tag  );
-        
+        $parser = Folder\Files\Xml\Parser::getInstance();
+        $parsed = $parser->toXml($tag);
+
         return $parsed;
     }
 
@@ -288,8 +285,8 @@ class Output extends Object {
 
         return $printed;
     }
-    
-    final protected function getHandler($format = 'xhtml'){
+
+    final protected function getHandler($format = 'xhtml') {
         //$this->addToPosition("do:debugger", $console, '', true);
         //1. Work on the headers, make sure everything is beautiful
         // seconds, minutes, hours, days
@@ -334,12 +331,12 @@ class Output extends Object {
      * @return void
      *
      */
-    final public function display($format = 'xhtml', $httpCode=200,  $template='') {
+    final public function display($format = 'xhtml', $httpCode = 200, $template = '') {
 
         //anything that had previously been printed
         $printed = ob_get_contents();
-        
-        if(!empty($printed)):
+
+        if (!empty($printed)):
             $this->addToPosition("body", $printed, '', true);
         endif;
 
@@ -353,22 +350,21 @@ class Output extends Object {
 
 
         static::$prints = $this->restartBuffer();
-        
+
         //Format alerts
         //get the output;
         $alerts = $this->layout("alert", "system");
 
         //add the message
         $this->addToPosition("alerts", $alerts);
-        
+
         //$this->addToPosition("do:debugger", $console, '', true);
         //1. Work on the headers, make sure everything is beautiful
         // seconds, minutes, hours, days
         //The requested Response format
-         $Document = $this->getHandler();
+        $Document = $this->getHandler();
 
-         return $Document->render($template, $httpCode);
-     
+        return $Document->render($template, $httpCode);
     }
 
     /**
@@ -393,6 +389,23 @@ class Output extends Object {
     }
 
     /**
+     * 
+     * @param type $length
+     * @return string
+     */
+    final public static function getRandomString($length = 10) {
+        
+        $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $randomString = '';
+        
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        
+        return $randomString;
+    }
+
+    /**
      * Sets a cookie param
      *
      * @param type $name
@@ -402,7 +415,7 @@ class Output extends Object {
      * @param type $domain
      * @return Output
      */
-    final public function setCookie($name, $cookie, $expire= 86400, $path='', $domain='') {
+    final public function setCookie($name, $cookie, $expire = 86400, $path = '', $domain = '') {
 
         $encryptor = Encrypt::getInstance();
 
@@ -423,7 +436,7 @@ class Output extends Object {
      * @param type $set
      * @param type $setas
      */
-    public function layout($layout, $app='', $ext='.tpl', $variables = array(), $set = false, $setas ='') {
+    public function layout($layout, $app = '', $ext = '.tpl', $variables = array(), $set = false, $setas = '') {
 
         $load = \Platform\Loader::getInstance();
 
@@ -445,11 +458,11 @@ class Output extends Object {
             //Set the parsed layout as a variable
             $this->set($setass, $parsed);
         }
-        
+
         //Format Parsed!
-        $handler = $this->getHandler(); 
-        $parsed  = $handler->parse( $parsed , $handler );
-        
+        $handler = $this->getHandler();
+        $parsed = $handler->parse($parsed, $handler);
+
         //\Platform\Debugger::log( htmlentities($layout ) );
 
         return $parsed;
@@ -474,18 +487,18 @@ class Output extends Object {
 
         return $this->getTemplate();
     }
-    
+
     /**
      * Returns the current template path;
      * 
      * @return string; 
      */
-    final public function getTemplatePath(){
-        
+    final public function getTemplatePath() {
+
         $name = $this->getTemplateName();
-        $path = $this->config->getParam("path","/");
-        
-        return $path.$name;
+        $path = $this->config->getParam("path", "/");
+
+        return $path . $name;
     }
 
     /**
@@ -505,7 +518,7 @@ class Output extends Object {
      *
      * @return void
      */
-    final public function headers($mimeType = 'text/html', $charset='utf-8') {
+    final public function headers($mimeType = 'text/html', $charset = 'utf-8') {
 
         //Response codes;
         //To satisfy the PRG patter, and prevent form resubmissions, we need to
@@ -592,10 +605,10 @@ class Output extends Object {
      * @param string $message
      * @param string $type
      */
-    final public function addMessage( $message, $title='', $type='info' ) {
+    final public function addMessage($message, $title = '', $type = 'info') {
 
         //Set the message variables;
-        $this->set("alerts",  array( array("alertType"=>$type, "alertBody"=>$message,"alertTitle"=>$title ) ) );
+        $this->set("alerts", array(array("alertType" => $type, "alertBody" => $message, "alertTitle" => $title)));
 
         return $this;
     }
@@ -610,7 +623,7 @@ class Output extends Object {
      * @param boolean $returnprevious
      * @return Output
      */
-    final public function addVariable($name, $value, $returnprevious=false) {
+    final public function addVariable($name, $value, $returnprevious = false) {
 
         $this->$name = $value;
 
@@ -655,7 +668,7 @@ class Output extends Object {
      * @return Output
      */
     final public function setResponseCode($code = 200) {
-        $this->code = is_null($code)? 200 : $code;
+        $this->code = is_null($code) ? 200 : $code;
         return $this;
     }
 
@@ -667,7 +680,7 @@ class Output extends Object {
     final public function setPageTitle($title) {
 
         $this->pageTitle = trim($title);
-        $this->set("page", array( "title"=>$this->pageTitle ) );
+        $this->set("page", array("title" => $this->pageTitle));
 
         return $this;
     }
@@ -680,19 +693,18 @@ class Output extends Object {
      *
      * @return object Output
      */
-    final public function set($param, $value=null, $overwrite=false) {
+    final public function set($param, $value = null, $overwrite = false) {
 
         //Check if the param already exists
-        $existing = $this->get($param, null );
-        $variable = array($param=>$value );
-        
-        if(!empty($existing)&&is_array($existing)&&!$overwrite){
+        $existing = $this->get($param, null);
+        $variable = array($param => $value);
+
+        if (!empty($existing) && is_array($existing) && !$overwrite) {
             //Just fascilitates using namespaces
-            $value      = is_array($value)? array_merge($existing, $value) : null;
-            $variable   = array($param=>$value);
-            
-        }		
-        $this->variables = array_merge($this->variables, $variable); 
+            $value = is_array($value) ? array_merge($existing, $value) : null;
+            $variable = array($param => $value);
+        }
+        $this->variables = array_merge($this->variables, $variable);
 
         return $this;
     }
@@ -704,7 +716,7 @@ class Output extends Object {
      * @param mixed $default
      * @param mixed $format
      */
-    final public function get($param, $default='', $format='') {
+    final public function get($param, $default = '', $format = '') {
 
         //print_R($this->variables);
         if (isset($this->$param)) {
@@ -745,7 +757,7 @@ class Output extends Object {
      * @return string
      */
     final public function getMimeType() {
-
+        
     }
 
     /**
@@ -779,7 +791,7 @@ class Output extends Object {
      * @return string
      */
     final public function getLangauge() {
-
+        
     }
 
     /**
@@ -788,7 +800,7 @@ class Output extends Object {
      * @return string
      */
     final public function getPageDescription() {
-
+        
     }
 
     /**
@@ -797,7 +809,7 @@ class Output extends Object {
      * @return string
      */
     final public function getPageAuthor() {
-
+        
     }
 
     /**
@@ -806,7 +818,7 @@ class Output extends Object {
      * @return string
      */
     final public function getMessages() {
-
+        
     }
 
     /**
@@ -838,7 +850,7 @@ class Output extends Object {
     }
 
     final public function setLanguage($language) {
-
+        
     }
 
     /**
@@ -853,7 +865,7 @@ class Output extends Object {
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-        
+
         $instance = new Output();
 
         return $instance;
@@ -866,7 +878,7 @@ class Output extends Object {
      * @param type $default
      * @param type $style
      */
-    public function position($name, $default='', $style='') {
+    public function position($name, $default = '', $style = '') {
 
         //if is array loop through each;
         if ($this->hasPosition($name)) {
@@ -907,7 +919,7 @@ class Output extends Object {
      * @param type $default
      * @param type $callback
      */
-    public function addToPosition($name, $content='', $title="", $params=array(), $prepend = FALSE) {
+    public function addToPosition($name, $content = '', $title = "", $params = array(), $prepend = FALSE) {
 
         if (!isset($this->variables["page"]["block"][$name])) {
             $this->variables["page"]["block"][$name] = array();
@@ -917,15 +929,16 @@ class Output extends Object {
             array_unshift($this->variables["page"]["block"][$name], array(
                 "content" => $content,
                 "title" => $title,
-                "params"=> $params
+                "params" => $params
             ));
         } else {
             array_push($this->variables["page"]["block"][$name], array(
                 "content" => $content,
                 "title" => $title,
-                "params"=> $params
+                "params" => $params
             ));
         }
         return $this;
     }
+
 }

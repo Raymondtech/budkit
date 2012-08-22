@@ -85,6 +85,8 @@ final class Ini extends \Library\Object {
             return static::$file;
         } elseif (!empty($filename) && isset(static::$file[$filename])) {
             return static::$file[$filename];
+        }else{
+            return array(); //if the params don't exists;
         }
     }
 

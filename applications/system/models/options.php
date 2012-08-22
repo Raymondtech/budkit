@@ -20,6 +20,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\System\Models;
 
 use Platform;
@@ -43,9 +44,10 @@ class Options extends Platform\Model {
     /**
      * Default display method for every model 
      */
-    public function display(){ return false; }
-    
-    
+    public function display() {
+        return false;
+    }
+
     /**
      * Saves options to the database, inserting if none exists or updating on duplicate key
      * 
@@ -53,40 +55,46 @@ class Options extends Platform\Model {
      * @param type $group
      * @return boolean
      */
-    public function save( $options , $group = null ){    
-        
-        if(!is_array($options)||empty($options)){
-            $this->setError( "No options passed to be saved");
+    public function save($options, $group = null) {
+
+        if (!is_array($options) || empty($options)) {
+            $this->setError("No options passed to be saved");
             return false;
         }
         //Inser the data if not exists, or update if it does exists;
-        $table      = $this->load->table( "?options" );      
-        $shortgun   = "REPLACE INTO ?options (`option_group_id`,`option_name`,`option_value`)\t";
+        $table = $this->load->table("?options");
+        $shortgun = "REPLACE INTO ?options (`option_group_id`,`option_name`,`option_value`)\t";
         //$this->database->startTransaction();
-        $values     = array();
-        foreach($options as $option=>$value):
+        $values = array();
+        
+        foreach ($options as $group => $option):
+            if (is_array($option)):
+                foreach ($option as $item => $value):
+                    $binder = "( " . $this->database->quote($group) . "," . $this->database->quote($item) . "," . $this->database->quote($value) . ")";
+                    $values[] = $binder;
+                endforeach;
+            else:
+                $item = $group;
+                $value = $option;
+                $binder = "( " . $this->database->quote("general") . "," . $this->database->quote($item) . "," . $this->database->quote($value) . ")";
+                $values[] = $binder;
+            endif;
             
-            $binder     = "( ".$this->database->quote($group).",".$this->database->quote($option).",".$this->database->quote($value).")";
-            $values[]   = $binder;
-            
-            //$table->insert($binder, T);
+        //$table->insert($binder, T);
         endforeach;
-        $primaryKey  = $table->keys();
-        $shortgunval = implode(',',$values);
-        $shortgun   .= "VALUES\t".$shortgunval;
+        
+        $primaryKey = $table->keys();
+        $shortgunval = implode(',', $values);
+        $shortgun .= "VALUES\t" . $shortgunval;
         //$shortgun   .= "\tON DUPLICATE KEY UPDATE ".$primaryKey->Field."=VALUES(`option_group_id`)+VALUES(`option_name`)+VALUES(`option_value`)";
-
-        
         //echo $shortgun; die;
-        
         //Run the query directly
-        if(!$this->database->exec($shortgun)){
-            $this->setError( $this->database->getError() );
+        if (!$this->database->exec($shortgun)) {
+            $this->setError($this->database->getError());
             return false;
         }
         return true;
     }
-    
 
     /**
      * Get's an instance of the activity model
@@ -106,6 +114,6 @@ class Options extends Platform\Model {
 
         return $instance;
     }
-}
 
+}
 

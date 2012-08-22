@@ -43,13 +43,35 @@ use Platform;
  */
 final class Database extends \Library\Object  {
     
-    static $params = array();
+    static protected $params = array();
     
-    public function getParams(){}
+    public static function getParams(){
+
+        return static::$params;
+    }
     
-    public function saveParams(){}
+    public static function saveParams(){}
     
-    public function readParams(){}
+    /**
+     * Reads the database configuration 
+     * 
+     * @return void
+     */
+    public static function readParams(){
+        
+        //print_R(static::$params);
+        $database   = \Library\Database::getInstance();
+        //$token = (string) $input->getCookie($sessId);
+        $statement  = $database->select("`option_group_id` as `section`,`option_name` as `param`, `option_value` as `value`")->from("?options")->where("option_autoload", $database->quote("yes"))->prepare();
+        $result     = $statement->execute();
+
+        //Create the database config param
+        while($option = $result->fetchArray()){
+            static::$params[$option['section']][$option["param"]] = $option["value"];
+        }
+        //Do we have a session that fits this criteria in the db? if not destroy
+        
+    }
 
     /**
      * Gets an instance of the config element
@@ -66,6 +88,7 @@ final class Database extends \Library\Object  {
             return $instance;
 
         $instance = new self();
+        $instance->readParams();
 
         return $instance;
     }

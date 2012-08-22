@@ -70,11 +70,11 @@ final class Encrypt extends \Library\Object {
      * @param string $txt
      * @return string 
      */
-    public function generateKey($txt) {
+    public static function generateKey($txt, $length=null) {
 
         $possible = "2346789bcdfghjkmnpqrtvwxyzBCDFGHJKLMNPQRTVWXYZ";
 
-        $maxlength = strlen($possible);
+        $maxlength = ( empty($length)||(int)$length > strlen($possible)  ) ? strlen($possible) : (int)$length;
         $random = "";
 
         $i = 0;

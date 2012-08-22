@@ -40,7 +40,7 @@
     <div class="control-group">
         <label class="control-label"><?php echo _('DB Table Prefix') ; ?></label>
         <div class="controls input">
-            <input type="text" name="dbtableprefix" id="dbtableprefix" class="input-xxlarge" value="dd_" />
+            <input type="text" name="dbtableprefix" id="dbtableprefix" class="input-xxlarge" value="<?php echo $this->getRandomString('5'); ?>_" />
             <span class="help-block">This is a security feautre, and if one is not defined it will be automatically be generated</span>
         </div>
     </div>

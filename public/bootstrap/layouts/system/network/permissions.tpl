@@ -98,7 +98,7 @@
                                 <select name="authority-parent" id="authority-parent" class="input-xxxlarge">
                                     <?php foreach ($authorities as $e): ?>
                                     <option value="<?php echo $e['authority']['authority_id'] ?>">
-                                        <?php echo str_repeat(' - ', (int) $e['authority']['indent']) . ' ' . $e['authority']['authority_title'] ?>
+                                        <?php echo str_repeat('|--', (int) $e['authority']['indent']) . ' ' . $e['authority']['authority_title'] ?>
                                     </option>
                                     <?php endforeach; ?>
                                 </select>
