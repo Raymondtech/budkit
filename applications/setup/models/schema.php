@@ -106,7 +106,7 @@ final class Schema extends Platform\Model {
                 UNIQUE KEY `UNIQUE` (`permission_area_uri`,`permission_type`,`authority_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;"
         );
-        //Dumping default permission data to authority_permission table
+        //Dumping default permission data to authority_permission tablegit
         static::$database->query(
            "INSERT INTO `?authority_permissions` (`authority_permission_key`, `authority_id`, `permission_area_uri`, `permission`, `permission_type`, `permission_title`) VALUES
             (1, 1, '/system/admin/*', 'deny', 'view', 'Admin Panel'),
