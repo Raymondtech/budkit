@@ -38,7 +38,7 @@ namespace Library;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Authorize extends \Library\Observer {
+class Authorize extends \Library\Object {
 
     /**
      * The user ID, whose authority and permission is being evaluated
@@ -120,21 +120,6 @@ class Authorize extends \Library\Observer {
             //At least we know the user is authenticated
             $this->setAuthority(AUTHROITY_IMPLIED_AUTHENTICATED);
         }
-
-        // print_R($this);
-        // print_R($this->userid);
-        // echo AUTHROITY_IMPLIED_ANONYMOUS;
-        // Now try to get direct permissions
-        //
-        // Reads all the user permissions!
-        // Note that a non defined permission implies a fail
-        $execute = \Library\Authorize\Permission::execute($this, array());
-
-
-        //print_R($this);
-
-
-        return $execute;
     }
 
     /**

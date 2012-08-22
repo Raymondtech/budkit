@@ -106,6 +106,16 @@ final class Schema extends Platform\Model {
                 UNIQUE KEY `UNIQUE` (`permission_area_uri`,`permission_type`,`authority_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;"
         );
+        //Dumping default permission data to authority_permission table
+        static::$database->query(
+           "INSERT INTO `?authority_permissions` (`authority_permission_key`, `authority_id`, `permission_area_uri`, `permission`, `permission_type`, `permission_title`) VALUES
+            (1, 1, '/system/admin/*', 'deny', 'view', 'Admin Panel'),
+            (2, 4, '/system/admin/*', 'allow', 'special', 'Admin Panel'),
+            (3, 1, '/member/session/start', 'allow', 'execute', 'Site Login'),
+            (4, 1, '/member/account/create', 'allow', 'execute', 'Site Signup'),
+            (5, 2, '/system/activity/create', 'allow', 'execute', 'Update Status'),
+            (6, 2, '/content/*/create', 'allow', 'execute', 'Create Content');"
+         );
     }
     
     private static function createMenutable(){

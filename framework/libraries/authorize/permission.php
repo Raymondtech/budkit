@@ -40,27 +40,13 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/permission
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Permission extends Library\Authorize implements \Library\Authorize\Authority {
+final class Permission extends Library\Observer {
 
-    /**
-     * Checks has permission to 
-     * 
-     * @param type $permission
-     * @param type $args 
-     */
-    public static function to($permission, $args=array()) {
-        
-    }
-
-    /**
-     * Asserts an authority has permission
-     * 
-     * @param type $authority
-     * @param type $args 
-     */
-    public static function assert($authority, $args=array()) {
-        
-    }
+    
+    private static function create(){}
+    private static function read(){}
+    private static function update(){}
+    private static function delete(){}
 
     /** 
      * Checks a user has permission to execute
@@ -69,20 +55,20 @@ final class Permission extends Library\Authorize implements \Library\Authorize\A
      * @param array $array
      * @return type 
      */
-    public static function execute($authority, array $array = NULL) {
+    public static function execute($action, $params = NULL) {
 
-        //print_R($authority);
-        //$authority->userID = 23;
-
-        $permission = new self;
-
-        //Load Permissions from storage;
-        //Calculate implied/direct permissions;
-        //print_R($authority);
-        //print_R($permission);
-        //Reads all the permission in to directAuthorities variable
-
-        return $authority;
+        $actionController = $params["action"];
+        $actionRoute      = $params["route"];
+        $actionUser       = $params["user"];
+        
+        //Test Message
+        $actionController->alert("You do not have the relevant authority to access this section of our site. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '<i class="icon icon-lock"></i>', 'error');
+        
+        
+        //If User does not have permission to view this page, redirect them back to homepage
+        //$actionController->redirect('/');
+        
+        return true;
     }
 }
 

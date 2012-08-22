@@ -40,62 +40,16 @@ use Platform;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/object
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Observer extends \Library\Object {
+abstract class Observer extends Object {
 
     /**
-     * The Action controller propergating action to listerners
-     * and being executed
+     * Delegate method to be executed on observered action states
      * 
-     * @var type 
+     * @return void;
      */
-    public $controller;
-
-    /**
-     * The listerners listening to the actions performed by this controller
-     * @var type 
-     */
-    protected static $listeners = array();
-
-    /**
-     * Alias Observer method to add listerner
-     * An example of a listerner is the Authorize library class
-     * 
-     * @return void
-     */
-    static public function attach() {
-        return static::addListerner();
-    }
-
-    /**
-     * Method to add listerner to an action controller
-     * 
-     * @return boolean true if added, false if not added
-     */
-    static public function addListerner() {
-        
-    }
-
-    /**
-     * Tells listeners an action is about to be executed
-     * i.e Notifies listerners an action has taken plage
-     * 
-     * @return void
-     */
-    static public function announce() {
-        
-    }
-
-    /**
-     * Tells listeners an action has finished being executed
-     * i.e Notifies listerners an action has taken plage
-     * 
-     * @return void
-     */
-    static public function report() {
-        
-    }
-
-    /**
+    abstract static public function execute( $action, $params );
+    
+       /**
      * Gets an instance of the registry element
      *
      * @staticvar self $instance

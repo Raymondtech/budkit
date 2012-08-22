@@ -169,9 +169,11 @@ final class Dispatcher extends \Library\Object {
                 throw new \Platform\Exception("Method $method does not exists in $class");
             }
         }
-        //Before Dispatch Event
-        //static::isDispatchable($route, $this);
         
+        //Attach the permission observer
+        $this->task->attach("\Library\Authorize\Permission");
+        
+        //@TODO Should we Allow onBeforeDispatch to modify $this->task?
         Library\Event::trigger('onBeforeDispatch', $route);
         
         \call_user_func_array(array($this->task, $method), (array) $argmts);

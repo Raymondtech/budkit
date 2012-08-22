@@ -12,10 +12,6 @@
                     <form class="form-horizontal"> 
 
                         <fieldset>
-<!--                            <div class="alert alert-block alert-info">
-                                <p><?php echo _('Note that by default, all un-defined permissions are denied. Where thesame permission is defined to the parent, it will be inherited. Also permission heiracchy is Special > Modify > Execute > View, implying an authority with Special permissions can View, Execute and Modify objects in an AoR. An authority with permission to Modify can, automatically View the Objects in this area, etc'); ?></p>
-                                                        <a data-toggle="tab" data-target="#addauthorityrole" class="btn">Add a New Role-Based Permission</a>
-                            </div>-->
                             <table class="table table-striped">
                                 <tbody>
                                     <?php
@@ -37,12 +33,20 @@
                             </table>
                         </fieldset>
                     </form>
+                    <div class="alert alert-info">          
+                        <ol>
+                            <li>Permission heiracchy is "Special" > "Modify" > "Execute" > "View", implying an authority with Special permissions can "View", "Execute" and "Modify" objects in an area of responsibility (AoR).</li>
+                            <li>By default, unless explicitly denied, all "View" permission are allowed (and inheritted) for every AoR to every authority. All other permissions ("Execute", "Modify" and "Special") are denied unless explicitly allowed</li>
+                            <li>Special permission will always be granted to the owner of an object</li>
+                            <li>All Permissions defined for the parent authority group, will be inherited by child authority groups.</li>
+                        </ol>
+                    </div>
                 </div>
                 <div class="tab-pane active" id="authorities">
-<!--                    <div class="alert alert-block alert-info">
-                        <p><?php echo _("An authority is a role in an area of responsibility (AoR). A curator is the head of an authority, who can create and grant permissions to users in that authority, or sub authority. A permission is an authorization to, access, modify or execute an object or operation, granted to an authority or user by a curator. Some authorities are automatically generated. For instance geographical and age authorities, can be used to limit permission by location, and age respectively.") ?></p>
-                                        <a data-toggle="tab" data-target="#addauthority" class="btn">Add Authority Group</a>
-                    </div>-->
+                    <!--                    <div class="alert alert-block alert-info">
+                                            <p><?php echo _("An authority is a role in an area of responsibility (AoR). A curator is the head of an authority, who can create and grant permissions to users in that authority, or sub authority. A permission is an authorization to, access, modify or execute an object or operation, granted to an authority or user by a curator. Some authorities are automatically generated. For instance geographical and age authorities, can be used to limit permission by location, and age respectively.") ?></p>
+                                                            <a data-toggle="tab" data-target="#addauthority" class="btn">Add Authority Group</a>
+                                        </div>-->
                     <table class="table table-striped">
                         <thead>
                             <tr>

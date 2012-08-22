@@ -57,18 +57,7 @@ class Start extends Platform\Controller {
         $view->dashboard(); //sample call;        
         //$this->output();
     }
-    
-    public function explore(){
-        //To set the pate title use
-        
-        $this->output->setLayout("explorer");
-        $this->output->setPageTitle("Explore");
-        
-        $form  = $this->output->layout("explorer");
-       
-
-        $this->output->addToPosition("body" , $form); 
-    }
+   
     
      public function featured(){
         //To set the pate title use

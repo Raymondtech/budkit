@@ -12,7 +12,7 @@
 
                     <ul class="nav pull-left">                     
                         <li><a href="/system/start/featured">Featured</a></li>
-                        <li><a href="/system/start/explore">Explore</a></li>
+                        <li><a href="/content/locations/map">Explore</a></li>
                         <li><a href="/system/activity/stream">Activity</a></li>
                         <li class="divider-vertical"></li>
                         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >

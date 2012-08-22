@@ -39,7 +39,7 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/controller
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-abstract class Controller extends Library\Object {
+abstract class Controller extends Library\Action {
 
     //use Library\Singleton;
     
@@ -93,8 +93,8 @@ abstract class Controller extends Library\Object {
             'load' => '\Platform\Loader',
             'user'  => '\Platform\User',
             'validate' => 'Library\Validate',
-            'output' => 'Library\Output',
-            'observer' => 'Library\Observer'
+            'output' => 'Library\Output'
+    
         );
         
         foreach ($classes as $var => $class) {
@@ -112,7 +112,6 @@ abstract class Controller extends Library\Object {
         $this->authhandler = "dbauth";
         
         $this->output->set("user", $this->user );
-        $this->observer->attach(); //The Permission class
 
         $installed      =  $this->config->getParam("installed", false ,"database");
         $application    =  $this->application;
@@ -256,12 +255,15 @@ abstract class Controller extends Library\Object {
      */
     final public function login() {
         
+        static::actionStateAs("view");
         //@TODO Kill any logged in session
         //@TODO If already logged in, redirect to homepage or somewhere else;
         //$this->redirect( '/index.php' );
         //login and authorize
         if ($this->input->methodIs("post")) {
 
+            static::actionStateAs("execute");
+            
             //1. Check that we have a valid username and password
             $credentials = array();
 

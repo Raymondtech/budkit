@@ -65,7 +65,15 @@ final class Location extends \Platform\Controller {
     // domain.com/post/item/1902480-Born-in-the-USA/
     public function map() {
         
-       $view = $this->load->view('location');
+        //To set the pate title use    
+        $this->output->setLayout("explorer");
+        $this->output->setPageTitle("Browse Locations");
+        
+        $form  = $this->output->layout("location/explorer");
+       
+
+        $this->output->addToPosition("body" , $form); 
+    
         
     }
 

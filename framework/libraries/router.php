@@ -640,6 +640,15 @@ final class Router extends Object {
         
         return $this->path;
     }
+    
+    /**
+     * Resolves URL aliases into full URLs
+     * and vice versa
+     * 
+     */
+    public function getRealPath(){
+        
+    }
 
     /**
      * Sets the routed application for dispatching
