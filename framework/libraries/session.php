@@ -241,7 +241,7 @@ class Session extends Object {
     final public static function getNamespace($name = 'default') {
         //Returns the Registry object corresponding to the
         //namespace $name from $this->registry
-        $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
+        $self = (!isset($this) || !is_a($this, "\Library\Session")) ? self::getInstance() : $this;
 
         return $self->registry[$name];
     }

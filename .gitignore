@@ -13,3 +13,5 @@ config/setup.ini
 .htaccess
 
 config.inc
+
+config.inc

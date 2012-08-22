@@ -233,6 +233,7 @@ class Config extends Object {
                         if ($_INI->readParams($ini) !== FALSE) {
                             //print_R($INI);
                             $params = $_INI->getParams($ini);
+                            //$config = array_merge($config, $params);
                             $config = static::mergeParams($config, $params);
                         }
                     }
@@ -240,12 +241,6 @@ class Config extends Object {
             //continue;
             endforeach;
             
-            //print_R($config);
-
-            //Get database configs
-            $_DB    = static::getDatabase();
-            $params = $_DB->getParams();
-            $config = static::mergeParams($config, $params);
 
             //Find all the config files in apps
             $configs = \Library\Folder::itemizeFind("config.inc", APPPATH, 0, TRUE, 1);
@@ -266,6 +261,26 @@ class Config extends Object {
             $configarray = & $config;
         }
         return $configarray;
+    }
+    
+    /**
+     * 
+     * @param type $section
+     * @param type $autoload
+     */
+    public static function getDBParams($section = null, $autoload = null){
+   
+        if((bool)static::getParam("installed",false,"database")):
+
+            $_DB    = static::getDatabase();
+            //print_R(Config::getParams());
+
+            $_DB->readParams();
+            $params = $_DB->getParams();
+            static::$params = static::mergeParams(static::$params, $params);
+
+        endif;
+            
     }
     
     /**
@@ -357,6 +372,8 @@ class Config extends Object {
 
         $instance = new self();
         static::$params = $params; //Store Params form config files;
+        
+        static::getDBParams();
 
         return $instance;
     }

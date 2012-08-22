@@ -70,7 +70,7 @@ final class Database extends \Library\Object  {
             static::$params[$option['section']][$option["param"]] = $option["value"];
         }
         //Do we have a session that fits this criteria in the db? if not destroy
-        
+        return true;
     }
 
     /**
@@ -88,7 +88,7 @@ final class Database extends \Library\Object  {
             return $instance;
 
         $instance = new self();
-        $instance->readParams();
+        //$instance->readParams();
 
         return $instance;
     }

@@ -237,53 +237,53 @@ final class Schema extends Platform\Model {
         );
     }
     
-    private static function createPostmetaTable(){
-        static::$database->query("DROP TABLE IF EXISTS `?postmeta`");
+    private static function createContentmetaTable(){
+        static::$database->query("DROP TABLE IF EXISTS `?contentmeta`");
         static::$database->query(
-            "CREATE TABLE IF NOT EXISTS `?postmeta` (
-                `postmeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                `postmeta_post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-                `postmeta_key` varchar(255) DEFAULT NULL,
-                `postmeta_value` longtext,
-                PRIMARY KEY (`postmeta_id`),
-                KEY `post_id` (`postmeta_post_id`),
-                KEY `meta_key` (`postmeta_key`)
+            "CREATE TABLE IF NOT EXISTS `?contentmeta` (
+                `contentmeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                `contentmeta_content_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+                `contentmeta_key` varchar(255) DEFAULT NULL,
+                `contentmeta_value` longtext,
+                PRIMARY KEY (`contentmeta_id`),
+                KEY `content_id` (`contentmeta_content_id`),
+                KEY `meta_key` (`contentmeta_key`)
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;"
         );
     }
     
-    private static function createPostsTable(){
-        static::$database->query("DROP TABLE IF EXISTS `?posts`");
+    private static function createContentsTable(){
+        static::$database->query("DROP TABLE IF EXISTS `?contents`");
         static::$database->query(
-            "CREATE TABLE IF NOT EXISTS `?posts` (
-                `post_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                `post_author` bigint(20) unsigned NOT NULL DEFAULT '0',
-                `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                `post_date_gmt` datetime NOT NULL,
-                `post_content` longtext NOT NULL,
-                `post_title` text NOT NULL,
-                `post_excerpt` text NOT NULL,
-                `post_status` varchar(20) NOT NULL DEFAULT 'publish',
-                `post_comment_status` varchar(20) NOT NULL DEFAULT 'open',
-                `post_ping_status` varchar(20) NOT NULL DEFAULT 'open',
-                `post_password` varchar(20) NOT NULL DEFAULT '',
-                `post_name` varchar(200) NOT NULL DEFAULT '',
-                `post_to_ping` text NOT NULL,
-                `post_pinged` text NOT NULL,
-                `post_modified` datetime NOT NULL,
-                `post_modified_gmt` datetime NOT NULL,
-                `post_content_filtered` text NOT NULL,
-                `post_parent` bigint(20) unsigned NOT NULL DEFAULT '0',
-                `post_guid` varchar(255) NOT NULL DEFAULT '',
-                `post_menu_order` int(11) NOT NULL DEFAULT '0',
-                `post_type` varchar(20) NOT NULL DEFAULT 'post',
-                `post_mime_type` varchar(100) NOT NULL DEFAULT '',
-                `post_comment_count` bigint(20) NOT NULL DEFAULT '0',
-                PRIMARY KEY (`post_id`),
-                KEY `post_name` (`post_name`),
-                KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`post_id`),
-                KEY `post_parent` (`post_parent`),
-                KEY `post_author` (`post_author`)
+            "CREATE TABLE IF NOT EXISTS `?contents` (
+                `content_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                `content_author` bigint(20) unsigned NOT NULL DEFAULT '0',
+                `content_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `content_date_gmt` datetime NOT NULL,
+                `content_body` longtext NOT NULL,
+                `content_title` text NOT NULL,
+                `content_excerpt` text NOT NULL,
+                `content_status` varchar(20) NOT NULL DEFAULT 'publish',
+                `content_comment_status` varchar(20) NOT NULL DEFAULT 'open',
+                `content_ping_status` varchar(20) NOT NULL DEFAULT 'open',
+                `content_password` varchar(20) NOT NULL DEFAULT '',
+                `content_name` varchar(200) NOT NULL DEFAULT '',
+                `content_to_ping` text NOT NULL,
+                `content_pinged` text NOT NULL,
+                `content_modified` datetime NOT NULL,
+                `content_modified_gmt` datetime NOT NULL,
+                `content_body_filtered` text NOT NULL,
+                `content_parent` bigint(20) unsigned NOT NULL DEFAULT '0',
+                `content_guid` varchar(255) NOT NULL DEFAULT '',
+                `content_menu_order` int(11) NOT NULL DEFAULT '0',
+                `content_type` varchar(20) NOT NULL DEFAULT 'article',
+                `content_mime_type` varchar(100) NOT NULL DEFAULT '',
+                `content_comment_count` bigint(20) NOT NULL DEFAULT '0',
+                PRIMARY KEY (`content_id`),
+                KEY `content_name` (`content_name`),
+                KEY `type_status_date` (`content_type`,`content_status`,`content_date`,`content_id`),
+                KEY `content_parent` (`content_parent`),
+                KEY `content_author` (`content_author`)
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;"
         );
     }
@@ -368,8 +368,8 @@ final class Schema extends Platform\Model {
         static::createMenutable();
         static::createMenuGroupTable();
         static::createOptionsTable();
-        static::createPostmetaTable();
-        static::createPostsTable();
+        static::createContentmetaTable();
+        static::createContentsTable();
         static::createSessionTable();
         static::createUsermetaTable();
         static::createUsersTable();
