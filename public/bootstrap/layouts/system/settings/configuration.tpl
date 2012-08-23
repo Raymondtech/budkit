@@ -315,7 +315,19 @@
                 </div>
             </div>
             <div class="tab-pane" id="profile">
-                Profile settings
+                <div class="control-group">
+                    <label class="control-label" for="options[profile][default-authority]"> <?php echo _('Default Authority group'); ?></label>
+                    <div class="controls row-fluid">
+                        <select name="options[profile][default-authority]"  class="input-xxxlarge">
+                            <?php foreach ($this->get("authorities") as $e): ?>
+                            <option value="<?php echo $e['authority']['authority_id'] ?>">
+                                <?php echo str_repeat('|--', (int) $e['authority']['indent']) . ' ' . $e['authority']['authority_title'] ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <span class="help-block"><?php echo _('The default authority group members will be automatically added to at sign-up'); ?></span>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane" id="storage">
                 <div class="control-group">

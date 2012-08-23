@@ -44,6 +44,14 @@ class Settings extends System\Admin {
 
     public function configuration() {
 
+        //2. Load Model
+        $model = $this->load->model("authority");
+
+        //3. Get the authorities list
+        $authorities = $model->getAuthorities();
+
+        //4. Set Properties
+        $this->set("authorities", $authorities);
         $form = $this->load->view('settings');
 
         $form->configurationForm();
