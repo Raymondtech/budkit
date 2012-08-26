@@ -39,9 +39,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="/system/start/dashboard">Dashboard</a></li>
                                     <li><a href="/member/profile/view">View your profile</a></li>
-                                    <li><a href="/member/messages/inbox">Direct messages</a></li>
+                                    <li><a href="/member/messages/inbox">Messages</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/member/settings/account">Profile settings</a></li>
+                                    <li><a href="/member/settings/account">Account settings</a></li>
                                     <li><a href="/member/settings/privacy">Privacy</a></li>                            
                                     <li class="divider"></li>
                                     <li><a href="/sign-out">Sign out</a></li>
