@@ -77,7 +77,7 @@ final class Account extends \Platform\Controller {
         
         if(empty($userpass)||empty($username)||empty($usernameid)||empty($useremail)){
             //Display a message telling them what can't be empty
-            $this->alert( _('Please provide at least a Name, Username, E-mail and Password') , _('Not enough information!'), "error" );
+            $this->alert( _t('Please provide at least a Name, Username, E-mail and Password') , _('Not enough information!'), "error" );
             return $this->create();
         }
         
@@ -87,13 +87,13 @@ final class Account extends \Platform\Controller {
         
         if(empty($userpass)||empty($username)||empty($usernameid)||empty($useremail)){
             //Display a message telling them what can't be empty
-            $this->setError( _('Please provide at least a Name, Username, E-mail and Password') );
+            $this->setError( _t('Please provide at least a Name, Username, E-mail and Password') );
             return false;
         }
         
         //Validate the passwords
         if($userpass <> $userpass2){
-            $this->setError( _('The user passwords do not match') );
+            $this->setError( _t('The user passwords do not match') );
             return false;
         }
              

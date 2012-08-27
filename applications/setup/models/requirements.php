@@ -67,7 +67,7 @@ final class Requirements extends Platform\Model {
         if (is_array($directive)) {
             //If the extension is loaded
             if (!extension_loaded($name)) {
-                $return["current"] = _("Not Loaded");
+                $return["current"] = _t("Not Loaded");
                 //If we require this module loaded, then fail
                 if ($directive["loaded"]) {
                     $return["test"] = false;
@@ -76,7 +76,7 @@ final class Requirements extends Platform\Model {
                 if ($directive["installed"] && function_exists('dl')) {
                     if (!dl($name)) {
                         $return["test"] = false;
-                        $return["current"] = _("Not Installed");
+                        $return["current"] = _t("Not Installed");
                     }
                 }
             } else {
@@ -100,21 +100,21 @@ final class Requirements extends Platform\Model {
         //Test install directory is writable, readable
         //Test we are not trying to overide an installation
         $return = array(
-            "title" => $directive['path'], "name" => $name, "current" => "Not Writable", "test" => false
+            "title" => $directive['path'], "name" => $name, "current" => _t("Not Writable"), "test" => false
         );
 
         if (is_array($directive)) {
             //If the extension is loaded
             $return['status']     = ((bool)$directive['writable']) ? "Writable" : "Not Writable";
            if(\Library\Folder\Files::isWritable($path) && (bool)$directive['writable']){
-               $return['current'] = "Is Writable";
+               $return['current'] = _t("Is Writable") ;
                $return['test']    =  true;
            }elseif(!\Library\Folder\Files::isWritable($path) && !(bool)$directive['writable']){
               $return['test']     =  true; 
            }
            
            if(\Library\Folder\Files::isWritable($path)){
-               $return['current'] = "Is Writable";
+               $return['current'] = _t("Is Writable");
            }
         }
         //Return test result;
@@ -132,7 +132,7 @@ final class Requirements extends Platform\Model {
     public function testDirective($name, $directive = array()) {
 
         $return = array(
-            "title" => $name, "status" => (!$directive['status']) ? _('Off') : _('On'), "current" => "", "test" => true
+            "title" => $name, "status" => (!$directive['status']) ? 'Off' : 'On', "current" => "", "test" => true
         );
 
         //For now we can only check boolean variables
@@ -147,7 +147,7 @@ final class Requirements extends Platform\Model {
             }
 
             //Literalize
-            $return['current'] = (!$setting) ? _('Off') : _('On');
+            $return['current'] = (!$setting) ? _t('Off') : _t('On');
         }
 
         return $return;

@@ -66,20 +66,20 @@ final class Install extends Platform\Model {
         
         if(empty($userpass)||empty($username)||empty($usernameid)||empty($useremail)){
             //Display a message telling them what can't be empty
-            $this->setError( _('Please provide at least a Name, Username, E-mail and Password') );
+            $this->setError( _t('Please provide at least a Name, Username, E-mail and Password') );
             return false;
         }
         
         //Validate the passwords
         if($userpass <> $userpass2){
-            $this->setError( _('The user passwords do not match') );
+            $this->setError( _t('The user passwords do not match') );
             return false;
         }
         
         //6. Store the user
         if(!$account->store( $this->input->data("post"))){
             //Display a message telling them what can't be empty
-            $this->setError( _('Could not store the admin user account')  );
+            $this->setError( _t('Could not store the admin user account')  );
             return false;
         }
         //@TODO Empty the setup/sessions folder
@@ -112,19 +112,19 @@ final class Install extends Platform\Model {
         $dbDriver = $this->input->getString("dbdriver","MySQLi");
         
         if(empty($dbName)){
-            $this->setError("Database Name is required to proceed.");
+            $this->setError(_t("Database Name is required to proceed."));
             return false;
         }
         if(empty($dbDriver)){
-            $this->setError("Database Driver Type is required to proceed.");
+            $this->setError(_t("Database Driver Type is required to proceed."));
             return false;
         }
         if(empty($dbUser)){
-            $this->setError("Database username is required to proceed");
+            $this->setError(_t("Database username is required to proceed"));
             return false;
         }
         if(empty($dbHost)){
-            $this->setError("Please provide a link to your database host. If using SQLite, provide a path to the SQLite database as host");
+            $this->setError(_t("Please provide a link to your database host. If using SQLite, provide a path to the SQLite database as host"));
             return false;
         }
         $config::setParam("host", $dbHost , "database");
@@ -141,12 +141,12 @@ final class Install extends Platform\Model {
                  $database->close();
                  $database = \Library\Database::getInstance(array(), TRUE); //
                  //print_R($database);
-                 $this->setError( "Could not connect to the database" );
+                 $this->setError(_t("Could not connect to the database" ) );
                  return false;
              }
              //We have probles with out database
         }else{
-            $this->setError("Could not connect to the database");
+            $this->setError(_t("Could not connect to the database"));
             return false;
         }
         //@TODO run the install.sql script on the connected database

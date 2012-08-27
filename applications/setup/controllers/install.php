@@ -55,7 +55,7 @@ final class Install extends Platform\Controller {
         $view->index() ; //sample call;
         
         //To set the page title use
-        $this->output->setPageTitle("Installation | EULA");
+        $this->output->setPageTitle(_t("Installation | EULA"));
         
         //@TODO, Reference other Licences at the bottom of this page
         
@@ -75,7 +75,7 @@ final class Install extends Platform\Controller {
         //If we have not accepted the terms and conditions.
         //Redirect back and explain
         if(!$this->input->getBoolean("eula_accept")){
-            $this->alert(_('You must read and accept the End User License Agreement (EULA) to proceed with installation'),'','error');
+            $this->alert(_t('You must read and accept the End User License Agreement (EULA) to proceed with installation'),'','error');
             $this->redirect("/install/step1");
         }
         
@@ -86,7 +86,7 @@ final class Install extends Platform\Controller {
         $this->set("requirements", $requirements);
        
         $view->index() ; //sample call;
-        $this->output->setPageTitle("Installation | Requirements");
+        $this->output->setPageTitle( _t("Installation | Requirements") );
         
     }
     
@@ -98,7 +98,7 @@ final class Install extends Platform\Controller {
         $this->set("step", "3");
         
         //To set the pate title use
-        $this->output->setPageTitle("Installation | Database Config Settings");
+        $this->output->setPageTitle(_t("Installation | Database Config Settings"  ));
         $view->index() ; //sample call;
         
     }
@@ -109,20 +109,20 @@ final class Install extends Platform\Controller {
         $install    = $this->load->model('install') ;
         
         if (!$this->input->methodIs("post")) {
-            $this->alert("No user data recieved",'Something went wrong','error' );
+            $this->alert( _t("No user data recieved"),_t('Something went wrong'),'error' );
             $this->redirect("/install/step3");
         }
 
         //Check we have all the information we need!
         if(!$install->run()){
-            $this->alert(_($install->getError()),'Something went wrong','error');
+            $this->alert( $install->getError(),_t('Something went wrong'),'error');
             $this->redirect("/install/step3");
         }
-        $this->alert( "Awesome! Your database is all setup and ready. Now complete the details below to create a master user account. Please use a valid email address","","info");
+        $this->alert( _t("Awesome! Your database is all setup and ready. Now complete the details below to create a master user account. Please use a valid email address"),"","info");
         //sample call; this is step 1;
         $this->set("step", "4");
         
-        $this->output->setPageTitle("Installation | Final Things");
+        $this->output->setPageTitle(_t("Installation | Final Things"));
         $view->index() ; 
         
     }
@@ -133,21 +133,21 @@ final class Install extends Platform\Controller {
         $install    = $this->load->model('install') ;
         
         if (!$this->input->methodIs("post")) {
-            $this->alert("No user data recieved",'Something went wrong','error' );
+            $this->alert(_t("No user data recieved"),_t('Something went wrong'),'error' );
             $this->redirect("/install/step3");
         }
 
         //Check we have all the information we need!
         if(!$install->superadmin()){
-            $this->alert(_($install->getError()),'Something went wrong','error');
+            $this->alert($install->getError(),_t('Something went wrong'),'error');
             $this->set("step", "4");
             $view->index() ; 
-            return $this->output->setPageTitle("Installation | Final Things");
+            return $this->output->setPageTitle(_t("Installation | Final Things"));
         }
-        $this->alert( "Fantastico. All systems ready to go. Please make a note of the information below. If possible print this screen and keep it for your records","","success");
+        $this->alert(_t("Fantastico. All systems ready to go. Please make a note of the information below. If possible print this screen and keep it for your records") ,"","success");
         
         //Return the install report as launch
-        $this->output->setPageTitle("Installation Complete");
+        $this->output->setPageTitle(_t("Installation Complete"));
         
         return $view->readme();
     }

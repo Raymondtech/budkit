@@ -33,7 +33,7 @@ use Platform;
  * ------------------------------------------------------
  */
 require( FSPATH . 'framework' . DS .'utilities'.DS. 'loader' . EXT);
-
+require( FSPATH . 'framework' . DS .'utilities'.DS. 'functions' . EXT);
 
 spl_autoload_register(new Platform\Loader("Platform", FSPATH . 'framework'.DS.'utilities'));
 spl_autoload_register(new Platform\Loader("Library", FSPATH . 'framework' . DS . 'libraries'));
@@ -77,7 +77,6 @@ Debugger::start();
 Library\Output::startBuffer(); //important order!! Must be called before session start
 Library\Event::trigger('onStart');
 Library\Session::start();
-
 
 /*
  * ------------------------------------------------------

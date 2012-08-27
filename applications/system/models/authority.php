@@ -39,7 +39,7 @@ class Authority extends Platform\Model {
         //All fields required;
         foreach ($aData as $k => $item) {
             if (empty($item)) {
-                $this->setError(_("Please complete all permission fields; Provide a title and uri defining the area, a permission type and value"));
+                $this->setError(_t("Please complete all permission fields; Provide a title and uri defining the area, a permission type and value"));
                 return false;
             }
         }
@@ -121,7 +121,7 @@ class Authority extends Platform\Model {
         if ($table->isNewRow()) {
 
             if (empty($authorityName) || empty($authorityParent) || empty($authorityTitle)) {
-                $this->setError(_('Every new authority must have a defined Title, and must be a subset of the public authority'));
+                $this->setError(_t('Every new authority must have a defined Title, and must be a subset of the public authority'));
                 return false;
             }
 
@@ -150,21 +150,13 @@ class Authority extends Platform\Model {
         return true;
     }
 
-    public function load() {
-        
-    }
+    public function load() {}
 
-    public function delete() {
-        
-    }
+    public function delete() {}
 
-    public function validate() {
-        
-    }
+    public function validate() {}
 
-    public function getToken() {
-        
-    }
+    public function getToken() {}
 
     public function getAuthorities() {
 

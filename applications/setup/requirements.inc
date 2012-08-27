@@ -25,77 +25,77 @@
 $requirements = array(
     "modules" => array(
         "gd" => array(
-            "title" => _('Image Manipultation'),
+            "title" => _t('Image Manipultation'),
             "installed" => true,
             "loaded" => true
         ),
         "mcrypt" => array(
-            "title" => _('Cryptography Handling'),
+            "title" => _t('Cryptography Handling'),
             "installed" => true,
             "loaded" => true
         ),
         "gettext" => array(
-            "title" => _('Localization'),
+            "title" => _t('Localization'),
             "installed" => true,
             "loaded" => true
         ),
         "tokenizer" => array(
-            "title" => _('Tokenizer'),
+            "title" => _t('Tokenizer'),
             "installed" => true,
             "loaded" => true
         ),
         "pcre" => array(
-            "title" => _('Perl Compatible RegEx'),
+            "title" => _t('Perl Compatible RegEx'),
             "installed" => true,
             "loaded" => true
         ),
         "json" => array(
-            "title" => _('javaScript Object Notation'),
+            "title" => _t('javaScript Object Notation'),
             "installed" => true,
             "loaded" => true
         ),
         "iconv" => array(
-            "title" => _('IconV Character-Set Conversion'),
+            "title" => _t('IconV Character-Set Conversion'),
             "installed" => true,
             "loaded" => true
         ),
         "imap" => array(
-            "title" => _('IMAP extension'),
+            "title" => _t('IMAP extension'),
             "installed" => true,
             "loaded" => true
         ),
         "mbstring" => array(
-            "title" => _('Multibyte Strings'),
+            "title" => _t('Multibyte Strings'),
             "installed" => true,
             "loaded" => true
         ),
         "ctype" => array(
-            "title" => _('Character-Type checking'),
+            "title" => _t('Character-Type checking'),
             "installed" => true,
             "loaded" => true
         ),
         "libxml" => array(
-            "title" => _('XML Manipulation'),
+            "title" => _t('XML Manipulation'),
             "installed" => true,
             "loaded" => true
         ),
         "zlib" => array(
-            "title" => _('Zlib Compression'),
+            "title" => _t('Zlib Compression'),
             "installed" => true,
             "loaded" => true
         ),
         "mysqli" => array(
-            "title" => _('Database Management with MySQLi'),
+            "title" => _t('Database Management with MySQLi'),
             "installed" => true,
             "loaded" => true,
             "alternate" => array(
                 "mysql" => array(
                     "installed" => true,
                     "loaded" => true,
-                    "title" => _('MySQL Library'),
+                    "title" => _t('MySQL Library'),
                     "alternate" => array(
                         "sqlite3" => array(
-                            "title" => _('sQLite3 Library'),
+                            "title" => _t('sQLite3 Library'),
                             "installed" => true,
                             "loaded" => true,
                         //"terminal"  => true || If we get to this stage, then the error is terminal
