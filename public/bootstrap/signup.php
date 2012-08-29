@@ -32,7 +32,7 @@
                         <div class="span12">           
                             <div class="row-fluid">
                                 <div class="span8"> 
-                                    Features
+                                    <tpl:i18n>Features</tpl:i18n>
                                     <tpl:block data="page.block.body">Content</tpl:block></div>
                                 <div class="span4">
                                     <div class="left-pad">  
@@ -41,35 +41,35 @@
                                                 <fieldset class="no-margin">
                                                     <legend>Register a new account</legend><tpl:block data="page.block.alerts" />
                                                     <div class="control-group">
-                                                        <label class="control-label" for="user_name"><?php echo _('Full Name'); ?><em class="mandatory">*</em></label>
+                                                        <label class="control-label" for="user_name"><tpl:i18n>Full Name</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">
                                                             <input class="input-large focused span11" id="user_name" name="user_name" type="text" placeholder="John Doe" />
                                                         </div>
                                                     </div>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="user_name_id"><?php echo _('Unique Username'); ?><em class="mandatory">*</em></label>
+                                                        <label class="control-label" for="user_name_id"><tpl:i18n>Unique Username</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">
                                                             <input class="input-large focused span11" id="user_name_id" name="user_name_id" type="text" placeholder="JohnDoe1976" />
                                                         </div>
                                                     </div>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="user_email"><?php echo _('Email address'); ?><em class="mandatory">*</em></label>
+                                                        <label class="control-label" for="user_email"><tpl:i18n>Email address</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">
                                                             <input class="input-large focused span11" id="user_email" name="user_email" type="text" placeholder="<?php echo _('e.g john.doe@example.com'); ?>" />
                                                         </div>
                                                     </div>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="user_password"><?php echo _('Password'); ?><em class="mandatory">*</em></label>
+                                                        <label class="control-label" for="user_password"><tpl:i18n>Password</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">
                                                             <input class="input-large focused span11" id="user_password" name="user_password" type="password" />
                                                         </div>
                                                     </div>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="user_password_2"><?php echo _('Verify Password'); ?><em class="mandatory">*</em></label>
+                                                        <label class="control-label" for="user_password_2"><tpl:i18n>Verify Password</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">
                                                             <input class="input-large focused span11" id="user_password_2" name="user_password_2" type="password" />
                                                         </div>
@@ -94,10 +94,10 @@
                                                 </fieldset>
                                                 <div class="btn-toolbar">
                                                     <div class="btn-group">
-                                                        <button type="submit" class="btn">Create an Account</button> 
+                                                        <button type="submit" class="btn" tpl:i18n="">Create an Account</button> 
                                                     </div>
                                                     <div class="btn-group">
-                                                        <button type="reset" class="btn">Cancel</button> 
+                                                        <button type="reset" class="btn" tpl:i18n="">Cancel</button> 
                                                     </div>
                                                 </div>
                                             </form>

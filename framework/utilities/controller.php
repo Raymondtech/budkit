@@ -121,7 +121,7 @@ abstract class Controller extends Library\Action {
         if(!$installed && (strtolower($application)!== "setup" ) ){
             $this->redirect("/setup/install/step1");
         }elseif( $installed && (strtolower($application)== "setup" && strtolower($controller)== "install")){
-            throw new \Platform\Exception("The system is already installed, you cannot perform any more install actions. Did you want to upgrade instead? try /setup/update/");
+            throw new \Platform\Exception(_t("The system is already installed, you cannot perform any more install actions. Did you want to upgrade instead? try /setup/update/"));
         }
     }
 
@@ -154,7 +154,7 @@ abstract class Controller extends Library\Action {
         //1. Check the user is authenticated,
         //2. If the user is not authenticated, redirect them to authenticate,
         if(!$this->user->isAuthenticated()){
-            $this->alert( _("You need to be logged in to complete this task"), _("Authentication required"), "info" );
+            $this->alert( _t("You need to be logged in to complete this task"), _("Authentication required"), "info" );
             
             //@TODO user $this->login() for persistent data;
             //Is there a means to redirect back from the login form once authentiation is complete?
@@ -276,7 +276,7 @@ abstract class Controller extends Library\Action {
             $authenticate = "Library\Authenticate\\" . $authhandler;
 
             //failure
-            $failure = _("The password or username you provided did not match any user");
+            $failure = _t("The password or username you provided did not match any user");
 
             $authhandler = (empty($authhandler)) ? "dbauth" : $authhandler;
             $authenticate = (!class_exists($authenticate) || !method_exists($authenticate, "attest")) ? 'Library\Authenticate\DbAuth' : $authenticate;
@@ -292,12 +292,12 @@ abstract class Controller extends Library\Action {
                         //get the user data
                         $this->user = User::getInstance();
 
-                        $this->alert( _('Welcome on board') , sprintf(_('Howdy %s!!'), $this->user->fullname), "success");
+                        $this->alert( _t('Welcome on board') , sprintf(_t('Howdy %s!!'), $this->user->fullname), "success");
                         $this->redirect( $this->output->link( "/system/start/dashboard") );
                         
                     } else {
                         //if not show the form...with messages maybe?;
-                        $this->alert($failure, _("We were unable to log you in"), "error");
+                        $this->alert($failure, _t("We were unable to log you in"), "error");
                     }
                 }
             }
@@ -320,7 +320,7 @@ abstract class Controller extends Library\Action {
         //echo $return;
         
         //Send back to homepage
-        $this->alert(_("You have been logged out"), "", "info");
+        $this->alert(_t("You have been logged out"), "", "info");
         //$this->redirect("/");
         $this->redirect($this->uri->getURL('signin'));
     }

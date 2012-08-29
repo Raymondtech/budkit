@@ -100,7 +100,7 @@ abstract class Document extends Library\Object {
         if (!\method_exists($this, $method)) {
 
             if (!\method_exists($output, $method)) {
-                $this->setError(_('Method does not exists'));
+                $this->setError(_t('Method does not exists'));
                 return false;
             }
 

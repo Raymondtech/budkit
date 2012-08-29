@@ -57,13 +57,13 @@ class DbAuth extends \Library\Authenticate {
 
         //If not credentials
         if (empty($credentials) || !array_key_exists("usernameid", $credentials) || !array_key_exists("usernamepass", $credentials)) {
-            $this->setError(_('Must specify a valid usernameid and password'));
+            $this->setError(_t('Must specify a valid usernameid and password'));
             return false;
         }
 
         //We don't want empty passwords or usernames;
         if (empty($credentials['usernamepass']) || empty($credentials['usernamepass'])) {
-            $this->setError(_('Must specify a valid usernameid and password'));
+            $this->setError(_t('Must specify a valid usernameid and password'));
             return false;
         }
 
@@ -96,7 +96,7 @@ class DbAuth extends \Library\Authenticate {
 
         //Are the passhashes similar?
         if ($passhash !== $userobject->user_password) {
-            $this->setError(_('Could not authenticate the user with the credentials supplied'));
+            $this->setError(_t('Could not authenticate the user with the credentials supplied'));
             return false;
         }
 

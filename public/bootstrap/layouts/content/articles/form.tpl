@@ -4,19 +4,19 @@
             <div class="modal-box">
                 <form>
                     <fieldset>
-                        <h3><?php echo _('Create new Article'); ?></h3>
+                        <h3 tpl:i18n="">Create new Article</h3>
                         <hr class="hr-ccc" />
                         <div class="row wrap">
                             <div class="col two-thirds mutableContent wrap">
                                 <div id="text-input">
                                     <div id="title-input">
                                         <label>Title
-                                            <span class="small">(optional)</span>
+                                            <span class="small" tpl:i18n="">(optional)</span>
                                         </label>
                                         <input type="text" name="title" value="" id="title" style="width: 100%" />
                                     </div>
                                     <label>Post
-                                        <span class="small"> &HorizontalLine; <a href="#global-input" dref="toggle"><?php echo _('Save as draft?'); ?></a></span>
+                                        <span class="small"> &HorizontalLine; <a href="#global-input" dref="toggle" tpl:i18n="">Save as draft?</a></span>
                                     </label>
                                     <textarea name="ptext" id="ptext" style="width: 100%;min-height: 205px" class="wysiwyg"></textarea>
                                 </div>
@@ -25,14 +25,14 @@
                                     <hr class="hr-ccc" />
 
                                     <label> Add a cover photo 
-                                        <span class="small"> &HorizontalLine; <a href="#">Upload from URL instead?</a></span>
+                                        <span class="small"> &HorizontalLine; <a href="#" tpl:i18n="">Upload from URL instead?</a></span>
                                     </label>
                                     <input type="file" name="email" value="" id="title" style="width: 100%" />
                                     <label>Excerpt
-                                        <span class="small">(optional)</span>
+                                        <span class="small" tpl:i18n="">(optional)</span>
                                     </label>
                                     <textarea name="ptext" id="ptext" style="width: 100%;min-height: 92px" class="wysiwyg"></textarea>
-                                    <span class="small" style="margin-bottom: 10px; display: block; width: 100%"><?php echo sprintf(_('By submitting this article you are agreeing to our %s') , '<a href="#">Terms of Use</a>') ; ?></span>
+                                    <span class="small" style="margin-bottom: 10px; display: block; width: 100%"><?php echo sprintf(_t('By submitting this article you are agreeing to our %s') , '<a href="#">Terms of Use</a>') ; ?></span>
                                 </div>
                             </div>
                             <div class="col two-sixths wrap">

@@ -196,7 +196,7 @@ abstract class Database extends Object {
 
 
         if (!\method_exists($AR, $method)) {
-            $this->setError(_('Method does not exists'));
+            $this->setError(_t('Method does not exists'));
             return false;
         }
 
@@ -224,14 +224,14 @@ abstract class Database extends Object {
 
         if (!isset($dbparams) OR count($dbparams) == 0) {
             //display some sort of error;
-            static::setError('db params not set or not properly formatted');
+            static::setError(_t('db params not set or not properly formatted'));
             return false;
         }
 
         if (!isset($dbparams['driver'])) {
             //die;
             //we can't work without this
-            static::setError('we need to know what driver your using');
+            static::setError(_t('we need to know what driver your using'));
             return false;
         }
 
@@ -249,7 +249,7 @@ abstract class Database extends Object {
    
 
         if (!\is_object($instances[$signature])) {
-            static::setError('Could not instantiate database object for the driver:' . $driver);
+            static::setError(sprintf( _t('Could not instantiate database object for the driver: %s'), $driver) );
             return false;
         }
         
