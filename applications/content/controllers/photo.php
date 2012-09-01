@@ -74,9 +74,9 @@ final class Photo extends \Platform\Controller {
     public function gallery() {
         
         $view       = $this->load->view('index');
-        $this->output->setPageTitle( _("Photo - Born in the USA") );
+        $this->output->setPageTitle( _t("Photo - Born in the USA") );
 
-        $body       = $this->output->layout('photo');
+        $body       = $this->output->layout('photos/photo');
         //$right      = _("Notifications filter");
         
         $this->output->addToPosition("body", $body);

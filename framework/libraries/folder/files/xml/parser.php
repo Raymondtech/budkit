@@ -131,7 +131,7 @@ class Parser extends Files\Xml {
         self::$level = null;
         self::$elements = null;
         //self::$ROOT = null;
-        self::$eventContext = _("XML Parser Events");
+        self::$eventContext = _t("XML Parser Events");
 
         //self::$tree[0] = array();
         self::$stack[count(self::$stack)] = &self::$tree;
@@ -206,12 +206,12 @@ class Parser extends Files\Xml {
 
         if ($systemId) {
             if (!list($parser, $fp) = new_xml_parser($systemId)) {
-                self::setError("Could not open entity %s at %s\n", $openEntityNames, $systemId);
+                self::setError(sprintf( _t("Could not open entity %s at %s\n"), $openEntityNames, $systemId ) );
                 return false;
             }
             while ($data = fread($fp, 4096)) {
                 if (!xml_parse($parser, $data, feof($fp))) {
-                    self::setError("XML error: %s at line %d while parsing entity %s\n", xml_error_string(xml_get_error_code($parser)), xml_get_current_line_number($parser), $openEntityNames);
+                    self::setError(sprintf( _t("XML error: %s at line %d while parsing entity %s\n"), xml_error_string(xml_get_error_code($parser)), xml_get_current_line_number($parser), $openEntityNames) );
                     xml_parser_free($parser);
                     return false;
                 }
@@ -338,7 +338,7 @@ class Parser extends Files\Xml {
         //For now just arrays! will look to handle objects later
         if (!isset($ROOT) || !is_array($ROOT)) {
             //print_R($ROOT);
-            $this->setError(_("The document root is invalid"));
+            $this->setError(_t("The document root is invalid"));
             return false;
         }
 

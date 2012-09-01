@@ -22,6 +22,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\Content\Views;
 
 use Platform;
@@ -51,20 +52,28 @@ final class Photo extends \Platform\View {
     }
 
     public function display() {
-        
+        //parse Layout Demo;
+        //$sidebar      = $this->output->layout( "index_sidebar" );
+        $dashboard = $this->output->layout("dashboard", "system");
+        $sidebar = $this->output->layout("sidebar", "system");
+
+        $this->output->addToPosition("side", $sidebar);
+        $this->output->addToPosition("body", $dashboard);
     }
 
     public function createform() {
         //Photo
-         $this->output->setPageTitle("Photos | Upload more");
-                 
+        $this->output->setPageTitle("Photos | Upload more photos");
+
         //form
-        $form  = $this->output->layout( "photos/form" );
-        
+        $form = $this->output->layout("photos/form");
+
         //The default installation box;
         //$this->output->addToPosition("left",    $sidebar);
-        
-        $this->output->addToPosition("body",   $form);
+
+        $this->output->addToPosition("dashboard", $form);
+
+        return $this->display();
     }
 
     public static function getInstance() {

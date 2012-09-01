@@ -104,7 +104,7 @@ final class Encrypt extends \Library\Object {
     public function encode($string) {
 
         if (empty($string)) {
-            $this->setError(_t('cannot encode an empty string'));
+            $this->setError(_t('Cannot encode an empty string'));
             return false;
         }
 

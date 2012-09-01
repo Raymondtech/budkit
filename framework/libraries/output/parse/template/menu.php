@@ -102,6 +102,7 @@ class Menu extends Parse\Template {
         $li = array();
         $parent = 0;
         $id = 0;
+        $hasActive = false;
 
         //$hasActive  = false;
         foreach ($menuItems as $item) {
@@ -126,6 +127,8 @@ class Menu extends Parse\Template {
             $query = \Library\Uri::getInstance()->getQuery();
             $active = ( \Library\Uri::internal($item['menu_url']) <> \Library\Uri::internal($query) ) ? false : true;
             //$hasActive = $active;
+            
+           
 
             $link = array(
                 "ELEMENT" => 'li',
@@ -138,6 +141,9 @@ class Menu extends Parse\Template {
                     )
                 )
             );
+            
+             //$hasActive = ($active)? true : false; 
+             
             //Ammend active path if tab is active;
             //@TODO am i a child? who is my parent?
             //@TODO build a tag

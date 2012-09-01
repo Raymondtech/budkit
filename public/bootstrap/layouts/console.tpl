@@ -21,5 +21,5 @@
                 </ul>
             </div>
         </div>
-    </tpl:if>
+    </tpl:condition>
 </tpl:layout>

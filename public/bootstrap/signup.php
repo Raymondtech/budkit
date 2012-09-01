@@ -39,7 +39,7 @@
                                         <div class="row-fluid">
                                             <form id="form" name="form" method="post" action="/member/account/update">
                                                 <fieldset class="no-margin">
-                                                    <legend>Register a new account</legend><tpl:block data="page.block.alerts" />
+                                                    <legend tpl:i18n="">Register a new account</legend><tpl:block data="page.block.alerts" />
                                                     <div class="control-group">
                                                         <label class="control-label" for="user_name"><tpl:i18n>Full Name</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">

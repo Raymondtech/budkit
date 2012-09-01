@@ -42,18 +42,25 @@ use Library;
 final class Framework extends Library\Object {
 
     /**
-     *
+     * Localization
+     * 
      * @var array 
      */
     static $object = array();
+    
     
     /*
      * The class constructor
      * @return void
      */
     public function __construct(){
-        //Turn off code coverage
+        $classes = array(
+            'i18n' => 'Library\i18n'
+        );
         
+        foreach ($classes as $var => $class) {
+            $this->$var = $class::getInstance();
+        }
     }
 
     /**
@@ -70,7 +77,7 @@ final class Framework extends Library\Object {
         if (isset($instance))
             return $instance;
 
-        $instance = new self();
+        $instance = new Framework();
 
         return $instance;
     }

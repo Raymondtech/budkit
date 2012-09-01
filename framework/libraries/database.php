@@ -224,14 +224,14 @@ abstract class Database extends Object {
 
         if (!isset($dbparams) OR count($dbparams) == 0) {
             //display some sort of error;
-            static::setError(_t('db params not set or not properly formatted'));
+            static::setError(_t('DB params not set or not properly formatted'));
             return false;
         }
 
         if (!isset($dbparams['driver'])) {
             //die;
             //we can't work without this
-            static::setError(_t('we need to know what driver your using'));
+            static::setError(_t('We need to know what driver your using'));
             return false;
         }
 

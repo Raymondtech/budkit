@@ -51,7 +51,14 @@ final class Video extends \Platform\View {
     }
 
     public function display() {
-        
+               
+        //parse Layout Demo;
+        //$sidebar      = $this->output->layout( "index_sidebar" );
+        $dashboard      = $this->output->layout( "dashboard" , "system" );
+        $sidebar        = $this->output->layout( "sidebar" , "system"  );
+  
+        $this->output->addToPosition("side",   $sidebar);
+        $this->output->addToPosition("body",    $dashboard);
     }
 
     public function streams() {
@@ -68,7 +75,9 @@ final class Video extends \Platform\View {
         //The default installation box;
         //$this->output->addToPosition("left",    $sidebar);
         
-        $this->output->addToPosition("body",   $form);
+        $this->output->addToPosition("dashboard",   $form);
+        
+        return $this->display();
     }
 
     public static function getInstance() {

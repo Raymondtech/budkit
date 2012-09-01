@@ -22,6 +22,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\Content\Controllers;
 
 use Platform;
@@ -49,32 +50,32 @@ final class Location extends \Platform\Controller {
     }
 
     // domain.com/post/item/create/
-    public function create() {
-        echo "create item";
+    public function checkin() {
+        $view = $this->load->view("location");
+        $view->checkin();
     }
+
     // domain.com/post/item/update/1902480-Born-in-the-USA/
     public function update() {
         
     }
-    
+
     //domain.com/post/item/edit/1902480-Born-in-the-USA/
-    public function edit(){
+    public function edit() {
         
     }
 
     // domain.com/post/item/1902480-Born-in-the-USA/
     public function map() {
-        
+
         //To set the pate title use    
         $this->output->setLayout("explorer");
         $this->output->setPageTitle("Browse Locations");
-        
-        $form  = $this->output->layout("location/explorer");
-       
 
-        $this->output->addToPosition("body" , $form); 
-    
-        
+        $form = $this->output->layout("location/explorer");
+
+
+        $this->output->addToPosition("body", $form);
     }
 
     // domain.com/post/item/delete/1902480-Born-in-the-USA/

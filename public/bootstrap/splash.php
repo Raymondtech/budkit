@@ -31,12 +31,12 @@
                             <div>
                                 <tpl:block data="page.block.content" return="true">
                                     <tpl:block data="page.block.alerts" />    
-                                    <p>Sorry, but the page you were trying to view does not exist. It looks like this was the result of either: a mistyped address, an out-of-date link, or our engineers have messed things up!</p>
+                                    <p tpl:i18n="">Sorry, but the page you were trying to view does not exist. It looks like this was the result of either: a mistyped address, an out-of-date link, or our engineers have messed things up!</p>
                                 </tpl:block>                    
                             </div>
                             <hr />
                             <div>
-                                <tpl:block data="page.block.actions" return="true"><a  href="/">Home Page</a></tpl:block>
+                                <tpl:block data="page.block.actions" return="true"><a  href="/" tpl:i18n="">Home Page</a></tpl:block>
                                 <tpl:import layout="console" />
                             </div>
                         </article>

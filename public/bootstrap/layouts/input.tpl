@@ -12,10 +12,10 @@
                             <button class="btn"><i class="icon icon-map-marker"></i> Check-in</button>
                         </div>
                         <div class="btn-group">
-                            <button type="submit" class="btn">Upload</button>
+                            <button type="submit" class="btn"><i class="icon icon-upload"></i>Upload</button>
                         </div>
                         <div class="btn-group pull-right">
-                            <button type="submit" class="btn btn-success" href="#">Publish</button>    
+                            <button type="submit" class="btn" href="#">Publish</button>    
                         </div>
                     </div>
                 </div>

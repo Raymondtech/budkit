@@ -70,7 +70,7 @@ final class Debugger extends Library\Log{
         static::$time   = microtime( true );
         static::$memory = memory_get_usage( true );
 	
-        self::log(  static::$time , _("Start execution time") , "info" );       
+        self::log(  static::$time , _t("Start execution time") , "info" );       
     }
 
     /**
@@ -100,7 +100,7 @@ final class Debugger extends Library\Log{
         endif;
         
         //Log usage
-        self::log( $now , _("Stop execution time") , "info"  );
+        self::log( $now , _t("Stop execution time") , "info"  );
         
         $output     = \Library\Output::getInstance();
                 

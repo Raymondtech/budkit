@@ -1,141 +1,77 @@
-<div class="grid input-box wrap">
-    <div class="row">
-        <div class="col whole">
-            <div class="modal-box">
-                <form>
-                    <fieldset>
-                        <h3><?php echo _('Plan an Event!'); ?></h3>
-                        <hr class="hr-ccc" />
-                        <div class="row wrap">
-                            <div class="col two-thirds mutableContent wrap">
-
-                                <div id="text-input">
-                                    <div id="title-input">
-                                        <label>Event Title
-                                            <span class="small">&HorizontalLine; <?php echo _('Keep it simple and descriptive'); ?></span>
-                                        </label>
-                                        <input type="text" name="title" value="" id="title" style="width: 100%" />
-                                    </div>
-                                    <label>Description
-                                        <span class="small"> &HorizontalLine; <?php echo _('Optional description'); ?></span>
-                                    </label>
-                                    <textarea name="ptext" id="ptext" style="width: 100%;min-height: 141px"></textarea>
-                                </div>
-                                <hr class="hr-ccc" />
-
-                                <div id="date-input" class="row">
-                                    <div class="col half">
-                                        <label class="required"><?php echo _('Start Date'); ?>
-                                            <span class="small"></span>
-                                        </label>
-                                        <input type="text" name="start-date" class="datepicker" value="<?php echo date('m/d/Y'); ?>"  style="width: 99%" />
-                                    </div>
-                                    <div class="col half">
-                                        <label class="required"><?php echo _('Start Time'); ?>
-                                            <span class="small"></span>
-                                        </label>
-                                        <select style="width: 100%">
-                                            <option value="1">My Profile</option>
-                                            <option value="1">Stupid Women&trade; (Group)</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div id="date-input2" class="row">
-                                    <div class="col half">
-                                        <label class="required"><?php echo _('End Date'); ?>
-                                            <span class="small"></span>
-                                        </label>
-                                        <input type="text" name="start-date" class="datepicker" value="<?php echo date('m/d/Y'); ?>"  style="width: 99%" />
-                                    </div>
-                                    <div class="col half">
-                                        <label class="required"><?php echo _('End Time'); ?>
-                                            <span class="small"></span>
-                                        </label>
-                                        <select style="width: 100%">
-                                            <option value="1">My Profile</option>
-                                            <option value="1">Stupid Women&trade; (Group)</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <hr class="hr-ccc" />
-
-                                <label> Select Photo 
-                                    <span class="small"> &HorizontalLine; <a href="#">Upload from URL instead?</a></span>
-                                </label>
-                                <input type="file" name="email" value="" id="title" style="width: 100%" />
-                                
-                                <hr class="hr-ccc" />
-
-                                <div>
-                                    <label class="required"><?php echo _('Event Location'); ?>
-                                        <span class="small"></span>
-                                    </label>
-                                    <input type="text" name="location" style="width: 100%" />
-                                </div>
-
-
-                                <div>
-                                    <label><?php echo _('Headlining'); ?>
-                                        <span class="small"></span>
-                                    </label>
-                                    <input type="text" name="headlining" style="width: 100%" />
-                                </div>
-
-
-
-
-                            </div>
-                            <div class="col two-sixths wrap">
-                                <div style="padding: 0 0 0 15px">
-                                    <label>Invite friends
-                                        <span class="small"></span>
-                                    </label>
-                                    <textarea name="ptext" id="ptext" style="width: 100%;min-height: 205px" placeholder="<?php echo _('Tag your friends to invite them to this event. Seperate each tag with a comma.'); ?>"></textarea>
-
-                                    <hr class="hr-ccc" />
-                                    <div id="section-input">
-                                        <label class="required"><?php echo _('Section'); ?>
-                                            <span class="small"></span>
-                                        </label>
-                                        <select style="width: 100%">
-                                            <option value="1">My Profile</option>
-                                            <option value="1">Stupid Women&trade; (Group)</option>
-                                        </select>
-                                    </div>
-                                    <div id="date-input">
-                                        <label class="required"><?php echo _('Publication Date'); ?>
-                                            <span class="small"></span>
-                                        </label>
-                                        <input type="text" name="email" class="datepicker" value="<?php echo date('m/d/Y'); ?>" id="title" style="width: 100%" />
-                                    </div>
-
-                                    <label class="required">Privacy</label>
-                                    <select style="width: 100%">
-                                        <option value="1">Make post public</option>
-                                        <option value="1">Make visible to followers only</option>
-                                    </select>
-
-
-                                </div>
-                            </div>
+<tpl:layout name="input" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+    <form action="/system/activity/create" method="POST">
+        <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
+            <fieldset class="timeline-item-publisher no-margin">
+                <div class="control-group  row-fluid">
+                    <div class="span8">
+                        <label class="control-label" for="options[storage][FTP-server-host]">Event Title</label>
+                        <div class="controls">
+                            <input type="text" name="options[storage][FTP-server-host]" class="input-xxxlarge" />
                         </div>
-                        <hr class="hr-ccc" /> 
-                        <div class="row">
-                            <div class="col sixth  mutableContent"> 
-                                <button class="button medium"><?php echo _("Previe Event"); ?></button>
-
-                            </div>                        
-                            <div class="col four-sixths">&nbsp;</div>
-                            <div class="col sixth" align="right">
-                                <button class="button medium"><?php echo _("Create Event"); ?></button>
-                            </div>
-
+                    </div>
+                    <div class="span4">
+                        <label class="control-label" for="options[storage][FTP-server-port]">Event Options</label>
+                        <div class="controls">
+                            <select name="options[localization][timezone]" class="input-xxxlarge">
+                                <option value="-12.0">Guest can invite Others</option>
+                                <option value="-12.0">Guest can add Photos</option>
+                            </select>
                         </div>
-                    </fieldset>
-                </form>
+                    </div>
+                </div>
+                <div class="control-group  row-fluid">
+                    <div class="span4">
+                        <label class="control-label" for="options[storage][FTP-server-host]">Start Date</label>
+                        <div class="controls">
+                            <input type="text" name="options[storage][FTP-server-host]" class="input-xxxlarge" />
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <label class="control-label" for="options[storage][FTP-server-host]">Start Time</label>
+                        <div class="controls">
+                            <input type="text" name="options[storage][FTP-server-host]" class="input-xxxlarge" />
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <label class="control-label" for="options[storage][FTP-server-host]">End Time</label>
+                        <div class="controls">
+                            <input type="text" name="options[storage][FTP-server-host]" class="input-xxxlarge" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="control-label" for="options[general][site-name]"><tpl:i18n>Location</tpl:i18n></label>
+                        <input type="text" name="options[general][site-name]"  class="input-xxxlarge"  />
+                    </div>
+                </div> 
+                <hr />
+                <div class="control-group">
+                    <label class="control-label" for="options[general][site-name]"><tpl:i18n>Event Description</tpl:i18n></label>
+                    <div class="controls">
+                        <textarea class="input-xxxlarge focused" rows="5" name="post_content"></textarea>
+                    </div>
+                </div>
+                <hr />
+                <div class="timeline-item-publisher-actions">
+                    <div class="btn-toolbar  no-margin">
+                        <div class="btn-group">
+                            <button class="btn"><i class="icon icon-user"></i> Invite Guests</button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn"><i class="icon icon-file"></i> Attach Document</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn" href="#">Publish</button>    
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </tpl:condition>
+        <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
+            <div class="alert alert-warning">
+                <a href="/member/session/start">Login now</a> to share a story from your current location, or upload photos 
             </div>
-        </div>
-    </div>
-</div>
+        </tpl:condition>
+    </form>
+</tpl:layout>

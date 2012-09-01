@@ -7,13 +7,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand logo" href="/">Pilgrimage</a>
+                <a class="brand logo" href="/">Budkit</a>
                 <div class="nav-collapse">
 
                     <ul class="nav pull-left">                     
-                        <li><a href="/system/start/featured">Featured</a></li>
-                        <li><a href="/content/locations/map">Explore</a></li>
-                        <li><a href="/system/activity/stream">Activity</a></li>
+                        <li><a href="/system/start/featured" tpl:i18n="">Featured</a></li>
+                        <li><a href="/content/locations/map" tpl:i18n="">Explore</a></li>
+                        <li><a href="/system/activity/stream" tpl:i18n="">Activity</a></li>
                         <li class="divider-vertical"></li>
                         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                             <li class="notification dropdown">
@@ -21,7 +21,7 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="alert-info alert no-margin">
-                                            No new notifications
+                                            <tpl:i18n>No new notifications</tpl:i18n>
                                         </div>
                                     </li>
                                 </ul>
@@ -37,27 +37,27 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.username">username</tpl:element><b class="caret">&nbsp;</b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/system/start/dashboard">Dashboard</a></li>
-                                    <li><a href="/member/profile/view">View your profile</a></li>
-                                    <li><a href="/member/messages/inbox">Messages</a></li>
+                                    <li><a href="/system/start/index"><tpl:i18n>Dashboard</tpl:i18n></a></li>
+                                    <li><a href="/member/profile/view" tpl:i18n="">View your profile</a></li>
+                                    <li><a href="/member/messages/inbox" tpl:i18n="">Messages</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/member/settings/account">Account settings</a></li>
-                                    <li><a href="/member/settings/privacy">Privacy</a></li>                            
+                                    <li><a href="/member/settings/account" tpl:i18n="">Account settings</a></li>
+                                    <li><a href="/member/settings/privacy" tpl:i18n="">Privacy</a></li>                            
                                     <li class="divider"></li>
-                                    <li><a href="/sign-out">Sign out</a></li>
+                                    <li><a href="/sign-out" tpl:i18n="">Sign out</a></li>
                                 </ul>
                             </li>
                             
                         </tpl:condition>
                         <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
-                            <li><a href="/member/session/start">Sign in</a></li>
+                            <li><a href="/member/session/start" tpl:i18n="">Sign in</a></li>
                         </tpl:condition>
 
                     </ul> 
 
 
                     <form class="navbar-search pull-right" action="/search" method="get">
-                        <input type="text" class="search-query span4" name="query" placeholder="Search" />
+                        <input type="text" class="search-query span4" name="query" placeholder="i18n:Search"  />
                     </form>
                 </div>
             </div>

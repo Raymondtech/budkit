@@ -154,7 +154,7 @@ abstract class Controller extends Library\Action {
         //1. Check the user is authenticated,
         //2. If the user is not authenticated, redirect them to authenticate,
         if(!$this->user->isAuthenticated()){
-            $this->alert( _t("You need to be logged in to complete this task"), _("Authentication required"), "info" );
+            $this->alert( _t("You need to be logged in to complete this task"), _t("Authentication required"), "info" );
             
             //@TODO user $this->login() for persistent data;
             //Is there a means to redirect back from the login form once authentiation is complete?

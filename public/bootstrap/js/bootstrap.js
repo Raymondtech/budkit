@@ -948,6 +948,11 @@
         , 
         template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
     }
+    
+    
+    $(function(){
+        $('a[rel=tooltip]').tooltip();
+    })
 
 }( window.jQuery );
 /* ===========================================================
