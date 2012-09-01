@@ -53,8 +53,9 @@ class Index extends Platform\View {
         //To get a previously set property;
         //echo $this->get("user2");
 
-        //To set the pate title use
-        $this->output->setPageTitle("Welcome to diddat");
+        //TODO only set if not already set To set the pate title use
+        
+        //$this->output->setPageTitle("Welcome to diddat");
         
         //to add some js file
         $this->output->addScript("some.js");

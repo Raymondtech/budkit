@@ -78,20 +78,12 @@ Library\Output::startBuffer(); //important order!! Must be called before session
 Library\Event::trigger('onStart');
 Library\Session::start();
 
-/*
- * ------------------------------------------------------
- *  Platform Framework & Application
- * ------------------------------------------------------
- */
-$Framework = Platform\Framework::getInstance();
-$Application = Platform\Application::getInstance();
 
 /*
  * ------------------------------------------------------
  *  Base Classes and Controllers
  * ------------------------------------------------------
  */
-$Config = Library\Config::getInstance();
 $Router = Library\Router::getInstance();
 $Uri    = Library\Uri::getInstance();
 $Output = Library\Output::getInstance();

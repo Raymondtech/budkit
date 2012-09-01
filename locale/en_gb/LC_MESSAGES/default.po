@@ -1,0 +1,258 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Budkit 0.9.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-30 14:45-0000\n"
+"PO-Revision-Date: 2012-08-30 14:45-0000\n"
+"Last-Translator: Livingstone Fultang <livingstonefultang@gmail.com>\n"
+"Language-Team: Budkit. Team <info@budkit.org>\n"
+"Language: English (British)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _t;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /Users/livingstonefultang/Sites/framework\n"
+"X-Poedit-SearchPath-1: /Users/livingstonefultang/Sites/public\n"
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database.php:199
+#: /Users/livingstonefultang/Sites/framework/libraries/output/document.php:103
+msgid "Method does not exists"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database.php:227
+msgid "DB params not set or not properly formatted"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database.php:234
+msgid "We need to know what driver your using"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database.php:252
+#, php-format
+msgid "Could not instantiate database object for the driver: %s"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/date.php:93
+msgid "Never"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/encrypt.php:107
+msgid "Cannot encode an empty string"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/object.php:153
+msgid "System events"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/object.php:185
+#, php-format
+msgid "[%s] Calling %1s() at %2s in %3s context"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/uri.php:418
+msgid "Invalid Resource Link"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/validate.php:214
+msgid "The local part of the email is not of valid lengths"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/validate.php:217
+msgid "The email domain exceeded maximum length"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/validate.php:220
+msgid "invalid end dot ('.') position in local of email"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/validate.php:223
+msgid "Two consecutive dots ('.') in local of email"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/validate.php:226
+msgid "Invalid character in domain part"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/validate.php:229
+msgid "Two consecutive dots ('.') in domain of email"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/validate.php:234
+msgid "Invalid character in local of email"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/validate.php:239
+msgid "The domain of email not found in DNS"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/authenticate/dbauth.php:60
+#: /Users/livingstonefultang/Sites/framework/libraries/authenticate/dbauth.php:66
+msgid "Must specify a valid usernameid and password"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/authenticate/dbauth.php:99
+msgid "Could not authenticate the user with the credentials supplied"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/config/ini.php:63
+msgid "Could not Parse the ini file"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/config/ini.php:70
+#, php-format
+msgid "The configuration file (%s) does not exists"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/config/ini.php:151
+#, php-format
+msgid ""
+"Could not create the setup configuration file. Please check %s folder "
+"permissions"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/config/ini.php:156
+msgid "Could not write out to the configuration file"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/table.php:127
+msgid "Table accessory method does not exists"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/table.php:150
+msgid "we need to know what driver and have a dbo passed"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/table.php:181
+msgid "Data must be either an object or array"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/table.php:214
+#, php-format
+msgid "%s is not a valid %2s"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysql/accessory.php:68
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/accessory.php:68
+msgid "There are no values to insert into the database"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysql/accessory.php:77
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/accessory.php:77
+msgid "No table to insert data to defined"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysql/driver.php:136
+msgid "The MySQL extension \"mysql\" is not available."
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysql/driver.php:144
+msgid "Could not connect to MySQL"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysql/driver.php:176
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:190
+msgid "Could not connect to database"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysql/driver.php:303
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:313
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:361
+msgid "No valid connection resource found"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysql/driver.php:379
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:396
+msgid "No transaction queries found"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysql/driver.php:391
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:408
+msgid "The transaction could not be committed"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:133
+msgid "The MySQLi extension \"mysqli\" is not available."
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:141
+msgid "mysqli_init failed"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:146
+msgid "Setting MYSQLI_INIT_COMMAND failed"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/database/drivers/mysqli/driver.php:150
+msgid "Setting MYSQLI_OPT_CONNECT_TIMEOUT failed"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/folder/files/xml/parser.php:134
+msgid "XML Parser Events"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/folder/files/xml/parser.php:209
+#, php-format
+msgid "Could not open entity %s at %s\n"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/folder/files/xml/parser.php:214
+#, php-format
+msgid "XML error: %s at line %d while parsing entity %s\n"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/libraries/folder/files/xml/parser.php:341
+msgid "The document root is invalid"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/controller.php:124
+msgid ""
+"The system is already installed, you cannot perform any more install "
+"actions. Did you want to upgrade instead? try /setup/update/"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/controller.php:157
+msgid "You need to be logged in to complete this task"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/controller.php:157
+msgid "Authentication required"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/controller.php:279
+msgid "The password or username you provided did not match any user"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/controller.php:295
+msgid "Welcome on board"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/controller.php:295
+#, php-format
+msgid "Howdy %s!!"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/controller.php:300
+msgid "We were unable to log you in"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/controller.php:323
+msgid "You have been logged out"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/debugger.php:73
+msgid "Start execution time"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/framework/utilities/debugger.php:103
+msgid "Stop execution time"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/public/bootstrap/signin.php:41
+msgid "Registered Username or Email"
+msgstr ""
+
+#: /Users/livingstonefultang/Sites/public/bootstrap/signup.php:60
+msgid "e.g john.doe@example.com"
+msgstr ""

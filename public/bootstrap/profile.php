@@ -22,7 +22,7 @@
 
         <body>
             <tpl:import layout="navbar" />
-            
+
             <div class="container"> 
                 <tpl:block data="page.block.alerts" />  
                 <tpl:block data="page.block.banner">Banner</tpl:block>
@@ -37,22 +37,22 @@
                             <div class="left-pad"> 
                                 <div class="btn-toolbar no-top-margin">
                                     <div class="btn-group">
-                                        <button class="btn">View As</button>
+                                        <button class="btn" tpl:i18n="">View As</button>
                                         <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
+                                            <li><a href="#" tpl:i18n="">Action</a></li>
+                                            <li><a href="#" tpl:i18n="">Another action</a></li>
+                                            <li><a href="#" tpl:i18n="">Something else here</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
+                                            <li><a href="#" tpl:i18n="">Separated link</a></li>
                                         </ul>
                                     </div>
                                     <div class="btn-group">
-                                        <button class="btn">Edit Info</button>
+                                        <button class="btn" tpl:i18n="">Edit Info</button>
                                     </div>
                                     <div class="btn-group">
                                         <button class="btn">
-                                            <i class="icon icon-lock"></i> Privacy
+                                            <i class="icon icon-lock"></i> <tpl:i18n>Privacy</tpl:i18n>
                                         </button>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                         <div class="span4">
                                             <div class="well no-margin">
                                                 <h1 class="count-body">189</h1> <small>Friends</small>
-                                            
+
                                             </div>
                                         </div>
                                         <div class="span4">
@@ -108,7 +108,7 @@
                             </div>
                             <div class="row-fluid">
                                 <div class="span8 tab-content">
-<!--                                    <hr />-->
+                                    <!--                                    <hr />-->
                                     <div class="entry tab-pane" id="timelinepane">Timeline</div>
                                     <div class="entry tab-pane active" id="aboutmepane">
                                         <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <a href="#">links look like this</a>. tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
@@ -157,18 +157,18 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/);this.elem.style.displa
 http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/],rb=s.defaultView&amp;&amp;s.defaultView.getComputedStyle,Pa=c.support.cssFloat?
 http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(this.elem[this.prop]!=null&amp;&amp;(!this.elem.style||this.elem.style[this.prop]==null))return%20this.elem[this.prop];return(a=parseFloat(c.css(this.elem,this.prop,a)))&amp;&amp;a&gt;-10000?a:parseFloat(c.curCSS(this.elem,this.prop))||0},custom:function(a,b,d){function%20f(j){return%20e.step(j)}this.startTime=J();this.start=a;this.end=b;this.unit=d||this.unit||</code></pre>
                                     </div> 
-                                    <div class="entry tab-pane" id="achievementspane">Achievements</div>
-                                    <div class="entry tab-pane" id="blogpane">Blog</div>
-                                    <div class="entry tab-pane" id="multimediapane">Photos</div>
-                                    <div class="entry tab-pane" id="extendedpane">Extended profile</div>
+                                    <div class="entry tab-pane" id="achievementspane" tpl:i18n="">Achievements</div>
+                                    <div class="entry tab-pane" id="blogpane" tpl:i18n="">Blog</div>
+                                    <div class="entry tab-pane" id="multimediapane" tpl:i18n="">Photos</div>
+                                    <div class="entry tab-pane" id="extendedpane" tpl:i18n="">Extended profile</div>
                                 </div>
                                 <div class="span4">
                                     <div class="left-pad">
-                                       
+
                                         <tpl:menu id="profilemenu" type="nav-block" />
-                                        
+
                                         <div class="widget top-pad">
-                                            <h4>Badges and Rewards</h4> 
+                                            <h4 tpl:i18n="">Badges and Rewards</h4> 
                                             <div class="widget-body top-pad">
 
                                                 <ul class="thumbnails">
@@ -223,7 +223,7 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                 </section>
                 <tpl:import layout="footer" />    
             </div>
-            
+
             <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
             <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>

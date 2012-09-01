@@ -46,41 +46,34 @@ class i18n extends Object {
 
     static $instance;
 
+    
     /**
-     * Localization categories
+     * The current translation string category
+     * 
      * @var type 
      */
-    protected static $_categories = array(
-        'LC_ALL', 'LC_COLLATE', 'LC_CTYPE', 'LC_MONETARY', 'LC_NUMERIC', 'LC_TIME', 'LC_MESSAGES'
-    );
+    public static $category = 'LC_MESSAGES';
 
     /**
      * The language for current locale
      *
      * @var string
      */
-    public $language = 'English (British)';
-
-    /**
-     * Locale search paths
-     *
-     * @var array
-     */
-    public $languagePath = array('eng');
+    public static $language = 'English (British)';
 
     /**
      * ISO 639-3 for current locale
      *
      * @var string
      */
-    public $lang = 'eng';
+    public static $langKey = 'en_gb';
 
     /**
      * Locale
      *
      * @var string
      */
-    public $locale = 'en_gb';
+    public static $locale = 'en_gb';
 
     /**
      * Default ISO 639-3 language.
@@ -89,28 +82,51 @@ class i18n extends Object {
      *
      * @var string
      */
-    public $default = null;
+    public static $default = null;
 
     /**
      * Encoding used for current locale
      *
      * @var string
      */
-    public $charset = 'utf-8';
+    public static $charset = 'utf-8';
 
     /**
      * Text direction for current locale
      *
      * @var string
      */
-    public $direction = 'ltr';
+    public static $direction = 'ltr';
 
     /**
      * Set to true if a locale is found
      *
      * @var string
      */
-    public $found = false;
+    public static $found = false;
+    
+    /**
+     * The current domain being translated
+     * 
+     * @var string
+     */
+    public static $domain = null;
+    
+    
+    /**
+     * Extracted Translations grouped into domains
+     * 
+     * @var array
+     */
+    protected static $translations = array(
+        "system"=>array(
+            "path"      => "/locale",
+            "strings"   =>array(
+                "LC_MESSAGES" =>array(),
+                "LC_CURRENCY" =>array()
+            )
+         )
+    );
 
     /**
      * Maps ISO 639-3 to I10n::_l10nCatalog
@@ -354,25 +370,86 @@ class i18n extends Object {
 
     /**
      * A domain could be an 
-     * @param type $domain
+     * 
+     * @param string $domain
+     * @param string $path
      */
-    public static function setDomain($domain = 'system', $path = '/locale'){}
+    public static function setDomain($domain = 'system', $path = '/locale'){
+        //1. Check that the path does exist
+        //2. Check that we don't have this already set in translations
+        //3. Update this domain property;
+        static::$domain = $domain;
+    }
     
-    protected static function setLanguage(){}
-
-    public static function setLocale($category=0, $locale=null) {}
+   /**
+    * Returns the translations cache;
+    * 
+    * @param string $domain
+    * @param string $category
+    * @return array
+    */
+    public static function getTranslations( $domain = null, $category = null){
+        return static::$translations;
+    }
     
-    public static function getLocale( $lang ){}
-    
-    public static function getLanguage( $locale ){}
-
-    private static function getLocaleMessages() {}
-
-    private static function getLocaleTime() {}
-
-    private static function getLocaleCurrency() {}
+    /**
+     * Set the string representation for the current locale
+     * 
+     * @param type $lang
+     */
+    protected static function setLanguage( $lang ){ 
+        static::$language       = $lang;
+        static::$langkey        = $lang;
+    }
 
     /**
+     * Set the current locale for translations
+     * 
+     * @param type $locale
+     */
+    public static function setLocale( $locale ) {
+        //1. Validate locale
+        //2. Set Locale
+        //3. Set language
+    }
+    
+    /**
+     * Returns a string representation for the current locale
+     * 
+     * @return string
+     */
+    public static function getLocale(){
+        return static::$locale;
+    }
+    
+    /**
+     * Returns a string title for the current language
+     * 
+     * @return string
+     */
+    public static function getLanguage(){
+        return static::$language;
+    }
+    
+    /**
+     * Returns an array containing the full language/locale defintion 
+     * 
+     * @param string $locale
+     * @return array
+     * 
+     */
+    public static function getLanguageDefinition($locale){}
+
+    /**
+     * Loads all values from the po file for the current category in current domain
+     * 
+     * @param type $category
+     */
+    private static function parseLocaleTranslations($category="LC_MESSAGES") {}
+
+
+    /**
+     * Translates a string into a valid 
      * 
      * @param type $singular
      * @param type $plural
@@ -382,7 +459,13 @@ class i18n extends Object {
      * @param type $language
      * 
      */
-    public static function translate($singular, $plural = null, $domain = null, $category = 6, $count = null, $language = null) {
+    public static function translate($singular, $plural = null, $domain = null, $category = 'LC_MESSAGES', $count = null, $language = null) {
+        
+        //$self = static::getInstance();
+        
+        //1. Clean the singular and plural string
+        //2. Update the translation category
+        //3. Update the translation domain if set
         
     }
 

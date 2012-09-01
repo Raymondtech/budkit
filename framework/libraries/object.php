@@ -150,7 +150,7 @@ abstract class Object {
     final public static function trigger() { //$event, [$data = '', ]...
 
         //Just arbitrary context so we know who is calling
-        $context = (!isset(static::$eventContext)) ? _("system events") : static::$eventContext ;
+        $context = (!isset(static::$eventContext)) ? _t("System events") : static::$eventContext ;
          
         // get func args
         $args = func_get_args(); //eventName, [callBackargs, ]
@@ -182,7 +182,7 @@ abstract class Object {
                 if (is_callable($callback)) {
 
                     // Log in the console
-                    \Platform\Debugger::log(sprintf(_("[{$time}] Calling %s() at %2s in %3s context"), $callback, $event, $context), $event, "success");
+                    \Platform\Debugger::log(sprintf(_t("[%s] Calling %1s() at %2s in %3s context"),$time, $callback, $event, $context), $event, "success");
 
                     //@TODO Determine Method Name from
                     //CallBack directive to use as indices in results array
@@ -193,7 +193,6 @@ abstract class Object {
             return $results;
         } else {
             //There are no events to trigger
-            //\Platform\Debugger::log(sprintf(_("[{$time}] No events triggered for %s in %2s context"), $event, $context), $event, "info");
 
             return false;
         }

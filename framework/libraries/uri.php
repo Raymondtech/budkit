@@ -415,7 +415,7 @@ final class Uri {
                     break;
                 } else if (++$halt > 10) {
                     // Runaway check. URI has been seriously compromised.
-                    throw new Library\Exception(_("Invalid Resource Link"));
+                    throw new Library\Exception(_t("Invalid Resource Link"));
                 }
             }
 

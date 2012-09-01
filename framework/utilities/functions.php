@@ -22,9 +22,6 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Platform;
-
-use Library;
 
 /**
  * Lookup a message in the current domain
@@ -32,6 +29,15 @@ use Library;
  * @param string $message
  */
 function _t($message){
+    
+    $Framework  = \Platform\Framework::getInstance();
+    $i18n       = $Framework->get('i18n');
+    
+     //print_R($Framework);
+    
+    
+    //die;
+    
     return $message;
 }
 

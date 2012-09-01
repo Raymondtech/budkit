@@ -130,7 +130,7 @@ final class Driver extends Library\Database{
         // mysql driver exists?
         if (!function_exists('mysqli_real_connect')) {
             $this->errorNum = 1;
-            $this->errorMsg = 'The MySQLi extension "mysqli" is not available.';
+            $this->errorMsg = _t('The MySQLi extension "mysqli" is not available.');
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return false;
         }
@@ -138,16 +138,16 @@ final class Driver extends Library\Database{
         $this->resourceId = mysqli_init();
         
         if (!$this->resourceId) {
-            $this->setError('mysqli_init failed');
+            $this->setError(_t('mysqli_init failed'));
         }
         
         //We want to keep autocomit on all the time exceplt when we are performing a transaction
         if (!$this->resourceId->options(MYSQLI_INIT_COMMAND, 'SET AUTOCOMMIT = 1')) {
-            $this->setError('Setting MYSQLI_INIT_COMMAND failed');
+            $this->setError(_t('Setting MYSQLI_INIT_COMMAND failed'));
         }
 
         if (!$this->resourceId->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5)) {
-            $this->setError('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
+            $this->setError(_t('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed'));
         }
         
         // connect to the server
@@ -187,7 +187,7 @@ final class Driver extends Library\Database{
         //Chooses the database to connect to
         if (!mysqli_select_db($this->resourceId, $database)) {
             $this->errorNum = 3;
-            $this->errorMsg = 'Could not connect to database';
+            $this->errorMsg = _t('Could not connect to database');
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return false;
         }
@@ -310,7 +310,7 @@ final class Driver extends Library\Database{
 
         //@TODO how to verify the resource Id
         if (!is_a($this->resourceId, "mysqli")) {
-            $this->setError( _("No valid connection resource found") );
+            $this->setError( _t("No valid connection resource found") );
             return false;
         }
 
@@ -358,7 +358,7 @@ final class Driver extends Library\Database{
     public function startTransaction(){
         
         if (!is_a($this->resourceId, "mysqli")) {
-            $this->setError( _("No valid connection resource found") );
+            $this->setError( _t("No valid connection resource found") );
             return false;
         }
         $this->resourceId->autocommit( FALSE ); //Turns autocommit off;
@@ -393,7 +393,7 @@ final class Driver extends Library\Database{
     public function commitTransaction(){
          
         if(empty($this->transactions)||!is_array($this->transactions)){
-            $this->setError("No transaction queries found");
+            $this->setError(_t("No transaction queries found"));
             return false;
         }
         //Query transactions
@@ -405,7 +405,7 @@ final class Driver extends Library\Database{
         }
         //Commit the transaction
         if(!$this->resourceId->commit()){
-            $this->setError( "The transaction could not be committed");
+            $this->setError( _t("The transaction could not be committed"));
             return false;
         }
         

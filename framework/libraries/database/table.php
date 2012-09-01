@@ -124,7 +124,7 @@ abstract class Table extends \Library\Object {
 
 
         if (!\method_exists($AR, $method)) {
-            throw new \Library\Exception('Table accessory method does not exists');
+            throw new \Library\Exception(_t('Table accessory method does not exists'));
             return false;
         }
 
@@ -147,7 +147,7 @@ abstract class Table extends \Library\Object {
         //@TODO check the statement is set in the dbo. before continue
         if (!isset($options) || !is_array($options) || !isset($options['driver']) || !isset($options['table'])) {
 
-            exit('we need to know what driver and have a dbo passed');
+            exit(_t('we need to know what driver and have a dbo passed'));
             //@TODO show some form of error; Or attempt to get it from the dbo passed;
             return false;
         }
@@ -178,7 +178,7 @@ abstract class Table extends \Library\Object {
         $validate = \Library\Validate::getInstance();
 
         if (!is_object($data) && !is_array($data)) {
-            $this->setError(_("Data must be either an object or array"));
+            $this->setError(_t("Data must be either an object or array"));
             return false;
         }
 
@@ -211,7 +211,7 @@ abstract class Table extends \Library\Object {
                         unset($this->schema[$k]->Value);
 
                         //set the error
-                        $this->setError(sprintf(_("%s is not a valid %2s"), $k, $datatype));
+                        $this->setError(sprintf(_t("%s is not a valid %2s"), $k, $datatype));
 
                         //throw an exception if in strict mode
                         if ($strict) {

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * location.php
+ * video.php
  *
  * Requires PHP version 5.3
  *
@@ -22,7 +22,6 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-
 namespace Application\Content\Views;
 
 use Platform;
@@ -41,41 +40,43 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Location extends \Platform\View {
+final class Audio extends \Platform\View {
 
     public function __construct() {
 
         //Construct the parent
         parent::__construct();
 
-        $this->output->setPageTitle("Locations");
+        $this->output->setPageTitle("Audio");
     }
 
     public function display() {
-
+               
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
-        $dashboard = $this->output->layout("dashboard", "system");
-        $sidebar = $this->output->layout("sidebar", "system");
-
-        $this->output->addToPosition("side", $sidebar);
-        $this->output->addToPosition("body", $dashboard);
+        $dashboard      = $this->output->layout( "dashboard" , "system" );
+        $sidebar        = $this->output->layout( "sidebar" , "system"  );
+  
+        $this->output->addToPosition("side",   $sidebar);
+        $this->output->addToPosition("body",    $dashboard);
     }
 
     public function streams() {
         
     }
-
-    public function checkin() {
-        //Page Title
-        $this->output->setPageTitle("Locations | Check-in");
-
+    
+    public function createform(){
+                //Photo
+         $this->output->setPageTitle("Audio | Add Audio");
+                 
         //form
-        $form = $this->output->layout("location/form");
-
+        $form  = $this->output->layout( "audio/form" );
+        
         //The default installation box;
-        $this->output->addToPosition("dashboard", $form);
-
+        //$this->output->addToPosition("left",    $sidebar);
+        
+        $this->output->addToPosition("dashboard",   $form);
+        
         return $this->display();
     }
 

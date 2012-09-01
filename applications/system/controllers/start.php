@@ -44,7 +44,7 @@ class Start extends Platform\Controller {
      * The system dashboard, 
      * @ return false;
      */
-    public function dashboard() {
+    public function index() {
 
         //Get the view;
         $view = $this->load->view('index');
@@ -69,21 +69,6 @@ class Start extends Platform\Controller {
         $this->output->addToPosition("body" , $form); 
     }
 
-    /**
-     * The default page, consider this the homepage
-     * of the application, You can change this to anything else in the config/routes.php 
-     * 
-     * @return type 
-     */
-    public function index() {
-        
-        //Loads the index view
-        $view = $this->load->view('index');
-        
-        //echo "the index page";
-        
-        $view->index();
-    }
 
     /**
      * Returns and instantiated Instance of the __CLASS__ class

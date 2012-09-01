@@ -60,14 +60,14 @@ final class Ini extends \Library\Object {
         if (!array_key_exists($filename, static::$file)) {
             if (file_exists($filename)) {
                 if ((static::$file[$filename] = parse_ini_file($filename, true)) === FALSE) {
-                    static::setError(_("Could not Parse the ini file"));
+                    static::setError(_t("Could not Parse the ini file"));
                     return false;
                 } else {
                     //Add the iniParams to $this->params;
                     return;
                 }
             } else {
-                static::setError(_("The configuration file ({$filename}) does not exists"));
+                static::setError( sprintf( _t("The configuration file (%s) does not exists"),$filename ) );
                 return false;
             }
         }
@@ -148,12 +148,12 @@ final class Ini extends \Library\Object {
         //$configfile::chmod($configdir, 755);
 
         if (!($setupini = $configfile::create($configdir . $filename) )) {
-            $config->setError("Could not create the setup configuration file. Please check $configdir folder permissions");
+            $config->setError( sprintf( _t("Could not create the setup configuration file. Please check %s folder permissions"),$configdir));
             return false;
         }
         //Now write to file
         if (!$configfile::write($configdir . $filename, $_globals)) {
-            $config->setError("Could not write out to the configuration file");
+            $config->setError( _t("Could not write out to the configuration file"));
             return false;
         }
 

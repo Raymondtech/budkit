@@ -46,6 +46,6 @@ $route["index"] = array(
     "path" => '/',
     "application" => 'system',
     "controller" => 'start',
-    "method" => 'index'
+    "method" => 'featured'
 );
 

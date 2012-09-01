@@ -65,7 +65,7 @@ class Accessory extends \Library\Database\ActiveRecord {
         }
 
         if (count($this->arraySet) == 0) {
-            $this->setError(_("There are no values to insert into the database"));
+            $this->setError(_t("There are no values to insert into the database"));
             if ((bool) $this->_debug) {
                 return FALSE; //display error
             }
@@ -74,7 +74,7 @@ class Accessory extends \Library\Database\ActiveRecord {
 
         if ($table == '') {
             if (!isset($this->arrayFrom[0])) {
-                $this->setError(_("No table to insert data to defined"));
+                $this->setError(_t("No table to insert data to defined"));
                 if ((bool) $this->_debug) {
                     return FALSE; //display error
                 }

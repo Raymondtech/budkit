@@ -133,7 +133,7 @@ final class Driver extends Library\Database{
         // mysql driver exists?
         if (!function_exists('mysql_connect')) {
             $this->errorNum = 1;
-            $this->errorMsg = 'The MySQL extension "mysql" is not available.';
+            $this->errorMsg = _t('The MySQL extension "mysql" is not available.');
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return false;
         }
@@ -141,7 +141,7 @@ final class Driver extends Library\Database{
         // connect to the server
         if (!($this->resourceId = @mysql_connect($server, $username, $password, true))) {
             $this->errorNum = 2;
-            $this->errorMsg = 'Could not connect to MySQL';
+            $this->errorMsg = _t('Could not connect to MySQL');
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return false;
         }
@@ -173,7 +173,7 @@ final class Driver extends Library\Database{
         //Chooses the database to connect to
         if (!mysql_select_db($database, $this->resourceId)) {
             $this->errorNum = 3;
-            $this->errorMsg = 'Could not connect to database';
+            $this->errorMsg = _t('Could not connect to database');
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return false;
         }
@@ -300,7 +300,7 @@ final class Driver extends Library\Database{
     final public function exec( $query ='') {
         
         if (!is_resource($this->resourceId)) {
-            $this->setError( _("No valid connection resource found") );
+            $this->setError( _t("No valid connection resource found") );
             return false;
         }
 
@@ -376,7 +376,7 @@ final class Driver extends Library\Database{
     public function commitTransaction(){
         
         if(empty($this->transactions)||!is_array($this->transactions)){
-            $this->setError("No transaction queries found");
+            $this->setError(_t("No transaction queries found"));
             return false;
         }
         //Query transactions
@@ -388,7 +388,7 @@ final class Driver extends Library\Database{
         }
         //Commit the transaction
         if(!$this->exec("COMMIT")){
-            $this->setError( "The transaction could not be committed");
+            $this->setError( _t("The transaction could not be committed"));
             return false;
         }
         

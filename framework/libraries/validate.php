@@ -211,32 +211,32 @@ final class Validate extends \Library\Object {
 
             //Validation
             if ($localLen < 1 || $localLen > 64) {
-                static::setError(_("The local part of the email is not of valid lengths"));
+                static::setError(_t("The local part of the email is not of valid lengths"));
                 return false;
             } else if ($domainLen < 1 || $domainLen > 255) {
-                static::setError(_("The email domain exceeded maximum length"));
+                static::setError(_t("The email domain exceeded maximum length"));
                 return false;
             } else if ($local[0] == '.' || $local[$localLen - 1] == '.') {
-                static::setError(_("invalid end dot ('.') position in local of email"));
+                static::setError(_t("invalid end dot ('.') position in local of email"));
                 return false;
             } else if (preg_match('/\\.\\./', $local)) {
-                static::setError(_("Two consecutive dots ('.') in local of email"));
+                static::setError(_t("Two consecutive dots ('.') in local of email"));
                 return false;
             } else if (!preg_match('/^[A-Za-z0-9\\-\\.]+$/', $domain)) {
-                static::setError(_("Invalid character in domain part"));
+                static::setError(_t("Invalid character in domain part"));
                 return false;
             } else if (preg_match('/\\.\\./', $domain)) {
-                static::setError(_("Two consecutive dots ('.') in domain of email"));
+                static::setError(_t("Two consecutive dots ('.') in domain of email"));
                 return false;
             } else if (!preg_match('/^(\\\\.|[A-Za-z0-9!#%&`_=\\/$\'*+?^{}|~.-])+$/', str_replace("\\\\", "", $local))) {
 
                 if (!preg_match('/^"(\\\\"|[^"])+"$/', str_replace("\\\\", "", $local))) {
-                    static::setError(_("Invalid character in local of email"));
+                    static::setError(_t("Invalid character in local of email"));
                     return false;
                 }
             }
             if ($isValid && !(checkdnsrr($domain, "MX") || checkdnsrr($domain, "A"))) {
-                static::setError(_("The domain of email not found in DNS"));
+                static::setError(_t("The domain of email not found in DNS"));
                 return false;
             }
         }

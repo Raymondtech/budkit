@@ -36,7 +36,7 @@
                                         <div class="row-fluid">
                                             <form id="form" name="login_form" method="post" action="/member/session/start">                       
                                                 <fieldset class="no-margin">
-                                                    <legend>Sign in to your account</legend>
+                                                    <legend tpl:i18n="">Sign in to your account</legend>
                                                     <div class="control-group">
                                                         <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">
@@ -44,7 +44,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="user_password"><?php echo _('Password or API Key'); ?><em class="mandatory">*</em></label>
+                                                        <label class="control-label" for="user_password"><tpl:i18n>Password or API Key</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">
                                                             <input class="input-large focused span11" id="user_password" name="user_password" type="password" />
                                                         </div>
@@ -53,7 +53,7 @@
                                                         <div class="controls">
                                                             <label class="checkbox">
                                                                 <input type="checkbox" name="user_session_save" value="1" />
-                                                                Save my login details for 14 days
+                                                                <tpl:i18n>Save my login details for 14 days</tpl:i18n>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -61,15 +61,15 @@
                                                 <input type="hidden" name="auth_handler" value="dbauth" />
                                                 <input type="hidden" name="redirect" value="" />
                                                 <ul>
-                                                    <li><a href="/index.php"><?php echo _("Forgot your password?"); ?></a></li>
-                                                    <li><a href="/member/account/create"><?php echo _("Don't have an account?"); ?></a></li>
+                                                    <li><a href="/index.php" tpl:i18n="">Forgot your password?</a></li>
+                                                    <li><a href="/member/account/create" tpl:i18n="">Don't have an account?</a></li>
                                                 </ul>
                                                 <div class="btn-toolbar">
                                                     <div class="btn-group">
-                                                        <button type="submit" class="btn">Sign-in</button> 
+                                                        <button type="submit" class="btn" tpl:i18n="">Sign-in</button> 
                                                     </div>
                                                     <div class="btn-group">
-                                                        <button type="reset" class="btn">Cancel</button> 
+                                                        <button type="reset" class="btn" tpl:i18n="">Cancel</button> 
                                                     </div>
                                                 </div>
 

@@ -74,7 +74,7 @@ class i18n extends Parse\Template {
 
         //Get the layout name; and save it!
         if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
-            static::$writer->writeRaw($tag['CDATA']);
+            static::$writer->writeRaw( _t( $tag['CDATA'] ) );
         endif;
 
         return null; //Removes the element from the tree but returns the text;

@@ -33,3 +33,40 @@ a.thumbnail:hover {
 .thumbnail .caption {
   padding: 9px;
 }
+
+.thumbnail-icon {
+  display: block;
+  border: 1px solid #ddd;
+   width:73px;
+    height:73px;
+    border-radius:73px;
+    line-height:100px;
+text-decoration:none;
+    text-align:center;
+  .border-radius(50px);
+  .box-shadow(0 1px 1px rgba(0,0,0,.075));
+   margin-right: 9px;
+    margin-bottom: 9px;
+    float: left;
+}
+// Add a hover state for linked versions only
+a.thumbnail-icon:hover {
+  border-color: @linkColor;
+  .box-shadow(0 1px 4px rgba(0,105,214,.25));
+}
+// Images and captions
+.thumbnail-icon > .icon {
+  display: block;
+ .border-radius(66px);
+    border:4px solid #fff;
+    height: 65px;
+    width: 65px;
+    line-height:68px;
+    text-align:center;
+    text-decoration:none;
+    background:@grayLighter;
+    &:hover{
+        border-color: lighten( @linkColor, 50% );
+    }
+}
+

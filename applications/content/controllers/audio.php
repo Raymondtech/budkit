@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * commands.php
+ * video.php
  *
  * Requires PHP version 5.3
  *
@@ -13,78 +13,83 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  *
+ * @category   Controller
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
+ * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-
-namespace Application\System\Controllers;
+namespace Application\Content\Controllers;
 
 use Platform;
 use Library;
-use Application\System\Views as View;
+use Application\Content\Views as View;
 
 /**
  * What is the purpose of this class, in one sentence?
  *
  * How does this class achieve the desired purpose?
  *
+ * @category   Controller
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
+ * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
  */
-class Commands extends Platform\Controller {
-    
-    /**
-     * How safe is this?
-     * 
-     * @param type $function
-     * @param type $args
-     * @return type 
-     */
-    final public function update(){
-        
-        //Determines magic methods
-        //Remap all commands
-        
-        
-        //return $this->index();
+final class Audio extends \Platform\Controller {
+
+    //put your code here
+    public function index() {
+        $view = $this->load->view('audio');
     }
-    
-    
-    /**
-     * Executes the search command
-     * 
-     * @return void
-     */
-    final public function search(){
+
+    public function create() {
         
-        $view = $this->load->view("index");
+        $view = $this->load->view('audio');
         
-        echo "searching for stuff";
+                
+        $view->createform();
+        
+        
+        return true;
     }
-    
-    /**
-     * Gets an instance of the command class
-     * 
-     * @staticvar self $instance
-     * @return self 
-     */
-    public static function  getInstance() {
+
+    public function update( $audioid = null) {
         
+        //There many ways to get the arguents passed here
+        $args1 = func_get_args();
+        $args  = $this->getRequestArgs();
+        
+        //print_R($args); print_r($args1); echo $videoid;
+        
+    }
+
+    public function read() {
+        
+        echo $this->router->getView()."<br />";
+        echo $this->router->getFormat();
+        
+    }
+
+    public function delete() {
+        
+    }
+
+    public static function getInstance() {
+
         static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
+        if (isset($instance))
+            return $instance;
 
-        $instance =  new self;
+        $instance = new self;
 
-        return $instance;   
+        return $instance;
     }
-}
 
+}
