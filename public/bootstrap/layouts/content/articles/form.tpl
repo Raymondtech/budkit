@@ -6,13 +6,41 @@
                     <label class="control-label" for="options[general][site-name]"><tpl:i18n>Title</tpl:i18n></label>
                     <div class="controls">
                         <input type="text" name="options[general][site-name]"  class="input-xxxlarge"  value="<?php echo $this->config->getParam('site-name','','general'); ?>" />
-                        
+
                     </div>
-                </div> 
-                <hr />
+                </div>
                 <div class="control-group">
-                    <label class="control-label" for="options[general][site-name]"><tpl:i18n>Article</tpl:i18n></label>
+<!--                    <label class="control-label" for="options[general][site-name]"><tpl:i18n>Article</tpl:i18n></label>-->
                     <div class="controls">
+                        <div class="btn-toolbar  no-margin">
+                            <div class="btn-group">
+                                <button class="btn" type="button"><i class="icon icon-bold"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-italic"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-underline"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-strikethrough"></i></button>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn" type="button"><i class="icon icon-align-left"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-align-center"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-align-right"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-align-justify"></i></button>
+                            </div>
+     
+                            <div class="btn-group">
+                                <button class="btn" type="button"><i class="icon icon-list-ul"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-list-ol"></i></button>
+                                </div>
+     
+                            <div class="btn-group">
+                                <button class="btn" type="button"><i class="icon icon-picture"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-film"></i></button>
+                                <button class="btn" type="button"><i class="icon icon-link"></i></button>
+                            </div>
+                            
+                            <div class="btn-group pull-right">
+                                <button class="btn" type="button"><i class="icon icon-eye-open"></i> Preview</button>
+                            </div>
+                        </div>
                         <textarea class="input-xxxlarge focused" rows="15" name="post_content"></textarea>
                     </div>
                 </div>

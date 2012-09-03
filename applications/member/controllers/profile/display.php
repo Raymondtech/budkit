@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * profile.php
+ * privacy.php
  *
  * Requires PHP version 5.3
  *
@@ -19,11 +19,12 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\Member\Controllers;
+namespace Application\Member\Controllers\Profile;
 
 use Platform;
 use Library;
 use Application\Member\Views as View;
+use Application\Member\Controllers as Member;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -38,55 +39,49 @@ use Application\Member\Views as View;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Profile extends \Platform\Controller {
+final class Display extends Member\Profile {
 
-    //put your code here
-    // domain.com/user/account/1934353
-    // domain.com/user/account/johndoe
-    // domain.com/account/1934353
-    // domain.com/account/johndoe
-    public function index() {
-               /**View Profile**/
-        
-        $username = $this->router->getMethod();
-        $view     = $this->load->view('profile');
-        
-        
-        //echo "view profile";
-        
-        $view->profilePage();
-    }
 
-    //domain.com/user/account/create
-    public function create() {
+
+    public function activity(){
+        
+        //echo "Activity view";
+        
+        //die;
+        $activity   = $this->output->layout("system/timeline");
+
+        $this->output->addToPosition("body", $activity);
+        
+        return $this->index();
         
     }
     
-    //domain.com/user/account/update/1934353
-    public function update() {
+    
+    public function information(){
         
+        echo "information";
+        
+        return $this->index();
+    }
+    
+    
+        
+    public function achievements(){
+        
+        echo "achievements";
+        
+        return $this->index();
+    }
+    
+    
+        
+    public function network(){
+        
+        echo "network";
+        
+        return $this->index();
     }
 
-    
-    
-    final public function __call($name, $arguments) {
-        
-        //check if this is a valid userid or usernameid
-            //If it is a valid user, show the view page,
-            return $this->view( );
-            //If its is NOT a valid user, return the 404 not found page
-        
-    }
-    
-    //domain.com/user/account/edit/1934353/
-    public function edit(){
-        
-    }
-
-    //domain.com/user/account/delete/1934353/
-    public function delete() {
-        
-    }
 
     public static function getInstance() {
 

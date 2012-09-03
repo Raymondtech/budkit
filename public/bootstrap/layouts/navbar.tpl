@@ -17,8 +17,10 @@
                         <li class="divider-vertical"></li>
                         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                             <li class="notification dropdown">
-                                <a href="/member/notification/list" class="dropdown-toggle" data-toggle="dropdown">40</a>
+                                <a href="/member/notification/list" class="dropdown-toggle on" data-toggle="dropdown"><i class="icon icon-pushpin"></i></a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="/system/start/dashboard/notifications">View all notifications</a> <a href="/system/start/dashboard/notifications" class="pull-right">Clear All</a></li>
+                                    <li class="divider"></li>
                                     <li>
                                         <div class="alert-info alert no-margin">
                                             <tpl:i18n>No new notifications</tpl:i18n>
@@ -27,31 +29,38 @@
                                 </ul>
                             </li>
                             <li class="shareform dropdown">
-                                <a href="#" class="dropdown-toggle persistent" data-toggle="dropdown"><i class="icon icon-white icon-plus"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-white icon-plus"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <tpl:import layout="input" />
-                                    </li>
-                                </ul>
+                                    <tpl:import layout="input" />
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.username">username</tpl:element><b class="caret">&nbsp;</b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/system/start/index"><tpl:i18n>Dashboard</tpl:i18n></a></li>
-                                    <li><a href="/member/profile/view" tpl:i18n="">View your profile</a></li>
-                                    <li><a href="/member/messages/inbox" tpl:i18n="">Messages</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="/member/settings/account" tpl:i18n="">Account settings</a></li>
-                                    <li><a href="/member/settings/privacy" tpl:i18n="">Privacy</a></li>                            
-                                    <li class="divider"></li>
-                                    <li><a href="/sign-out" tpl:i18n="">Sign out</a></li>
-                                </ul>
+                    </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.username"/> <b class="caret">&nbsp;</b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/member/profile/display/information" class="profile-link clearfix">
+                                    <img class="profile-avatar pull-left" src="http://placehold.it/32x32" alt="Livingstone Fultang" />
+                                    <tpl:element type="text" data="user.fullname" />
+                                    <span class="profile-username">@<tpl:element type="text" data="user.username" /></span>
+                                </a>
                             </li>
-                            
-                        </tpl:condition>
-                        <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
-                            <li><a href="/member/session/start" tpl:i18n="">Sign in</a></li>
-                        </tpl:condition>
+                            <li class="divider"></li>
+                            <li><a href="/system/start/index"><strong><tpl:i18n>Dashboard</tpl:i18n></strong></a></li>
+
+                            <li><a href="/member/messages/inbox">Messages</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/member/settings/account">Account settings</a></li>
+                            <li><a href="/member/settings/privacy">Privacy</a></li>                            
+                            <li class="divider"></li>
+                            <li><a href="/sign-out">Sign out</a></li>
+                        </ul>
+                    </li>
+
+                    </tpl:condition>
+                    <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
+                        <li><a href="/member/session/start">Sign in</a></li>
+                    </tpl:condition>
 
                     </ul> 
 
