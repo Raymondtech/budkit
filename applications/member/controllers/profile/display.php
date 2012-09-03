@@ -19,7 +19,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\Member\Controllers\Settings;
+namespace Application\Member\Controllers\Profile;
 
 use Platform;
 use Library;
@@ -39,18 +39,48 @@ use Application\Member\Controllers as Member;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Profile extends Member\Settings {
+final class Display extends Member\Profile {
 
 
-    public function index() {
-                    
-        $view   = $this->load->view( 'settings' );
-        //$view   = 
-                
-        return $view->form("settings/profile");
-    
+
+    public function activity(){
+        
+        //echo "Activity view";
+        
+        //die;
+        $activity   = $this->output->layout("system/timeline");
+
+        $this->output->addToPosition("body", $activity);
+        
+        return $this->index();
+        
     }
-
+    
+    
+    public function information(){
+        
+        echo "information";
+        
+        return $this->index();
+    }
+    
+    
+        
+    public function achievements(){
+        
+        echo "achievements";
+        
+        return $this->index();
+    }
+    
+    
+        
+    public function network(){
+        
+        echo "network";
+        
+        return $this->index();
+    }
 
 
     public static function getInstance() {

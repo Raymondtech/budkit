@@ -45,7 +45,6 @@
                         <input type="text" name="options[general][site-name]"  class="input-xxxlarge"  />
                     </div>
                 </div> 
-                <hr />
                 <div class="control-group">
                     <label class="control-label" for="options[general][site-name]"><tpl:i18n>Event Description</tpl:i18n></label>
                     <div class="controls">

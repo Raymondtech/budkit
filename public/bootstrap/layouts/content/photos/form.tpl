@@ -3,12 +3,20 @@
         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
             <fieldset class="timeline-item-publisher no-margin">
                 <div class="control-group">
-                    <div class="controls">
-                        <label class="control-label" for="options[general][site-name]"><tpl:i18n>Upload Photo</tpl:i18n></label>
-                        <input type="file" name="options[general][site-name]"  class="input-xxxlarge"  />
+                    <label class="control-label" for="options[general][site-name]"><tpl:i18n>Choose File</tpl:i18n></label>
+                    <div class="controls fileupload fileupload-new input" data-provides="fileupload">
+                        <div class="input-append">
+                            <div class="uneditable-input input-xxxlarge"><i class="icon-picture fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file add-on" rel="tooltip" data-original-title="Select File"><span class="fileupload-new"><i class="icon icon-picture"></i></span><span class="fileupload-exists" rel="tooltip" data-original-title="Change File"><i class="icon icon-picture"></i></span><input type="file" /></span><a href="#" class="fileupload-exists btn add-on" data-dismiss="fileupload" rel="tooltip" data-original-title="Remove"><i class="icon icon-trash"></i></a>
+                        </div>
                     </div>
-                </div> 
-                <hr />
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[general][site-name]"><tpl:i18n>Upload from URL</tpl:i18n></label>
+                    <div class="controls">
+                        <input type="text" name="options[general][site-name]"  class="input-xxxlarge"  value="http://" />
+                        
+                    </div>
+                </div>
                 <div class="control-group">
                     <label class="control-label" for="options[general][site-name]"><tpl:i18n>Caption</tpl:i18n></label>
                     <div class="controls">

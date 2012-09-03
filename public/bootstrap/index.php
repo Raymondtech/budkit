@@ -30,7 +30,8 @@
                         <div class="span12">           
                             <div class="row-fluid">
                                 <div class="span8"> 
-                                    <tpl:block data="page.block.body">Content</tpl:block></div>
+                                    <tpl:block data="page.block.body">Content</tpl:block>
+                                </div>
                                 <div class="span4">
                                     <div class="left-pad">                                 
                                         <tpl:block data="page.block.side">Sidebar</tpl:block>

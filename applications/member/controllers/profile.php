@@ -38,7 +38,7 @@ use Application\Member\Views as View;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Profile extends \Platform\Controller {
+class Profile extends \Platform\Controller {
 
     //put your code here
     // domain.com/user/account/1934353
@@ -46,7 +46,15 @@ final class Profile extends \Platform\Controller {
     // domain.com/account/1934353
     // domain.com/account/johndoe
     public function index() {
-        return $this->view();
+               /**View Profile**/
+        
+        $username = $this->router->getMethod();
+        $view     = $this->load->view('profile');
+        
+        
+        //echo "view profile";
+        
+        $view->profilePage();
     }
 
     //domain.com/user/account/create
@@ -59,18 +67,6 @@ final class Profile extends \Platform\Controller {
         
     }
 
-    // alias to index
-    public function view() {
-        /**View Profile**/
-        
-        $username = $this->router->getMethod();
-        $view     = $this->load->view('profile');
-        
-        
-        //echo "view profile";
-        
-        $view->profilePage();
-    }
     
     
     final public function __call($name, $arguments) {

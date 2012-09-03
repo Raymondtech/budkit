@@ -20,7 +20,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\System\Controllers\Admin;
+namespace Application\System\Controllers\Start;
 
 use Platform;
 use Library;
@@ -39,15 +39,53 @@ use Application\System\Controllers as System;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-class Appearance extends System\Admin {
+class Dashboard extends System\Start {
     
     
-    public function dashboard(){
+    public function content(){
         
-        echo $this->router->getFormat();
+        echo "Content flow";
+
         
         return $this->index();
     }
+    
+    
+        
+    public function activity(){
+        
+        $this->output->setPageTitle( _("Acivity Stream") );
+       $activity   = $this->output->layout("system/timeline");
+
+        $this->output->addToPosition("dashboard", $activity);
+
+        
+        return $this->index();
+    }
+    
+    
+        
+    public function notifications(){
+        
+       $this->output->setPageTitle( _("Task and Notifications") );
+        $view = $this->load->view("index");
+        
+        $dashboard       = $this->output->layout('notifications');
+        $this->output->addToPosition("dashboard" , $dashboard);
+        
+        return $this->index();
+    }
+    
+    
+        
+    public function analytics(){
+        
+        echo "Analytics";
+
+        
+        return $this->index();
+    }
+    
     
     
     public function index(){

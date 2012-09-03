@@ -71,25 +71,33 @@
                         <div class="span12"> 
                             <div class="row-fluid">
                                 <div class="span8">
-                                    <div class="row-fluid top-pad">
-                                        <div class="span4">
-                                            <div class="well no-margin">
-                                                <h1 class="count-body">189</h1> <small>Friends</small>
-
-                                            </div>
+                                    
+                                    <div id="control-panel" class="top-pad">
+                                        <div class="row-fluid text-centered clearfix"> 
+                                            <a href="/content/article/create" class="thumbnail-icon text-centered text-grey" data-original-title="New Article" rel="tooltip">
+                                                <i class="icon icon-32 icon-edit icon-block"></i>
+                                            </a>
+                                            <a href="/content/photo/create" class="thumbnail-icon text-centered text-orange" data-original-title="Upload Photos" rel="tooltip">
+                                                <i class="icon icon-32 icon-camera-retro icon-block"></i>
+                                            </a>
+                                            <a href="/content/event/create" class="thumbnail-icon text-centered text-green" data-original-title="Create Event" rel="tooltip">
+                                                <i class="icon icon-32 icon-calendar icon-block"></i>
+                                            </a>
+                                            <a href="/content/question/create" class="thumbnail-icon text-centered text-purple" data-original-title="Ask Question" rel="tooltip">
+                                                <i class="icon icon-32 icon-question-sign icon-block"></i>
+                                            </a>
+                                            <a href="/content/audio/create" class="thumbnail-icon text-centered" data-original-title="Add Audio" rel="tooltip">
+                                                <i class="icon icon-32 icon-music icon-block"></i>
+                                            </a>
+                                            <a href="/content/video/create" class="thumbnail-icon text-centered" data-original-title="Add Video" rel="tooltip">
+                                                <i class="icon icon-32 icon-film icon-block"></i>
+                                            </a>
+                                            <a href="/content/location/checkin" class="thumbnail-icon text-centered text-red" data-original-title="New Check-In" rel="tooltip">
+                                                <i class="icon icon-32 icon-map-marker icon-block"></i>
+                                            </a>
                                         </div>
-                                        <div class="span4">
-                                            <div class="well no-margin">
-                                                Detail
-                                            </div>
-                                        </div>
-                                        <div class="span4">
-                                            <div class="well no-margin">
-                                                Detail
-                                            </div>
-                                        </div>
-
                                     </div>
+                            
                                 </div>
                                 <div class="span4">
                                     <div class="left-pad top-pad bottom-pad">
@@ -107,60 +115,14 @@
                                 </div>
                             </div>
                             <div class="row-fluid">
-                                <div class="span8 tab-content">
-                                    <!--                                    <hr />-->
-                                    <div class="entry tab-pane" id="timelinepane">Timeline</div>
-                                    <div class="entry tab-pane active" id="aboutmepane">
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <a href="#">links look like this</a>. tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <strong>bolded word</strong> <a href="#">tempor sit amet</a>, ante. Donec eu <em>this area in italics</em> libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                        <p><span id="more-5"></span></p>
-                                        <h2>This is an h2 subtitle</h2>
-                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <strong>bolded word</strong> <a href="#">tempor sit amet</a>, ante. Donec eu <em>this area in italics</em> libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                        <h3>This is an h3 subtitle</h3>
-                                        <ul>
-                                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                                            <li>Aliquam tincidunt mauris eu risus.</li>
-                                            <li>Vestibulum auctor dapibus neque.
-                                                <ul>
-                                                    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                                                    <li>Aliquam tincidunt mauris eu risus.</li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <h4>This is an h4 subtitle</h4>
-                                        <ol>
-                                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                                            <li>Aliquam tincidunt mauris eu risus.</li>
-                                            <li>Vestibulum auctor dapibus neque.
-                                                <ol>
-                                                    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                                                    <li>Aliquam tincidunt mauris eu risus.</li>
-                                                </ol>
-                                            </li>
-                                        </ol>
-                                        <blockquote><p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. <a href="#">Donec eu</a> libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                        </blockquote>
-                                        <h5>This is an h5 subtitle</h5>
-                                        <p>Here is some preformatted text:</p>
-                                        <pre><code>#header h1 a {
-	display: block;
-	width: 300px;
-	height: 80px;
-}</code></pre>
-                                        <p>..and some longer code examples:</p>
-                                        <pre><code>(http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/).css(
-http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/);f=e.css(
-http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/,c.css(this[a],
-http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/;if(c.css(this[a],
-http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/)&amp;&amp;this.style){j.display=c.css(this,
-http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/);this.elem.style.display=a?a:this.options.display;if(c.css(this.elem,
-http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/],rb=s.defaultView&amp;&amp;s.defaultView.getComputedStyle,Pa=c.support.cssFloat?
-http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(this.elem[this.prop]!=null&amp;&amp;(!this.elem.style||this.elem.style[this.prop]==null))return%20this.elem[this.prop];return(a=parseFloat(c.css(this.elem,this.prop,a)))&amp;&amp;a&gt;-10000?a:parseFloat(c.curCSS(this.elem,this.prop))||0},custom:function(a,b,d){function%20f(j){return%20e.step(j)}this.startTime=J();this.start=a;this.end=b;this.unit=d||this.unit||</code></pre>
-                                    </div> 
-                                    <div class="entry tab-pane" id="achievementspane" tpl:i18n="">Achievements</div>
-                                    <div class="entry tab-pane" id="blogpane" tpl:i18n="">Blog</div>
-                                    <div class="entry tab-pane" id="multimediapane" tpl:i18n="">Photos</div>
-                                    <div class="entry tab-pane" id="extendedpane" tpl:i18n="">Extended profile</div>
+                                <div class="span8">
+
+                                    <tpl:block data="page.block.body" return="1">
+                                        What content?
+                                    </tpl:block>
+
+
+
                                 </div>
                                 <div class="span4">
                                     <div class="left-pad">
