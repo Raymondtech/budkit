@@ -9,18 +9,6 @@
                 </a>
                 <div class="row-fluid">
                     <a class="brand logo span2" href="/">Pilgrimage</a>
-
-                    <div class="no-margin">
-
-                        <ul class="nav pull-left">                     
-                            <li class="divider-vertical" style="margin: 0 6px"></li>
-                        </ul> 
-
-
-                        <form class="navbar-search" action="/search" method="get">
-                            <input type="text" class="search-query span4" name="query" placeholder="Search" />
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>

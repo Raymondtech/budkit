@@ -23,7 +23,7 @@
         <?php //print_R($this); ?>
         <body>
             <form method="post" action="/" style="margin-top: 150px">
-                <div role="container" class="container fillfix clearfix">
+                <div role="container" class="container left fillfix clearfix">
                     <div class="row clearfix fillfix">
                         <article class="span8">
                             <h1 class="text-embedded"><tpl:element type="text" data="page.title">400</tpl:element></h1>

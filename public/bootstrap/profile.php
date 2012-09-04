@@ -23,7 +23,7 @@
         <body>
             <tpl:import layout="navbar" />
 
-            <div class="container"> 
+            <div class="container left"> 
                 <tpl:block data="page.block.alerts" />  
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed has-bg">

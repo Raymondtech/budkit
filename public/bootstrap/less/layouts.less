@@ -7,6 +7,14 @@
 // Container (centered, fixed-width layouts)
 .container {
   .container-fixed();
+    &.left{
+        margin-left: @gridGutterWidth;
+        margin-right: auto;
+    }
+    &.right{
+        margin-right: @gridGutterWidth;
+        margin-left: auto;
+    }
 }
 
 // Fluid layouts (left aligned, with sidebar, min- & max-width content)

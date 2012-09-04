@@ -20,15 +20,17 @@
 .navbar-inner {
   //padding-left:  20px;
   //padding-right: 20px;
-    padding: 5px 20px;
-  //#gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+    padding: 2px 20px;
+   #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
   .border-radius(4px);
+border-top: 1px solid #94B6FF;
+border-bottom: 1px solid #284278;
   @shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
   //.box-shadow(@shadow);
-    background: @navbarBackground;
+    //background: @navbarBackground;
     //border-top: 4px solid @navbarTopBorder;
     &.adminbar{
-            background: @adminbarBackground;
+            #gradient > .vertical(@adminbarBackgroundHighlight, @adminbarBackground);
             //border-top: 4px solid @adminbarTopBorder;
     }
 }
@@ -242,7 +244,7 @@
         width: 440px;
         //min-height: 200px;
         padding: 10px 10px;
-        margin-top: 6px;
+        margin-top: 9px;
         margin-left: -220px;
         &:before{
             left: 230px;
@@ -267,7 +269,7 @@
     margin-left: 10px;
     a{
         background:#29691D;
-        margin-top: 5px;
+        margin-top: 9px;
         padding: 5px 10px 4px;
         color: 
         white;
@@ -335,8 +337,8 @@
     width: 1px;
     margin: 0 9px;
     overflow: hidden;
-    background-color: #0C344D;
-    border-right: 1px solid #0B5072;
+    background-color: #376899;
+    border-right: 1px solid #5799DA;
 }
 
 .navbar .adminbar .divider-vertical {
