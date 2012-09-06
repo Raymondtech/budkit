@@ -17,30 +17,40 @@
             <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
             <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
             <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
-<!--            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css' />-->
+            <!--            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css' />-->
         </head>
         <body>
             <tpl:import layout="navbar" />
-            
+
             <div class="container left">
                 <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed has-bg">  
-                    <div class="row-fluid">
-                        <div class="span12">           
-                            <div class="row-fluid">
-                                <div class="span8"> 
-                                    <tpl:block data="page.block.body">Content</tpl:block>
-                                </div>
-                                <div class="span4">
-                                    <div class="left-pad">                                 
-                                        <tpl:block data="page.block.side">Sidebar</tpl:block>
+                <tpl:condition data="page.activesidebar" test="boolean" value="1"> 
+                    <section class="layout-block boxed has-bg">  
+                        <div class="row-fluid">
+                            <div class="span12">           
+                                <div class="row-fluid">
+                                    <div class="span8"> 
+                                        <tpl:block data="page.block.body">Content</tpl:block>
+                                    </div>
+                                    <div class="span4">
+                                        <div class="left-pad">                                 
+                                            <tpl:block data="page.block.side">Sidebar</tpl:block>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </tpl:condition>
+                <tpl:condition data="page.activesidebar" test="boolean" value="0"> 
+                    <section class="layout-block boxed">  
+
+                        <tpl:block data="page.block.body">Content</tpl:block>
+
+                    </section>
+                </tpl:condition>
+
                 <tpl:import layout="footer" />    
             </div>
 

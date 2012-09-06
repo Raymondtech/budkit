@@ -81,7 +81,10 @@ class Output extends Object {
      * @var array
      */
     protected $variables = array(
-        "pageid" => "_page"
+        "pageid" => "_page",
+        "page"  => array(
+            "activesidebar" => false
+        )
     );
 
     /**
@@ -938,6 +941,11 @@ class Output extends Object {
                 "params" => $params
             ));
         }
+        
+        if(strtolower($name)=="side"){
+            $this->variables["page"]["activesidebar"] = true;
+        }
+        
         return $this;
     }
 

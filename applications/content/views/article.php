@@ -71,7 +71,7 @@ final class Article extends \Platform\View{
      * The new article create form
      * 
      */
-    public function createform(){
+    public function createform( $fullscreen = false){
         
         //Page Title
         $this->output->setPageTitle("Articles | Create new Article");
@@ -81,12 +81,12 @@ final class Article extends \Platform\View{
         
         //The default installation box;
         //$this->output->addToPosition("left",    $sidebar);
-        
-        $this->output->addToPosition("dashboard",   $form);
-        
-        
-        
-        return $this->display();
+        if(!$fullscreen):
+            $this->output->addToPosition("dashboard",   $form);
+            return $this->display();
+        else:
+             $this->output->addToPosition("body",   $form);
+        endif;
     }
     
     public static function getInstance(){

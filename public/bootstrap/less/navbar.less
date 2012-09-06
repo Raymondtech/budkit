@@ -226,6 +226,7 @@ border-bottom: 1px solid #284278;
   float: left;
   &.notification{
     margin-left: 10px;
+    float: right!important;
     a.dropdown-toggle{
     &.on{
             background: #AF1010;
@@ -246,12 +247,6 @@ border-bottom: 1px solid #284278;
         padding: 10px 10px;
         margin-top: 9px;
         margin-left: -220px;
-        &:before{
-            left: 230px;
-        }
-        &::after {
-            left: 230px;
-        }
         a {
             color: @linkColor;
             text-decoration: none;
@@ -267,9 +262,10 @@ border-bottom: 1px solid #284278;
   }
 &.shareform{
     margin-left: 10px;
+    float:right!important;
     a{
         background:#29691D;
-        margin-top: 9px;
+        margin-top: 5px;
         padding: 5px 10px 4px;
         color: 
         white;
@@ -284,14 +280,8 @@ border-bottom: 1px solid #284278;
         width: 440px;
         //min-height: 200px;
         padding: 10px 10px;
-        margin-top: 6px;
+        margin-top: 9px;
         margin-left: -220px;
-        &:before{
-            left: 230px;
-        }
-        &::after {
-            left: 230px;
-        }
         a {
             color: @linkColor;
             text-decoration: none;
@@ -359,7 +349,7 @@ border-bottom: 1px solid #284278;
 
 // Menu position and menu carets
 .navbar .dropdown-menu {
-  margin-top: -1px;
+  
   //.border-radius(4px);
   &:before {
     content: '';

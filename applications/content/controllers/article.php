@@ -48,8 +48,24 @@ final class Article extends Platform\Controller {
     }
 
     public function create() {     
+        
+        
         $view = $this->load->view('article');
-        return $view->createForm();
+        
+        //get passparams
+        $params     = func_get_args();
+        $fullscreen = false;
+        
+        //param1 = fullscreen 
+        //param2 = autoplay
+        if(isset($params) && is_array($params)){
+            if(isset($params[0]) && strtolower($params[0])=="fullscreen"){
+                $fullscreen = true;
+            }
+        }
+ 
+        
+        return $view->createForm( $fullscreen );
         
     }
     

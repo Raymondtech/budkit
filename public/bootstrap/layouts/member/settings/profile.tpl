@@ -18,7 +18,17 @@
                 <div class="controls input">
                     <div class="input-append">
                         <input class="input-xxxlarge" id="middle-name" name="middle-name" size="30" type="text" placeholder="Where have you worked?" />
-                        <a class="add-on" href="#"><i class="icon icon-eye-open"></i></a><span class="help-block">Website privacy</span>
+                        <span class="dropdown">
+                            <a class="add-on dropdown-toggle btn" data-toggle="dropdown"><i class="icon icon-lock"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </span>
+                        <span class="help-block">Website privacy</span>
                     </div>
                 </div>
             </div><!-- /control-group -->

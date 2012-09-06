@@ -14,7 +14,7 @@
                     </form>
 
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-                        <ul class="nav pull-right span4" id="user-nav">    
+                        <ul class="nav pull-right span4" id="notifications-nav">    
                             <li class="divider-vertical"></li>
                             <li class="notification dropdown">
                                 <a href="#" class="dropdown-toggle on" data-toggle="dropdown"><i class="icon icon-pushpin"></i></a>
@@ -28,34 +28,35 @@
                                     </li>
                                 </ul>
                             </li>
+                            
+                            <li class="usermenu dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.username"/> <b class="caret">&nbsp;</b></a>
+                                <ul class="dropdown-menu" id="user-nav">
+                                    <li><a href="/member/profile/display/information" class="profile-link clearfix">
+                                            <img class="profile-avatar pull-left" src="http://placehold.it/32x32" alt="Livingstone Fultang" />
+                                            <tpl:element type="text" data="user.fullname" />
+                                            <span class="profile-username">@<tpl:element type="text" data="user.username" /></span>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="/system/start/index"><strong><tpl:i18n>Dashboard</tpl:i18n></strong></a></li>
+                                    <li><a href="/system/activity/stream" tpl:i18n="">Activity</a></li>
+                                    <li><a href="/member/messages/inbox">Messages</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/member/settings/account">Account settings</a></li>
+                                    <li><a href="/member/settings/privacy">Privacy</a></li>                            
+                                    <li class="divider"></li>
+                                    <li><a href="/sign-out">Sign out</a></li>
+                                </ul>
+                            </li>
                             <li class="shareform dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-white icon-plus"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                    <tpl:import layout="input" />
+                                        <tpl:import layout="input" />
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.username"/> <b class="caret">&nbsp;</b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/member/profile/display/information" class="profile-link clearfix">
-                                        <img class="profile-avatar pull-left" src="http://placehold.it/32x32" alt="Livingstone Fultang" />
-                                        <tpl:element type="text" data="user.fullname" />
-                                        <span class="profile-username">@<tpl:element type="text" data="user.username" /></span>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="/system/start/index"><strong><tpl:i18n>Dashboard</tpl:i18n></strong></a></li>
-                                <li><a href="/system/activity/stream" tpl:i18n="">Activity</a></li>
-                                <li><a href="/member/messages/inbox">Messages</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/member/settings/account">Account settings</a></li>
-                                <li><a href="/member/settings/privacy">Privacy</a></li>                            
-                                <li class="divider"></li>
-                                <li><a href="/sign-out">Sign out</a></li>
-                            </ul>
-                        </li>
                         </ul>
                     </tpl:condition>
 
