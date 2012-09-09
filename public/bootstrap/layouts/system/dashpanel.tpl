@@ -1,5 +1,49 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-
+    <div id="control-panel" class="inline-block">
+        <div class="row-fluid text-centered"> 
+            <a href="/content/article/create" class="thumbnail-icon text-centered text-grey" data-original-title="New Article" rel="tooltip">
+                <i class="icon icon-32 icon-font icon-block"></i>
+            </a>
+            <a href="/content/photo/create" class="thumbnail-icon text-centered text-orange" data-original-title="Upload Photos" rel="tooltip">
+                <i class="icon icon-32 icon-camera-retro icon-block"></i>
+            </a>
+            <a href="/content/event/create" class="thumbnail-icon text-centered text-green" data-original-title="Create Event" rel="tooltip">
+                <i class="icon icon-32 icon-calendar icon-block"></i>
+            </a>
+            <a href="/content/question/create" class="thumbnail-icon text-centered text-purple" data-original-title="Ask Question" rel="tooltip">
+                <i class="icon icon-32 icon-question-sign icon-block"></i>
+            </a>
+            <a href="/content/audio/create" class="thumbnail-icon text-centered" data-original-title="Add Audio" rel="tooltip">
+                <i class="icon icon-32 icon-music icon-block"></i>
+            </a>
+            <a href="/content/video/create" class="thumbnail-icon text-centered" data-original-title="Add Video" rel="tooltip">
+                <i class="icon icon-32 icon-film icon-block"></i>
+            </a>
+            <a href="/content/location/checkin" class="thumbnail-icon text-centered text-red" data-original-title="New Check-In" rel="tooltip">
+                <i class="icon icon-32 icon-map-marker icon-block"></i>
+            </a>
+            <a href="/campus/tasks/new" class="thumbnail-icon text-centered" data-original-title="New Tasks" rel="tooltip">
+                <i class="icon icon-32 icon-tasks icon-block"></i>
+            </a>
+            <a href="/content/photo/create" class="thumbnail-icon text-centered text-orange" data-original-title="Upload Photos" rel="tooltip">
+                <i class="icon icon-32 icon-camera-retro icon-block"></i>
+            </a>
+            <a href="/content/event/create" class="thumbnail-icon text-centered text-green" data-original-title="Create Event" rel="tooltip">
+                <i class="icon icon-32 icon-calendar icon-block"></i>
+            </a>
+            <a href="/content/question/create" class="thumbnail-icon text-centered text-purple" data-original-title="Ask Question" rel="tooltip">
+                <i class="icon icon-32 icon-question-sign icon-block"></i>
+            </a>
+            <a href="/content/audio/create" class="thumbnail-icon text-centered" data-original-title="Add Audio" rel="tooltip">
+                <i class="icon icon-32 icon-music icon-block"></i>
+            </a>
+            <a href="/content/video/create" class="thumbnail-icon text-centered" data-original-title="Add Video" rel="tooltip">
+                <i class="icon icon-32 icon-film icon-block"></i>
+            </a>
+            
+        </div>
+    </div>
+    <hr />
     <ul class="nav nav-tabs admin-main-tabs" id="systemPreferences">    
         <li class="active"><a data-target="#moderation" data-toggle="tab"><i class="icon icon-tasks"></i> Tasks <span class="label label-important">10</span></a></li>
         <li><a data-target="#notifications" data-toggle="tab"><i class="icon icon-inbox"></i> Messages <span class="label label-important">34</span></a></li>
@@ -10,12 +54,12 @@
         <div class="span8">
             <div class="tab-content">
                 <div class="tab-pane" id="notifications">
-                    
-<!--                    <div class="alert alert-state alert-empty">
-                        <h1>Nothing to Report</h1>
-                        <p>We will fill this page with alerts, once we come across anything worth reporting</p>
-                    </div>-->
-                    
+
+                    <!--                    <div class="alert alert-state alert-empty">
+                                            <h1>Nothing to Report</h1>
+                                            <p>We will fill this page with alerts, once we come across anything worth reporting</p>
+                                        </div>-->
+
                     <div class="alert">
                         <a class="close" data-dismiss="alert">×</a>
                         <strong>Warning!</strong> Best check yo self, you're not looking too good.
@@ -154,7 +198,7 @@
                     </div>
 
                 </div>
-               
+
                 <div class="tab-pane" id="live">
                     <div class="row-fluid">
                         <div class="span12">
@@ -209,7 +253,7 @@
 
             <h4>Welcome your newest members</h4>
             <div id="placeholder3" class="row-fluid" style="height: 250px; margin-bottom: 10px;"></div>
-            
+
             <h4>Welcome your newest members</h4>
             <div id="placeholder4" class="row-fluid" style="height: 250px; margin-bottom: 10px;"></div>
 

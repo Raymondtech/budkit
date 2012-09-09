@@ -137,7 +137,7 @@ class Menu extends Parse\Template {
                     array(
                         "ELEMENT" => "a",
                         "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
-                        "CDATA" => (( strtolower($menuType) === "nav-icons") ? '<i class="icon icon-'.str_replace(array(" ","(",")","-","&","%",",","#" ), '-', strtolower($item['menu_title'])).'"></i>' : "").$item['menu_title']
+                        "CDATA" =>  '<i class="icon icon-'.str_replace(array(" ","(",")","-","&","%",",","#" ), '-', strtolower($item['menu_title'])).'"></i>'.$item['menu_title']
                     )
                 )
             );

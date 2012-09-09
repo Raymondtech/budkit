@@ -35,11 +35,11 @@
        
     }
     &.boxed{
-       // border:1px solid #DDD;
+         border:1px solid #eee;
         .border-radius(2px);
         //.box-shadow(0px 0px 4px 0px #ccc );
         background-color: @white;
-        .box-shadow(0 3px 7px rgba(163, 163, 175, 0.42));
+        //.box-shadow(0 3px 7px rgba(163, 163, 175, 0.42));
     }
 }
 
@@ -123,6 +123,36 @@
             &:hover{ 
                 background: #f5f5f5; cursor: pointer; 
             }
+        }
+    }
+}
+
+
+//Sidebar
+//----------------------------
+.layout-box{
+    position: relative;
+    .sidebar{
+        width: 230px;
+        &.sidebar-left{
+            float: left;
+        }
+        &.sidebar-right{
+            float: right;
+        }
+    }
+    &.has-left-sidebar{
+        .content-box{
+            background: @white;
+            margin-left: 230px;
+            min-height: 800px;
+     
+        }
+    }
+    &.has-right-sidebar{
+        .content-box{
+            background: @white;
+            margin-right: 230px;
         }
     }
 }
