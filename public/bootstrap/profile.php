@@ -60,10 +60,10 @@
                         </div>
                     </div>
                     <div class="profile-cover">
-                        <a href="#" class="cover"><img  src="http://www.number10.gov.uk/wp-content/uploads/2012/07/Olympic-stadium-940.jpg" width="940" height="300" /></a>
+                        <a href="#" class="cover"><img  src="http://lorempixel.com/938/300/abstract/" width="938" height="300" /></a>
                         <div class="profile-avatar">
                             <a href="#">
-                                <img  src="http://placehold.it/260x250" width="260" height="250" />
+                                <img  src="http://lorempixel.com/260/250/people/9" width="260" height="250" />
                             </a>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                                                     <?php for ($i = 0; $i < 15; $i++): ?>
                                                         <li>
                                                             <a href="#">
-                                                                <img class="thumbnail" src="http://placehold.it/32x32" alt="" width="32" height="32" />
+                                                                <img class="thumbnail" src="http://lorempixel.com/32/32/people/<?php echo $i ?>" alt="" width="32" height="32" />
                                                             </a>
                                                         </li>
                                                     <?php endfor; ?>
@@ -169,7 +169,7 @@
                                                     <?php for ($i = 0; $i < 15; $i++): ?>
                                                         <li>
                                                             <a href="#">
-                                                                <img class="thumbnail" src="http://placehold.it/32x32" alt="" width="32" height="32" />
+                                                                <img class="thumbnail" src="http://lorempixel.com/32/32/people/<?php echo $i ?>" alt="" width="32" height="32" />
                                                             </a>
                                                         </li>
                                                     <?php endfor; ?>

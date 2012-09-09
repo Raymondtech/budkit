@@ -4,7 +4,7 @@
     </div>
     <div id="control-panel">
         <div class="row-fluid text-centered clearfix"> 
-            <a href="/content/article/create" class="thumbnail-icon text-centered text-grey" data-original-title="New Article" rel="tooltip">
+            <a href="/content/article/create" class="thumbnail-icon text-centered text-gray" data-original-title="New Article" rel="tooltip">
                 <i class="icon icon-32 icon-font icon-block"></i>
             </a>
             <a href="/content/photo/create" class="thumbnail-icon text-centered text-orange" data-original-title="Upload Photos" rel="tooltip">

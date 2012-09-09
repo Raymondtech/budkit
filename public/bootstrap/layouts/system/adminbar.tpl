@@ -8,7 +8,10 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="row-fluid">
-                    <a class="brand logo span2" href="/">Budkit</a>
+                    <a class="brand logo span2" href="/system/admin/index">Budkit</a>
+                    <ul class="nav pull-right">                     
+                        <li><a href="/" class="homepage-link"><i class="icon-home icon-24"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>

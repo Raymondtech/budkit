@@ -6,7 +6,7 @@
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placehold.it/48x48/346A85/ffffff" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="http://lorempixel.com/48/48/people/10" alt="Livingstone Fultang" />
 
                             <strong class="profile-name">Livingstone Fultang</strong>
                             <span class="profile-nameid">@drstonyhills</span>                      
@@ -27,7 +27,7 @@
                         <div class="timeline-item-gallery carousel slide" id="item-slider-id">
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="http://placehold.it/550x300" />
+                                    <img src="http://lorempixel.com/550/300/city/6" />
                                     <div class="carousel-caption">This is an interesing picture caption</div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placehold.it/48x48/f6a43d/ffffff" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="http://lorempixel.com/48/48/people/5" alt="Livingstone Fultang" />
 
                             <strong class="profile-name">Livingstone Fultang</strong>
                             <span class="profile-nameid">@drstonyhills</span>
@@ -70,7 +70,7 @@
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placehold.it/48x48/7f3485/ffffff" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="http://lorempixel.com/48/48/people/3" alt="Livingstone Fultang" />
                             <strong class="profile-name">Livingstone Fultang</strong>
                             <span class="profile-nameid">@drstonyhills</span>
                         </a>
@@ -98,7 +98,7 @@
                             <div class="timeline-item-container">
                                 <div class="timeline-item-header">
                                     <a class="publisher-profile" href="#">
-                                        <img class="profile-avatar" src="http://placehold.it/48x48/348569/ffffff" alt="Livingstone Fultang" />
+                                        <img class="profile-avatar" src="http://lorempixel.com/48/48/people/9" alt="Livingstone Fultang" />
                                         <strong class="profile-name">Livingstone Fultang</strong>
                                         <span class="profile-nameid">@drstonyhills</span>
                                     </a>
@@ -123,7 +123,7 @@
                             <div class="timeline-item-container">
                                 <div class="timeline-item-header">
                                     <a class="publisher-profile" href="#">
-                                        <img class="profile-avatar" src="http://placehold.it/48x48/AF1010/ffffff" alt="Livingstone Fultang" />
+                                        <img class="profile-avatar" src="http://lorempixel.com/48/48/people/4" alt="Livingstone Fultang" />
                                         <strong class="profile-name">Livingstone Fultang</strong>
                                         <span class="profile-nameid">@drstonyhills</span>
                                     </a>
@@ -151,7 +151,7 @@
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placehold.it/48x48/7f3485/ffffff" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="http://lorempixel.com/48/48/people/9" alt="Livingstone Fultang" />
                             <strong class="profile-name">Livingstone Fultang</strong>
                             <span class="profile-nameid">@drstonyhills</span>
                         </a>
@@ -169,7 +169,7 @@
                     <div class="timeline-item-media">
                         <hr />
                         <div class="row-fluid">  
-                            <div class="span3"><img src="http://placehold.it/120x120" /></div> 
+                            <div class="span3"><img src="http://lorempixel.com/120/120/sports/5" /></div> 
                             <div class="span9">
                                 <blockquote>
                                     <h4><a href="#">Redknapp admits Modric may leave</a></h4>
@@ -188,7 +188,7 @@
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placehold.it/48x48/7f3485/ffffff" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="http://lorempixel.com/48/48/people/8" alt="Livingstone Fultang" />
                             <strong class="profile-name">Livingstone Fultang</strong>
                             <span class="profile-nameid">@drstonyhills</span>
                         </a>
@@ -213,7 +213,7 @@
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placehold.it/48x48/348569/ffffff" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="http://lorempixel.com/48/48/people/11" alt="Livingstone Fultang" />
                             <strong class="profile-name">Livingstone Fultang</strong>
                             <span class="profile-nameid">@drstonyhills</span>
                         </a>
@@ -238,7 +238,7 @@
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placehold.it/48x48/346A85/ffffff" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="http://lorempixel.com/48/48/people/2" alt="Livingstone Fultang" />
                             <strong class="profile-name">Livingstone Fultang</strong>
                             <span class="profile-nameid">@drstonyhills</span>
                         </a>
@@ -262,7 +262,7 @@
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placehold.it/48x48/346A85/ffffff" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="http://lorempixel.com/48/48/people/5" alt="Livingstone Fultang" />
                             <strong class="profile-name">Livingstone Fultang</strong>
                             <span class="profile-nameid">@drstonyhills</span>
                         </a>

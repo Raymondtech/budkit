@@ -1,11 +1,35 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-    <ul class="nav nav-tabs admin-main-tabs" id="systemPreferences">
-        <li class="active"><a data-target="#lists" data-toggle="tab"><i class="icon icon-user"></i> All Members</a></li>
-        <li><a data-target="#types" data-toggle="tab">Member Types</a></li>
-        <li><a data-target="#attributes" data-toggle="tab">Attributes</a></li>
-        <li><a data-target="#connectionrules" data-toggle="tab">Relationships</a></li>
-        <li><a data-target="#definitions" data-toggle="tab">Definitions</a></li>
-    </ul>
+   
+    
+     <div class="btn-toolbar">
+        <div class="btn-group">
+            <a class="btn" href="/system/admin/content/lists/filter/pending">Active</a>
+            <a class="btn" href="/system/admin/content/lists/filter/drafts">Deactivated</a>
+            <a class="btn" href="/system/admin/content/lists/filter/pending">Blocked</a>
+            <a class="btn" href="/system/admin/content/lists/filter/trash">Deleted</a>
+        </div>
+        <div class="btn-group ">
+            <button class="btn">Member Type...</button>
+            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group pull-right">
+            <button class="btn">Apply Actions</button>
+            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Delete</a></li>
+                <li><a href="#">Move Somewhere</a></li>
+            </ul>
+        </div>
+    </div>
 
     <form class="form-horizontal">
         <fieldset class="no-margin">
@@ -32,20 +56,9 @@
                     <?php endfor ; ?>
                 </ul>
             </div>
+            <hr />
             <div class="row-fluid">
-                <div class="span2">
-                    <div class="btn-group pull-left">
-                        <button class="btn">Apply Actions</button>
-                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Edit</a></li>
-                            <li><a href="#">Delete</a></li>
-                            <li><a href="#">Move Somewhere</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="span8">
-                    <div class="pagination no-margin" align="center">
+                <div class="pagination no-margin" align="center">
                         <ul>
                             <li class="disabled"><a href="#">«</a></li>
                             <li class="active"><a href="#">1</a></li>
@@ -58,16 +71,6 @@
                             <li><a href="#">»</a></li>
                         </ul>
                     </div>
-                </div>
-
-                <div class="span2">
-                    <div class="pagination no-margin pull-right">
-                        <ul>
-                            <li class="active"><a href="#"><i class="icon  icon-th-list"></i> List</a></li>
-                            <li><a href="#"><i class="icon  icon-th"></i> Grid</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </fieldset>
     </form>

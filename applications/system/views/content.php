@@ -42,7 +42,7 @@ class Content extends Platform\View {
         
         $type = ucfirst( $this->get('content-type') );
         //$type = Platform\Inflector::pluralize( $type );
-        $this->output->setPageTitle(sprintf( _("Content Lists &raquo; %s") , $type )  );
+        $this->output->setPageTitle(sprintf( _("All Content") , $type )  );
         
         
         $panel = $this->output->layout('content/lists'); 
