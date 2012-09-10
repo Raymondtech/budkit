@@ -31,8 +31,7 @@ body{
 }
 
 .admin-main-tabs{
-    background: #F9F9F9;
-    padding: 7px 7px 0;
+    padding-left: 7px;
     a{ cursor: pointer; }
 }
 
@@ -100,7 +99,7 @@ canvas.base{ margin: 0 -10px }
     border-top: none;
     .dropdown{
             &.active{
-                a.dropdown-toggle, a.dropdown-toggle:hover{border-bottom: 1px solid #070707; color: @white !important}
+                a.dropdown-toggle, a.dropdown-toggle:hover{border-bottom: 1px solid #070707; color: @white !important; margin-right:0px;}
             }
         &.open{ 
             .dropdown-toggle , .dropdown-toggle:hover {
@@ -135,15 +134,20 @@ canvas.base{ margin: 0 -10px }
             border-top: 1px solid #3f3f3f;
             border-bottom: 1px solid #1A1A1A;
             text-indent: 1px;
+            margin-right:0px;
             .icon{
                 margin: 0px 10px;
                 font-size: 20px;
                 line-height: 1px;
             }
          }
+         &.active{
+            a, a:hover{
+                //margin-right:0px!important;
+            }
+         }
     }
 }
-//.nav-block.left .active > a, .nav-block.left .active > a:hover { border-top: none; border-bottom: none; margin-right: 0px;}
 
 .nav-tabs{
     display: inline-block;

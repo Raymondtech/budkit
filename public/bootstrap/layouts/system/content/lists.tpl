@@ -68,7 +68,7 @@
                     </tbody>
                 </table>
             </div>
-            <hr />
+            
             <div class="pagination no-margin" align="center">
                 <ul>
                     <li class="disabled"><a href="#">«</a></li>

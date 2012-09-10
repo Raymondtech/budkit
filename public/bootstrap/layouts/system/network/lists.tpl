@@ -29,6 +29,10 @@
                 <li><a href="#">Move Somewhere</a></li>
             </ul>
         </div>
+         
+         <div class="btn-group pull-right">
+             <button class="btn"><i class="icon icon-plus"></i> New Member</button>
+         </div>
     </div>
 
     <form class="form-horizontal">
@@ -56,7 +60,7 @@
                     <?php endfor ; ?>
                 </ul>
             </div>
-            <hr />
+            <hr class="no-margin" />
             <div class="row-fluid">
                 <div class="pagination no-margin" align="center">
                         <ul>

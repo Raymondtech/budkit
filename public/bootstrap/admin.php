@@ -77,7 +77,7 @@
                         <div>
                             <tpl:block data="page.block.body" />
                         </div>
-                        <hr class="no-margin" />
+                        <hr  />
                         <p class="text-gray" style="margin-top: 10px">Version 0.9.0</p> 
                     </div>
                 </section>
