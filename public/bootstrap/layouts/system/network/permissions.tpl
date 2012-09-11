@@ -1,5 +1,6 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <?php $authorities = $this->get("authorities"); ?>
+    
     <ul id="permissions-tab" class="nav nav-tabs admin-main-tabs">
         <li  class="active"><a data-target="#authorities" data-toggle="tab">Authorities</a></li>
         <li><a data-target="#permissions" data-toggle="tab">Access Permissions</a></li>       

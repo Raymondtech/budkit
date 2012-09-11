@@ -84,6 +84,6 @@
             </section>
         </body>
         <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.js" type="text/javascript"></script>
-        <script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/administrator.js"></script>
+        
     </html>
 </tpl:layout>

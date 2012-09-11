@@ -148,3 +148,21 @@ table {
   .span11    { .tableColumns(11); }
   .span12    { .tableColumns(12); }
 }
+
+
+
+// TABLE BACKGROUNDS
+// -----------------
+// Exact selectors below required to override .table-striped
+
+.table {
+  tbody tr.success td {
+    background-color: @successBackground;
+  }
+  tbody tr.error td {
+    background-color: @errorBackground;
+  }
+  tbody tr.info td {
+    background-color: @infoBackground;
+  }
+}

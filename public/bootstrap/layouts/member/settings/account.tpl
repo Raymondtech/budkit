@@ -276,8 +276,5 @@
                 <input type="submit" class="btn primary" value="Save changes" />&#160;<button type="reset" class="btn">Cancel</button>
             </div>
         </fieldset>
-
-
-
     </form>
 </tpl:layout>

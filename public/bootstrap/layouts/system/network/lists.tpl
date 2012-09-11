@@ -31,7 +31,7 @@
         </div>
          
          <div class="btn-group pull-right">
-             <button class="btn"><i class="icon icon-plus"></i> New Member</button>
+             <a class="btn" href="/system/admin/network/add/member"><i class="icon icon-plus"></i> New Member</a>
          </div>
     </div>
 
