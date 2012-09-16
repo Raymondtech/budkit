@@ -73,7 +73,7 @@ final class Group extends \Platform\Controller {
     public function update() {
         
         //1. Load the model
-        $account = $this->load->model("account");
+        $account = $this->load->model("user");
         $encrypt = \Library\Encrypt::getInstance();
         
 

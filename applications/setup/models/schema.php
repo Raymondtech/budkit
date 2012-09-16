@@ -345,6 +345,8 @@ final class Schema extends Platform\Model {
                 KEY `user_login_key` (`user_name_id`)
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;"
         );
+       
+        
     }
     
     private static function createUsersAuthorityTable(){
@@ -360,6 +362,84 @@ final class Schema extends Platform\Model {
         );
     }
     
+    private static function createObjectsTable(){
+        
+        static::$database->query("DROP TABLE IF EXISTS `?objects`");
+        static::$database->query(
+             "CREATE TABLE `?objects` (
+                `object_id` INTEGER NOT NULL AUTO_INCREMENT,
+                `object_type` VARCHAR(55) NOT NULL DEFAULT 'entity',
+                `object_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                `object_uri` VARCHAR(20) NOT NULL UNIQUE,
+                `object_status` ENUM('disabled','active') DEFAULT 'active',
+                PRIMARY KEY (`object_id`)
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+         );
+    }
+    
+    
+    private static function createPropertiesTable(){
+         static::$database->query("DROP TABLE IF EXISTS `?properties`");
+         static::$database->query(
+                "CREATE TABLE `?properties` (
+                    `property_id` INTEGER NOT NULL AUTO_INCREMENT,
+                    `property_parent` INTEGER,
+                    `property_name` VARCHAR(90) NOT NULL UNIQUE,
+                    `property_label` TEXT,
+                    `property_datatype` ENUM('interger','varchar','timestamp','text') NOT NULL DEFAULT 'varchar',
+                    `property_charsize` INTEGER,
+                    `property_default` VARCHAR(255),
+                    `property_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    `property_indexed` BOOLEAN NOT NULL DEFAULT FALSE,
+                    PRIMARY KEY (`property_id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+         );
+    }
+    
+    
+    private static function createPropertyValuesTable(){
+         static::$database->query("DROP TABLE IF EXISTS `?property_values`");
+         static::$database->query(
+                 "CREATE TABLE `?property_values` (
+                    `value_id` INTEGER NOT NULL AUTO_INCREMENT,
+                    `value_data` TEXT NOT NULL,
+                    `value_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    `property_id` INTEGER NOT NULL,
+                    `object_id` INTEGER NOT NULL,
+                    PRIMARY KEY (`value_id`)
+                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+         );
+    }
+    
+    private static function createUsersView(){
+        static::$database->query(
+            "CREATE OR REPLACE VIEW `?users_` AS
+                SELECT
+                    o.object_id,
+                    o.object_uri,
+                    MAX(IF(p.property_name = 'first_name', v.value_data, null)) AS first_name,
+                    MAX(IF(p.property_name = 'middle_name', v.value_data, null)) AS middle_name,
+                    MAX(IF(p.property_name = 'last_name', v.value_data, null)) AS last_name,
+                    MAX(IF(p.property_name = 'password', v.value_data, null)) AS password,
+                    MAX(IF(p.property_name = 'api_key', v.value_data, null)) AS api_key,
+                    MAX(IF(p.property_name = 'email', v.value_data, null)) AS email
+                FROM ?property_values v
+                LEFT JOIN ?properties p ON p.property_id = v.property_id
+                LEFT JOIN ?objects o ON o.object_id=v.object_id
+                WHERE o.object_type='user' GROUP BY o.object_id"
+        );
+    }
+    private static function createIndices(){
+        
+        static::$database->query("CREATE INDEX `object_id_idx` ON `?objects` (`object_id`);");
+        static::$database->query("CREATE INDEX `object_uri_idx` ON `?objects` (`object_uri`);");
+        static::$database->query("CREATE INDEX `property_id_idx` ON `?properties` (`property_id`);");
+        static::$database->query("CREATE INDEX `property_name_idx` ON `?properties` (`property_name`);");
+        static::$database->query("CREATE INDEX `value_id_idx` ON `?property_values` (`value_id`);");
+        static::$database->query("ALTER TABLE `?property_values` ADD FOREIGN KEY `property_id_idxfk` (`property_id`) REFERENCES `?properties` (`property_id`) ON DELETE CASCADE;");
+        static::$database->query("ALTER TABLE `?property_values` ADD FOREIGN KEY `object_id_idxfk` (`object_id`) REFERENCES `?objects` (`object_id`) ON DELETE CASCADE;");
+        
+    } 
     
     public static function createTables(){
         
@@ -368,12 +448,19 @@ final class Schema extends Platform\Model {
         static::createMenutable();
         static::createMenuGroupTable();
         static::createOptionsTable();
-        static::createContentmetaTable();
-        static::createContentsTable();
+        //static::createContentmetaTable();
+        //static::createContentsTable();
         static::createSessionTable();
-        static::createUsermetaTable();
+
+        static::createObjectsTable();
+        static::createPropertiesTable();
+        static::createPropertyValuesTable();
+        static::createIndices();        
+        
+        //static::createUsermetaTable();
         static::createUsersTable();
-        static::createUsersAuthorityTable();
+        //static::createUsersAuthorityTable();
+        static::createUsersView();
         
         if(!static::$database->commitTransaction()){
             static::setError( static::$database->getError() );
