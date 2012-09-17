@@ -50,7 +50,7 @@ final class Install extends Platform\Model {
         
         //@TODO create master user account
         //1. Load the model
-        $account = $this->load->model("account", "member");
+        $account = $this->load->model("user", "member");
         $encrypt = \Library\Encrypt::getInstance();
         
 

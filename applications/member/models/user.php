@@ -37,10 +37,9 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Account extends Platform\Model {
+class User extends Platform\Entity {
+   
     //put your code here
-    
-    public function display(){}
     
     /**
      * Store the user data in the database
