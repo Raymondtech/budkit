@@ -41,14 +41,40 @@ use Library;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 class Entity extends Model {
+    /*
+     * Name of primary table
+     */
 
-    public static $type = 'entity';
+    protected $entityTableName = 'objects';
+    protected $entityFieldId = 'object_id';
+    /*
+     * Eav model objects
+     */
+    protected $dataModel = array();
 
-    public static function setProperty() {
+    /*
+     * Name of attribute table
+     */
+    protected $attributeTableName = 'properties';
+    protected $attributeFieldId = 'property_id';
+    protected $attributeFieldType = 'property_type';
+    protected $attributeFieldName = 'property_name';
+
+    /**
+     * Attributes model
+     * @var Zend_Db_Table_Abstract
+     */
+    protected $attributeModel;
+    protected $attributes;
+    protected $cache = false;
+    protected $cacheData = array();
+    
+
+    public static function setAttribute() {
         
     }
 
-    public static function setPropertyValue() {
+    public static function setAttributeValue() {
         
     }
 
@@ -60,7 +86,7 @@ class Entity extends Model {
      * @return array
      * 
      */
-    public static function getProperty( $propertyName ) {
+    public static function getAttribute($attributeName) {
         
     }
 
@@ -70,7 +96,7 @@ class Entity extends Model {
      * @param interger $propertyId
      * @return string
      */
-    public static function getPropertyNameFromId($propertyId) {
+    public static function getAttributeNameFromId($attributeId) {
         
     }
 
@@ -81,7 +107,7 @@ class Entity extends Model {
      * @param interger $entityId
      * @return mixed
      */
-    public static function getPropertyValue($propertyName, $entityId = null) {
+    public static function getAttributeValue($attributeName, $entityId = null) {
         
     }
 
@@ -92,7 +118,7 @@ class Entity extends Model {
      * @param interger $entityId
      * @return mixed if property value exist, null if not exists
      */
-    public static function getPropertyValueById($propertyId, $entityId = null) {
+    public static function getAttributeValueById($attributeId, $entityId = null) {
         
     }
 
@@ -102,18 +128,18 @@ class Entity extends Model {
      * @param string $entityType
      * @return void
      */
-    public static function setEntityType( $entityType ) {
+    public static function setobjectType($entityType) {
         static::$type = $entityType;
     }
 
-    public static function getEntity() {
+    public static function getObject() {
         
     }
 
-    public static function setEntity() {
+    public static function setObject() {
         
     }
-    
+
     /**
      * Use this when saving data to a virtual table
      * 
@@ -121,7 +147,7 @@ class Entity extends Model {
     public static function bindDataValues() {
         
     }
-    
+
     final public static function saveEntity() {
         
     }
