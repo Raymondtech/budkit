@@ -262,7 +262,7 @@ abstract class ActiveRecord extends \Library\Object {
      */
     final public function table($table, $getData = false, $dataType = null) {
         if (!empty($table)) {
-            $this->fromTable($table);
+            $this->from($table);
 
             //if getData; run getData;
         }
@@ -427,6 +427,9 @@ abstract class ActiveRecord extends \Library\Object {
             if (!is_int($field) && empty($field)) {
                 continue; //if empty and not zero?
             }
+            
+            
+            
             $this->arraySelect[] = $field;
 
             if ($this->arrayCaching) {
@@ -475,12 +478,37 @@ abstract class ActiveRecord extends \Library\Object {
     }
 
     /**
-     *
+     * NOTE: As of now you cannot use aliasing in a Max Clause
+     * @fields 
      * @return TuiyoDatabase
+     * 
      */
-    final public function max() {
+    final public function max( $field ) {
+        
+        if (!is_array($fields)) {
+            if (strpos($fields, ',') !== FALSE) {
+                $fields = explode(',', $fields);
+            } else {
+                $fields = array( $fields );
+            }
+        }
+
+        foreach ($fields as $field) {
+            $field = trim($field);
+            if (!is_int($field) && empty($field)) {
+                continue; //if empty and not zero?
+            }
+            $this->arraySelect[] = $field;
+
+            if ($this->arrayCaching) {
+                $this->arrayCacheSelect[] = $field;
+                $this->arrayCacheExists[] = 'select';
+            }
+        }
+        
         return $this;
     }
+   
 
     /**
      *

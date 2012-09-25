@@ -38,8 +38,7 @@ use Library;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 class User extends Platform\Entity {
-   
-    //put your code here
+  
     
     /**
      * Store the user data in the database
