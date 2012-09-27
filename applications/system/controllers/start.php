@@ -69,6 +69,9 @@ class Start extends Platform\Controller {
         
         $test->getObjectsByPropertyValueMatch(array("first_name","last_name"), array("Livingstone","Fultang"),array("first_name","last_name","password","balance"));
 
+        $test2 = $this->load->model('profile', 'member');
+        print_R($test2->getDataModel());
+        
         $this->output->addToPosition("body" , $form); 
     }
 

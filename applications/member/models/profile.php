@@ -39,9 +39,27 @@ use Library;
  */
 class Profile extends User {
    
-    //put your code here
-   
-    
+    /**
+     * Constructs the Profile Object model
+     * @return void
+     */
+    public function __construct() {
+        
+        parent::__construct();
+        
+        //Extend the User Object Model
+        $this->extendDataModel(array(
+           "balance" => array() 
+        ));
+    }
+
+
+    /**
+     * Returns an instance of the profile object model
+     * 
+     * @staticvar self $instance
+     * @return \self
+     */
     public static function getInstance(){
         
         static $instance;
@@ -49,7 +67,7 @@ class Profile extends User {
         //If the class was already instantiated, just return it
         if (isset($instance) ) return $instance ;
 
-        $instance =  new self;
+        $instance =  new self();
 
         return $instance;
     }

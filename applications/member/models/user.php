@@ -39,7 +39,27 @@ use Library;
  */
 class User extends Platform\Entity {
   
+    protected $properties = array();
+        
     
+    public function __construct() {
+        
+        parent::__construct(); 
+        
+        //The User Model Data Model
+        $this->extendDataModel( 
+                array(
+                    "first_name"    =>array(),
+                    "middle_name"   =>array(),
+                    "last_name"     =>array(),
+                    "password"      =>array(),
+                    "api_key"       =>array(),
+                    "email"         =>array()
+                ) 
+        );
+        //$this->newDataModel( $dataModel ); use this to set a new data models
+        
+    }
     /**
      * Store the user data in the database
      * 
@@ -83,7 +103,7 @@ class User extends Platform\Entity {
         //If the class was already instantiated, just return it
         if (isset($instance) ) return $instance ;
 
-        $instance =  new self;
+        $instance =  new self();
 
         return $instance;
     }

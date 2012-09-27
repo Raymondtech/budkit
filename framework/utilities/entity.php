@@ -41,33 +41,20 @@ use Library;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 class Entity extends Model {
-    /*
-     * Name of primary table
-     */
 
     protected $objectTableName = 'objects';
     protected $objectFieldId = 'object_id';
-    /*
-     * Eav model objects
-     */
-    protected $dataModel = array();
 
-    /*
-     * Name of attribute table
-     */
+    
     protected $propertyTableName = 'properties';
     protected $propertyFieldId = 'property_id';
     protected $propertyFieldType = 'property_type';
     protected $propertyFieldName = 'property_name';
 
-    /**
-     * Attributes model
-     * @var Zend_Db_Table_Abstract
-     */
-    protected $propertyModel;
     protected $properties = array();
     protected $cache = false;
     protected $cacheData = array();
+    protected $dataModel = array();
 
     /**
      * Sets the property Value before save
@@ -381,7 +368,43 @@ class Entity extends Model {
     
     
     
-    final public static function save() {
+    final public function save() {
+        
+    }
+    
+    /**
+     * Returns the current data model
+     * 
+     * @return type
+     */
+    final public function getDataModel(){
+        return $this->dataModel;
+    }
+    
+    /**
+     * Extends the parent data model
+     * Allows the current object to use parent object properties
+     * 
+     * @param type $dataModel
+     */
+    final public function extendDataModel($dataModel = array()){
+        
+        $this->dataModel = array_merge($this->dataModel, $dataModel );
+        
+        return $this;
+  
+    }
+    
+    /**
+     * Creates a completely new data model.
+     * Any Properties not explicitly described for this object will be ignored
+     * 
+     * @param type $dataModel
+     */
+    final public function newDataModel( $dataModel = array() ){
+        
+        $this->dataModel = $dataModel;
+        return $this;
         
     }
 
