@@ -386,14 +386,56 @@ final class Schema extends Platform\Model {
                     `property_parent` INTEGER,
                     `property_name` VARCHAR(90) NOT NULL UNIQUE,
                     `property_label` TEXT,
-                    `property_datatype` ENUM('interger','varchar','timestamp','text') NOT NULL DEFAULT 'varchar',
+                    `property_datatype` VARCHAR(50) NOT NULL DEFAULT 'varchar',
                     `property_charsize` INTEGER,
                     `property_default` VARCHAR(255),
+                    `property_enum` VARCHAR( 255 ),
                     `property_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                     `property_indexed` BOOLEAN NOT NULL DEFAULT FALSE,
                     PRIMARY KEY (`property_id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
          );
+    }
+    
+    private static function createPropertyDatatypeTable(){
+        static::$database->query("DROP TABLE IF EXISTS `?property_datatypes`");
+        static::$database->query(
+                "CREATE TABLE `?property_datatypes` (
+                    `datatype_id` INTEGER NOT NULL AUTO_INCREMENT,
+                    `datatype_name` VARCHAR(50) NOT NULL UNIQUE,
+                    `datatype_is_numeric` TINYINT DEFAULT 0,
+                    `datatype_is_datetime` TINYINT DEFAULT 0,
+                    `datatype_not_null` TINYINT DEFAULT 0,
+                    `datatype_validation` VARCHAR(255), 
+                    PRIMARY KEY (`datatype_id`)
+                 ) ENGINE=InnoDB CHARACTER SET=utf8;"
+        );
+    }
+    
+    private static function insertPropertyDatatypes(){
+        static::$database->query(
+                "INSERT INTO `?property_datatypes` (`datatype_id`, `datatype_name`, `datatype_is_numeric`, `datatype_is_datetime`, `datatype_not_null`, `datatype_validation`) VALUES
+                    (1, 'char', 0, 0, 0, NULL),
+                    (2, 'varchar', 0, 0, 0, NULL),
+                    (3, 'tinytext', 0, 0, 0, NULL),
+                    (4, 'text', 0, 0, 0, NULL),
+                    (5, 'mediumtext', 0, 0, 0, NULL),
+                    (6, 'longtext', 0, 0, 0, NULL),
+                    (7, 'blob', 0, 0, 0, NULL),
+                    (8, 'mediumblob', 0, 0, 0, NULL),
+                    (9, 'longblob', 0, 0, 0, NULL),
+                    (10, 'tinyint', 1, 0, 0, NULL),
+                    (11, 'smallint', 1, 0, 0, NULL),
+                    (12, 'mediumint', 1, 0, 0, NULL),
+                    (13, 'int', 1, 0, 0, NULL),
+                    (14, 'bigint', 1, 0, 0, NULL),
+                    (15, 'float', 1, 0, 0, NULL),
+                    (16, 'double', 1, 0, 0, NULL),
+                    (17, 'decimal', 1, 0, 0, NULL),
+                    (18, 'time', 0, 0, 0, NULL),
+                    (19, 'timestamp', 0, 0, 0, NULL),
+                    (20, 'enum', 0, 0, 0, NULL);"
+        );
     }
     
     
@@ -431,13 +473,16 @@ final class Schema extends Platform\Model {
     }
     private static function createIndices(){
         
-        static::$database->query("CREATE INDEX `object_id_idx` ON `?objects` (`object_id`);");
-        static::$database->query("CREATE INDEX `object_uri_idx` ON `?objects` (`object_uri`);");
-        static::$database->query("CREATE INDEX `property_id_idx` ON `?properties` (`property_id`);");
-        static::$database->query("CREATE INDEX `property_name_idx` ON `?properties` (`property_name`);");
-        static::$database->query("CREATE INDEX `value_id_idx` ON `?property_values` (`value_id`);");
+       // static::$database->query("CREATE INDEX `object_id_idx` ON `?objects` (`object_id`);");
+       // static::$database->query("CREATE INDEX `object_uri_idx` ON `?objects` (`object_uri`);");
+       // static::$database->query("CREATE INDEX `datatype_id_idx` ON `?property_datatypes` (`datatype_id`);");
+       // static::$database->query("CREATE INDEX `datatype_name_idx` ON `?property_datatypes` (`datatype_name`);");
+       // static::$database->query("CREATE INDEX `property_id_idx` ON `?properties` (`property_id`);");
+       // static::$database->query("CREATE INDEX `property_name_idx` ON `?properties` (`property_name`);");
+       // static::$database->query("CREATE INDEX `value_id_idx` ON `?property_values` (`value_id`);");
         static::$database->query("ALTER TABLE `?property_values` ADD FOREIGN KEY `property_id_idxfk` (`property_id`) REFERENCES `?properties` (`property_id`) ON DELETE CASCADE;");
         static::$database->query("ALTER TABLE `?property_values` ADD FOREIGN KEY `object_id_idxfk` (`object_id`) REFERENCES `?objects` (`object_id`) ON DELETE CASCADE;");
+        static::$database->query("ALTER TABLE `?properties` ADD FOREIGN KEY `property_datatype_idxfk` (`property_datatype`) REFERENCES `?property_datatypes` (`datatype_name`);");
         
     } 
     
@@ -454,13 +499,15 @@ final class Schema extends Platform\Model {
 
         static::createObjectsTable();
         static::createPropertiesTable();
+        static::createPropertyDatatypeTable();
         static::createPropertyValuesTable();
-        static::createIndices();        
+        static::createIndices(); 
+        static::insertPropertyDatatypes();
         
         //static::createUsermetaTable();
         static::createUsersTable();
         //static::createUsersAuthorityTable();
-        static::createUsersView();
+        //static::createUsersView();
         
         if(!static::$database->commitTransaction()){
             static::setError( static::$database->getError() );

@@ -42,15 +42,6 @@ use Library;
  */
 class Entity extends Model {
 
-    protected $objectTableName = 'objects';
-    protected $objectFieldId = 'object_id';
-
-    
-    protected $propertyTableName = 'properties';
-    protected $propertyFieldId = 'property_id';
-    protected $propertyFieldType = 'property_type';
-    protected $propertyFieldName = 'property_name';
-
     protected $properties = array();
     protected $cache = false;
     protected $cacheData = array();
