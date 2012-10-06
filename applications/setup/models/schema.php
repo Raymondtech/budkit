@@ -66,7 +66,7 @@ final class Schema extends Platform\Model {
     private static function createAuthorityTable(){
         
         //Drop the authority table if exists, create if doesn't
-        static::$database->query("DROP TABLE IF EXISTS `?authority`");
+        static::$database->query("DROP TABLE IF EXISTS `?authority`;");
         static::$database->query(          
            "CREATE TABLE IF NOT EXISTS `?authority` (
                 `authority_id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -93,7 +93,7 @@ final class Schema extends Platform\Model {
     private static function createAuthorityPermissionsTable(){
         
         //Drop the authority table if exists, create if doesn't
-        static::$database->query("DROP TABLE IF EXISTS `?authority_permissions`");
+        static::$database->query("DROP TABLE IF EXISTS `?authority_permissions`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?authority_permissions` (
                 `authority_permission_key` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -121,7 +121,7 @@ final class Schema extends Platform\Model {
     private static function createMenutable(){
         
         //Drop the menu table if it already exists;
-        static::$database->query("DROP TABLE IF EXISTS `?menu`");
+        static::$database->query("DROP TABLE IF EXISTS `?menu`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?menu` (
                 `menu_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -199,7 +199,7 @@ final class Schema extends Platform\Model {
     
     private static function createMenuGroupTable(){
         
-        static::$database->query("DROP TABLE IF EXISTS `?menu_group`");
+        static::$database->query("DROP TABLE IF EXISTS `?menu_group`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?menu_group` (
                 `menu_group_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -238,7 +238,7 @@ final class Schema extends Platform\Model {
     }
     
     private static function createContentmetaTable(){
-        static::$database->query("DROP TABLE IF EXISTS `?contentmeta`");
+        static::$database->query("DROP TABLE IF EXISTS `?contentmeta`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?contentmeta` (
                 `contentmeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -253,7 +253,7 @@ final class Schema extends Platform\Model {
     }
     
     private static function createContentsTable(){
-        static::$database->query("DROP TABLE IF EXISTS `?contents`");
+        static::$database->query("DROP TABLE IF EXISTS `?contents`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?contents` (
                 `content_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -289,7 +289,7 @@ final class Schema extends Platform\Model {
     }
     
     private static function createSessionTable(){
-        static::$database->query("DROP TABLE IF EXISTS `?session`");
+        static::$database->query("DROP TABLE IF EXISTS `?session`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?session` (
                 `session_id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -326,7 +326,7 @@ final class Schema extends Platform\Model {
     
     private static function createUsersTable(){
         
-        static::$database->query("DROP TABLE IF EXISTS `?users`");
+        static::$database->query("DROP TABLE IF EXISTS `?users`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?users` (
                 `user_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -350,7 +350,7 @@ final class Schema extends Platform\Model {
     }
     
     private static function createUsersAuthorityTable(){
-        static::$database->query("DROP TABLE IF EXISTS `?users_authority`");
+        static::$database->query("DROP TABLE IF EXISTS `?users_authority`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?users_authority` (
                 `user_authority_key` varchar(45) NOT NULL,
@@ -364,51 +364,61 @@ final class Schema extends Platform\Model {
     
     private static function createObjectsTable(){
         
-        static::$database->query("DROP TABLE IF EXISTS `?objects`");
+        static::$database->query("DROP TABLE IF EXISTS `?objects`;");
         static::$database->query(
-             "CREATE TABLE `?objects` (
-                `object_id` INTEGER NOT NULL AUTO_INCREMENT,
-                `object_type` VARCHAR(55) NOT NULL DEFAULT 'entity',
-                `object_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                `object_uri` VARCHAR(20) NOT NULL UNIQUE,
-                `object_status` ENUM('disabled','active') DEFAULT 'active',
-                PRIMARY KEY (`object_id`)
-              ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+             "CREATE TABLE IF NOT EXISTS `?objects` (
+                `object_id` int(11) NOT NULL AUTO_INCREMENT,
+                `object_type` varchar(55) NOT NULL DEFAULT 'entity',
+                `object_updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                `object_uri` varchar(20) NOT NULL,
+                `object_status` enum('disabled','active') DEFAULT 'active',
+                PRIMARY KEY (`object_id`),
+                UNIQUE KEY `object_uri` (`object_uri`),
+                KEY `object_id_idx` (`object_id`),
+                KEY `object_uri_idx` (`object_uri`)
+              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
          );
     }
     
     
     private static function createPropertiesTable(){
-         static::$database->query("DROP TABLE IF EXISTS `?properties`");
+         static::$database->query("DROP TABLE IF EXISTS `?properties`;");
          static::$database->query(
-                "CREATE TABLE `?properties` (
-                    `property_id` INTEGER NOT NULL AUTO_INCREMENT,
-                    `property_parent` INTEGER,
-                    `property_name` VARCHAR(90) NOT NULL UNIQUE,
-                    `property_label` TEXT,
-                    `property_datatype` VARCHAR(50) NOT NULL DEFAULT 'varchar',
-                    `property_charsize` INTEGER,
-                    `property_default` VARCHAR(255),
-                    `property_enum` VARCHAR( 255 ),
-                    `property_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                    `property_indexed` BOOLEAN NOT NULL DEFAULT FALSE,
-                    PRIMARY KEY (`property_id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+                "CREATE TABLE IF NOT EXISTS `?properties` (
+                `property_id` int(11) NOT NULL AUTO_INCREMENT,
+                `property_parent` int(11) DEFAULT NULL,
+                `property_name` varchar(90) NOT NULL,
+                `property_label` text,
+                `property_datatype` varchar(50) NOT NULL DEFAULT 'varchar',
+                `property_charsize` int(11) DEFAULT NULL,
+                `property_default` varchar(255) DEFAULT NULL,
+                `property_updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                `property_indexed` tinyint(1) NOT NULL DEFAULT '0',
+                PRIMARY KEY (`property_id`),
+                UNIQUE KEY `property_name` (`property_name`),
+                KEY `property_id_idx` (`property_id`),
+                KEY `property_name_idx` (`property_name`),
+                KEY `property_datatype_idxfk` (`property_datatype`)
+              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
          );
     }
     
     private static function createPropertyDatatypeTable(){
-        static::$database->query("DROP TABLE IF EXISTS `?property_datatypes`");
+        static::$database->query("DROP TABLE IF EXISTS `?property_datatypes`;");
         static::$database->query(
-                "CREATE TABLE `?property_datatypes` (
-                    `datatype_id` INTEGER NOT NULL AUTO_INCREMENT,
-                    `datatype_name` VARCHAR(50) NOT NULL UNIQUE,
-                    `datatype_is_numeric` TINYINT DEFAULT 0,
-                    `datatype_is_datetime` TINYINT DEFAULT 0,
-                    `datatype_not_null` TINYINT DEFAULT 0,
-                    `datatype_validation` VARCHAR(255), 
-                    PRIMARY KEY (`datatype_id`)
-                 ) ENGINE=InnoDB CHARACTER SET=utf8;"
+                "CREATE TABLE IF NOT EXISTS `?property_datatypes` (
+                `datatype_id` int(11) NOT NULL AUTO_INCREMENT,
+                `datatype_name` varchar(50) DEFAULT NULL,
+                `datatype_is_numeric` tinyint(4) DEFAULT '0',
+                `datatype_is_datetime` tinyint(4) DEFAULT '0',
+                `datatype_not_null` tinyint(4) DEFAULT '0',
+                `datatype_validation` varchar(255) DEFAULT NULL,
+                `datatype_enum` varchar(255) DEFAULT NULL COMMENT 'Lookup Fields',
+                PRIMARY KEY (`datatype_id`),
+                UNIQUE KEY `datatype_name` (`datatype_name`),
+                KEY `datatype_id_idx` (`datatype_id`),
+                KEY `datatype_name_idx` (`datatype_name`)
+              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
         );
     }
     
@@ -434,22 +444,62 @@ final class Schema extends Platform\Model {
                     (17, 'decimal', 1, 0, 0, NULL),
                     (18, 'time', 0, 0, 0, NULL),
                     (19, 'timestamp', 0, 0, 0, NULL),
-                    (20, 'enum', 0, 0, 0, NULL);"
+                    (20, 'enum', 0, 0, 0, NULL),
+                    (21, 'datetime', 0, 0, 0, NULL),
+                    (22, 'date', 0, 0, 0, NULL);"
         );
+       
     }
     
     
     private static function createPropertyValuesTable(){
-         static::$database->query("DROP TABLE IF EXISTS `?property_values`");
+         static::$database->query("DROP TABLE IF EXISTS `?property_values`;");
          static::$database->query(
-                 "CREATE TABLE `?property_values` (
-                    `value_id` INTEGER NOT NULL AUTO_INCREMENT,
-                    `value_data` TEXT NOT NULL,
-                    `value_updated_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    `property_id` INTEGER NOT NULL,
-                    `object_id` INTEGER NOT NULL,
-                    PRIMARY KEY (`value_id`)
-                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+                 "CREATE TABLE IF NOT EXISTS `?property_values` (
+                    `value_id` int(11) NOT NULL AUTO_INCREMENT,
+                    `value_data` text NOT NULL,
+                    `value_updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    `property_id` int(11) NOT NULL,
+                    `object_id` int(11) NOT NULL,
+                    PRIMARY KEY (`value_id`),
+                    KEY `value_id_idx` (`value_id`),
+                    KEY `property_id_idxfk` (`property_id`),
+                    KEY `object_id_idxfk` (`object_id`)
+                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
+         );
+         static::$database->query("DROP PROCEDURE IF EXISTS `property_value_validate`;");
+         static::$database->query(
+               "CREATE PROCEDURE `?property_value_validate`(IN _property_id INT, IN _value_data LONGTEXT) 
+                BEGIN 
+                    DECLARE _validationFails CONDITION FOR SQLSTATE '99001';
+                    DECLARE _dataTypeRegExp VARCHAR(255); 
+                    DECLARE _signalText TEXT;
+                    SELECT r.datatype_validation  FROM `?properties` AS d INNER JOIN `?property_datatypes` AS r WHERE `property_id`= _property_id AND d.property_datatype=r.datatype_name INTO _dataTypeRegExp;
+                    IF (_dataTypeRegExp IS NOT NULL) THEN
+                            IF (_value_data NOT REGEXP(_dataTypeRegExp)) THEN
+                            	SET _signalText = CONCAT('The inserted/updated value fails the property data type validation');
+                                SIGNAL _validationFails SET MESSAGE_TEXT=_signalText; 
+                            END IF;
+                    END IF;
+                END;"
+         );  
+         
+         static::$database->query("DROP TRIGGER IF EXISTS `?property_value_validate_insert`;" );
+         static::$database->query(
+             "CREATE TRIGGER `?property_value_validate_insert` BEFORE INSERT ON `?property_values`
+                FOR EACH ROW
+                BEGIN
+                    CALL ?property_value_validate(NEW.property_id, NEW.value_data);
+                END;"    
+         );
+         
+         static::$database->query("DROP TRIGGER IF EXISTS `?property_value_validate_update`;" );
+         static::$database->query(
+             "CREATE TRIGGER `?property_value_validate_update` BEFORE UPDATE ON `?property_values`
+                FOR EACH ROW
+                BEGIN
+                    CALL ?property_value_validate(NEW.property_id, NEW.value_data);
+                END;"    
          );
     }
     
@@ -471,20 +521,27 @@ final class Schema extends Platform\Model {
                 WHERE o.object_type='user' GROUP BY o.object_id"
         );
     }
+    
+    
     private static function createIndices(){
-        
-       // static::$database->query("CREATE INDEX `object_id_idx` ON `?objects` (`object_id`);");
-       // static::$database->query("CREATE INDEX `object_uri_idx` ON `?objects` (`object_uri`);");
-       // static::$database->query("CREATE INDEX `datatype_id_idx` ON `?property_datatypes` (`datatype_id`);");
-       // static::$database->query("CREATE INDEX `datatype_name_idx` ON `?property_datatypes` (`datatype_name`);");
-       // static::$database->query("CREATE INDEX `property_id_idx` ON `?properties` (`property_id`);");
-       // static::$database->query("CREATE INDEX `property_name_idx` ON `?properties` (`property_name`);");
-       // static::$database->query("CREATE INDEX `value_id_idx` ON `?property_values` (`value_id`);");
-        static::$database->query("ALTER TABLE `?property_values` ADD FOREIGN KEY `property_id_idxfk` (`property_id`) REFERENCES `?properties` (`property_id`) ON DELETE CASCADE;");
-        static::$database->query("ALTER TABLE `?property_values` ADD FOREIGN KEY `object_id_idxfk` (`object_id`) REFERENCES `?objects` (`object_id`) ON DELETE CASCADE;");
-        static::$database->query("ALTER TABLE `?properties` ADD FOREIGN KEY `property_datatype_idxfk` (`property_datatype`) REFERENCES `?property_datatypes` (`datatype_name`);");
-        
+  
+        static::$database->query("ALTER TABLE `?properties` ADD CONSTRAINT `properties_ibfk_` FOREIGN KEY (`property_datatype`) REFERENCES `?property_datatypes` (`datatype_name`);");
+        static::$database->query(
+                "ALTER TABLE `?property_values`
+                    ADD CONSTRAINT `property_values_ibfk_1` FOREIGN KEY (`object_id`) REFERENCES `?objects` (`object_id`),
+                    ADD CONSTRAINT `property_values_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `?properties` (`property_id`) ON DELETE CASCADE;"
+        );
     } 
+    
+    private static function addDefaultData(){
+        
+         static::$database->query(
+                "INSERT INTO `?properties` (`property_id`, `property_parent`, `property_name`, `property_label`, `property_datatype`, `property_charsize`, `property_default`, `property_updated_on`, `property_indexed`) VALUES
+                    (1, NULL, 'first_name', 'First Name', 'mediumtext', NULL, NULL, '2012-09-26 21:25:46', 1),
+                    (2, NULL, 'email', 'Email', 'varchar', NULL, NULL, '2012-09-26 21:25:46', 1),
+                    (3, NULL, 'dob', 'Date of Birth', 'date', NULL, NULL, '2012-09-26 21:25:46', 0);"
+                );
+    }
     
     public static function createTables(){
         
@@ -508,6 +565,7 @@ final class Schema extends Platform\Model {
         static::createUsersTable();
         //static::createUsersAuthorityTable();
         //static::createUsersView();
+        static::addDefaultData();
         
         if(!static::$database->commitTransaction()){
             static::setError( static::$database->getError() );

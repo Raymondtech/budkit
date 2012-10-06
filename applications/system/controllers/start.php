@@ -67,10 +67,10 @@ class Start extends Platform\Controller {
        
         $test = $this->load->model('user', 'member');
         
-        $test->getObjectsByPropertyValueMatch(array("first_name","last_name"), array("Livingstone","Fultang"),array("first_name","last_name","password","balance"));
+        $test->getObjectsByPropertyValueMatch(array("first_name"), array("Livingstone"),array("first_name","last_name","password","balance"));
 
-        $test2 = $this->load->model('profile', 'member');
-        print_R($test2->getDataModel());
+        //$test2 = $this->load->model('profile', 'member');
+        //print_R($test2->getDataModel());
         
         $this->output->addToPosition("body" , $form); 
     }
