@@ -39,26 +39,25 @@ use Library;
  */
 class User extends Platform\Entity {
   
-    protected $properties = array();
-        
-    
+          
     public function __construct() {
         
         parent::__construct(); 
         
-        //The User Model Data Model
-        $this->extendDataModel( 
+        //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
+        $this->extendPropertyModel( 
                 array(
-                    "first_name"    =>array(),
-                    "middle_name"   =>array(),
-                    "last_name"     =>array(),
-                    "password"      =>array(),
-                    "api_key"       =>array(),
-                    "email"         =>array()
-                ) 
+                    "user_first_name"    =>array("First Name", "mediumtext", 50),
+                    "user_middle_name"   =>array("Middle Name", "mediumtext", 50),
+                    "user_last_name"     =>array("Last Name", "mediumtext", 50),
+                    "user_name_id"       =>array("User (Nick) Name", "mediumtext", 50),
+                    "user_password"      =>array("Password", "varchar", 2000),
+                    "user_api_key"       =>array("API Key", "varchar", 100),
+                    "user_email"         =>array("email", "varchar", 100),
+                ),
+                "user"
         );
         //$this->newDataModel( $dataModel ); use this to set a new data models
-        
     }
     /**
      * Store the user data in the database
@@ -70,21 +69,17 @@ class User extends Platform\Entity {
     public function store( $data ){
         
         $encrypt    = \Library\Encrypt::getInstance();
-        $table      = $this->load->table("?users");
+        $data['user_password']   = $encrypt->hash( $data['user_password'] ); 
         
-        $data['user_password'] = $encrypt->hash( $data['user_password'] ); 
-       
-        if(!$table->bindData( $data )){  
-            //print_R($table->getErrors());
-            $this->setError( $table->getError() );
+        foreach($data as $property=>$value):
+            $this->setPropertyValue($property, $value);
+        endforeach;
+        
+        if(!$this->saveObject($this->getPropertyValue("user_name_id"), "user")){
+            //There is a problem!
             return false;
         }
-       
-        if(!$table->save()){
-            //print_R($table->getErrors());
-            $this->setError( $table->getError() );
-            return false;
-        }
+      
         return true;
     }
     

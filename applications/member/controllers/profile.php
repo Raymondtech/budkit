@@ -50,9 +50,12 @@ class Profile extends \Platform\Controller {
         
         $username = $this->router->getMethod();
         $view     = $this->load->view('profile');
+        $user     = $this->load->model('user');
+        $profile  = $this->load->model('profile');
         
-        
-        //echo "view profile";
+        $row = $profile->getObjectById(1);
+        //$row->setPropertyValue("first_name", "Livingstone");
+        //$row->saveObject();
         
         $view->profilePage();
     }

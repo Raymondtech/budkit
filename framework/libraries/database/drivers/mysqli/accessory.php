@@ -57,7 +57,7 @@ class Accessory extends \Library\Database\ActiveRecord {
      * @param <type> $table
      * @param <type> $set
      */
-    final public function insert($table='', $set=NULL, $updateIfExists = FALSE , $updateUnique=NULL) {
+    final public function insert($table='', $set=NULL, $updateIfExists = FALSE , $updateUnique=NULL, $autocexecute = TRUE ) {
 
         if (!is_null($set)) {
             //print_R($set);
@@ -93,8 +93,12 @@ class Accessory extends \Library\Database\ActiveRecord {
         $this->DBO->resetRun();
 
         //@TODO somepeople might want to know what the inserted ID is?
-
+        if(!$autocexecute){
+            return $shortgunsql;
+        }
+        
         return $this->DBO->exec($shortgunsql); //this returns a cursor. will need to check for errors and other stuff
+        
     }
 
     /**

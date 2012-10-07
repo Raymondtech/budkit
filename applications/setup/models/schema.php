@@ -396,8 +396,6 @@ final class Schema extends Platform\Model {
                 `property_indexed` tinyint(1) NOT NULL DEFAULT '0',
                 PRIMARY KEY (`property_id`),
                 UNIQUE KEY `property_name` (`property_name`),
-                KEY `property_id_idx` (`property_id`),
-                KEY `property_name_idx` (`property_name`),
                 KEY `property_datatype_idxfk` (`property_datatype`)
               ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
          );
@@ -415,9 +413,7 @@ final class Schema extends Platform\Model {
                 `datatype_validation` varchar(255) DEFAULT NULL,
                 `datatype_enum` varchar(255) DEFAULT NULL COMMENT 'Lookup Fields',
                 PRIMARY KEY (`datatype_id`),
-                UNIQUE KEY `datatype_name` (`datatype_name`),
-                KEY `datatype_id_idx` (`datatype_id`),
-                KEY `datatype_name_idx` (`datatype_name`)
+                UNIQUE KEY `datatype_name` (`datatype_name`)
               ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
         );
     }
@@ -456,13 +452,13 @@ final class Schema extends Platform\Model {
          static::$database->query("DROP TABLE IF EXISTS `?property_values`;");
          static::$database->query(
                  "CREATE TABLE IF NOT EXISTS `?property_values` (
-                    `value_id` int(11) NOT NULL AUTO_INCREMENT,
+                    `value_id` mediumint(11) NOT NULL AUTO_INCREMENT,
                     `value_data` text NOT NULL,
                     `value_updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     `property_id` int(11) NOT NULL,
                     `object_id` int(11) NOT NULL,
                     PRIMARY KEY (`value_id`),
-                    KEY `value_id_idx` (`value_id`),
+                    UNIQUE KEY `object_property_uid` (`object_id`,`property_id`),
                     KEY `property_id_idxfk` (`property_id`),
                     KEY `object_id_idxfk` (`object_id`)
                   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
@@ -533,15 +529,7 @@ final class Schema extends Platform\Model {
         );
     } 
     
-    private static function addDefaultData(){
-        
-         static::$database->query(
-                "INSERT INTO `?properties` (`property_id`, `property_parent`, `property_name`, `property_label`, `property_datatype`, `property_charsize`, `property_default`, `property_updated_on`, `property_indexed`) VALUES
-                    (1, NULL, 'first_name', 'First Name', 'mediumtext', NULL, NULL, '2012-09-26 21:25:46', 1),
-                    (2, NULL, 'email', 'Email', 'varchar', NULL, NULL, '2012-09-26 21:25:46', 1),
-                    (3, NULL, 'dob', 'Date of Birth', 'date', NULL, NULL, '2012-09-26 21:25:46', 0);"
-                );
-    }
+    private static function addDefaultData(){}
     
     public static function createTables(){
         
@@ -562,7 +550,7 @@ final class Schema extends Platform\Model {
         static::insertPropertyDatatypes();
         
         //static::createUsermetaTable();
-        static::createUsersTable();
+        //static::createUsersTable();
         //static::createUsersAuthorityTable();
         //static::createUsersView();
         static::addDefaultData();

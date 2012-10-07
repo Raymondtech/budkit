@@ -64,13 +64,7 @@ class Start extends Platform\Controller {
         $this->output->setPageTitle("Featured");
         
         $form  = "Featured Content";
-       
-        $test = $this->load->model('user', 'member');
-        
-        $test->getObjectsByPropertyValueMatch(array("first_name"), array("Livingstone"),array("first_name","last_name","password","balance"));
-
-        //$test2 = $this->load->model('profile', 'member');
-        //print_R($test2->getDataModel());
+     
         
         $this->output->addToPosition("body" , $form); 
     }

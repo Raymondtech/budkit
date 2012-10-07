@@ -30,12 +30,12 @@
                             </li>
                             
                             <li class="usermenu dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.username"/> <b class="caret">&nbsp;</b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.user_name_id"/> <b class="caret">&nbsp;</b></a>
                                 <ul class="dropdown-menu" id="user-nav">
                                     <li><a href="/member/profile/display/information" class="profile-link clearfix">
                                             <img class="profile-avatar pull-left" src="http://lorempixel.com/32/32/people/9" alt="Livingstone Fultang" />
                                             <tpl:element type="text" data="user.fullname" />
-                                            <span class="profile-username">@<tpl:element type="text" data="user.username" /></span>
+                                            <span class="profile-username">@<tpl:element type="text" data="user.user_name_id" /></span>
                                         </a>
                                     </li>
                                     <li class="divider"></li>

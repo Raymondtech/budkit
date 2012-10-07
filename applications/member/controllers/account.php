@@ -66,7 +66,7 @@ final class Account extends \Platform\Controller {
         
 
         //2. Prevalidate passwords and other stuff;
-        $username   = $this->input->getString("user_name",  "","post", FALSE, array());
+        $username   = $this->input->getString("user_first_name",  "","post", FALSE, array());
         $usernameid = $this->input->getString("user_name_id", "","post",FALSE, array());
         $userpass   = $this->input->getString("user_password", "", "post", FALSE, array());
         $userpass2  = $this->input->getString("user_password_2", "", "post", FALSE, array());

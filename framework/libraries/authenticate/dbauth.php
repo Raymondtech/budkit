@@ -68,16 +68,18 @@ class DbAuth extends \Library\Authenticate {
         }
 
         //If usernameid an email 
-        $usernameid = $database->quote($credentials['usernameid']);
-
-        //$database->table('?users');
+        $usernameid = $credentials['usernameid'];
+        $objects   = \Platform\Entity::getInstance();
+        
+        $object     = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password", "user_name_id", "user_email"));
+        
 
         if ($validate->email($credentials['usernameid'])) {
             //treat as user_email, 
-            $statement = $database->select()->from('?users')->where("user_email", $usernameid)->prepare();
+            $statement = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password","user_name_id", "user_email")); //Use EAV to get data;
         } else {
             //use as user_name_id
-            $statement = $database->select()->from('?users')->where("user_name_id", $usernameid)->prepare();
+            $statement = $objects->getObjectsByPropertyValueMatch( array("user_name_id"), array( $usernameid ) , array("user_password","user_name_id", "user_email")); //Use EAV to get the data
         }
 
         $result = $statement->execute();
@@ -109,10 +111,10 @@ class DbAuth extends \Library\Authenticate {
 
         $authenticate->authenticated = true;
         $authenticate->type = 'dbauth';
-        $authenticate->userid = $userobject->user_id;
-        $authenticate->username = $userobject->user_name_id;
-        $authenticate->email = $userobject->user_email;
-        $authenticate->fullname = $userobject->user_name;
+        $authenticate->user_id = $userobject->object_id;
+        $authenticate->user_name_id = $userobject->user_name_id;
+        $authenticate->user_email = $userobject->user_email;
+        $authenticate->user_first_name = $userobject->user_first_name;
 
         //Update
         $session->set("handler", $authenticate, "auth");

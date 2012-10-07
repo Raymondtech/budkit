@@ -41,12 +41,17 @@
                                                 <fieldset class="no-margin">
                                                     <legend tpl:i18n="">Register a new account</legend><tpl:block data="page.block.alerts" />
                                                     <div class="control-group">
-                                                        <label class="control-label" for="user_name"><tpl:i18n>Full Name</tpl:i18n><em class="mandatory">*</em></label>
+                                                        <label class="control-label" for="user_name"><tpl:i18n>First Name</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">
-                                                            <input class="input-large focused span11" id="user_name" name="user_name" type="text" placeholder="John Doe" />
+                                                            <input class="input-large focused span11" id="first_name" name="user_first_name" type="text" placeholder="Johnatan" />
                                                         </div>
                                                     </div>
-
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="user_name"><tpl:i18n>Last Name</tpl:i18n><em class="mandatory">*</em></label>
+                                                        <div class="controls row-fluid">
+                                                            <input class="input-large focused span11" id="last_name" name="user_last_name" type="text" placeholder="Johnatan" />
+                                                        </div>
+                                                    </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="user_name_id"><tpl:i18n>Unique Username</tpl:i18n><em class="mandatory">*</em></label>
                                                         <div class="controls row-fluid">

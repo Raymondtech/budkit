@@ -105,13 +105,14 @@ class User extends Library\Object {
             if ($authenticate->authenticated) {
                 $this->authenticated = true;
                 if (empty($userid) || $userid === (int) $authenticate->get("userid")) {
-                    $data = $authenticate->get(array("userid", "email", "fullname", "username", "language", "timezone"));
+                    $data = $authenticate->get(array("user_id", "user_email", "user_first_name", "user_name_id", "language", "timezone"));
                     foreach ($data as $property => $value) {
                         $this->$property = $value;
                     }
                 }
-                $this->userid   = $authenticate->get("userid");
-                $this->email    = $authenticate->get("email"); 
+                $this->user_id   = $authenticate->get("user_id");
+                $this->user_email    = $authenticate->get("user_email"); 
+                $this->user_name_id    = $authenticate->get("user_name_id"); 
                 $this->isauthenticated = $this->authenticated;
             }
             //get authority;

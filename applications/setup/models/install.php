@@ -55,7 +55,7 @@ final class Install extends Platform\Model {
         
 
         //2. Prevalidate passwords and other stuff;
-        $username   = $this->input->getString("user_name",  "","post", FALSE, array()); $this->set("adminFullName", $username );
+        $username   = $this->input->getString("user_first_name",  "","post", FALSE, array()); $this->set("adminFullName", $username );
         $usernameid = $this->input->getString("user_name_id", "","post",FALSE, array()); $this->set("adminUserName", $usernameid );
         $userpass   = $this->input->getString("user_password", "", "post", FALSE, array()); 
         $userpass2  = $this->input->getString("user_password_2", "", "post", FALSE, array());

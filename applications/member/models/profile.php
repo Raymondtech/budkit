@@ -48,8 +48,8 @@ class Profile extends User {
         parent::__construct();
         
         //Extend the User Object Model
-        $this->extendDataModel(array(
-           "balance" => array() 
+        $this->extendPropertyModel(array(
+           "dob" => array("Date of Birth", "date")
         ));
     }
 
