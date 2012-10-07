@@ -69,6 +69,8 @@ class User extends Platform\Entity {
     public function store( $data ){
         
         $encrypt    = \Library\Encrypt::getInstance();
+        $authority  = $this->config->getParam( "default-authority", NULL, "profile" );
+        
         $data['user_password']   = $encrypt->hash( $data['user_password'] ); 
         
         foreach($data as $property=>$value):

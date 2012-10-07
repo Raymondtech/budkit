@@ -349,15 +349,15 @@ final class Schema extends Platform\Model {
         
     }
     
-    private static function createUsersAuthorityTable(){
-        static::$database->query("DROP TABLE IF EXISTS `?users_authority`;");
+    private static function createObjectsAuthorityTable(){
+        static::$database->query("DROP TABLE IF EXISTS `?objects_authority`;");
         static::$database->query(
-            "CREATE TABLE IF NOT EXISTS `?users_authority` (
-                `user_authority_key` varchar(45) NOT NULL,
+            "CREATE TABLE IF NOT EXISTS `?objects_authority` (
+                `object_authority_id` varchar(45) NOT NULL,
                 `authority_id` bigint(20) NOT NULL,
-                `user_id` varchar(45) NOT NULL,
-                PRIMARY KEY (`user_authority_key`),
-                UNIQUE KEY `UNIQUE_authority` (`authority_id`,`user_id`)
+                `object_id` varchar(45) NOT NULL,
+                PRIMARY KEY (`object_authority_key`),
+                UNIQUE KEY `UNIQUE_authority` (`authority_id`,`object_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
         );
     }
@@ -535,6 +535,7 @@ final class Schema extends Platform\Model {
         
         static::createAuthorityTable();
         static::createAuthorityPermissionsTable();
+        
         static::createMenutable();
         static::createMenuGroupTable();
         static::createOptionsTable();
@@ -543,6 +544,7 @@ final class Schema extends Platform\Model {
         static::createSessionTable();
 
         static::createObjectsTable();
+        static::createObjectsAuthorityTable();
         static::createPropertiesTable();
         static::createPropertyDatatypeTable();
         static::createPropertyValuesTable();
@@ -551,7 +553,6 @@ final class Schema extends Platform\Model {
         
         //static::createUsermetaTable();
         //static::createUsersTable();
-        //static::createUsersAuthorityTable();
         //static::createUsersView();
         static::addDefaultData();
         
