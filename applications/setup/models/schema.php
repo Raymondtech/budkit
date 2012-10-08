@@ -353,11 +353,11 @@ final class Schema extends Platform\Model {
         static::$database->query("DROP TABLE IF EXISTS `?objects_authority`;");
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?objects_authority` (
-                `object_authority_id` varchar(45) NOT NULL,
+                `object_authority_id` int(11) NOT NULL AUTO_INCREMENT,
                 `authority_id` bigint(20) NOT NULL,
                 `object_id` varchar(45) NOT NULL,
-                PRIMARY KEY (`object_authority_key`),
-                UNIQUE KEY `UNIQUE_authority` (`authority_id`,`object_id`)
+                PRIMARY KEY (`object_authority_id`),
+                UNIQUE KEY `object_authority` (`authority_id`,`object_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
         );
     }
