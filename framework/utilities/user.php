@@ -44,17 +44,23 @@ class User extends Library\Object {
     protected $authenticated;
     
     protected $authority;
+    
+    static $instance;
 
+    /**
+     * Returns an instance of the User Object
+     * 
+     * @return type
+     */
     public static function getInstance() {
-
-        static $instance;
+        
         //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
+        if (isset(static::$instance) && is_a(static::$instance, "User"))
+            return static::$instance;
 
-        $instance = new self();
+        static::$instance = new self();
 
-        return $instance;
+        return static::$instance;
     }
 
     /**
@@ -71,14 +77,11 @@ class User extends Library\Object {
      * @return type 
      */
     public function isAuthenticated(){
-        
         return (bool)$this->authenticated;
-        
     }
     
     /**
      * Determins if a user is authenticated
-     * 
      * @return type 
      */
     public static function getAuthenticated(){
@@ -92,6 +95,11 @@ class User extends Library\Object {
         else return false;
     }
 
+    /**
+     * Constructs the user proxy object
+     * 
+     * @param type $userid
+     */
     public function __construct($userid = null) {
         //@TODO Rework the userid, use case, if user id is not provided or is null
         //Get the authenticated user
@@ -120,15 +128,5 @@ class User extends Library\Object {
         }
         
     }
-    
-    //Checks a user permission
-    public function can(){
-        
-        //Example permisison definition
-        //$this->authority->can("access", "user/section");
-        
-    }
-
-    public function __destruct() {}
 
 }

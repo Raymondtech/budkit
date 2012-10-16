@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * permission.php
+ * authority.php
  *
  * Requires PHP version 5.3
  *
@@ -18,14 +18,15 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/permission
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/age
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
 
-namespace Library\Authorize;
+namespace Library\Authorize\Type;
 
 use Library;
+use Library\Authorize;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -37,40 +38,29 @@ use Library;
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/permission
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/age
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Permission extends Library\Observer {
+final class Authority extends Library\Authorize\Permission {
 
-    
-    private static function create(){}
-    private static function read(){}
-    private static function update(){}
-    private static function delete(){}
-
-    /** 
-     * Checks a user has permission to execute
-     *
-     * @param type $authority
-     * @param array $array
-     * @return type 
+    /**
+     * Returns an instance of the Authority class
+     * 
+     * @staticvar self $instance
+     * @return self 
      */
-    public static function execute($action, $params = NULL) {
+    final public static function getInstance() {
 
-        $actionController = $params["action"];
-        $actionRoute      = $params["route"];
-        $actionUser       = $params["user"];
-        
-        //Test Message
-        $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '<i class="icon icon-lock"></i>', 'warning');
-        
-        //print_R($actionUser);
-        
-        
-        //If User does not have permission to view this page, redirect them back to homepage
-        //$actionController->redirect('/');
-        
-        return true;
+        static $instance;
+        //If the class was already instantiated, just return it
+        if (isset($instance))
+            return $instance;
+
+        //@TODO. Look into the possibility of implied authorities
+        $instance = new self();
+
+        return $instance;
     }
+
 }
 

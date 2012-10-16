@@ -78,7 +78,7 @@
                             <tpl:block data="page.block.body" />
                         </div>
                         <hr  />
-                        <p class="text-gray" style="margin-top: 10px">Version 0.9.0</p> 
+                        <p class="text-gray" style="margin-top: 10px"><?php echo \Platform\Version::getLongVersion(); ?></p> 
                     </div>
                 </section>
             </section>

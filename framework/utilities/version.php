@@ -50,25 +50,25 @@ class Version extends \Library\Object  {
 
     /**
      *  *  * @var string Product */
-    static $PRODUCT = 'Pilgrimage';
+    static $PRODUCT = 'Budkit';
     /**
      *  *  * @var int Main Release Level */
-    static $RELEASE = '1.0';
+    static $RELEASE = '0.0';
     /**
      *  *  * @var string Development Status */
-    static $DEV_STATUS = 'a2';
+    static $DEV_STATUS = 'alpha';
     /**
      *  *  * @var int Sub Release Level */
-    static $DEV_LEVEL = '0';
+    static $DEV_LEVEL = '9';
     /**
      *  *  * @var int build Number */
-    static $BUILD = '0';
+    static $BUILD = '1';
     /**
      *  *  * @var string Codename */
     static $CODENAME = 'Zanya';
     /**
      *  *  * @var string Date */
-    static $RELDATE = '27-July-2011';
+    static $RELDATE = '27-October-2012';
     /**
      *  *  * @var string Time */
     static $RELTIME = '00:00';
@@ -80,7 +80,7 @@ class Version extends \Library\Object  {
     static $RELTZ = 'GMT';
     /**
      *  *  * @var string Copyright Text */
-    static $COPYRIGHT = 'Copyright (C) 2011 StonyhillsHQ LLC. All rights reserved.';
+    static $COPYRIGHT = 'Copyright (C) 2012 StonyhillsHQ LLC. All rights reserved.';
     /**
      *  *  * @var string URL */
     static $URL = '';
@@ -94,9 +94,9 @@ class Version extends \Library\Object  {
      * @return string Long format version
      */
     public static function getLongVersion() {
-        $product    = static::$PRODUCT;
-        $reslease   = static::$RELEASE;
-        $return     = static::$PRODUCT . ' ' . static::$RELEASE . '.' . static::$DEV_LEVEL . ' ' . static::$DEV_STATUS .' build ' . static::$BUILD . ' [ ' . static::$CODENAME . ' ] ' . static::$RELDATE . ' ' . static::$RELTIME . ' ' . static::$RELTZ;
+
+        return static::$PRODUCT . ' ' . static::$RELEASE . '.' . static::$DEV_LEVEL . ' ' . static::$DEV_STATUS .' ' . static::$BUILD . ' [ ' . static::$CODENAME . ' ] ' . static::$RELDATE . ' ' . static::$RELTIME . ' ' . static::$RELTZ;
+        
         
     }
 

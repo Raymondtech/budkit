@@ -76,10 +76,10 @@ class Admin extends Platform\Controller {
      */
     public function index() {
         
-        //Tell all observers that we are viewing the admin panel
-        static::actionStateAs('view');
         
         return $this->view->dashboard();
+        
+        
         
     }
     

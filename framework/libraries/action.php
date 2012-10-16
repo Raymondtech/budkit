@@ -131,9 +131,6 @@ abstract class Action extends \Library\Object {
                 $action = static::getInstance();
                 $user   = Platform\User::getInstance();
                 $route  = $action->router->url;
-                
-                //print_R($action->router);
-                
                 $params = array_merge(array("action"=>$action, "user"=>$user, "route"=>$route ), static::$stateParams );
                 $observer::execute( $state, $params );
                 unset($params);
