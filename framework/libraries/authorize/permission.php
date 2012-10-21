@@ -47,6 +47,8 @@ final class Permission extends Library\Observer {
     private static function read(){}
     private static function update(){}
     private static function delete(){}
+    
+    
 
     /** 
      * Checks a user has permission to execute
@@ -56,15 +58,23 @@ final class Permission extends Library\Observer {
      * @return type 
      */
     public static function execute($action, $params = NULL) {
-
+        
         $actionController = $params["action"];
         $actionRoute      = $params["route"];
         $actionUser       = $params["user"];
+        $action           = trim($action);
+        $database         = Library\Database::getInstance();
         
         //Test Message
         $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '<i class="icon icon-lock"></i>', 'warning');
+        $premissionsSQLc  = "SELECT * FROM ?authority_permissions WHERE {$database->quote($actionRoute)} REGEXP permission_area_uri"; 
+        $permissionsSQL   = $database->prepare( $premissionsSQLc );
+        $permissions      = $permissionsSQL->execute();
         
-        //print_R($actionUser);
+        //print_R($actionRoute);
+        while($row = $permissions->fetchObject()){
+            print_R($row);
+        }
         
         
         //If User does not have permission to view this page, redirect them back to homepage

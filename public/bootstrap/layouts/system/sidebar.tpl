@@ -18,7 +18,7 @@
 
     <!-- Dasboard Menu -->
     <div style="margin-top:15px">
-        <tpl:menu id="dashboardmenu" type="nav-block" />
+        <tpl:menu id="dashboardmenu" type="nav-block" position="left" />
     </div>
 
 

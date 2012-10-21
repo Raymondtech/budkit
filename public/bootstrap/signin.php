@@ -20,66 +20,66 @@
         </head>
         <body>
             <tpl:import layout="navbar" />
-            
-            <div class="container left">
+
+            <div class="container-fluid left">
                 <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed has-bg">  
-                    <div class="row-fluid">
-                        <div class="span12">           
-                            <div class="row-fluid">
-                                <div class="span8"> 
-                                    Features
-                                    <tpl:block data="page.block.body">Content</tpl:block></div>
-                                <div class="span4">
-                                    <div class="left-pad">  
-                                        <div class="row-fluid">
-                                            <form id="form" name="login_form" method="post" action="/member/session/start">                       
-                                                <fieldset class="no-margin">
-                                                    <legend tpl:i18n="">Sign in to your account</legend>
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
-                                                        <div class="controls row-fluid">
-                                                            <input class="input-large focused span11" id="user_name_id" name="user_name_id" type="text" placeholder="JohnDoe1976" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="user_password"><tpl:i18n>Password or API Key</tpl:i18n><em class="mandatory">*</em></label>
-                                                        <div class="controls row-fluid">
-                                                            <input class="input-large focused span11" id="user_password" name="user_password" type="password" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <div class="controls">
-                                                            <label class="checkbox">
-                                                                <input type="checkbox" name="user_session_save" value="1" />
-                                                                <tpl:i18n>Save my login details for 14 days</tpl:i18n>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <input type="hidden" name="auth_handler" value="dbauth" />
-                                                <input type="hidden" name="redirect" value="" />
-                                                <ul>
-                                                    <li><a href="/index.php" tpl:i18n="">Forgot your password?</a></li>
-                                                    <li><a href="/member/account/create" tpl:i18n="">Don't have an account?</a></li>
-                                                </ul>
-                                                <div class="btn-toolbar">
-                                                    <div class="btn-group">
-                                                        <button type="submit" class="btn" tpl:i18n="">Sign-in</button> 
-                                                    </div>
-                                                    <div class="btn-group">
-                                                        <button type="reset" class="btn" tpl:i18n="">Cancel</button> 
-                                                    </div>
-                                                </div>
-
-                                            </form>
+                <section class="layout-block boxed has-bg has-aside-block">  
+                    <div class="aside-block right-pad">  
+                        <div class="row-fluid">
+                            <form id="form" name="login_form" method="post" action="/member/session/start">                       
+                                <fieldset class="no-margin">
+                                    <legend tpl:i18n="">Sign in to your account</legend>
+                                    <div class="control-group">
+                                        <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
+                                        <div class="controls row-fluid">
+                                            <input class="input-xxxlarge focused span12" id="user_name_id" name="user_name_id" type="text" placeholder="JohnDoe1976" />
                                         </div>
-                                        <tpl:block data="page.block.side">Sidebar</tpl:block>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="user_password"><tpl:i18n>Password or API Key</tpl:i18n><em class="mandatory">*</em></label>
+                                        <div class="controls row-fluid">
+                                            <input class="input-xxxlarge focused span12" id="user_password" name="user_password" type="password" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="user_session_save" value="1" />
+                                                <tpl:i18n>Save my login details for 14 days</tpl:i18n>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <input type="hidden" name="auth_handler" value="dbauth" />
+                                <input type="hidden" name="redirect" value="" />
+                                <ul>
+                                    <li><a href="/index.php" tpl:i18n="">Forgot your password?</a></li>
+                                    <li><a href="/member/account/create" tpl:i18n="">Don't have an account?</a></li>
+                                </ul>
+                                <div class="btn-toolbar">
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn" tpl:i18n="">Sign-in</button> 
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="reset" class="btn" tpl:i18n="">Cancel</button> 
                                     </div>
                                 </div>
-                            </div>
+
+                            </form>
                         </div>
+                        <tpl:block data="page.block.side">Sidebar</tpl:block>
+                    </div>
+                    <div class="main-block">
+                                
+                            <div class="row-fluid">
+                                <div class="span12"> 
+                                    Features
+                                    <tpl:block data="page.block.body">Content</tpl:block>
+                                </div>
+
+                            </div>
+                  
                     </div>
                 </section>
                 <tpl:import layout="footer" />    

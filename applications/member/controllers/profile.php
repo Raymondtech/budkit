@@ -54,6 +54,9 @@ class Profile extends \Platform\Controller {
         $profile  = $this->load->model('profile');
         
         $row = $profile->getObjectById(1);
+        $adminId = $profile->getObjectByURI( "tanya.vyland" )->getPropertyValue("user_first_name");
+        
+        print_R($adminId);
         //$row->setPropertyValue("first_name", "Livingstone");
         //$row->saveObject();
         

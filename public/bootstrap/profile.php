@@ -23,165 +23,153 @@
         <body>
             <tpl:import layout="navbar" />
 
-            <div class="container left"> 
+            <div class="container-fluid left"> 
                 <tpl:block data="page.block.alerts" />  
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed has-bg">
-                    <div class="row-fluid">
-                        <div class="span8">
-                            <div class="profile-header">
-                                <h1>Livingstone K. F. Fultang <small> (@drstonyhills)</small></h1>
-                            </div>
-                        </div>
-                        <div class="span4">
-                            <div class="left-pad"> 
-                                <div class="btn-toolbar no-top-margin">
-                                    <div class="btn-group">
-                                        <button class="btn" tpl:i18n="">View As</button>
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#" tpl:i18n="">Action</a></li>
-                                            <li><a href="#" tpl:i18n="">Another action</a></li>
-                                            <li><a href="#" tpl:i18n="">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#" tpl:i18n="">Separated link</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button class="btn" tpl:i18n="">Edit Info</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button class="btn">
-                                            <i class="icon icon-lock"></i> <tpl:i18n>Privacy</tpl:i18n>
-                                        </button>
-                                    </div>
+                <section class="layout-block boxed has-bg has-aside-block">
+
+
+
+                    <div class="aside-block right-pad">  
+                        <div class="row-fluid">
+                            <div class="btn-toolbar no-top-margin">
+                                <div class="btn-group">
+                                    <button class="btn" tpl:i18n="">View As...</button>
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" tpl:i18n="">Action</a></li>
+                                        <li><a href="#" tpl:i18n="">Another action</a></li>
+                                        <li><a href="#" tpl:i18n="">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#" tpl:i18n="">Separated link</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn" tpl:i18n="">Edit Info..</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn">
+                                        <i class="icon icon-lock"></i> <tpl:i18n>Privacy</tpl:i18n>
+                                    </button>
                                 </div>
                             </div>
+
+                            <div class="profile-avatar">
+                                <a href="#">
+                                    <img  src="http://lorempixel.com/270/270/people/9" width="270" height="270" />
+                                </a>
+                            </div>
+
+                            <tpl:menu id="profilemenu" type="nav-block" />
+                            <div class="widget top-pad">
+                                <h4 tpl:i18n="">Badges and Rewards</h4> 
+                                <div class="widget-body top-pad">
+
+                                    <ul class="thumbnails">
+                                        <?php for ($i = 0; $i < 15; $i++): ?>
+                                            <li>
+                                                <a href="#">
+                                                    <img class="thumbnail" src="http://placehold.it/32x32" alt="" width="32" height="32" />
+                                                </a>
+                                            </li>
+                                        <?php endfor; ?>
+                                    </ul>
+                                </div>
+                                <hr />
+                            </div>
+                            <div class="widget">
+                                <h4>Followers</h4> 
+                                <div class="widget-body top-pad">
+
+                                    <ul class="thumbnails">
+                                        <?php for ($i = 0; $i < 15; $i++): ?>
+                                            <li>
+                                                <a href="#">
+                                                    <img class="thumbnail" src="http://lorempixel.com/32/32/people/<?php echo $i ?>" alt="" width="32" height="32" />
+                                                </a>
+                                            </li>
+                                        <?php endfor; ?>
+                                    </ul>
+                                </div>
+                                <hr />
+                            </div>
+                            <div class="widget">
+                                <h4>Following</h4> 
+                                <div class="widget-body top-pad">
+
+                                    <ul class="thumbnails">
+                                        <?php for ($i = 0; $i < 15; $i++): ?>
+                                            <li>
+                                                <a href="#">
+                                                    <img class="thumbnail" src="http://lorempixel.com/32/32/people/<?php echo $i ?>" alt="" width="32" height="32" />
+                                                </a>
+                                            </li>
+                                        <?php endfor; ?>
+                                    </ul>
+                                </div>
+                                <hr />
+                            </div>
                         </div>
                     </div>
-                    <div class="profile-cover">
-                        <a href="#" class="cover"><img  src="http://lorempixel.com/938/300/abstract/" width="938" height="300" /></a>
-                        <div class="profile-avatar">
-                            <a href="#">
-                                <img  src="http://lorempixel.com/260/250/people/9" width="260" height="250" />
-                            </a>
+                    <div class="main-block">
+                        <div class="profile-header">
+                            <h2>Livingstone K. F. Fultang <small> (@drstonyhills)</small></h2>
                         </div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="span12"> 
-                            <div class="row-fluid">
-                                <div class="span8">
-                                    
-                                    <div id="control-panel" class="top-pad">
-                                        <div class="row-fluid text-centered clearfix"> 
-                                            <a href="/content/article/create" class="thumbnail-icon text-centered text-grey" data-original-title="New Article" rel="tooltip">
-                                                <i class="icon icon-32 icon-edit icon-block"></i>
-                                            </a>
-                                            <a href="/content/photo/create" class="thumbnail-icon text-centered text-orange" data-original-title="Upload Photos" rel="tooltip">
-                                                <i class="icon icon-32 icon-camera-retro icon-block"></i>
-                                            </a>
-                                            <a href="/content/event/create" class="thumbnail-icon text-centered text-green" data-original-title="Create Event" rel="tooltip">
-                                                <i class="icon icon-32 icon-calendar icon-block"></i>
-                                            </a>
-                                            <a href="/content/question/create" class="thumbnail-icon text-centered text-purple" data-original-title="Ask Question" rel="tooltip">
-                                                <i class="icon icon-32 icon-question-sign icon-block"></i>
-                                            </a>
-                                            <a href="/content/audio/create" class="thumbnail-icon text-centered" data-original-title="Add Audio" rel="tooltip">
-                                                <i class="icon icon-32 icon-music icon-block"></i>
-                                            </a>
-                                            <a href="/content/video/create" class="thumbnail-icon text-centered" data-original-title="Add Video" rel="tooltip">
-                                                <i class="icon icon-32 icon-film icon-block"></i>
-                                            </a>
-                                            <a href="/content/location/checkin" class="thumbnail-icon text-centered text-red" data-original-title="New Check-In" rel="tooltip">
-                                                <i class="icon icon-32 icon-map-marker icon-block"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                        <div class="profile-cover">
+                            <a href="#" class="cover"><img  src="http://lorempixel.com/1100/300/abstract/" width="1100" height="300" /></a>
                             
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span8">
+                                <div id="control-panel" class="top-pad">
+                                    <div class="row-fluid text-centered clearfix"> 
+                                        <a href="/content/article/create" class="thumbnail-icon text-centered text-grey" data-original-title="New Article" rel="tooltip">
+                                            <i class="icon icon-32 icon-edit icon-block"></i>
+                                        </a>
+                                        <a href="/content/photo/create" class="thumbnail-icon text-centered text-orange" data-original-title="Upload Photos" rel="tooltip">
+                                            <i class="icon icon-32 icon-camera-retro icon-block"></i>
+                                        </a>
+                                        <a href="/content/event/create" class="thumbnail-icon text-centered text-green" data-original-title="Create Event" rel="tooltip">
+                                            <i class="icon icon-32 icon-calendar icon-block"></i>
+                                        </a>
+                                        <a href="/content/question/create" class="thumbnail-icon text-centered text-purple" data-original-title="Ask Question" rel="tooltip">
+                                            <i class="icon icon-32 icon-question-sign icon-block"></i>
+                                        </a>
+                                        <a href="/content/audio/create" class="thumbnail-icon text-centered" data-original-title="Add Audio" rel="tooltip">
+                                            <i class="icon icon-32 icon-music icon-block"></i>
+                                        </a>
+                                        <a href="/content/video/create" class="thumbnail-icon text-centered" data-original-title="Add Video" rel="tooltip">
+                                            <i class="icon icon-32 icon-film icon-block"></i>
+                                        </a>
+                                        <a href="/content/location/checkin" class="thumbnail-icon text-centered text-red" data-original-title="New Check-In" rel="tooltip">
+                                            <i class="icon icon-32 icon-map-marker icon-block"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="span4">
-                                    <div class="left-pad top-pad bottom-pad">
-                                        <ul class="page-info">
-                                            <li class="signup-date">Member since 10 months ago</li>
-                                            <li class="signin-date">Last logged in about 6 days ago</li>
-                                            <!-- Date of Birth -->
-                                            <li class="company-element">Born on the <a href="#">14th of March</a></li>
-                                            <!-- Contact Information -->
-                                            <li class="company-element">Works at <a href="#">Stonyhills LLC</a></li>
-                                            <li class="email-element"><a href="mailto:livingstonefultang@gmail.com">livingstonefultang@gmail.com</a></li>
-                                            <!--CUSTOM SOCIAL INFORMATION-->
-                                        </ul>
+                                <div class="row-fluid">
+                                    <div class="span12"> 
+                                        <tpl:block data="page.block.body" return="1">What? Content</tpl:block>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row-fluid">
-                                <div class="span8">
-
-                                    <tpl:block data="page.block.body" return="1">
-                                        What content?
-                                    </tpl:block>
-
-
-
-                                </div>
-                                <div class="span4">
-                                    <div class="left-pad">
-
-                                        <tpl:menu id="profilemenu" type="nav-block" />
-
-                                        <div class="widget top-pad">
-                                            <h4 tpl:i18n="">Badges and Rewards</h4> 
-                                            <div class="widget-body top-pad">
-
-                                                <ul class="thumbnails">
-                                                    <?php for ($i = 0; $i < 15; $i++): ?>
-                                                        <li>
-                                                            <a href="#">
-                                                                <img class="thumbnail" src="http://placehold.it/32x32" alt="" width="32" height="32" />
-                                                            </a>
-                                                        </li>
-                                                    <?php endfor; ?>
-                                                </ul>
-                                            </div>
-                                            <hr />
-                                        </div>
-                                        <div class="widget">
-                                            <h4>Followers</h4> 
-                                            <div class="widget-body top-pad">
-
-                                                <ul class="thumbnails">
-                                                    <?php for ($i = 0; $i < 15; $i++): ?>
-                                                        <li>
-                                                            <a href="#">
-                                                                <img class="thumbnail" src="http://lorempixel.com/32/32/people/<?php echo $i ?>" alt="" width="32" height="32" />
-                                                            </a>
-                                                        </li>
-                                                    <?php endfor; ?>
-                                                </ul>
-                                            </div>
-                                            <hr />
-                                        </div>
-                                        <div class="widget">
-                                            <h4>Following</h4> 
-                                            <div class="widget-body top-pad">
-
-                                                <ul class="thumbnails">
-                                                    <?php for ($i = 0; $i < 15; $i++): ?>
-                                                        <li>
-                                                            <a href="#">
-                                                                <img class="thumbnail" src="http://lorempixel.com/32/32/people/<?php echo $i ?>" alt="" width="32" height="32" />
-                                                            </a>
-                                                        </li>
-                                                    <?php endfor; ?>
-                                                </ul>
-                                            </div>
-                                            <hr />
-                                        </div>
-                                    </div>
+                            <div class="span4">
+                                <div class="left-pad top-pad bottom-pad right-pad">
+                                    <ul class="page-info">
+                                        <li class="signup-date">Member since 10 months ago</li>
+                                        <li class="signin-date">Last logged in about 6 days ago</li>
+                                        <!-- Date of Birth -->
+                                        <li class="company-element">Born on the <a href="#">14th of March</a></li>
+                                        <!-- Contact Information -->
+                                        <li class="company-element">Works at <a href="#">Stonyhills LLC</a></li>
+                                        <li class="email-element"><a href="mailto:livingstonefultang@gmail.com">livingstonefultang@gmail.com</a></li>
+                                        <!--CUSTOM SOCIAL INFORMATION-->
+                                    </ul>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                 </section>
                 <tpl:import layout="footer" />    
             </div>

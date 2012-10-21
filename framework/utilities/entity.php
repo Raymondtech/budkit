@@ -123,6 +123,11 @@ class Entity extends Model {
      * @return mixed
      */
     public function getPropertyValue($propertyName, $objectId = null) {
+        
+        //You can return this protected properties as objects too.
+        if(in_array($propertyName, array("objectId","objectType","objectURI")) && isset($this->$propertyName)){
+            return $this->$propertyName;
+        }
 
         $property = strtolower($propertyName);
         //1. Check that the property exists in $dataModel;
@@ -133,6 +138,7 @@ class Entity extends Model {
             //IF we have a property that is not defined go get 
             if (!isset($this->propertyData[$property]) && !empty($this->objectId)) {
                 //@TODO Database QUERY with objectId
+                //Remember that this will most likely be used for 'un-modeled' data
                 return;
             }
             //If we already have the property set and the objectId is empty

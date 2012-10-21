@@ -21,9 +21,9 @@
                                     foreach ($e['authority']['permissions'] as $permission): ?>
                                     <tr>
                                         <td class="span1 permission-<?php echo $permission['permission'] ?>"><div ><?php echo _(ucfirst($permission['permission'])) ?></div></td>
-                                        <td class="span6 authority-name"><?php echo str_repeat('|--', (int) $e['authority']['indent']) . sprintf(_("<span>%s</span>"), $e['authority']['authority_title']); ?></td>
+                                        <td class="span5 authority-name"><?php echo str_repeat('|--', (int) $e['authority']['indent']) . sprintf(_("<span>%s</span>"), $e['authority']['authority_title']); ?></td>
                                         <td class="span1"><?php echo _(ucfirst($permission['permission_type'])) ?></td>
-                                        <td class="span3"><a href="/system/admin/network/authorities.json" rel="modal" title="<?php echo _("Areas affected by this permission") ?>"><span title="<?php echo $permission['permission_area_uri'] ?>" rel="tooltip"><?php echo $permission['permission_title'] ?></span></a></td>             
+                                        <td class="span4"><a href="/system/admin/network/authorities.json" rel="modal" title="<?php echo _('Areas affected by this permission') ?>"><span title="<?php echo $permission['permission_title'] ?>" rel="tooltip"><?php echo $permission['permission_area_uri'] ?></span></a></td>             
                                         <td class="span1"><a href="#"><?php echo _('Revoke'); ?></a></td>
                                     </tr>
                                     <?php endforeach;
@@ -40,6 +40,7 @@
                             <li>By default, unless explicitly denied, all "View" permission are allowed (and inheritted) for every AoR to every authority. All other permissions ("Execute", "Modify" and "Special") are denied unless explicitly allowed</li>
                             <li>Special permission will always be granted to the owner of an object</li>
                             <li>All Permissions defined for the parent authority group, will be inherited by child authority groups.</li>
+                            <li>Use the Regular expression <kbd>(/[a-z0-9-]*)*</kbd> to represent zero or more optional segments in are uri</li>
                         </ol>
                     </div>
                 </div>
@@ -132,17 +133,17 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="area-title"> <?php echo _('Area of Responsibility (AoR)'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="area-title" class="input-xxxlarge" placeholder="e.g Marketplace" />
-                            </div>
-                        </div>
-                        <div class="control-group">
                             <label class="control-label" for="area-uri"> <?php echo _('Area URI'); ?></label>
                             <div class="controls">
                                 <input type="text" name="area-uri" class="input-xxxlarge" placeholder="e.g /marketplace/*" />
                             </div>
                         </div>
+                        <div class="control-group">
+                            <label class="control-label" for="area-title"> <?php echo _('Description'); ?></label>
+                            <div class="controls">
+                                <input type="text" name="area-title" class="input-xxxlarge" placeholder="e.g Marketplace" />
+                            </div>
+                        </div>            
                         <div class="control-group">
                             <label class="control-label"><?php echo _('Role / Permission'); ?></label>
                             <div class="controls">

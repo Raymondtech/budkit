@@ -170,9 +170,13 @@ final class Dispatcher extends \Library\Object {
             }
         }
         
-        //Attach the permission observer
-        $this->task->attach("\Library\Authorize\Permission");
-        $this->task->actionStateAs('view'); //View Permissions will always be checked! 
+        if($this->task->config->getParam( "installed", NULL, "database" )):
+            //Check Permissions only if we are not installing?
+            //Attach the permission observer
+            $this->task->attach("\Library\Authorize\Permission");
+            $this->task->actionStateAs('view'); //View Permissions will always be checked! 
+            
+        endif; 
         
         //@TODO Should we Allow onBeforeDispatch to modify $this->task?
         Library\Event::trigger('onBeforeDispatch', $route);

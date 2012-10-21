@@ -22,22 +22,20 @@
         <body>
             <tpl:import layout="navbar" />
 
-            <div class="container left">
+            <div class="container-fluid left">
                 <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <tpl:condition data="page.activesidebar" test="boolean" value="1"> 
-                    <section class="layout-block boxed has-bg">  
-                        <div class="row-fluid">
-                            <div class="span12">           
-                                <div class="row-fluid">
-                                    <div class="span8"> 
-                                        <tpl:block data="page.block.body">Content</tpl:block>
-                                    </div>
-                                    <div class="span4">
-                                        <div class="left-pad">                                 
-                                            <tpl:block data="page.block.side">Sidebar</tpl:block>
-                                        </div>
-                                    </div>
+                    <section class="layout-block boxed has-bg has-aside-block">  
+                        <div class="aside-block right-pad">  
+                            <div class="row-fluid">
+                                <tpl:block data="page.block.side">Sidebar</tpl:block>
+                            </div>
+                        </div>
+                        <div class="main-block">
+                            <div class="row-fluid">
+                                <div class="span12"> 
+                                    <tpl:block data="page.block.body">Content</tpl:block>
                                 </div>
                             </div>
                         </div>
@@ -45,9 +43,7 @@
                 </tpl:condition>
                 <tpl:condition data="page.activesidebar" test="boolean" value="0"> 
                     <section class="layout-block boxed">  
-
                         <tpl:block data="page.block.body">Content</tpl:block>
-
                     </section>
                 </tpl:condition>
 

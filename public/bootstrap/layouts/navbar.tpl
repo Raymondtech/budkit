@@ -1,7 +1,7 @@
 <tpl:layout name="navbar" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-            <div class="container left">
+            <div class="container-fluid left">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -33,9 +33,8 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.user_name_id"/> <b class="caret">&nbsp;</b></a>
                                 <ul class="dropdown-menu" id="user-nav">
                                     <li><a href="/member/profile/display/information" class="profile-link clearfix">
-                                            <img class="profile-avatar pull-left" src="http://lorempixel.com/32/32/people/9" alt="Livingstone Fultang" />
-                                            <tpl:element type="text" data="user.fullname" />
-                                            <span class="profile-username">@<tpl:element type="text" data="user.user_name_id" /></span>
+                                            <img src="http://lorempixel.com/200/200/people/5" width="200" height="200" alt="Livingstone Fultang" />
+                                            
                                         </a>
                                     </li>
                                     <li class="divider"></li>
