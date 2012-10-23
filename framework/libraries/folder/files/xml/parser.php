@@ -346,7 +346,7 @@ class Parser extends Files\Xml {
         $xmlWriter = new \XMLWriter;
         $xmlWriter->openMemory();
         $xmlWriter->startDocument($version, $encoding);
-        $xmlWriter->setIndent(true);
+        $xmlWriter->setIndent(false);
         //$xmlWriter->startElement("ROOT");
         //Recursively write out the xml;
         static::writeXML($xmlWriter, $ROOT, $readonly);
@@ -395,10 +395,15 @@ class Parser extends Files\Xml {
                     //continue;
                     break;
                 case "CDATA":
-                    //$xmlWriter->startCdata( );
-                    Library\Event::trigger("_XMLContentCallback", $data, $xmlWriter);
+                    
+                    
+                    
                     if (!Library\Event::isDefined("_XMLContentCallback")) {
                         $xmlWriter->writeRaw(trim($data));
+                    }else{
+                        //$xmlWriter->startCdata( );
+                        $cdata = Library\Event::trigger("_XMLContentCallback", $data );
+                        $xmlWriter->writeRaw(trim($cdata[0])); 
                     }
                     //$xmlWriter->endCdata();
                     //continue;
@@ -406,20 +411,28 @@ class Parser extends Files\Xml {
                 default:
                     if (!is_array($data)):
 
-                        //Else
-                        //@TODO Deal with namespaced attributes
-                        //@TODO trigger Last
-                        //echo $element;                 
-                        Library\Event::trigger("_XMLAttributeCallback", $element, $data, $xmlWriter);
+                       
                         //If no default callback is defined
                         if (!Library\Event::isDefined("_XMLAttributeCallback")) {
                             $xmlWriter->writeAttribute($element, $data);
                             //$xmlWriter->startAttribute(strtolower($element));
                             //$xmlWriter->text($data);
                             //$xmlWriter->endAttribute();
-                        }
-
-
+                        }else{
+                            //Else
+                            //@TODO Deal with namespaced attributes
+                            //@TODO trigger Last
+                            //echo $element;   
+                            
+                            //print_R(\Library\Event::getInstance());
+                            
+                            $return = Library\Event::trigger("_XMLAttributeCallback", $element, $data, $xmlWriter);
+                            
+                            //echo($attribute);
+                            $xmlWriter->startAttribute(strtolower($return[0]));
+                            $xmlWriter->text( $return[1] );
+                            $xmlWriter->endAttribute();
+                        }          
                     endif;
                     //continue;
                     break;

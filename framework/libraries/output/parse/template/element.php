@@ -70,9 +70,6 @@ class Element extends Parse\Template {
      * @return boolean 
      */
     public static function attribute($attribute, $content, $writer) {
-
-        //echo($attribute);
-        $writer->startAttribute(strtolower($attribute));
         
         //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
         if( preg_match_all('/(?:(?<=\$\{)).*?(?=\})/i', $content, $matches) ){
@@ -95,11 +92,8 @@ class Element extends Parse\Template {
         if(in_array(strtoupper($attribute), $references)){
             $content = \Library\Uri::internal( $content );
         }
-        
-        $writer->text($content);
-        $writer->endAttribute();
 
-        return true;
+        return array($attribute, $content, $writer);
     }
     
     /**

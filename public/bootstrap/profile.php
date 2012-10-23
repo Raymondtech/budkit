@@ -54,7 +54,7 @@
                                 </div>
                             </div>
 
-                            <div class="profile-avatar">
+                            <div class="profile-avatar bottom-pad">
                                 <a href="#">
                                     <img  src="http://lorempixel.com/270/270/people/9" width="270" height="270" />
                                 </a>

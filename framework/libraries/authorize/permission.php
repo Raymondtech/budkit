@@ -41,14 +41,10 @@ use Library;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 final class Permission extends Library\Observer {
-
-    
-    private static function create(){}
-    private static function read(){}
-    private static function update(){}
-    private static function delete(){}
     
     
+    protected static $grantedTo = array();
+    protected static $rejectedTo = array(); 
 
     /** 
      * Checks a user has permission to execute
@@ -59,27 +55,97 @@ final class Permission extends Library\Observer {
      */
     public static function execute($action, $params = NULL) {
         
+        $permissionTypes  = array("view"=>1,"execute"=>2,"modify"=>3,"special"=>4);
+        
+        //If action not in our types return false;
+        if(!array_key_exists(strtolower($action), $permissionTypes)) return false;
+        
+        
         $actionController = $params["action"];
         $actionRoute      = $params["route"];
         $actionUser       = $params["user"];
         $action           = trim($action);
         $database         = Library\Database::getInstance();
         
-        //Test Message
-        $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '<i class="icon icon-lock"></i>', 'warning');
-        $premissionsSQLc  = "SELECT * FROM ?authority_permissions WHERE {$database->quote($actionRoute)} REGEXP permission_area_uri"; 
+
+        //Get Permission Definitions
+        $premissionsSQLc  = "SELECT p.*, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?authority_permissions AS p LEFT JOIN ?authority AS a ON p.authority_id=a.authority_id WHERE {$database->quote($actionRoute)} REGEXP p.permission_area_uri"; 
         $permissionsSQL   = $database->prepare( $premissionsSQLc );
-        $permissions      = $permissionsSQL->execute();
+        $permissions      = $permissionsSQL->execute()->fetchAll();
         
-        //print_R($actionRoute);
-        while($row = $permissions->fetchObject()){
-            print_R($row);
-        }
+        //Build Permission Tree;
+        //@TODO We will eventually need to crunch this permission tree maps based on area_uri to find the best fit.
+        //ATM /* will capture every possible url, so allow on /* and denying on /x/y/z/* still allows the permisison.
+        //Will need to come up with a sort of permission hierachy where if /x/y/z is defined, ignore /*
+        $permissionTree   = array();
+        $right            = array();
+        
+        //List all permissions as defined!
+        //Think of it as a guest list. We shall list only the authorities with allowed permissions
+        //Next we shall check the users authorities against this list, if they match then they are allowed.
+        //We will keep searching till we find a match otherwise failed.
+        foreach($permissions as $authority ) {
+             if (count($right) > 0) {
+                while ($right[count($right) - 1] < $authority['rgt']) {
+                    array_pop($right);
+                }
+            }
+            //Authority Indent
+            $authority["indent"] = sizeof($right);
+            $authority["permission"] = in_array($authority['permission'],array("allow"))? true : false;
+            
+            //IF permission type is higher or permission not already set;
+            if( $authority["permission"] && (!isset($permissionTree[$authority['authority_id']]) || $permissionTypes[$authority['permission_type']] > $permissionTypes[$permissionTree[$authority['authority_id']]['permission_type']] ) ){
+                $permissionTree[$authority['authority_id']] = $authority;
+            }
+            $right[] = $authority['rgt'];
+        } 
+        
+        //Test
+        $allowed          = false;
+        
+        if($actionUser->isAuthenticated()):
+            //Get User Authorities;
+            $authoritiesSQLc  = "SELECT o.authority_id, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?objects_authority AS o LEFT JOIN ?authority AS a ON o.authority_id=a.authority_id WHERE o.object_id = {$database->quote((int)$actionUser->get("user_id"))}";
+            $authoritiesSQL   = $database->prepare( $authoritiesSQLc );
+            $authorities      = $authoritiesSQL->execute()->fetchAll();
+
+            //Remember its easier to look for granted permissions
+            //If we found a granted permission, we skip to the next
+            foreach($authorities as $group){
+                //1.The easiest thing to do is check if we have the authority group defined
+                if(array_key_exists($group['authority_id'], $permissionTree)){
+                    //If the authority group is defined on the 'guest list' of allowed permissions
+                    //Then we are sure that this user is granted permissions so...
+                    $allowed = true;
+                    break;
+                }       
+                //2.The harder thing to do is check if this authority is a child of a defined authority on the guest list
+                //This is looking for inheritance! NOTE: YOU Cannot grant a permission to a parent which you deny to a child!!
+                foreach($permissionTree as $k=>$definition):
+                    //Looking for left right boundaries
+                    if(($group['lft'] > $definition['lft']) && ($group['rgt'] < $definition['rgt'])):
+                        $allowed = true;
+                        break;
+                    endif;
+                endforeach;
+            }
+        endif;
+        
+        //What about the public?
+        $public_authority = \Library\Config::getParam( "public-authority", NULL, "profile" );
+        //@TODO Replace the exception list with actual route map paths!
+        if(array_key_exists($public_authority, $permissionTree) || in_array( $actionRoute , array("/", "/index.php", "/sign-out", "/sign-in" )) ) $allowed = true; //We need the home page to be public
+
         
         
-        //If User does not have permission to view this page, redirect them back to homepage
-        //$actionController->redirect('/');
-        
+        if(!$allowed):  
+            //If User does not have permission to view this page, redirect to..
+            $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '<i class="icon icon-lock"></i>', 'error');
+            $actionController->redirect( ($actionUser->isAuthenticated())? "/":"/sign-in" );
+            
+        endif;
+       
         return true;
     }
 }

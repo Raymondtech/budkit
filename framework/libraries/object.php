@@ -181,16 +181,19 @@ abstract class Object {
 
                 if (is_callable($callback)) {
 
-                    // Log in the console
-                    \Platform\Debugger::log(sprintf(_t("[%s] Calling %1s() at %2s in %3s context"),$time, $callback, $event, $context), $event, "success");
+                    //@TODO group the calls together and output only once! Log in the console
+                    //\Platform\Debugger::log(sprintf(_t("[%s] Calling %1s() at %2s in %3s context"),$time, $callback, $event, $context), $event, "success");
 
                     //@TODO Determine Method Name from
                     //CallBack directive to use as indices in results array
-                    $results[] = call_user_func_array($callback, $data );
+                    $data = call_user_func_array($callback, $data );
+                    
+                    //It is important that convention is followed when returning data from a call back
+                    //simply return an array with the modified params! e.g trigger(a, b, z) where a is the callback and b, z are data vars return modified data as array(b, z);
                 }
             }
             //print_R($events);
-            return $results;
+            return $data;
         } else {
             //There are no events to trigger
 

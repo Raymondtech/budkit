@@ -72,9 +72,6 @@ class Activity extends Platform\Controller {
             
             //@1 Check where the form is comming from
             //@2 Validate the user permission
-            if(! $this->user->can("system/activity/create") ){
-               
-            }
             //@3 Privacy settings, If posting to wall can the user post to the wall
            
             //@4 Add the post;
