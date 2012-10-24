@@ -69,7 +69,7 @@ final class Permission extends Library\Observer {
         
 
         //Get Permission Definitions
-        $premissionsSQLc  = "SELECT p.*, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?authority_permissions AS p LEFT JOIN ?authority AS a ON p.authority_id=a.authority_id WHERE {$database->quote($actionRoute)} REGEXP p.permission_area_uri"; 
+        $premissionsSQLc  = "SELECT p.*, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?authority_permissions AS p LEFT JOIN ?authority AS a ON p.authority_id=a.authority_id WHERE {$database->quote($actionRoute)} REGEXP p.permission_area_uri ORDER BY a.lft ASC"; 
         $permissionsSQL   = $database->prepare( $premissionsSQLc );
         $permissions      = $permissionsSQL->execute()->fetchAll();
         
@@ -79,6 +79,7 @@ final class Permission extends Library\Observer {
         //Will need to come up with a sort of permission hierachy where if /x/y/z is defined, ignore /*
         $permissionTree   = array();
         $right            = array();
+        $denied           = array();
         
         //List all permissions as defined!
         //Think of it as a guest list. We shall list only the authorities with allowed permissions
@@ -94,10 +95,36 @@ final class Permission extends Library\Observer {
             $authority["indent"] = sizeof($right);
             $authority["permission"] = in_array($authority['permission'],array("allow"))? true : false;
             
-            //IF permission type is higher or permission not already set;
-            if( $authority["permission"] && (!isset($permissionTree[$authority['authority_id']]) || $permissionTypes[$authority['permission_type']] > $permissionTypes[$permissionTree[$authority['authority_id']]['permission_type']] ) ){
-                $permissionTree[$authority['authority_id']] = $authority;
+            //If we were previously granted permission to a parent of this area, i.e if we were granted permission on /xy/* but denied on /xy/z/k
+            if( (isset($permissionTree[$authority['authority_id']]) )  && !$authority["permission"] && ($permissionTypes[$authority['permission_type']] <= $permissionTypes[$permissionTree[$authority['authority_id']]['permission_type']]) ){
+                unset($permissionTree[$authority['authority_id']]);        
+                $denied[$authority['authority_id']] = array(
+                    't' => $authority['permission_type'],
+                    'r' => $authority['rgt'],
+                    'l' => $authority['lft']
+                );
+                continue; 
             }
+            
+            //If we've not been granted permission to this area do not add to permission tree
+            if( (!isset($permissionTree[$authority['authority_id']]) )  && !$authority["permission"]  ){
+                if(!in_array($authority['authority_id'], $denied)) 
+                    $denied[$authority['authority_id']] = array(
+                        't' => $authority['permission_type'],
+                        'r' => $authority['rgt'],
+                        'l' => $authority['lft']
+                    );
+                continue; 
+            }
+ 
+            //IF permission type is higher or permission not already set;
+            if( $authority["permission"] && //We are granting permissions
+                    (!isset($permissionTree[$authority['authority_id']]) || $permissionTypes[$authority['permission_type']] > $permissionTypes[$permissionTree[$authority['authority_id']]['permission_type']] ) && //And that permission has never been granted before
+                    (!array_key_exists($authority['authority_id'], $denied) || (array_key_exists($authority['authority_id'], $denied)  && $permissionTypes[$denied[$authority['authority_id']]['t']] <= $permissionTypes[$authority['permission_type']] ) ) ){ //And has never been denied before
+                        
+                        $permissionTree[$authority['authority_id']] = $authority;
+            }        
+            
             $right[] = $authority['rgt'];
         } 
         
@@ -106,7 +133,7 @@ final class Permission extends Library\Observer {
         
         if($actionUser->isAuthenticated()):
             //Get User Authorities;
-            $authoritiesSQLc  = "SELECT o.authority_id, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?objects_authority AS o LEFT JOIN ?authority AS a ON o.authority_id=a.authority_id WHERE o.object_id = {$database->quote((int)$actionUser->get("user_id"))}";
+            $authoritiesSQLc  = "SELECT o.authority_id, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?objects_authority AS o LEFT JOIN ?authority AS a ON o.authority_id=a.authority_id WHERE o.object_id = {$database->quote((int)$actionUser->get("user_id"))} ORDER BY a.lft ASC";
             $authoritiesSQL   = $database->prepare( $authoritiesSQLc );
             $authorities      = $authoritiesSQL->execute()->fetchAll();
 
@@ -117,7 +144,15 @@ final class Permission extends Library\Observer {
                 if(array_key_exists($group['authority_id'], $permissionTree)){
                     //If the authority group is defined on the 'guest list' of allowed permissions
                     //Then we are sure that this user is granted permissions so...
+                    //if group id is/or is parent to denied group then deny)'
                     $allowed = true;
+                    foreach($denied as $i=>$deny):
+                        //Looking for parent left right boundaries
+                        if(($group['lft'] < $deny['l']) && ($group['rgt'] > $deny['r'])):
+                            $allowed = false;
+                        endif;
+                    endforeach;
+                    if(!$allowed) unset($permissionTree[$group['authority_id']]);
                     break;
                 }       
                 //2.The harder thing to do is check if this authority is a child of a defined authority on the guest list
@@ -136,8 +171,6 @@ final class Permission extends Library\Observer {
         $public_authority = \Library\Config::getParam( "public-authority", NULL, "profile" );
         //@TODO Replace the exception list with actual route map paths!
         if(array_key_exists($public_authority, $permissionTree) || in_array( $actionRoute , array("/", "/index.php", "/sign-out", "/sign-in" )) ) $allowed = true; //We need the home page to be public
-
-        
         
         if(!$allowed):  
             //If User does not have permission to view this page, redirect to..
