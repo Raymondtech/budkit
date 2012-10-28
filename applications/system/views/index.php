@@ -29,7 +29,7 @@ class Index extends Platform\View {
     public function dashboard(){
         
         //you can add stuff you want displayed;
-        $user = $this->get('user');
+        //$user = $this->get('user');
         
         return $this->display();
         
@@ -76,9 +76,11 @@ class Index extends Platform\View {
         //$sidebar      = $this->output->layout( "index_sidebar" );
         $dashboard      = $this->output->layout( "dashboard" );
         $sidebar        = $this->output->layout( "sidebar"  );
+        $rightaside     = $this->output->layout( "cpanel"  );
   
-        $this->output->addToPosition("side",   $sidebar);
+        $this->output->addToPosition("side",    $sidebar);
         $this->output->addToPosition("body",    $dashboard);
+        $this->output->addToPosition("aside",   $rightaside );
         
     }
     
