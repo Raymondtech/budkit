@@ -129,13 +129,15 @@ canvas.base{ margin: 0 -10px }
         border-bottom: none; border-top: none;
         
          a{ 
-            line-height: 40px; color: @white; text-decoration: none; text-shadow: none; 
-            #gradient > .vertical(#353434, #292828);
+            line-height: 40px; color: #ADADAD; text-decoration: none; text-shadow: none; 
+            #gradient > .vertical(#333232, #333232);
             border-top: 1px solid #3f3f3f;
             border-bottom: 1px solid #1A1A1A;
             text-indent: 1px;
             margin-right:0px;
-            .icon{
+            padding-left: 0px!important;
+            i{
+                display: inline-block !important;
                 margin: 0px 10px;
                 font-size: 20px;
                 line-height: 1px;
@@ -143,6 +145,8 @@ canvas.base{ margin: 0 -10px }
          }
          &.active{
             a, a:hover{
+                color: @white;
+                padding-left: 0px!important;
                 //margin-right:0px!important;
             }
          }

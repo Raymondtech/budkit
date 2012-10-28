@@ -1,7 +1,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <div class="btn-toolbar no-top-margin">
         <div class="btn-group">
-            <button class="btn">Add New ...</button>
+            <button class="btn">Add ...</button>
             <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu">
                 <li><a href="#">Action</a></li>

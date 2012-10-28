@@ -595,7 +595,7 @@ ul.grid-list.grid {
 }
 .container.map-canvas {
   position: absolute;
-  top: 60px;
+  top: 45px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -669,6 +669,24 @@ ul.grid-list.grid {
 .layout-block.has-sidebar-btns {
   margin-left: 100px;
 }
+.layout-block .aside-block {
+  width: 230px;
+  float: left;
+}
+.layout-block.has-aside-block .main-block {
+  margin-left: 275px;
+}
+.layout-block .main-block.has-main-block-aside {
+  background-image: url(../img/mainblockbg.png);
+  background-position: 100% 0;
+}
+.layout-block .main-block.has-main-block-aside .main-block-content {
+  margin-right: 315px;
+}
+.layout-block .main-block.has-main-block-aside .main-block-aside {
+  width: 270px;
+  float: right;
+}
 .layout-block.boxed {
   border: 1px solid #eee;
   -webkit-border-radius: 2px;
@@ -702,24 +720,11 @@ ul.grid-list.grid {
 .bottom-pad {
   padding-bottom: 20px;
 }
-.profile-cover {
+.profile-avatar {
   position: relative;
 }
-.profile-cover .cover img {
-  margin: 0 -20px;
-  max-width: none;
-}
-.profile-cover .profile-avatar {
-  position: absolute;
-  top: 0px;
-  right: -20px;
-  background: transparent url(../img/avatar-bg.png) repeat 0 0 scroll;
-  width: 310px;
-  min-height: 300px;
-}
-.profile-cover .profile-avatar img {
-  margin: 20px;
-  border: 5px solid #ffffff;
+.profile-avatar img {
+  border: 5px solid #eeeeee;
 }
 .explorer-item {
   border-bottom: 1px solid #f5f5f5;
@@ -844,7 +849,7 @@ h1 small {
 }
 h2 {
   font-size: 24px;
-  line-height: 36px;
+  line-height: 18px;
 }
 h2 small {
   font-size: 18px;
@@ -3777,7 +3782,7 @@ input[type="submit"].btn.small {
 }
 .nav-block {
   border-top: 1px solid #E8E9EB;
-  margin: 0 -20px;
+  margin: 0 -18px;
   position: relative;
 }
 .nav-block > li > a,
@@ -3798,10 +3803,16 @@ input[type="submit"].btn.small {
 .nav-block .active > a,
 .nav-block .active > a:hover {
   background-color: #ffffff;
-  margin-left: -3px;
+  margin-right: -3px;
   padding-left: 2px;
   position: relative;
   z-index: 10;
+}
+.nav-block.left a {
+  padding-left: 20px;
+}
+.nav-block.left a i {
+  display: none;
 }
 .nav-block.left .active > a,
 .nav-block.left .active > a:hover {
@@ -3809,6 +3820,7 @@ input[type="submit"].btn.small {
   margin-right: -2px;
   margin-left: 0px;
   padding-right: 2px;
+  padding-left: 20px;
 }
 .nav-block [class^="icon-"] {
   margin-right: 2px;
@@ -5120,7 +5132,7 @@ input[type="submit"].btn.small {
 }
 .thumbnails > li {
   float: left;
-  margin: 0 0 10px 10px;
+  margin: 0 0 6px 6px;
 }
 .thumbnail {
   display: block;
@@ -5152,8 +5164,8 @@ a.thumbnail:hover {
 .thumbnail-icon {
   display: block;
   position: relative;
-  width: 72px;
-  height: 72px;
+  width: 65px;
+  height: 65px;
   line-height: 100px;
   text-decoration: none;
   text-align: center;
@@ -5179,9 +5191,9 @@ a.thumbnail-icon:hover {
 .thumbnail-icon > .icon {
   display: block;
   border: 6px solid #fff;
-  height: 62px;
-  width: 62px;
-  line-height: 68px;
+  height: 55px;
+  width: 55px;
+  line-height: 60px;
   text-align: center;
   text-decoration: none;
   background: #eeeeee;
@@ -5626,7 +5638,7 @@ a.badge:hover {
 }
 .container-fixed.map-canvas {
   position: absolute;
-  top: 60px;
+  top: 45px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -5646,6 +5658,15 @@ a.badge:hover {
 #user-nav:after {
   right: auto;
   left: 13px;
+}
+.left-pad .nav-block li a {
+  padding-left: 18px;
+}
+.left-pad .nav-block li a i {
+  display: none;
+}
+.left-pad .nav-block li a:hover {
+  padding-left: 18px;
 }
 /*!
  * Bootstrap Responsive v2.0.1
@@ -5819,7 +5840,7 @@ a.badge:hover {
 @media (min-width: 768px) and (max-width: 979px) {
   .layout-block.boxed.has-bg {
     background-image: url(../img/boxedbg.png);
-    background-position: 40% 0;
+    background-position: 0 0;
   }
   .row {
     margin-left: -20px;
@@ -6365,6 +6386,9 @@ a.badge:hover {
   }
 }
 @media (min-width: 980px) {
+  .container-fluid {
+    max-width: 1280px;
+  }
   body {
     padding-top: 0px;
   }
@@ -6373,7 +6397,8 @@ a.badge:hover {
   }
   .layout-block.boxed.has-bg {
     background-image: url(../img/boxedbg.png);
-    background-position: 50% 0;
+    background-position: 0 0 !important;
+    background-repeat: repeat-y;
   }
   .subnav-fixed {
     position: fixed;
@@ -6787,27 +6812,34 @@ canvas.base {
 }
 .nav-block li a {
   line-height: 40px;
-  color: #ffffff;
+  color: #ADADAD;
   text-decoration: none;
   text-shadow: none;
-  background-color: #302f2f;
-  background-image: -moz-linear-gradient(top, #353434, #292828);
-  background-image: -ms-linear-gradient(top, #353434, #292828);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#353434), to(#292828));
-  background-image: -webkit-linear-gradient(top, #353434, #292828);
-  background-image: -o-linear-gradient(top, #353434, #292828);
-  background-image: linear-gradient(top, #353434, #292828);
+  background-color: #333232;
+  background-image: -moz-linear-gradient(top, #333232, #333232);
+  background-image: -ms-linear-gradient(top, #333232, #333232);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333232), to(#333232));
+  background-image: -webkit-linear-gradient(top, #333232, #333232);
+  background-image: -o-linear-gradient(top, #333232, #333232);
+  background-image: linear-gradient(top, #333232, #333232);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#353434', endColorstr='#292828', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333232', endColorstr='#333232', GradientType=0);
   border-top: 1px solid #3f3f3f;
   border-bottom: 1px solid #1A1A1A;
   text-indent: 1px;
   margin-right: 0px;
+  padding-left: 0px!important;
 }
-.nav-block li a .icon {
+.nav-block li a i {
+  display: inline-block !important;
   margin: 0px 10px;
   font-size: 20px;
   line-height: 1px;
+}
+.nav-block li.active a,
+.nav-block li.active a:hover {
+  color: #ffffff;
+  padding-left: 0px!important;
 }
 .nav-tabs {
   display: inline-block;
