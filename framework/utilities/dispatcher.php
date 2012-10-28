@@ -67,17 +67,12 @@ final class Dispatcher extends \Library\Object {
      * @var array 
      */
     protected $route;
+    
 
     public function __construct() {
         //Determines the referer
     }
 
-
-    public function isAuthenticated() {
-
-        //$session = Library\Session::getInstance();
-        //return $session->isAuthenticated();
-    }
 
     //@TODO create request, execute action, add parameter
     //for dynamic request re-routing

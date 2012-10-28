@@ -1,19 +1,19 @@
 <?php
 /*
 |------------------------------------------------------------------------------
-|      o-o   O  o--o  o--o   o-o  o   o o  o 
-|     /     / \ |   | |   | o   o |\  | |  | 
-|    O     o---oO-Oo  O--o  |   | | \ | o--O 
-|     \    |   ||  \  |   | o   o |  \|    | 
-|      o-o o   oo   o o--o   o-o  o   o    o 
+|   o--o  o   o o-o   o  o o-o-o o-o-o 
+|   |   | |   | |  \  | /    |     |   
+|   o--o  |   | |   o oo     |     |   
+|   |   | |   | |  /  | \    |     |   
+|   o--o   o-o  o-o   o  o o-o-o   o  ALPHA
 |                                     
 |------------------------------------------------------------------------------
 | NAMESPACE
 |------------------------------------------------------------------------------
 |
 | Library	- All Library Classes
-| Application	- All Applicaition action controllers
-| Platform      - The platform utitlities
+| Application	- All Applicaition Action controllers
+| Platform      - The Platform Utitlities
 |
 */
 namespace Platform;

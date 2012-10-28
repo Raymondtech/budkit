@@ -937,6 +937,9 @@ class Output extends Object {
         if(strtolower($name)=="side"){
             $this->variables["page"]["activesidebar"] = true;
         }
+        if(strtolower($name)=="aside"){
+            $this->variables["page"]["activeaside"] = true;
+        }
         
         return $this;
     }

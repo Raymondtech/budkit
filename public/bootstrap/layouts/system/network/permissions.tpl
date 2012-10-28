@@ -3,8 +3,9 @@
     
     <ul id="permissions-tab" class="nav nav-tabs admin-main-tabs">
         <li  class="active"><a data-target="#authorities" data-toggle="tab">Authorities</a></li>
-        <li><a data-target="#permissions" data-toggle="tab">Access Permissions</a></li>       
-        <li><a data-target="#roles" data-toggle="tab">Edit Roles</a></li>
+        <li><a data-target="#permissionsDemography" data-toggle="tab">Permissions by Demography</a></li>
+        <li><a data-target="#permissions" data-toggle="tab">Permissions by Authority</a></li> 
+        <li><a data-target="#permissionsConsole" data-toggle="tab">Console</a></li>
     </ul>
     <div class="row-fluid">
         <div class="span8">
@@ -67,8 +68,8 @@
                     </table>
 
                 </div>
-                <div class="tab-pane" id="roles">...</div>
-                <div class="tab-pane" id="settings">...</div>
+                <div class="tab-pane" id="permissionsDemography">Set Permissions by Demography</div>
+                <div class="tab-pane" id="permissionsConsole">Test permission settings</div>
 
 
             </div>

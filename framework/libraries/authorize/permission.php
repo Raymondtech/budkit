@@ -174,7 +174,7 @@ final class Permission extends Library\Observer {
         
         if(!$allowed):  
             //If User does not have permission to view this page, redirect to..
-            $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '<i class="icon icon-lock"></i>', 'error');
+            $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '', 'error');
             $actionController->redirect( ($actionUser->isAuthenticated())? "/":"/sign-in" );
             
         endif;

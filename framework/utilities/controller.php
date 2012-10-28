@@ -293,7 +293,7 @@ abstract class Controller extends Library\Action {
                         $this->user = User::getInstance();
 
                         $this->alert( _t('Welcome on board') , sprintf(_t('Howdy %s!!'), $this->user->fullname), "success");
-                        $this->redirect( $this->output->link( "/system/start/dashboard") );
+                        $this->redirect( $this->output->link( "/system/start/index") );
                         
                     } else {
                         //if not show the form...with messages maybe?;
