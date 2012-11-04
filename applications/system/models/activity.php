@@ -20,6 +20,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\System\Models;
 
 use Platform;
@@ -38,31 +39,48 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/controller
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Activity extends Platform\Model {
+class Activity extends Platform\Entity {
 
-    /**
-     * Default display method for every model 
-     */
-    public function display(){}
-    
-    
-    public function add(){
+    static $_verbs = array(
+        "post"
+    );
+
+    public function __construct() {
         
+        parent::__construct();
+
+        //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
+        $this->definePropertyModel(array(
+            "activity_published" => array("Published", "text", 50),
+            "activity_content" => array("Content", "varchar", 1000),
+            "activity_summary" => array("Summary", "mediumtext", 50),
+            "activity_comment_status" => array("Allow Comments", "tinyint", 1, 0), //*
+            "activity_parent" => array("Parent", "smallint", 10), //*
+            "activity_generator" => array("Generator", "mediumtext", 100),
+            "activity_provider" => array("Provider", "mediumtext", 100),
+            "activity_mentions" => array("Mentions", "varchar", 1000), //*
+            "activity_actor" => array("Actor", "varchar", 1000),
+            "activity_verb" => array("Verb", "smalltext", 20, "post"),
+            "activity_geotags" => array("Geotags", "varchar", 1000), //*
+            "activity_object" => array("Object", "varchar", 1000),
+            "activity_target" => array("Target", "varchar", 1000),
+            "activity_permissions" => array("First Name", "mediumtext", 50), //* //allo:{},deny:{}
+                ), "activity");
+    }
+
+    public function addActivity() {
+
         //@TODO determine the user has permission to post;
         //print_R($this->user);
         $post = array(
-           "post_author"    => $this->user->get("userid"),
-           "post_content"   => $this->input->getString('post_content','','post')
+            "post_author" => $this->user->get("userid"),
+            "post_content" => $this->input->getString('post_content', '', 'post')
         );
-        
-        print_R($post);
-        
+
+        print_R($this->input->data('post'));
+
         die;
-        
-        return false;
-        
     }
-    
 
     /**
      * Get's an instance of the activity model
@@ -82,5 +100,13 @@ class Activity extends Platform\Model {
 
         return $instance;
     }
+
+    /**
+     * Default display method for every model 
+     */
+    public function display() {
+        
+    }
+
 }
 

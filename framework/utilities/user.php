@@ -126,7 +126,5 @@ class User extends Library\Object {
             //get authority;
             $this->authority = Library\Session::getInstance()->getAuthority();    
         }
-        
     }
-
 }

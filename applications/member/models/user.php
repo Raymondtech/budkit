@@ -57,7 +57,7 @@ class User extends Platform\Entity {
                 ),
                 "user"
         );
-        //$this->newDataModel( $dataModel ); use this to set a new data models
+        //$this->definePropertyModel( $dataModel ); use this to set a new data models
     }
     /**
      * Store the user data in the database
