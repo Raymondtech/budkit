@@ -21,7 +21,7 @@
         </head>
 
         <?php //print_R($this); ?>
-        <body>
+        <body  class="responsive-body">
             <form method="post" action="/" style="margin-top: 150px">
                 <div role="container" class="container left fillfix clearfix">
                     <div class="row clearfix fillfix">

@@ -18,7 +18,7 @@
 
             <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
         </head>
-        <body>
+        <body  class="responsive-body">
             <tpl:import layout="navbar" />
 
             <div class="container-fluid left">
@@ -27,6 +27,7 @@
                 <section class="layout-block boxed has-bg has-aside-block">  
                     <div class="aside-block right-pad">  
                         <div class="row-fluid">
+
                             <form id="form" name="login_form" method="post" action="/member/session/start">                       
                                 <fieldset class="no-margin">
                                     <legend tpl:i18n="">Sign in to your account</legend>
@@ -51,22 +52,32 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <input type="hidden" name="auth_handler" value="dbauth" />
-                                <input type="hidden" name="redirect" value="" />
-                                <ul>
-                                    <li><a href="/index.php" tpl:i18n="">Forgot your password?</a></li>
-                                    <li><a href="/member/account/create" tpl:i18n="">Don't have an account?</a></li>
-                                </ul>
+
                                 <div class="btn-toolbar">
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn" tpl:i18n="">Sign-in</button> 
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="reset" class="btn" tpl:i18n="">Cancel</button> 
+                                    <div class="btn-group row-fluid">
+                                        <button type="submit" class="btn span12" tpl:i18n="">Sign in</button> 
                                     </div>
                                 </div>
 
+                                <hr />
+
+                                <div class="btn-toolbar">
+                                    <div class="row-fluid">
+                                        <button type="submit" class="btn span6 btn-facebook" tpl:i18n="">Facebook</button> 
+                                        <button type="submit" class="btn span6 btn-twitter" tpl:i18n="">Twitter</button>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="auth_handler" value="dbauth" />
+                                <input type="hidden" name="redirect" value="" />
+                                <ul class="top-pad">
+                                    <li><a href="/index.php" tpl:i18n="">Alternative ways to sign in</a></li>
+                                    <li><a href="/index.php" tpl:i18n="">Forgot your password?</a></li>
+                                    <li><a href="/member/account/create" tpl:i18n="">Don't have an account?</a></li>
+                                </ul>
+
                             </form>
+
                         </div>
                         <tpl:block data="page.block.side">Sidebar</tpl:block>
                     </div>

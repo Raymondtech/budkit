@@ -19,7 +19,7 @@
 
             <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
         </head>
-        <body class="explorer">
+        <body class="explorer responsive-body">
 
             <tpl:import layout="navbar" />
             <form>

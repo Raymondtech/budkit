@@ -2,22 +2,24 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid left">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".responsive-body">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand logo" href="/">Budkit</a>
                 <div class="nav-collapse">
-                    <form class="navbar-search pull-left" action="/search" method="get">
-                        <input type="text" class="search-query span4" name="query" placeholder="i18n:Search"  />
+                    <form class="navbar-search pull-left span5" action="/search" method="get">
+                        <div class="row-fluid">
+                            <input type="text" class="search-query span12" name="query" placeholder="i18n:Search"  />
+                        </div>
                     </form>
 
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                         <ul class="nav pull-right span4" id="notifications-nav">    
                             <li class="divider-vertical"></li>
                             <li class="notification dropdown">
-                                <a href="#" class="dropdown-toggle on" data-toggle="dropdown"><i class="icon icon-pushpin"></i></a>
+                                <a href="#" class="dropdown-toggle off" data-toggle="dropdown"><i class="icon-bell icon-16"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/system/start/dashboard/notifications">View all notifications</a> <a href="/system/start/dashboard/notifications" class="pull-right">Clear All</a></li>
                                     <li class="divider"></li>
@@ -28,13 +30,13 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <li class="usermenu dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.user_name_id"/> <b class="caret">&nbsp;</b></a>
                                 <ul class="dropdown-menu" id="user-nav">
                                     <li><a href="/member/profile/display/information" class="profile-link clearfix">
                                             <img src="http://lorempixel.com/200/200/people/5" width="200" height="200" alt="Livingstone Fultang" />
-                                            
+
                                         </a>
                                     </li>
                                     <li class="divider"></li>
@@ -48,31 +50,16 @@
                                     <li><a href="/sign-out">Sign out</a></li>
                                 </ul>
                             </li>
-                            <li class="shareform dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-white icon-plus"></i></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <tpl:import layout="input" />
-                                    </li>
-                                </ul>
-                            </li>
+
                         </ul>
                     </tpl:condition>
 
-                    <ul class="nav pull-right">                     
-                        <li><a href="/system/start/featured" tpl:i18n="">Featured</a></li>
-                        <li><a href="/content/locations/map" tpl:i18n="">Explore</a></li>
-   
-                        
 
-                        <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
+                    <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
+                        <ul class="nav pull-right"> 
                             <li><a href="/member/session/start">Sign in</a></li>
-                        </tpl:condition>
-
-                    </ul> 
-
-
-
+                        </ul> 
+                    </tpl:condition>
 
                 </div>
             </div>

@@ -75,7 +75,7 @@ class Activity extends Platform\Controller {
             //@3 Privacy settings, If posting to wall can the user post to the wall
            
             //@4 Add the post;
-            if(( $post = $this->load->model("activity")->add() ) == FALSE){              
+            if(( $post = $this->load->model("activity")->addActivity() ) == FALSE){              
                 $this->alert( _("Could not add your post"), null, "error" );
             }else{         
                 $this->alert( _("You activity post has been saved and publised"), null, "success"); 

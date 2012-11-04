@@ -78,8 +78,7 @@ class Options extends Platform\Model {
                 $value = $option;
                 $binder = "( " . $this->database->quote("general") . "," . $this->database->quote($item) . "," . $this->database->quote($value) . ")";
                 $values[] = $binder;
-            endif;
-            
+            endif;        
         //$table->insert($binder, T);
         endforeach;
         
