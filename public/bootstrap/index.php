@@ -19,7 +19,7 @@
             <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
             <!--            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css' />-->
         </head>
-        <body>
+        <body class="responsive-body">
             <tpl:import layout="navbar" />
 
             <div class="container-fluid left">

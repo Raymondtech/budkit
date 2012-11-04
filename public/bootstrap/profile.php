@@ -20,7 +20,7 @@
 
         </head>
 
-        <body>
+        <body  class="responsive-body">
             <tpl:import layout="navbar" />
 
             <div class="container-fluid left"> 
@@ -32,7 +32,7 @@
 
                     <div class="aside-block right-pad">  
                         <div class="row-fluid">
-                            <div class="btn-toolbar no-top-margin">
+<!--                            <div class="btn-toolbar no-top-margin">
                                 <div class="btn-group">
                                     <button class="btn" tpl:i18n="">View As...</button>
                                     <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
@@ -45,18 +45,13 @@
                                     </ul>
                                 </div>
                                 <div class="btn-group">
-                                    <button class="btn" tpl:i18n="">Edit Info..</button>
+                                    <button class="btn" tpl:i18n="">Edit Information</button>
                                 </div>
-                                <div class="btn-group">
-                                    <button class="btn">
-                                        <i class="icon icon-lock"></i> <tpl:i18n>Privacy</tpl:i18n>
-                                    </button>
-                                </div>
-                            </div>
+                            </div>-->
 
                             <div class="profile-avatar bottom-pad">
                                 <a href="#">
-                                    <img  src="http://lorempixel.com/270/270/people/9" width="270" height="270" />
+                                    <img  src="http://lorempixel.com/220/220/people/9" width="220" height="220" />
                                 </a>
                             </div>
 
@@ -112,13 +107,13 @@
                         </div>
                     </div>
                     <div class="main-block">
-                        <div class="profile-header">
+                        <div class="page-header">
                             <h2>Livingstone K. F. Fultang <small> (@drstonyhills)</small></h2>
                         </div>
-                        <div class="profile-cover">
+<!--                        <div class="profile-cover">
                             <a href="#" class="cover"><img  src="http://lorempixel.com/1100/300/abstract/" width="1100" height="300" /></a>
                             
-                        </div>
+                        </div>-->
                         <div class="row-fluid">
                             <div class="span8">
                                 <div id="control-panel" class="top-pad">

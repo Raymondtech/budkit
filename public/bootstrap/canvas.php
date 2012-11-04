@@ -22,7 +22,7 @@
             <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
         </head>
-        <body>
+        <body  class="responsive-body">
             <div class="container navbar canvas">
                 <div style="width: 200px; margin: auto">
                     <a class="brand logo" href="/">Pilgrimage</a>

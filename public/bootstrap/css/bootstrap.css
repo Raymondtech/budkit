@@ -3254,6 +3254,10 @@ ul.icons li .icon-large:before {
 .btn-success:hover,
 .btn-info,
 .btn-info:hover,
+.btn-twitter,
+.btn-twitter:hover,
+.btn-facebook,
+.btn-facebook:hover,
 .btn-inverse,
 .btn-inverse:hover {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -3262,6 +3266,8 @@ ul.icons li .icon-large:before {
 .btn-primary.active,
 .btn-warning.active,
 .btn-danger.active,
+.btn-facebook.active,
+.btn-twitter.active,
 .btn-success.active,
 .btn-info.active,
 .btn-dark.active {
@@ -3482,6 +3488,78 @@ ul.icons li .icon-large:before {
 .btn-inverse:active,
 .btn-inverse.active {
   background-color: #0c0c0c \9;
+}
+.btn-twitter {
+  background-color: #1dadea;
+  background-image: -moz-linear-gradient(top, #1ab9f0, #229ae1);
+  background-image: -ms-linear-gradient(top, #1ab9f0, #229ae1);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1ab9f0), to(#229ae1));
+  background-image: -webkit-linear-gradient(top, #1ab9f0, #229ae1);
+  background-image: -o-linear-gradient(top, #1ab9f0, #229ae1);
+  background-image: linear-gradient(top, #1ab9f0, #229ae1);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1ab9f0', endColorstr='#229ae1', GradientType=0);
+  border-color: #229ae1 #229ae1 #166da1;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-twitter:hover,
+.btn-twitter:active,
+.btn-twitter.active,
+.btn-twitter.disabled,
+.btn-twitter[disabled] {
+  background-color: #229ae1;
+}
+.btn-twitter:active,
+.btn-twitter.active {
+  background-color: #197cb7 \9;
+}
+.btn-twitter:hover,
+.btn-twitter:active,
+.btn-twitter.active,
+.btn-twitter.disabled,
+.btn-twitter[disabled] {
+  background-color: #229ae1;
+}
+.btn-twitter:active,
+.btn-twitter.active {
+  background-color: #197cb7 \9;
+}
+.btn-facebook {
+  background-color: #4c67a1;
+  background-image: -moz-linear-gradient(top, #5771a7, #3b5998);
+  background-image: -ms-linear-gradient(top, #5771a7, #3b5998);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5771a7), to(#3b5998));
+  background-image: -webkit-linear-gradient(top, #5771a7, #3b5998);
+  background-image: -o-linear-gradient(top, #5771a7, #3b5998);
+  background-image: linear-gradient(top, #5771a7, #3b5998);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5771a7', endColorstr='#3b5998', GradientType=0);
+  border-color: #3b5998 #3b5998 #263961;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-facebook:hover,
+.btn-facebook:active,
+.btn-facebook.active,
+.btn-facebook.disabled,
+.btn-facebook[disabled] {
+  background-color: #3b5998;
+}
+.btn-facebook:active,
+.btn-facebook.active {
+  background-color: #2d4373 \9;
+}
+.btn-facebook:hover,
+.btn-facebook:active,
+.btn-facebook.active,
+.btn-facebook.disabled,
+.btn-facebook[disabled] {
+  background-color: #3b5998;
+}
+.btn-facebook:active,
+.btn-facebook.active {
+  background-color: #2d4373 \9;
 }
 button.btn,
 input[type="submit"].btn {
@@ -4206,9 +4284,8 @@ input[type="submit"].btn.small {
 }
 .btn-navbar {
   display: none;
-  float: right;
-  padding: 7px 10px;
-  margin-left: 5px;
+  float: left;
+  padding: 10px;
   margin-right: 15px;
   background-color: #4480bc;
   background-image: -moz-linear-gradient(top, #4e8ece, #356aa0);
@@ -4279,7 +4356,7 @@ input[type="submit"].btn.small {
 }
 .navbar .brand.logo {
   text-indent: -9999em;
-  min-width: 120px;
+  min-width: 105px;
   background: url('../img/logo.png') 0px 0px no-repeat scroll;
   height: 30px;
   margin-top: 5px;
@@ -4296,10 +4373,6 @@ input[type="submit"].btn.small {
 .navbar .navbar-text a:hover {
   color: #ffffff;
   background-color: transparent;
-}
-.navbar .btn,
-.navbar .btn-group {
-  margin-top: 5px;
 }
 .navbar .btn-group .btn {
   margin-top: 0;
@@ -4352,6 +4425,7 @@ input[type="submit"].btn.small {
   position: relative;
   float: left;
   margin-top: 6px;
+  margin-left: 165px;
   margin-bottom: 0;
 }
 .navbar-search .search-query {
@@ -4443,18 +4517,26 @@ input[type="submit"].btn.small {
   margin-left: 10px;
   float: right!important;
 }
-.navbar .nav > li.notification a.dropdown-toggle.on {
-  background: #AF1010;
-  margin-top: 5px;
-  padding: 5px 10px 4px;
+.navbar .nav > li.notification a.dropdown-toggle {
+  margin-top: 6px;
+  padding: 5px 5px 2px;
   color: white;
   font-weight: bold;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
+.navbar .nav > li.notification a.dropdown-toggle.on {
+  background: #AF1010;
+}
 .navbar .nav > li.notification a.dropdown-toggle.on:hover {
   background: #F00;
+}
+.navbar .nav > li.notification a.dropdown-toggle.off {
+  background: #1D77B3;
+}
+.navbar .nav > li.notification a.dropdown-toggle.off:hover {
+  background: #094268;
 }
 .navbar .nav > li.notification.open a.dropdown-toggle .on {
   background: #F00;
@@ -6281,9 +6363,12 @@ a.badge:hover {
   body {
     padding-top: 0;
   }
+  .container-fluid {
+    padding: 0;
+  }
   .navbar-fixed-top {
     position: static;
-    margin-bottom: 18px;
+    margin-bottom: 0;
   }
   .navbar-fixed-top .navbar-inner {
     padding: 5px;
@@ -6294,8 +6379,9 @@ a.badge:hover {
   }
   .navbar .brand {
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 0px;
     margin: 0 0 0 -5px;
+    float: right;
   }
   .navbar .nav-collapse {
     clear: left;
@@ -6322,9 +6408,6 @@ a.badge:hover {
     padding: 6px 15px;
     font-weight: bold;
     color: #ffffff;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
   }
   .navbar .dropdown-menu li + li a {
     margin-bottom: 2px;
@@ -6361,13 +6444,16 @@ a.badge:hover {
   .navbar-form,
   .navbar-search {
     float: none;
+    margin-left: 0px;
     padding: 9px 15px;
-    margin: 9px 0;
-    border-top: 1px solid #356aa0;
-    border-bottom: 1px solid #356aa0;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+    margin-top: 0px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+  .navbar-form .search-query,
+  .navbar-search .search-query {
+    width: 230px;
   }
   .navbar .nav.pull-right {
     float: none;
@@ -6380,9 +6466,27 @@ a.badge:hover {
   .btn-navbar {
     display: block;
   }
+  .alert {
+    margin-bottom: 0px;
+  }
   .nav-collapse {
     overflow: hidden;
     height: 0;
+  }
+  body.in {
+    padding-left: 260px;
+    min-width: 700px;
+  }
+  body.in .nav-collapse {
+    position: absolute;
+    width: 260px;
+    background-color: #333232;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    min-height: 800px;
   }
 }
 @media (min-width: 980px) {

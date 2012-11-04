@@ -233,11 +233,13 @@
   // Remove any padding from the body
   body {
     padding-top: 0;
+    
   }
+  .container-fluid{padding: 0;}
   // Unfix the navbar
   .navbar-fixed-top {
     position: static;
-    margin-bottom: @baseLineHeight;
+    margin-bottom: 0;
   }
   .navbar-fixed-top .navbar-inner {
     padding: 5px;
@@ -249,8 +251,9 @@
   // Account for brand name
   .navbar .brand {
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 0px;
     margin: 0 0 0 -5px;
+    float: right;
   }
   // Nav collapse clears brand
   .navbar .nav-collapse {
@@ -280,7 +283,7 @@
     padding: 6px 15px;
     font-weight: bold;
     color: @navbarLinkColor;
-    .border-radius(3px);
+    //.border-radius(3px);
   }
   .navbar .dropdown-menu li + li a {
     margin-bottom: 2px;
@@ -315,12 +318,15 @@
   .navbar-form,
   .navbar-search {
     float: none;
+    margin-left:0px;
     padding: (@baseLineHeight / 2) 15px;
-    margin: (@baseLineHeight / 2) 0;
-    border-top: 1px solid @navbarBackground;
-    border-bottom: 1px solid @navbarBackground;
+    //margin: (@baseLineHeight / 2) 0;
+    margin-top: 0px;
+    //border-top: 1px solid @navbarBackground;
+    //border-bottom: 1px solid @navbarBackground;
     @shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
-    .box-shadow(@shadow);
+    .box-shadow(none);
+    .search-query{ width: 230px; }
   }
   // Pull right (secondary) nav content
   .navbar .nav.pull-right {
@@ -336,12 +342,20 @@
   .btn-navbar {
     display: block;
   }
-
+  .alert {margin-bottom: 0px}
   // Hide everything in the navbar save .brand and toggle button */
   .nav-collapse {
     overflow: hidden;
     height: 0;
   }
+  body{
+     &.in{ 
+        padding-left: 260px;
+        min-width: 700px;
+        .nav-collapse {position:absolute; width: 260px; background-color: #333232; top:0; left:0; right:0; bottom:0; height: 100%; min-height: 800px;}
+  
+}
+}
 }
 
 
