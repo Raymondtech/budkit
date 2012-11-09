@@ -50,7 +50,5 @@
             <strong>SECTION 12.</strong>
             <strong>MISCELLANEOUS.</strong> Except as expressly set forth in this Agreement, this Agreement is a complete statement of the agreement between you and Developer and sets forth the entire liability of Developer, its Suppliers, and service providers, and your exclusive remedy with respect to the Software, and its use. The Suppliers, agents, employees, distributors, and dealers of the Developer are not authorized to make modifications to this Agreement, or to make any additional representations, commitments, or warranties binding on Developer. Any waiver of the terms herein by Developer must be in a writing signed by an authorized officer of the Developer and expressly referencing the applicable provisions of this Agreement. If any provision of this Agreement is invalid or unenforceable under applicable law, then it shall be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law, and the remaining provisions will continue in full force and effect. Headings are included for convenience only, and shall not be considered in interpreting this Agreement. As used in this Agreement, the word including means including but not limited to. This Agreement does not limit any rights that the Developer may have under trade secret, copyright, patent or other laws.
         </p>
-        April 15, 2011
-        StonyhillsHQ (http://www.stonyhillshq.com)
     </div>
 </tpl:layout>

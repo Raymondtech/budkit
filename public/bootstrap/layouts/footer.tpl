@@ -5,11 +5,8 @@
             <div class="span8">
                 <ul class="nav nav-pills">
                     <li><a href="/system/admin/index">Administrator</a></li>
-                    <li><a href="http://blog.stonyhillshq.com">Blog</a></li>
-                    <li><a href="http://developers.stonyhillshq.com">Developers</a></li>
-                    <li><a href="/help">Help</a></li>
-                    <li><a href="/legal/privacy">Privacy</a></li>
-                    <li><a href="/legal/terms">Terms</a></li>
+                    <li><tpl:import layout="console" /></li>
+                    <li><a href="http://budkit.org/documentation">Documentation</a></li>
                 </ul>
             </div>
             <div class="span4">
@@ -18,6 +15,5 @@
                 </ul>
             </div>
         </div>
-        <tpl:import layout="console" />
     </section>
 </tpl:layout>

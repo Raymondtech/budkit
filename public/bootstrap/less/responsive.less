@@ -349,13 +349,15 @@
     height: 0;
   }
   body{
+        width: 100%;
+        padding: 0 0 0 0;
+        .nav-collapse {.transition(width 0.1s  linear); position:fixed; width: 0px; background-color: #333232; top:0; left:0; right:0; bottom:0; height: 100%; min-height: 800px;}
      &.in{ 
-        padding-left: 260px;
-        min-width: 700px;
-        .nav-collapse {position:absolute; width: 260px; background-color: #333232; top:0; left:0; right:0; bottom:0; height: 100%; min-height: 800px;}
-  
-}
-}
+       .transition(padding 0.1s linear);      
+        padding: 0 0 0 260px;
+        .nav-collapse {width: 260px;}
+        }
+    }
 }
 
 

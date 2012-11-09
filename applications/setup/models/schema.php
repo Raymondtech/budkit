@@ -109,14 +109,14 @@ final class Schema extends Platform\Model {
         //Dumping default permission data to authority_permission tablegit
         static::$database->query(
            "INSERT INTO `?authority_permissions` (`authority_permission_key`, `authority_id`, `permission_area_uri`, `permission`, `permission_type`, `permission_title`) VALUES
-            (1, 1, '/system/admin(/[a-z0-9-]*)*', 'deny', 'view', 'Admin Panel'),
-            (2, 4, '/system/admin(/[a-z0-9-]*)*', 'allow', 'special', 'Admin Panel'),
-            (3, 1, '/member/session/start', 'allow', 'execute', 'Site Login'),
-            (4, 1, '/member/account/create', 'allow', 'execute', 'Site Signup'),
-            (5, 2, '/system/activity/create', 'allow', 'execute', 'Update Status'),
-            (6, 2, '/content(/[a-z0-9-]*)*/create', 'allow', 'execute', 'Create Content'),
-            (7, 1, '/setup/install(/[a-z0-9-]*)*', 'allow', 'execute', 'Setup Installer'),
-            (8, 1, '(/[a-z0-9-]*)*', 'allow', 'view', 'Home Page');"
+            (1, 4, '/system/admin(/[a-z0-9-]*)*', 'allow', 'special', 'Admin Panel'),
+            (2, 1, '/member/session(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Login'),
+            (3, 1, '/member/account(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Signup'),
+            (4, 2, '/system/activity(/[a-z0-9-]*)*', 'allow', 'execute', 'Update Status'),
+            (5, 2, '/content(/[a-z0-9-]*)*', 'allow', 'execute', 'View Content'),
+            (6, 1, '/setup/install(/[a-z0-9-]*)*', 'allow', 'execute', 'Setup Installer'),
+            (7, 2, '/system/start(/[a-z0-9-]*)*', 'allow', 'view', 'Start Pages'),
+            (8, 2, '/member(/[a-z0-9-]*)*', 'allow', 'view', 'Read User Profiles');"
          );
     }
     
