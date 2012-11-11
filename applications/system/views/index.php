@@ -80,7 +80,7 @@ class Index extends Platform\View {
   
         $this->output->addToPosition("side",    $sidebar);
         $this->output->addToPosition("body",    $dashboard);
-        $this->output->addToPosition("aside",   $rightaside );
+        //$this->output->addToPosition("aside",   $rightaside );
         
     }
     

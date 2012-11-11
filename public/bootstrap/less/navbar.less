@@ -70,7 +70,7 @@ border-bottom: 1px solid #284278;
   }
   // Website or project name
   .brand {
-    float: left;
+    float: right;
     display: block;
     font-size: 20px;
     font-weight: 200;
@@ -81,7 +81,7 @@ border-bottom: 1px solid #284278;
         min-width: 105px;
         background: url('../img/logo.png') 0px 0px no-repeat scroll;
         height: 30px;
-        margin-top: 5px;
+        margin: 3px 0 2px;
     }
   }
   &.canvas{ 
@@ -142,10 +142,10 @@ border-bottom: 1px solid #284278;
 .navbar-search {
   position: relative;
   float: left;
-  margin-top: 6px;
-    margin-left:165px;
+  margin-top: 3px;
   margin-bottom: 0;
   .search-query {
+    width: 270px;
     padding: 4px 9px;
     #font > .sans-serif(13px, normal, 1);
     color: @white;
@@ -224,22 +224,27 @@ border-bottom: 1px solid #284278;
 .navbar .nav > li {
   display: block;
   float: left;
+    .navbar-profile-link{
+        line-height: 1px;
+        padding: 1px 1px 0px 0px;
+        display:inline-block;
+        float:right;
+        margin-top:3px;
+    }
   &.notification{
-    margin-left: 10px;
-    float: right!important;
     a.dropdown-toggle{
-                margin-top: 6px;
-            padding: 5px 5px 2px;
-            color: white;
-            font-weight: bold;
-            .border-radius(2px);
+   margin: 3px 7px;
+padding: 6px 11px 3px;
+         color: white;
+         min-width: 32px;
+         font-weight: bold;
     &.on{
             background: #AF1010;
             &:hover{ background: #F00; }
         }
     &.off{
-            background: #1D77B3;
-            &:hover{ background: #094268; }
+            background: #094268;
+            &:hover{ background: #1D77B3; }
         }
     }
     &.open{
@@ -250,7 +255,7 @@ border-bottom: 1px solid #284278;
         //min-height: 200px;
         padding: 10px 10px;
         margin-top: 9px;
-        margin-left: -220px;
+        margin-left: 0px;
         a {
             color: @linkColor;
             text-decoration: none;
@@ -304,8 +309,8 @@ border-bottom: 1px solid #284278;
 // Links
 .navbar .nav > li > a {
   float: none;
-  padding: 10px 10px 11px;
-  line-height: 19px;
+   margin: 3px 0 3px 7px;
+padding: 6px 3px;
   color: @navbarLinkColor;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0,0,0,.25);

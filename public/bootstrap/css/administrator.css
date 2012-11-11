@@ -681,7 +681,7 @@ ul.grid-list.grid {
   background-position: 100% 0;
 }
 .layout-block .main-block.has-main-block-aside .main-block-content {
-  margin-right: 315px;
+  margin-right: 310px;
 }
 .layout-block .main-block.has-main-block-aside .main-block-aside {
   width: 270px;
@@ -4353,7 +4353,7 @@ input[type="submit"].btn.small {
   text-decoration: none;
 }
 .navbar .brand {
-  float: left;
+  float: right;
   display: block;
   font-size: 20px;
   font-weight: 200;
@@ -4365,7 +4365,7 @@ input[type="submit"].btn.small {
   min-width: 105px;
   background: url('../img/logo.png') 0px 0px no-repeat scroll;
   height: 30px;
-  margin-top: 5px;
+  margin: 3px 0 2px;
 }
 .navbar.canvas .brand.logo {
   margin: 35px 0px 0;
@@ -4430,11 +4430,11 @@ input[type="submit"].btn.small {
 .navbar-search {
   position: relative;
   float: left;
-  margin-top: 6px;
-  margin-left: 165px;
+  margin-top: 3px;
   margin-bottom: 0;
 }
 .navbar-search .search-query {
+  width: 270px;
   padding: 4px 9px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -4519,18 +4519,19 @@ input[type="submit"].btn.small {
   display: block;
   float: left;
 }
-.navbar .nav > li.notification {
-  margin-left: 10px;
-  float: right!important;
+.navbar .nav > li .navbar-profile-link {
+  line-height: 1px;
+  padding: 1px 1px 0px 0px;
+  display: inline-block;
+  float: right;
+  margin-top: 3px;
 }
 .navbar .nav > li.notification a.dropdown-toggle {
-  margin-top: 6px;
-  padding: 5px 5px 2px;
+  margin: 3px 7px;
+  padding: 6px 11px 3px;
   color: white;
+  min-width: 32px;
   font-weight: bold;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
 }
 .navbar .nav > li.notification a.dropdown-toggle.on {
   background: #AF1010;
@@ -4539,10 +4540,10 @@ input[type="submit"].btn.small {
   background: #F00;
 }
 .navbar .nav > li.notification a.dropdown-toggle.off {
-  background: #1D77B3;
+  background: #094268;
 }
 .navbar .nav > li.notification a.dropdown-toggle.off:hover {
-  background: #094268;
+  background: #1D77B3;
 }
 .navbar .nav > li.notification.open a.dropdown-toggle .on {
   background: #F00;
@@ -4551,7 +4552,7 @@ input[type="submit"].btn.small {
   width: 440px;
   padding: 10px 10px;
   margin-top: 9px;
-  margin-left: -220px;
+  margin-left: 0px;
 }
 .navbar .nav > li.notification .dropdown-menu a {
   color: #3f729b;
@@ -4603,8 +4604,8 @@ input[type="submit"].btn.small {
 }
 .navbar .nav > li > a {
   float: none;
-  padding: 10px 10px 11px;
-  line-height: 19px;
+  margin: 3px 0 3px 7px;
+  padding: 6px 3px;
   color: #ffffff;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -5614,7 +5615,7 @@ a.badge:hover {
 }
 .carousel-control {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 15px;
   width: 40px;
   height: 40px;
@@ -5642,9 +5643,16 @@ a.badge:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 10px 15px 5px;
+  padding: 10px 15px 15px;
   background: #333333;
   background: rgba(0, 0, 0, 0.75);
+}
+.carousel-caption h1 {
+  color: #ffffff;
+}
+.carousel-caption .lead {
+  font-size: 18px;
+  margin-top: 10px;
 }
 .carousel-caption h4,
 .carousel-caption p {
@@ -5693,6 +5701,9 @@ a.badge:hover {
 }
 .pull-right {
   float: right;
+}
+.pull-right-important {
+  float: right !important;
 }
 .pull-left {
   float: left;
@@ -6696,7 +6707,8 @@ ol.timeline-items .timeline-item-li .timeline-item-interaction:before {
   border-bottom: 1px solid #c2c2c2;
 }
 .timeline-tips-list {
-  margin-left: 18px;
+  margin-left: 0px;
+  list-style: none;
 }
 .timeline-tips-list li {
   position: relative;
@@ -6731,13 +6743,13 @@ ol.timeline-items .timeline-item-li .timeline-item-interaction:before {
 .timeline-tips-list li .tip-actions {
   width: 16px;
   position: absolute;
-  left: -20px;
+  right: -20px;
   top: 0;
   background: #fcfcfc;
   display: none;
 }
 .timeline-tips-list li:hover .tip-actions {
-  display: block;
+  display: none;
 }
 .wizard {
   margin-bottom: 18px;
@@ -6972,7 +6984,7 @@ canvas.base {
   width: 98.93617020299999%;
 }
 .page-header:first-child {
-  padding: 5px 20px;
+  padding: 6px 20px;
   margin: -20px -20px 20px -20px;
   border-bottom: 1px solid #D4D4D4;
   background-color: #fafafa;

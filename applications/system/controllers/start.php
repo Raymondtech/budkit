@@ -63,10 +63,11 @@ class Start extends Platform\Controller {
         //To set the pate title use
         $this->output->setPageTitle("Featured");
         
-        $form  = "Featured Content";
-     
+        $frontpage      = $this->output->layout("system/frontpage"); 
+        $frontpageSide  = $this->output->layout("system/frontpageside");   
         
-        $this->output->addToPosition("body" , $form); 
+        $this->output->addToPosition("body" , $frontpage); 
+        $this->output->addToPosition("aside", $frontpageSide );
     }
 
 
