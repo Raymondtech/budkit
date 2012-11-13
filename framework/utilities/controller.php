@@ -112,7 +112,7 @@ abstract class Controller extends Library\Action {
         $this->authhandler = "dbauth";
         
         $this->output->set("user", $this->user );
-
+        
         $installed      =  $this->config->getParam("installed", false ,"database");
         $application    =  $this->application;
         $controller     =  $this->controller;

@@ -22,7 +22,7 @@
         <body class="responsive-body">
             <tpl:import layout="navbar" />
 
-            <div class="container-fluid left">
+            <div class="container">
                 <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <tpl:condition data="page.activesidebar" test="boolean" value="1"> 

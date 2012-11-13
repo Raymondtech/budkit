@@ -1,7 +1,7 @@
 <tpl:layout name="navbar" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-            <div class="container-fluid left">
+            <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".responsive-body">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -9,17 +9,14 @@
                 </a>
                 <a class="brand logo" href="/">Budkit</a>
                 <div class="nav-collapse">
-                    <form class="navbar-search pull-left span5" action="/search" method="get">
-                        <div class="row-fluid">
-                            <input type="text" class="search-query span12" name="query" placeholder="i18n:Search"  />
-                        </div>
-                    </form>
 
+                    <form class="navbar-search pull-right left-pad">
+                        <input type="text" class="search-query" placeholder="Search" />
+                    </form>
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-                        <ul class="nav pull-right span4" id="notifications-nav">    
-                            <li class="divider-vertical"></li>
+                        <ul class="nav pull-right"> 
                             <li class="notification dropdown">
-                                <a href="#" class="dropdown-toggle off" data-toggle="dropdown"><i class="icon-bell icon-16"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications<span class="badge badge-important">12</span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/system/start/dashboard/notifications">View all notifications</a> <a href="/system/start/dashboard/notifications" class="pull-right">Clear All</a></li>
                                     <li class="divider"></li>
@@ -32,13 +29,9 @@
                             </li>
 
                             <li class="usermenu dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<tpl:element type="text" data="user.user_name_id"/> <b class="caret">&nbsp;</b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><tpl:element type="text" data="user.user_full_name"/></a>
                                 <ul class="dropdown-menu" id="user-nav">
-                                    <li><a href="/member/profile/display/information" class="profile-link clearfix">
-                                            <img src="http://lorempixel.com/200/200/people/5" width="200" height="200" alt="Livingstone Fultang" />
-
-                                        </a>
-                                    </li>
+                                    <li><a href="/profile/view/">Your Profile </a></li>
                                     <li class="divider"></li>
                                     <li><a href="/system/start/index"><strong><tpl:i18n>Dashboard</tpl:i18n></strong></a></li>
                                     <li><a href="/system/activity/stream" tpl:i18n="">Activity</a></li>
@@ -53,13 +46,11 @@
 
                         </ul>
                     </tpl:condition>
-
-
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
                         <ul class="nav pull-right"> 
                             <li><a href="/member/session/start">Sign in</a></li>
                         </ul> 
-                    </tpl:condition>
+                    </tpl:condition>   
 
                 </div>
             </div>

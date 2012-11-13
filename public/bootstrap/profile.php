@@ -23,7 +23,7 @@
         <body  class="responsive-body">
             <tpl:import layout="navbar" />
 
-            <div class="container-fluid left"> 
+            <div class="container"> 
                 <tpl:block data="page.block.alerts" />  
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed has-bg has-aside-block">

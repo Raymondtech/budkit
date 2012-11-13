@@ -445,18 +445,18 @@ class Output extends Object {
         if (file_exists($file)) {
             include $file;
         }
-        $parsed = ob_get_contents();
+        $_parsed = ob_get_contents();
         //Close Buffer!
         ob_end_clean();
 
-        if ($set && !empty($setass)) {
+        if ($set && !empty($setas)) {
             //Set the parsed layout as a variable
-            $this->set($setass, $parsed);
+            $this->set($setas, $_parsed);
         }
 
         //Format Parsed!
         $handler = $this->getHandler();
-        $parsed = $handler->parse($parsed, $handler);
+        $parsed = $handler->parse($_parsed, $handler);
 
         //\Platform\Debugger::log( htmlentities($layout ) );
 

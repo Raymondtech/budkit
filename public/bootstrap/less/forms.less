@@ -62,7 +62,7 @@ label {
 // Inputs, Textareas, Selects
 input,
 textarea,
-select,
+//select,
 .uneditable-input {
   display: inline-block;
   width: 210px;
@@ -194,18 +194,18 @@ appearance: none; /* CSS3 */
   text-align: left;
   text-shadow: 0 1px 1px rgba(255,255,255,.75);
   vertical-align: middle;
-    background-color: @white;
+    @bgimg:url(../img/format-bullet-list.png);
+    #gradient > .vertical-with-image(@white, darken(@white, 10%),@bgimg );
 
   border: 1px solid #ccc;
   border-bottom-color: #bbb;
   .border-radius(1px);
 
-    background-image: url(../img/format-bullet-list.png);
-    background-position: 5px 50%;
-    padding-left: 25px;
-    background-repeat: no-repeat;
+   background-position: 100% 50%;
+   padding-right: 30px;
+   background-repeat: no-repeat;
 
-  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  //.box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
   @transition: border linear .2s, box-shadow linear .2s;
   .transition(@transition);
     
@@ -221,12 +221,8 @@ appearance: none; /* CSS3 */
 select:hover, select:active {
   color: @grayDark;
   text-decoration: none;
-  background-color: darken(@white, 10%);
-  //background-position: 0 -15px;
-
-    background-image: url(../img/format-bullet-list.png);
-    background-position: 5px 50%;
-    padding-left: 25px;
+    @bgimg:url(../img/format-bullet-list.png);
+    #gradient > .vertical-with-image(darken(@white, 10%),darken(@white, 10%),@bgimg );
     background-repeat: no-repeat;
 
   // transition is only when going to hover, otherwise the background
@@ -237,9 +233,9 @@ select:hover, select:active {
 // Focus state for keyboard and accessibility
 select:focus {
   .tab-focus();
-  border-color: rgba(82,168,236,.8);
-  @shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
-  .box-shadow(@shadow);
+  //border-color: rgba(82,168,236,.8);
+  //@shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+  //.box-shadow(@shadow);
   outline: 0;
   outline: thin dotted \9; /* IE6-9 */
 }

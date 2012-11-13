@@ -34,9 +34,6 @@
             break;
             case 1 :  echo($this->layout("license")); ?>
 
-            <span style="display: block"><input type="radio" name="eula_accept" value="1"  /> <?php echo _(' I <strong>ACCEPT</strong> the terms and conditions'); ?></span>
-            <span style="display: block"><input type="radio" name="eula_accept" value="0" /> <?php echo _(' I <strong>DO NOT accept</strong> the terms and conditions'); ?> </span>
-
             <?php break;
             default : ?>
 
@@ -49,6 +46,8 @@
             <div class="clearfix">
                 <?php if($step>1) : ?>
                 <a href="/setup/install/step'.((int) $this->get('step') - 1) " class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
+                <?php else: ?>
+                     <span style="display: block" class="pull-left"><input type="checkbox" name="eula_accept" value="1"  /> <?php echo _(' I <strong>ACCEPT</strong> the terms and conditions'); ?></span>
                 <?php endif; ?>
                 <button type="submit" class="btn pull-right"><?php echo "Next Step" ?></button>
             </div>
