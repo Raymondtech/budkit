@@ -3877,6 +3877,7 @@ input[type="submit"].btn.small {
 .nav-block > li {
   background: #F5F5F5;
   border-bottom: 1px solid #E8E9EB;
+  border-top: 1px solid #F9F9F9;
 }
 .nav-block > li.open {
   background: none;
@@ -4353,12 +4354,13 @@ input[type="submit"].btn.small {
   text-decoration: none;
 }
 .navbar .brand {
-  float: right;
   display: block;
   font-size: 20px;
   font-weight: 200;
   line-height: 1;
   color: #ffffff;
+  width: 260px;
+  float: left;
 }
 .navbar .brand.logo {
   text-indent: -9999em;
@@ -4434,7 +4436,7 @@ input[type="submit"].btn.small {
   margin-bottom: 0;
 }
 .navbar-search .search-query {
-  width: 270px;
+  width: 310px;
   padding: 4px 9px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -4551,8 +4553,10 @@ input[type="submit"].btn.small {
 .navbar .nav > li.notification .dropdown-menu {
   width: 440px;
   padding: 10px 10px;
-  margin-top: 9px;
+  margin-top: 5px;
   margin-left: 0px;
+  left: 0 ;
+  right: auto ;
 }
 .navbar .nav > li.notification .dropdown-menu a {
   color: #3f729b;
@@ -5295,10 +5299,10 @@ a.thumbnail-icon:hover {
 .badge {
   font-size: 10.998px;
   font-weight: bold;
-  line-height: 14px;
   color: #ffffff;
   vertical-align: baseline;
   white-space: nowrap;
+  margin: 0 5px;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #999999;
 }
@@ -5307,13 +5311,18 @@ a.thumbnail-icon:hover {
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
+  line-height: 14px;
   margin-right: 10px;
 }
 .badge {
-  padding: 2px 6px 1px;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
+  padding: 3px 6px 2px 4px;
+  min-width: 13px;
+  display: inline-block;
+  text-align: center;
+  line-height: 13px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 a.label:hover,
 a.badge:hover {
@@ -6726,7 +6735,7 @@ ol.timeline-items .timeline-item-li .timeline-item-interaction:before {
   opacity: 1;
 }
 .timeline-tips-list li .tip-popularity {
-  font-size: 150%;
+  font-size: 110%;
   font-weight: bold;
   position: absolute;
   right: 0px;

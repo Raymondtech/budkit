@@ -47,6 +47,7 @@ class Entity extends Model {
     protected $objectId = NULL;
     protected $objectType = "object";
     protected $objectURI = NULL;
+    protected $valueGroup = NULL; //property value groups can be sub categorised;
 
     /**
      * Sets the property Value before save
@@ -165,7 +166,7 @@ class Entity extends Model {
         if (empty($property) || empty($valueA) || empty($valueB) || empty($select))
             return false; //We must have eactly one property value pair defined 
 
-        $query = static::getObjectQuery($select);
+        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values");
         $where = false;
         if (!empty($objectId) || !empty($objectURI) || !empty($objectType)):
             $query .="\nWHERE";
@@ -209,7 +210,7 @@ class Entity extends Model {
         if (empty($property) || empty($value))
             return NULL; //We must have eactly one property value pair defined 
         $select = (empty($select)) ? array( $property ) : array_merge( array( $property ) , $select); //If we have an empty select use the values from property;
-        $query = static::getObjectQuery($select);
+        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values");
         $where = false;
         if (!empty($objectId) || !empty($objectURI) || !empty($objectType)):
             $query .="\nWHERE";
@@ -252,7 +253,7 @@ class Entity extends Model {
         if (empty($properties) || empty($values))
             return false; //We must have eactly one property value pair defined 
         $select = array_merge($properties, $select); //If we have an empty select use the values from property;
-        $query = static::getObjectQuery($select);
+        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values");
         $where = false;
         if (!empty($objectId) || !empty($objectURI) || !empty($objectType)):
             $query .="\nWHERE";
@@ -300,7 +301,7 @@ class Entity extends Model {
      */
     final public function getObjectsList($objectType, $properties) {
 
-        $query = static::getObjectQuery($properties);
+        $query = static::getObjectQuery($properties,"?{$this->valueGroup}property_values");
         $query .="\nWHERE o.object_type='{$objectType}' GROUP BY o.object_id";
 
         $results = $this->database->prepare($query)->execute();
@@ -323,7 +324,7 @@ class Entity extends Model {
             $properties = array_keys($this->propertyModel);
         endif;
 
-        $query = static::getObjectQuery($properties);
+        $query = static::getObjectQuery($properties,"?{$this->valueGroup}property_values");
         $query .="\nWHERE o.object_uri='{$objectURI}' GROUP BY o.object_id";
 
         $results = $this->database->prepare($query)->execute();
@@ -368,7 +369,7 @@ class Entity extends Model {
             $properties = array_keys($this->propertyModel);
         endif;
 
-        $query = static::getObjectQuery($properties);
+        $query = static::getObjectQuery($properties, "?{$this->valueGroup}property_values");
         $query .="\nWHERE o.object_id='{$objectId}' GROUP BY o.object_id";
 
         $results = $this->database->prepare($query)->execute();
@@ -404,10 +405,9 @@ class Entity extends Model {
      * @param type $properties
      * @return string
      */
-    final private static function getObjectQuery($properties) {
+    final private static function getObjectQuery($properties, $vtable = '?property_values') {
         //Join Query
-        $query = "SELECT o.object_id, o.object_uri, o.object_type,";
-
+        $query  = "SELECT o.object_id, o.object_uri, o.object_type,";
         //If we are querying for attributes
         $count = count($properties);
         if (!empty($properties) || $count < 1):
@@ -423,7 +423,7 @@ class Entity extends Model {
             endforeach;
 
             //The data Joins
-            $query .= "\nFROM ?property_values v"
+            $query .= "\nFROM {$vtable} v"
                     . "\nLEFT JOIN ?properties p ON p.property_id = v.property_id"
                     . "\nLEFT JOIN ?objects o ON o.object_id=v.object_id";
         else:
@@ -479,8 +479,9 @@ class Entity extends Model {
         //If property exists and value doesnt insert new value row
         //If property exists and value exists update value
         //if propert does not exists, insert property and insert value
+        $vtable = "?{$this->valueGroup}property_values";
         
-        $iquery = "REPLACE INTO ?property_values (property_id, object_id, value_data)";
+        $iquery = "REPLACE INTO {$vtable} (property_id, object_id, value_data)";
         $iqueryV= array();
         foreach ($this->propertyData as $propertyName=>$valueData):
             //@TODO validate the data?
@@ -501,6 +502,7 @@ class Entity extends Model {
         }
         return true;
     }
+    
 
     /**
      * Returns the current data model
@@ -538,6 +540,25 @@ class Entity extends Model {
         $this->setObjectType($objectType);
 
         return $this;
+    }
+    
+    /**
+     * Defines a sub table for value data;
+     * 
+     * @param type $valueGroup
+     */
+    final public function defineValueGroup( $valueGroup = NULL){
+       $this->valueGroup    = !empty($valueGroup) ? trim( $valueGroup )."_" : NULL;
+       //you must have this proxy table created at setup
+    }
+    
+    /**
+     * Returns the value group
+     * 
+     * @return string
+     */
+    final public function getValueGroup(){
+        return $this->valueGroup;
     }
 
     /**

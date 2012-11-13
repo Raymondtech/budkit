@@ -65,7 +65,10 @@ class Activity extends Platform\Entity {
             "activity_object" => array("Object", "varchar", 1000),
             "activity_target" => array("Target", "varchar", 1000),
             "activity_permissions" => array("First Name", "mediumtext", 50), //* //allo:{},deny:{}
-                ), "activity");
+        ), "activity");
+        
+        $this->defineValueGroup("activity");
+        
     }
 
     public function addActivity() {
@@ -79,6 +82,8 @@ class Activity extends Platform\Entity {
 
         print_R($this->input->data('post'));
 
+        echo $this->getValueGroup();
+        
         die;
     }
 

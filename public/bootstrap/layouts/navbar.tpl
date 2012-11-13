@@ -9,15 +9,14 @@
                 </a>
                 <a class="brand logo" href="/">Budkit</a>
                 <div class="nav-collapse">
-                    <form class="navbar-search pull-left">
+
+                    <form class="navbar-search pull-right left-pad">
                         <input type="text" class="search-query" placeholder="Search" />
                     </form>
-
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-                        <ul class="nav span5"> 
-                            
+                        <ul class="nav pull-right"> 
                             <li class="notification dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications<span class="badge badge-important">12</span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/system/start/dashboard/notifications">View all notifications</a> <a href="/system/start/dashboard/notifications" class="pull-right">Clear All</a></li>
                                     <li class="divider"></li>
@@ -28,9 +27,9 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <li class="usermenu dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><tpl:element type="text" data="user.user_name_id"/></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><tpl:element type="text" data="user.user_full_name"/></a>
                                 <ul class="dropdown-menu" id="user-nav">
                                     <li><a href="/profile/view/">Your Profile </a></li>
                                     <li class="divider"></li>
@@ -44,17 +43,14 @@
                                     <li><a href="/sign-out">Sign out</a></li>
                                 </ul>
                             </li>
-                                
+
                         </ul>
                     </tpl:condition>
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
-                        <ul class="nav span3"> 
+                        <ul class="nav pull-right"> 
                             <li><a href="/member/session/start">Sign in</a></li>
                         </ul> 
-                    </tpl:condition>
-                    
-
-
+                    </tpl:condition>   
 
                 </div>
             </div>
