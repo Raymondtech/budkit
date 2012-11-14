@@ -58,6 +58,7 @@ class User extends Platform\Entity {
                 "user"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models
+         $this->defineValueGroup("user"); //Tell the system we are using a proxy table
     }
     /**
      * Store the user data in the database

@@ -59,6 +59,7 @@ class Time extends \Library\Date {
      */
     public static function stamp($time = null) {
         //converts a time to timestamp
+        return date("y-m-d h:i:s");
     }
 
     /**

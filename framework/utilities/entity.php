@@ -447,8 +447,8 @@ class Entity extends Model {
     final public function saveObject($objectURI = NULL, $objectType = NULl) {
 
         //Get a randomstring for the objectURI
-        $objectURI = ( empty($objectURI) && empty($this->objectURI) ) ? Framework::getRandomString(6) : (!empty($this->objectURI) ? $this->objectURI : $objectURI);
-        $objectType = ( empty($objectType) && empty($this->objectType) ) ? Framework::getRandomString(6) : (!empty($this->objectType) ? $this->objectType : $objectType);
+        $this->objectURI = $objectURI = ( empty($objectURI) && empty($this->objectURI) ) ? Framework::getRandomString(6) : (!empty($this->objectURI) ? $this->objectURI : $objectURI);
+        $this->objectType = $objectType = ( empty($objectType) && empty($this->objectType) ) ? Framework::getRandomString(6) : (!empty($this->objectType) ? $this->objectType : $objectType);
         //Ensure we have all the properties
         if (empty($this->propertyModel) ||empty($this->propertyData))
             return false; //We have nothing to save
@@ -511,6 +511,15 @@ class Entity extends Model {
      */
     final public function getPropertyModel() {
         return $this->propertyModel;
+    }
+    
+    /**
+     * Returns the current data model values
+     * 
+     * @return type
+     */
+    final public function getPropertyData() {
+        return $this->propertyData;
     }
 
     /**

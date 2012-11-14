@@ -176,6 +176,10 @@ final class Dispatcher extends \Library\Object {
         //@TODO Should we Allow onBeforeDispatch to modify $this->task?
         Library\Event::trigger('onBeforeDispatch', $route);
         
+        //Register the session lastRequestURL;
+        //$referer = $this->task->input->getString("HTTP_REFERER","/","server");
+        \Library\Session::set("lastRequestURL", $this->task->input->getString("HTTP_REFERER","/","server"));
+        
         \call_user_func_array(array($this->task, $method), (array) $argmts);
         //Try throw exception;
     }

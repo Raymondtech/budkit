@@ -4,7 +4,7 @@
         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
             <fieldset class="timeline-item-publisher no-margin">
                 <div class="row-fluid">
-                    <textarea class="input-xxxlarge focused" rows="3" name="activity[content]" placeholder="Where are you now and what are you doing?"></textarea>
+                    <textarea class="input-xxxlarge focused" rows="3" name="activity_content" placeholder="Where are you now and what are you doing?"></textarea>
                 </div>
                 <div class="timeline-item-publisher-actions">
                     <div class="btn-toolbar no-margin pull-right">
@@ -18,7 +18,7 @@
                     </div>
                     <div class="pull-left">
                         <div class="controls">
-                            <select name="activity[permissions]" class="input-xxxlarge">
+                            <select name="activity_permissions" class="input-xxxlarge">
                                 <option value="1">Share with Everybody</option>
                                 <option value="2">Share with Friends only</option>
                                 <option value="3">Share with Colleagues</option>
@@ -28,9 +28,9 @@
                     </div>
                 </div>
             </fieldset>
-            <input type="hidden" name="activity[author_id]" value="" />
-            <input type="hidden" name="activity[verb]" value="post" />
-            <input type="hidden" name="activity[provider]" value="budkit" />
+            <input type="hidden" name="activity_author_id" value="" />
+            <input type="hidden" name="activity_verb" value="post" />
+            <input type="hidden" name="activity_provider" value="budkit" />
         </tpl:condition>
         <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
             <div class="alert alert-warning">

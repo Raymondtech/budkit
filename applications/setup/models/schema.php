@@ -447,12 +447,13 @@ final class Schema extends Platform\Model {
         );
     }
 
-    public static function createPropertyValuesProxyTable($tableName) {
+    public static function createPropertyValuesProxyTable($group) {
 
-        if( strtolower($tableName) === static::$database->replacePrefix("?property_values")):
-        
+        $group = strtolower($group);
+        if (!empty($group)) :
+            static::$database->query("DROP TABLE IF EXISTS `?{$group}_property_values`;");
             static::$database->query(
-                "CREATE TABLE IF NOT EXISTS `{$tableName}` (
+                    "CREATE TABLE IF NOT EXISTS `?{$group}_property_values` (
                    `value_id` mediumint(11) NOT NULL AUTO_INCREMENT,
                    `value_data` text NOT NULL,
                    `value_updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -465,22 +466,29 @@ final class Schema extends Platform\Model {
                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;"
             );
 
-            static::$database->query("DROP TRIGGER IF EXISTS `{$tableName}_validate_insert`;");
+            static::$database->query("DROP TRIGGER IF EXISTS `?{$group}_property_value_validate_insert`;");
             static::$database->query(
-                    "CREATE TRIGGER `{$tableName}_validate_insert` BEFORE INSERT ON `?property_values`
+                    "CREATE TRIGGER `?{$group}_property_value_validate_insert` BEFORE INSERT ON `?{$group}_property_values`
                     FOR EACH ROW
                     BEGIN
                         CALL ?property_value_validate(NEW.property_id, NEW.value_data);
                     END;"
             );
 
-            static::$database->query("DROP TRIGGER IF EXISTS `{$tableName}_validate_update`;");
+            static::$database->query("DROP TRIGGER IF EXISTS `?{$group}_property_value_validate_update`;");
             static::$database->query(
-                    "CREATE TRIGGER `{$tableName}_validate_update` BEFORE UPDATE ON `?property_values`
+                    "CREATE TRIGGER `?{$group}_property_value_validate_update` BEFORE UPDATE ON `?{$group}_property_values`
                     FOR EACH ROW
                     BEGIN
                         CALL ?property_value_validate(NEW.property_id, NEW.value_data);
                     END;"
+            );
+                    
+            //Add reference constrains
+            static::$database->query(
+                    "ALTER TABLE `?{$group}_property_values`
+                    ADD CONSTRAINT `{$group}_property_values_ibfk_1` FOREIGN KEY (`object_id`) REFERENCES `?objects` (`object_id`),
+                    ADD CONSTRAINT `{$group}_property_values_ibfk_2` FOREIGN KEY (`property_id`) REFERENCES `?properties` (`property_id`) ON DELETE CASCADE;"
             );
         endif;
     }
@@ -589,6 +597,8 @@ final class Schema extends Platform\Model {
         static::createIndices();
         static::insertPropertyDatatypes();
 
+        static::createPropertyValuesProxyTable("activity"); //The activity table
+        static::createPropertyValuesProxyTable("user"); //The users table
         //static::createUsermetaTable();
         //static::createUsersTable();
         //static::createUsersView();

@@ -134,6 +134,17 @@ abstract class Controller extends Library\Action {
     final public function getMethod() {
         return $this->method;
     }
+    
+    /**
+     * Returns the request back to referer;
+     * 
+     * @return boolean (changes state?)
+     */
+    final public function returnRequest(){
+                
+        return $this->redirect( \Library\Session::get("lastRequestURL") );
+        //return true;
+    }
 
     /**
      * Gets the name of the action controller

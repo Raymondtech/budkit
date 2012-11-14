@@ -40,7 +40,6 @@ use Application\System\Views as View;
  */
 class Activity extends Platform\Controller {
 
-
     /**
      * The default page, consider this the homepage
      * of the application, You can change this to anything else in the config/routes.php 
@@ -48,78 +47,67 @@ class Activity extends Platform\Controller {
      * @return type 
      */
     public function index() {
-        
-        $activity   = $this->output->layout("timeline");
-        $tips       = $this->output->layout("recommendations");
-        
+
+        $activity = $this->output->layout("timeline");
+        $tips = $this->output->layout("recommendations");
+
         $this->output->addToPosition("side", $tips);
         $this->output->addToPosition("body", $activity);
     }
-    
+
     /**
      * Creates a new activity feed $post
      * 
      * @return array $post 
      */
-    public function create(){
-        
+    public function create() {
+
         //Is the user authenticated?
         $this->requireAuthentication();
-        
-        $postid = null;
         //Is the input method submitted via POST;
+
         if ($this->input->methodIs("post")) {
-            
+            $model = $this->load->model("activity");
             //@1 Check where the form is comming from
             //@2 Validate the user permission
             //@3 Privacy settings, If posting to wall can the user post to the wall
-           
             //@4 Add the post;
-            if(( $post = $this->load->model("activity")->addActivity() ) == FALSE){              
-                $this->alert( _("Could not add your post"), null, "error" );
-            }else{         
-                $this->alert( _("You activity post has been saved and publised"), null, "success"); 
+            if (!$model->addActivity()) {
+                $this->alert(_("Could not add your post"), null, "error");
+            } else {
+                $this->alert(_("You post has been saved and publised"), null, "success");
             }
-            //Return the user to a post page
-            $postid = $post->post_id;
         }
-       
-        $this->redirect("/system/activity/read/$postid");
-        
-        return true;
+        //Returns the request back tot the reffer;
+        $this->returnRequest();
     }
-    
+
     /**
      * Alias for listing all activity posts;
      * @TODO If params, read individual items;
      * 
      * @return type 
      */
-    public function read(){
-        
+    public function read() {
+
         return $this->index();
-    } 
-    
+    }
+
     /**
      * Updates an existing activity posts;
      * 
      * @return void; 
      */
-    public function update(){
-        
-        
-    }
-    
-    
+    public function update() {}
     /**
      * Deletes an activity posts;
      *  
      * @return void;
      */
-    public function delete(){
-        
-        $this->alert( _("Could not delete your post."), _("There seems to be a problem with authenticating this session"), "error");
-        
+    public function delete() {
+
+        $this->alert(_("Could not delete your post."), _("There seems to be a problem with authenticating this session"), "error");
+
         return $this->read();
     }
 

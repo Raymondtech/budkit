@@ -303,23 +303,8 @@ final class Router extends Object {
 
         Event::trigger('onBeforeRoute', $path);
 
-        // Load the routes.php file.
-        @include(FSPATH . 'routes.inc');
-
-        $routers = Folder::itemizeFind("routes.inc", APPPATH, 0, TRUE, 1);
-
-        //print_R($routers);
-        foreach ($routers as $i => $routesFile) {
-            if (!Folder::is($routesFile)) {
-                //include the individual app routes
-                @include rtrim($routesFile, DS);
-            }
-        }
-
-        $this->routes = (!isset($route) OR !is_array($route)) ? array() : $route;
-
-        unset($route); //will need this later at some point;
-        //echo $this->path;
+        //Loads all the route maps into $this->routes;
+        $this->loadRoutes();
 
         $thisRequestPath = preg_replace('/^\//', '', rtrim($this->path, "/"));
         $thisRequestSegments = explode("/", $this->path);
@@ -512,6 +497,7 @@ final class Router extends Object {
 
             return $this;
         }
+        //$this->unloadRoutes();
     }
 
     /**
@@ -538,6 +524,43 @@ final class Router extends Object {
         $this->elements[$element] = $value;
 
         return $this;
+    }
+    
+    /**
+     * Removes the loaded route maps after execution
+     * Just an attempt to keep memory usage down
+     * 
+     * @return void
+     */
+    public function unloadRoutes(){
+        unset($this->routes);
+    }
+    
+    /**
+     * Loads all the router map required for routing
+     * 
+     * @return array $this->routes
+     */
+    public function loadRoutes(){
+        
+        // Load the routes.php file.
+        @include(FSPATH . 'routes.inc');
+        $routers = Folder::itemizeFind("routes.inc", APPPATH, 0, TRUE, 1);
+
+        //print_R($routers);
+        foreach ($routers as $i => $routesFile) {
+            if (!Folder::is($routesFile)) {
+                //include the individual app routes
+                @include rtrim($routesFile, DS);
+            }
+        }
+
+        $this->routes = (!isset($route) OR !is_array($route)) ? array() : $route;
+
+        unset($route); //will need this later at some point;
+        //echo $this->path;
+        
+        return $this->routes;
     }
 
     /**
