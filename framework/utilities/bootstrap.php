@@ -35,9 +35,9 @@ use Platform;
 require( FSPATH . 'framework' . DS .'utilities'.DS. 'loader' . EXT);
 require( FSPATH . 'framework' . DS .'utilities'.DS. 'functions' . EXT);
 
-spl_autoload_register(new Platform\Loader("Platform", FSPATH . 'framework'.DS.'utilities'));
-spl_autoload_register(new Platform\Loader("Library", FSPATH . 'framework' . DS . 'libraries'));
-spl_autoload_register(new Platform\Loader("Application", FSPATH . 'applications'));
+spl_autoload_register(new Platform\Loader("Platform", array( FSPATH . 'framework'.DS.'utilities', FSPATH . 'vendors'.DS.'utilities' ) ));
+spl_autoload_register(new Platform\Loader("Library", array( FSPATH . 'framework' . DS . 'libraries', FSPATH . 'vendors' . DS . 'libraries') ) );
+spl_autoload_register(new Platform\Loader("Application", array( FSPATH . 'applications', FSPATH .'vendors'.DS. 'applications')));
 
 /**
  * -----------------------------------------------------
