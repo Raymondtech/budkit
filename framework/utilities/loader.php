@@ -61,7 +61,7 @@ final class Loader{
      *
      * @var type 
      */
-    protected $paths;
+    protected $path;
 
     /**
      *
@@ -283,7 +283,7 @@ final class Loader{
 
     /**
      *
-     * @staticvar Loader $instance
+     * @static var Loader $instance
      * @param type $namespace
      * @param type $dir
      * @return Loader 
@@ -312,11 +312,25 @@ final class Loader{
             if ($this->namespace !== self::GLOBAL_NAMESPACE) {
                 $class = substr($class, strlen($this->namespace) + strlen(DS));
             }
-            $file = strtolower( $this->path . DS . $class . EXT );
-            
-            if (is_readable($file)) {
-                require_once( $file );
-            }
+            if(is_array( $this->path ) ) :
+                //To allow overides by vendors, we reverse the array
+                $paths = array_reverse( $this->path );
+                
+                //First to find
+                foreach($paths as $path ):
+                    $file = strtolower( $path . DS . $class . EXT );
+                    if (is_readable($file)) {
+                        require_once( $file );
+                        break;
+                    }
+                    
+                endforeach;
+            else:
+                $file = strtolower( $this->path . DS . $class . EXT );
+                if (is_readable($file)) {
+                    require_once( $file );
+                }
+            endif;
         }
     }
 }

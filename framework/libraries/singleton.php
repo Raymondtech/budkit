@@ -18,7 +18,6 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/i18n
  * @since      Class available since Release 1.0.0 June 6, 2012 9:09:41 AM
  * 
  */
@@ -26,19 +25,16 @@
 namespace Library;
 
 /**
- * What is the purpose of this class, in one sentence?
- *
- * How does this class achieve the desired purpose?
+ * Library class to simplify singleton definitions
  *
  * @category   Libraries
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/i18n
  * @since      Class available since Release 1.0.0 Jan 15, 2012 3:09:41 AM
  */
-class Singleton {
+class Singleton extends Object {
 
     static $_instance = NULL;
 

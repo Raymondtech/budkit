@@ -18,24 +18,22 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/validate
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM 
  */
 
 namespace Library;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Validation class for semi-auto validating user input
  *
- * How does this class achieve the desired purpose?
+ * IMPORTANT: This validation class is not a sanitization class. The Input library
+ * Should be used for all filteration and sanitization needs.
  *
  * @category   Library
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/validate
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 final class Validate extends \Library\Object {
@@ -49,12 +47,12 @@ final class Validate extends \Library\Object {
     }
 
     /**
-     * Validates a string
+     * Uses a custom RegEx Pattern to validate a string. Or alternatively is_string()
      * 
-     * @param type $str
-     * @param type $regExp
-     * @param type $length
-     * @return type 
+     * @param string $str The input string to be validated
+     * @param string $regExp A custom input validation pattern
+     * @param interger $length Optional string length specification
+     * @return booleant true or false. Returns true if validation rules met, or false otherwise
      */
     public static function string($str, $regExp=null, $length=null) {
         
@@ -82,21 +80,20 @@ final class Validate extends \Library\Object {
     }
 
     /**
-     * Validates a boolean
+     * Validates a boolean datatype. Wrapper method for is_bool()
      * 
-     * @param type $bool
-     * @param type $value
-     * @return type 
+     * @param mixed $bool the input data
+     * @return boolean Returns true if datatype is boolean
      */
-    public static function boolean($bool, $value=null) {
+    public static function boolean($bool ) {
         return is_bool($bool);
     }
 
     /**
-     * Validates a decimal
+     * Validates a decimal 
      *
-     * @param type $dec
-     * @return type 
+     * @param string $dec
+     * @return boolean True if is true decimal, False if not 
      */
     public static function decimal( $decimal ) {
         
@@ -109,9 +106,9 @@ final class Validate extends \Library\Object {
     /**
      * Validates a character is alphanumeric
      * 
-     * @param type $alnum
-     * @param type $length
-     * @return type 
+     * @param string $alnum
+     * @param interger $length
+     * @return boolean True if is alphanumeric, false if not 
      */
     public static function alphaNumeric($alnum, $length = null) {
         
@@ -125,8 +122,8 @@ final class Validate extends \Library\Object {
     /**
      * Checks that a string is a timestamp
      * 
-     * @param type $tstamp
-     * @return type 
+     * @param string $tstamp
+     * @return boolean True if is timestamp, false if not;
      */
     public static function timestamp($tstamp) {
         return ((string)(int)$tstamp === $tstamp) 
@@ -135,29 +132,30 @@ final class Validate extends \Library\Object {
     }
 
     /**
-     * Validate if a string is a flt
+     * Validate if a string is a float. 
      * 
-     * @param type $flt
-     * @return type 
+     * @param string $flt
+     * @return boolean True if is float, False if not. 
      */
     public static function float($flt) {
         return is_int($flt);
     }
 
     /**
-     *
-     * @param type $num
-     * @return type 
+     * Checks input variable $num is a number 
+     * 
+     * @param mixed $num input data
+     * @return boolean True if is number, False if not
      */
     public static function number($num) {
         return is_int($num);
     }
 
     /**
-     * Validates an interger
+     * Validates an interger. Checks input $int is an Interger datatype
      * 
-     * @param type $int
-     * @return type 
+     * @param mixed $int
+     * @return boolean True if is interger, False if its not. 
      */
     public static function interger($int) {
         return is_int($int);
@@ -167,7 +165,8 @@ final class Validate extends \Library\Object {
     /**
      * Validates an ip address format
      *
-     * @param type $address 
+     * @param string $address 
+     * @return boolean True if it is a valid IP address, False if Not.
      */
     public static function IP( $address ) {
         
@@ -188,8 +187,8 @@ final class Validate extends \Library\Object {
     /**
      * Quick and easy email validation
      * 
-     * @param type $email
-     * @return boolean 
+     * @param string $email
+     * @return boolean True if is valid email address, False if not
      */
     public static function email($email) {
 

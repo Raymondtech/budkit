@@ -597,5 +597,4 @@ class Entity extends Model {
 
         return $instance;
     }
-
 }

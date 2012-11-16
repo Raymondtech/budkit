@@ -18,7 +18,6 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/uri
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
@@ -26,64 +25,74 @@
 namespace Library;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * A library providing URI and URL parsing capability
  *
- * How does this class achieve the desired purpose?
+ * The main purpose of this class is to automatically determine the key components 
+ * pertaining to identifying the requested resource as well as build resource identifiers
+ * to system resources and actions. Whilst, tt does not provide any routing capability,
+ * this class is crucial to routing user queries to appropriate actions. cf \Library\Router
  *
  * @category   Library
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/uri
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Uri {
+final class Uri extends Object {
 
     /**  
+     * Host 
      * @var string 
      */
     private $host;
     
     /**
-     * @var type 
+     * Protocol
+     * @var string 
      */
     private $scheme = "http";
     
     /**
-     * @var type 
+     * Path
+     * @var string 
      */
     private $path = "/";
     
     /**
-     * @var type 
+     * The Request script
+     * 
+     * @var string
      */
     private $file = "index.php";
     
     /**
-     * @var type 
+     * Resource
+     * @var string 
      */
     private $resource;
     
     /**
-     * @var type 
+     * Authentication credentials
+     * 
+     * @var string 
      */
     private $credentials;
     
     /**
-     * @var type 
+     * Auto determined parts
+     * 
+     * @var string 
      */
     private $parts;
     
     /**
-     * @var type 
+     * Fragment
+     * 
+     * @var string 
      */
     private $fragment;
     
-    /**
-     * @var type 
-     */
-    private static $routes;
 
     /**
      * Constructor for the URI Library Object
@@ -120,7 +129,7 @@ final class Uri {
     /**
      * Builds a parsable query string from the request
      * 
-     * @return type 
+     * @return string The query string 
      */
     private static function buildQueryString() {
 
@@ -161,8 +170,8 @@ final class Uri {
     /**
      * Uses a route map ti compile a query?
      * 
-     * @param type $partsArray 
-     * @return type string
+     * @param array $partsArray 
+     * @return string A well formed internalized URL from parts
      */
     public function compile($partsArray) {
         
@@ -181,8 +190,8 @@ final class Uri {
     /**
      * Resolves a url adds path if missing
      * 
-     * @param string $uri
-     * @return string 
+     * @param string $url THe Url to internalize
+     * @return string A well formed internalized URL
      */
     public static function internal($url ='') {
 
@@ -230,7 +239,7 @@ final class Uri {
     }
 
     /**
-     * 
+     * Determines any authentication credentials embeded in URIs
      * 
      * @param string $paramname
      * @param mixed $default
@@ -250,9 +259,9 @@ final class Uri {
     }
 
     /**
-     * Gets the query string
+     * Returns the query string
      * 
-     * @return type 
+     * @return string 
      */
     public function getQuery() {
         return $this->path;
@@ -270,7 +279,7 @@ final class Uri {
     /**
      * Get path from uri
      * 
-     * @return type 
+     * @return string 
      */
     public function getPath() {
         return $this->path;
@@ -314,16 +323,18 @@ final class Uri {
     }
 
     /**
-     *
-     * @return type 
+     * Returns the request protocol
+     * 
+     * @return string 
      */
     public function getScheme() {
         return $this->scheme;
     }
 
     /**
+     * Sets the URL path
      *
-     * @param type $path 
+     * @param string $path 
      * 
      */
     private function setPath($path) {
@@ -331,17 +342,9 @@ final class Uri {
     }
 
     /**
-     *
-     * @return type 
-     */
-    public function getFragment() {
-        return $this->fragment;
-    }
-
-    /**
      * Returns the script name
      * 
-     * @return type 
+     * @return string 
      */
     public function getScriptName() {
 
