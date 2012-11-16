@@ -888,7 +888,7 @@ h6 {
   border-bottom: 1px solid #eeeeee;
 }
 .page-header h1 {
-  line-height: 1;
+  line-height: 1.75;
   font-weight: bold;
   font-size: 18px;
 }
@@ -4359,12 +4359,12 @@ input[type="submit"].btn.small {
   font-weight: 200;
   line-height: 1;
   color: #ffffff;
-  width: 260px;
+  width: 115px;
   float: left;
 }
 .navbar .brand.logo {
   text-indent: -9999em;
-  min-width: 105px;
+  min-width: 120px;
   background: url('../img/logo.png') 0px 0px no-repeat scroll;
   height: 30px;
   margin: 3px 0 2px;
@@ -4529,11 +4529,8 @@ input[type="submit"].btn.small {
   margin-top: 3px;
 }
 .navbar .nav > li.notification a.dropdown-toggle {
-  margin: 3px 7px;
-  padding: 6px 11px 3px;
   color: white;
   min-width: 32px;
-  font-weight: bold;
 }
 .navbar .nav > li.notification a.dropdown-toggle.on {
   background: #AF1010;
@@ -4551,12 +4548,19 @@ input[type="submit"].btn.small {
   background: #F00;
 }
 .navbar .nav > li.notification .dropdown-menu {
-  width: 440px;
+  width: 350px;
   padding: 10px 10px;
-  margin-top: 5px;
+  margin-top: 2px;
   margin-left: 0px;
-  left: 0 ;
-  right: auto ;
+  left: auto;
+}
+.navbar .nav > li.notification .dropdown-menu:before {
+  right: auto;
+  left: 18px;
+}
+.navbar .nav > li.notification .dropdown-menu:after {
+  right: auto;
+  left: 19px;
 }
 .navbar .nav > li.notification .dropdown-menu a {
   color: #3f729b;
@@ -4608,7 +4612,7 @@ input[type="submit"].btn.small {
 }
 .navbar .nav > li > a {
   float: none;
-  margin: 3px 0 3px 7px;
+  margin: 3px 10px;
   padding: 6px 3px;
   color: #ffffff;
   text-decoration: none;
@@ -4626,7 +4630,7 @@ input[type="submit"].btn.small {
   background-color: #356aa0;
 }
 .navbar .divider-vertical {
-  height: 40px;
+  height: 35px;
   width: 1px;
   margin: 0 9px;
   overflow: hidden;
@@ -5320,9 +5324,9 @@ a.thumbnail-icon:hover {
   display: inline-block;
   text-align: center;
   line-height: 13px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
 }
 a.label:hover,
 a.badge:hover {

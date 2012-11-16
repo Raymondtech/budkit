@@ -75,11 +75,11 @@ border-bottom: 1px solid #284278;
     font-weight: 200;
     line-height: 1;
     color: @white;
-    width: 260px;
+    width: 115px;
     float:left;
     &.logo{
         text-indent: -9999em;
-        min-width: 105px;
+        min-width: 120px;
         background: url('../img/logo.png') 0px 0px no-repeat scroll;
         height: 30px;
         margin: 3px 0 2px;
@@ -234,11 +234,10 @@ border-bottom: 1px solid #284278;
     }
   &.notification{
     a.dropdown-toggle{
-        margin: 3px 7px;
-        padding: 6px 11px 3px;
+        //margin: 3px 7px;
+        //padding: 6px 10px;
          color: white;
          min-width: 32px;
-         font-weight: bold;
     &.on{
             background: #AF1010;
             &:hover{ background: #F00; }
@@ -252,12 +251,19 @@ border-bottom: 1px solid #284278;
         a.dropdown-toggle .on{ background: #F00; }
     }
     .dropdown-menu{
-        width: 440px;
-        //min-height: 200px;
+        width: 350px;
         padding: 10px 10px;
-        margin-top: 5px;
+        margin-top: 2px;
         margin-left: 0px;
-                left:0 ; right: auto ;
+        left: auto;
+    &:before {
+        right: auto;
+        left: 18px;
+      }
+      &:after {
+        right: auto;
+        left: 19px;
+      }
 
         a {
             color: @linkColor;
@@ -312,7 +318,7 @@ border-bottom: 1px solid #284278;
 // Links
 .navbar .nav > li > a {
   float: none;
-   margin: 3px 0 3px 7px;
+   margin: 3px 10px;
 padding: 6px 3px;
   color: @navbarLinkColor;
   text-decoration: none;
