@@ -55,10 +55,14 @@ class Dashboard extends System\Start {
     public function activity(){
         
         $this->output->setPageTitle( _("Acivity Stream") );
-       $activity   = $this->output->layout("system/timeline");
-
+        
+        $model      = $this->load->model('activity');
+        $activities = $model->getAll();        
+        $this->set("activities", $activities);   
+        
+        $activity   = $this->output->layout("system/timeline");
         $this->output->addToPosition("dashboard", $activity);
-
+        
         
         return $this->index();
     }

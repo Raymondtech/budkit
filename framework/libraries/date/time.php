@@ -59,7 +59,7 @@ class Time extends \Library\Date {
      */
     public static function stamp($time = null) {
         //converts a time to timestamp
-        return date("y-m-d h:i:s");
+        return date("Y-m-d H:i:s");
     }
 
     /**
@@ -69,6 +69,65 @@ class Time extends \Library\Date {
      */
     public static function translate() {
         //Translate a human string to time
+    }
+    
+    /**
+     * Get time difference between 2 times
+     * 
+     * @param string $time
+     * @param string $now
+     * @param array $options
+     * @return string 
+     */
+    public static function difference($time, $now = NULL, $opt=array()) {
+        //calculates the difference between two times
+        //could be a string, or language
+        //default now is NULL
+        //Solve the 4 decades issue
+        if (date('Y-m-d H:i:s', $time) == "0000-00-00 00:00:00" || empty($time)) {
+            return _t('Never');
+        }
+
+        $defOptions = array(
+            'to' => $now,
+            'parts' => 1,
+            'precision' => 'sec',
+            'distance' => true,
+            'separator' => ', '
+        );
+        $opt = array_merge($defOptions, $opt);
+        
+        //If now is empty then set now is to time now;
+        if(!$opt['to']) $opt['to'] = time() ;
+        
+        
+        $str = '';
+        $diff = ($opt['to'] > $time) ? $opt['to'] - $time : $time - $opt['to'];
+        $periods = array(
+            'decade' => 315569260,
+            'year' => 31556926,
+            'month' => 2629744,
+            'week' => 604800,
+            'day' => 86400,
+            'hour' => 3600,
+            'min' => 60,
+            'sec' => 1);
+
+        if ($opt['precision'] != 'sec') {
+            $diff = round(($diff / $periods[$opt['precision']])) * $periods[$opt['precision']];
+        }
+        (0 == $diff) && ($str = 'less than 1 ' . $opt['precision']);
+        foreach ($periods as $label => $value) {
+            (($x = floor($diff / $value)) && $opt['parts']--) && $str .= ( $str ? $opt['separator'] :
+                            '') . ($x . ' ' . $label . ($x > 1 ? 's' : ''));
+            if ($opt['parts'] == 0 || $label == $opt['precision']) {
+                break;
+            }
+            $diff -= $x * $value;
+        }
+        $opt['distance'] && $str .= ( $str && $opt['to'] > $time) ? ' ago' : ' ago'; //($str && $opt['to'] > $time) ? ' ago' : ' away';
+
+        return $str;
     }
 
     /**

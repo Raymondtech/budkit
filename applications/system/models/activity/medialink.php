@@ -46,34 +46,83 @@ final class MediaLink {
      * A media link may contain a duration property when the target resource is a time-based media item such as an audio or video
      * @var interger
      */
-    public $duration = 0;
+    public static $duration = 0;
 
     /**
      * A hint to the consumer about the height, in pixels of the media resource identified by the url property. 
      * A media link may contain a height property when the targe resource is a visual mediat item such as an image, video or embeddable HTML page.
      * @var interger
      */
-    public $height = 0;
+    public static $height = 0;
 
     /**
      * A media link MUST have a URL property.
      * @var string 
      */
-    public $url = "/";
+    public static $url = "/";
 
     /**
      * A hint to the consumer about the width, in pixels of the media resource identified by the url peroperty. 
      * A media link may contain a width property when the target resource is a visual media item such as an image, video or embeddable HTML page
      * @var interger 
      */
-    public $width = 0;
+    public static $width = 0;
 
-    public function __construct() {}
+    /**
+     * Returns an array with object properties names as keys. 
+     * Empty property values are omitted
+     * 
+     * @return type
+     */
+    public static function getArray() {
+        
+        $object     = new \ReflectionClass( '\Application\System\Models\Activity\Medialink' );
+        $properties = $object->getProperties( \ReflectionProperty::IS_PUBLIC);
+        $array      = array();
+        
+        foreach($properties as $property){
+           $value = $property->getValue();
+           if(!empty($value)){
+               $array[$property->getName()] = $value;
+           }
+        }
+        return $array;
+    }
 
-    public function serialize() {}
+    /**
+     * Sets an object class property
+     * 
+     * @param type $property
+     * @param type $value
+     */
+    public static function set($property, $value = NULL) {
+        
+        $object = new \ReflectionClass( '\Application\System\Models\Activity\Medialink' );
+        $object->setStaticPropertyValue( $property , $value );
+        
+        return true;
+    }
 
-    public function unserialize() {}
+    /**
+     * Gets an object class property
+     * 
+     * @param type $property
+     * @param type $default
+     */
+    public static function get($property, $default = NULL) {
+        
+        $object = new \ReflectionClass( '\Application\System\Models\Activity\Medialink' );
+        $value  = $object->getStaticPropertyValue( $property );
+        
+        //If there is no value return the default
+        return (empty($value)) ? $default : $value;
+    }
 
-    public static function createInstance() {}
+    public static function getInstance() {
+
+        $instance = new self();
+
+        return $instance;
+    }
 
 }

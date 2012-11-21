@@ -6674,16 +6674,13 @@ ol.timeline-items .timeline-item-li .timeline-item-container .timeline-item-head
 }
 ol.timeline-items .timeline-item-li .timeline-item-container .timeline-item-header .published-time {
   color: #a2a2a2;
-  float: right;
+  margin: 0 5px;
 }
 ol.timeline-items .timeline-item-li .timeline-item-container .timeline-item-footer {
   margin-top: 5px;
 }
 ol.timeline-items .timeline-item-li .timeline-item-container:hover .timeline-item-header ul.actions {
   display: block;
-}
-ol.timeline-items .timeline-item-li .timeline-item-container:hover .timeline-item-header .published-time {
-  display: none;
 }
 ol.timeline-items .timeline-item-li:last-child {
   border-bottom: none;

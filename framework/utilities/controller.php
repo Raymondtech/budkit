@@ -302,8 +302,8 @@ abstract class Controller extends Library\Action {
                     if ($authenticate->attest($credentials)) {
                         //get the user data
                         $this->user = User::getInstance();
-
-                        $this->alert( _t('Welcome on board') , sprintf(_t('Howdy %s!!'), $this->user->fullname), "success");
+                        $lastURL    =  \Library\Session::get("lastRequestURL");
+                        $this->alert( _t('Welcome back ').$lastURL , sprintf(_t('Howdy %s,'), $this->user->user_full_name), "success");
                         $this->redirect( $this->output->link( "/system/start/index") );
                         
                     } else {

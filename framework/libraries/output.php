@@ -531,7 +531,7 @@ class Output extends Object {
         $expires = 60 * 60 * 24 * 14;
 
         @header("Pragma: public");
-        @header("Cache-Control: no-cache");
+        //@header("Cache-Control: no-cache");
         //@header("Cache-Control: maxage=" . $expires);
         //@header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT');
         $httpStatus = "HTTP/1.1 {$this->code} {$this->getHttpCodeString()}";

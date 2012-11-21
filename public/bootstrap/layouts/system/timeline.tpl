@@ -1,7 +1,46 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout  name="timeline" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <tpl:import layout="input" />
     <hr>
         <ol class="timeline-items" id="main-timeline">
+
+            <tpl:loop data="activities.items">
+                <li class="timeline-item-li">
+                    <div class="timeline-item-container">
+                        <div class="timeline-item-header">
+                            <a class="publisher-profile" href="/member/profile/view/${actor.uri}">
+                                <img class="profile-avatar" src="${actor.image.url}" alt="${actor.displayName}" />
+                                <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                                      
+                            </a>
+                            <a href="/system/activity/view/${uri}" title="${published}" class="published-time"><tpl:element type="time" data="published" /></a>
+
+                            <ul class="actions">
+                                <li class="action-like"><a href="/system/activity/favourite/${uri}"><span class="like" title="Like">Like</span></a></li>
+                                <li class="action-reply"><a href="/system/activity/reply/${uri}"><span class="reply" title="Reply">Reply</span></a></li>
+                                <li class="action-delete"><a href="/system/activity/delete/${uri}"><span class="delete" title="Delete">Delete</span></a></li>
+
+                            </ul>
+                        </div>
+                        <div class="timeline-item-body"><tpl:element type="text" data="content" /></div>
+                       <!-- <div class="timeline-item-media">
+                            <div class="timeline-item-gallery carousel slide" id="item-slider-id">
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="http://lorempixel.com/550/300/city/6" />
+                                        <div class="carousel-caption">This is an interesing picture caption</div>
+                                    </div>
+                                </div>
+                                <a class="left carousel-control" href="#item-slider-id" data-slide="prev"><i class="icon icon-chevron-left icon-32"></i></a>
+                                <a class="right carousel-control" href="#item-slider-id" data-slide="next"><i class="icon icon-chevron-right icon-32"></i></a>
+                            </div>
+                        </div>
+                        <div class="timeline-item-footer">
+                            <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
+                        </div>-->
+                    </div>
+                </li>
+            </tpl:loop>   
+
+         <!--   
             <li class="timeline-item-li">
                 <div class="timeline-item-container">
                     <div class="timeline-item-header">
@@ -282,6 +321,7 @@
                     </div>
                 </div>
             </li>
+         -->
         </ol>
         <hr />
         <div class="row-fluid">
