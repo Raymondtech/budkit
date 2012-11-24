@@ -69,9 +69,12 @@ final class Framework extends Library\Object {
      * @param type $length
      * @return string
      */
-    final public static function getRandomString($length = 10) {
+    final public static function getRandomString($length = 10, $lowercase = false) {
         
         $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if($lowercase):
+            $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
+        endif;
         $randomString = '';
         
         for ($i = 0; $i < $length; $i++) {

@@ -141,7 +141,6 @@ class Parser extends Files\Xml {
         static::$document->ROOT->CHILDREN = &self::$tree['CHILDREN'];
 
         //We do not need the default handler, as this in PHP5 does not get CDATA
-        //Its mainly for PHP4 guys!
         //xml_set_default_handler();
         //Parser Tag, Object, character handlers
         xml_set_object(self::$parser, self::$document);

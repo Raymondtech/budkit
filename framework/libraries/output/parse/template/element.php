@@ -20,7 +20,6 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/element
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  *
  */
@@ -41,7 +40,6 @@ use Library\Output\Parse;
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/element
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  */
 class Element extends Parse\Template {
@@ -103,9 +101,7 @@ class Element extends Parse\Template {
      * @param type $writer 
      */
     public static function content($text, $writer) {
-        
-        $writer->writeRaw(trim($text));
-        
+        $writer->writeRaw(trim($text));      
     }
     
     /**
@@ -116,6 +112,48 @@ class Element extends Parse\Template {
      */
     public static function text($tag){
         return static::html($tag);
+    }
+    
+    
+    /**
+     * Displays a formatted time string
+     * 
+     * @param type $tag
+     * @return null
+     */
+    public static function time($tag){
+        //Get the data;
+        if (isset($tag['DATA'])):
+            $tag['_DEFAULT'] = isset($tag['CDATA'])?$tag['CDATA']:null;
+            $time = self::getData($tag['DATA'], $tag['_DEFAULT']); //echo $data;
+            //if formatting
+            if (isset($tag['FORMATTING']) && in_array($tag['FORMATTING'], array("sprintf", "vsprintf"))):
+                $text = call_user_func($tag['FORMATTING'], $tag['_DEFAULT'], $time);
+                $time = $text;
+            endif;
+
+            if (isset($tag['FORMATTING']) && in_array($tag['FORMATTING'], array("noformatting"))):
+                    $time = $time;
+                else:
+                $now    = Library\Date\Time::stamp();
+                $time   = Library\Date\Time::difference( strtotime( $time ) , strtotime( $now ) );
+            endif;
+            
+            $tag['CDATA'] = $time;
+            //If we do not have a default empty it
+            if (is_null($tag['_DEFAULT']))
+                unset($tag['_DEFAULT']);
+        //die;
+        endif;
+        
+        
+
+        //Get the layout name; and save it!
+        if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
+            static::$writer->writeRaw($tag['CDATA']);
+        endif;
+
+        return null; //Removes the element from the tree but returns the text;
     }
 
     /**
@@ -190,7 +228,7 @@ class Element extends Parse\Template {
         if (isset($tag['TYPE'])):
             //@TODO Sad that i have to instantiate this calss 
             //To check if it exists. I need a better way of doing this
-            $submethods = array("text", "layout", "html");
+            $submethods = array("text", "layout", "html", "time");
             //To spare some more memory
             if (method_exists(self::getInstance(), $tag['TYPE']) && in_array(strtolower($tag['TYPE']) , $submethods) ) :
                 $tag = static::$tag['TYPE']($tag);

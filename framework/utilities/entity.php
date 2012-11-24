@@ -18,7 +18,6 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/model
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
@@ -37,7 +36,6 @@ use Library;
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/model
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 class Entity extends Model {
@@ -48,6 +46,11 @@ class Entity extends Model {
     protected $objectType = "object";
     protected $objectURI = NULL;
     protected $valueGroup = NULL; //property value groups can be sub categorised;
+    protected $listLimit = NULL;
+    protected $listStart = NULL;
+    protected $listOderByStatement = NULL;
+    protected $listLookUpConditions = array();
+    protected static $withConditions = false;
 
     /**
      * Sets the property Value before save
@@ -137,7 +140,7 @@ class Entity extends Model {
         //2. if isset objectId and object is this object, check value in propertyData
         if ((!empty($objectId) && (int) $objectId == $this->objectId ) || empty($objectId)) {
             //IF we have a property that is not defined go get 
-            if (!isset($this->propertyData[$property]) && !empty($this->objectId)) {
+            if (!isset($this->propertyData[$property]) ) {
                 //@TODO Database QUERY with objectId
                 //Remember that this will most likely be used for 'un-modeled' data
                 return;
@@ -166,25 +169,7 @@ class Entity extends Model {
         if (empty($property) || empty($valueA) || empty($valueB) || empty($select))
             return false; //We must have eactly one property value pair defined 
 
-        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values");
-        $where = false;
-        if (!empty($objectId) || !empty($objectURI) || !empty($objectType)):
-            $query .="\nWHERE";
-            if (!empty($objectType)):
-                $query .= "\to.object_type='{$objectType}'";
-                $where = TRUE;
-            endif;
-            if (!empty($objectURI)):
-                $query .= ($where) ? "\t AND" : "";
-                $query .= "\to.object_uri='{$objectURI}'";
-                $where = TRUE;
-            endif;
-            if (!empty($objectId)):
-                $query .= ($where) ? "\t AND \t" : "";
-                $query .= "\to.object_id='{$objectId}'";
-                $where = TRUE;
-            endif;
-        endif;
+        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values", $objectId, $objectType, $objectURI);
 
         $query .="\nGROUP BY o.object_id";
         $query .= "\nHAVING {$property} BETWEEN {$valueA} AND {$valueB}"; //@TODO check if we are comparing dates and use CAST() to convert to dates 
@@ -210,25 +195,8 @@ class Entity extends Model {
         if (empty($property) || empty($value))
             return NULL; //We must have eactly one property value pair defined 
         $select = (empty($select)) ? array( $property ) : array_merge( array( $property ) , $select); //If we have an empty select use the values from property;
-        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values");
-        $where = false;
-        if (!empty($objectId) || !empty($objectURI) || !empty($objectType)):
-            $query .="\nWHERE";
-            if (!empty($objectType)):
-                $query .= "\to.object_type='{$objectType}'";
-                $where = TRUE;
-            endif;
-            if (!empty($objectURI)):
-                $query .= ($where) ? "\t AND" : "";
-                $query .= "\to.object_uri='{$objectURI}'";
-                $where = TRUE;
-            endif;
-            if (!empty($objectId)):
-                $query .= ($where) ? "\t AND \t" : "";
-                $query .= "\to.object_id='{$objectId}'";
-                $where = TRUE;
-            endif;
-        endif;
+        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values", $objectId, $objectType, $objectURI);
+
         $query .="\nGROUP BY o.object_id";
         $query .= "\nHAVING {$property} LIKE '%{$value}%'";
 
@@ -253,25 +221,7 @@ class Entity extends Model {
         if (empty($properties) || empty($values))
             return false; //We must have eactly one property value pair defined 
         $select = array_merge($properties, $select); //If we have an empty select use the values from property;
-        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values");
-        $where = false;
-        if (!empty($objectId) || !empty($objectURI) || !empty($objectType)):
-            $query .="\nWHERE";
-            if (!empty($objectType)):
-                $query .= "\to.object_type='{$objectType}'";
-                $where = TRUE;
-            endif;
-            if (!empty($objectURI)):
-                $query .= ($where) ? "\t AND" : "";
-                $query .= "\to.object_uri='{$objectURI}'";
-                $where = TRUE;
-            endif;
-            if (!empty($objectId)):
-                $query .= ($where) ? "\t AND \t" : "";
-                $query .= "\to.object_id='{$objectId}'";
-                $where = TRUE;
-            endif;
-        endif;
+        $query = static::getObjectQuery($select,"?{$this->valueGroup}property_values", $objectId, $objectType, $objectType);
 
         $query .="\nGROUP BY o.object_id";
         $p = count($properties);
@@ -290,6 +240,79 @@ class Entity extends Model {
 
         return $results;
     }
+    
+    /**
+     * Sets lists limit for page'd lists
+     * 
+     * @param type $limit
+     * @return \Platform\Entity
+     */
+    final public function setListLimit( $limit = 10 ){
+        $this->listLimit = intval( $limit );
+        return $this;
+    }
+    
+    /**
+     * Set list start for page'd lists
+     * 
+     * @param type $start
+     * @return \Platform\Entity
+     */
+    final public function setListStart( $start = 0 ){
+        $this->listStart = intval( $start );
+        return $this;
+    }
+    
+    /**
+     * Sets the list order direction
+     * 
+     * @param type $fields comma seperated list, or array 
+     * @param type $direction
+     * @return \Platform\Entity
+     */
+    final public function setListOrderBy($fields, $direction="ASC"){
+      
+        $direction = (in_array(strtoupper(trim($direction)), array('ASC', 'DESC'), TRUE)) ? ' ' . $direction : ' ASC';
+        $orderby = NULL;
+        //Clean up the order by field list
+        if (!empty($fields) && !is_array( $fields)) {
+            $temp = array();
+            foreach (explode(',', $fields) as $part) {
+                $part = trim($part);
+                $temp[] = $part;
+            }
+
+            $orderby = implode(', ', $temp);
+        } else if (is_array( $fields )) {
+            $temp = array();
+            foreach($fields as $field){
+                $part = trim($field);
+                $temp[] = $part;
+            }
+            $orderby = implode(', ', $temp);
+        }
+        
+        
+        
+        if(!empty($orderby)){  
+            $this->listOrderByStatement = "\nORDER BY ". $orderby . $direction;
+        }
+        //Return this object
+        return $this;
+    }
+    
+    /**
+     * Returns the list orderby statement if any defined or NULL if none
+     * 
+     * @return string
+     */
+    final public function getListOrderByStatement(){
+        return $this->listOrderByStatement;
+    }
+   
+    final public function setListLookUpConditions(){
+        return $this;
+    }
 
     /**
      * Returns objects lists table with attributes list and values
@@ -299,13 +322,36 @@ class Entity extends Model {
      * @return type $statement
      * 
      */
-    final public function getObjectsList($objectType, $properties) {
+    final public function getObjectsList($objectType, $properties = array() ) {
 
-        $query = static::getObjectQuery($properties,"?{$this->valueGroup}property_values");
-        $query .="\nWHERE o.object_type='{$objectType}' GROUP BY o.object_id";
+        $query = static::getObjectQuery($properties,"?{$this->valueGroup}property_values", NULL, $objectType );
+        
+        //echo($this->withConditions) ;
+        
+        
+        
+        $query .="\nGROUP BY o.object_id";
+        $query .= $this->getListOrderByStatement();
 
         $results = $this->database->prepare($query)->execute();
 
+        return $results;
+    }
+    
+    
+    final public function getObjectById($objectId, $properties = array()){
+        if (empty($properties)):
+            if (empty($this->propertyModel))
+                return false; //@TODO Raise error?
+            //Attempt to build a list of properties from datamodel
+            $properties = array_keys($this->propertyModel);
+        endif;
+
+        $query = static::getObjectQuery($properties, "?{$this->valueGroup}property_values");
+        $query .="\nWHERE o.object_id='{$objectId}' GROUP BY o.object_id";
+
+        $results = $this->database->prepare($query)->execute();
+        
         return $results;
     }
 
@@ -315,7 +361,7 @@ class Entity extends Model {
      * @param type $objectId
      * @param type $attributes
      */
-    public function getObjectByURI($objectURI, $properties = array()) {
+    public function loadObjectByURI($objectURI, $properties = array()) {
 
         if (empty($properties)):
             if (empty($this->propertyModel))
@@ -360,19 +406,9 @@ class Entity extends Model {
      * @param type $objectId
      * @param type $attributes
      */
-    public function getObjectById($objectId, $properties = array()) {
+    public function loadObjectById($objectId, $properties = array()) {
 
-        if (empty($properties)):
-            if (empty($this->propertyModel))
-                return false; //@TODO Raise error?
-            //Attempt to build a list of properties from datamodel
-            $properties = array_keys($this->propertyModel);
-        endif;
-
-        $query = static::getObjectQuery($properties, "?{$this->valueGroup}property_values");
-        $query .="\nWHERE o.object_id='{$objectId}' GROUP BY o.object_id";
-
-        $results = $this->database->prepare($query)->execute();
+        $results = $this->getObjectById($objectId, $properties );
         //If success, store the object id in
         $n = 0;
         $object = new Entity();
@@ -403,9 +439,13 @@ class Entity extends Model {
      * Builds the original portion of the Object Query without conditions
      * 
      * @param type $properties
+     * @param type $vtable
+     * @param type $objectId
+     * @param type $objectType
+     * @param type $objectURI
      * @return string
      */
-    final private static function getObjectQuery($properties, $vtable = '?property_values') {
+    final private static function getObjectQuery($properties, $vtable = '?property_values', $objectId=NULL, $objectType=NULL, $objectURI=NULL) {
         //Join Query
         $query  = "SELECT o.object_id, o.object_uri, o.object_type,";
         //If we are querying for attributes
@@ -429,6 +469,25 @@ class Entity extends Model {
         else:
             $query .="\nFROM ?objetcs";
         endif;
+        
+        static::$withConditions = false;
+        if (!empty($objectId) || !empty($objectURI) || !empty($objectType)):
+            $query .="\nWHERE";
+            if (!empty($objectType)):
+                $query .= "\to.object_type='{$objectType}'";
+                static::$withConditions = TRUE;
+            endif;
+            if (!empty($objectURI)):
+                $query .= (static::$withConditions) ? "\t AND" : "";
+                $query .= "\to.object_uri='{$objectURI}'";
+                static::$withConditions = TRUE;
+            endif;
+            if (!empty($objectId)):
+                $query .= (static::$withConditions) ? "\t AND \t" : "";
+                $query .= "\to.object_id='{$objectId}'";
+                static::$withConditions = TRUE;
+            endif;
+        endif;
 
         return $query;
     }
@@ -448,7 +507,7 @@ class Entity extends Model {
 
         //Get a randomstring for the objectURI
         $this->objectURI = $objectURI = ( empty($objectURI) && empty($this->objectURI) ) ? Framework::getRandomString(6) : (!empty($this->objectURI) ? $this->objectURI : $objectURI);
-        $this->objectType = $objectType = ( empty($objectType) && empty($this->objectType) ) ? Framework::getRandomString(6) : (!empty($this->objectType) ? $this->objectType : $objectType);
+        $this->objectType = $objectType = ( empty($objectType) && empty($this->objectType) ) ? 'entity' : (!empty($this->objectType) ? $this->objectType : $objectType);
         //Ensure we have all the properties
         if (empty($this->propertyModel) ||empty($this->propertyData))
             return false; //We have nothing to save
@@ -470,8 +529,10 @@ class Entity extends Model {
         $this->database->query( $pquery );
         
         //If objectId is NULL then NEW Create new object
-        if (empty($this->objectId)):       
-            $oquery = $this->database->insert("?objects",array("object_uri" => $this->database->quote($objectURI), "object_type" => $this->database->quote($objectType)), FALSE, NULL, FALSE);
+        if (empty($this->objectId)):  
+            
+            $timestamp = \Library\Date\Time::stamp();
+            $oquery = $this->database->insert("?objects",array("object_uri" => $this->database->quote($objectURI), "object_type" => $this->database->quote($objectType), "object_created_on"=> $this->database->quote( $timestamp )), FALSE, NULL, FALSE);
             $this->database->query( $oquery );
             //$this->objectId = $this->database->select("LAST_INSERT_ID() AS object_id")->prepare()->execute()->fetchAll();
         endif;

@@ -46,7 +46,7 @@ final class Collection {
      * The Stream serialization may contain a "count" property
      * @var interger 
      */
-    public $totalItems = 0;
+    public static $totalItems = 0;
 
     /**
      * An array containing a listing of objects of any object type. 
@@ -54,13 +54,68 @@ final class Collection {
      * of objects that can be found in the resource identified by the url
      * @var array
      */
-    public $items = array();
-    
+    public static $items = array();
+
     /**
      * An IRI [RFC3987] Referencing a document containing the full listing of objects in this collection
      * @var string 
      */
-    public $url = "/";
-    
+    public static $url = "/";
+
+    /**
+     * Returns an array with object properties names as keys. 
+     * Empty property values are omitted
+     * 
+     * @return type
+     */
+    public static function getArray() {
+        $object = new \ReflectionClass('\Application\System\Models\Activity\Collection');
+        $properties = $object->getProperties(\ReflectionProperty::IS_PUBLIC);
+        $array = array();
+
+        foreach ($properties as $property) {
+            $value = $property->getValue();
+            if (!empty($value)) {
+                $array[$property->getName()] = $value;
+            }
+        }
+        return $array;
+    }
+
+    /**
+     * Sets an object class property
+     * 
+     * @param type $property
+     * @param type $value
+     */
+    public static function set($property, $value = NULL) {
+
+        $object = new \ReflectionClass('\Application\System\Models\Activity\Collection');
+        $object->setStaticPropertyValue($property, $value);
+
+        return true;
+    }
+
+    /**
+     * Gets an object class property
+     * 
+     * @param type $property
+     * @param type $default
+     */
+    public static function get($property, $default = NULL) {
+
+        $object = new \ReflectionClass('\Application\System\Models\Activity\Collection');
+        $value = $object->getStaticPropertyValue($property);
+
+        //If there is no value return the default
+        return (empty($value)) ? $default : $value;
+    }
+
+    public static function getInstance() {
+
+        $instance = new self();
+
+        return $instance;
+    }
 
 }

@@ -48,11 +48,15 @@ class Activity extends Platform\Controller {
      */
     public function index() {
 
-        $activity = $this->output->layout("timeline");
-        $tips = $this->output->layout("recommendations");
+        $view = $this->load->view('activity');
+        $model = $this->load->model('activity');
 
-        $this->output->addToPosition("side", $tips);
-        $this->output->addToPosition("body", $activity);
+        $activities = $model->getAll();
+        
+       // echo $model->getListOrderByStatement();
+        $this->set("activities", $activities);
+        
+        $view->display();
     }
 
     /**
@@ -98,7 +102,10 @@ class Activity extends Platform\Controller {
      * 
      * @return void; 
      */
-    public function update() {}
+    public function update() {
+        
+    }
+
     /**
      * Deletes an activity posts;
      *  

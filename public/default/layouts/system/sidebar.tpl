@@ -1,8 +1,8 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <div class="btn-toolbar no-top-margin">
-        <div class="btn-group">
-            <button class="btn">Add ...</button>
-            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+        <div class="btn-group row-fluid">
+            <button class="btn span10">My Personal Workspace</button>
+            <button class="btn dropdown-toggle span2" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu">
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -11,9 +11,7 @@
                 <li><a href="#">Separated link</a></li>
             </ul>
         </div>
-        <div class="btn-group">
-            <a class="btn" href="/member/settings/account"><i class="icon icon-cog"></i> Edit Information</a>
-        </div>
+        
     </div>
 
     <!-- Dasboard Menu -->
@@ -21,7 +19,27 @@
         <tpl:menu id="dashboardmenu" type="nav-block" position="left" />
     </div>
 
-    <div class="widget  top-pad">
+   
+
+    
+    <div class="widget top-pad">
+        <h4>Following</h4> 
+        <div class="widget-body top-pad">
+
+            <ul class="thumbnails">
+                <?php for ($i = 0; $i < 15; $i++): ?>
+                <li style="margin-bottom: 1px">
+                    <a href="#">
+                        <img src="http://placehold.it/42x42" alt="" width="42" height="42" />
+                    </a>
+                </li>
+                <?php endfor; ?>
+            </ul>
+        </div>
+        <small><a href="#">View all</a></small>
+    </div>
+    <hr />
+  <div class="widget">
         <h4>Trending</h4> 
         <div class="widget-body top-pad">
 
@@ -77,24 +95,6 @@
                 </li>
             </ol>
         </div>
-    </div>
-
-    <hr />
-    <div class="widget">
-        <h4>Following</h4> 
-        <div class="widget-body top-pad">
-
-            <ul class="thumbnails">
-                <?php for ($i = 0; $i < 15; $i++): ?>
-                <li>
-                    <a href="#" class="thumbnail">
-                        <img src="http://placehold.it/32x32" alt="" width="32" height="32" />
-                    </a>
-                </li>
-                <?php endfor; ?>
-            </ul>
-        </div>
-        <small><a href="#">View all</a></small>
     </div>
 
 </tpl:layout>

@@ -21,10 +21,10 @@
                             <li class="usermenu dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><tpl:element type="text" data="user.user_full_name"/></a>
                                 <ul class="dropdown-menu" id="user-nav">
+                                    <li><a href="/system/start/index"><strong><tpl:i18n>Dashboard</tpl:i18n></strong></a></li>
                                     <li><a href="/member/profile/view/">Your Profile </a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/system/start/index"><strong><tpl:i18n>Dashboard</tpl:i18n></strong></a></li>
-                                    <li><a href="/system/start/dashboard/activity" tpl:i18n="">Activity</a></li>
+                                    <li><a href="/system/activity/index" tpl:i18n="">Activity</a></li>
                                     <li><a href="/member/messages/inbox">Messages</a></li>
                                     <li class="divider"></li>
                                     <li><a href="/member/settings/account">Account settings</a></li>

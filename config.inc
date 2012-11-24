@@ -111,9 +111,9 @@ $config = array(
 */
 'system' => 
     array(
-        'host' => 'imac.local',
+        'host' => 'mb.local',
         'path' => '/',
-        'template' => 'bootstrap'
+        'template' => 'default'
     ),
     
  /*

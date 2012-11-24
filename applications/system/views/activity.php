@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * commands.php
+ * activity.php
  *
  * Requires PHP version 5.3
  *
@@ -20,12 +20,10 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-
-namespace Application\System\Controllers;
+namespace Application\System\Views;
 
 use Platform;
-use Library;
-use Application\System\Views as View;
+use Application\System\Controllers;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -37,72 +35,43 @@ use Application\System\Views as View;
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
  */
-class Commands extends Platform\Controller {
-
-    /**
-     * How safe is this?
-     * 
-     * @param type $function
-     * @param type $args
-     * @return type 
-     */
-    final public function update() {
-
-        //Determines magic methods
-        //Remap all commands
-        //return $this->index();
+class Activity extends Platform\View {
+    
+    public function index(){
+        return $this->display();
     }
-
-    /**
-     * The global system uploader. Just point to /system/commands/upload
-     */
-    final public function upload() {
+ 
+    public function display(){
         
-        
-        //Display the upload form
-        
-        $view = $this->load->view("index");
+        $activity   = $this->output->layout("timeline");
+        $tips       = $this->output->layout("recommendations");
         //$dashboard  = Controllers\Start\Dashboard::getInstance();
-        //$this->output->set("upload", array( "title"=>"Upload Page Title" ));
+
+        $this->output->addToPosition("aside", $tips);
+        $this->output->addToPosition("body", $activity);
         
-        $form       = $this->output->layout("uploadform");
-        $sidebar    = $this->output->layout("sidebar");
+        //$this->output->addToPosition("dashboard", $activity);
+
         
-        $this->output->addToPosition("side", $sidebar);
-        $this->output->addToPosition("body", $form);
+        //return $dashboard->index();
     }
-
-    /**
-     * Executes the search command
-     * 
-     * @return void
-     */
-    final public function search() {
-
-        $view = $this->load->view("index");
-
-        echo "searching for stuff";
-    }
-
-    /**
-     * Gets an instance of the command class
-     * 
-     * @staticvar self $instance
-     * @return self 
-     */
-    public static function getInstance() {
-
+    
+   /**
+    * Returns an instance of the activity class
+    * 
+    * @staticvar self $instance
+    * @return \self
+    */
+   final static function getInstance(){
+        
         static $instance;
+        
         //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
+        if (isset($instance) ) return $instance ;
 
-        $instance = new self;
-
+        $instance =  new self();
         return $instance;
     }
-
+    
 }
-

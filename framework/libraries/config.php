@@ -18,7 +18,6 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq.com/documents/index/carbon4/libraries/config
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
@@ -37,7 +36,6 @@ use Platform;
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/config
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 class Config extends Object {
