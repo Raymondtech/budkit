@@ -48,19 +48,33 @@ final class Raw extends Library\Output\Document {
      * 
      * @return string json
      */
-    public function render($httpCode=null) {
+    public function render($httpCode=200) {
 
-        //1. Work on the headers, make sure everything is beautiful
-        //json response headers
-        $this->headers('text/html');
+        //The response code, default is 200;
+        if(isset($httpCode)&&!empty($httpCode)){
+            $this->setResponseCode( (int) $httpCode );
+        }
 
-        //@TODO; if layout is set, print layout,
-        //else var dump?
-        $body = $this->layout($this->output->layout);
+        $this->headers("text/html");
+        //$template = empty($template) ? $this->output->layout : $template ;
+        
+        //@TODO we need to work out a way to decide what block you intend to get
+        $this->position("body", "No output to render"); //Raw displays only the body position
+       
+        
+        //parse the set layout as the final output;
+        //5. Close and Flush buffer
+        $document     = $this->restartBuffer();
+        
+        //print_R(\Platform\Debugger::$log);
+        //Print to client
+        print(trim($document) );
 
+        ob_flush();
+        ob_end_flush();
 
-        //Print to browser?
-        print($body);
+        exit;
+        //return $this;
     }
 
     /**

@@ -1,7 +1,6 @@
 <tpl:layout name="console" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <tpl:condition data="debug.displaylog" test="boolean" value="1"> 
-        <a href="#" data-toggle="modal" data-target="#console">Console</a>
-        <div id="console" class="modal hide fade modal-wide"  style="white-space: wrap; display: none;">
+        <div id="console" class="modal hide fade modal-wide">
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">×</a>
                 <h3>Debug Console</h3>

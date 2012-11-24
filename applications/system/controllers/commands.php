@@ -40,7 +40,7 @@ use Application\System\Views as View;
  * 
  */
 class Commands extends Platform\Controller {
-    
+
     /**
      * How safe is this?
      * 
@@ -48,43 +48,61 @@ class Commands extends Platform\Controller {
      * @param type $args
      * @return type 
      */
-    final public function update(){
-        
+    final public function update() {
+
         //Determines magic methods
         //Remap all commands
-        
-        
         //return $this->index();
     }
-    
-    
+
+    /**
+     * The global system uploader. Just point to /system/commands/upload
+     */
+    final public function upload() {
+        
+        
+        //Display the upload form
+        
+        $view = $this->load->view("index");
+        //$dashboard  = Controllers\Start\Dashboard::getInstance();
+        //$this->output->set("upload", array( "title"=>"Upload Page Title" ));
+        
+        $form       = $this->output->layout("uploadform");
+        $sidebar    = $this->output->layout("sidebar");
+        
+        $this->output->addToPosition("side", $sidebar);
+        $this->output->addToPosition("body", $form);
+    }
+
     /**
      * Executes the search command
      * 
      * @return void
      */
-    final public function search(){
-        
+    final public function search() {
+
         $view = $this->load->view("index");
-        
+
         echo "searching for stuff";
     }
-    
+
     /**
      * Gets an instance of the command class
      * 
      * @staticvar self $instance
      * @return self 
      */
-    public static function  getInstance() {
-        
+    public static function getInstance() {
+
         static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
+        if (isset($instance))
+            return $instance;
 
-        $instance =  new self;
+        $instance = new self;
 
-        return $instance;   
+        return $instance;
     }
+
 }
 

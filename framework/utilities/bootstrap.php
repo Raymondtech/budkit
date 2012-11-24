@@ -113,3 +113,4 @@ $Dispatcher->redirect();
 Library\Event::trigger('onShutdown');
 Debugger::stop();
 
+//phpinfo();

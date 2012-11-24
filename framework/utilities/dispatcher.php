@@ -122,6 +122,7 @@ final class Dispatcher extends \Library\Object {
             $word = Inflector::pluralize($controller);
             if ($word == $controller) {
                 $word = Inflector::singularize($word);
+                //@TODO Correct the controller defined in route 
             }
             $class = "Application\\" . ucfirst($application) . "\Controllers\\" . ucfirst($word);
         }

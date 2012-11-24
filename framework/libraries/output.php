@@ -877,12 +877,13 @@ class Output extends Object {
 
         //if is array loop through each;
         if ($this->hasPosition($name)) {
+            
             foreach ($this->variables["page"]["block"][$name] as $block) {
-                if (!is_array($block) || !isset($block['content']) || !isset($block['callback'])) {
+                if (!is_array($block) || !isset($block['content']) ) {
                     continue;
                 }
                 //process the callback
-                $callback = $block['callback'];
+                //$callback = $block['callback'];
                 $string = $block['content'];
 
                 //@TODO rework this, for now just print() the string
@@ -890,7 +891,6 @@ class Output extends Object {
             }
             return; // Successfull
         }
-
         //Output stuff pertaining to that position;
         print($default);
     }
