@@ -23,7 +23,7 @@
  * 
  */
 
-namespace Application\Content\Views;
+namespace Application\System\Views\Content;
 
 use Platform;
 use Library;

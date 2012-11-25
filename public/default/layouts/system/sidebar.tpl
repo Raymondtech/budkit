@@ -1,17 +1,21 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-    <div class="btn-toolbar no-top-margin">
-        <div class="btn-group row-fluid">
-            <button class="btn span10">My Personal Workspace</button>
-            <button class="btn dropdown-toggle span2" data-toggle="dropdown"><span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
+    <div class="btn-toolbar no-margin inline">
+        <div class="btn-group pull-right">   
+            <button class="btn dropdown-toggle" data-toggle="dropdown" data-target="workspaces"><i class="icon icon-reorder text-gray"></i></button>         
+            <ul class="dropdown-menu" id="workspaces">
+                <li><a href="#">Biology Course</a></li>
+                <li><a href="#">Immunology Course</a></li>
+                <li><a href="#">PhD ICamB 8450F</a></li>
                 <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Browse All Workspaces</a></li>
             </ul>
         </div>
-        
+        <div class="btn-group ">
+            <button class="btn">Create Workspace ...</button>
+
+
+        </div>
+
     </div>
 
     <!-- Dasboard Menu -->
@@ -19,9 +23,9 @@
         <tpl:menu id="dashboardmenu" type="nav-block" position="left" />
     </div>
 
-   
 
-    
+
+
     <div class="widget top-pad">
         <h4>Following</h4> 
         <div class="widget-body top-pad">
@@ -39,7 +43,7 @@
         <small><a href="#">View all</a></small>
     </div>
     <hr />
-  <div class="widget">
+    <div class="widget">
         <h4>Trending</h4> 
         <div class="widget-body top-pad">
 

@@ -34,7 +34,7 @@
                         </div>
                         <tpl:condition data="page.activeaside" test="boolean" value="1"> 
                             <div class="main-block has-main-block-aside">
-                                <div class="main-block-aside">
+                                <div class="main-block-aside top-pad bottom-pad right-pad">
                                     <tpl:block data="page.block.aside">Asidebar</tpl:block>
                                 </div>
                                 <div class="main-block-content">
@@ -64,7 +64,7 @@
                     <section class="layout-block boxed">  
                         <tpl:condition data="page.activeaside" test="boolean" value="1"> 
                             <div class="main-block has-main-block-aside">
-                                <div class="main-block-aside">
+                                <div class="main-block-aside  top-pad bottom-pad right-pad">
                                     <tpl:block data="page.block.aside">Asidebar</tpl:block>
                                 </div>
                                 <div class="main-block-content">

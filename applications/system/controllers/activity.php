@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * start.php
+ * activity.php
  *
  * Requires PHP version 5.3
  *
@@ -38,61 +38,95 @@ use Application\System\Views as View;
  * @version    Release: 1.0.0
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Start extends Platform\Controller {
+class Activity extends Platform\Controller {
 
     /**
-     * The system dashboard, 
-     * @ return false;
+     * The default page, consider this the homepage
+     * of the application, You can change this to anything else in the config/routes.php 
+     * 
+     * @return type 
      */
     public function index() {
 
-        //Get the view;
-        $view = $this->load->view('index');
-        
-        $user = \Platform\User::getInstance();
-
-        \Library\Authorize::getAuthroityTree();
-
-        $this->set("user", $user);
-        $view->dashboard(); //sample call;        
-        //$this->output();
+        return null;
     }
-   
-    
-     public function featured(){
-        //To set the pate title use
-        $this->output->setPageTitle("Featured");
-        
-        $frontpage      = $this->output->layout("system/frontpage"); 
-        $frontpageSide  = $this->output->layout("system/frontpageside");   
-        
-        $this->output->addToPosition("body" , $frontpage); 
-        $this->output->addToPosition("aside", $frontpageSide );
-    }
-
 
     /**
-     * Returns and instantiated Instance of the __CLASS__ class
+     * Creates a new activity feed $post
      * 
-     * NOTE: As of PHP5.3 it is vital that you include constructors in your class
-     * especially if they are defined under a namespace. A method with the same
-     * name as the class is no longer considered to be its constructor
+     * @return array $post 
+     */
+    public function create() {
+
+        //Is the user authenticated?
+        $this->requireAuthentication();
+        //Is the input method submitted via POST;
+
+        if ($this->input->methodIs("post")) {
+            $model = $this->load->model("activity");
+            //@1 Check where the form is comming from
+            //@2 Validate the user permission
+            //@3 Privacy settings, If posting to wall can the user post to the wall
+            //@4 Add the post;
+            if (!$model->addActivity()) {
+                $this->alert(_("Could not add your post"), null, "error");
+            } else {
+                $this->alert(_("You post has been saved and publised"), null, "success");
+            }
+        }
+        //Returns the request back tot the reffer;
+        $this->returnRequest();
+    }
+
+    /**
+     * Alias for listing all activity posts;
+     * @TODO If params, read individual items;
      * 
-     * @staticvar object $instance
-     * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
-     * @return object i18n
+     * @return type 
+     */
+    public function read() {
+
+        return $this->index();
+    }
+
+    /**
+     * Updates an existing activity posts;
+     * 
+     * @return void; 
+     */
+    public function update() {
+        
+    }
+
+    /**
+     * Deletes an activity posts;
+     *  
+     * @return void;
+     */
+    public function delete() {
+
+        $this->alert(_("Could not delete your post."), _("There seems to be a problem with authenticating this session"), "error");
+
+        return $this->read();
+    }
+
+    /**
+     * Gets an instance of the start controller
+     * 
+     * @staticvar self $instance
+     * @return self 
      */
     public static function getInstance() {
 
-        $class = __CLASS__;
+        static $instance;
+        //If the class was already instantiated, just return it
+        if (isset($instance))
+            return $instance;
 
-        if (is_object(static::$instance) && is_a(static::$instance, $class))
-            return static::$instance;
+        $instance = new self;
 
-        static::$instance = new $class;
-
-        return static::$instance;
+        return $instance;
     }
+
 }
 

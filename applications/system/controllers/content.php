@@ -38,7 +38,7 @@ use Application\System\Views as View;
  * @version    Release: 1.0.0
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Start extends Platform\Controller {
+class Content extends Platform\Controller {
 
     /**
      * The system dashboard, 

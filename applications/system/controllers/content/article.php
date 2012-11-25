@@ -22,11 +22,10 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\Content\Controllers;
+namespace Application\System\Controllers\Content;
 
-use Platform;
-use Library;
-use Application\Content\Views as View;
+
+use Application\System\Controllers as System;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -41,7 +40,7 @@ use Application\Content\Views as View;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Article extends Platform\Controller {
+final class Article extends System\Content {
 
     public function index() {
         return $this->read();
@@ -73,11 +72,15 @@ final class Article extends Platform\Controller {
     public function update() {}
     
     //domain.com/post/item/edit/1902480-Born-in-the-USA/
-    public function edit(){}
+    public function edit(){
+        
+        echo "editing Applications";
+        
+    }
 
     // domain.com/post/item/1902480-Born-in-the-USA/
     public function read() {
-         $view = $this->load->view('article');
+         $view = $this->load->view('content\article');
     }
 
     // domain.com/post/item/delete/1902480-Born-in-the-USA/

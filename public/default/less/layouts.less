@@ -26,7 +26,7 @@
 
 
 .layout-block {
-    padding:@gridGutterWidth;
+    //padding:@gridGutterWidth;
     margin-bottom:@gridGutterWidth;
     //width: (@gridRowWidth)-(@gridColumnWidth * 1);
     .clearfix();
@@ -37,6 +37,7 @@
     .aside-block{
         width: 230px;
         float:left;
+        padding: @gridGutterWidth @gridGutterWidth;
     }
     &.has-aside-block{
         .main-block{
@@ -45,12 +46,17 @@
         }
     }
     .main-block{
+        .main-block-content{
+             position:relative;
+        }
         &.has-main-block-aside{
             .main-block-content{
                 margin-right: 310px;
+               
             }
             background-image: url(../img/mainblockbg.png);
             background-position: 100% 0;
+            background-repeat: repeat-y; 
             .main-block-aside{
                 width: 270px;
                 float: right;
@@ -75,9 +81,46 @@
 .left-pad{ padding-left:@gridGutterWidth }
 .top-pad{ padding-top:@gridGutterWidth }
 .half-top-pad{ padding-top:(@gridGutterWidth * 0.5)-3 }
+.half-bottom-pad{ padding-bottom:(@gridGutterWidth * 0.5)-3 }
 .right-pad{ padding-right:@gridGutterWidth }
 .bottom-pad{ padding-bottom:@gridGutterWidth }
+.no-margin{
+    margin:0 !important;
+}
 
+.fix-left-gutter{
+    margin-left: @gridGutterWidth !important;
+}
+
+.margin-right{
+    margin-right: @gridGutterWidth;
+}
+
+.no-padding{
+    padding:0;
+}
+
+.box-padding{
+    padding: @gridGutterWidth;
+}
+
+.no-top-margin{
+    margin-top: 0;
+}
+
+.no-bottom-margin{
+    margin-bottom: 0;
+}
+
+.container-fixed{
+    &.map-canvas{
+        position:absolute;
+        top: 45px;
+        bottom:0;
+        left:0;
+        right: 0;
+    }
+}
 .profile-cover{
     
 }

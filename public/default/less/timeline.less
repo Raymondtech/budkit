@@ -1,3 +1,29 @@
+.timeline-stream{
+    background-color: #f9f9f9;
+    background-image: url(../img/activitystream-bg.png); 
+    background-repeat: repeat-y;
+    min-height: 1000px;
+}
+.timeline-active-item{background: #fff; border: 1px solid #ddd; padding: 18px; margin-bottom: @baseLineHeight}
+.timeline-workspace-title,{
+    border-bottom: 1px solid #eee; //margin-bottom: @baseLineHeight*0.7;
+    padding-bottom: 12px;
+    img{ float: left; }
+    .workspace-description{
+        margin-left: 50px;
+        .title{  display: block; font-weight: bold; font-size: 14px;}
+        .description{ color: @grayLight }
+    }
+}
+
+.timeline-active-title{
+    margin-left: 4-@gridGutterWidth;
+    background: #fff;
+    border-bottom: 1px solid #eee; margin-bottom: @baseLineHeight*0.7;
+    padding-bottom: 12px;
+    h1{ font-size: 15px; line-height: @baseLineHeight; min-height: 2*@baseLineHeight;}
+}
+
 .timeline-item-publisher{
     //padding: 5px;
     //margin-top: @baseLineHeight;
@@ -28,9 +54,7 @@ ol.timeline-items{
         zoom:1;
         cusor: pointer;
         position: relative;
-        min-height: 51px;
-        padding: 9px 12px 9px;
-        border-bottom: 1px solid #E8E8E8;
+
         .timeline-item-media{
             margin-top: 5px;
             blockquote{ 
@@ -57,15 +81,20 @@ ol.timeline-items{
             
         }
         .timeline-item-container{
-            margin-left: 48px;
+            min-height: 51px;
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 15px;
+            margin: 10px 60px;
+ 
                 
             .timeline-item-header{
-                cusor: pointer;
+                cursor: pointer;
                 margin-bottom: 5px;
                 ul.actions{
                     position: absolute;
                     top: 9px;
-                    right: 12px;
+                    right: 72px;
                     list-style:none;
                     display: none;
                     .transition(opacity .15s ease-in-out);
@@ -80,7 +109,7 @@ ol.timeline-items{
                     color: @grayDark;
                     .profile-avatar{
                         position: absolute;
-                        left: 0;
+               
                     }
                     &:hover{text-decoration: none}
                     .profile-nameid{
@@ -108,6 +137,33 @@ ol.timeline-items{
                         //display: none;
                     }
                 }
+            }
+        }
+
+        &:nth-child(even){
+            .timeline-item-container{
+           
+                .timeline-item-header{
+                    .publisher-profile{
+                        .profile-avatar{                        
+                            right: 0px;  
+                            top: 2px;   
+                        }
+                     }
+                 }
+            }
+        }
+        &:nth-child(odd){
+            .timeline-item-container{
+           
+                .timeline-item-header{
+                    .publisher-profile{
+                        .profile-avatar{                        
+                            left: 0px;  
+                            top: 2px;   
+                        }
+                     }
+                 }
             }
         }
         
@@ -187,6 +243,24 @@ list-style: none;
             .tip-actions{
                 display: none;
             }
+        }
+    }
+}
+
+
+.timeline-item-index{
+    margin: 0px;
+    list-style: none;
+    li{ //min-height: 50px; 
+        .label{ 
+            display: inline-block; margin-left: 0px; 
+            //.icon{ font-size: 13px; padding: 2px; line-height: 20px; }
+        }
+        //border-bottom: 1px solid #eee;
+        padding: 15px 0;
+        //margin-bottom: 15px;
+      &:nth-child(even){
+            background-color: #f7f7f7;
         }
     }
 }

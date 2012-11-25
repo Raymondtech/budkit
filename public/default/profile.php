@@ -107,6 +107,7 @@
                         </div>
                     </div>
                     <div class="main-block">
+                        <div class="box-padding">
                         <div class="page-header">
                             <h2>Livingstone K. F. Fultang <small> (@drstonyhills)</small></h2>
                         </div>
@@ -162,7 +163,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        </div>
                     </div>
 
                 </section>

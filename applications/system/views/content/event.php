@@ -22,7 +22,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\Content\Views;
+namespace Application\System\Views\Content;
 
 use Platform;
 use Library;
