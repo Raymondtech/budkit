@@ -14,7 +14,7 @@
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1350860868/jussinaamapieni_normal.jpg" width="48" height="48" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                              
                                 </a>
                                 <small class="published-time">
@@ -25,22 +25,16 @@
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">Here are a collection of resources to help with project 98F2C</div>
                             </div>
-                            <div class="timeline-item-body">Here are a collection of resources to help with project 98F2C</div>
-                            <div class="timeline-item-media">
-                                <ul class="media-list">
-                                    <li><a href="#"><span class="label label-info"><i class="icon icon-picture"></i> Image</span> budkit-1.0.0.min.jpg</a></li>
-                                    <li><a href="#"><span class="label label-info"><i class="icon icon-picture"></i> Image</span> budkit-1.0.0.min.jpg</a></li>
-                                    <li><a href="#"><span class="label label-info"><i class="icon icon-picture"></i> Image</span> budkit-1.0.0.min.jpg</a></li>
-                                </ul>
-                            </div>
+
                         </div>
                     </li>
                     <li class="timeline-item-li">
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/2297487453/nvaci9hgig7aecd21ixa_normal.jpeg" width="48" height="48" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                              
                                 </a>
                                 <small class="published-time">
@@ -51,21 +45,16 @@
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">It is becoming obvious Modric will leave</div>
                             </div>
-                            <div class="timeline-item-media">
-                                <div class="well">
-                                    <h4><a href="#">Redknapp admits Modric may leave</a></h4>
-                                    <div>Tottenham manager Harry Redknapp says Luka Modric may leave White Hart Lane when the transfer window opens.</div>
-                                    <small class="author">Some Author</small>
-                                </div>
-                            </div>
+                            
                         </div>
                     </li>
                     <li class="timeline-item-li">
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/2860810860/5450873107ef4bc3987809e2e57487f6_normal.jpeg" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                                 
                                 </a>
                                 <small class="published-time">
@@ -76,20 +65,9 @@
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
-                            </div>
-                            <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                            <div class="timeline-item-footer">
-                                <ul class="thumbnails">
-                                    <li style="margin-bottom: 1px">
-                                        <a href="#"><span class="label label-info"><i class="icon icon-comments"></i> 9</span> </a>
-                                    </li>
-                                    <li style="margin-bottom: 1px">
-                                        <a href="#"><span class="label label-important"><i class="icon icon-heart"></i> 5</span> </a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
+                                <div class="timeline-item-title">It is becoming obvious Modric will leave</div>     
+                            </div>          
+                            
 
                         </div>
                     </li>
@@ -97,7 +75,7 @@
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1609922828/96x96-Storify-Square-Avatar_normal.png" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>
 
                                 </a>
@@ -111,8 +89,9 @@
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
 
                                 </ul>
+                                <div class="timeline-item-title">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
                             </div>
-                            <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
+
 
                         </div>         
                     </li>
@@ -120,7 +99,7 @@
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/2824616796/2d3383532bbc7bcc28f7a07e69cfe25e_normal.png" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                              
                                 </a>
                                 <small class="published-time">
@@ -131,23 +110,17 @@
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">A Sample todo list</div>
                             </div>
-                            <div class="timeline-item-body">A Sample todo list</div>
-                            <div class="timeline-item-media">
-                                <ul class="media-list">
-                                    <li class="progress progress-bar"><label class="bar" style="width: 60%">Option one is this and that—be sure to include why it's great</label></li>
-                                    <li><label class="checkbox"><input type="checkbox" value="" /> Option one is this and that—be sure to include why it's great</label></li>
-                                    <li><label class="checkbox"><input type="checkbox" value="" /> Option one is this and that—be sure to include why it's great</label></li>
-                                    <li><label class="checkbox"><input type="checkbox" value="" /> Option one is this and that—be sure to include why it's great</label></li>
-                                </ul>
-                            </div>
+
+
                         </div>
                     </li>
                     <li class="timeline-item-li">
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/2760025207/d4788854c760b0b439b80a1362aa1634_normal.jpeg" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                               
                                 </a>
 
@@ -159,8 +132,9 @@
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>                      
                             </div>
-                            <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>                      
+
 
 
                         </div>
@@ -169,7 +143,7 @@
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1150885297/gugg_banner_normal.jpg" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                              
                                 </a>
                                 <small class="published-time">
@@ -181,16 +155,9 @@
 
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>                      
                             </div>
-                            <div class="timeline-item-media">
 
-                                <div class="well">
-                                    <h4><a href="#">Redknapp admits Modric may leave</a></h4>
-                                    <div>Tottenham manager Harry Redknapp says Luka Modric may leave White Hart Lane when the transfer window opens.</div>
-                                    <small class="author">Some Author</small>
-                                </div>
-
-                            </div>
 
                         </div>
                     </li>
@@ -198,7 +165,7 @@
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/2856606601/236895527003de183464f2e0a4bc4f71_normal.png" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                                    
                                 </a>
                                 <small class="published-time">
@@ -209,8 +176,9 @@
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
                             </div>
-                            <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
+
                             <div class="timeline-item-footer">
                                 <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
                             </div>
@@ -220,7 +188,7 @@
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/2733526683/93601caadf97f9e70d3a5cfbf7a38cd5_normal.png" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                                   
                                 </a>
                                 <small class="published-time">
@@ -231,8 +199,9 @@
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
                             </div>
-                            <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
+
                             <div class="timeline-item-footer">
                                 <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
                             </div>
@@ -242,12 +211,10 @@
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1833163079/Facebook-_-Twitter-logo_normal.gif" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                                    
                                 </a>
-                                <small class="published-summary">
-                                    Published a note
-                                </small>
+
                                 <small class="published-time">
                                     <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
                                 </small>
@@ -258,8 +225,9 @@
 
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
                             </div>
-                            <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
+
                             <div class="timeline-item-footer">
                                 <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
                             </div>
@@ -269,7 +237,7 @@
                         <div class="timeline-item-container">
                             <div class="timeline-item-header">
                                 <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/563382333/logo_normal.jpg" alt="Livingstone Fultang" />
                                     <strong class="profile-name">Livingstone Fultang</strong>                                   
                                 </a>
                                 <small class="published-time">
@@ -280,8 +248,9 @@
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                                     <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                                 </ul>
+                                <div class="timeline-item-title">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
                             </div>
-                            <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
+
                             <div class="timeline-item-footer">
                                 <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
                             </div>
@@ -296,7 +265,7 @@
 
                     <div class="timeline-item-header">
                         <a class="publisher-profile" href="#">
-                            <img class="profile-avatar" src="http://placeskull.com/24/24/2554C7" alt="Livingstone Fultang" />
+                            <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
                             <strong class="profile-name">Livingstone Fultang</strong>                                   
                         </a>
                         <small class="published-time">
@@ -307,10 +276,34 @@
                             <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
                             <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                         </ul>
+                        <div class="timeline-item-title">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>                      
                     </div>
-                    <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>                      
+
                     <div class="timeline-item-media">
                         <iframe width="100%" height="315" src="http://www.youtube.com/embed/jiZ-vN6L39M" frameborder="0" allowfullscreen=""></iframe>
+                    </div>
+                    <div class="timeline-item-media">
+
+                        <div class="well">
+                            <h4><a href="#">Redknapp admits Modric may leave</a></h4>
+                            <div>Tottenham manager Harry Redknapp says Luka Modric may leave White Hart Lane when the transfer window opens.</div>
+                            <small class="author">Some Author</small>
+                        </div>
+
+                    </div>
+                    <div class="timeline-item-media">
+                        <ul class="media-list">
+                            <li><label class="checkbox"><input type="checkbox" value="" /> Option one is this and that—be sure to include why it's great</label></li>
+                            <li><label class="checkbox"><input type="checkbox" value="" /> Option one is this and that—be sure to include why it's great</label></li>
+                            <li><label class="checkbox"><input type="checkbox" value="" /> Option one is this and that—be sure to include why it's great</label></li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item-media">
+                        <ul class="media-list">
+                            <li><a href="#"><span class="label label-info"><i class="icon icon-picture"></i> Image</span> budkit-1.0.0.min.jpg</a></li>
+                            <li><a href="#"><span class="label label-info"><i class="icon icon-picture"></i> Image</span> budkit-1.0.0.min.jpg</a></li>
+                            <li><a href="#"><span class="label label-info"><i class="icon icon-picture"></i> Image</span> budkit-1.0.0.min.jpg</a></li>
+                        </ul>
                     </div>
                     <div class="timeline-item-footer">
                         <ul class="thumbnails">

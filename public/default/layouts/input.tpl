@@ -6,11 +6,7 @@
                     <a class="publisher-profile" href="/member/profile/view/">
                         <img class="profile-avatar" src="http://placeskull.com/50/50/2554C7"  />                                      
                     </a>
-                    <div class="control-group">
-                        <div class="controls input">
-                            <input class="input-xxxlarge" id="username" name="username" size="20" type="text" placeholder="Title (Optional)"  />
-                        </div>
-                    </div>
+                    
                     <div class="controls half-bottom-pad">
                         <div class="btn-toolbar inline no-margin">
                             <div class="btn-group">
