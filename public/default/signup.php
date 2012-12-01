@@ -19,9 +19,10 @@
             <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
         </head>
         <body  class="responsive-body">
-            <tpl:import layout="navbar" />
+            
 
             <div class="container">
+                <tpl:import layout="navbar" />
                 <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed has-bg has-aside-block">  

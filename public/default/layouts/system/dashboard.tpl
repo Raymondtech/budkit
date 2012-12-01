@@ -4,5 +4,5 @@
             <h1><tpl:element type="text" data="dashboard.title" /></h1>
         </div>
     </tpl:condition> 
-    <tpl:block data="page.block.dashboard">Dashboard Content</tpl:block></div>
+    <tpl:block data="page.block.dashboard">Dashboard Content</tpl:block>
 </tpl:layout>

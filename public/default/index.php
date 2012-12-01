@@ -20,9 +20,10 @@
             <!--            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css' />-->
         </head>
         <body class="responsive-body">
-            <tpl:import layout="navbar" />
+            
 
             <div class="container">
+                <tpl:import layout="navbar" />
                 <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <tpl:condition data="page.activesidebar" test="boolean" value="1"> 

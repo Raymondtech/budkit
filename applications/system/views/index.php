@@ -26,75 +26,69 @@ use Library;
  */
 class Index extends Platform\View {
 
-    public function dashboard(){
+    public function dashboard() {
         
+        $this->output->setPageTitle(_("Your Dashboard"));
+
+        $activity = $this->output->layout("dashblock");
+        $this->output->addToPosition("dashboard", $activity);
         //you can add stuff you want displayed;
         //$user = $this->get('user');
-        
+
         return $this->display();
-        
     }
-    
-    
-    public function index(){
-        
-        $indexpage  = "Welcome page";
+
+    public function index() {
+
+        $indexpage = "Welcome page";
         $indexpage2 = "Side panel";
-        
+
         $this->output->addToPosition("body", $indexpage);
-        $this->output->addToPosition("side", $indexpage2 );
+        $this->output->addToPosition("side", $indexpage2);
     }
- 
-    public function display(){
-        
+
+    public function display() {
+
         //To specify a layout, else default will be used
         //$this->setLayout("page");
-        
         //To get a previously set property;
         //echo $this->get("user2");
-
         //TODO only set if not already set To set the pate title use
-        
         //$this->output->setPageTitle("Welcome to diddat");
-        
         //to add some js file
         $this->output->addScript("some.js");
-        
+
         //to add some js file
         $this->output->addStyle("some.css");
-        
+
         //to output just the layout use
         //$this->output->raw();
-        
         //to output just the xml use
         //$this->output->xml();
-        
         //to output as json use
         //$this->output->json();
-        
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
-        $dashboard      = $this->output->layout( "dashboard" );
-        $sidebar        = $this->output->layout( "sidebar"  );
-        $rightaside     = $this->output->layout( "cpanel"  );
-  
-        $this->output->addToPosition("side",    $sidebar);
-        $this->output->addToPosition("body",    $dashboard);
-        //$this->output->addToPosition("aside",   $rightaside );
-        
-    }
-    
-   
-   final static function getInstance(){
-        
-        static $instance;
-        
-        //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
+        $dashboard = $this->output->layout("dashboard");
+        $sidebar = $this->output->layout("sidebar");
+        //$rightaside     = $this->output->layout( "cpanel"  );
 
-        $instance =  new self();
+        $this->output->addToPosition("side", $sidebar);
+        $this->output->addToPosition("body", $dashboard);
+        //$this->output->addToPosition("aside",   $rightaside );
+    }
+
+    final static function getInstance() {
+
+        static $instance;
+
+        //If the class was already instantiated, just return it
+        if (isset($instance))
+            return $instance;
+
+        $instance = new self();
 
         return $instance;
     }
-    
+
 }

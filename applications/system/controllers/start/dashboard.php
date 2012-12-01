@@ -44,15 +44,23 @@ class Dashboard extends System\Start {
     
     public function content(){
         
-        echo "Content flow";
-
+        $this->output->setPageTitle( _("Content Workspace") );
         
-        return $this->index();
+        $model      = $this->load->model('activity');
+        $activities = $model->getAll();        
+        $this->set("activities", $activities);   
+        
+        $activity   = $this->output->layout("workspace");
+        $this->output->addToPosition("dashboard", $activity);
+        
+        
+        return $this->load->view("index")->display();
     }
     
     
         
     public function activity(){
+        
         
         $this->output->setPageTitle( _("Acivity Stream") );
         
@@ -60,24 +68,23 @@ class Dashboard extends System\Start {
         $activities = $model->getAll();        
         $this->set("activities", $activities);   
         
-        $activity   = $this->output->layout("system/timeline");
+        $activity   = $this->output->layout("timeline");
         $this->output->addToPosition("dashboard", $activity);
         
         
-        return $this->index();
+        return $this->load->view("index")->display();
     }
     
     
         
     public function notifications(){
         
-       $this->output->setPageTitle( _("Task and Notifications") );
-        $view = $this->load->view("index");
+        $this->output->setPageTitle( _("Task and Notifications") );
         
         $dashboard       = $this->output->layout('notifications');
         $this->output->addToPosition("dashboard" , $dashboard);
         
-        return $this->index();
+        return $this->load->view("index")->display();
     }
     
     
@@ -87,7 +94,7 @@ class Dashboard extends System\Start {
         echo "Analytics";
 
         
-        return $this->index();
+        return $this->load->view("index")->display();
     }
     
     
@@ -97,7 +104,12 @@ class Dashboard extends System\Start {
         $view = $this->load->view('index') ;   
         $this->set("user2", "livingstone");
         
-        $view->dashboard() ; //sample call;        
+        $this->output->setPageTitle(_("Your Dashboard"));
+
+        $activity = $this->output->layout("dashblock");
+        $this->output->addToPosition("dashboard", $activity);
+        
+        $this->load->view("index")->display();      
         //$this->output();
         
     }

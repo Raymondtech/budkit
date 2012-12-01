@@ -35,14 +35,14 @@
        
     }
     .aside-block{
-        width: 230px;
+        width: 185px;
         float:left;
         padding: @gridGutterWidth @gridGutterWidth;
     }
     &.has-aside-block{
         .main-block{
             //width: 300px;
-            margin-left: 270px;
+            margin-left: 225px;
         }
     }
     .main-block{
@@ -77,7 +77,7 @@
     &.white-background{ background: @white; }
     &.bordered{ border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
 }
-
+.no-top-border{ border-top: none !important}
 .left-pad{ padding-left:@gridGutterWidth }
 .top-pad{ padding-top:@gridGutterWidth }
 .half-top-pad{ padding-top:(@gridGutterWidth * 0.5)-3 }
@@ -217,5 +217,5 @@
     }
 }
 
-
+.workspace-head{ min-height: 50px; background: #fbfbfb; border-bottom: 1px solid #E8E9EB; padding: 18px 18px 0; position:relative}
 .inline{display:inline;}
