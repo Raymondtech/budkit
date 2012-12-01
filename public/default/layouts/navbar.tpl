@@ -23,7 +23,7 @@
                                 <ul class="dropdown-menu" id="user-nav">
                                     <li><a href="/system/start/index"><strong><tpl:i18n>Dashboard</tpl:i18n></strong></a></li>
                                     <li><a href="/member/profile/view/">Your Profile </a></li>
-                                    <li><a href="/system/start/dashboard/content" tpl:i18n="">Your Workspace</a></li>
+                                    <li><a href="/system/workspace/personal" tpl:i18n="">Your Workspace</a></li>
                                     <li class="divider"></li>
                                     <li><a href="/member/messages/inbox">Private Messages</a></li>
                                     <li><a href="/member/settings/account">Account settings</a></li>

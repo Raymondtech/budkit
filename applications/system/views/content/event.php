@@ -61,7 +61,7 @@ final class Event extends \Platform\View{
         $this->output->addToPosition("body",    $dashboard);
     }
     
-    public function streams(){}
+    public function drawCalendar(){}
     
     
     /**

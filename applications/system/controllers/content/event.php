@@ -22,11 +22,12 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\Content\Controllers;
+namespace Application\System\Controllers\Content;
 
 use Platform;
 use Library;
-use Application\Content\Views as View;
+use Application\System\Views as View;
+use Application\System\Controllers as System;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -41,12 +42,8 @@ use Application\Content\Views as View;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Event extends \Platform\Controller {
+final class Event extends System\Content {
 
-    //put your code here
-    public function index() {
-        return $this->read();
-    }
 
     public function create() {
         
@@ -65,8 +62,11 @@ final class Event extends \Platform\Controller {
     }
 
     // domain.com/post/item/1902480-Born-in-the-USA/
-    public function read() {
-         $view = $this->load->view('event');
+    public function calendar() {
+        
+         $view = $this->load->view('content\event');
+         $view->drawCalendar();
+         
     }
 
     // domain.com/post/item/delete/1902480-Born-in-the-USA/

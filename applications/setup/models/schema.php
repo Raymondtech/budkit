@@ -118,7 +118,8 @@ final class Schema extends Platform\Model {
             (5, 2, '/content(/[a-z0-9-]*)*', 'allow', 'execute', 'View Content'),
             (6, 1, '/setup/install(/[a-z0-9-]*)*', 'allow', 'execute', 'Setup Installer'),
             (7, 2, '/system/start(/[a-z0-9-]*)*', 'allow', 'view', 'Start Pages'),
-            (8, 2, '/member(/[a-z0-9-]*)*', 'allow', 'view', 'Read User Profiles');"
+            (8, 1, '/system/command([s]*/[a-z0-9-]*)*', 'allow', 'view', 'System Commands'),
+            (9, 2, '/member(/[a-z0-9-]*)*', 'allow', 'view', 'Read User Profiles');"
         );
     }
 
@@ -189,7 +190,7 @@ final class Schema extends Platform\Model {
                 (40, 0, 'Achievements', '/member/profile/display/achievements', NULL, 0, 5, 'link', NULL, 5, 6, 0),
                 (41, 0, 'Network', '/member/profile/display/network', NULL, 0, 5, 'link', NULL, 9, 10, 0),
                 (42, 0, 'Dashboard', '/system/start/index', NULL, 0, 3, 'link', NULL, 1, 2, 1),
-                (44, 0, 'Personal Workspace', '/system/start/dashboard/content', NULL, 0, 3, 'link', NULL, 5, 6, 1),       
+                (44, 0, 'Your Workspace', '/system/workspace/personal/', NULL, 0, 3, 'link', NULL, 5, 6, 1),       
                 (47, 0, 'Inbox', '/member/messages/inbox', NULL, 0, 4, 'link', NULL, 1, 2, 1),
                 (48, 0, 'Sent Messages', '/member/messages/sent', NULL, 0, 4, 'link', NULL, 3, 4, 1),
                 (49, 0, 'Live Chat', '/member/messages/live', NULL, 0, 4, 'link', NULL, 5, 6, 1),

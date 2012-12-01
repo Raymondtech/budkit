@@ -38,14 +38,48 @@ use Application\System\Views as View;
  * @version    Release: 1.0.0
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Content extends Platform\Controller {
+class Workspace extends Platform\Controller {
 
     /**
      * The system dashboard, 
      * @ return false;
      */
-    public function index() {}
+    public function index() {
+
+        return $this->inbox();
+        
+    }
+    
+    
+    public function inbox(){
+        
+        $this->output->setPageTitle( _("Content Workspace") );
+        
+        $model      = $this->load->model('activity');
+        $activities = $model->getAll();        
+        $this->set("activities", $activities);   
+        
+        $activity   = $this->output->layout("workspace");
+        $this->output->addToPosition("dashboard", $activity);
+        
+        
+        return $this->load->view("index")->display();
+    }
+    
+    
   
+    
+        
+    public function reports(){
+        
+        echo "Analytics";
+
+        
+        return $this->load->view("index")->display();
+    }
+   
+
+
     /**
      * Returns and instantiated Instance of the __CLASS__ class
      * 

@@ -2,7 +2,7 @@
     <div class="workspace-head">
         <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom">
             <li class="active"><a href="#stream" data-toggle="tab"><i class="icon-inbox icon icon-24"></i>Inbox</a></li>
-            <li><a href="#files" data-toggle="tab"><i class="icon-briefcase icon icon-24"></i>Files</a></li>
+            <li><a href="#files" data-toggle="tab"><i class="icon-paper-clip icon icon-24"></i>Files</a></li>
             <li><a href="#settings" data-toggle="tab"><i class="icon-plus icon icon-24"></i>Add App</a></li>
         </ul>
         <ul class="nav icon-tabs right no-margin no-bottom-border docked-bottom">

@@ -31,7 +31,7 @@
             <div class="container top-pad">
                 <tpl:block data="page.block.alerts" />  
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed">
+                <section class="layout-block boxed box-padding">
                     <tpl:block data="page.block.body" />              
                 </section>
                 <section role="footer"> 

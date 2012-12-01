@@ -42,63 +42,6 @@ use Application\System\Controllers as System;
 class Dashboard extends System\Start {
     
     
-    public function content(){
-        
-        $this->output->setPageTitle( _("Content Workspace") );
-        
-        $model      = $this->load->model('activity');
-        $activities = $model->getAll();        
-        $this->set("activities", $activities);   
-        
-        $activity   = $this->output->layout("workspace");
-        $this->output->addToPosition("dashboard", $activity);
-        
-        
-        return $this->load->view("index")->display();
-    }
-    
-    
-        
-    public function activity(){
-        
-        
-        $this->output->setPageTitle( _("Acivity Stream") );
-        
-        $model      = $this->load->model('activity');
-        $activities = $model->getAll();        
-        $this->set("activities", $activities);   
-        
-        $activity   = $this->output->layout("timeline");
-        $this->output->addToPosition("dashboard", $activity);
-        
-        
-        return $this->load->view("index")->display();
-    }
-    
-    
-        
-    public function notifications(){
-        
-        $this->output->setPageTitle( _("Task and Notifications") );
-        
-        $dashboard       = $this->output->layout('notifications');
-        $this->output->addToPosition("dashboard" , $dashboard);
-        
-        return $this->load->view("index")->display();
-    }
-    
-    
-        
-    public function analytics(){
-        
-        echo "Analytics";
-
-        
-        return $this->load->view("index")->display();
-    }
-    
-    
-    
     public function index(){
 
         $view = $this->load->view('index') ;   

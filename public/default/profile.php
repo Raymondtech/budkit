@@ -51,8 +51,8 @@
                             </div>-->
 
                             <div class="profile-avatar bottom-pad">
-                                <a href="#">
-                                    <img  src="http://lorempixel.com/220/220/people/9" width="220" height="220" />
+                                <a href="/member/profile/view">
+                                    <img  src="http://placeskull.com/170/170/DDDDDD" width="170" height="170" />
                                 </a>
                             </div>
 
@@ -118,31 +118,7 @@
                         </div>-->
                         <div class="row-fluid">
                             <div class="span8">
-                                <div id="control-panel" class="top-pad">
-                                    <div class="row-fluid text-centered clearfix"> 
-                                        <a href="/content/article/create" class="thumbnail-icon text-centered text-grey" data-original-title="New Article" rel="tooltip">
-                                            <i class="icon icon-32 icon-edit icon-block"></i>
-                                        </a>
-                                        <a href="/content/photo/create" class="thumbnail-icon text-centered text-orange" data-original-title="Upload Photos" rel="tooltip">
-                                            <i class="icon icon-32 icon-camera-retro icon-block"></i>
-                                        </a>
-                                        <a href="/content/event/create" class="thumbnail-icon text-centered text-green" data-original-title="Create Event" rel="tooltip">
-                                            <i class="icon icon-32 icon-calendar icon-block"></i>
-                                        </a>
-                                        <a href="/content/question/create" class="thumbnail-icon text-centered text-purple" data-original-title="Ask Question" rel="tooltip">
-                                            <i class="icon icon-32 icon-question-sign icon-block"></i>
-                                        </a>
-                                        <a href="/content/audio/create" class="thumbnail-icon text-centered" data-original-title="Add Audio" rel="tooltip">
-                                            <i class="icon icon-32 icon-music icon-block"></i>
-                                        </a>
-                                        <a href="/content/video/create" class="thumbnail-icon text-centered" data-original-title="Add Video" rel="tooltip">
-                                            <i class="icon icon-32 icon-film icon-block"></i>
-                                        </a>
-                                        <a href="/content/location/checkin" class="thumbnail-icon text-centered text-red" data-original-title="New Check-In" rel="tooltip">
-                                            <i class="icon icon-32 icon-map-marker icon-block"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                
                                 <div class="row-fluid">
                                     <div class="span12"> 
                                         <tpl:block data="page.block.body" return="1">What? Content</tpl:block>

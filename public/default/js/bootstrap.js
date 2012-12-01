@@ -72,213 +72,226 @@
 !function( $ ){
 
     "use strict"
-/* MODAL CLASS DEFINITION
+    /* MODAL CLASS DEFINITION
   * ====================== */
 
-  var Modal = function (element, options) {
-    this.options = options
-    this.$element = $(element)
-      .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this))
-    this.options.remote && this.$element.find('.modal-body').load(this.options.remote)
-  }
+    var Modal = function (element, options) {
+        this.options = options
+        this.$element = $(element)
+        .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this))
+        this.options.remote && this.$element.find('.modal-body').load(this.options.remote)
+    }
 
-  Modal.prototype = {
+    Modal.prototype = {
 
-      constructor: Modal
+        constructor: Modal
 
-    , toggle: function () {
-        return this[!this.isShown ? 'show' : 'hide']()
-      }
-
-    , show: function () {
-        var that = this
-          , e = $.Event('show')
-
-        this.$element.trigger(e)
-
-        if (this.isShown || e.isDefaultPrevented()) return
-
-        this.isShown = true
-
-        this.escape()
-
-        this.backdrop(function () {
-          var transition = $.support.transition && that.$element.hasClass('fade')
-
-          if (!that.$element.parent().length) {
-            that.$element.appendTo(document.body) //don't move modals dom position
-          }
-
-          that.$element
-            .show()
-
-          if (transition) {
-            that.$element[0].offsetWidth // force reflow
-          }
-
-          that.$element
-            .addClass('in')
-            .attr('aria-hidden', false)
-
-          that.enforceFocus()
-
-          transition ?
-            that.$element.one($.support.transition.end, function () { that.$element.focus().trigger('shown') }) :
-            that.$element.focus().trigger('shown')
-
-        })
-      }
-
-    , hide: function (e) {
-        e && e.preventDefault()
-
-        var that = this
-
-        e = $.Event('hide')
-
-        this.$element.trigger(e)
-
-        if (!this.isShown || e.isDefaultPrevented()) return
-
-        this.isShown = false
-
-        this.escape()
-
-        $(document).off('focusin.modal')
-
-        this.$element
-          .removeClass('in')
-          .attr('aria-hidden', true)
-
-        $.support.transition && this.$element.hasClass('fade') ?
-          this.hideWithTransition() :
-          this.hideModal()
-      }
-
-    , enforceFocus: function () {
-        var that = this
-        $(document).on('focusin.modal', function (e) {
-          if (that.$element[0] !== e.target && !that.$element.has(e.target).length) {
-            that.$element.focus()
-          }
-        })
-      }
-
-    , escape: function () {
-        var that = this
-        if (this.isShown && this.options.keyboard) {
-          this.$element.on('keyup.dismiss.modal', function ( e ) {
-            e.which == 27 && that.hide()
-          })
-        } else if (!this.isShown) {
-          this.$element.off('keyup.dismiss.modal')
+        , 
+        toggle: function () {
+            return this[!this.isShown ? 'show' : 'hide']()
         }
-      }
 
-    , hideWithTransition: function () {
-        var that = this
-          , timeout = setTimeout(function () {
-              that.$element.off($.support.transition.end)
-              that.hideModal()
+        , 
+        show: function () {
+            var that = this
+            , e = $.Event('show')
+
+            this.$element.trigger(e)
+
+            if (this.isShown || e.isDefaultPrevented()) return
+
+            this.isShown = true
+
+            this.escape()
+
+            this.backdrop(function () {
+                var transition = $.support.transition && that.$element.hasClass('fade')
+
+                if (!that.$element.parent().length) {
+                    that.$element.appendTo(document.body) //don't move modals dom position
+                }
+
+                that.$element
+                .show()
+
+                if (transition) {
+                    that.$element[0].offsetWidth // force reflow
+                }
+
+                that.$element
+                .addClass('in')
+                .attr('aria-hidden', false)
+
+                that.enforceFocus()
+
+                transition ?
+                that.$element.one($.support.transition.end, function () {
+                    that.$element.focus().trigger('shown')
+                }) :
+                that.$element.focus().trigger('shown')
+
+            })
+        }
+
+        , 
+        hide: function (e) {
+            e && e.preventDefault()
+
+            var that = this
+
+            e = $.Event('hide')
+
+            this.$element.trigger(e)
+
+            if (!this.isShown || e.isDefaultPrevented()) return
+
+            this.isShown = false
+
+            this.escape()
+
+            $(document).off('focusin.modal')
+
+            this.$element
+            .removeClass('in')
+            .attr('aria-hidden', true)
+
+            $.support.transition && this.$element.hasClass('fade') ?
+            this.hideWithTransition() :
+            this.hideModal()
+        }
+
+        , 
+        enforceFocus: function () {
+            var that = this
+            $(document).on('focusin.modal', function (e) {
+                if (that.$element[0] !== e.target && !that.$element.has(e.target).length) {
+                    that.$element.focus()
+                }
+            })
+        }
+
+        , 
+        escape: function () {
+            var that = this
+            if (this.isShown && this.options.keyboard) {
+                this.$element.on('keyup.dismiss.modal', function ( e ) {
+                    e.which == 27 && that.hide()
+                })
+            } else if (!this.isShown) {
+                this.$element.off('keyup.dismiss.modal')
+            }
+        }
+
+        , 
+        hideWithTransition: function () {
+            var that = this
+            , timeout = setTimeout(function () {
+                that.$element.off($.support.transition.end)
+                that.hideModal()
             }, 500)
 
-        this.$element.one($.support.transition.end, function () {
-          clearTimeout(timeout)
-          that.hideModal()
-        })
-      }
-
-    , hideModal: function (that) {
-        this.$element
-          .hide()
-          .trigger('hidden')
-
-        this.backdrop()
-      }
-
-    , removeBackdrop: function () {
-        this.$backdrop.remove()
-        this.$backdrop = null
-      }
-
-    , backdrop: function (callback) {
-        var that = this
-          , animate = this.$element.hasClass('fade') ? 'fade' : ''
-
-        if (this.isShown && this.options.backdrop) {
-          var doAnimate = $.support.transition && animate
-
-          this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
-            .appendTo(document.body)
-
-          this.$backdrop.click(
-            this.options.backdrop == 'static' ?
-              $.proxy(this.$element[0].focus, this.$element[0])
-            : $.proxy(this.hide, this)
-          )
-
-          if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
-
-          this.$backdrop.addClass('in')
-
-          doAnimate ?
-            this.$backdrop.one($.support.transition.end, callback) :
-            callback()
-
-        } else if (!this.isShown && this.$backdrop) {
-          this.$backdrop.removeClass('in')
-
-          $.support.transition && this.$element.hasClass('fade')?
-            this.$backdrop.one($.support.transition.end, $.proxy(this.removeBackdrop, this)) :
-            this.removeBackdrop()
-
-        } else if (callback) {
-          callback()
+            this.$element.one($.support.transition.end, function () {
+                clearTimeout(timeout)
+                that.hideModal()
+            })
         }
-      }
-  }
+
+        , 
+        hideModal: function (that) {
+            this.$element
+            .hide()
+            .trigger('hidden')
+
+            this.backdrop()
+        }
+
+        , 
+        removeBackdrop: function () {
+            this.$backdrop.remove()
+            this.$backdrop = null
+        }
+
+        , 
+        backdrop: function (callback) {
+            var that = this
+            , animate = this.$element.hasClass('fade') ? 'fade' : ''
+
+            if (this.isShown && this.options.backdrop) {
+                var doAnimate = $.support.transition && animate
+
+                this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+                .appendTo(document.body)
+
+                this.$backdrop.click(
+                    this.options.backdrop == 'static' ?
+                    $.proxy(this.$element[0].focus, this.$element[0])
+                    : $.proxy(this.hide, this)
+                    )
+
+                if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
+
+                this.$backdrop.addClass('in')
+
+                doAnimate ?
+                this.$backdrop.one($.support.transition.end, callback) :
+                callback()
+
+            } else if (!this.isShown && this.$backdrop) {
+                this.$backdrop.removeClass('in')
+
+                $.support.transition && this.$element.hasClass('fade')?
+                this.$backdrop.one($.support.transition.end, $.proxy(this.removeBackdrop, this)) :
+                this.removeBackdrop()
+
+            } else if (callback) {
+                callback()
+            }
+        }
+    }
 
 
- /* MODAL PLUGIN DEFINITION
+    /* MODAL PLUGIN DEFINITION
   * ======================= */
 
-  $.fn.modal = function (option) {
-    return this.each(function () {
-      var $this = $(this)
-        , data = $this.data('modal')
-        , options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof option == 'object' && option)
-      if (!data) $this.data('modal', (data = new Modal(this, options)))
-      if (typeof option == 'string') data[option]()
-      else if (options.show) data.show()
-    })
-  }
+    $.fn.modal = function (option) {
+        return this.each(function () {
+            var $this = $(this)
+            , data = $this.data('modal')
+            , options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof option == 'object' && option)
+            if (!data) $this.data('modal', (data = new Modal(this, options)))
+            if (typeof option == 'string') data[option]()
+            else if (options.show) data.show()
+        })
+    }
 
-  $.fn.modal.defaults = {
-      backdrop: true
-    , keyboard: true
-    , show: true
-  }
+    $.fn.modal.defaults = {
+        backdrop: true
+        , 
+        keyboard: true
+        , 
+        show: true
+    }
 
-  $.fn.modal.Constructor = Modal
+    $.fn.modal.Constructor = Modal
 
 
- /* MODAL DATA-API
+    /* MODAL DATA-API
   * ============== */
 
-  $(document).on('click.modal.data-api', '[data-toggle="modal"]', function (e) {
-    var $this = $(this)
-      , href = $this.attr('href')
-      , $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) //strip for ie7
-      , option = $target.data('modal') ? 'toggle' : $.extend({ remote:!/#/.test(href) && href }, $target.data(), $this.data())
+    $(document).on('click.modal.data-api', '[data-toggle="modal"]', function (e) {
+        var $this = $(this)
+        , href = $this.attr('href')
+        , $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) //strip for ie7
+        , option = $target.data('modal') ? 'toggle' : $.extend({remote:!/#/.test(href) && href}, $target.data(), $this.data())
 
-    e.preventDefault()
+        e.preventDefault()
 
-    $target
-      .modal(option)
-      .one('hide', function () {
-        $this.focus()
-      })
-  })
+        $target
+        .modal(option)
+        .one('hide', function () {
+            $this.focus()
+        })
+    })
 
 }( window.jQuery );
 /* ============================================================
@@ -627,6 +640,7 @@
         return this.each(function () {
             var $this = $(this)
             , data = $this.data('tab')
+            
             if (!data) $this.data('tab', (data = new Tab(this)))
             if (typeof option == 'string') data[option]()
         })
@@ -643,6 +657,13 @@
         activeTab && activeTab.tab('show');
         $('body').on('click.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
             e.preventDefault()
+          var $this = $(this)
+            , href = $this.attr('href')
+            , $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) //strip for ie7
+            
+            if(href && href.lastIndexOf('#') <= 0)  
+                $target.load( !/#/.test(href) && href ) 
+            
             $(this).tab('show')
         })
     })
@@ -798,25 +819,25 @@
                         tp = {
                             top: pos.top + pos.height, 
                             left: pos.left + pos.width / 2 - actualWidth / 2
-                            }
+                        }
                         break
                     case 'top':
                         tp = {
                             top: pos.top - actualHeight, 
                             left: pos.left + pos.width / 2 - actualWidth / 2
-                            }
+                        }
                         break
                     case 'left':
                         tp = {
                             top: pos.top + pos.height / 2 - actualHeight / 2, 
                             left: pos.left - actualWidth
-                            }
+                        }
                         break
                     case 'right':
                         tp = {
                             top: pos.top + pos.height / 2 - actualHeight / 2, 
                             left: pos.left + pos.width
-                            }
+                        }
                         break
                 }
 
@@ -1211,7 +1232,7 @@
                 $(selector).prop('checked', true)
             else
                 $(selector).prop('checked', false)
-            //e && e.preventDefault()
+        //e && e.preventDefault()
         }
 
     }
@@ -1964,108 +1985,110 @@
 
 !function ($) {
 
-  "use strict"; // jshint ;_
+    "use strict"; // jshint ;_
 
- /* INPUTMASK PUBLIC CLASS DEFINITION
+    /* INPUTMASK PUBLIC CLASS DEFINITION
   * ================================= */
 
-  var Fileupload = function (element, options) {
-    this.$element = $(element)
-    this.type = this.$element.data('uploadtype') || (this.$element.find('.thumbnail').length > 0 ? "image" : "file")
+    var Fileupload = function (element, options) {
+        this.$element = $(element)
+        this.type = this.$element.data('uploadtype') || (this.$element.find('.thumbnail').length > 0 ? "image" : "file")
       
-    this.$input = this.$element.find(':file')
-    if (this.$input.length === 0) return
+        this.$input = this.$element.find(':file')
+        if (this.$input.length === 0) return
 
-    this.name = this.$input.attr('name') || options.name
+        this.name = this.$input.attr('name') || options.name
 
-    this.$hidden = this.$element.find(':hidden[name="'+this.name+'"]')
-    if (this.$hidden.length === 0) {
-      this.$hidden = $('<input type="hidden" />')
-      this.$element.prepend(this.$hidden)
-    }
-
-    this.$preview = this.$element.find('.fileupload-preview')
-    var height = this.$preview.css('height')
-    if (this.$preview.css('display') != 'inline' && height != '0px' && height != 'none') this.$preview.css('line-height', height)
-
-    this.$remove = this.$element.find('[data-dismiss="fileupload"]')
-    
-    this.listen()
-  }
-  
-  Fileupload.prototype = {
-    
-    listen: function() {
-      this.$input.on('change.fileupload', $.proxy(this.change, this))
-      if (this.$remove) this.$remove.on('click.fileupload', $.proxy(this.clear, this))
-    },
-    
-    change: function(e, invoked) {
-      var file = e.target.files !== undefined ? e.target.files[0] : { name: e.target.value.replace(/^.+\\/, '') }
-      if (!file || invoked === 'clear') return
-      
-      this.$hidden.val('')
-      this.$hidden.attr('name', '')
-      this.$input.attr('name', this.name)
-
-      if (this.type === "image" && this.$preview.length > 0 && (typeof file.type !== "undefined" ? file.type.match('image.*') : file.name.match('\\.(gif|png|jpe?g)$')) && typeof FileReader !== "undefined") {
-        var reader = new FileReader()
-        var preview = this.$preview
-        var element = this.$element
-
-        reader.onload = function(e) {
-          preview.html('<img src="' + e.target.result + '" ' + (preview.css('max-height') != 'none' ? 'style="max-height: ' + preview.css('max-height') + ';"' : '') + ' />')
-          element.addClass('fileupload-exists').removeClass('fileupload-new')
+        this.$hidden = this.$element.find(':hidden[name="'+this.name+'"]')
+        if (this.$hidden.length === 0) {
+            this.$hidden = $('<input type="hidden" />')
+            this.$element.prepend(this.$hidden)
         }
 
-        reader.readAsDataURL(file)
-      } else {
-        this.$preview.text(file.name)
-        this.$element.addClass('fileupload-exists').removeClass('fileupload-new')
-      }
-    },
+        this.$preview = this.$element.find('.fileupload-preview')
+        var height = this.$preview.css('height')
+        if (this.$preview.css('display') != 'inline' && height != '0px' && height != 'none') this.$preview.css('line-height', height)
 
-    clear: function(e) {
-      this.$hidden.val('')
-      this.$hidden.attr('name', this.name)
-      this.$input.attr('name', '')
-
-      this.$preview.html('')
-      this.$element.addClass('fileupload-new').removeClass('fileupload-exists')
-
-      this.$input.trigger('change', [ 'clear' ])
-
-      e.preventDefault()
-      return false
+        this.$remove = this.$element.find('[data-dismiss="fileupload"]')
+    
+        this.listen()
     }
-  }
+  
+    Fileupload.prototype = {
+    
+        listen: function() {
+            this.$input.on('change.fileupload', $.proxy(this.change, this))
+            if (this.$remove) this.$remove.on('click.fileupload', $.proxy(this.clear, this))
+        },
+    
+        change: function(e, invoked) {
+            var file = e.target.files !== undefined ? e.target.files[0] : {
+                name: e.target.value.replace(/^.+\\/, '')
+            }
+            if (!file || invoked === 'clear') return
+      
+            this.$hidden.val('')
+            this.$hidden.attr('name', '')
+            this.$input.attr('name', this.name)
+
+            if (this.type === "image" && this.$preview.length > 0 && (typeof file.type !== "undefined" ? file.type.match('image.*') : file.name.match('\\.(gif|png|jpe?g)$')) && typeof FileReader !== "undefined") {
+                var reader = new FileReader()
+                var preview = this.$preview
+                var element = this.$element
+
+                reader.onload = function(e) {
+                    preview.html('<img src="' + e.target.result + '" ' + (preview.css('max-height') != 'none' ? 'style="max-height: ' + preview.css('max-height') + ';"' : '') + ' />')
+                    element.addClass('fileupload-exists').removeClass('fileupload-new')
+                }
+
+                reader.readAsDataURL(file)
+            } else {
+                this.$preview.text(file.name)
+                this.$element.addClass('fileupload-exists').removeClass('fileupload-new')
+            }
+        },
+
+        clear: function(e) {
+            this.$hidden.val('')
+            this.$hidden.attr('name', this.name)
+            this.$input.attr('name', '')
+
+            this.$preview.html('')
+            this.$element.addClass('fileupload-new').removeClass('fileupload-exists')
+
+            this.$input.trigger('change', [ 'clear' ])
+
+            e.preventDefault()
+            return false
+        }
+    }
 
   
- /* INPUTMASK PLUGIN DEFINITION
+    /* INPUTMASK PLUGIN DEFINITION
   * =========================== */
 
-  $.fn.fileupload = function (options) {
-    return this.each(function () {
-      var $this = $(this)
-      , data = $this.data('fileupload')
-      if (!data) $this.data('fileupload', (data = new Fileupload(this, options)))
-    })
-  }
+    $.fn.fileupload = function (options) {
+        return this.each(function () {
+            var $this = $(this)
+            , data = $this.data('fileupload')
+            if (!data) $this.data('fileupload', (data = new Fileupload(this, options)))
+        })
+    }
 
-  $.fn.fileupload.Constructor = Fileupload
+    $.fn.fileupload.Constructor = Fileupload
 
 
- /* INPUTMASK DATA-API
+    /* INPUTMASK DATA-API
   * ================== */
 
-  $(function () {
-    $('body').on('click.fileupload.data-api', '[data-provides="fileupload"]', function (e) {
-      var $this = $(this)
-      if ($this.data('fileupload')) return
-      $this.fileupload($this.data())
+    $(function () {
+        $('body').on('click.fileupload.data-api', '[data-provides="fileupload"]', function (e) {
+            var $this = $(this)
+            if ($this.data('fileupload')) return
+            $this.fileupload($this.data())
       
-      if ($(e.target).data('dismiss') == 'fileupload') $(e.target).trigger('click.fileupload')
+            if ($(e.target).data('dismiss') == 'fileupload') $(e.target).trigger('click.fileupload')
+        })
     })
-  })
 
 }(window.jQuery)
