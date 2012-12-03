@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * commands.php
+ * upload.php
  *
  * Requires PHP version 5.3
  *
@@ -39,30 +39,17 @@ use Application\System\Views as View;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-class Commands extends Platform\Controller {
+class Upload extends Platform\Controller {
 
-    /**
-     * How safe is this?
-     * 
-     * @param type $function
-     * @param type $args
-     * @return type 
-     */
-    final public function update() {
-
-        //Determines magic methods
-        //Remap all commands
-        //return $this->index();
-    }
+    
+    public function index() {}
 
     /**
      * The global system uploader. Just point to /system/commands/upload
      */
-    final public function upload() {
-        
-        
-        //Display the upload form
-        
+    final public function form() {
+                
+        //Display the upload form   
         $view = $this->load->view("index");
         //$dashboard  = Controllers\Start\Dashboard::getInstance();
         //$this->output->set("upload", array( "title"=>"Upload Page Title" ));
@@ -74,17 +61,6 @@ class Commands extends Platform\Controller {
         $this->output->addToPosition("body", $form);
     }
 
-    /**
-     * Executes the search command
-     * 
-     * @return void
-     */
-    final public function search() {
-
-        $view = $this->load->view("index");
-
-        echo "searching for stuff";
-    }
 
     /**
      * Gets an instance of the command class

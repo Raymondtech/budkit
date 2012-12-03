@@ -95,7 +95,7 @@ class Activity extends Platform\Entity {
             $actorObject->set("uri", $object['user_name_id']);
             
             $actorImage  = Activity\MediaLink::getInstance();
-            $actorImage->set("url", "http://placeskull.com/50/50/2554C7");
+            $actorImage->set("url", "http://placeskull.com/50/50/dddddd");
             $actorImage->set("height", 48);
             $actorImage->set("width", 48);
             $actorObject->set("image", $actorImage::getArray());

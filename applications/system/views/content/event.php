@@ -61,7 +61,15 @@ final class Event extends \Platform\View{
         $this->output->addToPosition("body",    $dashboard);
     }
     
-    public function drawCalendar(){}
+    public function drawCalendar(){
+        
+        $calendar = $this->output->layout( "content/events/calendar" );
+        
+        
+        
+        $this->output->addToPosition( "body", $calendar);
+      
+    }
     
     
     /**

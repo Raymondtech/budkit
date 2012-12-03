@@ -685,10 +685,10 @@ ul.grid-list.grid {
   background-repeat: repeat-y;
 }
 .layout-block .main-block.has-main-block-aside .main-block-content {
-  margin-right: 310px;
+  margin-right: 340px;
 }
 .layout-block .main-block.has-main-block-aside .main-block-aside {
-  width: 270px;
+  width: 300px;
   float: right;
 }
 .layout-block.boxed {
@@ -1161,6 +1161,7 @@ legend small {
   color: #999999;
 }
 label,
+.input,
 input,
 button,
 select,
@@ -1169,6 +1170,7 @@ textarea {
   font-weight: normal;
   line-height: 18px;
 }
+.input,
 input,
 button,
 select,
@@ -1180,6 +1182,7 @@ label {
   margin-bottom: 5px;
   color: #333333;
 }
+.input,
 input,
 textarea,
 .uneditable-input {
@@ -1202,7 +1205,8 @@ textarea,
   width: auto;
   height: auto;
 }
-textarea {
+textarea,
+.input {
   padding: 10px;
 }
 .uneditable-input,
@@ -1278,7 +1282,8 @@ input[type="image"] {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-textarea {
+textarea,
+.input {
   height: auto;
 }
 input[type="hidden"] {
@@ -1404,6 +1409,7 @@ select[disabled] {
 .checkbox.inline + .checkbox.inline {
   margin-left: 10px;
 }
+.input,
 input,
 textarea {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1415,6 +1421,7 @@ textarea {
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
 }
+.input:focus,
 input:focus,
 textarea:focus {
   border-color: rgba(82, 168, 236, 0.8);
@@ -2051,6 +2058,9 @@ legend + .control-group {
 }
 .fileupload-new.thumbnail-borderless .thumbnail {
   border: 1px solid #ddd;
+}
+.input {
+  background-color: #ffffff;
 }
 table {
   max-width: 100%;
@@ -4561,7 +4571,7 @@ input[type="submit"].btn.small {
   margin-bottom: 0;
 }
 .navbar-search .search-query {
-  width: 275px;
+  width: 320px;
   padding: 4px 9px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -6698,10 +6708,10 @@ a.badge:hover {
   }
 }
 .timeline-stream {
-  background-color: #f9f9f9;
+  background-color: #fdfdfd;
   background-image: url(../img/activitystream-bg.png);
   background-repeat: repeat-y;
-  background-position: 0px 0;
+  background-position: 100% 0;
   min-height: 1000px;
 }
 .timeline-workspace-title {
@@ -6735,7 +6745,10 @@ a.badge:hover {
   position: relative;
 }
 .timeline-item-publisher {
-  margin: 0 60px;
+  padding: 12.6px;
+  margin: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
 }
 .timeline-item-publisher .publisher-profile {
   font-size: 1.1em;

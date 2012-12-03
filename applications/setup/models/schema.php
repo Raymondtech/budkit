@@ -115,11 +115,13 @@ final class Schema extends Platform\Model {
             (2, 1, '/member/session(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Login'),
             (3, 1, '/member/account(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Signup'),
             (4, 2, '/system/activity(/[a-z0-9-]*)*', 'allow', 'execute', 'Update Status'),
-            (5, 2, '/content(/[a-z0-9-]*)*', 'allow', 'execute', 'View Content'),
+            (5, 2, '/system/content([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'View Content'),
             (6, 1, '/setup/install(/[a-z0-9-]*)*', 'allow', 'execute', 'Setup Installer'),
             (7, 2, '/system/start(/[a-z0-9-]*)*', 'allow', 'view', 'Start Pages'),
-            (8, 1, '/system/command([s]*/[a-z0-9-]*)*', 'allow', 'view', 'System Commands'),
-            (9, 2, '/member(/[a-z0-9-]*)*', 'allow', 'view', 'Read User Profiles');"
+            (8, 2, '/system/upload([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Uploads'),
+            (9, 1, '/system/search(/[a-z0-9-]*)*', 'allow', 'execute', 'System Search'),
+            (10, 2, '/system/workspace([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Workspaces'),
+            (11, 2, '/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Read User Profiles');"
         );
     }
 

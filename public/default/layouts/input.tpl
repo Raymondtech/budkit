@@ -3,10 +3,7 @@
         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
             <div class="timeline-item-publisher-box">
                 <fieldset class="timeline-item-publisher no-bottom-margin">
-                    <a class="publisher-profile" href="/member/profile/view/">
-                        <img class="profile-avatar" src="http://placeskull.com/50/50/2554C7"  />                                      
-                    </a>
-                    
+
                     <div class="controls half-bottom-pad">
                         <div class="btn-toolbar inline no-margin">
                             <div class="btn-group">
@@ -16,7 +13,7 @@
                                 <button class="btn" type="button"><i class="icon icon-strikethrough"></i></button>
                             </div>
                             <div class="btn-group">
-                                <a class="btn" href="/system/commands/upload.raw" data-toggle="modal" data-target="#upload-tool"><i class="icon icon-picture"></i></a>
+                                <a class="btn" href="/system/upload/form.raw" data-toggle="modal" data-target="#upload-tool"><i class="icon icon-picture"></i></a>
                                 <button class="btn" type="button"><i class="icon icon-film"></i></button>
                                 <button class="btn" type="button"><i class="icon icon-music"></i></button>
                                 <button class="btn" type="button"><i class="icon icon-file"></i></button>
@@ -28,8 +25,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="control-group row-fluid">
-                        <textarea class="input-xxxlarge focused" rows="4" name="activity_content" placeholder="Say Something..."></textarea>
+                    <div class="controls">
+                        <textarea class="input-xxxlarge focused input-editor" rows="4" name="activity_content" placeholder="Say Something..."></textarea>
                     </div>
                 </fieldset>
             </div>
@@ -43,4 +40,11 @@
             </div>
         </tpl:condition>
     </form>
+    <script type="text/javaScript">
+        <![CDATA[
+            !function($){
+                $(".input-editor").bkeditor();
+            }(window.jQuery);
+        ]]>
+    </script>
 </tpl:layout>

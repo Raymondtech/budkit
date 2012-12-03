@@ -17,7 +17,14 @@
             <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
             <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
             <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
-            <!--            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css' />-->
+    
+            <!-- Scripts -->
+            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
+            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.js" type="text/javascript"></script>  
+            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/budkit-1.0.0.min.js" type="text/javascript"></script>
+              
         </head>
         <body class="responsive-body">
             
@@ -94,13 +101,6 @@
 
                 <tpl:import layout="footer" />    
             </div>
-
-            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
-            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
-            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
-            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/budkit-1.0.0.min.js" type="text/javascript"></script>
-            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.js" type="text/javascript"></script>
-            
         </body>
     </html>
 </tpl:layout>

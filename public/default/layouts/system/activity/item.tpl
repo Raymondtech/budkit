@@ -145,9 +145,4 @@
             </li>
         </tpl:loop>  
     </ol> 
-    <div  align="center">
-        <button class="btn  btn-mini">Load more</button>
-    </div>
-    <hr  />
-    <tpl:import layout="input" />
 </tpl:layout>
