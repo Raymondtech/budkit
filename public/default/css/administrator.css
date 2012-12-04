@@ -2080,6 +2080,12 @@ legend + .control-group {
 .bkeditor-content {
   min-height: 40px;
 }
+.bkeditor-content:focus {
+  min-height: 150px;
+}
+.bkeditor-toolbar {
+  margin-top: 0px !important;
+}
 table {
   max-width: 100%;
   border-collapse: collapse;
@@ -3352,16 +3358,16 @@ ul.icons li .icon-large:before {
   color: rgba(255, 255, 255, 0.75);
 }
 .btn-primary {
-  background-color: #0181f5;
-  background-image: -moz-linear-gradient(top, #008dfd, #0370ea);
-  background-image: -ms-linear-gradient(top, #008dfd, #0370ea);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#008dfd), to(#0370ea));
-  background-image: -webkit-linear-gradient(top, #008dfd, #0370ea);
-  background-image: -o-linear-gradient(top, #008dfd, #0370ea);
-  background-image: linear-gradient(top, #008dfd, #0370ea);
+  background-color: #4479bc;
+  background-image: -moz-linear-gradient(top, #4e8ece, #365aa0);
+  background-image: -ms-linear-gradient(top, #4e8ece, #365aa0);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e8ece), to(#365aa0));
+  background-image: -webkit-linear-gradient(top, #4e8ece, #365aa0);
+  background-image: -o-linear-gradient(top, #4e8ece, #365aa0);
+  background-image: linear-gradient(top, #4e8ece, #365aa0);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#008dfd', endColorstr='#0370ea', GradientType=0);
-  border-color: #0370ea #0370ea #024c9e;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e8ece', endColorstr='#365aa0', GradientType=0);
+  border-color: #365aa0 #365aa0 #233a67;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
@@ -3370,22 +3376,22 @@ ul.icons li .icon-large:before {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #0370ea;
+  background-color: #365aa0;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #0258b8 \9;
+  background-color: #29457a \9;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #0370ea;
+  background-color: #365aa0;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #0258b8 \9;
+  background-color: #29457a \9;
 }
 .btn-warning {
   background-color: #faa732;
