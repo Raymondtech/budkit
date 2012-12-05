@@ -15,9 +15,6 @@
         </ul>
     </div>
 
-    <div class="top-pad">
-        <div class="alert alert-block alert-info">Some info</div>
-    </div>
 </tpl:layout>
 
 

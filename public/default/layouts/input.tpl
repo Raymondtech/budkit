@@ -4,7 +4,7 @@
             <div class="timeline-item-publisher-box">
                 <fieldset class="timeline-item-publisher no-bottom-margin">
                     <div class="controls">
-                        <textarea class="input-xxxlarge focused input-editor" rows="4" name="activity_content" placeholder="Share something new with your followers..."></textarea>
+                        <textarea class="input-xxxlarge focused" data-target="budkit-editor" rows="1" name="activity_content" placeholder="Share something new with your followers..."></textarea>
                     </div>
                 </fieldset>
             </div>
@@ -18,11 +18,4 @@
             </div>
         </tpl:condition>
     </form>
-    <script type="text/javaScript">
-            <![CDATA[
-                    !function($){
-                $(".input-editor").bkeditor();
-            }(window.jQuery);
-        ]]>
-    </script>
 </tpl:layout>
