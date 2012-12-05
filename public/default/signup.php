@@ -48,7 +48,7 @@
                                         <div class="controls">
                                             <label class="checkbox">
                                                 <input type="checkbox" name="user_session_save" value="1" />
-                                                <tpl:i18n>Save my login details for 14 days</tpl:i18n>
+                                                <tpl:i18n>Remember me for 14 days</tpl:i18n>
                                             </label>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                         </div>
                         <tpl:block data="page.block.side">Sidebar</tpl:block>
                     </div>
-                    <div class="main-block">
+                    <div class="main-block box-padding">
 
                         <div class="row-fluid">
                             <div class="span12"> 

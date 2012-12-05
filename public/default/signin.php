@@ -80,7 +80,7 @@
                         </div>
                         <tpl:block data="page.block.side">Sidebar</tpl:block>
                     </div>
-                    <div class="main-block">
+                    <div class="main-block box-padding">
                                 
                             <div class="row-fluid">
                                 <div class="span12"> 
