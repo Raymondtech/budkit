@@ -1,4 +1,18 @@
 /* FullCalendar fc-button themed using Twitter Bootstrap. */
+.fc table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+html .fc,
+.fc table {
+  font-size: 1em;
+}
+html .fc td,
+.fc table td,
+html .fc th,
+.fc table th {
+  vertical-align: top;
+}
 .fc {
   direction: ltf;
   text-align: left;
@@ -802,24 +816,14 @@
   margin-bottom: 25px;
   color: #999 ;
 }
-.fc .fc table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-.fc html .fc,
-.fc .fc table {
-  font-size: 1em;
-}
-.fc .fc td,
-.fc .fc th {
-  padding: 0;
-  vertical-align: top;
-}
 .fc .fc-header {
   margin-bottom: 18px;
 }
 .fc .fc-header td {
   white-space: nowrap;
+}
+.fc .fc-header-space {
+  padding-left: 10px;
 }
 .fc .fc-header-left {
   width: 25%;
@@ -827,6 +831,7 @@
 }
 .fc .fc-header-center {
   text-align: center;
+  vertical-align: middle;
 }
 .fc .fc-header-right {
   width: 25%;
@@ -839,9 +844,6 @@
 .fc .fc-header-title h2 {
   margin-top: 0;
   white-space: nowrap;
-}
-.fc .fc .fc-header-space {
-  padding-left: 10px;
 }
 .fc .fc-header .fc-button {
   margin-bottom: 1em;

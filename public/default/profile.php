@@ -62,7 +62,7 @@
                                 <div class="widget-body top-pad">
 
                                     <ul class="thumbnails">
-                                        <?php for ($i = 0; $i < 15; $i++): ?>
+                                        <?php for ($i = 0; $i < 12; $i++): ?>
                                             <li>
                                                 <a href="#">
                                                     <img class="thumbnail" src="http://placehold.it/32x32" alt="" width="32" height="32" />
@@ -78,7 +78,7 @@
                                 <div class="widget-body top-pad">
 
                                     <ul class="thumbnails">
-                                        <?php for ($i = 0; $i < 15; $i++): ?>
+                                        <?php for ($i = 0; $i < 12; $i++): ?>
                                             <li>
                                                 <a href="#">
                                                     <img class="thumbnail" src="http://lorempixel.com/32/32/people/<?php echo $i ?>" alt="" width="32" height="32" />
@@ -94,7 +94,7 @@
                                 <div class="widget-body top-pad">
 
                                     <ul class="thumbnails">
-                                        <?php for ($i = 0; $i < 15; $i++): ?>
+                                        <?php for ($i = 0; $i < 12; $i++): ?>
                                             <li>
                                                 <a href="#">
                                                     <img class="thumbnail" src="http://lorempixel.com/32/32/people/<?php echo $i ?>" alt="" width="32" height="32" />
