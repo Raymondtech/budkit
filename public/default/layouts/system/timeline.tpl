@@ -26,7 +26,7 @@
                 </tpl:loop>  
             </ol>
             <div  align="center">
-                <button class="btn  btn-mini">Load more</button>
+                <button class="btn">Load more</button>
             </div>
         </div>
         <div class="span4">

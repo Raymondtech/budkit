@@ -44,6 +44,7 @@ class Settings extends \Platform\View {
      */
     final public function display() {
         //The default method
+        $this->output->addToPosition("aside", "Sidebar");
     }
 
     /**
@@ -62,6 +63,8 @@ class Settings extends \Platform\View {
 
         $this->output->addToPosition("body", $body);
         $this->output->addToPosition("side", $sidebar);
+        
+        $this->display();
     }
 
     /**

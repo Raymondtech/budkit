@@ -14,6 +14,10 @@ body {
   color: @textColor;
   position: relative;
   background: @bodyBackgroundColor @bodyBackgroundImage;
+    &.header-bg{
+          background-image: url(../img/body-header-gradient.png), @bodyBackgroundImage;
+          background-repeat: repeat-x, repeat;
+    }
     &.white-background{
         background-color: @white;
     }

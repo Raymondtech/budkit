@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * upload.php
+ * attachments.php
  *
  * Requires PHP version 5.3
  *
@@ -21,11 +21,12 @@
  * 
  */
 
-namespace Application\System\Controllers;
+namespace Application\System\Controllers\Content;
 
 use Platform;
 use Library;
 use Application\System\Views as View;
+use Application\System\Controllers as System;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -39,7 +40,7 @@ use Application\System\Views as View;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-class Upload extends Platform\Controller {
+class Attachments extends System\Content {
 
     
     public function index() {}
@@ -47,14 +48,14 @@ class Upload extends Platform\Controller {
     /**
      * The global system uploader. Just point to /system/commands/upload
      */
-    final public function form() {
+    final public function upload() {
                 
         //Display the upload form   
         $view = $this->load->view("index");
         //$dashboard  = Controllers\Start\Dashboard::getInstance();
         //$this->output->set("upload", array( "title"=>"Upload Page Title" ));
         
-        $form       = $this->output->layout("uploadform");
+        $form       = $this->output->layout("content/uploads/form");
         $sidebar    = $this->output->layout("sidebar");
         
         $this->output->addToPosition("side", $sidebar);

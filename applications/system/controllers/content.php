@@ -44,7 +44,7 @@ class Content extends Platform\Controller {
      * The system dashboard, 
      * @ return false;
      */
-    public function index() {}
+    public function index(){}
   
     /**
      * Returns and instantiated Instance of the __CLASS__ class

@@ -6,7 +6,6 @@
            !function($){
                 $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '<?php echo $this->getTemplatePath() ?>/js/plugins/fullcalendar/fullcalendar.css') );
                 $('#events-calendar').fullCalendar({ header:{ left: 'prev,next today',center: 'title',right: 'month,basicWeek,basicDay'},editable: true, events:[] });
-
             }( window.jQuery );
         ]]>
     </script>

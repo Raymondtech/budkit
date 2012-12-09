@@ -6,6 +6,9 @@
 
 // Container (centered, fixed-width layouts)
 .container {
+    &.mini{ width: 360px; }
+&.medium{ width: 980px; }
+&.large{ width: 1080px; }
   .container-fixed();
     &.left{
         margin-left: @gridGutterWidth;
@@ -19,8 +22,8 @@
 
 // Fluid layouts (left aligned, with sidebar, min- & max-width content)
 .container-fluid {
-  padding-left: @gridGutterWidth;
-  padding-right: @gridGutterWidth;
+  //padding-left: @gridGutterWidth;
+  //padding-right: @gridGutterWidth;
   .clearfix();
 }
 
@@ -51,14 +54,14 @@
         }
         &.has-main-block-aside{
             .main-block-content{
-                margin-right: 340px;
+                margin-right: 293px;
                
             }
             background-image: url(../img/mainblockbg.png);
             background-position: 100% 0;
             background-repeat: repeat-y; 
             .main-block-aside{
-                width: 300px;
+                width: 253px;
                 float: right;
             }
         }

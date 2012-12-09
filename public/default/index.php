@@ -26,11 +26,11 @@
             <script src="<?php echo $this->getTemplatePath() ?>/js/libs/budkit-1.0.0.min.js" type="text/javascript"></script>
               
         </head>
-        <body class="responsive-body">
-            
-
-            <div class="container">
+        <body class="responsive-body header-bg">
+            <div class="container-fluid">
                 <tpl:import layout="navbar" />
+            </div>
+            <div class="container large">
                 <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <tpl:condition data="page.activesidebar" test="boolean" value="1"> 

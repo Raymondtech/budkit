@@ -1,7 +1,7 @@
 <tpl:layout name="navbar" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <div class="navbar">
         <div class="navbar-inner">
-            <div class="container-fluid no-padding">
+            <div class="container large no-padding">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".responsive-body">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>

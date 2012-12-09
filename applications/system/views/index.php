@@ -45,6 +45,7 @@ class Index extends Platform\View {
 
         $this->output->addToPosition("body", $indexpage);
         $this->output->addToPosition("side", $indexpage2);
+        
     }
 
     public function display() {

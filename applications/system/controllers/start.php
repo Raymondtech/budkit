@@ -64,10 +64,10 @@ class Start extends Platform\Controller {
         $this->output->setPageTitle("Featured");
         
         $frontpage      = $this->output->layout("system/frontpage"); 
-        $frontpageSide  = $this->output->layout("system/frontpageside");   
         
         $this->output->addToPosition("body" , $frontpage); 
-        $this->output->addToPosition("aside", $frontpageSide );
+        
+        //$this->output->setLayout("canvas");
     }
 
 

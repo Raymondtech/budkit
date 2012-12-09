@@ -22,6 +22,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Platform;
 
 use Library;
@@ -47,22 +48,36 @@ final class Framework extends Library\Object {
      * @var array 
      */
     static $object = array();
-    
-    
+
     /*
      * The class constructor
      * @return void
      */
-    public function __construct(){
+
+    public function __construct() {
         $classes = array(
             'i18n' => 'Library\i18n'
         );
-        
+
         foreach ($classes as $var => $class) {
             $this->$var = $class::getInstance();
         }
     }
-    
+
+    /**
+     * Generates a random hex collor
+     * 
+     * @return type
+     */
+    final public static function getRandomColor() {
+        $letters = "1234567890ABCDEF";
+        while (strlen($str) < 6) {
+            $pos = rand(1, 16);
+            $str .= $letters{$pos};
+        }
+        return $str;
+    }
+
     /**
      * Returns a random string
      * 
@@ -70,17 +85,17 @@ final class Framework extends Library\Object {
      * @return string
      */
     final public static function getRandomString($length = 10, $lowercase = false) {
-        
+
         $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        if($lowercase):
+        if ($lowercase):
             $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
         endif;
         $randomString = '';
-        
+
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, strlen($characters) - 1)];
         }
-        
+
         return $randomString;
     }
 
@@ -93,7 +108,7 @@ final class Framework extends Library\Object {
     public static function getInstance() {
 
         static $instance;
-        
+
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
