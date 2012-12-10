@@ -4894,7 +4894,7 @@ input[type="submit"].btn.small {
 }
 .modal-body {
   overflow-y: auto;
-  max-height: 400px;
+  max-height: 600px;
   padding: 15px;
 }
 .modal-form {
@@ -5664,12 +5664,10 @@ a.badge:hover {
 .border-right {
   border-right: 1px solid #eee;
 }
-#upload-dropbox {
+.upload-prompt {
   border: 3px dashed #ddd;
-  min-height: 300px;
-}
-#upload-dropbox .upload-prompt {
-  margin: 125px;
+  text-align: center;
+  padding: 125px 0;
   font-size: 24px;
   font-weight: bold;
   color: #DDD;
@@ -6430,9 +6428,6 @@ a.badge:hover {
   }
 }
 @media (min-width: 980px) {
-  .container-fluid {
-    max-width: 1280px;
-  }
   body {
     padding-top: 0px;
   }
