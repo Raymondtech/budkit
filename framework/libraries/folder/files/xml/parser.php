@@ -446,7 +446,7 @@ class Parser extends Files\Xml {
                     if(!in_array($tag, $selfclosing)){
                             $xmlWriter->fullEndElement();
                     }else{
-                            $xmlWriter->endElement();
+                        $xmlWriter->endElement();
                      }
                     //if (!empty($tag)):
                     //endif;

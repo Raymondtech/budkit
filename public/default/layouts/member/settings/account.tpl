@@ -1,4 +1,4 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="box-padding">
         <div class="page-header">
             <h1>Account Information</h1>
@@ -202,7 +202,7 @@
                             <option value="1901">1901</option>
                             <option value="1900">1900</option>
                         </select>
-                        <span class="help-block">We will not show your date of birth on your profile, unless you&nbsp;<a href="#">tell us to</a></span>
+                        <span class="help-block">We will not show your date of birth on your profile, unless you <a href="#">tell us to</a></span>
                     </div>
                 </div><!-- /control-group -->
 

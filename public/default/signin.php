@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <html lang="en">
         <head>
             <title><tpl:element type="text" data="page.title">Sign In</tpl:element></title>
@@ -30,9 +30,11 @@
             </div>
             <div class="container mini top-pad">
 
-                <tpl:block data="page.block.alerts" />  
+                 
                 <tpl:block data="page.block.banner">Banner</tpl:block>
+                <tpl:block data="page.block.alerts" /> 
                 <section class="layout-block boxed box-padding">
+                    
                     <form id="form" name="login_form" method="post" action="/member/session/start">                       
                         <fieldset class="no-margin">
                             <legend tpl:i18n="">Sign in to your account</legend>
@@ -50,24 +52,15 @@
                             </div>
 
                         </fieldset>
-                        <div class="btn-toolbar half-top-pad">
-                            <div class="btn-group row-fluid">
-                                <button type="submit" class="btn btn-success span6" tpl:i18n="">Sign in</button> 
-                                <label class="checkbox pull-right half-top-pad">
-                                    <input type="checkbox" name="user_session_save" value="1" />
-                                    <tpl:i18n>Remember me </tpl:i18n>
-                                </label>
+                        
+                        <div class="btn-toolbar top-pad">
+                            <div class="row-fluid">
+                                <button type="submit" class="btn btn-success span4" tpl:i18n="">Sign in</button> 
+                                <button type="submit" class="btn span4 btn-facebook" tpl:i18n="">Facebook</button> 
+                                <button type="submit" class="btn span4 btn-twitter" tpl:i18n="">Twitter</button>
                             </div>
-
-
                         </div>
                         <hr />
-                        <div class="btn-toolbar">
-                            <div class="row-fluid">
-                                <button type="submit" class="btn span6 btn-facebook" tpl:i18n="">Facebook</button> 
-                                <button type="submit" class="btn span6 btn-twitter" tpl:i18n="">Twitter</button>
-                            </div>
-                        </div>
                         <input type="hidden" name="auth_handler" value="dbauth" />
                         <input type="hidden" name="redirect" value="" />
                         <ul class="top-pad">

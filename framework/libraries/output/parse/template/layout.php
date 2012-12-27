@@ -81,10 +81,10 @@ class Layout extends Parse\Template {
 
         //print_R(static::$layouts);
         //If there is a name we will save this layout to static::$layouts
-        $name = isset($tag['NAME']) ? $tag['NAME'] : null;
+        $name   = isset($tag['NAME']) ? $tag['NAME'] : null;
         //Layouts are just wrapper elements, with names;
-        $cdata = isset($tag['CDATA']) ? $tag['CDATA'] : null;
-        $tag = isset($tag['CHILDREN']) ? $tag['CHILDREN'] : null;
+        $cdata  = isset($tag['CDATA']) ? $tag['CDATA'] : null;
+        $tag    = isset($tag['CHILDREN']) ? $tag['CHILDREN'] : null;
 
         //Write out the CDATA if we have any
         if (!is_array($tag) && !empty($cdata)) {

@@ -14,7 +14,7 @@ use Library;
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt.  If you did not receive a copy of
  * the GPLv3 License and are unable to obtain it through the web, please
- * send a note to license@tuiyo.co.uk so we can mail you a copy immediately.
+ * send a note to license@budkit.org so we can mail you a copy immediately.
  *
  * @category   Do
  * @package    DoController
@@ -32,7 +32,9 @@ final class Admin extends Platform\View {
         
         //To set the pate title use
         $this->output->setPageTitle("Dashboard");
-        $this->output->setLayout("admin");
+        $sidebar  = $this->output->layout("adminbar");
+        
+        $this->output->addToPosition("side", $sidebar);
         
         //Draw the table at the end when all the parameters have been entered!
         //register_shutdown_function( array('Application\System\Views\Admin' , 'drawAdminPage'));

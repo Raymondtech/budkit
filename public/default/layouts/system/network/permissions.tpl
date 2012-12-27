@@ -1,15 +1,16 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <?php $authorities = $this->get("authorities"); ?>
-    
-    <ul id="permissions-tab" class="nav nav-tabs admin-main-tabs">
-        <li  class="active"><a data-target="#authorities" data-toggle="tab">Authorities</a></li>
-        <li><a data-target="#permissionsDemography" data-toggle="tab">Permissions by Demography</a></li>
-        <li><a data-target="#permissions" data-toggle="tab">Permissions by Authority</a></li> 
-        <li><a data-target="#permissionsConsole" data-toggle="tab">Console</a></li>
-    </ul>
+    <div class="workspace-head">
+        <ul id="permissions-tab" class="nav icon-tabs left no-margin no-bottom-border docked-bottom">
+            <li  class="active"><a data-target="#authorities" data-toggle="tab">Authorities</a></li>
+            <li><a data-target="#permissionsDemography" data-toggle="tab">Permissions by Demography</a></li>
+            <li><a data-target="#permissions" data-toggle="tab">Permissions by Authority</a></li> 
+            <li><a data-target="#permissionsConsole" data-toggle="tab">Console</a></li>
+        </ul>
+    </div>
     <div class="row-fluid">
         <div class="span8">
-            <div class="tab-content">
+            <div class="tab-content top-pad left-pad bottom-pad">
                 <div class="tab-pane" id="permissions">
                     <form class="form-horizontal"> 
 

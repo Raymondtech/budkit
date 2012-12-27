@@ -1,4 +1,4 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
 <div id="contenttable">
 
     <form class="wrap">
@@ -73,7 +73,7 @@
             <label><?php echo _('Repository Address'); ?>
                 <span class="small"><?php echo _('URL to the repository source'); ?></span>
             </label>
-            <input type="text" name="site-name" id="site-name" style="width:500px" placeholder="e.g http://repository.tuiyo.co.uk" />
+            <input type="text" name="site-name" id="site-name" style="width:500px" placeholder="e.g http://repository.budkit.org" />
             <label style="margin: 15px 0 10px">
                 <input type="checkbox" name="allow-registraion" checked="checked" value="1" />
                 <?php echo _('Verify packages before install?'); ?>

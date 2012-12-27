@@ -1,4 +1,4 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div id="extensionInstaller">
         <ul class="nav nav-tabs admin-main-tabs">
             <li class="active"><a data-target="#addnew" data-toggle="tab">Upload Package</a></li>

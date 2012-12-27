@@ -1,4 +1,4 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">    
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">    
     <div class="page-header clearfix">
         <h1>Born in the USA<small> by @drstonyhills</small></h1>
         <p class="help-block">Uploaded to the collection <a href="">A memorible life time in the life of Mark Drewry</a> on August 01, 2011</p>

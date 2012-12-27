@@ -86,8 +86,8 @@ class Block extends Parse\Template {
                 }
                 
                 //process the callback
-                $callback = $block['callback'];
-                $string = $block['content'];
+                $callback = isset($block['callback']) ? $block['callback'] : null;
+                $string = isset($block['content']) ? $block['content'] : null;
                 
                 //Parse the block content!
                 //Slows things down! Maybe check if block is parsable

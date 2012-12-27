@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <html lang="en">
         <head>
             <title><tpl:element type="text" data="page.title">Sign In</tpl:element></title>
@@ -28,8 +28,9 @@
             <div class="container navbar canvas" style="width: 135px; margin: auto">
                 <a class="brand logo" href="/">Budkit</a>
             </div>
+            <tpl:block data="page.block.alerts" /> 
             <div class="container mini top-pad">
-                <tpl:block data="page.block.alerts" />  
+                 
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed box-padding">
                     <form id="form" name="form" method="post" action="/member/account/update">

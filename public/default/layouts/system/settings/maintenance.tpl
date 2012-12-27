@@ -1,11 +1,13 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-    <ul class="nav nav-tabs admin-main-tabs" id="maintenancePreferences">
-        <li class="active"><a data-target="#config" data-toggle="tab">Maintenance</a></li>
-        <li><a data-target="#messages" data-toggle="tab">Alert Messages</a></li>
-        <li><a data-target="#scheduled" data-toggle="tab">Scheduled Maintenance</a></li>
-        <li><a data-target="#logs" data-toggle="tab">Maintenance Logs</a></li>
-    </ul>
-    <div class="tab-content">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
+    <div class="workspace-head">
+        <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom" id="maintenancePreferences">
+            <li class="active"><a data-target="#config" data-toggle="tab">Maintenance</a></li>
+            <li><a data-target="#messages" data-toggle="tab">Alert Messages</a></li>
+            <li><a data-target="#scheduled" data-toggle="tab">Scheduled Maintenance</a></li>
+            <li><a data-target="#logs" data-toggle="tab">Maintenance Logs</a></li>
+        </ul>
+    </div>
+    <div class="tab-content box-padding">
         <div class="tab-pane active" id="config">
             <form>
                 <fieldset>

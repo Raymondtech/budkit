@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <html class="no-js" lang="en">
         <head>
             <title><tpl:element type="text" data="page.title">Default Title</tpl:element></title>
@@ -26,8 +25,8 @@
             <script src="<?php echo $this->getTemplatePath() ?>/js/libs/budkit-1.0.0.min.js" type="text/javascript"></script>
               
         </head>
-        <body class="responsive-body header-bg">
-            <div class="container-fluid">
+        <body class="responsive-body">
+            <div class="container large">
                 <tpl:import layout="navbar" />
             </div>
             <div class="container large">
@@ -51,8 +50,7 @@
                                             <tpl:block data="page.block.body">Content</tpl:block>
                                         </div>
                                     </div>
-                                </div>
-                  
+                                </div>         
                             </div>
                         </tpl:condition>
                         <tpl:condition data="page.activeaside" test="boolean" value="0"> 

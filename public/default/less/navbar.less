@@ -7,7 +7,7 @@
 
 .navbar {
   overflow: visible;
-  margin-bottom: 2*@baseLineHeight;
+  //margin-bottom: 2*@baseLineHeight;
     //margin-top:  @baseLineHeight;
 }
 
@@ -21,7 +21,7 @@
 .navbar-inner {
   //padding-left:  20px;
   //padding-right: 20px;
-    padding: 10px 20px;
+    padding: 5px 10px;
    #gradient > .vertical-with-image(@navbarBackgroundHighlight, @navbarBackground, @navbarBackgroundImage);
   //.border-radius(4px);
 border-top: 1px solid #94B6FF;
@@ -78,6 +78,10 @@ border-bottom: 1px solid #284278;
     color: @white;
     width: 115px;
     float:left;
+    &.centered{
+        position: absolute;
+        left: 45%;
+    }
     &.logo{
         text-indent: -9999em;
         min-width: 212px;
@@ -147,7 +151,7 @@ border-bottom: 1px solid #284278;
   margin-top: 3px;
   margin-bottom: 0;
   .search-query {
-    width: 293px;
+    width: 205px;
     padding: 4px 9px;
     #font > .sans-serif(13px, normal, 1);
     color: @white;
@@ -259,7 +263,7 @@ border-top: 1px solid #356AA0;;
     .dropdown-menu{
         width: 350px;
         padding: 10px 10px;
-        margin-top: 10px;
+        margin-top: 5px;
         margin-left: 0px;
         left: auto;
     &:before {
@@ -364,7 +368,7 @@ padding: 6px 3px;
 // Secondary (floated right) nav in topbar
 .navbar .nav.pull-right {
   margin-left: 10px;
-  margin-right: 0;
+  margin-right: 10px;
 }
 
 

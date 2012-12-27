@@ -58,7 +58,7 @@ class Element extends Parse\Template {
     public function __constructor() {
         
     }
-    
+
     /**
      * Writes out the attribute element
      * 
@@ -68,32 +68,26 @@ class Element extends Parse\Template {
      * @return boolean 
      */
     public static function attribute($attribute, $content, $writer) {
-        
+
         //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
-        if( preg_match_all('/(?:(?<=\$\{)).*?(?=\})/i', $content, $matches) ){
-              
-            $searches       = array();
-            $replace        = array();         
-            $placemarkers   = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
-            
-            foreach($placemarkers as $k=>$dataid){
-                $replace[]  = self::getData( strval($dataid) ); //default is null 
-                $searches[] = '${'.$dataid.'}';
-            }
-            //Replace with data;
-            $content = str_ireplace($searches, $replace, $content);     
-        }
+        $parsed = static::getDataAttributeContent($attribute, $content);
+        
+        //print_R($content);
+        
+        if(!empty($parsed)):
+             $content = str_ireplace($parsed['searches'], $parsed['replace'], $content);
+        endif;
         
         //Automatically internalize HREFs! 
         //@TODO Use call backs of type i.x _XMLAttributeCallbackOn<type> e.g _XMLAttributeCallbackOnHref
-        $references = array("HREF","ACTION");
-        if(in_array(strtoupper($attribute), $references)){
-            $content = \Library\Uri::internal( $content );
+        $references = array("HREF", "ACTION");
+        if (in_array(strtoupper($attribute), $references)) {
+            $content = \Library\Uri::internal($content);
         }
 
         return array($attribute, $content, $writer);
     }
-    
+
     /**
      * Writes out CDATA
      * 
@@ -101,30 +95,29 @@ class Element extends Parse\Template {
      * @param type $writer 
      */
     public static function content($text, $writer) {
-        $writer->writeRaw(trim($text));      
+        $writer->writeRaw(trim($text));
     }
-    
+
     /**
      * Alias for html, but does not allows tags
      * 
      * @param type $tag
      * @return type 
      */
-    public static function text($tag){
+    public static function text($tag) {
         return static::html($tag);
     }
-    
-    
+
     /**
      * Displays a formatted time string
      * 
      * @param type $tag
      * @return null
      */
-    public static function time($tag){
+    public static function time($tag) {
         //Get the data;
         if (isset($tag['DATA'])):
-            $tag['_DEFAULT'] = isset($tag['CDATA'])?$tag['CDATA']:null;
+            $tag['_DEFAULT'] = isset($tag['CDATA']) ? $tag['CDATA'] : null;
             $time = self::getData($tag['DATA'], $tag['_DEFAULT']); //echo $data;
             //if formatting
             if (isset($tag['FORMATTING']) && in_array($tag['FORMATTING'], array("sprintf", "vsprintf"))):
@@ -133,20 +126,18 @@ class Element extends Parse\Template {
             endif;
 
             if (isset($tag['FORMATTING']) && in_array($tag['FORMATTING'], array("noformatting"))):
-                    $time = $time;
-                else:
-                $now    = Library\Date\Time::stamp();
-                $time   = Library\Date\Time::difference( strtotime( $time ) , strtotime( $now ) );
+                $time = $time;
+            else:
+                $now = Library\Date\Time::stamp();
+                $time = Library\Date\Time::difference(strtotime($time), strtotime($now));
             endif;
-            
+
             $tag['CDATA'] = $time;
             //If we do not have a default empty it
             if (is_null($tag['_DEFAULT']))
                 unset($tag['_DEFAULT']);
         //die;
         endif;
-        
-        
 
         //Get the layout name; and save it!
         if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
@@ -166,7 +157,7 @@ class Element extends Parse\Template {
 
         //Get the data;
         if (isset($tag['DATA'])):
-            $tag['_DEFAULT'] = isset($tag['CDATA'])?$tag['CDATA']:null;
+            $tag['_DEFAULT'] = isset($tag['CDATA']) ? $tag['CDATA'] : null;
             $data = self::getData($tag['DATA'], $tag['_DEFAULT']); //echo $data;
             //if formatting
             if (isset($tag['FORMATTING']) && in_array($tag['FORMATTING'], array("sprintf", "vsprintf"))):
@@ -175,8 +166,6 @@ class Element extends Parse\Template {
                 //Replace the CDATA;
                 $data = $text;
             endif;
-
-
 
             $tag['CDATA'] = $data;
             //If we do not have a default empty it
@@ -230,7 +219,7 @@ class Element extends Parse\Template {
             //To check if it exists. I need a better way of doing this
             $submethods = array("text", "layout", "html", "time");
             //To spare some more memory
-            if (method_exists(self::getInstance(), $tag['TYPE']) && in_array(strtolower($tag['TYPE']) , $submethods) ) :
+            if (method_exists(self::getInstance(), $tag['TYPE']) && in_array(strtolower($tag['TYPE']), $submethods)) :
                 $tag = static::$tag['TYPE']($tag);
             endif;
         endif;

@@ -1,4 +1,4 @@
-<tpl:layout name="adminbar" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout name="adminbar" xmlns:tpl="http://budkit.org/tpl">
     <tpl:element type="text" data="upload.title" />
     <form class="form-vectical upload-form" action="index.php" method="post" enctype="multipart/form-data" data-target="budkit-uploader">
         <div id="upload-dropbox" align="center">

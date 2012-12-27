@@ -1,4 +1,4 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
 <div class="page-header">
     <h1>Installation Complete!</h1><br />
     <small>Congratulations on completing the installation and first time configuration for your web app. We hope you enjoy using your new site. Before you start exploring, here are a few details you need to make a note of. If possible print them out and keep them safe (Don't let any ONE see them but you). You will probably need them at some point: if things don't work as they should</small>

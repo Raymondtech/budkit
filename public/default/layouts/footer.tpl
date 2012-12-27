@@ -1,4 +1,4 @@
-<tpl:layout name="footer" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout name="footer" xmlns:tpl="http://budkit.org/tpl">
     <section role="footer">
         <tpl:block data="page.block.footer">Footer</tpl:block>
         <div class="row-fluid">

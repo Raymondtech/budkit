@@ -1,24 +1,16 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-    <ul class="nav nav-tabs admin-main-tabs" id="navigationPreferences">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
+    <div class="workspace-head">
+    <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom" id="navigationPreferences">
         <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
         <?php if($group['menu_group_iscore'] > 0 ): ?>
         <li><a data-target="#<?php echo $group['menu_group_uid']; ?>-nav" data-toggle="tab"><?php echo $group['menu_group_title']; ?></a></li>
         <?php endif; ?>
         <?php endforeach; ?> 
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-plus"></i></a>
-            <ul class="dropdown-menu">
-                <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
-                <?php if($group['menu_group_iscore'] < 1 ): ?>
-                <li><a data-target="#<?php echo $group['menu_group_uid']; ?>-nav" data-toggle="tab"><?php echo $group['menu_group_title']; ?></a></li>
-                <?php endif; ?>
-                <?php endforeach; ?>
-            </ul>
-        </li>
     </ul>
+    </div>
     <div class="row-fluid">
         <div class="span8">
-            <div class="tab-content">
+            <div class="tab-content top-pad left-pad bottom-pad">
                 <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
                 <div class="tab-pane" id="<?php echo $group['menu_group_uid']; ?>-nav">
                     <ul class="admin-menu-lists">

@@ -75,9 +75,97 @@ abstract class Template extends Output\Parse {
      * @var type 
      */
     static $pvariables = array();
+    
+    /**
+     * Useful data modifiers for altering attribute data values
+     * 
+     * @var type 
+     */
+    static $allowedDataModifiers = array(
+        "query"=>"getQueryData",
+        "i18n"=>"getI18nString",
+        "array"=> "getArrayFromString"
+    );
+    
+    /**
+     * Returns data by executing a database query. 
+     * e.g ${query|SELECT * FROM ?users WHERE user_name_id="joshua"}
+     * 
+     * @param type $path
+     * @param type $default
+     */
+    final public static function getQueryData($path, $default=""){
+        //echo $path;
+        
+        return $rows = [1=>"Rudolf",2,3,4,5];
+    }
+    
+    /**
+     * Converts a data string to an array
+     * 
+     * @param type $path
+     * @param type $default
+     * @return type
+     */
+    final public static function getArrayFromString($path, $default=""){
+        //echo $path;
+        echo $path; 
+        
+        
+        
+        return $data;
+        
+    }
+    
+    /**
+     * Translates the resulting string that follows the modifier
+     * 
+     * @param type $path
+     * @param type $default
+     */
+    final public static function getI18nString($path, $default=""){
+        return $path;
+    }
+    
+    final public static function getDataAttributeContent($attribute, $content){
+        
+        $parsed = array();
+        $matches = array();
+         
+        //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
+        if (preg_match_all('/(?:(?<=\$\{)).*?(?=\})/i', $content, $matches)) {
+
+            $searches = array();
+            $replace = array();
+            $placemarkers = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
+
+            foreach ($placemarkers as $placemarker):
+                //search for modifiers
+                $parts    = explode("|", $placemarker, 2);
+                $modifier = (is_array($parts) && count($parts)>1) ? reset($parts) : null;
+                if (!empty($modifier)):
+                    if(array_key_exists($modifier, static::$allowedDataModifiers)):
+                        $method = static::$allowedDataModifiers[$modifier];
+                        $path   = end( $parts );
+                        $replace[] = self::$method( $path );                   
+                    endif;
+                else:
+                    //if no modifier found e.g ${modifier|dataid} is found use the default method getData;
+                    $replace[] = self::getData(strval($placemarker)); //default is null                  
+                endif;
+                $searches[] = '${'.$placemarker.'}';
+            endforeach;
+            //Replace with data;
+            $parsed['searches'] = $searches;
+            $parsed['replace'] = $replace;
+            //$parsed['']    = $content;
+        }     
+        return $parsed;
+    }
 
     /**
-     *
+     * Useful for preserving data states and iterations in template loops
+     * 
      * @param type $path
      * @param type $default
      * @return type 
@@ -101,7 +189,8 @@ abstract class Template extends Output\Parse {
     }
 
     /**
-     *
+     * Generic get Data method
+     * 
      * @param type $path
      * @param type $default
      * @return type 
@@ -149,17 +238,6 @@ abstract class Template extends Output\Parse {
 
         return (!empty($value) ) ? $value : $default;
     }
-
-    final public static function getLayout() {
-        
-    }
-
-    final public static function getImport() {
-        
-    }
-
-    //Cannot have static abstract methods in php 5.4 this will have to go to an interface
-    //abstract public static function execute($parser, $element, $writer);
 
     /**
      * Returns and instantiated Instance of the template class

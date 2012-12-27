@@ -1,13 +1,15 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-    <ul class="nav nav-tabs admin-main-tabs" id="apperancePreferences">
-        <li class="active"><a data-target="#themes" data-toggle="tab">Themes</a></li>
-        <li><a data-target="#navigation" data-toggle="tab">Navigations</a></li>
-        <li><a data-target="#widgets" data-toggle="tab">Widgets</a></li>
-        <li><a data-target="#optimization" data-toggle="tab">Optimization</a></li>
-        <li><a data-target="#scripts" data-toggle="tab">Scripts</a></li>
-        <li><a data-target="#banners" data-toggle="tab">Banners</a></li>
-    </ul>
-    <div class="tab-content">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
+    <div class="workspace-head">
+        <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom" id="apperancePreferences">
+            <li class="active"><a data-target="#themes" data-toggle="tab"><i class="icon-grid icon icon-16"></i> Themes</a></li>
+            <li><a data-target="#navigation" data-toggle="tab"><i class="icon-compass icon icon-16"></i>Navigations</a></li>
+            <li><a data-target="#widgets" data-toggle="tab"><i class="icon-plugin icon icon-16"></i>Widgets</a></li>
+            <li><a data-target="#optimization" data-toggle="tab"><i class="icon-magic-stars icon icon-16"></i>Optimization</a></li>
+            <li><a data-target="#scripts" data-toggle="tab"><i class="icon-file-source icon icon-16"></i>Scripts</a></li>
+            <li><a data-target="#banners" data-toggle="tab">Banners</a></li>
+        </ul>
+    </div>
+    <div class="tab-content box-padding">
         <div class="tab-pane active row-fluid" id="themes">   
             <ul class="thumbnails">
                 <li class="span3">
@@ -131,7 +133,7 @@
                     </div>
                 </li>
             </ul>
-            
+
         </div>
         <div class="tab-pane" id="navigation">
             <form>

@@ -1,4 +1,4 @@
-<tpl:layout name="console" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout name="console" xmlns:tpl="http://budkit.org/tpl">
     <tpl:condition data="debug.displaylog" test="boolean" value="1"> 
         <div id="console" class="modal hide fade modal-wide">
             <div class="modal-header">

@@ -1,4 +1,4 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div id="control-panel">
         <div class="row-fluid text-centered clearfix"> 
             <a href="/content/article/create" class="thumbnail-icon text-centered" data-original-title="New Article" rel="tooltip">

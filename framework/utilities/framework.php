@@ -71,6 +71,7 @@ final class Framework extends Library\Object {
      */
     final public static function getRandomColor() {
         $letters = "1234567890ABCDEF";
+        $str     = "";
         while (strlen($str) < 6) {
             $pos = rand(1, 16);
             $str .= $letters{$pos};

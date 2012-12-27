@@ -110,8 +110,7 @@ class Condition extends Parse\Template {
             //Get the layout name; and save it!
             if (isset($tag['CHILDREN']) ):
                 $element =  $tag['CHILDREN'] ;
-            endif;
-            
+            endif;  
         } 
         //Else remove the tag from the tree;
         return $element;

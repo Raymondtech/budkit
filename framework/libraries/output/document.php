@@ -54,15 +54,16 @@ abstract class Document extends Library\Object {
      * 
      * @return string output 
      */
-    final public function parse($output, $object=null) {
+    final public function parse($output, $object=null, $xml=false) {
         //parses the document output buffer
         //1. Set the output as source
         static::$_source    = $output;
-        
-        
         //2. Parse layouts
         static::$_prepared  = Parse::_(static::$_source, $object);
-        static::$_prepared  = str_replace('<?xml version="1.0" encoding="UTF-8"?>',NULL,  static::$_prepared );
+        
+        if($xml):
+            static::$_prepared  = str_replace('<?xml version="1.0" encoding="UTF-8"?>',NULL,  static::$_prepared );
+        endif;
 
         //4. Return source;
         return static::$_prepared;
