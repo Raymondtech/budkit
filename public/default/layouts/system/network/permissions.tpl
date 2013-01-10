@@ -2,10 +2,10 @@
     <?php $authorities = $this->get("authorities"); ?>
     <div class="workspace-head">
         <ul id="permissions-tab" class="nav icon-tabs left no-margin no-bottom-border docked-bottom">
-            <li  class="active"><a data-target="#authorities" data-toggle="tab">Authorities</a></li>
-            <li><a data-target="#permissionsDemography" data-toggle="tab">Permissions by Demography</a></li>
-            <li><a data-target="#permissions" data-toggle="tab">Permissions by Authority</a></li> 
-            <li><a data-target="#permissionsConsole" data-toggle="tab">Console</a></li>
+            <li  class="active"><a data-target="#authorities" data-toggle="tab"><i class="icon-user-group icon icon-16"></i>Authorities</a></li>
+            <li><a data-target="#permissionsDemography" data-toggle="tab"><i class="icon-pie icon icon-16"></i>Permissions by Demography</a></li>
+            <li><a data-target="#permissions" data-toggle="tab"><i class="icon-lock-opened icon icon-16"></i>Permissions by Authority</a></li> 
+            <li><a data-target="#permissionsConsole" data-toggle="tab"><i class="icon-file-source icon icon-16"></i>Console</a></li>
         </ul>
     </div>
     <div class="row-fluid">

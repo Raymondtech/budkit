@@ -48,12 +48,7 @@ class Form extends Parse\Template {
      */
 
     static
-            $instance,
-            $parseControls = false,
-            $wrapControls = false,
-            $allowed = array(
-                "input","select","button","radios","checkboxes" //introduces a new radios and checkboxes elements which equal to lookup radio groups and checkboxes
-            );
+            $instance;
 
     /**
      * Defines the class constructor
@@ -64,94 +59,109 @@ class Form extends Parse\Template {
     public function __constructor() {
         
     }
-    
+
     /**
      * Wraps control elements into appropriately styled xhtml
      * 
      * @param type $element
      * @return string
      */
-    private static function wrapper( $element ){ 
-        
+    public static function wrapper($element) {
+
         //if element has a nowrap attribute skip wrapping
-        if(isset($element['NOWRAP'])) return $element;
+        if (isset($element['NOWRAP']))
+            return $element;
         
+
         //Define wrapping futures
-        $controlGroup   = array("ELEMENT"=>"div","CLASS"=>"control-group"); 
-        $controlLabel   = array("ELEMENT"=>"label","CLASS"=>"control-label");
-        $controlElement = array("ELEMENT"=>"div","CLASS"=>"control");
-        $helpBlock      = array("ELEMENT"=>"span","CLASS"=>"help-block");
+        $controlGroup = array("ELEMENT" => "div", "NAMESPACE"=>null, "CLASS" => "control-group");
+        $controlLabel = array("ELEMENT" => "label","NAMESPACE"=>null, "CLASS" => "control-label");
+        $controlElement = array("ELEMENT" => "div","NAMESPACE"=>null, "CLASS" => "control");
+        $helpBlock = array("ELEMENT" => "span","NAMESPACE"=>null, "CLASS" => "help-block");
+        $namespace = isset($element['NAMESPACE']) ? $element["NAMESPACE"] : null;
+        if(!empty($namespace)){
+            $controlElement['NAMESPACE'] = $controlLabel['NAMESPACE']= $controlGroup['NAMESPACE'] = $helpBlock['NAMESPACE'] = $namespace;
+        }  else {
+            unset($controlElement['NAMESPACE'],$controlLabel['NAMESPACE'],$controlGroup['NAMESPACE'], $helpBlock['NAMESPACE']);
+        }
         
+
         //Define the label, etc;
-        if(isset($element['LABEL'])):
-            $controlLabel['FOR']    = isset($element['NAME']) ? $element['NAME'] : $element['LABEL'];
-            $controlLabel['CDATA']  = $element['LABEL'];
+        if (isset($element['LABEL'])):
+            $controlLabel['FOR'] = isset($element['NAME']) ? $element['NAME'] : $element['LABEL'];
+            $controlLabel['CDATA'] = $element['LABEL'];
             unset($element['LABEL']); //Remove the label if defined;
         endif;
-        
+
         ////Define the help block or hint
-        if(isset($element['HINT'])):
-            $helpBlock['CDATA']  = $element['HINT'];
+        if (isset($element['HINT'])):
+            $helpBlock['CDATA'] = $element['HINT'];
             unset($element['HINT']); //Remove the label if defined;
         endif;
-        
+
         //Stack'em Up
         $controlElement["CHILDREN"][] = $element;
         $controlElement["CHILDREN"][] = $helpBlock;
-        $controlGroup["CHILDREN"][]   = $controlLabel;
-        $controlGroup["CHILDREN"][]   = $controlElement;
-        
+        $controlGroup["CHILDREN"][] = $controlLabel;
+        $controlGroup["CHILDREN"][] = $controlElement;
+
         //print_R($controlGroup);
-        
+
         return $controlGroup;
     }
-    
-    private static function input( $element ){
+
+    private static function input($element) {
         //print_R($element);
         return $element;
     }
-    
+
     /**
      * Generates a select form element from a Parsed PHP form
      * 
      * @param type $element
      * @return type
      */
-    private static function select( $element ){
-        
-        //Calculate and set the default value;
-        if(isset($element['VALUE'])):
-            
-            $default = $element['VALUE'];
-        
-            foreach($element['CHILDREN'] AS $k=>$option):
+    private static function select($element) {
 
-                if($option['VALUE']!==$default):
+
+        //Calculate and set the default value;
+        if (isset($element['VALUE'])):
+
+            $default = $element['VALUE'];
+
+            foreach ($element['CHILDREN'] AS $k => $option):
+
+                if ($option['VALUE'] !== $default):
                     unset($element['CHILDREN'][$k]['SELECTED']);
-                elseif($option['VALUE'] == $default ):   
+                elseif ($option['VALUE'] == $default):
                     //@TODO @BUG Due to the fact that you have to set all attributes
                     //between the element and cdata keys in the element array
                     //We have to unset the cdata, set the selected and then reset the cdata
                     //Very nasty indeed
-                    $cdata  = $option['CDATA']; unset($option['CDATA']);
+                    $cdata = $option['CDATA'];
+                    unset($option['CDATA']);
                     $option['SELECTED'] = 'selected';
-                    $option['CDATA']    = $cdata;
-                    $element['CHILDREN'][$k] = $option;              
+                    $option['CDATA'] = $cdata;
+                    $element['CHILDREN'][$k] = $option;
                 endif;
             endforeach;
-            
+
             unset($element['VALUE']);
         endif;
+
         return $element;
     }
-    
-    private static function radios( $element ){
+
+    /**
+     * Defines a textarea
+     * 
+     * @param type $element
+     * @return type
+     */
+    private static function textarea($element) {
         return $element;
     }
-    private static function checkboxes( $element ){
-        return $element;
-    }
-    
+
     /**
      * Executes the tpl:element method
      * 
@@ -163,25 +173,9 @@ class Form extends Parse\Template {
     public static function execute($parser, $tag, $writer) {
 
         static::$writer = $writer;
+
         
-        static::$parseControls = (isset($tag['PARSE']) && (bool) $tag['PARSE'] ) ? TRUE : FALSE;      
-        if (static::$parseControls):
-            static::$wrapControls = (isset($tag['WRAP']) && (bool) $tag['WRAP'] ) ? TRUE : FALSE;
-            //echo "form block";
-            $children = array();
-            $elements = isset($tag['CHILDREN']) ? $tag['CHILDREN'] : array(); //Get all the form element definitions       
-            foreach ($elements as $i=>$element):
-                if(in_array($element['ELEMENT'], static::$allowed) && method_exists(self::getInstance(), $element['ELEMENT'])):
-                    $element = static::$element['ELEMENT']($element);
-                    if(!empty($element)):
-                        $element = (static::$wrapControls)? static::wrapper($element) : $element;
-                    endif;
-                endif;
-                $children[] = $element;
-            endforeach;
-            $tag["CHILDREN"] = $children;
-        endif;
-        
+
         //If we don't return the other elements that are not parsed, then they will not be displayed
         //Remember this form tpl parser is mainly for elements which have the parse=true attribute
         return $tag;
@@ -201,7 +195,7 @@ class Form extends Parse\Template {
      */
     public static function getInstance() {
 
-        if (is_object(static::$instance) && is_a(static::$instance, 'element'))
+        if (is_object(static::$instance) && is_a(static::$instance, 'form'))
             return static::$instance;
 
         static::$instance = new self();

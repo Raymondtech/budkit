@@ -1,18 +1,8 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="workspace-head">
-        <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom">
-            <li class="active"><a href="#published" data-toggle="tab"><i class="icon-dot-dot-dot icon icon-16"></i>Published</a></li>
-            <li><a href="#trashed" data-toggle="tab"><i class="icon-trash-full icon icon-16"></i>Trashed</a></li>
-        </ul>
-        <ul class="nav icon-tabs right no-margin no-bottom-border docked-bottom">
-            <li>
-                <form class="search pull-right box-padding">
-                    <input type="text" class="span3" placeholder="Search" />
-                </form>
-            </li>
-        </ul>
-    </div>
     <div class="left-pad right-pad top-pad">
+        <div class="page-header">
+            <h1>Moderation Queue</h1>
+        </div>
         <div class="btn-toolbar">
             <div class="btn-group  pull-right">
                 <button class="btn">Content Type...</button>
@@ -51,8 +41,7 @@
                                 <th scope="col" id="post_selector"><input type="checkbox" data-check="content" /></th>
                                 <th scope="col" id="post_title">Title</th>
                                 <th scope="col" id="post_author">Author</th>
-                                <th scope="col" id="post_comments">Comments</th>
-                                <th scope="col" id="post_date">Date</th>
+                                <th scope="col" id="post_comments">Flags</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -63,8 +52,7 @@
                                 <td width="1%"><input type="checkbox"  data-selector="content" /></td>
                                 <td class="span7"><a href="#">This is a quite relatively long but yet simple, and minimal Post Title and a summary</a></td>
                                 <td class="span2"><a href="#">Livingstone Fultang</a></td>
-                                <td class="span1">43</td>
-                                <td class="span1">Date</td>
+                                <td class="span1">1</td>
                             </tr>
                             <?php endfor ; ?>
                         </tbody>

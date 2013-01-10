@@ -3,98 +3,82 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * start.php
+ * textarea.php
  *
  * Requires PHP version 5.3
  *
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ *
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  *
+ *
+ * @category   Library
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
+ *
  */
 
-namespace Application\System\Controllers;
+namespace Library\Output\Parse\Template;
 
-use Platform;
 use Library;
-use Application\System\Views as View;
+use Library\Output;
+use Library\Output\Parse;
 
 /**
  * What is the purpose of this class, in one sentence?
  *
  * How does this class achieve the desired purpose?
  *
+ * @category   Libraries
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  */
-class Start extends Platform\Controller {
-
-    /**
-     * The system dashboard, 
-     * @ return false;
+class Textarea extends Form {
+            static
+            $instance ;
+        
+            /**
+     * Defines the class constructor
+     * Used to preload pre-requisites for the element class
+     *
+     * @return object element
      */
-    public function index() {
-
-        //Get the view;
-        $view = $this->load->view('index');
+    public function __constructor() {
         
-        $user = \Platform\User::getInstance();
-
-        $model      = $this->load->model('activity');
-        $activities = $model->getAll();        
-        $this->set("activities", $activities);   
-
-        $this->set("user", $user);
-        $view->dashboard(); //sample call;        
-        //$this->output();
     }
-   
+    public static function execute($parser, $tag, $writer){
+        
+        return $tag;
+    }
     
-     public function featured(){
-        //To set the pate title use
-        $this->output->setPageTitle("Featured");
-        
-        $frontpage      = $this->output->layout("system/frontpage"); 
-        
-        $this->output->addToPosition("body" , $frontpage); 
-        
-        //$this->output->setLayout("canvas");
-    }
-
-
-    /**
-     * Returns and instantiated Instance of the __CLASS__ class
-     * 
+        /**
+     * Returns and instantiated Instance of the element class
+     *
      * NOTE: As of PHP5.3 it is vital that you include constructors in your class
      * especially if they are defined under a namespace. A method with the same
      * name as the class is no longer considered to be its constructor
-     * 
+     *
      * @staticvar object $instance
      * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
-     * @return object i18n
+     * @property-write object $instance
+     * @return object element
      */
     public static function getInstance() {
 
-        $class = __CLASS__;
-
-        if (is_object(static::$instance) && is_a(static::$instance, $class))
+        if (is_object(static::$instance) && is_a(static::$instance, 'textarea'))
             return static::$instance;
 
-        static::$instance = new $class;
+        static::$instance = new self();
 
         return static::$instance;
     }
 }
-

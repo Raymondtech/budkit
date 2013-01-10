@@ -65,7 +65,7 @@ class Extensions extends System\Admin {
         //$this->output();
     }
 
-    public function installed() {
+    public function index() {
 
         $view = $this->load->view('extensions');
         $this->set("user2", "livingstone");
@@ -89,7 +89,7 @@ class Extensions extends System\Admin {
      * @staticvar self $instance
      * @return self 
      */
-    public static function getInstance() {
+    public static function getInstance(){
 
         static $instance;
         //If the class was already instantiated, just return it

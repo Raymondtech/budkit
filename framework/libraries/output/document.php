@@ -61,7 +61,7 @@ abstract class Document extends Library\Object {
         //2. Parse layouts
         static::$_prepared  = Parse::_(static::$_source, $object);
         
-        if($xml):
+        if(!$xml):
             static::$_prepared  = str_replace('<?xml version="1.0" encoding="UTF-8"?>',NULL,  static::$_prepared );
         endif;
 

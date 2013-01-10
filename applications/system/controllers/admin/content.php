@@ -41,25 +41,12 @@ use Application\System\Controllers as System;
  */
 class Content extends System\Admin {
     
-
-    public function add( $type = ""){
-
-        $view = $this->load->view('content') ;   
-        
-        $this->set("content-type", $type );
-          
-        $view->addContent() ; //sample call; //$this->output();
-        
-    }
     
-    
-    public function lists($type = "articles"){
+    public function reported($type = "articles"){
         
   
         $view = $this->load->view('content') ;   
-        
-        //$this->set("user2", "livingstone");
-        
+
         $this->set("content-type", $type );
         
         $view->listContent() ; //sample call; //$this->output();

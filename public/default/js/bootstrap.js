@@ -336,6 +336,7 @@
 
         , 
         toggle: function ( e ) {
+    
             var $this = $(this)
             , selector = $this.attr('data-target')
             , $parent
@@ -351,25 +352,23 @@
             $parent.length || ($parent = $this.parent())
 
             isActive = $parent.hasClass('open')
-            isPersistent = $this.hasClass('persistent')
+            isPersistent = $parent.hasClass('persistent')
       
             if(isActive && isPersistent){
-                $parent.toggleClass('open')
-            //clearMenus()
-            //return false
+                //close other persistent and open tabs
+                $parent.toggleClass('open');  
             }
 
             clearMenus()
             //isPersistent && $parent.toggleClass('open')
             !isActive && $parent.toggleClass('open')
 
-            return false
+            return false;
         }
-
     }
 
     function clearMenus() {
-        $(toggle).not('.persistent').parent().removeClass('open')
+        $(toggle).parent().not('.persistent').removeClass('open')
     }
 
 

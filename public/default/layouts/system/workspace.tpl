@@ -1,9 +1,8 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="workspace-head">
         <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom width-fluid">
-            <li class="active"><a href="#stream" data-toggle="tab"><i class="icon-speech-reply icon icon-16"></i>Everything</a></li>
-            <li><a href="#files" data-toggle="tab"><i class="icon-box icon icon-16"></i>Files</a></li>
-            <li><a href="/member/settings/account.raw" data-target="#appdir" data-toggle="tab"><i class="icon-dot-dot icon icon-16"></i>Add App</a></li>
+            <li class="active"><a href="#stream" data-toggle="tab"><i class="icon-air-waves icon icon-16"></i>Stream</a></li>
+            <li><a href="/member/settings/account.raw" data-target="#appdir" data-toggle="tab"><i class="icon-add icon icon-16"></i>Add App</a></li>
             <li class="pull-right-important"><a href="#settings" data-toggle="tab"><i class="icon-cog icon icon-16"></i>Settings</a></li>
         </ul>
     </div>

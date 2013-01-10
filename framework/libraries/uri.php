@@ -207,7 +207,7 @@ final class Uri extends Object {
         //die;
 
         //Do we have the path info included?
-        $sPath = Config::getParam("path", "/", "system");
+        $sPath = Config::getParam("path", "/");
         
         if (!empty($url) && $sPath<> "/") {
 

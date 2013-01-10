@@ -84,7 +84,8 @@ abstract class Template extends Output\Parse {
     static $allowedDataModifiers = array(
         "query"=>"getQueryData",
         "i18n"=>"getI18nString",
-        "array"=> "getArrayFromString"
+        "array"=> "getArrayFromString",
+        "config"=> "getConfigParam"
     );
     
     /**
@@ -99,6 +100,14 @@ abstract class Template extends Output\Parse {
         
         return $rows = [1=>"Rudolf",2,3,4,5];
     }
+    
+    /**
+     * Returns a defined config param value
+     * 
+     * @param type $path
+     * @param type $default
+     */
+    final public static function getConfigParam($path, $default=""){}
     
     /**
      * Converts a data string to an array

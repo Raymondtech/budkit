@@ -3,7 +3,7 @@
     <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom" id="navigationPreferences">
         <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
         <?php if($group['menu_group_iscore'] > 0 ): ?>
-        <li><a data-target="#<?php echo $group['menu_group_uid']; ?>-nav" data-toggle="tab"><?php echo $group['menu_group_title']; ?></a></li>
+        <li><a data-target="#<?php echo $group['menu_group_uid']; ?>-nav" data-toggle="tab"><i class="icon-toggle icon icon-16"></i><?php echo $group['menu_group_title']; ?></a></li>
         <?php endif; ?>
         <?php endforeach; ?> 
     </ul>

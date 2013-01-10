@@ -14,39 +14,28 @@
             <div class="span8">
                 <div class="tab-content box-padding">
                     <div class="tab-pane active" id="general">
-                        <fieldset>
+                        <fieldset class="no-margin">
                             <div class="control-group">
                                 <label class="control-label" for="options[general][site-name]"> <?php echo _('Website Name'); ?></label>
                                 <div class="controls">
-                                    <input type="text" name="options[general][site-name]"  class="input-xxxlarge" placeholder="e.g MySocialNetwork" value="<?php echo $this->config->getParam('site-name','','general'); ?>" />
+                                    <input type="text" name="options[general][site-name]"  class="input-xxxlarge" placeholder="e.g MySocialNetwork" value="<?php echo $this->config->getParam('site-name',''); ?>" />
                                     <span class="help-block">A unique catchy name to identify your website. This will show as the default page titles</span>
                                 </div>
                             </div>                   
-
-                            <div class="control-group">
-                                <label class="control-label" for="options[general][site-url]"> <?php echo _('Website URL'); ?></label>
-                                <div class="controls">
-                                    <input type="text" name="options[general][site-url]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" value="<?php echo $this->config->getParam('site-url','','general'); ?>" />
-                                    <span class="help-block">Unless you are using a subdirectory you really don't need to change this.</span>
-                                </div>
-                            </div>
-
                             <div class="control-group">
                                 <label class="control-label" for="options[general][site-meta-description]"> <?php echo _('Website description'); ?></label>
                                 <div class="controls">
-                                    <textarea name="options[general][site-meta-description]" class="wysiwyg input-xxxlarge" rows="8" ><?php echo $this->config->getParam('site-meta-description','','general'); ?></textarea>
+                                    <textarea name="options[general][site-meta-description]" class="wysiwyg input-xxxlarge" rows="8" ><?php echo $this->config->getParam('site-meta-description',''); ?></textarea>
                                     <span class="help-block">Describe your community, its interest and purpose. </span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="options[general][site-meta-keywords]"> <?php echo _('Website Keywords'); ?></label>
                                 <div class="controls">
-                                    <textarea name="options[general][site-meta-keywords]" class="wysiwyg input-xxxlarge" ><?php echo $this->config->getParam('site-meta-keywords','','general'); ?></textarea>
+                                    <textarea name="options[general][site-meta-keywords]" class="wysiwyg input-xxxlarge" ><?php echo $this->config->getParam('site-meta-keywords',''); ?></textarea>
                                     <span class="help-block">Lists as many keywords that may promote your listing in some search engines</span>
                                 </div>
                             </div>
-
-
                             <div class="control-group">
                                 <label class="control-label" for="options[general][site-allow-registration]">Registration</label>
                                 <div class="controls">
@@ -65,30 +54,14 @@
                                 </div>
                             </div>
                             <hr />
-                            <div class="control-group  row-fluid">
-                                <div class="span6">
-                                    <label class="control-label" for="options[session][domain]"> <?php echo _('Cookie Domain'); ?></label>
-                                    <div class="controls">
-
-                                        <input type="text" name="options[session][domain]" class="input-xxxlarge" value="<?php echo $this->config->getParam('domain','budkit_session','session'); ?>" />
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <label class="control-label" for="options[session][path]"> <?php echo _('Cokie Path'); ?></label>
-                                    <div class="controls">
-                                        <input type="text" name="options[session][cookie-path]" class="input-xxxlarge" value="<?php echo $this->config->getParam('path','/','session'); ?>" />
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
                             <div class="control-group row-fluid">
                                 <div class="span6">
                                     <label class="control-label" for="options[general][site-page-title]"> <?php echo _('Website page titles'); ?></label>
                                     <div class="controls">
                                         <select name="options[general][site-page-title]" class="input-xxxlarge">
-                                            <option value="0"><?php echo _('Leave as is'); ?></option>
-                                            <option value="1"><?php echo _('Prepend website name'); ?></option>
-                                            <option value="2"><?php echo _('Append website name'); ?></option>
+                                            <option value="as-is"><?php echo _('Leave as is'); ?></option>
+                                            <option value="name-last"><?php echo _('Prepend website name'); ?></option>
+                                            <option value="name-first"><?php echo _('Append website name'); ?></option>
                                         </select>
                                         <span class="help-block">By default the page title is the website name.</span>
                                     </div>
@@ -97,10 +70,10 @@
                                     <label class="control-label" for="options[general][site-robots]"> <?php echo _('Robot Instructions'); ?></label>
                                     <div class="controls">
                                         <select name="options[general][site-robots]" class="input-xxxlarge">
-                                            <option value="1"><?php echo _('Index, Follow'); ?></option>
-                                            <option value="2"><?php echo _('No Index, Follow'); ?></option>
-                                            <option value="3"><?php echo _('Index, No Follow'); ?></option>
-                                            <option value="4"><?php echo _('No Index, No Follow'); ?></option>
+                                            <option value="index-follow"><?php echo _('Index, Follow'); ?></option>
+                                            <option value="no-index-follow"><?php echo _('No Index, Follow'); ?></option>
+                                            <option value="index-no-follow"><?php echo _('Index, No Follow'); ?></option>
+                                            <option value="no-index-no-follow"><?php echo _('No Index, No Follow'); ?></option>
                                         </select>
                                     </div>
                                 </div>
@@ -116,16 +89,13 @@
                                         <input type="checkbox" name="options[general][site-unicode-aliases]" value="1" />
                                         Use Unicode Aliasis.
                                     </label>
-                                    <label class="checkbox">
-                                        <input type="checkbox" name="options[general][site-force-clearn-url]" value="1" />
-                                        Force clean URLs, even without mod_rewrite
-                                    </label>
                                 </div>
                             </div>
                         </fieldset>
+                        <hr />
                     </div>
                     <div class="tab-pane" id="server">
-                        <fieldset>
+                        <fieldset class="no-margin">
                             <div class="control-group">
                                 <label class="control-label" for="options[server][outgoing-mail-handler]"> <?php echo _('Mail Handler'); ?></label>
                                 <div class="controls">
@@ -137,6 +107,7 @@
                                     <span class="help-block">The Outgoing mail handler. Leave as is if not sure or ask your host provider.</span>
                                 </div>
                             </div>
+                            <hr />
                             <div class="control-group">
                                 <label class="control-label" for="options[server][outgoing-mail-address]"> <?php echo _('Outgoing E-Mail'); ?></label>
                                 <div class="controls">
@@ -182,7 +153,6 @@
                                 <div class="span8">
                                     <label class="control-label" for="options[server][proxy-server]"> <?php echo _('Proxy Server'); ?></label>
                                     <div class="controls">
-
                                         <input type="text" name="options[server][proxy-server]" class="input-xxxlarge" placeholder="e.g http://proxy.mydomain.com" value="<?php echo $this->config->getParam('proxy-server','','server'); ?>" />
                                     </div>
                                 </div>
@@ -207,18 +177,18 @@
                             </div>
                             <hr />
                             <div class="control-group">
-                                <label class="control-label" for="options[server][site-enable-xmlrpc]">Protocols</label>
+                                <label class="control-label" for="options[server][protocols]">Protocols</label>
                                 <div class="controls">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="options[server][site-enable-xmlrpc]" value="1" />
+                                        <input type="checkbox" name="options[server][enable-xmlrpc]" value="1" />
                                         Enable XML-RPC Protocol?
                                     </label>
                                     <label class="checkbox">
-                                        <input type="checkbox" name="options[server][site-enable-restful]" value="1" />
+                                        <input type="checkbox" name="options[server][enable-restful]" value="1" />
                                         Enable RESTful Protocol.
                                     </label>
                                     <label class="checkbox">
-                                        <input type="checkbox" name="options[server][site-verify-protocol]" value="1" />
+                                        <input type="checkbox" name="options[server][protocol-auth]" value="1" />
                                         Require Authentication to use protocol
                                     </label>
                                 </div>
@@ -226,7 +196,7 @@
                             <hr />
                             <div class="control-group  row-fluid">
                                 <div class="span8">
-                                    <label class="control-label" for="options[server][server-error-log]"> <?php echo _('System ErrorLog'); ?></label>
+                                    <label class="control-label" for="options[server][error-log]"> <?php echo _('System ErrorLog'); ?></label>
                                     <div class="controls">
 
                                         <input type="text" name="options[server][error-log]" class="input-xxxlarge" value="<?php echo $this->config->getParam('error-log','','server'); ?>" />
@@ -253,129 +223,141 @@
                                 </div>
                             </div>
                         </fieldset>
+                        <hr />
                     </div>
                     <div class="tab-pane" id="content">
-
-                        <div class="control-group">
-                            <label class="control-label" for="options[content][content-editor]"> <?php echo _('Content Editor'); ?></label>
-                            <div class="controls">
-                                <select name="options[content][content-editor]" class="input-xlarge">
-                                    <option value="none"><?php echo _('None'); ?></option>
-                                    <option value="tinymce"><?php echo _('TinyMCE'); ?></option>
-                                    <option value="codemirror"><?php echo _('CodeMiror'); ?></option>
-                                </select>
-                                <span class="help-block">By default the page title is the website name.</span>
+                        <fieldset class="no-margin">
+                            <div class="control-group">
+                                <label class="control-label" for="options[content][content-editor]"> <?php echo _('Content Editor'); ?></label>
+                                <div class="controls">
+                                    <select name="options[content][content-editor]" class="input-xlarge">
+                                        <option value="none"><?php echo _('None'); ?></option>
+                                        <option value="tinymce"><?php echo _('TinyMCE'); ?></option>
+                                        <option value="codemirror"><?php echo _('CodeMiror'); ?></option>
+                                    </select>
+                                    <span class="help-block">By default the page title is the website name.</span>
+                                </div>
                             </div>
-                        </div>
+                            <hr />
+                            <div class="control-group">
+                                <label class="control-label" for="options[content][incoming-mail-address]"> <?php echo _('Incoming E-Mail'); ?></label>
+                                <div class="controls">
+                                    <input type="text" name="options[content][incoming-mail-address]" class="input-xxxlarge" placeholder="e.g info@mydomain.com" value="<?php echo $this->config->getParam('incoming-mail-address','','content'); ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="options[content][incoming-mail-server]"> <?php echo _('Incoming Mail Server'); ?></label>
+                                <div class="controls">
+                                    <input type="text" name="options[content][incoming-mail-server]" class="input-xxxlarge" placeholder="e.g http://webmail.mydomain.com" value="<?php echo $this->config->getParam('incoming-mail-server','','content'); ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="options[content][incoming-mail-server-username]"> <?php echo _('Incoming Mail Server Username'); ?></label>
+                                <div class="controls">
+                                    <input type="text" name="options[content][incoming-mail-server-username]" class="input-xxlarge" value="<?php echo $this->config->getParam('incoming-mail-server-username','','content'); ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="options[content][incoming-mail-server-password]"> <?php echo _('Incoming Mail Server Password'); ?></label>
+                                <div class="controls">
+                                    <input type="text" name="options[content][incoming-mail-server-password]" class="input-xxlarge" value="<?php echo $this->config->getParam('incoming-mail-server-password','','content'); ?>" />
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="control-group">
+                                <label class="control-label" for="options[content][copyright-notice]"> <?php echo _('Content Rights'); ?></label>
+                                <div class="controls">
+                                    <textarea name="options[content][copyright-notice]" class="wysiwyg input-xxxlarge" ><?php echo $this->config->getParam('copyright-notice','','content'); ?></textarea>
+                                    <span class="help-block">A brief copyright notice displayed at the bottom of your content</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="options[content][display]">Content Display</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="options[content][display-copyright-notice]" value="1" />
+                                        Display Content Rights?
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="options[content][display-author-meta]" value="1" />
+                                        Show Author meta-tag.
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
                         <hr />
-                        <div class="control-group">
-                            <label class="control-label" for="options[content][incoming-mail-address]"> <?php echo _('Incoming E-Mail'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="options[content][incoming-mail-address]" class="input-xxxlarge" placeholder="e.g info@mydomain.com" value="<?php echo $this->config->getParam('incoming-mail-address','','content'); ?>" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="options[content][incoming-mail-server]"> <?php echo _('Incoming Mail Server'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="options[content][incoming-mail-server]" class="input-xxxlarge" placeholder="e.g http://webmail.mydomain.com" value="<?php echo $this->config->getParam('incoming-mail-server','','content'); ?>" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="options[content][incoming-mail-server-username]"> <?php echo _('Incoming Mail Server Username'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="options[content][incoming-mail-server-username]" class="input-xxlarge" value="<?php echo $this->config->getParam('incoming-mail-server-username','','content'); ?>" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="options[content][incoming-mail-server-password]"> <?php echo _('Incoming Mail Server Password'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="options[content][incoming-mail-server-password]" class="input-xxlarge" value="<?php echo $this->config->getParam('incoming-mail-server-password','','content'); ?>" />
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="control-group">
-                            <label class="control-label" for="options[content][copyright-notice]"> <?php echo _('Content Rights'); ?></label>
-                            <div class="controls">
-                                <textarea name="options[content][copyright-notice]" class="wysiwyg input-xxxlarge" ><?php echo $this->config->getParam('copyright-notice','','content'); ?></textarea>
-                                <span class="help-block">A brief copyright notice displayed at the bottom of your content</span>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="options[content][display]">Content Display</label>
-                            <div class="controls">
-                                <label class="checkbox">
-                                    <input type="checkbox" name="options[content][display-copyright-notice]" value="1" />
-                                    Display Content Rights?
-                                </label>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="options[content][display-author-meta]" value="1" />
-                                    Show Author meta-tag.
-                                </label>
-                            </div>
-                        </div>
                     </div>
                     <div class="tab-pane" id="profile">
-                        <div class="control-group">
-                            <label class="control-label" for="options[profile][default-authority]"> <?php echo _('Default Authority group'); ?></label>
-                            <div class="controls row-fluid">
-                                <select name="options[profile][default-authority]"  class="input-xxxlarge">
-                                    <?php foreach ($this->get("authorities") as $e): ?>
-                                    <option value="<?php echo $e['authority']['authority_id'] ?>">
-                                        <?php echo str_repeat('|--', (int) $e['authority']['indent']) . ' ' . $e['authority']['authority_title'] ?>
-                                    </option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <span class="help-block"><?php echo _('The default authority group members will be automatically added to at sign-up'); ?></span>
+                        <fieldset class="no-margin">
+                            <div class="control-group">
+                                <label class="control-label" for="options[profile][default-authority]"> <?php echo _('Default Authority group'); ?></label>
+                                <div class="controls row-fluid">
+                                    <select name="options[profile][default-authority]"  class="input-xxxlarge">
+                                        <?php foreach ($this->get("authorities") as $e): ?>
+                                        <option value="<?php echo $e['authority']['authority_id'] ?>">
+                                            <?php echo str_repeat('|--', (int) $e['authority']['indent']) . ' ' . $e['authority']['authority_title'] ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <span class="help-block"><?php echo _('The default authority group members will be automatically added to at sign-up'); ?></span>
+                                </div>
                             </div>
-                        </div>
+                        </fieldset>
+                        <hr />
                     </div>
                     <div class="tab-pane" id="storage">
-                        <div class="control-group">
-                            <label class="control-label" for="options[storage][static-file-url]"> <?php echo _('Static file URL'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="options[storage][static-file-url]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" value="<?php echo $this->config->getParam('static-file-url','','storage'); ?>" />
-                                <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
+                        <fieldset class="no-margin">
+                            <div class="control-group">
+                                <label class="control-label" for="options[storage][static-file-url]"> <?php echo _('Static file URL'); ?></label>
+                                <div class="controls">
+                                    <input type="text" name="options[storage][static-file-url]" class="input-xxxlarge" placeholder="http://www.mydomain.com/" value="<?php echo $this->config->getParam('static-file-url','','storage'); ?>" />
+                                    <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
+                                </div>
                             </div>
-                        </div>
+                            <hr />
+                            <div class="control-group  row-fluid">
+                                <div class="span8">
+                                    <label class="control-label" for="options[storage][FTP-server-host]"> <?php echo _('FTP Server Host'); ?></label>
+                                    <div class="controls">
+                                        <input type="text" name="options[storage][FTP-server-host]" class="input-xxxlarge" placeholder="e.g http://proxy.mydomain.com" value="<?php echo $this->config->getParam('FTP-server-host','','storage'); ?>"  />
+                                    </div>
+                                </div>
+                                <div class="span4">
+                                    <label class="control-label" for="options[storage][FTP-server-port]"> <?php echo _('FTP Server Port'); ?></label>
+                                    <div class="controls">
+                                        <input type="text" name="options[storage][FTP-server-port]" class="input-xxxlarge"  value="<?php echo $this->config->getParam('FTP-server-port','','storage'); ?>" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="options[storage][FTP-server-username]"> <?php echo _('FTP Username'); ?></label>
+                                <div class="controls">
+                                    <input type="text" name="options[storage][FTP-server-username]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-server-username','','storage'); ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="options[storage][FTP-server-password]"> <?php echo _('FTP Password'); ?></label>
+                                <div class="controls">
+                                    <input type="text" name="options[storage][FTP-server-password]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-server-password','','storage'); ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="options[storage][FTP-root-path]"> <?php echo _('FTP Root Path'); ?></label>
+                                <div class="controls">
+                                    <input type="text" name="options[storage][FTP-root-path]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-root-path','/','storage'); ?>" />
+                                </div>
+                            </div>
+                        </fieldset>
                         <hr />
-                        <div class="control-group  row-fluid">
-                            <div class="span8">
-                                <label class="control-label" for="options[storage][FTP-server-host]"> <?php echo _('FTP Server Host'); ?></label>
-                                <div class="controls">
-                                    <input type="text" name="options[storage][FTP-server-host]" class="input-xxxlarge" placeholder="e.g http://proxy.mydomain.com" value="<?php echo $this->config->getParam('FTP-server-host','','storage'); ?>"  />
-                                </div>
-                            </div>
-                            <div class="span4">
-                                <label class="control-label" for="options[storage][FTP-server-port]"> <?php echo _('FTP Server Port'); ?></label>
-                                <div class="controls">
-                                    <input type="text" name="options[storage][FTP-server-port]" class="input-xxxlarge"  value="<?php echo $this->config->getParam('FTP-server-port','','storage'); ?>" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="options[storage][FTP-server-username]"> <?php echo _('FTP Username'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="options[storage][FTP-server-username]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-server-username','','storage'); ?>" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="options[storage][FTP-server-password]"> <?php echo _('FTP Password'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="options[storage][FTP-server-password]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-server-password','','storage'); ?>" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="options[storage][FTP-root-path]"> <?php echo _('FTP Root Path'); ?></label>
-                            <div class="controls">
-                                <input type="text" name="options[storage][FTP-root-path]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-root-path','/','storage'); ?>" />
-                            </div>
-                        </div>
                     </div>
                     <div class="tab-pane" id="intergration">
-                        Extensions and Application settings
+                        <fieldset class="no-margin">
+                            Extensions and Application settings
+                        </fieldset>
+                        <hr />
                     </div>
                     <div class="tab-pane" id="localization">
-                        <fieldset>
+                        <fieldset class="no-margin">
                             <div class="control-group">
                                 <label class="control-label" for="options[localization][timezone]"> <?php echo _('Locale timezone'); ?></label>
                                 <div class="controls">
@@ -436,6 +418,7 @@
                                 </div>
                             </div>
                         </fieldset>
+                        <hr />
                     </div>
                     <input type="hidden" name="options_group" value="system-config" />
                     <div class="tab-pane" id="information">

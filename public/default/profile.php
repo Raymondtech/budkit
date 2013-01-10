@@ -18,7 +18,7 @@
             <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
 
         </head>
-        <body  class="responsive-body header-bg">
+        <body  class="responsive-body dark-bg">
             <div class="container-fluid">
                 <tpl:import layout="navbar" />
             </div>
@@ -33,6 +33,17 @@
                                     <img  src="http://placeskull.com/170/170/<?php echo \Platform\Framework::getRandomColor() ?>" width="170" height="170" />
                                 </a>
                             </div>
+                            <ul class="page-info unstyled bottom-pad">
+                                <li class="signup-date">Member since 10 months ago</li>
+                                <li class="signin-date">Last logged in 6 days ago</li>
+                                <!-- Date of Birth -->
+                                <li class="company-element">Born on the <a href="#">14th of March</a></li>
+                                <!-- Contact Information -->
+                                <li class="company-element">Works at <a href="#">Stonyhills LLC</a></li>
+                                <li class="email-element"><a href="mailto:livingstonefultang@gmail.com">livingstonefultang@gmail.com</a></li>
+                                <!--CUSTOM SOCIAL INFORMATION-->
+                            </ul>
+                            
                             <tpl:menu id="profilemenu" type="nav-block" />
                             <div class="widget top-pad">
                                 <h4 tpl:i18n="">Badges and Rewards</h4> 
@@ -83,39 +94,13 @@
                         </div>
                     </div>
                     <div class="main-block">
-                        <div class="box-padding">
-                            <div class="page-header">
+                        <div class="top-pad left-pad right-pad">
+                            <div class="page-header no-margin">
                                 <h2>Livingstone K. F. Fultang <small> (@drstonyhills)</small></h2>
                             </div>
-                            <!--                        <div class="profile-cover">
-                                                        <a href="#" class="cover"><img  src="http://lorempixel.com/1100/300/abstract/" width="1100" height="300" /></a>
-                                                        
-                                                    </div>-->
-                            <div class="row-fluid">
-                                <div class="span8">
-
-                                    <div class="row-fluid">
-                                        <div class="span12"> 
-                                            <tpl:block data="page.block.body" return="1">What? Content</tpl:block>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="span4">
-                                    <div class="left-pad top-pad bottom-pad right-pad">
-                                        <ul class="page-info">
-                                            <li class="signup-date">Member since 10 months ago</li>
-                                            <li class="signin-date">Last logged in about 6 days ago</li>
-                                            <!-- Date of Birth -->
-                                            <li class="company-element">Born on the <a href="#">14th of March</a></li>
-                                            <!-- Contact Information -->
-                                            <li class="company-element">Works at <a href="#">Stonyhills LLC</a></li>
-                                            <li class="email-element"><a href="mailto:livingstonefultang@gmail.com">livingstonefultang@gmail.com</a></li>
-                                            <!--CUSTOM SOCIAL INFORMATION-->
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                        <tpl:block data="page.block.body" return="1">What? Content</tpl:block>
+                        
                     </div>
 
                 </section>

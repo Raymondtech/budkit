@@ -10,10 +10,7 @@
                 <a class="brand logo centered" href="/">Budkit</a>
                 <div class="nav-collapse">
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-                        <form class="navbar-search pull-left right-pad">
-                            <input type="text" class="search-query" placeholder="Search" />
-                        </form>
-                        <ul class="nav pull-right"> 
+                       <ul class="nav pull-left"> 
                             <li class="usermenu dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><tpl:element type="text" data="user.user_full_name"/></a>
                                 <ul class="dropdown-menu" id="user-nav">
@@ -41,6 +38,9 @@
                                 </ul>
                             </li>
                         </ul>
+                        <form class="navbar-search pull-right">
+                            <input type="text" class="search-query" placeholder="Search" />
+                        </form>
                     </tpl:condition>
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
                         <ul class="nav pull-right"> 

@@ -211,6 +211,9 @@ h6 {
   margin: 0 0 18px 0;
   border-bottom: 1px solid #eeeeee;
 }
+.page-header h2 {
+  line-height: 31px;
+}
 .page-header h1 {
   line-height: 1.75;
   font-weight: bold;

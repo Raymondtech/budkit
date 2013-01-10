@@ -25,8 +25,8 @@
             <script src="<?php echo $this->getTemplatePath() ?>/js/libs/budkit-1.0.0.min.js" type="text/javascript"></script>
               
         </head>
-        <body class="responsive-body">
-            <div class="container large">
+        <body class="responsive-body  dark-bg">
+            <div class="container-fluid large">
                 <tpl:import layout="navbar" />
             </div>
             <div class="container large">

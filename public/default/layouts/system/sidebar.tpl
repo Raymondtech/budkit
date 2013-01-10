@@ -8,12 +8,6 @@
     
     <div style="margin-top: 15px">
         <tpl:menu id="dashboardmenu" type="nav-block" position="left" />
-
-        <ul position="left" class="nav nav-block left no-top-border">
-            <li class="link">
-                <a href="/~lkffultang/budkit/system/start/index"><i class="icon icon-dashboard"></i>Add New Workspace...</a>
-            </li>
-        </ul>
     </div>
 </tpl:layout>
 

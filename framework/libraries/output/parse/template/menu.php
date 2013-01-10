@@ -49,7 +49,9 @@ class Menu extends Parse\Template {
      * @var object
      */
 
-    static $instance;
+    static $instance,
+    
+           $hasActive = false;
 
     /**
      * Execute the layout
@@ -102,7 +104,6 @@ class Menu extends Parse\Template {
         $li = array();
         $parent = 0;
         $id = 0;
-        $hasActive = false;
 
         //$hasActive  = false;
         foreach ($menuItems as $item) {
@@ -126,13 +127,13 @@ class Menu extends Parse\Template {
             //@TODO check if this is the current menu item and set it as active
             $query = \Library\Uri::getInstance()->getQuery();
             $active = ( \Library\Uri::internal($item['menu_url']) <> \Library\Uri::internal($query) ) ? false : true;
-            //$hasActive = $active;
+            static::$hasActive = ($active && !static::$hasActive)? true : false; 
             
            
 
             $link = array(
                 "ELEMENT" => 'li',
-                "CLASS" => ((isset($item['menu_classes']) && !empty($item['menu_classes'])) ? $item['menu_classes'] : "link") . (($active) ? " active" : ""),
+                "CLASS" => ((isset($item['menu_classes']) && !empty($item['menu_classes'])) ? $item['menu_classes'] : "link") . (($active) ? " active" : "")." persistent",
                 "CHILDREN" => array(
                     array(
                         "ELEMENT" => "a",
@@ -142,7 +143,6 @@ class Menu extends Parse\Template {
                 )
             );
             
-             //$hasActive = ($active)? true : false; 
              
             //Ammend active path if tab is active;
             //@TODO am i a child? who is my parent?
@@ -172,11 +172,14 @@ class Menu extends Parse\Template {
                 unset($link['CHILDREN'][0]['CDATA']);
                 $link['CHILDREN'][0]['CDATA'] = $title. (( $menuType <> "nav-block") ? '<b class="caret"></b>' : "");
                 //Move children to the very end of the array
+                static::$hasActive = false;
+                
                 $link['CHILDREN'][] = array(
                     "ELEMENT" => 'ul',
                     "CLASS" => 'dropdown-menu',
                     "CHILDREN" => static::element($item['children'])
                 );
+                
             }
 
             $li[] = $link;
