@@ -40,10 +40,10 @@ $config = array(
         'store' => 'file', //change to database to use database as session handler
         'table' => '?session',
         'cookie' => 'psession',
-        'domain' => '',
+        'domain' => 'budkit',
         'path' => '/',
         'datafile' => '/',//The absolute path to the session data file store
-        'life' => 60 * 15, //15 minutes The amount of time to keep for,
+        'life' => 60 * 15 * 4, //15 minutes The amount of time to keep for,
         'folder'=>'sessions',
         //Time to session remberance
         //If no explicit expiry time is set, session will be remembered for this long
@@ -103,22 +103,33 @@ $config = array(
     ),
 /*
 |---------------------------------------------------------------
-| SYSTEM CONFIGURATION SETTINGS
+| SYSTEM & DEFAULT CONFIGURATION SETTINGS
 |---------------------------------------------------------------
 |
 | The system config key can be overloaded with data from the database.
 | but for now to test things i am just going to use it on file
 */
-'system' => 
+ 'general' => 
     array(
         'host' => 'mb.local',
         'path' => '/',
-        'template' => 'default'
+        'template' => 'default',
+        'site-name' => 'awesome-secret',
+        'site-meta-description'=>'The social network',
+        'site-meta-keywords'=>'social, network, professional',
+        'site-allow-registration'=>true,
+        'site-inviteonly'=>false,
+        'site-verify-email'=>true,
+        'site-page-title'=>'name-first',
+        'site-robots'=>'index-follow',
+        'site-url-suffix'=>false,
+        'site-unicode-aliases'=>false,
+        
+        
     ),
-    
  /*
 |---------------------------------------------------------------
-| Database Settings
+| Database and other server Settings
 |---------------------------------------------------------------
 |
 | The Default database settings. Please not that these settings
@@ -139,4 +150,26 @@ $config = array(
         "charset" => "utf-8",
         "select" => true
     ),
+    
+ 'server' => 
+    array(
+        'outgoing-mail-handler'=>'smtp',
+        'outgoing-mail-address'=>'outmail@budkit.org',
+        'outgoing-mail-server'=>'http://webmail.budkit.org',
+        'outgoing-mail-server-port'=>25,
+        'outgoing-mail-server-security'=>'none',
+        'outgoing-mail-server-username'=>'drstonyhills',
+        'outgoing-mail-server-password'=>'',
+        'proxy-server'=>'',
+        'proxy-server-port'=>'',
+        'proxy-server-username'=>'',
+        'proxy-server-password'=>'',
+        'enable-restful' => true,
+        'enable-xmlrpc' => true,
+        'protocol-auth' => true,
+        'error-log'=>'error_log.log',
+        'error-console'=> true,
+        'error-send' => true,
+        'help-server-address' => 'http://help.budkit.org'
+    )
 );
