@@ -20,9 +20,10 @@
         </head>
         <body  class="responsive-body dark-bg">
             <div class="container-fluid">
-                <tpl:import layout="navbar" />
+                <tpl:import layout="toolbar" />
             </div>
             <div class="container large"> 
+                <tpl:import layout="navbar" />
                 <tpl:block data="page.block.alerts" />  
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed has-bg has-aside-block">

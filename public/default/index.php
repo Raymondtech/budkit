@@ -27,9 +27,10 @@
         </head>
         <body class="responsive-body  dark-bg">
             <div class="container-fluid large">
-                <tpl:import layout="navbar" />
+                <tpl:import layout="toolbar" />
             </div>
             <div class="container large">
+                <tpl:import layout="navbar" />
                 <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <tpl:condition data="page.activesidebar" test="boolean" value="1"> 
