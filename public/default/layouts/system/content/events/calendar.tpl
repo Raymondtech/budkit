@@ -1,5 +1,5 @@
 <tpl:layout  name="timeline" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div id="events-calendar"></div> 
+    <div id="events-calendar" class="box-padding"></div> 
     <script type="text/javaScript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/fullcalendar/fullcalendar.js"></script>
     <script type="text/javaScript">
       <![CDATA[

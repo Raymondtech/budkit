@@ -94,8 +94,32 @@ class Activity extends Platform\Controller {
      * 
      * @return void; 
      */
-    public function update() {
+    public function stream() {
         
+        $this->output->setPageTitle( _("Activity stream") );
+        
+        //Get the view;
+        $view = $this->load->view('index');
+        
+        $user = \Platform\User::getInstance();
+
+        $model      = $this->load->model('activity');
+        $activities = $model->getAll();   
+        
+        $this->set("activities", $activities);   
+        $this->set("dashboard", array("title"=>"Activity stream" ) );
+        $this->set("user", $user);
+        
+        $timeline = $this->output->layout("timeline");
+        $timelineside = $this->output->layout("timelinenotes");
+        
+        
+        $this->output->addToPosition("dashboard", $timeline);
+        $this->output->addToPosition("aside", $timelineside );
+        
+        
+        $view->display(); //sample call;        
+        //$this->output();
     }
 
     /**

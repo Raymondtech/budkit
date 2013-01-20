@@ -150,7 +150,7 @@ final class Schema extends Platform\Model {
         //Default menu data input;
         static::$database->query(
                 "INSERT INTO `?menu` (`menu_id`, `menu_parent_id`, `menu_title`, `menu_url`, `menu_classes`, `menu_order`, `menu_group_id`, `menu_type`, `menu_callback`, `lft`, `rgt`, `menu_iscore`) VALUES
-                (1, 0, 'Dashboard', '/system/admin/index', ' ', 1, 1, 'link', NULL, 1, 2, 1),
+                (1, 0, 'Administrator', '/system/admin/index', ' ', 1, 1, 'link', NULL, 1, 2, 1),
                 (2, 0, 'Moderation', '/system/admin/content/reported', '', 2, 1, 'link', NULL, 3, 4, 1),
                 (7, 0, 'Network', '/system/admin/network/index', '', 7, 1, 'link', '', 13, 24, 1),
                 (8, 7, 'Members', '/system/admin/network/members/lists', '', 8, 1, 'link', '', 14, 23, 1),
@@ -179,12 +179,14 @@ final class Schema extends Platform\Model {
                 (40, 0, 'Achievements', '/member/profile/display/achievements', NULL, 0, 5, 'link', NULL, 5, 6, 0),
                 (41, 0, 'Network', '/member/profile/display/network', NULL, 0, 5, 'link', NULL, 9, 10, 0),
                 (42, 0, 'Dashboard', '/system/start/index', NULL, 0, 3, 'link', NULL, 1, 2, 1),
-                (44, 0, 'Your Workspace', '/system/workspace/personal/', NULL, 0, 3, 'link', NULL, 5, 6, 1),       
-                (47, 0, 'Inbox', '/member/messages/inbox', NULL, 0, 4, 'link', NULL, 1, 2, 1),
-                (48, 0, 'Sent Messages', '/member/messages/sent', NULL, 0, 4, 'link', NULL, 3, 4, 1),
-                (49, 0, 'Live Chat', '/member/messages/live', NULL, 0, 4, 'link', NULL, 5, 6, 1),
-                (50, 0, 'Deleted Messages', '/member/messages/trash', NULL, 0, 4, 'link', NULL, 7, 8, 1),
-                (51, 0, 'Drafts', '/member/messages/drafts', NULL, 0, 4, 'link', NULL, 9, 10, 1);"
+                (43, 0, 'Activity', '/system/activity/stream', NULL, 0, 3, 'link', NULL, 1, 2, 1),
+                (44, 0, 'Media', '/system/content/media/gallery', NULL, 0, 3, 'link', NULL, 3, 4, 1),
+                (45, 0, 'Events', '/system/content/event/calendar', NULL, 0, 3, 'link', NULL, 5, 6, 1),    
+                (48, 0, 'Inbox', '/member/messages/inbox', NULL, 0, 4, 'link', NULL, 1, 2, 1),
+                (49, 0, 'Sent Messages', '/member/messages/sent', NULL, 0, 4, 'link', NULL, 3, 4, 1),
+                (50, 0, 'Live Chat', '/member/messages/live', NULL, 0, 4, 'link', NULL, 5, 6, 1),
+                (51, 0, 'Deleted Messages', '/member/messages/trash', NULL, 0, 4, 'link', NULL, 7, 8, 1),
+                (54, 0, 'Drafts', '/member/messages/drafts', NULL, 0, 4, 'link', NULL, 9, 10, 1);"
         );
     }
 

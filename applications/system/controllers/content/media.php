@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * event.php
+ * media.php
  *
  * Requires PHP version 5.3
  *
@@ -22,7 +22,6 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-
 namespace Application\System\Controllers\Content;
 
 use Platform;
@@ -43,49 +42,29 @@ use Application\System\Controllers as System;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Event extends System\Content {
+final class Media extends System\Content {
 
-    public function create() {
-
-        $view = $this->load->view('event');
-        return $view->createForm();
+    //put your code here
+    public function index() {
+        return false;
     }
 
-    // domain.com/post/item/update/1902480-Born-in-the-USA/
-    public function update() {
+    public function gallery() {
         
-    }
+        $view       = $this->load->view('index');
+        $this->output->setPageTitle( _t("Media gallery") );
 
-    //domain.com/post/item/edit/1902480-Born-in-the-USA/
-    public function edit() {
+        $gallery    = "media gallery";
         
-    }
-
-    // domain.com/post/item/1902480-Born-in-the-USA/
-    public function calendar() {
-
-        $view = $this->load->view('content\event');
-        $user = \Platform\User::getInstance();
-
+        $this->set("dashboard", array("title"=>"Media gallery" ) );
         $this->set("user", $user);
 
-        $this->output->setPageTitle(_("Event calendar"));
-        
-        $view->drawCalendar();
-
+        $this->output->addToPosition("dashboard", $gallery);
+          
+        $view->display(); //sample call;   
+        //$this->output->addToPosition("right", $right );
     }
 
-    // domain.com/post/item/delete/1902480-Born-in-the-USA/
-    public function delete() {
-        
-    }
-
-    /**
-     * Returns and instance of this class
-     * 
-     * @staticvar self $instance
-     * @return \Application\Content\Controllers\self 
-     */
     public static function getInstance() {
 
         static $instance;
@@ -99,3 +78,6 @@ final class Event extends System\Content {
     }
 
 }
+
+
+

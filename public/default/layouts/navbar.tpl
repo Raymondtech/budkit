@@ -9,13 +9,13 @@
                 </a>
                 <div class="nav-collapse">
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-                       <ul class="nav pull-right"> 
+                       <ul class="nav pull-left"> 
+                           <li><a href="/system/start/index">Dashboard</a></li>
                             <li class="usermenu dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><tpl:element type="text" data="user.user_full_name"/></a>
                                 <ul class="dropdown-menu" id="user-nav">
-                                    <li><a href="/system/start/index"><strong><tpl:i18n>Dashboard</tpl:i18n></strong></a></li>
+                                    
                                     <li><a href="/member/profile/view/">Your Profile </a></li>
-                                    <li><a href="/system/workspace/personal" tpl:i18n="">Your Workspace</a></li>
                                     <li class="divider"></li>
                                     <li><a href="/member/messages/inbox">Private Messages</a></li>
                                     <li><a href="/member/settings/account">Account settings</a></li>
@@ -23,7 +23,9 @@
                                     <li class="divider"></li>
                                     <li><a href="/sign-out">Sign out</a></li>
                                 </ul>
-                            </li>                          
+                            </li>    
+                            </ul>
+                        <ul class="nav pull-right"> 
                             <li class="notification dropdown" >
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications <span class="badge badge-important">12</span></a>
                                 <ul class="dropdown-menu" id="notification-nav">

@@ -25,6 +25,7 @@ use Library;
  *
  */
 class Index extends Platform\View {
+    
 
     public function dashboard() {
         
