@@ -1,6 +1,6 @@
 <tpl:layout name="console" xmlns:tpl="http://budkit.org/tpl">
     <tpl:condition data="debug.displaylog" test="boolean" value="1"> 
-        <div id="console" class="modal hide fade modal-wide">
+        <div id="console" class="white-background">
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">×</a>
                 <h3>Debug Console</h3>

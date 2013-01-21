@@ -19,5 +19,4 @@
         </div>
     </section>
     <tpl:import layout="upload" />
-    <tpl:import layout="console" />
 </tpl:layout>
