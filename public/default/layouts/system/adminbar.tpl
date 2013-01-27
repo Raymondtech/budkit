@@ -2,7 +2,7 @@
     <div class="btn-toolbar no-margin inline">
         <div class="btn-group ">
             <button class="btn">Share Something New</button>
-            <button class="btn"><i class="icon-add icon"></i> </button>
+            <button class="btn"><i class="icon-plus icon"></i> </button>
         </div>
     </div>
     

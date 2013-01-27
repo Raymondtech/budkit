@@ -23,21 +23,24 @@
             <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
         </head>
         <body>
-            <div class="container medium navbar canvas">
-                <div style="width:135px; margin: auto">
-                    <a class="brand logo" href="/">Pilgrimage</a>
+            <div class="wrap">
+                <div class="container medium navbar canvas">
+                    <div style="width:135px; margin: auto">
+                        <a class="brand logo" href="/">Pilgrimage</a>
+                    </div>
                 </div>
-            </div>
-            <div class="container large top-pad">
-                <tpl:block data="page.block.alerts" />  
-                <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed box-padding">
-                    <tpl:block data="page.block.body" />              
-                </section>
-                <section role="footer"> 
-                    <tpl:block data="page.block.footer">Footer</tpl:block>
-                    <tpl:import layout="console" />                
-                </section>
+                <div class="container large top-pad">
+                    <tpl:block data="page.block.alerts" />  
+                    <tpl:block data="page.block.banner">Banner</tpl:block>
+                    <section class="layout-block boxed box-padding">
+                        <tpl:block data="page.block.body" />              
+                    </section>
+                    <section role="footer"> 
+                        <tpl:block data="page.block.footer">Footer</tpl:block>
+
+                    </section>
+                </div>
+                <tpl:import layout="console" />
             </div>
             <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.js" type="text/javascript"></script>
         </body>

@@ -99,8 +99,9 @@
                     </tpl:condition>
                     <tpl:import layout="footer" />    
                 </div>
+                <tpl:import layout="console" />
             </div>
-            <tpl:import layout="console" />
+            
         </body>
     </html>
 </tpl:layout>

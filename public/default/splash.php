@@ -22,27 +22,29 @@
 
         <?php //print_R($this); ?>
         <body  class="responsive-body">
-            <form method="post" action="/" style="margin-top: 150px">
-                <div role="container" class="container fillfix clearfix">
-                    <div class="row clearfix fillfix">
-                        <article class="span8">
-                            <h1 class="text-embedded"><tpl:element type="text" data="page.title">400</tpl:element></h1>
-                            <hr />
-                            <div>
-                                <tpl:block data="page.block.content" return="true">
-                                    <tpl:block data="page.block.alerts" />    
-                                    <p tpl:i18n="">Sorry, but the page you were trying to view does not exist. It looks like this was the result of either: a mistyped address, an out-of-date link, or our engineers have messed things up!</p>
-                                </tpl:block>                    
-                            </div>
-                            <hr />
-                            <div>
-                                <tpl:block data="page.block.actions" return="true"><a  href="/" tpl:i18n="">Home Page</a></tpl:block>
-                                <tpl:import layout="console" />
-                            </div>
-                        </article>
+            <div class="wrap">
+                <form method="post" action="/" style="margin-top: 150px">
+                    <div role="container" class="container fillfix clearfix">
+                        <div class="row clearfix fillfix">
+                            <article class="span8">
+                                <h1 class="text-embedded"><tpl:element type="text" data="page.title">400</tpl:element></h1>
+                                <hr />
+                                <div>
+                                    <tpl:block data="page.block.content" return="true">
+                                        <tpl:block data="page.block.alerts" />    
+                                        <p tpl:i18n="">Sorry, but the page you were trying to view does not exist. It looks like this was the result of either: a mistyped address, an out-of-date link, or our engineers have messed things up!</p>
+                                    </tpl:block>                    
+                                </div>
+                                <hr />
+                                <div>
+                                    <tpl:block data="page.block.actions" return="true"><a  href="/" tpl:i18n="">Home Page</a></tpl:block>
+                                </div>
+                            </article>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+                <tpl:import layout="console" />
+            </div>
             <!-- scripts concatenated and minified via ant build script-->
             <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
             <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>

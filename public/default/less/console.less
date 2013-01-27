@@ -1,0 +1,60 @@
+
+.console{
+    //margin-top: @gridGutterWidth*4; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000000;
+    .console-inner{ color: @white;
+        padding: @gridGutterWidth;
+        background: #ac4a4a url(../img/body-noise.png);
+        display: none;
+        .body{
+           max-height: 340px;
+           overflow-y: scroll;
+           color: @grayDark;
+           padding: @gridGutterWidth;
+           background: #f2f2f2 url(../img/body-noise.png);
+        }
+    }
+    &.active{
+        .console-inner{ display: block}
+    }
+}
+
+.console-toggle{
+  display: inline-block;
+  padding: 4px 10px 4px;
+  margin-bottom: 0; // For input.btn
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+  color: @white;
+  text-align: center;
+  vertical-align: middle;
+  background:#ac4a4a;
+  .border-radius(1px);
+  cursor: pointer;
+
+  // Give IE7 some love
+  .reset-filter();
+  .ie7-restore-left-whitespace();
+}
+
+// Hover state
+.console-toggle:hover {
+  color: @white;
+  text-decoration: none;
+  text-shadow: 0 1px 1px #000;
+  background-color: darken(#ac4a4a, 10%);
+  background-position: 0 -15px;
+
+  // transition is only when going to hover, otherwise the background
+  // behind the gradient (there for IE<=9 fallback) gets mismatched
+  .transition(background-position .1s linear);
+}
+
+// Focus state for keyboard and accessibility
+.console-toggle:focus {
+  .tab-focus();
+}
