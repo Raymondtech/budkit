@@ -1,0 +1,80 @@
+
+
+.container-box{
+    max-width: 1365px;
+    @containerColumnWidth: 135px;
+    @containerGutterWidth: 15px;
+    @containerLeftWidth :  (@containerColumnWidth * 1) + (@containerGutterWidth * (1 - 1));
+    @_containerLeftWidth : @containerLeftWidth;
+    @containerAsideWidth : (@containerColumnWidth * 2) + (@containerGutterWidth * (1 - 2));
+    @_containerAsideWidth : @containerAsideWidth ;
+    //position: relative;
+    height: auto;
+    .clearfix();
+   
+    .container-left{
+       width: @containerLeftWidth;
+      *width: @_containerLeftWidth;
+        display: none;
+        float: left;
+        background: #191919;
+        position: absolute;
+        bottom: 0px;
+        top: 0px;
+    }
+    .container-right{
+        .container-aside{
+          width: @containerAsideWidth;
+         *width: @_containerAsideWidth;
+            display: none;
+            float: right;
+            background: #191919;
+            position: absolute;
+            bottom: 0px;
+            top: 0px;
+            right:0px
+        }
+        .container-content{ 
+            //background: green
+            position: relative;
+            .toggler{ 
+                position: absolute;
+                .navbarVerticalAlign(36px);
+                top: 0px;
+                background: rgba(0,0,0,.3);
+                //width: 15px;
+                text-decoration: none;
+                //height: 15px;
+                color: @white;
+                padding: 8px;
+                &.container-right-toggle{ right: 0}
+            }
+        }
+        &.has-aside{
+            .container-aside{ display: block }
+            .container-content{
+                margin-right: @containerAsideWidth;
+                *margin-right: @_containerAsideWidth;
+            }
+        }
+    }
+    &.has-left{
+        .container-left{ display: block }
+        .container-right{ 
+            margin-left: @containerLeftWidth;
+            *margin-left: @_containerLeftWidth;
+        }
+    }
+}
+
+.container-left, .container-aside{        
+    .nav-list > li > a {
+            font-size: 12px;
+            color: #505050;
+        }
+        .nav-list > .active > a,
+        .nav-list > .active > a:hover,
+        .nav-list > .active > a:focus {
+          color: @white;
+        }
+}
