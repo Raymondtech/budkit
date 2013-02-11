@@ -129,18 +129,18 @@
                                         </div>
                                     </div>
                                     <div class="tile1" style="background: orange"></div>
+                                    <div class="tile2" style="background: red"></div>
+                                    <div class="tile1" style="background: mediumseagreen"></div>
+                                    <div class="tile1" style="background: purple"></div>
+                                    <div class="tile1" style="background: green"></div>
+                                    <div class="tile1" style="background: chocolate"></div>
+                                    <div class="tile2" style="background: blue"></div>
                                     <div class="tile1" style="background: red"></div>
                                     <div class="tile1" style="background: mediumseagreen"></div>
                                     <div class="tile1" style="background: purple"></div>
                                     <div class="tile1" style="background: green"></div>
                                     <div class="tile1" style="background: chocolate"></div>
                                     <div class="tile1" style="background: blue"></div>
-                                    <div class="tile1" style="background: red"></div>
-                                    <div class="tile1" style="background: mediumseagreen"></div>
-                                    <div class="tile1" style="background: purple"></div>
-                                    <div class="tile1" style="background: green"></div>
-                                    <div class="tile1" style="background: chocolate"></div>
-                                    <div class="tile1" style="background: blue"></div>
                                     <div class="tile1" style="background: green"></div>
                                     <div class="tile1" style="background: chocolate"></div>
                                     <div class="tile1" style="background: blue"></div>
@@ -148,7 +148,7 @@
                                     <div class="tile1" style="background: mediumseagreen"></div>
                                     <div class="tile1" style="background: red"></div>
                                     <div class="tile1" style="background: mediumseagreen"></div>
-                                    <div class="tile1" style="background: purple"></div>
+                                    <div class="tile3" style="background: purple"></div>
                                     <div class="tile1" style="background: green"></div>
                                     <div class="tile1" style="background: chocolate"></div>
                                     <div class="tile1" style="background: blue"></div>
