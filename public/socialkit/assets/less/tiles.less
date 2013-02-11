@@ -1,0 +1,52 @@
+
+@gridTilePerRow : 9;
+@gridTileWidth: 195px;
+@gridTileMargin:0px;
+
+ .tileGrid(@gridTileWidth, @gridTileMargin) {
+    .tileX (@index) when (@index > 0) {
+      .tile@{index} { .tile(@index); }
+      .tileX(@index - 1);
+    }
+    .tileX (0) {}
+
+    .offsetX (@index) when (@index > 0) {
+      .offset@{index} { .offset(@index); }
+      .offsetX(@index - 1);
+    }
+    .offsetX (0) {}
+
+    .offset (@columns) {
+      margin-left: (@gridTileWidth * @columns) + (@gridTileMargin * (@columns + 1));
+    }
+
+    .tile (@columns) {
+      width: (@gridTileWidth * @columns) + (@gridTileMargin * (@columns - 1));
+      min-height: (@gridTileWidth * @columns) + (@gridTileMargin * (@columns - 1));
+    }
+
+    .row {
+      margin-left: @gridTileMargin * -1;
+      .clearfix();
+    }
+
+    [class*="tile"] {
+      float: left;
+      min-height: 1px; // prevent collapsing columns
+      margin-left: @gridTileMargin;
+    }
+
+    // Set the container width, and override it for fixed navbars in media queries
+    .container,
+    .navbar-static-top .container,
+    .navbar-fixed-top .container,
+    .navbar-fixed-bottom .container { .tile(@gridColumns); }
+
+    // generate .tileX and .offsetX
+    .tileX (@gridTilePerRow);
+    .offsetX (@gridTilePerRow);
+}
+
+.tiles{
+  .tileGrid(@gridTileWidth, @gridTileMargin);
+}

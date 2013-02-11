@@ -1,16 +1,15 @@
 
+#wrap{ position: relative; max-width: 1560px; min-height: 100%; background: @white; .clearfix(); overflow: hidden  }
 
 .container-box{
-    max-width: 1365px;
-    @containerColumnWidth: 135px;
-    @containerGutterWidth: 15px;
+    //max-width: 1365px;
+    @containerColumnWidth: 195px;
+    @containerGutterWidth: 0px;
     @containerLeftWidth :  (@containerColumnWidth * 1) + (@containerGutterWidth * (1 - 1));
     @_containerLeftWidth : @containerLeftWidth;
-    @containerAsideWidth : (@containerColumnWidth * 2) + (@containerGutterWidth * (1 - 2));
+    @containerAsideWidth : (@containerColumnWidth * 1) + (@containerGutterWidth * (1 - 1));
     @_containerAsideWidth : @containerAsideWidth ;
-    //position: relative;
-    height: auto;
-    .clearfix();
+    position: absolute; top:0; left:0; right:0; bottom:0;
    
     .container-left{
        width: @containerLeftWidth;
@@ -23,11 +22,12 @@
         top: 0px;
     }
     .container-right{
+        min-height: 100%;
         .container-aside{
           width: @containerAsideWidth;
          *width: @_containerAsideWidth;
             display: none;
-            float: right;
+            //float: right;
             background: #191919;
             position: absolute;
             bottom: 0px;
@@ -35,13 +35,16 @@
             right:0px
         }
         .container-content{ 
+                .clearfix();
             //background: green
-            position: relative;
+            position: absolute;
+            overflow-y: scroll;
+            height: 100%;
             .toggler{ 
                 position: absolute;
                 .navbarVerticalAlign(36px);
                 top: 0px;
-                background: rgba(0,0,0,.3);
+                //background: rgba(0,0,0,.3);
                 //width: 15px;
                 text-decoration: none;
                 //height: 15px;
@@ -65,6 +68,7 @@
             *margin-left: @_containerLeftWidth;
         }
     }
+
 }
 
 .container-left, .container-aside{        
@@ -77,4 +81,9 @@
         .nav-list > .active > a:focus {
           color: @white;
         }
+}
+
+.container-bucket{
+    .clearfix();
+    overflow-y: scroll;
 }
