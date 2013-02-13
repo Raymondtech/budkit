@@ -36,20 +36,25 @@
         }
         .container-content{ 
                 .clearfix();
-            //background: green
+            background:#eee;
             position: absolute;
+            right: 0; left: 0;
+            bottom:0; top: 0;
             overflow-y: scroll;
             height: 100%;
+            //width: 100%;
             .toggler{ 
                 position: absolute;
-                .navbarVerticalAlign(36px);
+                .navbarVerticalAlign(30px);
                 top: 0px;
-                //background: rgba(0,0,0,.3);
+                background: rgba(0,0,0,.3);
                 //width: 15px;
                 text-decoration: none;
                 //height: 15px;
                 color: @white;
-                padding: 8px;
+                padding: 5px 7px;
+                cursor: pointer;
+                width: 16px;
                 &.container-right-toggle{ right: 0}
             }
         }
@@ -67,6 +72,7 @@
             margin-left: @containerLeftWidth;
             *margin-left: @_containerLeftWidth;
         }
+        .container-content{ left: 195px; }
     }
 
 }
@@ -86,4 +92,9 @@
 .container-bucket{
     .clearfix();
     overflow-y: scroll;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: @navbarHeight;
 }

@@ -678,7 +678,12 @@ a:focus {
 }
 .container-box .container-right .container-content {
   *zoom: 1;
+  background: #eee;
   position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
   overflow-y: scroll;
   height: 100%;
 }
@@ -692,11 +697,14 @@ a:focus {
 }
 .container-box .container-right .container-content .toggler {
   position: absolute;
-  margin-top: 6px;
+  margin-top: 9px;
   top: 0px;
+  background: rgba(0, 0, 0, 0.3);
   text-decoration: none;
   color: #ffffff;
-  padding: 8px;
+  padding: 5px 7px;
+  cursor: pointer;
+  width: 16px;
 }
 .container-box .container-right .container-content .toggler.container-right-toggle {
   right: 0;
@@ -715,6 +723,9 @@ a:focus {
   margin-left: 195px;
   *margin-left: 195px;
 }
+.container-box.has-left .container-content {
+  left: 195px;
+}
 .container-left .nav-list > li > a,
 .container-aside .nav-list > li > a {
   font-size: 12px;
@@ -731,6 +742,11 @@ a:focus {
 .container-bucket {
   *zoom: 1;
   overflow-y: scroll;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 48px;
 }
 .container-bucket:before,
 .container-bucket:after {
