@@ -1,37 +1,44 @@
+<!DOCTYPE html>
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <html class="no-js" lang="en">
         <head>
-            <title><tpl:element type="text" data="page.title">Splash Page</tpl:element></title>
-            <meta charset="utf-8" />
+            <meta charset="utf-8"/>
+            <title><tpl:element type="text" data="page.title">SocialKit</tpl:element></title>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta name="description" content="<?php echo $this->getPageDescription(); ?>" />
             <meta name="author" content="<?php echo $this->getPageAuthor(); ?>" />
             <meta name="keywords" content="<?php echo $this->getPageAuthor(); ?>" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-            <!-- Le fav and touch icons -->
-            <link rel="shortcut icon" href="images/favicon.ico" />
-            <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-            <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
-            <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
+            <!-- Le styles -->
+            <link href="<?php echo $this->getTemplatePath() ?>/assets/css/bootstrap.css" rel="stylesheet" />
+            <link href="<?php echo $this->getTemplatePath() ?>/assets/css/bootstrap-responsive.css" rel="stylesheet" />
 
-            <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+              <script src="<?php echo $this->getTemplatePath() ?>/assets/js/html5shiv.js"></script>
+            <![endif]-->
 
-
+            <!-- Fav and touch icons -->
+            <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-144-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-114-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-72-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-57-precomposed.png" />
+            <link rel="shortcut icon" href="<?php echo $this->getTemplatePath() ?>/assets/ico/favicon.png" />
         </head>
+        <body>
 
-        <?php //print_R($this); ?>
-        <body  class="responsive-body">
-            <div class="wrap">
-                <form method="post" action="/" style="margin-top: 150px">
-                    <div role="container" class="container fillfix clearfix">
-                        <div class="row clearfix fillfix">
-                            <article class="span8">
-                                <h1 class="text-embedded"><tpl:element type="text" data="page.title">400</tpl:element></h1>
-                                <hr />
+            <div id="wrap">
+                <div class="container-fluid">
+                    <div class="container-startup canvas">
+                        <div class="startup-header">
+                            <h3><tpl:element type="text" data="page.title">There was an error</tpl:element></h3>
+                        </div>
+                        <tpl:block data="page.block.alerts" />
+                        <div class="startup-body">
+                            <article>
                                 <div>
-                                    <tpl:block data="page.block.content" return="true">
-                                        <tpl:block data="page.block.alerts" />    
+                                    <tpl:block data="page.block.content" return="true">   
                                         <p tpl:i18n="">Sorry, but the page you were trying to view does not exist. It looks like this was the result of either: a mistyped address, an out-of-date link, or our engineers have messed things up!</p>
                                     </tpl:block>                    
                                 </div>
@@ -40,18 +47,29 @@
                                     <tpl:block data="page.block.actions" return="true"><a  href="/" tpl:i18n="">Home Page</a></tpl:block>
                                 </div>
                             </article>
+                            <hr />
+                            <tpl:import layout="console" />
                         </div>
                     </div>
-                </form>
-                <tpl:import layout="console" />
+                </div><!--/.fluid-container-->
             </div>
-            <!-- scripts concatenated and minified via ant build script-->
-            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
-            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
-            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
-            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.js" type="text/javascript"></script>
-            <!-- end scripts-->
+            <!-- Le javascript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/jquery.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-transition.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-alert.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-modal.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit-container.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-dropdown.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-scrollspy.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-tab.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-tooltip.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-popover.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-button.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-collapse.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-carousel.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-typeahead.js"></script>
         </body>
-
     </html>
 </tpl:layout>

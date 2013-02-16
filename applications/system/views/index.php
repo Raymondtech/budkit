@@ -72,7 +72,7 @@ class Index extends Platform\View {
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
         $dashboard = $this->output->layout("dashboard");
-        $sidebar = $this->output->layout("sidebar");
+        $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
 
         $this->output->addToPosition("side", $sidebar);

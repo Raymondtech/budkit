@@ -42,7 +42,7 @@
             <?php break;
             endswitch; ?>
         </fieldset>
-        <div class="form-actions page-end">
+        <div class="page-end">
             <div class="clearfix">
                 <?php if($step>1) : ?>
                 <a href="/setup/install/step'.((int) $this->get('step') - 1) " class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>

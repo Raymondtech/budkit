@@ -1,5 +1,5 @@
 
-#wrap{ position: relative; max-width: 1560px; min-height: 100%; background: @white; .clearfix(); overflow: hidden  }
+#wrap{ position: relative; max-width: 1560px; min-height: 100%; .clearfix(); overflow: hidden  }
 
 .container-box{
     //max-width: 1365px;
@@ -54,7 +54,7 @@
                 color: @white;
                 padding: 5px 7px;
                 cursor: pointer;
-                width: 16px;
+                //width: 16px;
                 &.container-right-toggle{ right: 0}
             }
         }
@@ -97,4 +97,69 @@
     right: 0;
     bottom: 0;
     top: @navbarHeight;
+}
+
+
+.container-startup{
+    width: 40%;
+    margin: 10px auto;
+    background: @white;
+    color: @grayDark;
+    background-color: @white;
+    //border: 1px solid #999;
+    //border: 1px solid rgba(0,0,0,.3);
+    //*border: 1px solid #999; /* IE6-7 */
+    .border-radius(2px);
+    .box-shadow(0 1px 4px 0px rgba(0, 0, 0, 0.11));
+    .background-clip(padding-box);
+    // Remove focus outline from opened modal
+    outline: none;
+    &.singup, &.signin{max-width: 400px;}
+    &.canvas{width: 80%; max-width: 940px; }
+    .startup-header{
+        padding: 10px 35px;
+        border-bottom: 1px solid #ddd;
+        // Close icon
+        .close { margin-top: 2px; }
+        // Heading
+        #gradient > .vertical(#ffffff, #f2f2f2);
+        h3 {
+          margin: 0;
+          line-height: 30px;
+          font-size: 15px;
+          text-align: center;
+
+        }
+      }
+    .startup-body{
+        position: relative;
+        overflow-y: auto;
+        //max-height: 400px;
+        padding: 20px 35px 35px;
+        .btn.input-xxxlarge{ width: 100%; padding: 6px; margin-top: 10px}
+    }
+    .startup-alternatives{
+        padding: 15px 35px 15px;
+        margin-bottom: 0;
+        text-align: center; // right align buttons
+        background-color: rgb(247, 247, 247);
+        border-bottom: 1px solid #eee;
+        //.border-radius(0 0 6px 6px);
+        .box-shadow(inset 0 -1px 0 @white);
+        .clearfix(); // clear it in case folks use .pull-* classes on buttons
+
+        // Properly space out buttons
+        .btn + .btn {
+          margin-left: 5px;
+          margin-bottom: 0; // account for input[type="submit"] which gets the bottom margin like all other inputs
+        }
+        // but override that for button groups
+        .btn-group .btn + .btn {
+          margin-left: -1px;
+        }
+        // and override it for block buttons as well
+        .btn-block + .btn-block {
+          margin-left: 0;
+        }
+    }
 }

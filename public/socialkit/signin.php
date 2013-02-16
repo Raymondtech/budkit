@@ -27,58 +27,6 @@
             <link rel="shortcut icon" href="<?php echo $this->getTemplatePath() ?>/assets/ico/favicon.png" />
         </head>
         <body>
-            <!--            <div class="wrap">
-                            <div class="container navbar canvas" style="width: 135px; margin: auto">
-                                <a class="brand logo" href="/">Budkit</a>
-                            </div>
-                            <div class="container mini top-pad">
-            
-            
-                                <tpl:block data="page.block.banner">Banner</tpl:block>
-                                <tpl:block data="page.block.alerts" /> 
-                                <section class="layout-block boxed box-padding">
-            
-                                    <form id="form" name="login_form" method="post" action="/member/session/start">                       
-                                        <fieldset class="no-margin">
-                                            <legend tpl:i18n="">Sign in to your account</legend>
-                                            <div class="control-group">
-                                                <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
-                                                <div class="controls row-fluid">
-                                                    <input class="input-xxxlarge focused span12" id="user_name_id" name="user_name_id" type="text" placeholder="JohnDoe1976" />
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="user_password"><tpl:i18n>Password or API Key</tpl:i18n><em class="mandatory">*</em></label>
-                                                <div class="controls row-fluid">
-                                                    <input class="input-xxxlarge focused span12" id="user_password" name="user_password" type="password" />
-                                                </div>
-                                            </div>
-            
-                                        </fieldset>
-            
-                                        <div class="btn-toolbar top-pad">
-                                            <div class="row-fluid">
-                                                <button type="submit" class="btn btn-success span4" tpl:i18n="">Sign in</button> 
-                                                <button type="submit" class="btn span4 btn-facebook" tpl:i18n="">Facebook</button> 
-                                                <button type="submit" class="btn span4 btn-twitter" tpl:i18n="">Twitter</button>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <input type="hidden" name="auth_handler" value="dbauth" />
-                                        <input type="hidden" name="redirect" value="" />
-                                        <ul class="top-pad">
-                                            <li><a href="/index.php" tpl:i18n="">Alternative ways to sign in</a></li>
-                                            <li><a href="/index.php" tpl:i18n="">Forgot your password?</a></li>
-                                            <li><a href="/member/account/create" tpl:i18n="">Don't have an account?</a></li>
-                                        </ul>
-                                    </form>
-                                    <tpl:block data="page.block.body" />    
-                                </section>
-                                <section role="footer"> 
-                                    <tpl:block data="page.block.footer">Footer</tpl:block>                
-                                </section>
-                            </div>
-                        </div>-->
 
             <div id="wrap">
                 <div class="container-box">
@@ -87,34 +35,49 @@
 
 
                         <div class="container-content">
-                            <div class="navbar">
-                                <div class="navbar-inner">
-                                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                    </button>                         
-                                    <div class="nav-collapse collapse">
-                                        <form class="form-inline form-horizontal pull-right" name="login_form" method="post" action="/member/session/start">
-                                            <div class="row-fluid">
-                                                <input type="text" id="user_name_id" name="user_name_id" class="input-large" placeholder="Email or Username" />
-                                                <input type="password" class="input-large" id="user_password" name="user_password" placeholder="Password or API Key" />
+
+                            <div class="container-bucket">
+                                <div class="container">
+                                    <form id="form" name="login_form" method="post" action="/member/session/start">                       
+                                        <div class="container-startup signin">
+                                            <div class="startup-header">
+                                                <h3>Sign in to your account</h3>
+                                            </div>
+                                            <tpl:block data="page.block.alerts" />
+                                            <div class="startup-alternatives">
+                                                <ul class="unstyled no-margin no-bottom-margin">
+                                                    <li><a href="/member/account/create">Don't have an account?</a></li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="startup-body">                                               
+                                                <div class="control-group">
+                                                    <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
+                                                    <div class="controls row-fluid">
+                                                        <input class="input-xxxlarge focused span12" id="user_name_id" name="user_name_id" type="text" placeholder="JohnDoe1976" />
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label" for="user_password"><tpl:i18n>Password or API Key</tpl:i18n><em class="mandatory">*</em></label>
+                                                    <div class="controls row-fluid">
+                                                        <input class="input-xxxlarge focused span12" id="user_password" name="user_password" type="password" />
+                                                    </div>
+                                                </div>
+                                                <ul class="unstyled">
+                                                    <li><a href="/index.php">Forgot your password?</a></li>
+                                                </ul>
+                                            
+                                                
+                                                <button type="submit" class="btn margin-top input-xxxlarge" >Sign-in to Account</button> 
+                                                
+
                                                 <input type="hidden" name="auth_handler" value="dbauth" />
                                                 <input type="hidden" name="redirect" value="" />
-                                                <button type="submit" class="btn">Sign in</button>
+
                                             </div>
-                                            <div class="row-fluid">
-                                                <label class="checkbox">
-                                                    <input type="checkbox" /> Remember me
-                                                </label>
-                                            </div>
-                                        </form>
-                                    </div><!--/.nav-collapse -->
-                                    <a class="topic">Sign In</a>
+                                        </div>
+                                    </form>
                                 </div>
-                            </div>
-                            <div class="container-bucket">
-                                SignUpForm
                             </div>
 
                         </div>
