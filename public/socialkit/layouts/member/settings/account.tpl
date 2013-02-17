@@ -3,7 +3,7 @@
         <div class="page-header">
             <h1>Account Information</h1>
         </div>
-        <form class="form-vertical" action="/" method="POST">
+        <form class="form-horizontal" action="/" method="POST">
             <fieldset>
                 <div class="control-group">
                     <label class="control-label"  for="username">Username</label>

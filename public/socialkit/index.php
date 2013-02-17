@@ -32,7 +32,7 @@
                     <div class="container-left">                 
                         <tpl:import layout="sidebar" />
                     </div>
-                    <div class="container-right">
+                    <div class="container-right has-aside">
                         <div class="container-aside">
                             <tpl:import layout="asidebar" />
                         </div>
@@ -43,7 +43,7 @@
                                 <tpl:block data="page.block.body">Content</tpl:block>
                             </div>
                             <a href="#" class="container-box-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>
-                            <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-left"></i></a>
+                            <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-right"></i></a>
                         </div>
                     </div>
                 </div><!--/.fluid-container-->

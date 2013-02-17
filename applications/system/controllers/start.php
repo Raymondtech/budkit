@@ -45,18 +45,17 @@ class Start extends Platform\Controller {
      * @ return false;
      */
     public function index() {
-
-        //Get the view;
-        $view = $this->load->view('index');
+                $user = \Platform\User::getInstance();
+  
+        $view = $this->load->view('index') ;   
+        $this->set("user2", "livingstone");
         
-        $user = \Platform\User::getInstance();
+        $this->output->setPageTitle(_("Dashboard"));
 
-        $model      = $this->load->model('activity');
-        $activities = $model->getAll();        
-        $this->set("activities", $activities);   
-
-        $this->set("user", $user);
-        $view->dashboard(); //sample call;        
+        $today = $this->output->layout("start");
+        $this->output->addToPosition("dashboard", $today);
+        
+        $this->load->view("index")->display();      
         //$this->output();
     }
    

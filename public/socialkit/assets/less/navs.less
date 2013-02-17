@@ -15,6 +15,7 @@
 // Make links block level
 .nav > li > a {
   display: block;
+    cursor: pointer;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -96,7 +97,8 @@
 }
 .nav-tabs > li,
 .nav-pills > li {
-  float: left;
+  //float: left;
+    display: inline-block;
 }
 .nav-tabs > li > a,
 .nav-pills > li > a {
@@ -123,7 +125,7 @@
   padding-bottom: 8px;
   line-height: @baseLineHeight;
   border: 1px solid transparent;
-  .border-radius(4px 4px 0 0);
+  //.border-radius(4px 4px 0 0);
   &:hover,
   &:focus {
     border-color: @grayLighter @grayLighter #ddd;

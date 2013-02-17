@@ -1,7 +1,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="POST" action="/system/admin/settings/save" class="form-vertical">
-        <div class="workspace-head">
-            <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom" id="systemPreferences">
+    <div class="navbar navbar-subnav margin-bottom">
+        <div class="navbar-inner padding-left-half">
+            <ul class="nav">
                 <li class="active"><a data-target="#general" data-toggle="tab"><i class="icon-cog icon icon-16"></i>General</a></li>
                 <li><a data-target="#server" data-toggle="tab"><i class="icon-grid icon icon-16"></i>Server</a></li>
                 <li><a data-target="#storage" data-toggle="tab"><i class="icon-box icon icon-16"></i>Storage</a></li>
@@ -10,8 +10,10 @@
                 <li><a data-target="#localization" data-toggle="tab"><i class="icon-globe icon icon-16"></i>Localization</a></li>
             </ul>
         </div>
+    </div>
+    <form method="POST" action="/system/admin/settings/save" class="form-horizontal padding-half">
         <div class="row-fluid">
-            <div class="span8">
+            <div class="span12">
                 <div class="tab-content box-padding">
                     <div class="tab-pane active" id="general">
                         <fieldset class="no-margin">
@@ -429,9 +431,6 @@
                         <button type="submit" class="btn">Save Preferences</button>
                     </div>
                 </div>
-            </div>
-            <div class="span4">
-                <div id="settings-widget" class="well"></div>
             </div>
         </div>
     </form>

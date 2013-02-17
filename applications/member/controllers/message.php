@@ -56,7 +56,7 @@ final class Message extends \Platform\Controller {
 
 
         $this->output->addToPosition("body", $body);
-        $this->output->addToPosition("side", $sidebar);
+        //$this->output->addToPosition("side", $sidebar);
     }
 
     public function inbox() {
