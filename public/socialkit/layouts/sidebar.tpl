@@ -3,10 +3,10 @@
         <div class="navbar-inner padding-zero">
             <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                 <ul class="nav pull-left" id="menutabs"> 
-                    <li class="active"><a data-target="#mainmenu" data-toggle="tab"><i class="icon-align-justify"></i></a></li>
-                    <li><a data-target="#usermenu" data-toggle="tab"><i class="icon-user"></i></a></li>                
+                    <li class="active"><a data-target="#mainmenu" data-toggle="tab"><i class="icon-align-justify"></i></a></li>                             
                     <li><a data-target="#settingsmenu" data-toggle="tab"><i class="icon-cogs"></i></a></li>
-                    <li><a data-target="#messagesmenu" data-toggle="tab"><i class="icon-envelope-alt"></i></a></li>   
+                    <li><a data-target="#messagesmenu" data-toggle="tab"><i class="icon-envelope-alt"></i></a></li>
+                    <li><a data-target="#notificationslist" data-toggle="tab"><i class="icon-bell-alt"></i></a></li>     
                 </ul>
             </tpl:condition>
             <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
@@ -37,20 +37,33 @@
             <li><a href="#">Experience</a></li>
             <li><a href="#">Privacy</a></li>
         </ul>-->
-
     <div class="tab-content">
         <div class="tab-pane active" id="mainmenu">
-            <tpl:menu id="dashboardmenu" type="nav-list" />
-        </div>
-        <div class="tab-pane" id="usermenu">           
             <ul class="nav nav-list">
-                <li><a href="/system/start/index">Your Dashboard </a></li>
-                <li><a href="/member/profile/view/">@<tpl:element type="text" data="user.user_name_id"/> <span class="badge badge-important pull-right">12</span></a></li>
-                <li><a href="/member/messages/inbox">Private Messages</a></li>
-                <li><a href="/member/settings/account">Account settings</a></li>
-                <li><a href="/member/settings/privacy">Privacy</a></li>                            
-                <li><a href="/sign-out">Sign out</a></li>
+                <li class="nav-header">Favourites</li>
             </ul>
+            <tpl:menu id="dashboardmenu" type="nav-list" />
+            <ul class="nav nav-list">
+                <li class="nav-header">Friends</li>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">System</a></li>
+                <li><a href="#">Extensions</a></li>
+                <li><a href="#">Moderation <span class="badge pull-right">3</span></a></li>
+                <li><a href="#">Experience</a></li>
+                <li><a href="#">Privacy</a></li>
+            </ul>
+            <ul class="nav nav-list">
+                <li class="nav-header">Groups</li>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">System</a></li>
+                <li><a href="#">Extensions</a></li>
+                <li><a href="#">Moderation <span class="badge pull-right">3</span></a></li>
+                <li><a href="#">Experience</a></li>
+                <li><a href="#">Privacy</a></li>
+            </ul>
+        </div>
+        <div class="tab-pane" id="notificationslist">           
+            <div class="padding-half">A list of Notifications</div>
         </div>
         <div class="tab-pane" id="settingsmenu">
             <tpl:menu id="settingsmenu" type="nav-list" />

@@ -31,10 +31,10 @@
             <div id="wrap">
                 <div class="container-box">
                     <div class="container-right">
-                        <div class="container-content">
-                            <div class="container-bucket">
+                        <div class="container-content scroll-y">
+                            <div class="container-fluid">
                                 <div class="container-startup signup">
-                                    <form id="form" name="form" method="post" action="/member/account/update">
+                                    <form class="form-horizontal" name="form" method="post" action="/member/account/update">
                                         <div class="startup-header">
                                             <h3>Register a new account</h3>
                                         </div>
@@ -48,38 +48,38 @@
                                         <div class="startup-body">
                                             <div class="control-group">
                                                 <label class="control-label" for="user_name"><tpl:i18n>First Name</tpl:i18n><em class="mandatory">*</em></label>
-                                                <div class="controls row-fluid">
-                                                    <input class="input-large focused span12" id="first_name" name="user_first_name" type="text" placeholder="First Name" />
+                                                <div class="controls">
+                                                    <input class="input-large focused" id="first_name" name="user_first_name" type="text" placeholder="First Name" />
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="user_name"><tpl:i18n>Last Name</tpl:i18n><em class="mandatory">*</em></label>
-                                                <div class="controls row-fluid">
-                                                    <input class="input-large focused span12" id="last_name" name="user_last_name" type="text" placeholder="Last Name" />
+                                                <div class="controls">
+                                                    <input class="input-large focused" id="last_name" name="user_last_name" type="text" placeholder="Last Name" />
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="user_name_id"><tpl:i18n>Unique Username</tpl:i18n><em class="mandatory">*</em></label>
-                                                <div class="controls row-fluid">
-                                                    <input class="input-large focused span12" id="user_name_id" name="user_name_id" type="text" placeholder="JohnDoe1976" />
+                                                <div class="controls">
+                                                    <input class="input-large focused" id="user_name_id" name="user_name_id" type="text" placeholder="JohnDoe1976" />
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="user_email"><tpl:i18n>Email address</tpl:i18n><em class="mandatory">*</em></label>
-                                                <div class="controls row-fluid">
-                                                    <input class="input-large focused span12" id="user_email" name="user_email" type="text" placeholder="<?php echo _('e.g john.doe@example.com'); ?>" />
+                                                <div class="controls">
+                                                    <input class="input-large focused" id="user_email" name="user_email" type="text" placeholder="<?php echo _('e.g john.doe@example.com'); ?>" />
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="user_password"><tpl:i18n>Password</tpl:i18n><em class="mandatory">*</em></label>
-                                                <div class="controls row-fluid">
-                                                    <input class="input-large focused span12" id="user_password" name="user_password" type="password" />
+                                                <div class="controls">
+                                                    <input class="input-large focused" id="user_password" name="user_password" type="password" />
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="user_password_2"><tpl:i18n>Verify Password</tpl:i18n><em class="mandatory">*</em></label>
-                                                <div class="controls row-fluid">
-                                                    <input class="input-large focused span12" id="user_password_2" name="user_password_2" type="password" />
+                                                <div class="controls">
+                                                    <input class="input-large focused" id="user_password_2" name="user_password_2" type="password" />
                                                 </div>
                                             </div>
 
@@ -92,7 +92,7 @@
                                                    <input type="hidden" name="user_accepted_terms_2" value="2" />                                                      
                                                 </div>
                                             </div>
-                                            <div class="btn-toolbar margin-top">
+                                            <div class="form-actions">
                                                 <div class="btn-group">
                                                     <button type="submit" class="btn" tpl:i18n="">Create an Account</button> 
                                                 </div>

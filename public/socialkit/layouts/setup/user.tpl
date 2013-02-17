@@ -3,18 +3,17 @@
         <!--    <h1><?php echo _('Additional Details') ; ?></h1><br />-->
         <small><?php echo _('Please provide details for the superadmin User account. ' ) ; ?></small>
     </div>
-    <div class="row-fluid">
-        <div class="control-group span6">
-            <label class="control-label" for="user_name"><tpl:i18n>First Name</tpl:i18n><em class="mandatory">*</em></label>
-            <div class="controls row-fluid">
-                <input class="input-xxlarge focused span11" id="first_name" name="user_first_name" type="text" placeholder="Johnatan" />
-            </div>
+
+    <div class="control-group">
+        <label class="control-label" for="user_name"><tpl:i18n>First Name</tpl:i18n><em class="mandatory">*</em></label>
+        <div class="controls row-fluid">
+            <input class="input-xxlarge focused" id="first_name" name="user_first_name" type="text" placeholder="Johnatan" />
         </div>
-        <div class="control-group span6">
-            <label class="control-label" for="user_name"><tpl:i18n>Last Name</tpl:i18n><em class="mandatory">*</em></label>
-            <div class="controls row-fluid">
-                <input class="input-xxlarge focused span11" id="last_name" name="user_last_name" type="text" placeholder="Johnatan" />
-            </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="user_name"><tpl:i18n>Last Name</tpl:i18n><em class="mandatory">*</em></label>
+        <div class="controls row-fluid">
+            <input class="input-xxlarge" id="last_name" name="user_last_name" type="text" placeholder="Johnatan" />
         </div>
     </div>
     <div class="control-group">

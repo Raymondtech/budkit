@@ -111,11 +111,11 @@ class Activity extends Platform\Controller {
         $this->set("user", $user);
         
         $timeline = $this->output->layout("timeline");
-        $timelineside = $this->output->layout("timelinenotes");
+        //$timelineside = $this->output->layout("timelinenotes");
         
         
         $this->output->addToPosition("dashboard", $timeline);
-        $this->output->addToPosition("aside", $timelineside );
+        //$this->output->addToPosition("aside", $timelineside );
         
         
         $view->display(); //sample call;        

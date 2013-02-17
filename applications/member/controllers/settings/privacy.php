@@ -47,7 +47,7 @@ final class Privacy extends Member\Settings {
         $view   = $this->load->view( 'settings' );
         //$view   = 
                 
-        return $view->form("settings/privacy");
+        return $view->form("settings/privacy", "Privacy settings");
     
     }
 

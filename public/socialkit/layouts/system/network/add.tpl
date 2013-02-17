@@ -1,13 +1,15 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="workspace-head">
-        <ul id="permissions-tab" class="nav icon-tabs left no-margin no-bottom-border docked-bottom">
-            <li  class="active"><a data-target="#account" data-toggle="tab">Account</a></li>     
-            <li><a data-target="#profile" data-toggle="tab">Profile</a></li>
-            <li><a data-target="#permissions" data-toggle="tab">Permissions</a></li> 
-            <li><a data-target="#content" data-toggle="tab">Content</a></li> 
-            <li><a data-target="#relationships" data-toggle="tab">Relationships</a></li> 
-            <li><a data-target="#analytics" data-toggle="tab">Analytics</a></li> 
-        </ul>
+    <div class="navbar navbar-subnav margin-bottom">
+        <div class="navbar-inner padding-left-half">
+            <ul class="nav" id="addmenu">
+                <li  class="active"><a data-target="#account" data-toggle="tab">Account</a></li>     
+                <li><a data-target="#profile" data-toggle="tab">Profile</a></li>
+                <li><a data-target="#permissions" data-toggle="tab">Permissions</a></li> 
+                <li><a data-target="#content" data-toggle="tab">Content</a></li> 
+                <li><a data-target="#relationships" data-toggle="tab">Relationships</a></li> 
+                <li><a data-target="#analytics" data-toggle="tab">Analytics</a></li> 
+            </ul>
+        </div>
     </div>
     <div class="tab-content box-padding">
         <div class="tab-pane" id="analytics">User Profile Analytics</div>

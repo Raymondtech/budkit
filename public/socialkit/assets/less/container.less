@@ -35,7 +35,7 @@
             right:0px
         }
         .container-content{ 
-                .clearfix();
+            .clearfix();
             background:@bodyBackground;
             position: absolute;
             right: 0; left: 0;
@@ -115,7 +115,8 @@
     .background-clip(padding-box);
     // Remove focus outline from opened modal
     outline: none;
-    &.singup, &.signin{max-width: 400px;}
+    &.signin{max-width: 400px;}
+    &.signup{width: 60%; max-width: 600px;} 
     &.canvas{width: 80%; max-width: 940px; }
     .startup-header{
         padding: 10px 35px;
@@ -136,7 +137,7 @@
         position: relative;
         overflow-y: auto;
         //max-height: 400px;
-        padding: 20px 35px 35px;
+        padding: 35px 35px 0px;
         .btn.input-xxxlarge{ width: 100%; padding: 6px; margin-top: 10px}
     }
     .startup-alternatives{

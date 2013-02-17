@@ -1,15 +1,16 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="workspace-head">
-        <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom" id="maintenancePreferences">
-            <li class="active"><a data-target="#config" data-toggle="tab">Maintenance</a></li>
-            <li><a data-target="#messages" data-toggle="tab">Alert Messages</a></li>
-            <li><a data-target="#scheduled" data-toggle="tab">Scheduled Maintenance</a></li>
-            <li><a data-target="#logs" data-toggle="tab">Maintenance Logs</a></li>
-        </ul>
+    <div class="navbar navbar-subnav margin-bottom">
+        <div class="navbar-inner padding-left-half">
+            <ul class="nav" id="maintenancemenu">
+                <li><a data-target="#messages" data-toggle="tab"><i class="icon-warning-sign icon icon-16"></i> Tickets </a></li>
+                <li class="active"><a data-target="#config" data-toggle="tab"><i class="icon-ambulance icon icon-16"></i>  Maintenance</a></li>               
+                <li><a data-target="#scheduled" data-toggle="tab"><i class="icon-calendar icon icon-16"></i>  Scheduled </a></li>
+            </ul>
+        </div>
     </div>
     <div class="tab-content box-padding">
         <div class="tab-pane active" id="config">
-            <form>
+            <form class="form-horizontal" action="/" method="POST">
                 <fieldset>
                     <div class="control-group">
                         <label class="control-label" for="options[site-name]"> <?php echo _('Offline Page Title'); ?></label>
@@ -40,6 +41,9 @@
                         </div>
                     </div>   
                 </fieldset>
+                <div class="form-actions">
+                    <button type="submit" class="btn">Save Maintenance Settings</button>
+                </div>
             </form>
         </div>
     </div>

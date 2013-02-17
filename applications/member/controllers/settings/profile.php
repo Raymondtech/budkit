@@ -47,7 +47,7 @@ final class Profile extends Member\Settings {
         $view   = $this->load->view( 'settings' );
         //$view   = 
                 
-        return $view->form("settings/profile");
+        return $view->form("settings/profile", "Profile settings");
     
     }
 

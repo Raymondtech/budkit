@@ -4,6 +4,7 @@ body{
     background-color: #191919;
 }
 .input-xxxlarge   { width: 600px; }
+.input-100pct{width: 100%; }
 .progress{
     &.small-bar{
         height: 10px;
@@ -33,4 +34,35 @@ body{
 
 .margin-top{ margin-top : @gridGutterWidth }
 .margin-bottom{ margin-bottom : @gridGutterWidth }
-.no-margin{margin: 0;}
+.no-margin{margin: 0 !important;}
+.scroll-y{ overflow-y: scroll }
+
+
+// Warning appears are orange
+.btn-green {
+  .buttonBackground(#99CC00,#669900);
+}
+// Danger and error appear as red
+.btn-red {
+  .buttonBackground(@btnDangerBackground, @btnDangerBackgroundHighlight);
+}
+// Success appears as green
+.btn-orange {
+  .buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
+}
+// Info appears as a neutral blue
+.btn-purple {
+  .buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
+}
+// Inverse appears as dark gray
+.btn-facebook {
+  .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
+}
+
+.btn-twitter {
+  .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
+}
+
+.btn-google {
+  .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
+}

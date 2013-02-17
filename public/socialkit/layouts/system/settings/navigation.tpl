@@ -1,55 +1,28 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="workspace-head">
-    <ul class="nav icon-tabs left no-margin no-bottom-border docked-bottom" id="navigationPreferences">
-        <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
-        <?php if($group['menu_group_iscore'] > 0 ): ?>
-        <li><a data-target="#<?php echo $group['menu_group_uid']; ?>-nav" data-toggle="tab"><i class="icon-toggle icon icon-16"></i><?php echo $group['menu_group_title']; ?></a></li>
-        <?php endif; ?>
-        <?php endforeach; ?> 
-    </ul>
-    </div>
-    <div class="row-fluid">
-        <div class="span8">
-            <div class="tab-content top-pad left-pad bottom-pad">
-                <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
-                <div class="tab-pane" id="<?php echo $group['menu_group_uid']; ?>-nav">
-                    <ul class="admin-menu-lists">
-                        <?php foreach( $group['nodes'] as $menu ): ?>
-                        <li>
-                            <div class="row-fluid">
-                                <div class="span1"><input type="checkbox" /></div>
-                                <div class="span8"><span><?php echo htmlentities($menu['menu_title']); ?></span></div>
-                                <div class="span2"><a href="#">Permissions</a></div>
-                                <div class="span1"><a href="#">Edit</a></div>
-                            </div>
-                        </li>
-                        <?php if(sizeof($menu['children'])>0): ?>
-                        <ul>
-                            <?php foreach( $menu['children'] as $_menu ): ?>
-                            <li>
-                                <div class="row-fluid">
-                                    <div class="span1"><input type="checkbox" /></div>
-                                    <div class="span8"><?php echo htmlentities($_menu['menu_title']); ?></div>
-                                    <div class="span2"><a href="#">Permissions</a></div>
-                                    <div class="span1"><a href="#">Edit</a></div>
-                                </div>
-                            </li>
-                            <?php endforeach; ?>
-                        </ul>
+    <div class="navbar navbar-subnav margin-bottom">
+        <div class="navbar-inner padding-left-half">
+            <ul class="nav" id="navigationsmenu">
+                <li class="active"><a data-target="#navigation" data-toggle="tab"><i class="icon-sitemap icon icon-16"></i> Menus</a></li>             
+                <li><a data-target="#addmenugroup" data-toggle="tab"><i class="icon-plus icon icon-16"></i> New Menu</a></li>
+                <li><a data-target="#addmenulink" data-toggle="tab"><i class="icon-link icon icon-16"></i>New Menu Link</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder icon icon-16"></i> Edit Menus <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
+                        <?php if($group['menu_group_iscore'] > 0 ): ?>
+                        <li><a data-target="#<?php echo $group['menu_group_uid']; ?>-nav" data-toggle="tab"><?php echo $group['menu_group_title']; ?></a></li>
                         <?php endif; ?>
-
-                        <?php endforeach; ?>
+                        <?php endforeach; ?> 
                     </ul>
-                </div>
-                <?php endforeach; ?>
-            </div>
-
+                </li>  
+            </ul>
         </div>
-        <div class="span4">
-            <div class="well">
-                <form action="/" class="clearfix">
+    </div>
+    <div class="row-fluid margin-top">
+        <div class="tab-content">
+            <div class="tab-pane" id="addmenulink">
+                <form action="/" class="form-horizontal" method="POST">
                     <fieldset class="no-margin">
-                        <legend>Add New Menu Item</legend>
                         <div class="control-group">
                             <label class="control-label" for="appearance[navigation-name]"> <?php echo _('Title'); ?></label>
                             <div class="controls">
@@ -88,7 +61,7 @@
                             <div class="controls">
                                 <select name="options[site-page-title]" class="input-xxxlarge">
                                     <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
-                                        <option value="<?php echo $group['menu_group_uid']; ?>"><?php echo $group['menu_group_title']; ?></option>
+                                    <option value="<?php echo $group['menu_group_uid']; ?>"><?php echo $group['menu_group_title']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <span class="help-block">The menu group to add item to. If Item is child of another, you will only be able to set its parent, by dragging to parent after the item has been saved</span>
@@ -96,22 +69,22 @@
                         </div>
                     </fieldset>
 
-                    <hr />
-                    <div class="btn-toolbar">        
+
+                    <div class="form-actions">        
                         <button type="submit" class="btn pull-left">Add Menu Item</button>
                     </div>
                 </form>
             </div>
-            <hr />
-            <div class="well clearfix">
-                <form action="/">
+
+            <div class="tab-pane" id="addmenugroup">
+                <form  class="form-horizontal" method="POST">
                     <fieldset class="no-margin">
-                        <legend>Add New Menu Group</legend>
                         <div class="control-group">
                             <label class="control-label" for="appearance[navigation-name]"> <?php echo _('Add Menu Item'); ?></label>
                             <div class="controls">
                                 <input type="text" name="appearance[navigation-name]"  class="input-xxxlarge" />
-                                <span class="help-block">To create a new navigation group, enter its name/title here. To add multiple navigations use comma seperators, e.g Menu1 Title, Menu2 Title, etc</span>
+                                <span class="help-block">To create a new navigation group, enter its name/title here.</span>
+                                <span class="help-block">To add multiple navigations use comma seperators, e.g Menu1 Title, Menu2 Title, etc</span>
                             </div>
                         </div>   
 
@@ -132,18 +105,79 @@
                         </div>  
                     </fieldset>
 
-                    <hr />
-                    <div class="btn-toolbar">        
+                    <div class="form-actions">        
                         <button type="submit" class="btn pull-left">Add Custom Navigation Group</button>
                     </div>
                 </form>
             </div>
+            <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
+            <div class="tab-pane" id="<?php echo $group['menu_group_uid']; ?>-nav">
+                <ul class="admin-menu-lists">
+                    <?php foreach( $group['nodes'] as $menu ): ?>
+                    <li>
+                        <div class="row-fluid">
+                            <div class="span1"><input type="checkbox" /></div>
+                            <div class="span8"><span><?php echo htmlentities($menu['menu_title']); ?></span></div>
+                            <div class="span2"><a href="#">Permissions</a></div>
+                            <div class="span1"><a href="#">Edit</a></div>
+                        </div>
+                    </li>
+                    <?php if(sizeof($menu['children'])>0): ?>
+                    <ul>
+                        <?php foreach( $menu['children'] as $_menu ): ?>
+                        <li>
+                            <div class="row-fluid">
+                                <div class="span1"><input type="checkbox" /></div>
+                                <div class="span8"><?php echo htmlentities($_menu['menu_title']); ?></div>
+                                <div class="span2"><a href="#">Permissions</a></div>
+                                <div class="span1"><a href="#">Edit</a></div>
+                            </div>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php endif; ?>
+
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php endforeach; ?>
+            <div class="tab-pane active" id="navigation">
+                <form class="form-vectical">
+                    <fieldset>
+                        <table class="table table-striped">
+                            <thead>
+                                <th class="span1"><input type="checkbox" /></th>
+                                <th class="span4"><strong>Title</strong></th>
+                                <th class="span2"><strong>Unique ID</strong></th>
+                                <th class="span4">Position</th>
+                                <th class="span1">&nbsp;</th>
+                            </thead>
+                            <tbody>
+                                <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
+                                <tr>
+                                    <td class="span1"><input type="checkbox" /></td>
+                                    <td class="span4"><span><?php echo htmlentities($group['menu_group_title']); ?></span></td>
+                                    <td class="span2"><?php echo htmlentities($group['menu_group_uid']); ?></td>
+                                    <td class="span4">
+                                        <select>
+                                            <option>Menu Position 1</option>
+                                            <option>Menu Position 2</option>
+                                        </select>
+                                    </td>
+                                    <td class="span1"><a href="/system/admin/settings/navigation#<?php echo $group['menu_group_uid']; ?>">Edit</a></td>
+
+                                </tr>
+                                <?php endforeach; ?> 
+                            </tbody>
+                        </table>
+
+
+                    </fieldset>
+                    <div class="btn-toolbar">
+                        <button type="submit" class="btn">Save Settings</button>
+                    </div>
+                </form> 
+            </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(function(){
-        //alert('woot');
-        $("#navigationPreferences a:first").tab('show');
-    });
-    </script>
 </tpl:layout>

@@ -95,10 +95,10 @@ class Activity extends Platform\Entity {
             $actorObject->set("uri", $object['user_name_id']);
             
             $actorImage  = Activity\MediaLink::getInstance();
-            $actorImageURL = "http://placeskull.com/48/48/".\Platform\Framework::getRandomColor();
+            $actorImageURL = "http://placeskull.com/70/70/".\Platform\Framework::getRandomColor();
             $actorImage->set("url", $actorImageURL);
-            $actorImage->set("height", 48);
-            $actorImage->set("width", 48);
+            $actorImage->set("height", 70);
+            $actorImage->set("width", 70);
             $actorObject->set("image", $actorImage::getArray());
 
             $object['activity_actor'] =  $actorObject::getArray();

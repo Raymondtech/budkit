@@ -2,19 +2,14 @@
     <form action="/system/activity/create" method="POST">
         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
             <div class="timeline-item-publisher-box">
+                <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>
                 <fieldset class="timeline-item-publisher no-bottom-margin">
                     <div class="controls">
-                        <textarea class="input-xxxlarge focused" data-target="budkit-editor" rows="1" name="activity_content" placeholder="Share something new with your followers..."></textarea>
+                        <textarea class="input-100pct focused" data-target="budkit-editor" rows="4" name="activity_content" placeholder="Share something new with your followers..."></textarea>
                     </div>
-                    <div class="no-bottom-margin half-top-pad">    
-                        <ul class="nav nav-pills pull-left no-margin">
-                            <li><a href="/system/content/attachments/upload.raw" class="no-left-padding" data-toggle="modal" data-target="#upload-tool"><i class="icon icon-paper-clip"></i> Add files</a></li>
-                            <li><a href="/system/content/attachments/upload.raw" data-toggle="modal" data-target="#upload-tool"><i class="icon icon-photo-camera icon-16"></i> Add Photos</a></li>
-                        </ul>
-                        <ul class="nav nav-pills pull-right no-margin">
-                            <li><button class="btn btn-primary" type="submit">Submit</button></li>
-                        </ul>
-                        
+                    <div class="btn-toolbar no-margin"> 
+                        <button class="btn pull-right" type="submit">Submit</button>   
+                        <a href="/system/content/attachments/upload.raw" class="btn pull-left no-margin" data-toggle="modal" data-target="#upload-tool"><i class="icon icon-paper-clip"></i> Add files</a>
                     </div>
                 </fieldset>
             </div>

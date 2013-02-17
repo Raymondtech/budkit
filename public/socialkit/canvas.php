@@ -29,14 +29,18 @@
         <body>
 
             <div id="wrap">
-                <div class="container-fluid">
-                    <div class="container-startup canvas">
-                        <div class="startup-header">
-                            <h3><tpl:element type="text" data="page.title">SocialKit</tpl:element></h3>
-                        </div>
-                        <tpl:block data="page.block.alerts" />
-                        <div class="startup-body">
-                            <tpl:block data="page.block.body" /> 
+                <div class="container-box">
+                    <div class="container-right">
+                        <div class="container-content scroll-y">
+                            <div class="container-startup canvas">
+                                <div class="startup-header">
+                                    <h3><tpl:element type="text" data="page.title">SocialKit</tpl:element></h3>
+                                </div>
+                                <tpl:block data="page.block.alerts" />
+                                <div class="startup-body">
+                                    <tpl:block data="page.block.body" /> 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div><!--/.fluid-container-->

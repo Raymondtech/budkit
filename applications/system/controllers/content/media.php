@@ -57,7 +57,7 @@ final class Media extends System\Content {
         $gallery    = "media gallery";
         
         $this->set("dashboard", array("title"=>"Media gallery" ) );
-        $this->set("user", $user);
+        //$this->set("user", $user);
 
         $this->output->addToPosition("dashboard", $gallery);
           

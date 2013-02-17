@@ -1,14 +1,14 @@
 // Sub navbar
 @navbarSubnavBackground:                #f2f2f2;
 @navbarSubnavBackgroundHighlight:       #ffffff;
-@navbarSubnavBorder:                    #1C1D22;
+@navbarSubnavBorder:                    #ddd;
 
 @navbarSubnavText:                      @grayDark;
 @navbarSubnavLinkColor:                 @grayDark;
-@navbarSubnavLinkColorHover:            @white;
+@navbarSubnavLinkColorHover:            @grayDarker;
 @navbarSubnavLinkColorActive:           @navbarSubnavLinkColorHover;
 @navbarSubnavLinkBackgroundHover:       transparent;
-@navbarSubnavLinkBackgroundActive:      @navbarSubnavBackground;
+@navbarSubnavLinkBackgroundActive:      @navbarSubnavBorder;
 
 @navbarSubnavSearchBackground:          lighten(@navbarSubnavBackground, 25%);
 @navbarSubnavSearchBackgroundFocus:     @white;
@@ -40,16 +40,17 @@
   }
 
 .navbar-subnav{
-
+   
   .navbar-inner {
     #gradient > .vertical(@navbarSubnavBackgroundHighlight, @navbarSubnavBackground);
-    border-color: @navbarSubnavBorder;
+    border-bottom: 1px solid @navbarSubnavBorder;
+    margin-bottom: 2*@baseLineHeight;
   }
 
   .brand,.topic,
   .nav > li > a {
     color: @navbarSubnavLinkColor;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    text-shadow: none;
     &:hover,
     &:focus {
       color: @navbarSubnavLinkColorHover;
@@ -71,6 +72,10 @@
     color: @navbarSubnavText;
   }
 
+  .nav > li > a{
+     padding-left: 7px !important;
+   }
+
   .nav > li > a:focus,
   .nav > li > a:hover {
     background-color: @navbarSubnavLinkBackgroundHover;
@@ -81,7 +86,8 @@
   .nav .active > a:hover,
   .nav .active > a:focus {
     color: @navbarSubnavLinkColorActive;
-    //background-color: @navbarSubnavLinkBackgroundActive;
+    background-color: @navbarSubnavLinkBackgroundActive;
+    .box-shadow(none);
   }
 
   // Inline text links
@@ -105,6 +111,7 @@
   .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: @navbarSubnavLinkBackgroundActive;
     color: @navbarSubnavLinkColorActive;
+    
   }
   .nav li.dropdown > a:hover .caret,
   .nav li.dropdown > a:focus .caret {

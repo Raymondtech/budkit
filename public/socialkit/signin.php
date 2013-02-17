@@ -27,16 +27,11 @@
             <link rel="shortcut icon" href="<?php echo $this->getTemplatePath() ?>/assets/ico/favicon.png" />
         </head>
         <body>
-
             <div id="wrap">
                 <div class="container-box">
-
                     <div class="container-right">
-
-
-                        <div class="container-content">
-
-                            <div class="container-bucket">
+                        <div class="container-content scroll-y">
+                            <div class="container-fluid">
                                 <div class="container">
                                     <form id="form" name="login_form" method="post" action="/member/session/start">                       
                                         <div class="container-startup signin">
@@ -49,7 +44,6 @@
                                                     <li><a href="/member/account/create">Don't have an account?</a></li>
                                                 </ul>
                                             </div>
-                                            
                                             <div class="startup-body">                                               
                                                 <div class="control-group">
                                                     <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
@@ -66,20 +60,17 @@
                                                 <ul class="unstyled">
                                                     <li><a href="/index.php">Forgot your password?</a></li>
                                                 </ul>
-                                            
-                                                
-                                                <button type="submit" class="btn margin-top input-xxxlarge" >Sign-in to Account</button> 
-                                                
-
                                                 <input type="hidden" name="auth_handler" value="dbauth" />
                                                 <input type="hidden" name="redirect" value="" />
 
+                                                <div class="margin-bottom">                                                  
+                                                       <button type="submit" class="btn margin-top margin-bottom input-xxxlarge" >Sign-in to Account</button> 
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div><!--/.fluid-container-->

@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <form id="form" name="setup-form" class="form-vertical" method="POST" action="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') + 1) ); ?>">
+    <form id="form" name="setup-form" class="form-horizontal" method="POST" action="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') + 1) ); ?>">
         <fieldset>
 
             <?php switch ($step): 

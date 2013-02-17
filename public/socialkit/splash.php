@@ -29,26 +29,30 @@
         <body>
 
             <div id="wrap">
-                <div class="container-fluid">
-                    <div class="container-startup canvas">
-                        <div class="startup-header">
-                            <h3><tpl:element type="text" data="page.title">There was an error</tpl:element></h3>
-                        </div>
-                        <tpl:block data="page.block.alerts" />
-                        <div class="startup-body">
-                            <article>
-                                <div>
-                                    <tpl:block data="page.block.content" return="true">   
-                                        <p tpl:i18n="">Sorry, but the page you were trying to view does not exist. It looks like this was the result of either: a mistyped address, an out-of-date link, or our engineers have messed things up!</p>
-                                    </tpl:block>                    
+                <div class="container-box">
+                    <div class="container-right">
+                        <div class="container-content scroll-y">
+                            <div class="container-startup canvas">
+                                <div class="startup-header">
+                                    <h3><tpl:element type="text" data="page.title">There was an error</tpl:element></h3>
                                 </div>
-                                <hr />
-                                <div>
-                                    <tpl:block data="page.block.actions" return="true"><a  href="/" tpl:i18n="">Home Page</a></tpl:block>
+                                <tpl:block data="page.block.alerts" />
+                                <div class="startup-body">
+                                    <article>
+                                        <div>
+                                            <tpl:block data="page.block.content" return="true">   
+                                                <p tpl:i18n="">Sorry, but the page you were trying to view does not exist. It looks like this was the result of either: a mistyped address, an out-of-date link, or our engineers have messed things up!</p>
+                                            </tpl:block>                    
+                                        </div>
+                                        <hr />
+                                        <div>
+                                            <tpl:block data="page.block.actions" return="true"><a  href="/" tpl:i18n="">Home Page</a></tpl:block>
+                                        </div>
+                                    </article>
+                                    <hr />
+                                    <tpl:import layout="console" />
                                 </div>
-                            </article>
-                            <hr />
-                            <tpl:import layout="console" />
+                            </div>
                         </div>
                     </div>
                 </div><!--/.fluid-container-->

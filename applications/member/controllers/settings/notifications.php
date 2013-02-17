@@ -46,7 +46,7 @@ final class Notifications extends Member\Settings {
         $view   = $this->load->view( 'settings' );
         //$view   = 
                 
-        return $view->form("settings/notifications");
+        return $view->form("settings/notifications", "Notificaiton settings");
     
     }
 

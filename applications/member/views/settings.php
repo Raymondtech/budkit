@@ -53,9 +53,9 @@ class Settings extends \Platform\View {
      * @param type $form
      * @param type $app 
      */
-    final public function form($form = 'settings/account', $app = 'member') {
+    final public function form($form = 'settings/account', $title="Account settings", $app = 'member') {
 
-        $this->output->setPageTitle("Account Settings");
+        $this->output->setPageTitle($title);
 
         $sidebar = null; //$this->output->layout("settings/sidebar");
         $body = $this->output->layout($form, $app);
