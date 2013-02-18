@@ -1,5 +1,5 @@
 <tpl:layout  name="timeline" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="padding">
+    <div class="padding" id="timeline">
         <div class="row-fluid" >
             <div class="span8">
                 
@@ -9,7 +9,7 @@
                         <li class="timeline-item-li">
                             <div class="timeline-item-container">
                                 <div class="timeline-item-header">
-                                    <div class="timeline-item-icon"><a href="#"><i class="icon-camera-retro"></i></a></div>
+                                    <div class="timeline-item-icon"><a href="#"><i class="icon-quote-left"></i></a></div>
                                     <a class="publisher-profile" href="#">
                                         
                                         <img class="profile-avatar thumbnail" src="${actor.image.url}" alt="${actor.displayName}" width="${actor.image.width}" height="${actor.image.height}" />
@@ -27,7 +27,7 @@
                         </li>
                     </tpl:loop>  
                 </ol>
-                <div  align="center">
+                <div  class="timeline-more-items">
                     <button class="btn input-100pct">Load more</button>
                 </div>
             </div>
