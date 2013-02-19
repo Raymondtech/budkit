@@ -1,0 +1,48 @@
+.widget-bucket{
+    margin-bottom: @gridGutterWidth*0.9;
+}
+
+.widget{
+    background: @white;
+    line-height: @baseLineHeight;
+    border: 1px solid #ddd;
+    .border-radius(@baseBorderRadius);
+    .box-shadow(0 1px 3px rgba(0,0,0,.055));
+    .transition(all .2s ease-in-out);
+     margin-bottom: @gridGutterWidth;
+    .widget-head,
+    .widget-body,
+    .widget-footer{ padding: (@baseLineHeight * 0.25) (@baseLineHeight * 0.5);}
+
+    .widget-head{
+        #gradient > .vertical( #f9f9f9, #f2f2f2);
+        border-bottom: 1px solid #dedede;
+        font-weight: bold; text-transform: uppercase;
+        //display: block;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: @baseLineHeight;
+        color: @grayLight;
+        text-shadow: 0 1px 0 rgb(255,255,255);
+        text-transform: uppercase;
+        .widget-title{
+            cursor: move;
+        }
+        .widget-close{
+            text-decoration: none;
+            float: right;
+            color: @grayLight;
+            cursor: pointer;
+            &:hover{ color: @grayDark }
+        }
+    }
+    &.naked{
+        background: none; border: none; .box-shadow(none);
+        .widget-head{ background: none; border:none;}
+        .widget-head,
+        .widget-body,
+        .widget-footer{ padding: (@baseLineHeight * 0.25) 0;}
+    }
+    .widget-body{ }
+    .widget-footer{ font-size: 11px; }
+}

@@ -22,15 +22,14 @@ body{
     }
 }
 
-@import "timeline.less";
-@import "wizard.less";
-
 .padding{ padding : @gridGutterWidth }
 .padding-half{ padding : @gridGutterWidth * 0.5 }
 .padding-left-half{ padding-left : @gridGutterWidth * 0.5 }
 .padding-right-half{ padding-right : @gridGutterWidth * 0.5 }
 .padding-zero{ padding: 0; }
-.right-padding{ padding-right : @gridGutterWidth }
+.padding-right-zero{ padding-right: 0; }
+.padding-right{ padding-right : @gridGutterWidth }
+.padding-top-zero{ padding-top: 0 !important; }
 
 .margin-top{ margin-top : @gridGutterWidth }
 .margin-bottom{ margin-bottom : @gridGutterWidth }
@@ -66,3 +65,48 @@ body{
 .btn-google {
   .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
 }
+
+
+.media-grid{
+     a{ text-decoration: none; }
+    .thumbnail{
+        position: relative;
+        .feature{ border-bottom: 1px solid #ddd; }
+        .caption{ padding: 8px 5px 0px; text-decoration: none; color: @grayLight; font-size: 11px; }
+        .description{ position: absolute; top:4px; left:4px; right: 4px; height: 130px; background: rgba(255,255,255,0.8); padding: 10px; display: none}
+       &:hover{
+            .description{ display: block; }
+        }
+    }
+}
+
+.media-list{
+     li{ 
+        float:none; clear:both; display:block; border-bottom: 1px solid #ddd; padding-bottom: @gridGutterWidth; margin-bottom: 0px; padding-top: @gridGutterWidth; 
+        &:first-child{ padding-top: 0px }
+        &:last-child{ border-bottom: none; padding-top: 0px }
+    }
+     a{ text-decoration: none; }
+    .thumbnail{
+        position: relative;
+        .box-shadow( none );
+        border: none;
+        .column{display: inline-block; padding-right: @gridGutterWidth; vertical-align: top; }
+        .feature{ 
+            img{
+                border-bottom: 1px solid #ddd;   padding: 4px;
+                line-height: @baseLineHeight;
+                border: 1px solid #ddd;
+                .border-radius(@baseBorderRadius);
+                .box-shadow(0 1px 3px rgba(0,0,0,.055));
+                .transition(all .2s ease-in-out);
+            }
+        }
+        .caption{ padding: 0px; text-decoration: none; color: @grayLight; }
+        .description{ }
+    }
+}
+
+@import "timeline.less";
+@import "wizard.less";
+@import "widgets.less";

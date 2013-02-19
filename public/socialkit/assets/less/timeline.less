@@ -6,7 +6,7 @@
     background-position: 100% 0;
     min-height: 1000px;
 }
-.timeline-more-items{ margin-left: 70px}
+.timeline-more-items{ margin-left: 115px}
 .timeline-workspace-title,{
     border-bottom: 1px solid #eee; //margin-bottom: @baseLineHeight*0.7;
     padding-bottom: 12px;
@@ -30,7 +30,7 @@
     padding: @baseLineHeight*0.5;
     //margin: @gridGutterWidth;
     //margin-bottom: @baseLineHeight;
-    margin-left: 70px;
+    margin-left: 115px;
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     //padding-bottom:5px;
@@ -52,6 +52,32 @@
         .box-sizing(border-box);
         padding: 13px 5px;
     }
+      &:before{
+                content: "";
+                position: absolute;
+
+                border-style: solid;           
+                display: block;
+                width: 0;
+                top: 18px;
+                bottom: auto;
+                left: 106px;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent #ddd;
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                border-width: 13px 13px 0;
+                border-style: solid;
+                display: block;
+                width: 0;
+                top: 20px;
+                bottom: auto;
+                left: 107px;
+                border-width: 8px 10px 8px 0;
+                border-color: transparent #f5f5f5;
+            }
 }
 .timeline-item-publisher-actions{
     margin: 0;
@@ -96,10 +122,35 @@
         .timeline-item-container{
             //min-height: 51px;
             background: #fff;
-            border: 1px solid #eee;
+            border: 1px solid #ddd;
             padding: 15px;
             margin: 10px 60px;
- 
+            &:before{
+                content: "";
+                position: absolute;
+
+                border-style: solid;           
+                display: block;
+                width: 0;
+                top: 18px;
+                bottom: auto;
+                left: 106px;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent #ddd;
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                border-width: 13px 13px 0;
+                border-style: solid;
+                display: block;
+                width: 0;
+                top: 20px;
+                bottom: auto;
+                left: 107px;
+                border-width: 8px 10px 8px 0;
+                border-color: transparent #fff;
+            }
                 
             .timeline-item-header{
                 cursor: pointer;
@@ -223,14 +274,14 @@
                  }
 &:last-child{ .timeline-item-container{ border-bottom: 1px solid #EEE;} }
         .timeline-item-container{
-            margin:  0px 0px 0px 170px;
+            margin:  0px 0px 0px 115px;
             border: none;
             border-style:solid;
             border-width:1px;          
             border-color: inherit;         
             border-color: transparent;      
-            border-color: #eee;
-            border-color: #eee #eee transparent #eee;
+            border-color: #ddd;
+            border-color: #ddd #ddd transparent #ddd;
             
             
             .timeline-item-header{
@@ -250,7 +301,7 @@
                         margin-right: 10px;
                         position:absolute;
                         top: 0px;
-                        left: 70px;
+                        left: 0px;
                     }
                  }
              }
@@ -327,27 +378,21 @@ list-style: none;
 
 .timeline-item-icon{ 
     position: absolute; 
-    top: 20px; left: 0; 
-    width: 53px;
-    height: 53px;
-    @shadow : inset 0 2px 0px #ccc, 0 1px 2px #fff;
-    //.box-shadow(@shadow);
+    top: 20px; left: 72px; 
     .border-radius(50%);
-    //border: 1px solid #ddd;
     a { 
-        #gradient > .vertical(#e9e9e9, #eaeaea) ;
-        //width: 48px;
-        //height: 48px;
-        padding: 10px 9px;
-        .box-shadow(@shadow);
+        background: #DDD ;
+        padding: 5px;
         .border-radius(50%);
-        font-size: 20px;
-        //margin: 10px
-        border: 5px solid @white;
+        font-size: 13px;
         text-decoration: none;
-        color: @grayLight;
+        color: @white;
+        &:hover{ background: #999 }
     }
     &.toolset{
-        a{padding: 9px 13px}
+        a{padding: 4px 7px;}
     }
 }
+
+
+.icon-post:before               { content: "\f040"; }

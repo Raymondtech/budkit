@@ -95,10 +95,10 @@ class Activity extends Platform\Entity {
             $actorObject->set("uri", $object['user_name_id']);
             
             $actorImage  = Activity\MediaLink::getInstance();
-            $actorImageURL = "http://placeskull.com/70/70/".\Platform\Framework::getRandomColor();
+            $actorImageURL = "http://placeskull.com/50/50/999999";
             $actorImage->set("url", $actorImageURL);
-            $actorImage->set("height", 70);
-            $actorImage->set("width", 70);
+            $actorImage->set("height", 50);
+            $actorImage->set("width", 50);
             $actorObject->set("image", $actorImage::getArray());
 
             $object['activity_actor'] =  $actorObject::getArray();
@@ -113,12 +113,12 @@ class Activity extends Platform\Entity {
                     unset($object[$key]);
             endforeach;
             
-            $items      = $activities->get("items", array());
-            $items[]    = $object;
+            $items      = $activities->get("items", array()); //get the collection
+            $items[]    = $object; //add to the collection
             
             //print_R($items);
             
-            $activities->set("items", $items);
+            $activities->set("items", $items); //update the collection
             $activities->set("totalItems", count($items) );
             
         }

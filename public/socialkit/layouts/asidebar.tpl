@@ -1,5 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar navbar-inverse margin-bottom">
+    <div class="navbar margin-bottom">
         <div class="navbar-inner  padding-left-half padding-right-half">
             <ul class="nav">
                 <li class="active"><a href="#"><i class="icon-home"></i></a></li>

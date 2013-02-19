@@ -54,7 +54,7 @@ final class Media extends System\Content {
         $view       = $this->load->view('index');
         $this->output->setPageTitle( _t("Media gallery") );
 
-        $gallery    = "media gallery";
+        $gallery    = $this->output->layout("content/gallery");
         
         $this->set("dashboard", array("title"=>"Media gallery" ) );
         //$this->set("user", $user);
