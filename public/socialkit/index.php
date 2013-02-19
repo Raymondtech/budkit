@@ -61,6 +61,7 @@
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-dropdown.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-scrollspy.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-tab.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-affix.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-tooltip.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-popover.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-button.js"></script>

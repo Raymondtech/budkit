@@ -22,7 +22,7 @@
                 <li>
                     <a href="#">
                         <div class="thumbnail">
-                            <div class="feature column"><img src="http://placehold.it/200x150/f2f2f2" /></div>                      
+                            <div class="feature column"><img src="http://lorempixel.com/200/150/sports/<?php echo rand(1,10);?>/" /></div>                      
                             <div class="description column">
                                 This is the description of this image
                             </div>

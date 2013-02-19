@@ -1,5 +1,6 @@
 <tpl:layout  name="timeline" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="widget-body">
+        Blah updated their profile picture etc
         <h2>2,190<small class="pull-right">60%</small></h2>
         <div class="progress mini-bar progress-success">
             <div class="bar" style="width: 60%;"></div>
