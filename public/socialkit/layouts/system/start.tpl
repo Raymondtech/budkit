@@ -2,8 +2,8 @@
     <div class="navbar navbar-subnav no-margin">
         <div class="navbar-inner padding-left-half no-margin">
             <ul class="nav" id="startviewmenu">
-                <li class="active"><a data-target="#events-calendar" data-toggle="tab"><i class="icon-home icon-16"></i>Start</a></li>
-                <li><a data-target="#notifications" data-toggle="tab"><i class="icon-list-ul icon-16"></i>Notifications</a></li>
+                <li class="active"><a data-target="#events-calendar" data-toggle="tab"><i class="icon-home icon-16"></i>Your Dashboard</a></li>
+                <li><a data-target="#notifications" data-toggle="tab"><i class="icon-bell icon-16"></i>Notifications</a></li>
             </ul>
         </div>
     </div>
@@ -17,7 +17,6 @@
                         <div class="widget-body">
 
                         </div>
-
                     </div>
                 </div>
                 <div class="row-fluid">

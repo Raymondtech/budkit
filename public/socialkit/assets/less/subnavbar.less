@@ -50,6 +50,8 @@
   .brand,.topic,
   .nav > li > a {
     color: @navbarSubnavLinkColor;
+    padding: ((@navbarHeight - @baseLineHeight) / 4) 14px;
+    margin: ((@navbarHeight - @baseLineHeight) / 4) 0;
     text-shadow: none;
     &:hover,
     &:focus {
@@ -89,6 +91,14 @@
     background-color: @navbarSubnavLinkBackgroundActive;
     .box-shadow(none);
   }
+
+    .nav > .highlighted > a,
+    .nav > .highlighted > a:hover,
+    .nav > .highlighted > a:focus, {
+        background-color: #ca4037;
+        color: @white;
+        //margin: ((@navbarHeight - @baseLineHeight) / 4) 0;
+    }
 
   // Inline text links
   .navbar-link {
@@ -159,3 +169,4 @@
   }
 
 }
+

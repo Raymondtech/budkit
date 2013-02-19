@@ -2,9 +2,9 @@
     <div class="navbar navbar-subnav">
         <div class="navbar-inner padding-left-half no-margin">
             <ul class="nav" id="eventsmenu">
+                <li class="highlighted"><a data-target="#new-event" data-toggle="tab"><i class="icon-asterisk icon-16"></i>Create Event</a></li>
                 <li class="active"><a data-target="#events-calendar" data-toggle="tab"><i class="icon-calendar icon-16"></i>Calendar</a></li>
-                <li><a data-target="#events-lists" data-toggle="tab"><i class="icon-list-ul icon-16"></i>Lists</a></li>
-                <li><a data-target="#new-event" data-toggle="tab"><i class="icon-asterisk icon-16"></i>Create Event</a></li>
+                <li><a data-target="#events-lists" data-toggle="tab"><i class="icon-list-ul icon-16"></i>Lists</a></li>          
             </ul>
         </div>
     </div>
