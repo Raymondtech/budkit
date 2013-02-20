@@ -6,8 +6,8 @@
                     <label class="control-label" for="options[general][site-name]"><tpl:i18n>Choose File</tpl:i18n></label>
                     <div class="controls fileupload fileupload-new input" data-provides="fileupload">
                         <div class="input-prepend input-append">
-                            <span class="add-on"><i class="icon icon-film"></i></span>
-                            <input type="file" data-label="Select Video" />
+                            <span class="add-on"><i class="icon icon-music"></i></span>
+                            <input type="file" data-label="Select Audio" />
                             <div class="btn-group">
                                 <a class="add-on btn dropdown-toggle" data-toggle="dropdown"><i class="icon-globe"></i> Public <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -19,6 +19,7 @@
                                 </ul>
                             </div>
                         </div>
+                        <a class="help-block" href="#">Add more</a>
                     </div>
                 </div>
                 <div class="control-group">
@@ -58,7 +59,6 @@
                         </select>
                     </div>
                 </div>
-                
                 <div class="form-actions">
                     <div class="btn-toolbar  no-margin">
                         <div class="btn-group">

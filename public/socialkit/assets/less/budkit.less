@@ -22,17 +22,20 @@ body{
     }
 }
 
+.padding-top{ padding-top: @gridGutterWidth !important; }
 .padding{ padding : @gridGutterWidth }
 .padding-half{ padding : @gridGutterWidth * 0.5 }
 .padding-left-half{ padding-left : @gridGutterWidth * 0.5 }
 .padding-right-half{ padding-right : @gridGutterWidth * 0.5 }
 .padding-zero{ padding: 0; }
 .padding-right-zero{ padding-right: 0; }
+.padding-left-zero{ padding-left: 0; }
 .padding-right{ padding-right : @gridGutterWidth }
 .padding-top-zero{ padding-top: 0 !important; }
 
 .margin-top{ margin-top : @gridGutterWidth }
 .margin-bottom{ margin-bottom : @gridGutterWidth }
+.margin-bottom-half{ margin-bottom : @gridGutterWidth * 0.5 }
 .no-margin{margin: 0 !important;}
 .scroll-y{ overflow-y: scroll }
 
@@ -88,6 +91,7 @@ body{
     }
      a{ text-decoration: none; }
     .thumbnail{
+        padding: 0px;
         position: relative;
         .box-shadow( none );
         border: none;
@@ -105,6 +109,11 @@ body{
         .caption{ padding: 0px; text-decoration: none; color: @grayLight; }
         .description{ }
     }
+}
+
+
+.input-append .add-on,.input-prepend .add-on{
+    &.btn{ padding-left: 10px; padding-right: 10px;}
 }
 
 @import "timeline.less";

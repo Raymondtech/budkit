@@ -1,12 +1,12 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar margin-bottom">
-        <div class="navbar-inner padding-left-half padding-right-zero">
+    <div class="navbar margin-bottom-half">
+        <div class="navbar-inner padding-left-half padding-right-zero no-margin">
             <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                 <ul class="nav no-margin" id="menutabs"> 
                     <li class="active"><a data-target="#mainmenu" data-toggle="tab"><i class="icon-align-justify"></i></a></li>                             
                     <li><a data-target="#settingsmenu" data-toggle="tab"><i class="icon-cogs"></i></a></li>
                     <li><a data-target="#messagesmenu" data-toggle="tab"><i class="icon-envelope-alt"></i></a></li>
-                    <li><a data-target="#notificationslist" data-toggle="tab"><i class="icon-bell-alt"></i></a></li>     
+                    <li><a data-target="#notificationslist" data-toggle="tab"><i class="icon-bell-alt"></i></a></li>     <!--Use  class="highlighted" on new notifications-->
                 </ul>
             </tpl:condition>
             <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
@@ -16,7 +16,6 @@
             </tpl:condition> 
         </div>
     </div>
-
     <!--    <ul class="nav nav-list">
             <li class="nav-header">Profile</li>
             <li><a href="#">Dashboard</a></li>

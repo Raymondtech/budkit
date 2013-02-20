@@ -267,11 +267,13 @@
 .navbar .nav > li > a {
   float: none;
   // Vertically center the text given @navbarHeight
-  padding: ((@navbarHeight - @baseLineHeight) / 2) 14px ((@navbarHeight - @baseLineHeight) / 2);
+  //padding: ((@navbarHeight - @baseLineHeight) / 2) 14px ((@navbarHeight - @baseLineHeight) / 2);
   color: @navbarLinkColor;
   text-decoration: none;
   text-shadow: 0 1px 0 @navbarBackgroundHighlight;
   cursor: pointer;
+      padding: ((@navbarHeight - @baseLineHeight) / 4) 14px;
+  margin: ((@navbarHeight - @baseLineHeight) / 4) 0;
 }
 .navbar .nav .dropdown-toggle .caret {
   margin-top: 8px;
@@ -297,6 +299,14 @@
   padding: ((@navbarHeight - @baseLineHeight) / 4) 14px;
   margin: ((@navbarHeight - @baseLineHeight) / 4) 0;
   .box-shadow(inset 0 3px 8px rgba(0,0,0,.125));
+}
+
+.navbar .nav > .highlighted > a,
+.navbar .nav > .highlighted > a:hover,
+.navbar .nav > .highlighted > a:focus, {
+    background-color: #ca4037;
+    color: @white;
+    //margin: ((@navbarHeight - @baseLineHeight) / 4) 0;
 }
 
 // Navbar button for toggling navbar items in responsive layouts

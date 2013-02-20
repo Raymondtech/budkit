@@ -17,7 +17,8 @@
                     <label class="control-label"  for="middle-name">Photo</label>
                     <div class="controls">
                         <div class="input-append"> 
-                            <input type="file" data-label="Select Photo" />
+                            <input type="file" data-label="Select Photo..." />
+                            <a class="add-on btn">Chose from existing</a>
                             <div class="btn-group">
                                 <a class="add-on btn dropdown-toggle" data-toggle="dropdown"><i class="icon-globe"></i> Public <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
