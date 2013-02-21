@@ -60,7 +60,7 @@ final class Collection {
      * Returns an array with object properties names as keys. 
      * Empty property values are omitted
      * 
-     * @return type
+     * @return array of items in collection
      */
     public static function getArray() {
         $object = new \ReflectionClass('\Application\System\Models\Activity\Collection');
@@ -79,8 +79,8 @@ final class Collection {
     /**
      * Sets an object class property
      * 
-     * @param type $property
-     * @param type $value
+     * @param string $property
+     * @param mixed $value
      */
     public static function set($property, $value = NULL) {
 
@@ -93,8 +93,8 @@ final class Collection {
     /**
      * Gets an object class property
      * 
-     * @param type $property
-     * @param type $default
+     * @param string $property
+     * @param mixed $default
      */
     public static function get($property, $default = NULL) {
 
@@ -105,10 +105,12 @@ final class Collection {
         return (empty($value)) ? $default : $value;
     }
 
+    /**
+     * Returns an instance of the Collection Class
+     * @return object Collection
+     */
     public static function getInstance() {
-
         $instance = new self();
-
         return $instance;
     }
 
