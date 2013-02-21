@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * activity.php
+ * timeline.php
  *
  * Requires PHP version 5.3
  *
@@ -36,7 +36,7 @@ use Application\System\Controllers;
  * @version    Release: 1.0.0
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Activity extends Platform\View {
+class Timeline extends Platform\View {
     
     public function index(){
         return $this->display();

@@ -55,7 +55,7 @@
         <div class="tab-pane padding" id="new">
             <form class="form-horizontal padding-top">
                 <div class="control-group">
-                    <label class="control-label" for="">Media Type</label>
+                    <label class="control-label" for="">Content Type</label>
                     <div class="controls">
                         <ul class="nav nav-pills no-margin" id="mediatypemenu">
                             <li class="active"><a data-target="#new-photo" data-toggle="tab">Photo</a></li>

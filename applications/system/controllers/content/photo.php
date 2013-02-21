@@ -5,99 +5,93 @@
 /**
  * photo.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @category   Controller
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\Content\Controllers;
-
-use Platform;
-use Library;
-use Application\Content\Views as View;
+namespace Application\System\Controllers\Content;
+use Application\System\Controllers as System;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Photo CRUD action controller for system content 
  *
- * How does this class achieve the desired purpose?
+ * This class implements the action controller that manages the creation, 
+ * view and edit of photo.
  *
- * @category   Controller
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Action Controller
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Photo extends \Platform\Controller {
+final class Photo extends System\Content{
 
-    //put your code here
-    public function index() {
-        return false;
+    /**
+     * Displays the form required to creates a new photo. 
+     * @todo    Implement the create photo action method
+     * @return  \Application\System\Views\Content\Photo::createForm()
+     */
+    public function create() {    
+        $view       = $this->load->view('photo');        
+        return $view->createform(); 
     }
-
-    // domain.com/photo/item/create/
-    public function create() {
-      
-        $view       = $this->load->view('photo');
-        
-        $view->createform();
-        
-        
-        return true;
-        
-    }
-    
-    // domain.com/photo/item/update/1902480-Born-in-the-USA/
+    /**
+     * Updates an existing photo.
+     * @todo    Implement the photo update action method
+     * @return  void
+     */
     public function update() {
         
     }
-    
-    //domain.com/photo/item/edit/1902480-Born-in-the-USA/
+    /**
+     * Edits an existing photo.
+     * @todo    Implement the photo edit action method
+     * @return  void
+     */
     public function edit(){
         
     }
-
-    // domain.com/photo/item/view/1902480-Born-in-the-USA/
-    public function gallery() {
-        
+    /**
+     * Displays a photo gallery.
+     * @todo    Implement the photo gallery display option
+     * @return  void
+     */
+    public function gallery() {      
         $view       = $this->load->view('index');
         $this->output->setPageTitle( _t("Photo - Born in the USA") );
 
         $body       = $this->output->layout('photos/photo');
-        //$right      = _("Notifications filter");
-        
+        //$right      = _("Notifications filter");        
         $this->output->addToPosition("body", $body);
         //$this->output->addToPosition("right", $right );
     }
-
-    // domain.com/photo/item/delete/1902480-Born-in-the-USA/
+    /**
+     * Deletes an existing photo.
+     * @todo    Implement the photo delete action method
+     * @return  void
+     */
     public function delete() {
         
     }
-
+    /**
+     * Get's an instance of the photo controller, only creating one if does not
+     * exists
+     * @staticvar self $instance
+     * @return an instance of {@link Photo}
+     * 
+     */
     public static function getInstance() {
-
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self;
-
         return $instance;
     }
-
 }

@@ -5,48 +5,45 @@
 /**
  * attachments.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-
 namespace Application\System\Controllers\Content;
-
-use Platform;
-use Library;
-use Application\System\Views as View;
 use Application\System\Controllers as System;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Attachment management CRUD action controller for system content 
  *
- * How does this class achieve the desired purpose?
+ * This class implements the action controller that manages the creation, 
+ * view and edit of attachments within various posts/media types.
  *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ * @category  Application
+ * @package   Action Controller
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
 class Attachments extends System\Content {
 
-    
-    public function index() {}
-
     /**
-     * The global system uploader. Just point to /system/commands/upload
+     * The default fallback method. 
+     * Displays the global system attachment uploader 
+     * @return Attachments::upload()
+     */
+    public function index() {
+        return $this->upload();
+    }
+    /**
+     * Displays the global system attachment uploader form 
+     * @todo    Complete the implementation of the global file upload action
+     * @return  void;
      */
     final public function upload() {
                 
@@ -61,13 +58,11 @@ class Attachments extends System\Content {
         $this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $form);
     }
-
-
     /**
      * Gets an instance of the command class
-     * 
      * @staticvar self $instance
-     * @return self 
+     * @return an instance of {@link Attachments}
+     * 
      */
     public static function getInstance() {
 

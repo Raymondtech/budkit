@@ -3,71 +3,74 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * start.php
+ * content.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
  */
-
 namespace Application\System\Controllers;
 
-use Platform;
-use Library;
-use Application\System\Views as View;
-
 /**
- * What is the purpose of this class, in one sentence?
+ * The parent action controller for all system content types
  *
- * How does this class achieve the desired purpose?
+ * Defines common action methods for the managing the default system content types
+ * It is important that you inherit the key features defined in this class
+ * when defining content types
  *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Action Controller
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
-class Content extends Platform\Controller {
+Class Content extends \Platform\Controller{
 
     /**
-     * The system dashboard, 
-     * @ return false;
+     * The default fall back method. Probably overwritten in child classes
+     * @return boolean false 
      */
-    public function index(){}
-  
+    public function index() {
+        return false;
+    }
+
     /**
-     * Returns and instantiated Instance of the __CLASS__ class
-     * 
-     * NOTE: As of PHP5.3 it is vital that you include constructors in your class
-     * especially if they are defined under a namespace. A method with the same
-     * name as the class is no longer considered to be its constructor
-     * 
-     * @staticvar object $instance
-     * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
-     * @return object i18n
+     * Displays a gallery of content items. 
+     * @return void
+     */
+    public function gallery() {
+        
+        $view       = $this->load->view('index');
+        $gallery    = $this->output->layout("content/gallery");
+        
+        $this->set("dashboard", array("title"=>"Content gallery" ) );
+
+        $this->output->addToPosition("dashboard", $gallery);
+        $this->output->setPageTitle( _t("Content gallery") );
+        $view->display(); //sample call;   
+        //$this->output->addToPosition("right", $right );
+    }
+    /**
+     * Returns an instance of the content controller
+     * @staticvar self $instance
+     * @return Content 
      */
     public static function getInstance() {
 
-        $class = __CLASS__;
-
-        if (is_object(static::$instance) && is_a(static::$instance, $class))
-            return static::$instance;
-
-        static::$instance = new $class;
-
-        return static::$instance;
+        static $instance;
+        //If the class was already instantiated, just return it
+        if (isset($instance))
+            return $instance;
+        $instance = new self;
+        return $instance;
     }
 }
+
+
 

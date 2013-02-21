@@ -5,51 +5,43 @@
 /**
  * settings.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\System\Controllers\Admin;
 
-use Platform;
-use Library;
-use Application\System\Views as View;
+namespace Application\System\Controllers\Admin;
 use Application\System\Controllers as System;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Admin settings action controller
  *
- * How does this class achieve the desired purpose?
+ * Displays and update system configuration settings. 
  *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ * @category  Application
+ * @package   Action Controller
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * @todo      System manage action methods
  */
 class Settings extends System\Admin {
     
-
+    /**
+     * Displays the configuration form
+     * @return void
+     */
     public function configuration() {
-
         //2. Load Model
         $model = $this->load->model("authority");
-
         //3. Get the authorities list
         $authorities = $model->getAuthorities();
-
         //4. Set Properties
         $this->set("authorities", $authorities);
         $form = $this->load->view('settings');
@@ -57,26 +49,37 @@ class Settings extends System\Admin {
         $form->configurationForm();
     }
 
+    /**
+     * Displays the appearance configuration form
+     * @return void
+     */
     public function appearance() {
-
         $form = $this->load->view('settings');
-
         $form->appearanceConfigForm();
     }
 
+    /**
+     * Displays the navigation settings
+     * @return void
+     */
     public function navigation(){
        $form = $this->load->view('settings');
-
-        $form->navigationConfigForm();
+       $form->navigationConfigForm();
     }
 
+    /**
+     * Displays the moderation queue configuration settings
+     * @return void
+     */
     public function moderation() {
-
         $form = $this->load->view('settings');
-
         $form->moderationConfigForm();
     }
     
+    /**
+     * Saves configuraiton settings
+     * @return boolean
+     */
     public function save(){
         
         $referer    = $this->input->getReferer();
@@ -102,14 +105,12 @@ class Settings extends System\Admin {
 //            $this->redirect( $referer );
 //            return false; //useless
 //        }
-
         //Check we have all the information we need!
         if(!$options->save( $data , null)){
             $this->alert($options->getError(),'Something went wrong','error');
             $this->redirect( $referer );
             return false;
         }
-       
         //Report on state saved
         $this->alert( "Your configuration settings have now been saved","Everthing worked","success");
         $this->redirect( $referer ); //Redirect back to the page sending in the data;
@@ -117,29 +118,36 @@ class Settings extends System\Admin {
         return true;
     }
 
+    /**
+     * Displays the input setting form
+     * @todo admin input form
+     * @return void
+     */
     public function input() {
-
         $form = $this->load->view('settings');
-
         $form->inputConfigForm();
     }
 
+    /**
+     * Displays the maintenance settings form 
+     * @return void
+     */
     public function maintenance() {
-
         $form = $this->load->view('settings');
-
         $form->maintenanceConfigForm();
     }
 
+    /**
+     * Gets an instance of the settings action controller
+     * @staticvar object $instance
+     * @return object Settings
+     */
     public static function getInstance() {
-
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self;
-
         return $instance;
     }
 

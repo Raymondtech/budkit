@@ -3,61 +3,48 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * activity.php
+ * timeline.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-
 namespace Application\System\Controllers;
 
-use Platform;
-use Library;
-use Application\System\Views as View;
-
 /**
- * What is the purpose of this class, in one sentence?
+ * Timeline action controller 
  *
- * How does this class achieve the desired purpose?
+ * This class implements the action controller for displaying activity streams.
  *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Action Controller
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Activity extends Platform\Controller {
+class Timeline extends \Platform\Controller {
 
     /**
      * The default page, consider this the homepage
      * of the application, You can change this to anything else in the config/routes.php 
      * 
-     * @return type 
+     * @return void 
      */
     public function index() {
 
         return null;
     }
-
     /**
-     * Creates a new activity feed $post
-     * 
-     * @return array $post 
+     * Creates a new activity in the defined timeline. 
+     * @return  \Platform\Controller::returnRequest()
      */
     public function create() {
-
         //Is the user authenticated?
         $this->requireAuthentication();
         //Is the input method submitted via POST;
@@ -77,32 +64,22 @@ class Activity extends Platform\Controller {
         //Returns the request back tot the reffer;
         $this->returnRequest();
     }
-
     /**
      * Alias for listing all activity posts;
-     * @TODO If params, read individual items;
-     * 
-     * @return type 
+     * @return Timeline::stream()
      */
     public function read() {
-
-        return $this->index();
+        return $this->stream();
     }
-
     /**
-     * Updates an existing activity posts;
-     * 
+     * Lists all published activities within this timeline;
      * @return void; 
      */
-    public function stream() {
-        
-        $this->output->setPageTitle( _("Activity stream") );
-        
+    public function stream() {       
+        $this->output->setPageTitle( _("Activity stream") );       
         //Get the view;
-        $view = $this->load->view('index');
-        
+        $view = $this->load->view('index');        
         $user = \Platform\User::getInstance();
-
         $model      = $this->load->model('activity');
         $activities = $model->getAll();   
         
@@ -112,45 +89,33 @@ class Activity extends Platform\Controller {
         
         $timeline = $this->output->layout("timeline");
         //$timelineside = $this->output->layout("timelinenotes");
-        
-        
+             
         $this->output->addToPosition("dashboard", $timeline);
         //$this->output->addToPosition("aside", $timelineside );
-        
-        
+             
         $view->display(); //sample call;        
         //$this->output();
     }
-
     /**
-     * Deletes an activity posts;
-     *  
-     * @return void;
+     * Deletes an activity from the timeline;
+     * @return Timeline::read();
      */
     public function delete() {
-
         $this->alert(_("Could not delete your post."), _("There seems to be a problem with authenticating this session"), "error");
-
         return $this->read();
     }
-
     /**
-     * Gets an instance of the start controller
-     * 
+     * Gets an instance of the timeline controller
      * @staticvar self $instance
-     * @return self 
+     * @return Timeline 
      */
     public static function getInstance() {
-
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self;
-
         return $instance;
     }
-
 }
 

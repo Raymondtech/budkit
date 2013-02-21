@@ -3,92 +3,90 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * video.php
+ * audio.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @category   Controller
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-namespace Application\Content\Controllers;
-
-use Platform;
-use Library;
-use Application\Content\Views as View;
-
+namespace Application\System\Controllers\Content;
+use Application\System\Controllers as System;
 /**
- * What is the purpose of this class, in one sentence?
+ * Audio files management CRUD action controller for system content 
  *
- * How does this class achieve the desired purpose?
+ * This class implements the action controller that manages the creation, 
+ * view and edit of audio files within various posts/media types.
  *
- * @category   Controller
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Action Controller
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Audio extends \Platform\Controller {
+final class Audio extends \System\Controller {
 
-    //put your code here
+    /**
+     * The default fall-back method. 
+     * @return Audio::read()
+     */
     public function index() {
         $view = $this->load->view('audio');
     }
-
+    /**
+     * Displays the form required to creates a new audio. 
+     * @todo    Implement the create action method
+     * @return  {@link \Application\System\Views\Content\Audio::createForm()}
+     */
     public function create() {
-        
         $view = $this->load->view('audio');
-        
-                
-        $view->createform();
-        
-        
-        return true;
+        return $view->createform();
     }
-
-    public function update( $audioid = null) {
-        
+    /**
+     * Updates details of an existing audio files.
+     * @todo    Implement the audio content update action method
+     * @return  void
+     */
+    public function update($audioid = null) {
         //There many ways to get the arguents passed here
         $args1 = func_get_args();
-        $args  = $this->getRequestArgs();
-        
+        $args = $this->getRequestArgs();
         //print_R($args); print_r($args1); echo $videoid;
-        
     }
-
+    /**
+     * Displays an audio content.
+     * @todo    Implement the audio read action method
+     * @return  void
+     */
     public function read() {
-        
-        echo $this->router->getView()."<br />";
+        echo $this->router->getView() . "<br />";
         echo $this->router->getFormat();
-        
     }
-
-    public function delete() {
-        
+    /**
+     * Deletes an existing audio file.
+     * @todo    Implement the audio content delete action method
+     * @return  void
+     */
+    public function delete() {  
     }
-
+    /**
+     * Get's an instance of the audio controller, only creating one if does not
+     * exists
+     * @staticvar self $instance
+     * @return an instance of {@link Audio}
+     * 
+     */
     public static function getInstance() {
-
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self;
-
         return $instance;
     }
 
