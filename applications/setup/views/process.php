@@ -5,55 +5,55 @@
 /**
  * process.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
  */
-
 namespace Application\Setup\Views;
-
 use Platform;
-use Library;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Install process views
  *
- * How does this class achieve the desired purpose?
+ * Provides additional methods for managing installation views. 
  *
- * @category   View
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   View
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
 final class Process extends Platform\View {
 
+    /**
+     * Constructs the install view class
+     * @return void
+     */
     public function __construct() {
-
         parent::__construct();
-
         //To set the pate title use
         //$this->output->setPageTitle("Setup");
         $this->output->setLayout("canvas");
     }
 
+    /**
+     * The default install view
+     * @return void
+     */
     public function display() {
         return $this->index();
     }
 
+    /**
+     * The default installation page view i.e step1
+     * @return  void
+     */
     public function index() {
 
         //To specify a layout, else default will be used
@@ -79,7 +79,10 @@ final class Process extends Platform\View {
         $this->output->addToPosition("body", $form);
     }
     
-    
+    /**
+     * Displays a readme at the end of the installation process
+     * @return void
+     */
     public function readme(){
         
         //Displays the readme file after installation
@@ -88,15 +91,16 @@ final class Process extends Platform\View {
         
     }
     
-
+    /**
+     * Returns an instance of the installation process view
+     * @staticvar object $instance
+     * @return object Process
+     */
     final static function getInstance() {
-
         static $instance;
-
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self();
 
         return $instance;

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * config.php
+ * requirements.inc
  *
  * Requires PHP version 5.3
  *
@@ -18,8 +18,6 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
 $requirements = array(

@@ -1,48 +1,54 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * storage.php
+ * install.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\Setup\Models;
 
 use Platform;
 use Library;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Performs system installation
  *
- * How does this class achieve the desired purpose?
- *
- * @category   Model
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Data Model
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
 final class Install extends Platform\Model {
-
+    
+    /**
+     * An instance of the install model object
+     * @var object 
+     */
     static $instance;
 
+    /**
+     * This model has no data to display
+     * @return boolean
+     */
     public function display(){ return false; }
     
+    /**
+     * Registers a superadministrator at installation
+     * @return boolean
+     */
     public function superadmin(){
         
         $config     = \Library\Config::getInstance();
@@ -107,7 +113,11 @@ final class Install extends Platform\Model {
         return true;
     }
     
-    
+    /**
+     * Executes the installation
+     * 
+     * @return boolean
+     */
     public function run(){
              
         $config     = \Library\Config::getInstance();
@@ -183,7 +193,10 @@ final class Install extends Platform\Model {
         return true;
     }
     
-
+    /**
+     * Returns an instance of the install class
+     * @return object Install
+     */
     public static function getInstance() {
 
         //If the class was already instantiated, just return it

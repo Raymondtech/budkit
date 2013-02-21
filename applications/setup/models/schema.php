@@ -3,21 +3,15 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * storage.php
+ * schema.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
 
@@ -27,29 +21,27 @@ use Platform;
 use Library;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Generates and performs the database installation transaction
  *
- * How does this class achieve the desired purpose?
- *
- * @category   Model
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Data Model
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
 final class Schema extends Platform\Model {
 
     /**
      * An instance of the schema model object
-     * @var type 
+     * @var object 
      */
     static $instance;
 
     /**
      * The database object
-     * @var type 
+     * @var object 
      */
     static $database;
 
@@ -63,7 +55,7 @@ final class Schema extends Platform\Model {
 
     /**
      * Creates the authority table
-     * 
+     * @return void
      */
     private static function createAuthorityTable() {
 
@@ -92,6 +84,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the authority permission table
+     * @return void
+     */
     private static function createAuthorityPermissionsTable() {
 
         //Drop the authority table if exists, create if doesn't
@@ -125,6 +121,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the menu table
+     * @return void
+     */
     private static function createMenutable() {
 
         //Drop the menu table if it already exists;
@@ -184,6 +184,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the menu group table
+     * @return void
+     */
     private static function createMenuGroupTable() {
 
         static::$database->query("DROP TABLE IF EXISTS `?menu_group`;");
@@ -209,6 +213,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the options table
+     * @return void
+     */
     private static function createOptionsTable() {
         static::$database->query("DROP TABLE IF EXISTS `?options`");
         static::$database->query(
@@ -224,6 +232,11 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the content MetaTable
+     * @deprecated 21/02/2012 v1.0.0 
+     * @return void
+     */
     private static function createContentmetaTable() {
         static::$database->query("DROP TABLE IF EXISTS `?contentmeta`;");
         static::$database->query(
@@ -239,6 +252,11 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the content table
+     * @deprecated 21/02/2012 v1.0.0. System content uses the new EAV system
+     * @return void
+     */
     private static function createContentsTable() {
         static::$database->query("DROP TABLE IF EXISTS `?contents`;");
         static::$database->query(
@@ -275,6 +293,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the session table
+     * @return void
+     */
     private static function createSessionTable() {
         static::$database->query("DROP TABLE IF EXISTS `?session`;");
         static::$database->query(
@@ -296,6 +318,11 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the User MetaTable
+     * @deprecated 21/02/2012 v1.0.0 
+     * @return void
+     */
     private static function createUsermetaTable() {
         static::$database->query("DROP TABLE IF EXISTS `?usermeta`");
         static::$database->query(
@@ -311,6 +338,11 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the Users table
+     * @deprecated 21/02/2012 v1.0.0 Uses the new EAV model
+     * @return void
+     */
     private static function createUsersTable() {
 
         static::$database->query("DROP TABLE IF EXISTS `?users`;");
@@ -334,6 +366,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the object authority table
+     * @return void
+     */
     private static function createObjectsAuthorityTable() {
         static::$database->query("DROP TABLE IF EXISTS `?objects_authority`;");
         static::$database->query(
@@ -347,6 +383,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the objects table
+     * @return void
+     */
     private static function createObjectsTable() {
 
         static::$database->query("DROP TABLE IF EXISTS `?objects`;");
@@ -366,6 +406,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the object property table
+     * @return void
+     */
     private static function createPropertiesTable() {
         static::$database->query("DROP TABLE IF EXISTS `?properties`;");
         static::$database->query(
@@ -386,6 +430,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Creates the property datatype table
+     * @return void
+     */
     private static function createPropertyDatatypeTable() {
         static::$database->query("DROP TABLE IF EXISTS `?property_datatypes`;");
         static::$database->query(
@@ -403,6 +451,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Inserts default property datatypes to the property datatype table
+     * @return void
+     */
     private static function insertPropertyDatatypes() {
         static::$database->query(
                 "INSERT INTO `?property_datatypes` (`datatype_id`, `datatype_name`, `datatype_is_numeric`, `datatype_is_datetime`, `datatype_not_null`, `datatype_validation`) VALUES
@@ -431,6 +483,11 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Query for creating property values by proxy table
+     * @param string $group
+     * @return void
+     */
     public static function createPropertyValuesProxyTable($group) {
 
         $group = strtolower($group);
@@ -467,7 +524,7 @@ final class Schema extends Platform\Model {
                         CALL ?property_value_validate(NEW.property_id, NEW.value_data);
                     END;"
             );
-                    
+
             //Add reference constrains
             static::$database->query(
                     "ALTER TABLE `?{$group}_property_values`
@@ -477,6 +534,10 @@ final class Schema extends Platform\Model {
         endif;
     }
 
+    /**
+     * Query for creating the property values table
+     * @return void
+     */
     private static function createPropertyValuesTable() {
         static::$database->query("DROP TABLE IF EXISTS `?property_values`;");
         static::$database->query(
@@ -528,6 +589,11 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * SQL query for creating the user views table
+     * @deprecated 21/02/2012 v1.0.0 
+     * @return void
+     */
     private static function createUsersView() {
         static::$database->query(
                 "CREATE OR REPLACE VIEW `?users_` AS
@@ -547,6 +613,10 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Query for adding indicies to the property values table
+     * @return void
+     */
     private static function createIndices() {
 
         static::$database->query("ALTER TABLE `?properties` ADD CONSTRAINT `properties_ibfk_` FOREIGN KEY (`property_datatype`) REFERENCES `?property_datatypes` (`datatype_name`);");
@@ -557,10 +627,11 @@ final class Schema extends Platform\Model {
         );
     }
 
-    private static function addDefaultData() {
-        
-    }
 
+    /**
+     * Runs the database installation transaction
+     * @return boolean
+     */
     public static function createTables() {
 
         static::createAuthorityTable();
@@ -586,7 +657,6 @@ final class Schema extends Platform\Model {
         //static::createUsermetaTable();
         //static::createUsersTable();
         //static::createUsersView();
-        static::addDefaultData();
 
         if (!static::$database->commitTransaction()) {
             static::setError(static::$database->getError());
@@ -596,6 +666,10 @@ final class Schema extends Platform\Model {
         return true;
     }
 
+    /**
+     * Returns an instance of the database schema
+     * @return type
+     */
     public static function getInstance() {
 
         //If the class was already instantiated, just return it

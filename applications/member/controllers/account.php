@@ -107,28 +107,9 @@ final class Account extends \Platform\Controller {
 
         //7. Browser Messages
         //Return to index
-        return $this->view();
+        //return $this->view();
     }
 
-    // alias to index
-    public function view() {
-
-        $view = $this->load->view("index");
-
-        echo "viewing account";
-    }
-
-    //domain.com/user/account/edit/1934353/
-    public function edit() {
-        
-    }
-
-    public function settings() {
-
-
-
-        $this->load->view('index')->settings();
-    }
 
     //domain.com/user/account/delete/1934353/
     public function delete() {

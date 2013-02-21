@@ -3,9 +3,9 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * routes.php - Subroutes must have the same id as the static first segment
+ * routes.inc - Subroutes must have the same id as the static first segment
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
@@ -18,7 +18,6 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */

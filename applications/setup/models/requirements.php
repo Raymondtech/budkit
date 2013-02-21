@@ -1,61 +1,68 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
  * requirements.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\Setup\Models;
 
 use Platform;
 use Library;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Performs system requirements test
  *
- * How does this class achieve the desired purpose?
- *
- * @category   Model
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Data Model
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
 final class Requirements extends Platform\Model {
 
-    //put your code here
-
+    /**
+     * This model has no data to display
+     * @return boolean
+     */
     public function display() {
-        
+        return false;
     }
     
+    /**
+     * Test file upload size limits
+     * @todo Implement file upload system requirements test at install
+     */
     public function testFileUploads(){}
     
-    public function testMemory(){}
+    /**
+     * Test for available memore
+     * @todo Implement system memory test at install
+     */
+    public function testMemory(){}  
     
+    /**
+     * Test float?
+     */
     public function testFloat(){}
 
     /**
      * Checks required modules
      * 
-     * @param type $name
-     * @param type $directive
+     * @param string $name
+     * @param array $directive
      * @return boolean 
      */
     public function testModule($name, $directive = array()) {
@@ -95,6 +102,12 @@ final class Requirements extends Platform\Model {
         return $return;
     }
 
+    /**
+     * Test for folder permissions
+     * @param string $path
+     * @param array $directive
+     * @return boolean
+     */
     public function testFolderPermissions($path, $directive = array()) {
         
         //Test install directory is writable, readable
@@ -125,9 +138,9 @@ final class Requirements extends Platform\Model {
     /**
      * Test PHP Directives before install
      * 
-     * @param type $name
-     * @param type $directive
-     * @return type 
+     * @param string $name
+     * @param array $directive
+     * @return boolean 
      */
     public function testDirective($name, $directive = array()) {
 
@@ -156,8 +169,8 @@ final class Requirements extends Platform\Model {
     /**
      * Checks the current version 
      * 
-     * @param type $component
-     * @return type
+     * @param string $component
+     * @return boolean
      */
     public function checkVersion($component) {
 
@@ -167,8 +180,8 @@ final class Requirements extends Platform\Model {
     /**
      * Returns an instance of the requirements model
      * 
-     * @staticvar self $instance
-     * @return \self
+     * @staticvar object $instance
+     * @return object Requirements
      */
     public static function getInstance() {
 
