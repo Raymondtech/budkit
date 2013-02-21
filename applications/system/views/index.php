@@ -1,32 +1,40 @@
 <?php
 
-namespace Application\System\Views;
-
-use Platform;
-use Library;
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Do Framework
+ * index.php
  *
- * for PHP version 5
+ * Requires PHP version 5.4
  *
- * LICENSE: This source file is subject to version 3.01 of the GPL license
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
- * http://www.gnu.org/licenses/gpl.txt.  If you did not receive a copy of
- * the GPLv3 License and are unable to obtain it through the web, please
- * send a note to license@budkit.org so we can mail you a copy immediately.
+ * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
+ * the GPL License and are unable to obtain it through the web, please
+ * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ */
+namespace Application\System\Views;
+use Platform;
+
+/**
+ * Index view
+ * 
+ * The default system view handler
  *
- * @category   Do
- * @package    DoController
- * @author     Original Author <livingstonefultang@gmail.com>
- * @copyright  2011 Stonyhills LLC
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    SVN: $Id$
- *
+ * @category  Application
+ * @package   View
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
 class Index extends Platform\View {
     
-
+    /**
+     * Draws the system dashboard
+     * @return string
+     */
     public function dashboard() {
         
         $this->output->setPageTitle(_("Your Dashboard"));
@@ -39,6 +47,10 @@ class Index extends Platform\View {
         return $this->display();
     }
 
+    /**
+     * Draws the system index page
+     * @return void
+     */
     public function index() {
 
         $indexpage = "Welcome page";
@@ -49,6 +61,10 @@ class Index extends Platform\View {
         
     }
 
+    /**
+     * The default system view
+     * @return void
+     */
     public function display() {
 
         //To specify a layout, else default will be used
@@ -80,6 +96,11 @@ class Index extends Platform\View {
         //$this->output->addToPosition("aside",   $rightaside );
     }
 
+    /**
+     * Returns an instance of the index view class
+     * @staticvar object $instance
+     * @return object Index
+     */
     final static function getInstance() {
 
         static $instance;

@@ -5,71 +5,59 @@
 /**
  * article.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @category   View
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
  */
-namespace Application\System\Views\Content;
 
-use Platform;
-use Library;
+namespace Application\System\Views\Content;
+use \Application\System\Views;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Article Sub View class
  *
- * How does this class achieve the desired purpose?
- *
- * @category   View
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   View
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
-final class Article extends \Platform\View{
+final class Article extends Views\Content{
     
-    public function __construct(){
-        
+    /**
+     * Article View constructor
+     * @return void
+     */
+    public function __construct(){    
         //Construct the parent
-        parent::__construct();
-        
-        $this->output->setPageTitle("Articles");
-        
+        parent::__construct();  
+        $this->output->setPageTitle("Articles");        
     }
     
-    public function display(){
-        
-       
+    /**
+     * The default article view display method
+     * @return void
+     */
+    public function display(){  
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
         $dashboard      = $this->output->layout( "dashboard" , "system" );
         $sidebar        = $this->output->layout( "sidebar" , "system"  );
-  
+ 
         $this->output->addToPosition("side",   $sidebar);
-        $this->output->addToPosition("body",    $dashboard);
-        
+        $this->output->addToPosition("body",    $dashboard);    
     }
     
-    public function streams(){}
-    
-    
     /**
-     * The new article create form
-     * 
+     * Displays a form for creating new articles
+     * @param boolean $fullscreen
+     * @return void
      */
     public function createform( $fullscreen = false){
         
@@ -77,8 +65,7 @@ final class Article extends \Platform\View{
         $this->output->setPageTitle("Articles | Create new Article");
                  
         //form
-        $form  = $this->output->layout( "articles/form" );
-        
+        $form  = $this->output->layout( "articles/form" );      
         //The default installation box;
         //$this->output->addToPosition("left",    $sidebar);
         if(!$fullscreen):
@@ -89,13 +76,16 @@ final class Article extends \Platform\View{
         endif;
     }
     
+    /**
+     * Returns an instance of the article view class
+     * @staticvar object $instance
+     * @return object Article
+     */
     public static function getInstance(){
         
-        static $instance;
-        
+        static $instance;       
         //If the class was already instantiated, just return it
         if (isset($instance) ) return $instance ;
-
         $instance =  new self();
 
         return $instance;

@@ -78,7 +78,7 @@
         </tbody>
     </table>
 
-    <div class="action top-pad">
+    <div class="form-actions top-pad">
         <a href="/" class="btn btn-success">Start Exploring</a> or <a href="#">Check for updates</a>
     </div>
 

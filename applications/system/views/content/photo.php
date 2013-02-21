@@ -5,52 +5,45 @@
 /**
  * photo.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @category   View
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
  */
 
 namespace Application\System\Views\Content;
-
-use Platform;
-use Library;
+use \Application\System\Views;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Photo Sub View class
  *
- * How does this class achieve the desired purpose?
- *
- * @category   View
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   View
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
-final class Photo extends \Platform\View {
+final class Photo extends Views\Content {
 
+    /**
+     * Constructs the photo subview class
+     * @return void
+     */
     public function __construct() {
-
         //Construct the parent
         parent::__construct();
-
         $this->output->setPageTitle("Photos");
     }
 
+    /**
+     * Photo view display
+     * @return void
+     */
     public function display() {
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
@@ -61,29 +54,31 @@ final class Photo extends \Platform\View {
         $this->output->addToPosition("body", $dashboard);
     }
 
+    /**
+     * Displays the Photo upload form
+     * @return boolean
+     */
     public function createform() {
         //Photo
         $this->output->setPageTitle("Photos | Upload more photos");
 
-        //form
         $form = $this->output->layout("photos/form");
-
-        //The default installation box;
-        //$this->output->addToPosition("left",    $sidebar);
-
         $this->output->addToPosition("dashboard", $form);
 
         return $this->display();
     }
 
+    /**
+     * Returns an instance of the photo subview class
+     * @staticvar object $instance
+     * @return object Photo
+     */
     public static function getInstance() {
 
         static $instance;
-
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self();
 
         return $instance;

@@ -6,13 +6,13 @@
 
     <div class="control-group">
         <label class="control-label" for="user_name"><tpl:i18n>First Name</tpl:i18n><em class="mandatory">*</em></label>
-        <div class="controls row-fluid">
+        <div class="controls">
             <input class="input-xxlarge focused" id="first_name" name="user_first_name" type="text" placeholder="Johnatan" />
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="user_name"><tpl:i18n>Last Name</tpl:i18n><em class="mandatory">*</em></label>
-        <div class="controls row-fluid">
+        <div class="controls">
             <input class="input-xxlarge" id="last_name" name="user_last_name" type="text" placeholder="Johnatan" />
         </div>
     </div>

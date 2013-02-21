@@ -21,17 +21,21 @@ use Platform;
 use Library;
 
 /**
- * What is the purpose of this class, in one sentence?
+ * Activity stream collection model class
  *
- * How does this class achieve the desired purpose?
+ * An Activity Stream is a collection one or more individual activities. This provides
+ * methods for modelling a collection of activities within a stream. A "collection" 
+ * is a generic list of Objects of any object type. The objectType of each item 
+ * in the collection MAY be omitted if the type of object can be established 
+ * through context. The collection is used primarily as the root of an Activity Streams
  *
- * @category   Model
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/controller
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Data Model
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
 final class Collection {
 

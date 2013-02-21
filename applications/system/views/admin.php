@@ -1,31 +1,40 @@
 <?php
 
-namespace Application\System\Views;
-
-use Platform;
-use Library;
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Do Framework
+ * admin.php
  *
- * for PHP version 5
+ * Requires PHP version 5.4
  *
- * LICENSE: This source file is subject to version 3.01 of the GPL license
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
- * http://www.gnu.org/licenses/gpl.txt.  If you did not receive a copy of
- * the GPLv3 License and are unable to obtain it through the web, please
- * send a note to license@budkit.org so we can mail you a copy immediately.
+ * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
+ * the GPL License and are unable to obtain it through the web, please
+ * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ */
+namespace Application\System\Views;
+use Platform;
+
+/**
+ * Admin view parent class
  *
- * @category   Do
- * @package    DoController
- * @author     Original Author <livingstonefultang@gmail.com>
- * @copyright  2011 Stonyhills LLC
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    SVN: $Id$
+ * Provides additional methods for managing administrative panel views. 
  *
+ * @category  Application
+ * @package   View
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
 final class Admin extends Platform\View {
 
+    /**
+     * Admin view constructor
+     * @return void
+     */
     public function __construct() {
 
         parent::__construct();
@@ -42,55 +51,10 @@ final class Admin extends Platform\View {
       
     }
     
-    
-    public function dashboard(){
-        
-        //you can add stuff you want displayed;
-        $user = $this->get('user');
-        
-        $dashpanel  = $this->output->layout("dashpanel");
-        $dashbanner = $this->output->layout("dashbanner");
-        
-        //$this->output->addToPosition("banner" , $dashbanner );
-        $this->output->addToPosition("body" , $dashpanel );
-        
-    }
-
-
-
-    public function installExtensions() {
-
-        //To set the pate title use
-        $this->output->setPageTitle("Dasboard > Extend");
-
-
-        $sidebar = $this->output->layout("index_sidebar");
-        $dashboard = $this->output->layout("extensions_install");
-
-        //The default installation box;
-        $this->output->addToPosition("left", $sidebar);
-
-        $this->output->addToPosition("body", $dashboard);
-    }
-
-    public function updateExtensions() {
-
-        //To set the pate title use
-        $this->output->setPageTitle("Dasboard > Update Extensions");
-
-
-        $sidebar = $this->output->layout("index_sidebar");
-        $dashboard = $this->output->layout("extensions_updates");
-
-        //The default installation box;
-        $this->output->addToPosition("left", $sidebar);
-
-        $this->output->addToPosition("body", $dashboard);
-    }
 
     /**
      * The admin dashboard master table & widgetboard
-     * 
+     * @return void
      */
     public static function drawAdminPage() {
 
@@ -117,51 +81,10 @@ final class Admin extends Platform\View {
         
     }
 
-    public function listExtensions() {
-
-        //To set the pate title use
-        $this->output->setPageTitle("Dasboard > Installed Extensions");
-
-
-        $sidebar = $this->output->layout("index_sidebar");
-        $dashboard = $this->output->layout("extensions_lists");
-
-        //The default installation box;
-        $this->output->addToPosition("left", $sidebar);
-        $this->output->addToPosition("body", $dashboard);
-    }
-
-    public function addContent() {
-
-        //To set the pate title use
-        $this->output->setPageTitle("Dasboard");
-
-        //to add some js file
-        $this->output->addScript("some.js");
-
-        //to add some js file
-        $this->output->addStyle("some.css");
-
-        //to output just the layout use
-        //$this->output->raw();
-        //to output just the xml use
-        //$this->output->xml();
-        //to output as json use
-        //$this->output->json();
-        //parse Layout Demo;
-
-        $sidebar = $this->output->layout("index_sidebar");
-        $mainbody = $this->output->layout("content_input");
-
-
-        //$poster     = $this->output->layout( "content_input" );
-        //$this->set("inputform" , $poster );
-        //The default installation box;
-        $this->output->addToPosition("left", $sidebar);
-
-        $this->output->addToPosition("body", $mainbody);
-    }
-
+    /**
+     * The default page view method. Displays an admin page
+     * @return void
+     */
     public function display() {
 
         //To specify a layout, else default will be used
@@ -193,17 +116,17 @@ final class Admin extends Platform\View {
         $this->output->addToPosition("body", $dashboard);
     }
 
+    /**
+     * Returns an instance of the admin view class
+     * @staticvar object $instance
+     * @return object Admin
+     */
     final static function getInstance() {
-
         static $instance;
-
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self();
-
         return $instance;
     }
-
 }

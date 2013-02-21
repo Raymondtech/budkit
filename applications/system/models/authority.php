@@ -1,18 +1,64 @@
 <?php
 
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * authority.php
+ *
+ * Requires PHP version 5.4
+ *
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * that is available through the world-wide-web at the following URI:
+ * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
+ * the GPL License and are unable to obtain it through the web, please
+ * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ * 
+ */
+
 namespace Application\System\Models;
 
 use Platform;
 use Library;
 
+/**
+ * Authority group model
+ *
+ * An authority is a role in an area of responsibility (AoR). A curator is the 
+ * head of an authority, who can create and grant permissions to users in that 
+ * authority, or sub authority. A permission is an authorisation to, access, 
+ * modify or execute an object or operation, granted to an authority or user 
+ * by a curator. Some authorities are automatically generated. For instance 
+ * geographical and age authorities, can be used to limit permission by place, 
+ * and age . A unified control plan (UCP), is a predefined map of authority to 
+ * permission to operation in an Area of Responsibility. For instance, The Authority 
+ * ‘Moderators’ granted the permission to ‘modify’ all objects in the ‘Post submission’ 
+ * Area of responsibility. The UCP is defined by the Master Administrator, 
+ * who is the curator or curators
+ *
+ * @category  Application
+ * @package   Data Model
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
+ */
 class Authority extends Platform\Model {
 
-    //put your code here
-
+    /**
+     * Default model method
+     * @return void;
+     */
     public function display() {
-        
+        return false;
     }
 
+    /**
+     * Save authority group permissions
+     * @param array $params
+     * @return boolean True on success
+     * @throws \Platform\Exception on failure
+     */
     public function storePermissions($params = array()) {
 
         //1. Load Helpers
@@ -49,9 +95,8 @@ class Authority extends Platform\Model {
             throw new \Platform\Exception($table->getError());
             return false;
         }
-        
-        //@TODO: Check that we are not denying permission to an authority whose parent is granted the permission!!!
 
+        //@TODO: Check that we are not denying permission to an authority whose parent is granted the permission!!!
         //Check the Permission Area URI, make sure its not a route id,
         //We need exact URI paths, Throw an error is it does not make sense
         if ($table->isNewRow()) {
@@ -68,9 +113,8 @@ class Authority extends Platform\Model {
 
     /**
      * Stores Authority Data to the database
-     * 
      * @param array $data
-     * @return type 
+     * @return boolean true on success 
      */
     public function store($data = "", $params = array()) {
 
@@ -151,31 +195,54 @@ class Authority extends Platform\Model {
         return true;
     }
 
-    public function load() {}
+    /**
+     * Loads a row of authority groups
+     * @todo Implement authority model load
+     * @return void
+     */
+    public function load() {
+        
+    }
 
-    public function delete() {}
+    /**
+     * Deletes an authority group from the datastore
+     * @todo Implement the authority model delete
+     * @return void
+     */
+    public function delete() {
+        
+    }
 
-    public function validate() {}
+    /*
+     * Validates new authority input
+     * @todo Validate new authority input
+     * @return void
+     */
 
-    public function getToken() {}
+    public function validate() {
+        
+    }
 
+    /**
+     * Returns a processed array of authority groups
+     * @return array
+     */
     public function getAuthorities() {
-
-
         //Get All authorities from the database
-        $statement = $this->database->select("a.*, count(p.permission) AS permissions")->from("?authority a")->join("?authority_permissions p", "a.authority_id=p.authority_id", "LEFT")->groupBy("a.authority_name")->orderBy("a.lft", "ASC")->prepare();
+        $statement = $this->database->select("a.*, count(p.permission) AS permissions")
+                                    ->from("?authority a")
+                                    ->join("?authority_permissions p", "a.authority_id=p.authority_id", "LEFT")
+                                    ->groupBy("a.authority_name")
+                                     ->orderBy("a.lft", "ASC")->prepare();
         $results = $statement->execute();
 
         //Authorities Obbject
-        $rows        = $results->fetchAll();
+        $rows = $results->fetchAll();
         $authorities = array();
         $right = array();
-
-        //print_R($rows);
-
         foreach ($rows as $authority) {
 
-             if (count($right) > 0) {
+            if (count($right) > 0) {
                 while ($right[count($right) - 1] < $authority['rgt']) {
                     array_pop($right);
                 }
@@ -187,7 +254,6 @@ class Authority extends Platform\Model {
 
                 $authority['permissions'] = $this->database->select('p.*')->from("?authority_permissions p")->where("p.authority_id =", $authority['authority_id'])->run()->fetchAll();
             }
-
             $node = array(
                 "authority" => $authority,
             );
@@ -198,16 +264,17 @@ class Authority extends Platform\Model {
         return $authorities;
     }
 
+    /**
+     * Returns an instance of the authority class
+     * @staticvar object $instance
+     * @return object Authority
+     */
     public static function getInstance() {
-
         static $instance;
-
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self;
-
         return $instance;
     }
 
