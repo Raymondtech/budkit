@@ -1,46 +1,36 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
  * settings.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
  */
 namespace Application\Member\Views;
 
-use Platform;
-use Library;
-
 /**
- * What is the purpose of this class, in one sentence?
+ * Member Settings View
  *
- * How does this class achieve the desired purpose?
- *
- * @category   View
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   View
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
 class Settings extends \Platform\View {
 
     /**
-     * Default display 
+     * Default settings display
+     * @return void 
      */
     final public function display() {
         //The default method
@@ -48,10 +38,11 @@ class Settings extends \Platform\View {
     }
 
     /**
-     * Settings form
-     * 
-     * @param type $form
-     * @param type $app 
+     * Displays the settings form
+     * @param string $form
+     * @param string $title
+     * @param string $app
+     * @return void
      */
     final public function form($form = 'settings/account', $title="Account settings", $app = 'member') {
 
@@ -67,10 +58,10 @@ class Settings extends \Platform\View {
     }
 
     /**
-     * Instance 
+     * Instance of the settings view class
      * 
-     * @staticvar self $instance
-     * @return \Application\Member\Views\self 
+     * @staticvar object $instance
+     * @return object \Application\Member\Views\Settings
      */
     public static function getInstance() {
         static $instance;

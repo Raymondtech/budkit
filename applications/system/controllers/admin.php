@@ -15,7 +15,6 @@
  * 
  */
 namespace Application\System\Controllers;
-use Platform;
 
 /**
  * The parent system admin action controller.  

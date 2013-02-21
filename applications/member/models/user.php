@@ -1,49 +1,38 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * account.php
+ * user.php
  *
- * Requires PHP version 5.3
+ * Requires PHP version 5.4
  *
  * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\Member\Models;
 
-use Platform;
-use Library;
-
 /**
- * What is the purpose of this class, in one sentence?
+ * The User EAV model. 
  *
- * How does this class achieve the desired purpose?
- *
- * @category   Model
- * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
- * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * @category  Application
+ * @package   Data Model
+ * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version   1.0.0
+ * @since     Jan 14, 2012 4:54:37 PM
+ * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
-class User extends Platform\Entity {
+class User extends \Platform\Entity {
   
           
-    public function __construct() {
-        
-        parent::__construct(); 
-        
+    public function __construct() {       
+        parent::__construct();        
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->extendPropertyModel( 
                 array(
@@ -81,8 +70,7 @@ class User extends Platform\Entity {
         if(!$this->saveObject($this->getPropertyValue("user_name_id"), "user")){
             //There is a problem!
             return false;
-        }
-      
+        }     
         //Default Permission Group?
         if(!empty($authority)){
             $query = "INSERT INTO ?objects_authority( authority_id, object_id ) SELECT {$this->database->quote((int)$authority)}, object_id FROM ?objects WHERE object_uri={$this->database->quote($this->getPropertyValue("user_name_id"))}";
@@ -93,23 +81,37 @@ class User extends Platform\Entity {
         return true;
     }
     
+    /**
+     * Returns a user datastore row
+     * @todo User EAV model load
+     * @return void
+     */
     public function load(){}
     
+    /**
+     * Deletes a user record from the datastore
+     * @todo User delete
+     * @return void
+     */
     public function delete(){}
     
+    /**
+     * Validates user data before store
+     * @todo User data validate
+     * @return void
+     */
     public function validate(){}
     
-    public function getToken(){}
-    
-    public static function getInstance(){
-        
-        static $instance;
-        
+    /**
+     * Returns an instance of the user EAV model
+     * @staticvar object $instance
+     * @return object User
+     */
+    public static function getInstance(){     
+        static $instance;      
         //If the class was already instantiated, just return it
         if (isset($instance) ) return $instance ;
-
         $instance =  new self();
-
         return $instance;
     }
     
