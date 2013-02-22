@@ -12,21 +12,9 @@
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GNU/GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- *
- * @category   Libraries
- * @package    Library
- * @author     Livingstone Fultang <livingstone.futlang@stonyhillshq.com>
- * @copyright  1997-2012 Stonyhills HQ
- * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/version
- * @since      Class available since Release 1.0.0
- * 
  */
 
 namespace Platform;
-
-use Library;
 
 /**
  * Handles versioning
@@ -53,13 +41,13 @@ class Version extends \Library\Object  {
     static $PRODUCT = 'Budkit';
     /**
      *  *  * @var int Main Release Level */
-    static $RELEASE = '0.0';
+    static $RELEASE = '1.0';
     /**
      *  *  * @var string Development Status */
     static $DEV_STATUS = 'alpha';
     /**
      *  *  * @var int Sub Release Level */
-    static $DEV_LEVEL = '9';
+    static $DEV_LEVEL = '0';
     /**
      *  *  * @var int build Number */
     static $BUILD = '1';
@@ -68,10 +56,10 @@ class Version extends \Library\Object  {
     static $CODENAME = 'Zanya';
     /**
      *  *  * @var string Date */
-    static $RELDATE = '27-October-2012';
+    static $RELDATE = '14-January-2012';
     /**
      *  *  * @var string Time */
-    static $RELTIME = '00:00';
+    static $RELTIME = '4:54:37 PM';
     /**
      *  *  * @var string Revision */
     static $REVISION = '';
@@ -89,7 +77,7 @@ class Version extends \Library\Object  {
     static $DEV_BUG = 'bugs@stonyhillshq.com';
 
     /**
-     *
+     * Long veresion
      *
      * @return string Long format version
      */
@@ -101,7 +89,7 @@ class Version extends \Library\Object  {
     }
 
     /**
-     *
+     * Short Version
      *
      * @return string Short version format
      */
@@ -130,7 +118,6 @@ class Version extends \Library\Object  {
     }
 
     /**
-     * TuiyoVersion::isOutDated()
      * Checks if the current version of Tuiyo is out of date
      * @param mixed $latest
      * @return
@@ -144,8 +131,8 @@ class Version extends \Library\Object  {
     /**
      * Gets an instance of the version class
      * 
-     * @staticvar self $instance
-     * @return self 
+     * @staticvar object $instance
+     * @return object Version 
      */
     public static function getInstance() {
 

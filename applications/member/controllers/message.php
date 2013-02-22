@@ -33,10 +33,18 @@ final class Message extends \Platform\Controller {
      * @return void
      */
     public function index() {
-        $sidebar = $this->output->layout("messages/sidebar");
-        $body = $this->output->layout('messages');
-        $this->output->addToPosition("body", $body);
+        
         //$this->output->addToPosition("side", $sidebar);
+        $user = \Platform\User::getInstance();
+        $model      = $this->load->model('activity','system');
+        $activities = $model->getAll();   
+        
+        $this->set("activities", $activities);   
+        $this->set("dashboard", array("title"=>"Activity stream" ) );
+        $this->set("user", $user);
+        
+        $body = $this->output->layout('messages/lists');
+        $this->output->addToPosition("body", $body);
     }
 
     /**
