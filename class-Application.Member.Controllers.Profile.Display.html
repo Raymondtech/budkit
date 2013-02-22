@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\Member\Controllers\Profile\Display | budkit docs</title>
+	<title>Class Application\Member\Controllers\Profile\Display | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li class="active"><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -183,7 +178,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -194,9 +189,10 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>The profile display actions controller subclass</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>This class implements actions required for accessing various profile
+subviews</p>
 
 	</div>
 
@@ -247,52 +243,56 @@
 		<b>Final</b><br />
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.Member.html">Member</a>\<a href="namespace-Application.Member.Controllers.html">Controllers</a>\<a href="namespace-Application.Member.Controllers.Profile.html">Profile</a><br />
-		
+		<b>Package:</b> Action<br />
 
 				<b>Category:</b>
-				Controller<br />
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-				<b>Link:</b>
-				<a href="http://stonyhillshq/documents/index/carbon4/utilities/application">http://stonyhillshq/documents/index/carbon4/utilities/application</a><br />
-		<b>Located at</b> <a href="source-class-Application.Member.Controllers.Profile.Display.html#29-98" title="Go to source code">applications/member/controllers/profile/display.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.Member.Controllers.Profile.Display.html#19-90" title="Go to source code">applications/member/controllers/profile/display.php</a><br />
 	</div>
 
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="activity" id="_activity">
+	<tr data-order="timeline" id="_timeline">
 
 		<td class="attributes"><code>
 			 public 
-			
+			@return
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_activity">#</a>
-		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#46-57" title="Go to source code">activity</a>( )</code>
+		<a class="anchor" href="#_timeline">#</a>
+		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#34-45" title="Go to source code">timeline</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays the profile timeline</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the profile timeline</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>@return</code><br>false<br />
+				</div>
 
 
 
@@ -311,19 +311,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_information">#</a>
-		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#60-65" title="Go to source code">information</a>( )</code>
+		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#47-54" title="Go to source code">information</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays the basic profile inforation</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the basic profile inforation</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Profile Information<br />
+				</div>
 
 
 		</div>
@@ -340,14 +348,18 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_achievements">#</a>
-		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#69-74" title="Go to source code">achievements</a>( )</code>
+		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#57-64" title="Go to source code">achievements</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays the profile's achievement</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the profile's achievement</p>
+
 
 
 
@@ -369,14 +381,18 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_network">#</a>
-		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#78-83" title="Go to source code">network</a>( )</code>
+		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#67-74" title="Go to source code">network</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays the profile network graph</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the profile network graph</p>
+
 
 
 
@@ -391,31 +407,31 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public static
-			<code><a href="class-Application.Member.Controllers.Profile.Display.html">Application\Member\Controllers\Profile\Display</a></code>
+			object
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#86-96" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.Member.Controllers.Profile.Display.html#77-89" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
-<p>Gets an instance of the registry element</p>
+<p>Returns an instance of the Profile display class</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Gets an instance of the registry element</p>
+<p>Returns an instance of the Profile display class</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Application.Member.Controllers.Profile.Display.html">Application\Member\Controllers\Profile\Display</a></code></code><br />
+					<code>object</code><br>Display<br />
 				</div>
 
 
@@ -433,11 +449,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 	<tr>
 		<td><code>
 			<a href="class-Application.Member.Controllers.Profile.html#___call">__call()</a>, 
-			<a href="class-Application.Member.Controllers.Profile.html#_create">create()</a>, 
-			<a href="class-Application.Member.Controllers.Profile.html#_delete">delete()</a>, 
-			<a href="class-Application.Member.Controllers.Profile.html#_edit">edit()</a>, 
-			<a href="class-Application.Member.Controllers.Profile.html#_index">index()</a>, 
-			<a href="class-Application.Member.Controllers.Profile.html#_update">update()</a>
+			<a href="class-Application.Member.Controllers.Profile.html#_index">index()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -546,7 +558,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

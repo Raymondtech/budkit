@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\System\Views\Content | budkit docs</title>
+	<title>Class Application\System\Views\Content | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -137,7 +132,6 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Application.System.Views.Activity.html">Activity</a></li>
 				<li><a href="class-Application.System.Views.Admin.html">Admin</a></li>
 				<li class="active"><a href="class-Application.System.Views.Content.html">Content</a></li>
 				<li><a href="class-Application.System.Views.Extensions.html">Extensions</a></li>
@@ -145,6 +139,7 @@
 				<li><a href="class-Application.System.Views.Manager.html">Manager</a></li>
 				<li><a href="class-Application.System.Views.Network.html">Network</a></li>
 				<li><a href="class-Application.System.Views.Settings.html">Settings</a></li>
+				<li><a href="class-Application.System.Views.Timeline.html">Timeline</a></li>
 			</ul>
 
 
@@ -190,7 +185,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -201,17 +196,10 @@
 
 	<div class="description">
 	
-<p>Do Framework</p>
+<p>Content view parent class</p>
 
-<p>for PHP version 5</p>
-
-<p>LICENSE: This source file is subject to version 3.01 of the GPL license that
-is available through the world-wide-web at the following URI: <a
-href="http://www.gnu.org/licenses/gpl.txt">http://www.gnu.org/licenses/gpl.txt</a>.
-If you did not receive a copy of the GPLv3 License and are unable to obtain it
-through the web, please send a note to <a
-href="mailto:license&#64;budkit.org">license&#64;<!---->budkit.org</a> so we can
-mail you a copy immediately.</p>
+<p>System Content view parent class. Special methods for managing deferent
+content classes are defined in the content sub namepsace</p>
 
 	</div>
 
@@ -238,6 +226,15 @@ mail you a copy immediately.</p>
 	</dl>
 
 
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Application.System.Views.Content.Article.html">Application\System\Views\Content\Article</a>, 
+			<a href="class-Application.System.Views.Content.Audio.html">Application\System\Views\Content\Audio</a>, 
+			<a href="class-Application.System.Views.Content.Event.html">Application\System\Views\Content\Event</a>, 
+			<a href="class-Application.System.Views.Content.Location.html">Application\System\Views\Content\Location</a>, 
+			<a href="class-Application.System.Views.Content.Photo.html">Application\System\Views\Content\Photo</a>, 
+			<a href="class-Application.System.Views.Content.Video.html">Application\System\Views\Content\Video</a>
+	</div>
 
 
 
@@ -248,110 +245,61 @@ mail you a copy immediately.</p>
 		
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.System.html">System</a>\<a href="namespace-Application.System.Views.html">Views</a><br />
-		<b>Package:</b> DoController<br />
+		<b>Package:</b> View<br />
 
 				<b>Category:</b>
-				Do<br />
-				<b>Copyright:</b>
-				2011 Stonyhills LLC<br />
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
-				Original Author &lt;<a
-href="mailto:livingstonefultang&#64;gmail.com">livingstonefultang&#64;<!---->gmail.com</a>&gt;<br />
+				Livingstone Fultang &lt;<a
+href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				SVN: $Id$<br />
-		<b>Located at</b> <a href="source-class-Application.System.Views.Content.html#8-76" title="Go to source code">applications/system/views/content.php</a><br />
+				1.0.0<br />
+				<b>Since:</b>
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.System.Views.Content.html#19-56" title="Go to source code">applications/system/views/content.php</a><br />
 	</div>
 
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="addContent" id="_addContent">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_addContent">#</a>
-		<code><a href="source-class-Application.System.Views.Content.html#29-39" title="Go to source code">addContent</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="listContent" id="_listContent">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_listContent">#</a>
-		<code><a href="source-class-Application.System.Views.Content.html#41-53" title="Go to source code">listContent</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="display" id="_display">
 
 		<td class="attributes"><code>
 			 public 
-			
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_display">#</a>
-		<code><a href="source-class-Application.System.Views.Content.html#57-61" title="Go to source code">display</a>( <span>mixed <var>$panel</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-Application.System.Views.Content.html#35-42" title="Go to source code">display</a>( <span>string <var>$panel</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
-<p>The default method for each controller</p>
+<p>Displays a content pane</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>The default method for each controller</p>
+<p>Displays a content pane</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$panel</var></dt>
+					<dd><code>string</code><br>$panel Content to output to screen</dd>
+				</dl></div>
 
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
 
 
 
@@ -362,25 +310,33 @@ href="mailto:livingstonefultang&#64;gmail.com">livingstonefultang&#64;<!---->gma
 	<tr data-order="getInstance" id="_getInstance">
 
 		<td class="attributes"><code>
-			final public static
-			
+			 public static
+			object
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.System.Views.Content.html#64-74" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.System.Views.Content.html#44-55" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
+<p>Gets an instance of the content class</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Gets an instance of the content class</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>object</code><br>Content<br />
+				</div>
 
 
 
@@ -455,7 +411,7 @@ href="mailto:livingstonefultang&#64;gmail.com">livingstonefultang&#64;<!---->gma
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

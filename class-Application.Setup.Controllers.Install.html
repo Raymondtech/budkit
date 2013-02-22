@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\Setup\Controllers\Install | budkit docs</title>
+	<title>Class Application\Setup\Controllers\Install | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -184,7 +179,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -195,9 +190,9 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>Install actions controller</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>This class implements a controller for managing the installation process.</p>
 
 	</div>
 
@@ -241,24 +236,20 @@
 		<b>Final</b><br />
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.Setup.html">Setup</a>\<a href="namespace-Application.Setup.Controllers.html">Controllers</a><br />
-		
+		<b>Package:</b> Action<br />
 
 				<b>Category:</b>
-				Controller<br />
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-				<b>Link:</b>
-				<a href="http://stonyhillshq/documents/index/carbon4/utilities/application">http://stonyhillshq/documents/index/carbon4/utilities/application</a><br />
-		<b>Located at</b> <a href="source-class-Application.Setup.Controllers.Install.html#28-166" title="Go to source code">applications/setup/controllers/install.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.Setup.Controllers.Install.html#19-187" title="Go to source code">applications/setup/controllers/install.php</a><br />
 	</div>
 
 
@@ -269,34 +260,28 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Platform.Controller.html#$redirect">Platform\Controller::<var>$redirect</var></a></code>
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_index">#</a>
-		<code><a href="source-class-Application.Setup.Controllers.Install.html#45-47" title="Go to source code">index</a>( )</code>
+		<code><a href="source-class-Application.Setup.Controllers.Install.html#39-45" title="Go to source code">index</a>( )</code>
 
 		<div class="description short">
 			
-<p>This is the default method for undispatchable action=&gt;tasks Iterim search
-for the possibility that the path is virtual</p>
+<p>The default index action. Displays step 1 of the installation process</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>This is the default method for undispatchable action=&gt;tasks Iterim search
-for the possibility that the path is virtual</p>
+<p>The default index action. Displays step 1 of the installation process</p>
 
 
 
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Platform.Controller.html#$redirect">Platform\Controller::<var>$redirect</var></a></code></code><br>to start page<br />
-				</div>
 
 
 
@@ -317,14 +302,18 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_step1">#</a>
-		<code><a href="source-class-Application.Setup.Controllers.Install.html#49-64" title="Go to source code">step1</a>( )</code>
+		<code><a href="source-class-Application.Setup.Controllers.Install.html#47-61" title="Go to source code">step1</a>( )</code>
 
 		<div class="description short">
 			
+<p>Step1 of the installation process. Displays the end user license</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Step1 of the installation process. Displays the end user license</p>
+
 
 
 
@@ -346,19 +335,29 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_step2">#</a>
-		<code><a href="source-class-Application.Setup.Controllers.Install.html#66-91" title="Go to source code">step2</a>( )</code>
+		<code><a href="source-class-Application.Setup.Controllers.Install.html#63-94" title="Go to source code">step2</a>( )</code>
 
 		<div class="description short">
 			
+<p>Step2 of the installation process. Validates that the EULA has been accepted
+from step 1. Performs a validation of the system requirements.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Step2 of the installation process. Validates that the EULA has been accepted
+from step 1. Performs a validation of the system requirements.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						This method does not at this stage stop the installation proces on any failures<br />
+				</div>
 
 
 		</div>
@@ -375,14 +374,20 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_step3">#</a>
-		<code><a href="source-class-Application.Setup.Controllers.Install.html#93-104" title="Go to source code">step3</a>( )</code>
+		<code><a href="source-class-Application.Setup.Controllers.Install.html#96-111" title="Go to source code">step3</a>( )</code>
 
 		<div class="description short">
 			
+<p>Step3 of the installation process. Displays the database configuration
+form</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Step3 of the installation process. Displays the database configuration
+form</p>
+
 
 
 
@@ -404,14 +409,24 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_step4">#</a>
-		<code><a href="source-class-Application.Setup.Controllers.Install.html#106-128" title="Go to source code">step4</a>( )</code>
+		<code><a href="source-class-Application.Setup.Controllers.Install.html#113-142" title="Go to source code">step4</a>( )</code>
 
 		<div class="description short">
 			
+<p>Step4. Performs the database table setup. Please note that this method does
+not actually create or overwrite the database and as such the database must
+already exists. If Database setup is successful, will display the master user
+setup form</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Step4. Performs the database table setup. Please note that this method does
+not actually create or overwrite the database and as such the database must
+already exists. If Database setup is successful, will display the master user
+setup form</p>
+
 
 
 
@@ -433,14 +448,20 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_step5">#</a>
-		<code><a href="source-class-Application.Setup.Controllers.Install.html#130-153" title="Go to source code">step5</a>( )</code>
+		<code><a href="source-class-Application.Setup.Controllers.Install.html#144-173" title="Go to source code">step5</a>( )</code>
 
 		<div class="description short">
 			
+<p>Step5. Registers an account for the master user/superadministrator. IF
+Successfull will display a summary of the completed install process</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Step5. Registers an account for the master user/superadministrator. IF
+Successfull will display a summary of the completed install process</p>
+
 
 
 
@@ -455,31 +476,31 @@ for the possibility that the path is virtual</p>
 
 		<td class="attributes"><code>
 			 public static
-			<code><a href="class-Application.Setup.Controllers.Install.html">Application\Setup\Controllers\Install</a></code>
+			object
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.Setup.Controllers.Install.html#156-165" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.Setup.Controllers.Install.html#175-186" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
-<p>Gets an instance of the registry element</p>
+<p>Returns an instance of the Install action controller</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Gets an instance of the registry element</p>
+<p>Returns an instance of the Install action controller</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Application.Setup.Controllers.Install.html">Application\Setup\Controllers\Install</a></code></code><br />
+					<code>object</code><br>Install<br />
 				</div>
 
 
@@ -562,11 +583,11 @@ for the possibility that the path is virtual</p>
 	<tr data-order="instance" id="$instance">
 		<td class="attributes"><code>
 			public static 
-			mixed
+			object
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Application.Setup.Controllers.Install.html#43" title="Go to source code"><var>$instance</var></a>
+				<a href="source-class-Application.Setup.Controllers.Install.html#33-37" title="Go to source code"><var>$instance</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -574,10 +595,14 @@ for the possibility that the path is virtual</p>
 
 			<div class="description short">
 				
+<p>Holds an instance of the Install object.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>Holds an instance of the Install object.</p>
+
 
 			</div>
 		</div></td>
@@ -622,7 +647,7 @@ for the possibility that the path is virtual</p>
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

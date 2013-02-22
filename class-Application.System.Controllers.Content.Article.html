@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\System\Controllers\Content\Article | budkit docs</title>
+	<title>Class Application\System\Controllers\Content\Article | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -139,8 +134,11 @@
 			<ul>
 				<li class="active"><a href="class-Application.System.Controllers.Content.Article.html">Article</a></li>
 				<li><a href="class-Application.System.Controllers.Content.Attachments.html">Attachments</a></li>
+				<li><a href="class-Application.System.Controllers.Content.Audio.html">Audio</a></li>
 				<li><a href="class-Application.System.Controllers.Content.Event.html">Event</a></li>
-				<li><a href="class-Application.System.Controllers.Content.Media.html">Media</a></li>
+				<li><a href="class-Application.System.Controllers.Content.Location.html">Location</a></li>
+				<li><a href="class-Application.System.Controllers.Content.Photo.html">Photo</a></li>
+				<li><a href="class-Application.System.Controllers.Content.Video.html">Video</a></li>
 			</ul>
 
 
@@ -186,7 +184,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -197,9 +195,10 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>Article CRUD action controller for system content</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>This class implements the action controller that manages the creation, view
+and edit of articles.</p>
 
 	</div>
 
@@ -250,24 +249,20 @@
 		<b>Final</b><br />
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.System.html">System</a>\<a href="namespace-Application.System.Controllers.html">Controllers</a>\<a href="namespace-Application.System.Controllers.Content.html">Content</a><br />
-		
+		<b>Package:</b> Action<br />
 
 				<b>Category:</b>
-				Controller<br />
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-				<b>Link:</b>
-				<a href="http://stonyhillshq/documents/index/carbon4/utilities/application">http://stonyhillshq/documents/index/carbon4/utilities/application</a><br />
-		<b>Located at</b> <a href="source-class-Application.System.Controllers.Content.Article.html#30-108" title="Go to source code">applications/system/controllers/content/article.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.System.Controllers.Content.Article.html#20-104" title="Go to source code">applications/system/controllers/content/article.php</a><br />
 	</div>
 
 
@@ -278,31 +273,31 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Platform.Controller.html#$redirect">Platform\Controller::<var>$redirect</var></a></code>
+			<code><a href="class-Application.System.Controllers.Content.Article.html#_read">Application\System\Controllers\Content\Article::read()</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_index">#</a>
-		<code><a href="source-class-Application.System.Controllers.Content.Article.html#45-47" title="Go to source code">index</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Content.Article.html#34-40" title="Go to source code">index</a>( )</code>
 
 		<div class="description short">
 			
-<p>The system dashboard, @ return false;</p>
+<p>The default fallback method.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>The system dashboard, @ return false;</p>
+<p>The default fallback method.</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Platform.Controller.html#$redirect">Platform\Controller::<var>$redirect</var></a></code></code><br>to start page<br />
+					<code><code><a href="class-Application.System.Controllers.Content.Article.html#_read">Application\System\Controllers\Content\Article::read()</a></code></code><br />
 				</div>
 
 
@@ -317,26 +312,38 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			
+			Application\System\Views\Content\Article::createForm()
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_create">#</a>
-		<code><a href="source-class-Application.System.Controllers.Content.Article.html#49-69" title="Go to source code">create</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Content.Article.html#41-61" title="Go to source code">create</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays the form required to creates a new article.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays the form required to creates a new article.</p>
 
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Application\System\Views\Content\Article::createForm()</code><br />
+				</div>
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the create action method<br />
+				</div>
 
 
 		</div>
@@ -353,19 +360,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_update">#</a>
-		<code><a href="source-class-Application.System.Controllers.Content.Article.html#72" title="Go to source code">update</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Content.Article.html#62-67" title="Go to source code">update</a>( )</code>
 
 		<div class="description short">
 			
+<p>Updates an existing article.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Updates an existing article.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the article update action method<br />
+				</div>
 
 
 		</div>
@@ -382,19 +397,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_edit">#</a>
-		<code><a href="source-class-Application.System.Controllers.Content.Article.html#75-79" title="Go to source code">edit</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Content.Article.html#68-75" title="Go to source code">edit</a>( )</code>
 
 		<div class="description short">
 			
+<p>Edits an existing article.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Edits an existing article.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the article edit action method<br />
+				</div>
 
 
 		</div>
@@ -411,19 +434,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_read">#</a>
-		<code><a href="source-class-Application.System.Controllers.Content.Article.html#82-84" title="Go to source code">read</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Content.Article.html#76-83" title="Go to source code">read</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays an article.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays an article.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the article read action method<br />
+				</div>
 
 
 		</div>
@@ -440,19 +471,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Application.System.Controllers.Content.Article.html#87" title="Go to source code">delete</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Content.Article.html#84-89" title="Go to source code">delete</a>( )</code>
 
 		<div class="description short">
 			
+<p>Deletes an existing article.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Deletes an existing article.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the article delete action method<br />
+				</div>
 
 
 		</div>
@@ -462,31 +501,33 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public static
-			Application\Content\Controllers\self
+			an
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.System.Controllers.Content.Article.html#90-106" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Content.Article.html#90-103" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
-<p>Get's an instance of the Content\Article controller</p>
+<p>Returns an instance of the article controller, only creating one if does not
+exists</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Get's an instance of the Content\Article controller</p>
+<p>Returns an instance of the article controller, only creating one if does not
+exists</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>Application\Content\Controllers\self</code><br />
+					<code>an</code><br>instance of <code><a href="class-Application.System.Controllers.Content.Article.html">Application\System\Controllers\Content\Article</a></code><br />
 				</div>
 
 
@@ -499,6 +540,14 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 	</tr>
 	</table>
 
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Application.System.Controllers.Content.html#methods">Application\System\Controllers\Content</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Application.System.Controllers.Content.html#_gallery">gallery()</a>
+		</code></td>
+	</tr>
+	</table>
 	<table class="summary inherited">
 	<caption>Methods inherited from <a href="class-Platform.Controller.html#methods">Platform\Controller</a></caption>
 	<tr>
@@ -604,7 +653,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

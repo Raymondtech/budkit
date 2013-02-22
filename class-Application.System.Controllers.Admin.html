@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\System\Controllers\Admin | budkit docs</title>
+	<title>Class Application\System\Controllers\Admin | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -137,12 +132,12 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Application.System.Controllers.Activity.html">Activity</a></li>
 				<li class="active"><a href="class-Application.System.Controllers.Admin.html">Admin</a></li>
 				<li><a href="class-Application.System.Controllers.Content.html">Content</a></li>
 				<li><a href="class-Application.System.Controllers.Notification.html">Notification</a></li>
 				<li><a href="class-Application.System.Controllers.Search.html">Search</a></li>
 				<li><a href="class-Application.System.Controllers.Start.html">Start</a></li>
+				<li><a href="class-Application.System.Controllers.Timeline.html">Timeline</a></li>
 			</ul>
 
 
@@ -188,7 +183,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -199,9 +194,10 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>The parent system admin action controller.</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>This class implements the action controller for key system administrative
+task. Every other action is implemented in their respective subclasses.</p>
 
 	</div>
 
@@ -254,20 +250,20 @@
 		
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.System.html">System</a>\<a href="namespace-Application.System.Controllers.html">Controllers</a><br />
-		
+		<b>Package:</b> Action<br />
 
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				<b>Category:</b>
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-		<b>Located at</b> <a href="source-class-Application.System.Controllers.Admin.html#30-103" title="Go to source code">applications/system/controllers/admin.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.System.Controllers.Admin.html#19-66" title="Go to source code">applications/system/controllers/admin.php</a><br />
 	</div>
 
 
@@ -285,17 +281,17 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.html#43-57" title="Go to source code">__construct</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.html#34-44" title="Go to source code">__construct</a>( )</code>
 
 		<div class="description short">
 			
-<p>Constructs the Admin controller</p>
+<p>Admin action controller constructor</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Constructs the Admin controller</p>
+<p>Admin action controller constructor</p>
 
 
 
@@ -309,72 +305,35 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="dashboard" id="_dashboard">
-
-		<td class="attributes"><code>
-			 public 
-			type
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_dashboard">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.html#59-69" title="Go to source code">dashboard</a>( )</code>
-
-		<div class="description short">
-			
-<p>Returns the admin controller</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Returns the admin controller</p>
-
-
-
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>type</code><br />
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="index" id="_index">
 
 		<td class="attributes"><code>
 			 public 
-			type
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_index">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.html#72-84" title="Go to source code">index</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.html#45-51" title="Go to source code">index</a>( )</code>
 
 		<div class="description short">
 			
-<p>The admin dashboard</p>
+<p>The default fall back method</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>The admin dashboard</p>
+<p>The default fall back method</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>type</code><br />
+					<code>boolean</code><br>false<br />
 				</div>
 
 
@@ -396,7 +355,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.html#86-102" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.html#52-65" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
@@ -530,7 +489,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

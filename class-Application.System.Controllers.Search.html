@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\System\Controllers\Search | budkit docs</title>
+	<title>Class Application\System\Controllers\Search | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -137,12 +132,12 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Application.System.Controllers.Activity.html">Activity</a></li>
 				<li><a href="class-Application.System.Controllers.Admin.html">Admin</a></li>
 				<li><a href="class-Application.System.Controllers.Content.html">Content</a></li>
 				<li><a href="class-Application.System.Controllers.Notification.html">Notification</a></li>
 				<li class="active"><a href="class-Application.System.Controllers.Search.html">Search</a></li>
 				<li><a href="class-Application.System.Controllers.Start.html">Start</a></li>
+				<li><a href="class-Application.System.Controllers.Timeline.html">Timeline</a></li>
 			</ul>
 
 
@@ -188,7 +183,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -199,9 +194,10 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>Search Controller</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>This class implements the action controller that governs complete content
+search</p>
 
 	</div>
 
@@ -245,20 +241,20 @@
 		
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.System.html">System</a>\<a href="namespace-Application.System.Controllers.html">Controllers</a><br />
-		
+		<b>Package:</b> Action<br />
 
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				<b>Category:</b>
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-		<b>Located at</b> <a href="source-class-Application.System.Controllers.Search.html#30-76" title="Go to source code">applications/system/controllers/search.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.System.Controllers.Search.html#20-65" title="Go to source code">applications/system/controllers/search.php</a><br />
 	</div>
 
 
@@ -269,34 +265,28 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Platform.Controller.html#$redirect">Platform\Controller::<var>$redirect</var></a></code>
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_index">#</a>
-		<code><a href="source-class-Application.System.Controllers.Search.html#44" title="Go to source code">index</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Search.html#34-38" title="Go to source code">index</a>( )</code>
 
 		<div class="description short">
 			
-<p>This is the default method for undispatchable action=&gt;tasks Iterim search
-for the possibility that the path is virtual</p>
+<p>The default fallback method.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>This is the default method for undispatchable action=&gt;tasks Iterim search
-for the possibility that the path is virtual</p>
+<p>The default fallback method.</p>
 
 
 
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Platform.Controller.html#$redirect">Platform\Controller::<var>$redirect</var></a></code></code><br>to start page<br />
-				</div>
 
 
 
@@ -317,7 +307,7 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_search">#</a>
-		<code><a href="source-class-Application.System.Controllers.Search.html#46-56" title="Go to source code">search</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Search.html#40-49" title="Go to source code">search</a>( )</code>
 
 		<div class="description short">
 			
@@ -334,6 +324,10 @@ for the possibility that the path is virtual</p>
 
 
 
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the search action<br />
+				</div>
 
 
 		</div>
@@ -350,17 +344,17 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.System.Controllers.Search.html#58-74" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Search.html#51-64" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
-<p>Gets an instance of the command class</p>
+<p>Gets an instance of the search class</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Gets an instance of the command class</p>
+<p>Gets an instance of the search class</p>
 
 
 
@@ -485,7 +479,7 @@ for the possibility that the path is virtual</p>
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

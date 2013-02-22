@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\System\Models\Activity\Collection | budkit docs</title>
+	<title>Class Application\System\Models\Activity\Collection | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -185,7 +180,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -196,9 +191,14 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>Activity stream collection model class</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>An Activity Stream is a collection one or more individual activities. This
+provides methods for modelling a collection of activities within a stream. A
+"collection" is a generic list of Objects of any object type. The objectType of
+each item in the collection MAY be omitted if the type of object can be
+established through context. The collection is used primarily as the root of an
+Activity Streams</p>
 
 	</div>
 
@@ -214,24 +214,20 @@
 		<b>Final</b><br />
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.System.html">System</a>\<a href="namespace-Application.System.Models.html">Models</a>\<a href="namespace-Application.System.Models.Activity.html">Activity</a><br />
-		
+		<b>Package:</b> Data<br />
 
 				<b>Category:</b>
-				Model<br />
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-				<b>Link:</b>
-				<a href="http://stonyhillshq/documents/index/carbon4/utilities/controller">http://stonyhillshq/documents/index/carbon4/utilities/controller</a><br />
-		<b>Located at</b> <a href="source-class-Application.System.Models.Activity.Collection.html#29-121" title="Go to source code">applications/system/models/activity/collection.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.System.Models.Activity.Collection.html#23-121" title="Go to source code">applications/system/models/activity/collection.php</a><br />
 	</div>
 
 
@@ -242,14 +238,14 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public static
-			type
+			array
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getArray">#</a>
-		<code><a href="source-class-Application.System.Models.Activity.Collection.html#65-83" title="Go to source code">getArray</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Activity.Collection.html#63-81" title="Go to source code">getArray</a>( )</code>
 
 		<div class="description short">
 			
@@ -268,7 +264,7 @@ are omitted</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>type</code><br />
+					<code>array</code><br>of items in collection<br />
 				</div>
 
 
@@ -288,7 +284,7 @@ are omitted</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_set">#</a>
-		<code><a href="source-class-Application.System.Models.Activity.Collection.html#85-97" title="Go to source code">set</a>( <span>type <var>$property</var></span>, <span>type <var>$value</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-Application.System.Models.Activity.Collection.html#83-95" title="Go to source code">set</a>( <span>string <var>$property</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -305,9 +301,9 @@ are omitted</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$property</var></dt>
-					<dd><code>type</code><br>$property</dd>
+					<dd><code>string</code><br>$property</dd>
 					<dt><var>$value</var></dt>
-					<dd><code>type</code><br>$value</dd>
+					<dd><code>mixed</code><br>$value</dd>
 				</dl></div>
 
 
@@ -328,7 +324,7 @@ are omitted</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Application.System.Models.Activity.Collection.html#99-112" title="Go to source code">get</a>( <span>type <var>$property</var></span>, <span>type <var>$default</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-Application.System.Models.Activity.Collection.html#97-110" title="Go to source code">get</a>( <span>string <var>$property</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -345,9 +341,9 @@ are omitted</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$property</var></dt>
-					<dd><code>type</code><br>$property</dd>
+					<dd><code>string</code><br>$property</dd>
 					<dt><var>$default</var></dt>
-					<dd><code>type</code><br>$default</dd>
+					<dd><code>mixed</code><br>$default</dd>
 				</dl></div>
 
 
@@ -361,24 +357,32 @@ are omitted</p>
 
 		<td class="attributes"><code>
 			 public static
-			
+			object
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.System.Models.Activity.Collection.html#114-119" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Activity.Collection.html#112-119" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
+<p>Returns an instance of the Collection Class</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns an instance of the Collection Class</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>object</code><br>Collection<br />
+				</div>
 
 
 
@@ -408,7 +412,7 @@ are omitted</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Application.System.Models.Activity.Collection.html#44-49" title="Go to source code"><var>$totalItems</var></a>
+				<a href="source-class-Application.System.Models.Activity.Collection.html#42-47" title="Go to source code"><var>$totalItems</var></a>
 		</td>
 		<td class="value"><code><span class="php-num">0</span></code></td>
 		<td class="description"><div>
@@ -437,7 +441,7 @@ stream The Stream serialization may contain a "count" property</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Application.System.Models.Activity.Collection.html#51-57" title="Go to source code"><var>$items</var></a>
+				<a href="source-class-Application.System.Models.Activity.Collection.html#49-55" title="Go to source code"><var>$items</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
 		<td class="description"><div>
@@ -468,7 +472,7 @@ subset of objects that can be found in the resource identified by the url</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Application.System.Models.Activity.Collection.html#59-63" title="Go to source code"><var>$url</var></a>
+				<a href="source-class-Application.System.Models.Activity.Collection.html#57-61" title="Go to source code"><var>$url</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">&quot;/&quot;</span></code></td>
 		<td class="description"><div>
@@ -500,7 +504,7 @@ objects in this collection</p>
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

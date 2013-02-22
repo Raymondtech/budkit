@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\System\Models\Authority | budkit docs</title>
+	<title>Class Application\System\Models\Authority | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -185,7 +180,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -196,9 +191,19 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>Authority group model</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>An authority is a role in an area of responsibility (AoR). A curator is the
+head of an authority, who can create and grant permissions to users in that
+authority, or sub authority. A permission is an authorisation to, access, modify
+or execute an object or operation, granted to an authority or user by a curator.
+Some authorities are automatically generated. For instance geographical and age
+authorities, can be used to limit permission by place, and age . A unified
+control plan (UCP), is a predefined map of authority to permission to operation
+in an Area of Responsibility. For instance, The Authority ‘Moderators’
+granted the permission to ‘modify’ all objects in the ‘Post submission’
+Area of responsibility. The UCP is defined by the Master Administrator, who is
+the curator or curators</p>
 
 	</div>
 
@@ -235,24 +240,20 @@
 		
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.System.html">System</a>\<a href="namespace-Application.System.Models.html">Models</a><br />
-		
+		<b>Package:</b> Data<br />
 
 				<b>Category:</b>
-				Utility<br />
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-				<b>Link:</b>
-				<a href="http://stonyhillshq/documents/index/carbon4/utilities/model">http://stonyhillshq/documents/index/carbon4/utilities/model</a><br />
-		<b>Located at</b> <a href="source-class-Application.System.Models.Authority.html#8-214" title="Go to source code">applications/system/models/authority.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.System.Models.Authority.html#23-281" title="Go to source code">applications/system/models/authority.php</a><br />
 	</div>
 
 
@@ -263,28 +264,32 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			
+			void;
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_display">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#12-14" title="Go to source code">display</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Authority.html#48-54" title="Go to source code">display</a>( )</code>
 
 		<div class="description short">
 			
-<p>The default method for each controller</p>
+<p>Default model method</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>The default method for each controller</p>
+<p>Default model method</p>
 
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					<code>void;</code><br />
+				</div>
 
 
 
@@ -296,25 +301,42 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_storePermissions">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#16-67" title="Go to source code">storePermissions</a>( <span>mixed <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Application.System.Models.Authority.html#56-112" title="Go to source code">storePermissions</a>( <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Save authority group permissions</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Save authority group permissions</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$params</var></dt>
+					<dd><code>array</code><br>$params</dd>
+				</dl></div>
 
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>True on success<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Platform.Exception.html">Platform\Exception</a></code></code><br>on failure<br />
+				</div>
 
 
 
@@ -325,14 +347,14 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			type
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_store">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#69-152" title="Go to source code">store</a>( <span>array <var>$data</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>mixed <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Application.System.Models.Authority.html#114-196" title="Go to source code">store</a>( <span>array <var>$data</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>mixed <var>$params</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -356,7 +378,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>type</code><br />
+					<code>boolean</code><br>true on success<br />
 				</div>
 
 
@@ -376,19 +398,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#154" title="Go to source code">load</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Authority.html#198-205" title="Go to source code">load</a>( )</code>
 
 		<div class="description short">
 			
+<p>Loads a row of authority groups</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Loads a row of authority groups</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement authority model load<br />
+				</div>
 
 
 		</div>
@@ -405,19 +435,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#156" title="Go to source code">delete</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Authority.html#207-214" title="Go to source code">delete</a>( )</code>
 
 		<div class="description short">
 			
+<p>Deletes an authority group from the datastore</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Deletes an authority group from the datastore</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the authority model delete<br />
+				</div>
 
 
 		</div>
@@ -434,36 +472,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validate">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#158" title="Go to source code">validate</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getToken" id="_getToken">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getToken">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#160" title="Go to source code">getToken</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Authority.html#222-224" title="Go to source code">validate</a>( )</code>
 
 		<div class="description short">
 			
@@ -485,24 +494,32 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			
+			array
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAuthorities">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#162-199" title="Go to source code">getAuthorities</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Authority.html#226-265" title="Go to source code">getAuthorities</a>( )</code>
 
 		<div class="description short">
 			
+<p>Returns a processed array of authority groups</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Returns a processed array of authority groups</p>
 
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
 
 
 
@@ -521,24 +538,24 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.System.Models.Authority.html#201-212" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Authority.html#267-279" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
-<p>Instantiate the child controller</p>
+<p>Returns an instance of the authority class</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Instantiate the child controller</p>
+<p>Returns an instance of the authority class</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>object</code><br />
+					<code>object</code><br>Authority<br />
 				</div>
 
 
@@ -617,7 +634,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

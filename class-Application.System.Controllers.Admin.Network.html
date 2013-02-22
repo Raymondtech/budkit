@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\System\Controllers\Admin\Network | budkit docs</title>
+	<title>Class Application\System\Controllers\Admin\Network | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -188,7 +183,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -199,9 +194,9 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>Network action controller</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>Network actions, including relationship management and analytics.</p>
 
 	</div>
 
@@ -252,20 +247,22 @@
 		
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.System.html">System</a>\<a href="namespace-Application.System.Controllers.html">Controllers</a>\<a href="namespace-Application.System.Controllers.Admin.html">Admin</a><br />
-		
+		<b>Package:</b> Action<br />
 
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				<b>Category:</b>
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-		<b>Located at</b> <a href="source-class-Application.System.Controllers.Admin.Network.html#31-123" title="Go to source code">applications/system/controllers/admin/network.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+				<b>Todo:</b>
+				System manage action methods<br />
+		<b>Located at</b> <a href="source-class-Application.System.Controllers.Admin.Network.html#21-123" title="Go to source code">applications/system/controllers/admin/network.php</a><br />
 	</div>
 
 
@@ -283,19 +280,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_add">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#45-52" title="Go to source code">add</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#36-45" title="Go to source code">add</a>( )</code>
 
 		<div class="description short">
 			
+<p>Adds a node to the network</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Adds a node to the network</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Adding network nodes<br />
+				</div>
 
 
 		</div>
@@ -312,19 +317,32 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lists">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#54-63" title="Go to source code">lists</a>( <span>mixed <var>$type</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#47-57" title="Go to source code">lists</a>( <span>string <var>$type</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
+<p>Displays a lists of all network members</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays a lists of all network members</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$type</var></dt>
+					<dd><code>string</code><br>$type</dd>
+				</dl></div>
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Network members lists<br />
+				</div>
 
 
 		</div>
@@ -341,19 +359,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_analytics">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#65-72" title="Go to source code">analytics</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#58-66" title="Go to source code">analytics</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays comprehensive network analysis</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays comprehensive network analysis</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Network analytics<br />
+				</div>
 
 
 		</div>
@@ -370,19 +396,27 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_relationships">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#74-81" title="Go to source code">relationships</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#67-75" title="Go to source code">relationships</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays a graph of network relationships</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays a graph of network relationships</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement a graph of network relationships<br />
+				</div>
 
 
 		</div>
@@ -399,19 +433,32 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_authorities">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#83-101" title="Go to source code">authorities</a>( <span>mixed <var>$edit</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#76-100" title="Go to source code">authorities</a>( <span>string <var>$edit</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
 
 		<div class="description short">
 			
+<p>Displays a list of network authority groups</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays a list of network authority groups</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$edit</var></dt>
+					<dd><code>string</code><br>$edit</dd>
+				</dl></div>
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the ability to modify groups<br />
+				</div>
 
 
 		</div>
@@ -421,26 +468,38 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			
+			void.
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_members">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#103-109" title="Go to source code">members</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#101-109" title="Go to source code">members</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays a lists of network memebers</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays a lists of network memebers</p>
 
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					<code>void.</code><br />
+				</div>
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement network memembers list<br />
+				</div>
 
 
 		</div>
@@ -450,31 +509,31 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public static
-			<code><a href="class-Application.System.Controllers.Admin.Network.html">Application\System\Controllers\Admin\Network</a></code>
+			object
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#111-121" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.System.Controllers.Admin.Network.html#110-122" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
-<p>Returns an instance of the admin controller</p>
+<p>Gets an instance of the network class</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Returns an instance of the admin controller</p>
+<p>Gets an instance of the network class</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Application.System.Controllers.Admin.Network.html">Application\System\Controllers\Admin\Network</a></code></code><br />
+					<code>object</code><br>Network<br />
 				</div>
 
 
@@ -492,7 +551,6 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 	<tr>
 		<td><code>
 			<a href="class-Application.System.Controllers.Admin.html#___construct">__construct()</a>, 
-			<a href="class-Application.System.Controllers.Admin.html#_dashboard">dashboard()</a>, 
 			<a href="class-Application.System.Controllers.Admin.html#_index">index()</a>
 		</code></td>
 	</tr>
@@ -601,7 +659,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

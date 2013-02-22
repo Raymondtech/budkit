@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\Campus\Controllers\Course | budkit docs</title>
+	<title>Class Application\Campus\Controllers\Course | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li class="active"><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li class="active"><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -183,7 +178,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -194,9 +189,10 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>Course CRUD action controller for Campus</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>The course class implements the action controller that manages the creation,
+view and edit of courses within the campus application.</p>
 
 	</div>
 
@@ -240,24 +236,20 @@
 		<b>Final</b><br />
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.Campus.html">Campus</a>\<a href="namespace-Application.Campus.Controllers.html">Controllers</a><br />
-		
+		<b>Package:</b> Action<br />
 
 				<b>Category:</b>
-				Controller<br />
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-				<b>Link:</b>
-				<a href="http://stonyhillshq/documents/index/carbon4/utilities/application">http://stonyhillshq/documents/index/carbon4/utilities/application</a><br />
-		<b>Located at</b> <a href="source-class-Application.Campus.Controllers.Course.html#31-84" title="Go to source code">vendors/applications/campus/controllers/course.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.Campus.Controllers.Course.html#23-106" title="Go to source code">vendors/applications/campus/controllers/course.php</a><br />
 	</div>
 
 
@@ -268,34 +260,28 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			<code><a href="class-Platform.Controller.html#$redirect">Platform\Controller::<var>$redirect</var></a></code>
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_index">#</a>
-		<code><a href="source-class-Application.Campus.Controllers.Course.html#46-49" title="Go to source code">index</a>( )</code>
+		<code><a href="source-class-Application.Campus.Controllers.Course.html#38-44" title="Go to source code">index</a>( )</code>
 
 		<div class="description short">
 			
-<p>This is the default method for undispatchable action=&gt;tasks Iterim search
-for the possibility that the path is virtual</p>
+<p>The default fallback method.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>This is the default method for undispatchable action=&gt;tasks Iterim search
-for the possibility that the path is virtual</p>
+<p>The default fallback method.</p>
 
 
 
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-Platform.Controller.html#$redirect">Platform\Controller::<var>$redirect</var></a></code></code><br>to start page<br />
-				</div>
 
 
 
@@ -316,19 +302,27 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_create">#</a>
-		<code><a href="source-class-Application.Campus.Controllers.Course.html#51" title="Go to source code">create</a>( )</code>
+		<code><a href="source-class-Application.Campus.Controllers.Course.html#46-53" title="Go to source code">create</a>( )</code>
 
 		<div class="description short">
 			
+<p>Creates a new course.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Creates a new course.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the course creation action<br />
+				</div>
 
 
 		</div>
@@ -345,14 +339,18 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_update">#</a>
-		<code><a href="source-class-Application.Campus.Controllers.Course.html#54" title="Go to source code">update</a>( )</code>
+		<code><a href="source-class-Application.Campus.Controllers.Course.html#55-61" title="Go to source code">update</a>( )</code>
 
 		<div class="description short">
 			
+<p>Updates an existing course.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Updates an existing course.</p>
+
 
 
 
@@ -374,19 +372,27 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_edit">#</a>
-		<code><a href="source-class-Application.Campus.Controllers.Course.html#57" title="Go to source code">edit</a>( )</code>
+		<code><a href="source-class-Application.Campus.Controllers.Course.html#63-70" title="Go to source code">edit</a>( )</code>
 
 		<div class="description short">
 			
+<p>Edits an existing course.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Edits an existing course.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the course edit action<br />
+				</div>
 
 
 		</div>
@@ -403,19 +409,27 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_read">#</a>
-		<code><a href="source-class-Application.Campus.Controllers.Course.html#60" title="Go to source code">read</a>( )</code>
+		<code><a href="source-class-Application.Campus.Controllers.Course.html#72-79" title="Go to source code">read</a>( )</code>
 
 		<div class="description short">
 			
+<p>Displays course information.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Displays course information.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the course display action<br />
+				</div>
 
 
 		</div>
@@ -432,19 +446,27 @@ for the possibility that the path is virtual</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Application.Campus.Controllers.Course.html#63" title="Go to source code">delete</a>( )</code>
+		<code><a href="source-class-Application.Campus.Controllers.Course.html#81-88" title="Go to source code">delete</a>( )</code>
 
 		<div class="description short">
 			
+<p>Deletes a course.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Deletes a course.</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement the course deletion action<br />
+				</div>
 
 
 		</div>
@@ -454,31 +476,33 @@ for the possibility that the path is virtual</p>
 
 		<td class="attributes"><code>
 			 public static
-			Application\Content\Controllers\self
+			an
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.Campus.Controllers.Course.html#66-82" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.Campus.Controllers.Course.html#90-104" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
-<p>Get's an instance of the Content\Article controller</p>
+<p>Get's an instance of the Course controller only creating one if does not
+exists</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Get's an instance of the Content\Article controller</p>
+<p>Get's an instance of the Course controller only creating one if does not
+exists</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>Application\Content\Controllers\self</code><br />
+					<code>an</code><br>instance of <code><a href="class-Application.Campus.Controllers.Course.html">Application\Campus\Controllers\Course</a></code><br />
 				</div>
 
 
@@ -596,7 +620,7 @@ for the possibility that the path is virtual</p>
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

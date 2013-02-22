@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Application\System\Models\Options | budkit docs</title>
+	<title>Class Application\System\Models\Options | Budkit API</title>
 
-	<script type="text/javascript" src="resources/combined.js?2297856784"></script>
-	<script type="text/javascript" src="elementlist.js?726304876"></script>
+	<script type="text/javascript" src="resources/combined.js?444798755"></script>
+	<script type="text/javascript" src="elementlist.js?639174725"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -26,11 +26,6 @@
 				<li><a href="namespace-Application.Campus.html">Campus<span></span></a>
 						<ul>
 				<li><a href="namespace-Application.Campus.Controllers.html">Controllers</a>
-						</li>
-							</ul></li>
-				<li><a href="namespace-Application.Content.html">Content<span></span></a>
-						<ul>
-				<li><a href="namespace-Application.Content.Controllers.html">Controllers</a>
 						</li>
 							</ul></li>
 				<li><a href="namespace-Application.Member.html">Member<span></span></a>
@@ -185,7 +180,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="budkit-docs-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="budkit-api-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -196,9 +191,9 @@
 
 	<div class="description">
 	
-<p>What is the purpose of this class, in one sentence?</p>
+<p>Options management model</p>
 
-<p>How does this class achieve the desired purpose?</p>
+<p>Manages system options</p>
 
 	</div>
 
@@ -235,24 +230,20 @@
 		
 		
 		<b>Namespace:</b> <a href="namespace-Application.html">Application</a>\<a href="namespace-Application.System.html">System</a>\<a href="namespace-Application.System.Models.html">Models</a><br />
-		
+		<b>Package:</b> Data<br />
 
 				<b>Category:</b>
-				Model<br />
-				<b>Copyright:</b>
-				1997-2012 Stonyhills HQ<br />
+				Application<br />
 				<b>License:</b>
 				<a href="http://www.gnu.org/licenses/gpl.txt.">GNU GPL License 3.01</a><br />
 				<b>Author:</b>
 				Livingstone Fultang &lt;<a
 href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<!---->stonyhillshq.com</a>&gt;<br />
 				<b>Version:</b>
-				Release: 1.0.0<br />
+				1.0.0<br />
 				<b>Since:</b>
-				Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM<br />
-				<b>Link:</b>
-				<a href="http://stonyhillshq/documents/index/carbon4/utilities/controller">http://stonyhillshq/documents/index/carbon4/utilities/controller</a><br />
-		<b>Located at</b> <a href="source-class-Application.System.Models.Options.html#29-117" title="Go to source code">applications/system/models/options.php</a><br />
+				Jan 14, 2012 4:54:37 PM<br />
+		<b>Located at</b> <a href="source-class-Application.System.Models.Options.html#23-106" title="Go to source code">applications/system/models/options.php</a><br />
 	</div>
 
 
@@ -263,14 +254,14 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="attributes"><code>
 			 public 
-			
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_display">#</a>
-		<code><a href="source-class-Application.System.Models.Options.html#44-49" title="Go to source code">display</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Options.html#38-44" title="Go to source code">display</a>( )</code>
 
 		<div class="description short">
 			
@@ -285,6 +276,10 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>false<br />
+				</div>
 
 
 
@@ -303,7 +298,7 @@ href="mailto:livingstone.fultang&#64;stonyhillshq.com">livingstone.fultang&#64;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code><a href="source-class-Application.System.Models.Options.html#51-96" title="Go to source code">save</a>( <span>type <var>$options</var></span>, <span>type <var>$group</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Application.System.Models.Options.html#46-91" title="Go to source code">save</a>( <span>array <var>$options</var></span>, <span>string <var>$group</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -322,9 +317,9 @@ duplicate key</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$options</var></dt>
-					<dd><code>type</code><br>$options</dd>
+					<dd><code>array</code><br>$options An array of options</dd>
 					<dt><var>$group</var></dt>
-					<dd><code>type</code><br>$group</dd>
+					<dd><code>string</code><br>$group A unique string representing the options group</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -342,14 +337,14 @@ duplicate key</p>
 
 		<td class="attributes"><code>
 			 public static
-			Application\System\Models\self
+			object
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getInstance">#</a>
-		<code><a href="source-class-Application.System.Models.Options.html#98-115" title="Go to source code">getInstance</a>( )</code>
+		<code><a href="source-class-Application.System.Models.Options.html#93-105" title="Go to source code">getInstance</a>( )</code>
 
 		<div class="description short">
 			
@@ -366,7 +361,7 @@ duplicate key</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>Application\System\Models\self</code><br />
+					<code>object</code><br>\Application\System\Models\Options<br />
 				</div>
 
 
@@ -445,7 +440,7 @@ duplicate key</p>
 </div>
 
 	<div id="footer">
-		budkit docs API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Budkit API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>
