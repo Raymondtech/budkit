@@ -135,7 +135,8 @@ body{
     .message-list{
         border-right: 5px solid #ddd;
         overflow-y: scroll;
-        left:0;
+        overflow-x: hidden;
+        left:0; right:0;
         width: 35%;
         z-index: 1;
         .message-search{
@@ -159,6 +160,29 @@ body{
     
 }
 
+.stream{
+    margin: 0; padding:0; list-style: none;
+    li{
+        border-bottom: 1px solid #dedede;
+        padding: @gridGutterWidth*0.5 ;
+        position: relative;
+        &.has-thumbnail{ padding: @gridGutterWidth*0.5  @gridGutterWidth*0.5  @gridGutterWidth*0.5  80px; min-height: 50px+@gridGutterWidth*0.5;}
+        .thumbnail{
+            max-height: 50px;
+            max-width: 50px;
+            position: absolute; left:@gridGutterWidth*0.5; top:@gridGutterWidth*0.5;
+        }
+        .title{
+            .subject{ font-weight: bold; color: @grayDark }
+            .time{ position: absolute; right: @gridGutterWidth*0.55; top: @gridGutterWidth*0.55; }
+        }
+        .content{
+            color: @grayLight;
+        }
+        .link{ text-decoration: none;}
+        &:last-child{ border-bottom: none}
+    }
+}
 
 /****IMPORTS****/
 @import "timeline.less";

@@ -40,8 +40,11 @@
             </div>
             <div class="span4">
                 <div class="widget-bucket affix-top" data-spy="affix" data-offset-top="50" id="widget-bucket-4">
+                    <div class="widget naked clearfix">
+                        <a class="btn span12 btn-large" href="/member/messages/live"><i class="icon-comments-alt"></i>Start a LIVE discussion</a>
+                    </div>
                     <div class="widget">
-                        <div class="widget-head"><span class="widget-title">Network Activity</span><a class="widget-close" data-dismiss="widget"><i class="icon-remove"></i></a></div>
+                        <div class="widget-head"><span class="widget-title">Latest Network Activity</span><a class="widget-close" data-dismiss="widget"><i class="icon-remove"></i></a></div>
                         <div class="widget-body"><tpl:import layout="timelinenotes" /></div>
                         <!--<div class="widget-footer">Widget Footer</div>-->
                     </div>

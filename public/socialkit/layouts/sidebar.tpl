@@ -68,7 +68,17 @@
             <tpl:menu id="settingsmenu" type="nav-list" />
         </div>
         <div class="tab-pane" id="messagesmenu">
+            <ul class="nav nav-list">
+                <li class="nav-header">Private Messages</li>
+            </ul>
             <tpl:menu id="messagesmenu" type="nav-list" />
+            <ul class="nav nav-list">
+                <li class="nav-header">Group Discussions</li>
+                <li><a href="#">Joomla Developer group</a></li>
+                <li><a href="#">Budkit Devs <span class="badge pull-right">3</span></a></li>
+                <li><a href="#">Roman Catholics</a></li>
+                <li><a href="#">Usual Suspects</a></li>
+            </ul>
         </div>
     </div>    
     <tpl:block data="page.block.side">Sidebar</tpl:block>

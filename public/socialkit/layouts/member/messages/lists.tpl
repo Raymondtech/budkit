@@ -2,7 +2,7 @@
     <div class="messages-box row-fluid">
         <div class="message-list">
             <div class="navbar navbar-subnav no-margin">
-                <div class="navbar-inner padding-left-half no-margin">
+                <div class="navbar-inner padding-left-half padding-right-half no-margin">
                     <form class="navbar-form">
                         <div class="no-bottom-margin message-search">
                             <input type="text" class="span12" placeholder="Search message threads.." />
@@ -10,35 +10,24 @@
                     </form>
                 </div>
             </div>
-            <div class="">
-                <table class="table table-hover">
-                    <!--                    <thead>
-                                            <tr>
-                                                <th class="span1"><input type="checkbox" /></th>
-                                                <th class="span2">From</th>
-                                                <th class="span2"></th>
-                                                <th class="span9">Message</th>
-                                                <th class="span2">Time</th>
-                                            </tr>
-                                        </thead>-->
-                    <tbody>
-                        <?php for ($i = 0; $i < 10; $i++): ?>
-                        <tr>
-                            <td>
-                                <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar thumbnail" src="http://placeskull.com/50/50/999999" alt="" width="50" height="50" />                         
-                                </a>
-                            </td>
-                            <td>
-                                <strong class="profile-name display-block">Livingstone Fultang</strong> 
-                                No censoring.Commit to interaction absent personal.
-                            </td>
-                        </tr>
-
-                        <?php endfor ;?>
-                    </tbody>
-                </table>
-            </div>
+            <ul class="stream">
+                <?php for ($i = 0; $i < 15; $i++): ?>
+                <li class="has-thumbnail">
+                    <a class="thumbnail" href="#">
+                        <img class="profile-avatar" src="http://profile.ak.fbcdn.net/hprofile-ak-snc6/203280_100003630780902_1928341789_q.jpg" alt="" width="50" height="50" />                         
+                    </a>
+                    <a href="#" class="link">
+                        <div class="title">
+                            <span class="subject">Livingstone Fultang</span>
+                            <span class="time">10 hrs ago</span>
+                        </div>
+                        <div class="content">
+                            And here are the contents of this message. Maximum of two lines allowed
+                        </div>
+                    </a>
+                </li>
+                <?php endfor; ?>
+            </ul>
         </div>
         <div class="message-view">
             <div class="message-thread">
@@ -48,6 +37,7 @@
                     </div>
                 </div>
                 <div class="message-body padding" id="timeline">
+                    <tpl:import layout="input" />
                     <ol class="timeline-item-index">
                         <tpl:loop data="activities.items">
                             <li class="timeline-item-li">
@@ -70,7 +60,6 @@
                             </li>
                         </tpl:loop>  
                     </ol>
-                    <tpl:import layout="input" />
                     <!--                    <div  class="timeline-more-items">
                                             <button class="btn input-100pct">Load more</button>
                                         </div>-->

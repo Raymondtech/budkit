@@ -4624,7 +4624,8 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-text {
   margin-bottom: 0;
-  padding: 14px;
+  padding: 7px 14px;
+  margin-top: 9px;
   color: #78c8e6;
 }
 .navbar-link {
@@ -6768,7 +6769,9 @@ body {
 .messages-box .message-list {
   border-right: 5px solid #ddd;
   overflow-y: scroll;
+  overflow-x: hidden;
   left: 0;
+  right: 0;
   width: 35%;
   z-index: 1;
 }
@@ -6793,6 +6796,45 @@ body {
   overflow-y: scroll;
   right: 0px;
   left: 0px;
+}
+.stream {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.stream li {
+  border-bottom: 1px solid #dedede;
+  padding: 10px;
+  position: relative;
+}
+.stream li.has-thumbnail {
+  padding: 10px 10px 10px 80px;
+  min-height: 60px;
+}
+.stream li .thumbnail {
+  max-height: 50px;
+  max-width: 50px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.stream li .title .subject {
+  font-weight: bold;
+  color: #333333;
+}
+.stream li .title .time {
+  position: absolute;
+  right: 11px;
+  top: 11px;
+}
+.stream li .content {
+  color: #999999;
+}
+.stream li .link {
+  text-decoration: none;
+}
+.stream li:last-child {
+  border-bottom: none;
 }
 /****IMPORTS****/
 #timeline {

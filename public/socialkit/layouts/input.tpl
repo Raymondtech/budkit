@@ -5,12 +5,12 @@
                 <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>
                 <fieldset class="timeline-item-publisher no-bottom-margin">
                     <div class="controls">
-                        <textarea class="input-100pct focused" data-target="budkit-editor" rows="4" name="activity_content" placeholder="Share something new with your followers..."></textarea>
+                        <textarea class="input-100pct focused" data-target="budkit-editor" rows="4" name="activity_content" placeholder="Say something..."></textarea>
                     </div>
                     <div class="btn-toolbar no-margin"> 
                         <button class="btn pull-right" type="submit">Submit</button>   
                         <a href="/system/content/attachments/upload.raw" class="btn pull-left no-margin" data-toggle="modal" data-target="#upload-tool"><i class="icon icon-paper-clip"></i> Add files</a>
-                    </div>
+                    </div>              
                 </fieldset>
             </div>
             <input type="hidden" name="activity_author_id" value="" />
