@@ -15,12 +15,12 @@
     <div class="tab-content">
         <div class="tab-pane active padding" id="photos">
             <div class="clearfix">
-                <ul class="nav nav-pills pull-right nav-mediagrid no-margin" id="mediagallerygridtoggler">
+                <ul class="nav nav-pills pull-right no-margin">
+                    <li class="highlighted"><a href="#"><i class="icon-picture icon-16"></i>Upload Photos</a></li>
+                </ul>
+                <ul class="nav nav-pills nav-mediagrid no-margin" id="mediagallerygridtoggler">
                     <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid"><i class="icon-th icon-16"></i>Grid</a></li>
                     <li><a data-target=".media-gallery"  data-toggle="media-list"><i class="icon-th-list icon-16"></i>List</a></li>
-                </ul>
-                <ul class="nav nav-pills no-margin">
-                    <li class="highlighted"><a href="#"><i class="icon-picture icon-16"></i>Upload Photos</a></li>
                 </ul>
             </div>
             <hr />

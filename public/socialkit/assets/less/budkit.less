@@ -30,6 +30,7 @@ body{
 .padding-right-half{ padding-right : @gridGutterWidth * 0.5 }
 .padding-zero{ padding: 0; }
 .padding-right-zero{ padding-right: 0; }
+.padding-bottom-zero{ padding-bottom: 0; }
 .padding-left-zero{ padding-left: 0; }
 .padding-right{ padding-right : @gridGutterWidth }
 .padding-top-zero{ padding-top: 0 !important; }
@@ -142,6 +143,7 @@ body{
         width: 35%;
         z-index: 1;
         .message-search{
+            input{ margin: 3px auto}
         }
     }
     .message-view{
@@ -185,6 +187,68 @@ body{
         &:last-child{ border-bottom: none}
     }
 }
+
+//***** ACCORDION MENUS ***/
+
+.accordion-nav{
+    .accordion-group{
+        margin-bottom:0px;
+        border-bottom: 1px solid #eee;
+        .accordion-heading{
+            .accordion-toggle{
+                #gradient > .vertical( #eee, #efefef);
+                border-bottom: 1px solid #ddd;
+                font-weight: bold; 
+                //display: block;
+                font-size: 11px;
+                font-weight: bold;
+                line-height: @baseLineHeight;
+                //color: @grayLight;
+                text-shadow: 0 1px 0 rgb(255,255,255);
+                text-transform: uppercase;
+            }
+        }
+        .accordion-inner{ padding: 15px 0 ;}
+    }
+}
+
+.nav-menugroups{
+    li > a {
+        color: @grayLight;
+        padding: 0 15px;
+        border-bottom: 1px solid #383838;
+        i{ font-size: 24px; line-height: 60px; }
+    }
+     li > a:focus,
+     li > a:hover {
+        background: #222;
+    }
+    .active > a,
+    .active > a:hover,
+    .active > a:focus {
+        color: @grayLighter;
+        background: #222;
+    }
+}
+
+.nav-header {
+    display: block;
+    padding: 3px 15px;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 26px;
+    color: #999999;
+    text-transform: uppercase;
+    margin-top: 5px;
+    border-bottom: 1px solid #ddd;
+}
+.nav-home-page{
+    .navbar-inner{
+        border-right: 1px solid #235377;
+        .nav{ border-right: 1px solid #3D79B6; }
+    }
+}
+.nav-home-page-link{ font-size: 24px; margin: 0px !important; line-height: 40px; }
 
 /****IMPORTS****/
 @import "timeline.less";

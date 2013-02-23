@@ -1,17 +1,17 @@
 <tpl:layout  name="timeline" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="clearfix padding">
-        <ul class="nav nav-pills pull-right nav-mediagrid no-margin" id="articlesgridtoggler">
-            <li ><a data-target=".media-gallery"  data-toggle="media-grid"><i class="icon-th icon-16"></i>Grid</a></li>
-            <li class="active"><a data-target=".media-gallery"  data-toggle="media-list"><i class="icon-th-list icon-16"></i>List</a></li>
-        </ul>
-        <ul class="nav nav-pills no-margin">
+    <div class="clearfix padding padding-bottom-zero"> 
+        <ul class="nav nav-pills pull-right no-margin">
             <li class="highlighted"><a href="#"><i class="icon-edit icon-16"></i>New Article</a></li>
         </ul>
+        <ul class="nav nav-pills nav-mediagrid no-margin" id="articlesgridtoggler">
+            <li class="active"><a><i class="icon-th-list icon-16"></i>List</a></li>
+        </ul> 
+        <hr class="margin-bottom-zero" />    
     </div>
-    <hr class="margin-zero" />
+    
     <div id="timeline" class="padding">
         <div class="row-fluid">
-            <div class="span8">
+            <div class="span10">
                 <ul class="timeline-item-index">
                     <li class="timeline-item-li timeline-item-object">
                         <div class="timeline-item-container">
@@ -78,7 +78,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="span4">
+            <div class="span2">
             </div>
         </div>
     </div>

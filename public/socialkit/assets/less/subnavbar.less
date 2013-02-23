@@ -1,8 +1,8 @@
 // Sub navbar
-@navbarSubnavBackground:                #eeeeee;
+@navbarSubnavBackground:                #efefef;
 @navbarSubnavBackgroundHighlight:       #eeeeee;
-@navbarSubnavBorder:                    #dedede;
-
+@navbarSubnavBorder:                    #ddd;
+@navbarSubnavHeight:                    37px;
 @navbarSubnavText:                      @grayDark;
 @navbarSubnavLinkColor:                 @grayDark;
 @navbarSubnavLinkColorHover:            @grayDarker;
@@ -29,7 +29,7 @@
       font-weight: 400;
       min-width: (125px * 2);
         //margin-left: -20px; // negative indent to left-align the text down the page
-      padding: ((@navbarHeight - @baseLineHeight) / 2) 1px ((@navbarHeight - @baseLineHeight) / 2);
+      padding: ((@navbarHeight - @baseLineHeight) / 2) 1px ((@navbarSubnavHeight - @baseLineHeight) / 2);
     color: @navbarLinkColor;
     text-shadow: 0 -1px 0 rgba(0,0,0,.25);
     &:hover,
@@ -42,16 +42,18 @@
 .navbar-subnav{
    
   .navbar-inner {
+    min-height: @navbarSubnavHeight;
     #gradient > .vertical(@navbarSubnavBackgroundHighlight, @navbarSubnavBackground);
     border-bottom: 1px solid @navbarSubnavBorder;
     margin-bottom: 2*@baseLineHeight;
+    .box-shadow(none);
   }
 
   .brand,.topic,
   .nav > li > a {
     color: @navbarSubnavLinkColor;
-    padding: ((@navbarHeight - @baseLineHeight) / 4) 14px;
-    margin: ((@navbarHeight - @baseLineHeight) / 4) 0;
+    padding: ((@navbarSubnavHeight - @baseLineHeight) / 4) 14px;
+    margin: ((@navbarSubnavHeight - @baseLineHeight) / 4) 0;
     text-shadow: none;
     &:hover,
     &:focus {
@@ -67,11 +69,18 @@
       font-weight: 400;
       min-width: (125px * 2);
         margin-left: -20px; // negative indent to left-align the text down the page
-      padding: ((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
+      padding: ((@navbarSubnavHeight - @baseLineHeight) / 2) 20px ((@navbarSubnavHeight - @baseLineHeight) / 2);
     }
 
   .navbar-text {
     color: @navbarSubnavText;
+  margin-bottom: 0;
+  //line-height: @navbarSubnavHeight;
+      padding: ((@navbarSubnavHeight - @baseLineHeight) / 4) 14px;
+  .navbarVerticalAlign(48px);
+
+ 
+
   }
 
   .nav > li > a{
@@ -82,6 +91,8 @@
   .nav > li > a:hover {
     background-color: @navbarSubnavLinkBackgroundHover;
     color: @navbarSubnavLinkColorHover;
+        padding: ((@navbarSubnavHeight - @baseLineHeight) / 4) 14px;
+    margin: ((@navbarSubnavHeight - @baseLineHeight) / 4) 0;
   }
 
   .nav .active > a,
@@ -90,6 +101,8 @@
     color: @navbarSubnavLinkColorActive;
     background-color: @navbarSubnavLinkBackgroundActive;
     .box-shadow(none);
+        padding: ((@navbarSubnavHeight - @baseLineHeight) / 4) 14px;
+    margin: ((@navbarSubnavHeight - @baseLineHeight) / 4) 0;
   }
 
     .nav > .highlighted > a,
@@ -97,7 +110,7 @@
     .nav > .highlighted > a:focus, {
         background-color: #383838;
         color: @white;
-        //margin: ((@navbarHeight - @baseLineHeight) / 4) 0;
+        //margin: ((@navbarSubnavHeight - @baseLineHeight) / 4) 0;
     }
 
   // Inline text links

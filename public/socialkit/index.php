@@ -30,6 +30,28 @@
         </head>
         <body>
             <div id="wrap">
+                <div class="container-menu-box">
+                    <div class="navbar margin-bottom-zero nav-home-page">
+                        <div class="navbar-inner padding-zero no-margin">
+                            <ul class="nav no-margin">
+                                <li><a href="/" class="nav-home-page-link"><i class="icon-home"></i></a></li>  
+                            </ul>
+                        </div>
+                    </div>
+                    <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
+                        <ul class="nav nav-stacked nav-menugroups no-margin" id="menutabs"> 
+                            <li class="active"><a data-target="#mainmenu" data-toggle="tab"><i class="icon-heart"></i></a></li>   
+                            <li><a data-target="#messagesmenu" data-toggle="tab"><i class="icon-comments-alt"></i></a></li>                                                   
+                            <li><a data-target="#settingsmenu" data-toggle="tab"><i class="icon-cogs"></i></a></li>                            
+                            <li><a data-target="#notificationslist" data-toggle="tab"><i class="icon-bell-alt"></i></a></li>     <!--Use  class="highlighted" on new notifications-->
+                        </ul>
+                    </tpl:condition>
+                    <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
+                        <ul class="nav pull-left"> 
+                            <li><a href="/member/session/start">Sign in</a></li>
+                        </ul> 
+                    </tpl:condition> 
+                </div>
                 <div class="container-box has-left">
                     <div class="container-left">                 
                         <tpl:import layout="sidebar" />

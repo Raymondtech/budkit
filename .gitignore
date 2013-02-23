@@ -1,6 +1,1 @@
-nbproject
-.DS_Store
-.localized
-config/setup.ini
-.htaccess
-config.inc
+/nbproject/private/
