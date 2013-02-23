@@ -1,239 +1,84 @@
-<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="grid">
-        <div class="row">
-            <div class="col quater">
-                <ul class="post-filter">
-                    <li tpl:i18n="">Public posts stream</li>
+<tpl:layout  name="timeline" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
+    <div class="clearfix padding">
+        <ul class="nav nav-pills pull-right nav-mediagrid no-margin" id="articlesgridtoggler">
+            <li ><a data-target=".media-gallery"  data-toggle="media-grid"><i class="icon-th icon-16"></i>Grid</a></li>
+            <li class="active"><a data-target=".media-gallery"  data-toggle="media-list"><i class="icon-th-list icon-16"></i>List</a></li>
+        </ul>
+        <ul class="nav nav-pills no-margin">
+            <li class="highlighted"><a href="#"><i class="icon-edit icon-16"></i>New Article</a></li>
+        </ul>
+    </div>
+    <hr class="margin-zero" />
+    <div id="timeline" class="padding">
+        <div class="row-fluid">
+            <div class="span8">
+                <ul class="timeline-item-index">
+                    <li class="timeline-item-li timeline-item-object">
+                        <div class="timeline-item-container">
+                            <div class="timeline-item-header">
+                                <div class="timeline-item-icon">
+                                    <a href="/~livingstonefultang/#">
+                                        <i class="icon-post"></i>
+                                    </a>
+                                </div>
+                                <a class="publisher-profile" href="/~livingstonefultang/#">
+                                    <img class="profile-avatar thumbnail" src="http://placeskull.com/50/50/999999" alt="Livingstone Fultang" width="50" height="50" />
+
+                                </a>
+                                <a href="/~livingstonefultang/system/activity/view/J9HvBl" title="2013-02-22 21:46:23" class="published-time">9 hours ago</a>
+                                <ul class="actions">
+                                    <li class="action-like">
+                                        <a href="/~livingstonefultang/system/activity/favourite/J9HvBl">
+                                            <span class="like" title="Like">Like</span>
+                                        </a>
+                                    </li>
+                                    <li class="action-reply">
+                                        <a href="/~livingstonefultang/system/activity/reply/J9HvBl">
+                                            <span class="reply" title="Reply">Reply</span>
+                                        </a>
+                                    </li>
+                                    <li class="action-delete">
+                                        <a href="/~livingstonefultang/system/activity/delete/J9HvBl">
+                                            <span class="delete" title="Delete">Delete</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="timeline-item-title">What about articles, and other discussions?</div>
+                                <a href="#"><span class="profile-name">Livingstone Fultang</span></a>
+                            </div>
+                            <div class="timeline-item-media">
+                                <iframe width="100%" height="350" src="http://www.youtube.com/embed/bx_LWm6_6tA" frameborder="0" allowfullscreen="true"></iframe>
+                            </div>
+                            <div class="timeline-item-body">
+                                <p>Lorem ipsum augue et ad etiam luctus commodo imperdiet laoreet tellus rhoncus, etiam posuere diam nunc litora velit dapibus netus taciti scelerisque sociosqu, posuere himenaeos felis justo proin molestie ornare porttitor feugiat vivamus.</p>
+                                <p>Ultricies sem cursus pretium conubia viverra nunc per amet habitasse tempor senectus, pharetra erat tellus aptent at lacus phasellus egestas consectetur iaculis laoreet, ornare ultricies elit vestibulum proin pharetra class sodales scelerisque aenean.</p>
+                                <p>Sociosqu curae ut hendrerit urna mauris class cubilia quis vestibulum, eget felis lacus quam commodo ullamcorper purus faucibus, turpis suscipit eget nullam nisi morbi sollicitudin placerat convallis rutrum facilisis odio nam.</p>
+                                <p>Consectetur risus orci eget mattis erat netus morbi erat quisque eget orci, nostra lectus facilisis viverra justo morbi nam cursus lacus habitant, aptent ornare lobortis ullamcorper dapibus tincidunt per sapien augue taciti.</p>
+                                <p>Ac urna diam habitant curabitur id in integer mollis fermentum porta inceptos, aenean elementum auctor enim quis pellentesque quisque conubia vulputate hendrerit, diam ligula vulputate aliquam primis maecenas mauris placerat praesent nostra.</p>
+                                <p>Tincidunt blandit tempor fames conubia elementum malesuada sem suscipit orci nullam primis ornare cubilia mollis ultrices, auctor non vehicula porta eget ultricies amet quisque egestas posuere gravida primis magna.</p>
+                                <p>Laoreet purus luctus molestie vivamus nisl sem cursus suscipit, ut tempus class habitasse lobortis morbi donec, phasellus quisque diam mi ligula hendrerit sem.</p>
+
+                            </div>
+                            <!-- <div class="timeline-item-media">
+                                 <div class="timeline-item-gallery carousel slide" id="item-slider-id">
+                                     <div class="carousel-inner">
+                                         <div class="item active">
+                                             <img src="http://lorempixel.com/550/300/city/6" />
+                                             <div class="carousel-caption">This is an interesing picture caption</div>
+                                         </div>
+                                     </div>
+                                     <a class="left carousel-control" href="#item-slider-id" data-slide="prev"><i class="icon icon-chevron-left icon-32"></i></a>
+                                     <a class="right carousel-control" href="#item-slider-id" data-slide="next"><i class="icon icon-chevron-right icon-32"></i></a>
+                                 </div>
+                             </div>
+                             <div class="timeline-item-footer">
+                                 <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
+                             </div>-->
+                        </div>
+                    </li>
                 </ul>
             </div>
-            <div class="col three-quaters">
-                <div class="padding-left-25 wrap">
-                    <ul class="stream-posts" id="posts">
-                        <li class="stream-posts-li QUOTE wisdom new_post">
-                            <div class="stream-posts-box">
-                                <div class="stream-posts-box-side">
-                                    <div class="stream-posts-box-side-type"></div>
-                                    <a class="stream-posts-box-side-perma" href="http://demo.tumblr.com/post/236/it-does-not-matter-how-slow-you-go-so-long-as-you"></a>
-                                </div>
-                                <div class="stream-posts-box-content">
-                                    <h3><span class="QUOTE_quotation">&rdquo;</span>It does not matter how slow you go so long as you do not stop.</h3>
-                                    <p>Wisdom of&nbsp;<a href="#" title="http://en.wikipedia.org/wiki/Confucius">Confucius</a></p>
-                                    <div class="stream-posts-box-content-details">
-                                        <div class="stream-posts-box-content-details-upper">
-                                            <div class="stream-posts-box-content-timestamp">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="/day/2006/11/08">Posted 4 years ago</a> by <a href="#" title="http://john-appleseed.tumblr.com/" target="_blank">john-appleseed</a></p>
-                                            </div>
-                                            <div class="stream-posts-box-content-notes">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="http://demo.tumblr.com/post/236/it-does-not-matter-how-slow-you-go-so-long-as-you#notes">6,909 notes</a></p>
-                                            </div>
-                                        </div>
-                                        <div class="stream-posts-box-content-tags">
-                                            <span class="stream-posts-box-content-details-icon"></span>
-                                            <p>Tags: <a href="#" title="http://demo.tumblr.com/tagged/wisdom/chrono">wisdom</a>, </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stream-posts-break"></div>
-                        </li>
-                        <li class="stream-posts-li PHOTO mareen_fischinger new_york_city times_square new_post">
-                            <div class="stream-posts-box">
-                                <div class="stream-posts-box-side">
-                                    <div class="stream-posts-box-side-type"></div>
-                                    <a class="stream-posts-box-side-perma" href="http://demo.tumblr.com/post/459265350/passing-through-times-square-by-mareen-fischinger"></a>
-                                </div>
-                                <div class="stream-posts-box-content">
-                                    <div class="PHOTO-display">
-                                        <div class="PHOTO-display-width">
-                                            <a class="PHOTO-display-high-res" href="http://demo.tumblr.com/photo/1280/459265350/1/tumblr_kzjlfiTnfe1qz4rgh"></a>
-                                            <a href="#" title="http://demo.tumblr.com/photo/1280/459265350/1/tumblr_kzjlfiTnfe1qz4rgh"><img alt="Passing through Times Square by&nbsp;Mareen Fischinger" src="http://26.media.tumblr.com/tumblr_kzjlfiTnfe1qz4rgho1_500.jpg"></a>
-                                        </div>
-                                    </div>
-                                    <p>Passing through Times Square by&nbsp;<a href="#" title="http://www.mareenfischinger.com/">Mareen Fischinger</a></p>
-                                    <div class="stream-posts-box-content-details">
-                                        <div class="stream-posts-box-content-details-upper">
-                                            <div class="stream-posts-box-content-timestamp">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="/day/2006/11/08">Posted 4 years ago</a> by <a href="#" title="http://www.davidslog.com/" target="_blank">david</a></p>
-                                            </div>
-                                            <div class="stream-posts-box-content-notes">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="http://demo.tumblr.com/post/459265350/passing-through-times-square-by-mareen-fischinger#notes">3,163 notes</a></p>
-                                            </div>
-                                        </div>
-                                        <div class="stream-posts-box-content-tags">
-                                            <span class="stream-posts-box-content-details-icon"></span>
-                                            <p>Tags: <a href="#" title="http://demo.tumblr.com/tagged/Mareen_Fischinger/chrono">Mareen Fischinger</a>, <a href="#" title="http://demo.tumblr.com/tagged/New_York_City/chrono">New York City</a>, <a href="#" title="http://demo.tumblr.com/tagged/Times_Square/chrono">Times Square</a>, </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stream-posts-break"></div>
-                        </li>
-                        <li class="stream-posts-li LINK  new_post">
-                            <div class="stream-posts-box">
-                                <div class="stream-posts-box-side">
-                                    <div class="stream-posts-box-side-type"></div>
-                                    <a class="stream-posts-box-side-perma" href="http://demo.tumblr.com/post/234/my-favorite-web-site"></a>
-                                </div>
-                                <div class="stream-posts-box-content">
-                                    <h1><a href="#" title="http://">My favorite web site</a></h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                                    <div class="stream-posts-box-content-details">
-                                        <div class="stream-posts-box-content-details-upper">
-                                            <div class="stream-posts-box-content-timestamp">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="/day/2006/11/08">Posted 4 years ago</a> by <a href="#" title="http://john-appleseed.tumblr.com/" target="_blank">john-appleseed</a></p>
-                                            </div>
-                                            <div class="stream-posts-box-content-notes">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="http://demo.tumblr.com/post/234/my-favorite-web-site#notes">1,507 notes</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stream-posts-break"></div>
-                        </li>
-                        <li class="stream-posts-li CHAT funny new_post">
-                            <div class="stream-posts-box">
-                                <div class="stream-posts-box-side">
-                                    <div class="stream-posts-box-side-type"></div>
-                                    <a class="stream-posts-box-side-perma" href="http://demo.tumblr.com/post/233/jack-hey-you-know-what-sucks-lindsey"></a>
-                                </div>
-                                <div class="stream-posts-box-content">
-                                    <ul>
-                                        <li class="odd">
-                                            <strong>Jack:</strong> Hey, you know what sucks?
-                                        </li>
-                                        <li class="even">
-                                            <strong>Lindsey:</strong> vaccuums
-                                        </li>
-                                        <li class="odd ">
-                                            <strong>Jack:</strong> Hey, you know what sucks in a metaphorical sense?
-                                        </li>
-                                        <li class="even">
-                                            <strong>Lindsey:</strong> black holes
-                                        </li>
-                                        <li class="odd">
-                                            <strong>Jack:</strong> Hey, you know what just isn't cool?
-                                        </li>
-                                        <li class="even">
-                                            <strong>Lindsey:</strong> lava?
-                                        </li>
-                                    </ul>
-                                    <div class="stream-posts-box-content-details">
-                                        <div class="stream-posts-box-content-details-upper">
-                                            <div class="stream-posts-box-content-timestamp">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="/day/2006/11/08">Posted 4 years ago</a> by <a href="#" title="http://john-appleseed.tumblr.com/" target="_blank">john-appleseed</a></p>
-                                            </div>
-                                            <div class="stream-posts-box-content-notes">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="http://demo.tumblr.com/post/233/jack-hey-you-know-what-sucks-lindsey#notes">3,142 notes</a></p>
-                                            </div>
-                                        </div>
-                                        <div class="stream-posts-box-content-tags">
-                                            <span class="stream-posts-box-content-details-icon"></span>
-                                            <p>Tags: <a href="#" title="http://demo.tumblr.com/tagged/funny/chrono">funny</a>, </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stream-posts-break"></div>
-                        </li>
-                        <li class="stream-posts-li AUDIO reblog new_post">
-                            <div class="stream-posts-box">
-                                <div class="stream-posts-box-side">
-                                    <div class="stream-posts-box-side-type"></div>
-                                    <a class="stream-posts-box-side-perma" href="http://demo.tumblr.com/post/459260683/allison-weiss-fingers-crossed"></a>
-                                </div>
-                                <div class="stream-posts-box-content">
-                                    <div class="AUDIO_info">
-                                        <div class="AUDIO_info_album">
-                                            <div class="AUDIO_info_album_overlay"></div>
-                                            <img alt="" src="http://28.media.tumblr.com/tumblr_ksc4i2SkVU1qz8ouqo1_r2_cover.jpg">
-                                                <div class="AUDIO_info_album_none"></div>
-                                        </div>
-                                        <div class="AUDIO_info_float">
-                                            <div class="AUDIO_info_player">
-                                                <div class="AUDIO_info_player_embed">
-                                                    <script type="text/javascript" language="javascript" src="http://assets.tumblr.com/javascript/tumblelog.js?542"></script><span id="audio_player_459260683"><div class="audio_player"><embed type="application/x-shockwave-flash" src="http://assets.tumblr.com/swf/audio_player.swf?audio_file=http://www.tumblr.com/audio_file/459260683/tumblr_ksc4i2SkVU1qz8ouq&amp;color=E4E4E4" height="27" width="207" quality="best"></div></span><script type="text/javascript">/*<![CDATA[*/replaceIfFlash(9,"audio_player_459260683",'\x3cdiv class=\x22audio_player\x22\x3e<embed type="application/x-shockwave-flash" src="http://assets.tumblr.com/swf/audio_player.swf?audio_file=http://www.tumblr.com/audio_file/459260683/tumblr_ksc4i2SkVU1qz8ouq&color=E4E4E4" height="27" width="207" quality="best"></embed>\x3c/div\x3e');/*]]>*/</script>
-                                                </div>
-                                            </div>
-                                            <div class="AUDIO_info_ta">
-                                                <div class="AUDIO_info_track">
-                                                    <div class="AUDIO_info_none">Unknown</div>
-                                                    <div class="AUDIO_info_overlay">Fingers Crossed</div>
-                                                </div>
-                                                <div class="AUDIO_info_artist">
-                                                    <div class="AUDIO_info_none">Unknown</div>
-                                                    <div class="AUDIO_info_overlay"><a href="#" title="http://last.fm/artist/Allison Weiss" target="_blank">Allison Weiss</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="AUDIO_info_plays">
-                                                <div class="AUDIO_info_plays_count">1,144,240</div>
-                                                <div class="AUDIO_info_plays_label" style="text-transform:lowercase">Plays</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p><strong><a href="#" title="http://allisonweiss.tumblr.com/">Allison Weiss</a>&nbsp;—</strong> Fingers Crossed</p>
-                                    <div class="stream-posts-box-content-details">
-                                        <div class="stream-posts-box-content-details-upper">
-                                            <div class="stream-posts-box-content-timestamp">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p>Reblogged 4 years ago from <a href="#" title="http://allisonweiss.tumblr.com/post/228022847/allison-weiss-fingers-crossed-from-upcoming">allisonweiss</a> by <a href="#" title="http://www.davidslog.com/" target="_blank">david</a></p>
-                                            </div>
-                                            <div class="stream-posts-box-content-notes">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="http://demo.tumblr.com/post/459260683/allison-weiss-fingers-crossed#notes">811 notes</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stream-posts-break"></div>
-                        </li>
-                        <li class="stream-posts-li TEXT new_post">
-                            <div class="stream-posts-box">
-                                <div class="stream-posts-box-side">
-                                    <div class="stream-posts-box-side-type"></div>
-                                    <a class="stream-posts-box-side-perma" href="http://demo.tumblr.com/post/232/an-example-post"></a>
-                                </div>
-                                <div class="stream-posts-box-content">
-                                    <h2><a href="#" title="http://demo.tumblr.com/post/232/an-example-post">An example post</a></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetuer <a href="#" title="/">adipiscing elit</a>. Aliquam nisi lorem, pulvinar id, commodo feugiat, vehicula et, mauris. Aliquam mattis porta urna. Maecenas dui neque, rhoncus sed, vehicula vitae, auctor at, nisi. Aenean id massa ut lacus molestie porta. Curabitur sit amet quam id libero suscipit venenatis.</p>
-                                    <ul><li>Lorem ipsum dolor sit amet.</li>
-                                        <li>Consectetuer adipiscing elit. </li>
-                                        <li>Nam at tortor quis ipsum tempor aliquet.</li>
-                                    </ul><p>Cum sociis <a href="#" title="/">natoque penatibus</a> et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse sed ligula. Sed volutpat odio non turpis gravida luctus. Praesent elit pede, iaculis facilisis, vehicula mattis, tempus non, arcu.</p>
-                                    <blockquote>Donec placerat mauris commodo dolor. Nulla tincidunt. Nulla vitae augue.</blockquote>
-                                    <p>Suspendisse ac pede. Cras <a href="#" title="/">tincidunt pretium</a> felis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque porttitor mi id felis. Maecenas nec augue. Praesent a quam pretium leo congue accumsan.</p>
-                                    <div class="stream-posts-box-content-details">
-                                        <div class="stream-posts-box-content-details-upper">
-                                            <div class="stream-posts-box-content-timestamp">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="/day/2006/11/07">Posted 4 years ago</a> by <a href="#" title="http://john-appleseed.tumblr.com/" target="_blank">john-appleseed</a></p>
-                                            </div>
-                                            <div class="stream-posts-box-content-notes">
-                                                <span class="stream-posts-box-content-details-icon"></span>
-                                                <p><a href="#" title="http://demo.tumblr.com/post/232/an-example-post#notes">2,195 notes</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="stream-posts-break"></div>
-                        </li>
-                        <li class="stream-posts-li stream-posts-pagination">
-                            <div class="stream-posts-pagination-older">
-                                <a href="#" title="/page/2"></a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            <div class="span4">
             </div>
         </div>
     </div>

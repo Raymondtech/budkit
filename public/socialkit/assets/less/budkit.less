@@ -97,6 +97,7 @@ body{
         padding: 0px;
         position: relative;
         .box-shadow( none );
+        background: none;
         border: none;
         .column{display: inline-block; padding-right: @gridGutterWidth; vertical-align: top; }
         .feature{ 
@@ -107,6 +108,7 @@ body{
                 .border-radius(@baseBorderRadius);
                 .box-shadow(0 1px 3px rgba(0,0,0,.055));
                 .transition(all .2s ease-in-out);
+                background: #fff;
             }
         }
         .caption{ padding: 0px; text-decoration: none; color: @grayLight; }
@@ -134,7 +136,7 @@ body{
     }
     .message-list{
         border-right: 5px solid #ddd;
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden;
         left:0; right:0;
         width: 35%;
@@ -154,7 +156,7 @@ body{
             .message-reply-textarea{ height: 100px }
         }
         .message-thread{ 
-            overflow-y: scroll; right: 0px; left: 0px; 
+            overflow-y: auto; right: 0px; left: 0px; 
         }
     }
     
