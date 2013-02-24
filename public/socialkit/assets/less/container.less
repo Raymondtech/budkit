@@ -9,7 +9,8 @@
     @_containerLeftWidth : @containerLeftWidth;
     @containerAsideWidth : (@containerColumnWidth * 1) + (@containerGutterWidth * (1 - 1));
     @_containerAsideWidth : @containerAsideWidth ;
-    position: absolute; top:0; left:60px; right:0; bottom:0;
+    position: absolute; top:0; left:0px; right:0; bottom:0;
+    &.has-menu-box{ left: 60px }
    
     .container-left{
        width: @containerLeftWidth;

@@ -39,20 +39,22 @@
                         </div>
                     </div>
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-                        <ul class="nav nav-stacked nav-menugroups no-margin" id="menutabs"> 
-                            <li class="active"><a data-target="#mainmenu" data-toggle="tab"><i class="icon-heart"></i></a></li>   
-                            <li><a data-target="#messagesmenu" data-toggle="tab"><i class="icon-comments-alt"></i></a></li>                                                   
-                            <li><a data-target="#settingsmenu" data-toggle="tab"><i class="icon-cogs"></i></a></li>                            
-                            <li><a data-target="#notificationslist" data-toggle="tab"><i class="icon-bell-alt"></i></a></li>     <!--Use  class="highlighted" on new notifications-->
+                        <ul class="nav nav-stacked nav-menugroups no-margin" id="menutabs">
+                            <li class="active"><a data-target="#dashboardmenuview" data-toggle="tab"><i class="icon-dashboard"></i></a></li>  
+                            <li><a data-target="#favouritesmenuview" data-toggle="tab"><i class="icon-heart"></i></a></li>   
+                            <li><a data-target="#messagesmenuview" data-toggle="tab"><i class="icon-comments-alt"></i></a></li>                                                   
+                            <li><a data-target="#settingsmenuview" data-toggle="tab"><i class="icon-cogs"></i></a></li>                            
+                            <li><a data-target="#peoplemenuview" data-toggle="tab"><i class="icon-group"></i></a></li>     <!--Use  class="highlighted" on new notifications-->
+                            <li><a href="/member/session/stop"><i class="icon-signout"></i></a></li>
                         </ul>
                     </tpl:condition>
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
-                        <ul class="nav pull-left"> 
-                            <li><a href="/member/session/start">Sign in</a></li>
+                        <ul class="nav nav-stacked nav-menugroups no-margin"> 
+                            <li><a href="/member/session/start"><i class="icon-signin"></i></a></li>
                         </ul> 
                     </tpl:condition> 
                 </div>
-                <div class="container-box has-left">
+                <div class="container-box has-left has-menu-box">
                     <div class="container-left">                 
                         <tpl:import layout="sidebar" />
                     </div>

@@ -664,9 +664,12 @@ a:focus {
 .container-box {
   position: absolute;
   top: 0;
-  left: 60px;
+  left: 0px;
   right: 0;
   bottom: 0;
+}
+.container-box.has-menu-box {
+  left: 60px;
 }
 .container-box .container-left {
   width: 195px;

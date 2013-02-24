@@ -29,7 +29,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Audio extends \System\Controller {
+final class Audio extends System\Content {
 
     /**
      * The default fall-back method. 

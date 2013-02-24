@@ -30,7 +30,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Video extends \Platform\Controller {
+final class Video extends System\Content {
     /**
      * The default fallback method. 
      * @return Video::read()
