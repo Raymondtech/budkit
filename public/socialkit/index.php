@@ -27,6 +27,7 @@
             <link rel="shortcut icon" href="<?php echo $this->getTemplatePath() ?>/assets/ico/favicon.png" />
             <!-- jQuery here because if placed at bottom, in-line scripts (i.e script tags in .tpl files) won't work -->
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/jquery.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit.js"></script>
         </head>
         <body>
             <div id="wrap">
@@ -40,17 +41,17 @@
                     </div>
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                         <ul class="nav nav-stacked nav-menugroups no-margin" id="menutabs">
-                            <li class="active"><a data-target="#dashboardmenuview" data-toggle="tab"><i class="icon-dashboard"></i></a></li>  
-                            <li><a data-target="#favouritesmenuview" data-toggle="tab"><i class="icon-heart"></i></a></li>   
-                            <li><a data-target="#messagesmenuview" data-toggle="tab"><i class="icon-comments-alt"></i></a></li>                                                   
-                            <li><a data-target="#settingsmenuview" data-toggle="tab"><i class="icon-cogs"></i></a></li>                            
-                            <li><a data-target="#peoplemenuview" data-toggle="tab"><i class="icon-group"></i></a></li>     <!--Use  class="highlighted" on new notifications-->
-                            <li><a href="/member/session/stop"><i class="icon-signout"></i></a></li>
+                            <li class="active"><a data-target="#dashboardmenuview" data-toggle="tab"><i class="icon-dashboard"></i><small>Dashboard</small></a></li>  
+                            <li><a data-target="#favouritesmenuview" data-toggle="tab"><i class="icon-heart"></i><small>Media</small></a></li>   
+                            <li><a data-target="#messagesmenuview" data-toggle="tab"><i class="icon-comments-alt"></i><small>Messages</small></a></li>                                                   
+                            <li><a data-target="#settingsmenuview" data-toggle="tab"><i class="icon-cogs"></i><small>Settings</small></a></li>                            
+                            <li><a data-target="#peoplemenuview" data-toggle="tab"><i class="icon-group"></i><small>People</small></a></li>     <!--Use  class="highlighted" on new notifications-->
+                            <li><a href="/member/session/stop"><i class="icon-signout"></i><small>Sign Out</small></a></li>
                         </ul>
                     </tpl:condition>
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
                         <ul class="nav nav-stacked nav-menugroups no-margin"> 
-                            <li><a href="/member/session/start"><i class="icon-signin"></i></a></li>
+                            <li><a href="/member/session/start"><i class="icon-signin"></i><small>Sign In</small></a></li>
                         </ul> 
                     </tpl:condition> 
                 </div>

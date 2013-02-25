@@ -18,7 +18,7 @@
                     <label class="control-label"  for="middle-name">Thumbnail</label>
                     <div class="controls">
                         <div class="input-append"> 
-                            <input type="file" data-label="Select Photo..." />
+                            <input type="file" data-label="Select Photo..." data-target="budkit-uploader" />
                             <a class="add-on btn">Chose from existing</a>
                         </div>
                     </div>

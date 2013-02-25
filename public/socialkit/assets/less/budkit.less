@@ -124,44 +124,49 @@ body{
 
 
 /****MESSAGES****/
-.messages-box{
+.stream-box{
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    .message-list,.message-view, .message-thread{
+    .stream-list,.stream-view, .stream-thread{
         position: absolute;
         top: 0;
         bottom: 0;
     }
-    .message-list{
-        border-right: 5px solid #ddd;
+    .stream-list{
+        border-right: 1px solid #ddd;
         overflow-y: auto;
         overflow-x: hidden;
         left:0; right:0;
         width: 35%;
         z-index: 1;
-        .message-search{
+        .stream-search{
             input{ margin: 3px auto}
         }
     }
-    .message-view{
+    .stream-view{
         right: 0;
         width: 65%;
         left: 35%;
-        .message-reply{
+        .stream-reply{
             background: #eee;
             position: absolute; bottom: 0px; right: 0px; left: 0px;
             height: 170px;
             border-top: 1px solid #ddd;
-            .message-reply-textarea{ height: 100px }
+            .stream-reply-textarea{ height: 100px }
         }
-        .message-thread{ 
+        .stream-thread{ 
             overflow-y: auto; right: 0px; left: 0px; 
         }
     }
     
+}
+
+.activity-box{
+    .stream-list{ left: auto; right:0; border-right: none; border-left: 1px solid #ddd;}
+    .stream-view{ left: auto; right: 35% }
 }
 
 .stream{
@@ -215,9 +220,11 @@ body{
 .nav-menugroups{
     li > a {
         color: @grayLight;
-        padding: 0 15px;
+        text-align: center;
         border-bottom: 1px solid #383838;
-        i{ font-size: 24px; line-height: 60px; }
+        padding: 10px 0;
+        i{ font-size: 24px; line-height: 30px; margin: 0 15px; }
+        small{ font-size: 10px; display: inline-block}
     }
      li > a:focus,
      li > a:hover {
@@ -249,6 +256,37 @@ body{
     }
 }
 .nav-home-page-link{ font-size: 24px; margin: 0px !important; line-height: 40px; }
+
+.bkeditor-content{ 
+    min-height: 29px;
+    &:focus{ min-height: 150px; }
+    &.input{ 
+
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: @baseLineHeight*0.5;
+    font-size: @baseFontSize;
+    line-height: @baseLineHeight;
+    color: @gray;
+    border: 1px solid #ccc;
+    .border-radius(1px);
+      .box-sizing(border-box);
+        background-color: @white; 
+        cursor: auto;
+        display: block;
+        line-height: @baseLineHeight;
+        letter-spacing: normal;
+        text-align: start;
+        text-decoration: initial;
+        text-indent: 0px;
+        text-rendering: auto;
+        word-break: normal;
+        word-wrap: break-word;
+        word-spacing: 0px;
+        &.placeholder{color: @grayLight }
+    }
+ }
+.bkeditor-toolbar{ margin-top: 0px !important }
 
 /****IMPORTS****/
 @import "timeline.less";

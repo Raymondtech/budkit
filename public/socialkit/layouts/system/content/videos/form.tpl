@@ -7,7 +7,7 @@
                     <div class="controls fileupload fileupload-new input" data-provides="fileupload">
                         <div class="input-prepend input-append">
                             <span class="add-on"><i class="icon icon-film"></i></span>
-                            <input type="file" data-label="Select Video" />
+                            <input type="file" data-label="Select Video" data-target="budkit-uploader" />
                             <div class="btn-group">
                                 <a class="add-on btn dropdown-toggle" data-toggle="dropdown"><i class="icon-globe"></i> Public <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -43,7 +43,7 @@
                     <label class="control-label"  for="middle-name">Thumbnail</label>
                     <div class="controls">
                         <div class="input-append"> 
-                            <input type="file" data-label="Select Photo..." />
+                            <input type="file" data-label="Select Photo..." data-target="budkit-uploader" />
                             <a class="add-on btn">Chose from existing</a>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 <tpl:layout name="inputsettings" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form action="/system/timeline/create" method="POST">
+    <form action="/system/timeline/create" method="POST" enctype="multipart/form-data">
         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
             <div class="timeline-item-publisher-box">
                 <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>
@@ -9,7 +9,7 @@
                     </div>
                     <div class="btn-toolbar no-margin"> 
                         <button class="btn pull-right" type="submit">Submit</button>   
-                        <a href="/system/content/attachments/upload.raw" class="btn pull-left no-margin" data-toggle="modal" data-target="#upload-tool"><i class="icon icon-paper-clip"></i> Add files</a>
+                        <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" />
                     </div>              
                 </fieldset>
             </div>

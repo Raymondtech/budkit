@@ -6778,22 +6778,22 @@ body {
   padding-right: 10px;
 }
 /****MESSAGES****/
-.messages-box {
+.stream-box {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 }
-.messages-box .message-list,
-.messages-box .message-view,
-.messages-box .message-thread {
+.stream-box .stream-list,
+.stream-box .stream-view,
+.stream-box .stream-thread {
   position: absolute;
   top: 0;
   bottom: 0;
 }
-.messages-box .message-list {
-  border-right: 5px solid #ddd;
+.stream-box .stream-list {
+  border-right: 1px solid #ddd;
   overflow-y: auto;
   overflow-x: hidden;
   left: 0;
@@ -6801,15 +6801,15 @@ body {
   width: 35%;
   z-index: 1;
 }
-.messages-box .message-list .message-search input {
+.stream-box .stream-list .stream-search input {
   margin: 3px auto;
 }
-.messages-box .message-view {
+.stream-box .stream-view {
   right: 0;
   width: 65%;
   left: 35%;
 }
-.messages-box .message-view .message-reply {
+.stream-box .stream-view .stream-reply {
   background: #eee;
   position: absolute;
   bottom: 0px;
@@ -6818,13 +6818,23 @@ body {
   height: 170px;
   border-top: 1px solid #ddd;
 }
-.messages-box .message-view .message-reply .message-reply-textarea {
+.stream-box .stream-view .stream-reply .stream-reply-textarea {
   height: 100px;
 }
-.messages-box .message-view .message-thread {
+.stream-box .stream-view .stream-thread {
   overflow-y: auto;
   right: 0px;
   left: 0px;
+}
+.activity-box .stream-list {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 1px solid #ddd;
+}
+.activity-box .stream-view {
+  left: auto;
+  right: 35%;
 }
 .stream {
   margin: 0;
@@ -6890,12 +6900,18 @@ body {
 }
 .nav-menugroups li > a {
   color: #999999;
-  padding: 0 15px;
+  text-align: center;
   border-bottom: 1px solid #383838;
+  padding: 10px 0;
 }
 .nav-menugroups li > a i {
   font-size: 24px;
-  line-height: 60px;
+  line-height: 30px;
+  margin: 0 15px;
+}
+.nav-menugroups li > a small {
+  font-size: 10px;
+  display: inline-block;
 }
 .nav-menugroups li > a:focus,
 .nav-menugroups li > a:hover {
@@ -6928,6 +6944,44 @@ body {
   font-size: 24px;
   margin: 0px !important;
   line-height: 40px;
+}
+.bkeditor-content {
+  min-height: 29px;
+}
+.bkeditor-content:focus {
+  min-height: 150px;
+}
+.bkeditor-content.input {
+  display: inline-block;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #555555;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  cursor: auto;
+  display: block;
+  line-height: 20px;
+  letter-spacing: normal;
+  text-align: start;
+  text-decoration: initial;
+  text-indent: 0px;
+  text-rendering: auto;
+  word-break: normal;
+  word-wrap: break-word;
+  word-spacing: 0px;
+}
+.bkeditor-content.input.placeholder {
+  color: #999999;
+}
+.bkeditor-toolbar {
+  margin-top: 0px !important;
 }
 /****IMPORTS****/
 #timeline {

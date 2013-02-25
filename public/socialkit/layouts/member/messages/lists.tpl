@@ -1,10 +1,10 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="messages-box row-fluid">
-        <div class="message-list">
+    <div class="stream-box row-fluid">
+        <div class="stream-list">
             <div class="navbar navbar-subnav no-margin">
                 <div class="navbar-inner padding-left-half padding-right-half no-margin">
                     <form class="navbar-form">
-                        <div class="no-bottom-margin message-search">
+                        <div class="no-bottom-margin stream-search">
                             <input type="text" class="span12" placeholder="Search message threads.." />
                         </div>
                     </form>
@@ -14,7 +14,7 @@
                 <?php for ($i = 0; $i < 15; $i++): ?>
                 <li class="has-thumbnail">
                     <a class="thumbnail" href="#">
-                        <img class="profile-avatar" src="http://profile.ak.fbcdn.net/hprofile-ak-snc6/203280_100003630780902_1928341789_q.jpg" alt="" width="50" height="50" />                         
+                        <img class="profile-avatar" src="http://placeskull.com/50/50/999999" alt="" width="50" height="50" />                         
                     </a>
                     <a href="#" class="link">
                         <div class="title">
@@ -29,14 +29,14 @@
                 <?php endfor; ?>
             </ul>
         </div>
-        <div class="message-view">
-            <div class="message-thread">
+        <div class="stream-view">
+            <div class="stream-thread">
                 <div class="navbar navbar-subnav no-margin">
                     <div class="navbar-inner padding-left-half no-margin">
                         <p class="navbar-text "><strong>The title of this thread</strong></p>
                     </div>
                 </div>
-                <div class="message-body padding" id="timeline">
+                <div class="stream-body padding" id="timeline">
                     <tpl:import layout="input" />
                     <ol class="timeline-item-index">
                         <tpl:loop data="activities.items">

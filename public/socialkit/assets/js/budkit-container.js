@@ -86,25 +86,7 @@
         return false;
     };
     
-    $.fn.fileUploadField = function() {
-        this.each(function(index, field) {
-            field = $(field);
-            var label = field.attr("data-label") || "Choose File";
 
-            field.css({"display": "none"});
-            field.after("<input data-toggle=\"file-upload\" class=\"input\" type=\"text\"><a data-target=\"file-upload\" class=\"add-on btn\">" + label + "</a>");
-
-            var inputField = field.next('[data-toggle="file-upload"]'),
-                inputToggle = inputField.next('[data-target="file-upload"]');
-          
-            inputToggle.click( function(){
-                field.click()
-            } );
-            field.change( function(){
-               inputField.val(field.val());
-            });
-        });
-    };
         
     $(document).ready(function() {
         var activeTabs = {};
@@ -126,7 +108,7 @@
                 });
             }
         });
-        $('input[type="file"]').fileUploadField();
+        
     });
   
     $(document).on('click.container.data-api', '[data-toggle="container-left"]', function (e) {
