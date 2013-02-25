@@ -291,8 +291,9 @@
         this.options = $.extend({}, $.fn.bkuploader.defaults, options);
         this.field = $(field);
         this.form = $(field).closest('form');
-        this.selector = $('<a />').addClass('add-on btn no-margin').text(this.field.attr("data-label") || "Choose File").insertAfter(this.field);; 
-
+        this.selector = $('<a />').addClass('add-on btn no-margin').text(this.field.attr("data-label") || "Choose File").insertAfter(this.field);
+        ; 
+        this.datalist = this.field.attr('data-display');
         //Hide the remove type="file"
         this.field.hide();
        
@@ -311,37 +312,45 @@
         getDroppedFiles : function(){},
         getUploadedFiles : function(){},
         getSelectedFiles : function(event){
-            var files = this.field.prop('files');
+            var files = this.field.prop('files'),
+            ul    = $('<ul />').addClass('nav nav-files');
             event.preventDefault();       
             console.log(files);
             console.log(files.length);
+            if(this.datalist){
+                for (var x = 0; x < files.length; x++) {   
+                    var pb  = $('<div />').addClass('progress mini-bar progress-striped active').append( $('<div />').addClass('bar'));
+                    ul.append( $('<li/>').append( $('<a />').text(files[x].name ).append( pb )  ) );
+                }
+                $(this.datalist).append(ul);
+            }
             
-        },
-        validate: function(){},
-        beginUpload: function(event){
-            event.preventDefault();     
-            alert('form is being submitted begin the upload process');
-        },
-        onUpload: function(){},
-        beforeUpload: function(){},
-        afterUpload: function(){},
-        abortUpload: function(){}
-    };
-    //Plugin Defintion
-    $.fn.bkuploader = function(option) {
-        return this.each(function() {
-            var $this = $(this)
-            , data = $this.data('bkuploader')
-            , options = typeof option == 'object' && option;
-            if (!data)
-                $this.data('bkuploader', (data = new BKUploader(this, options)));
-        });
-    };
-    $.fn.bkuploader.defaults = {};
-    $.fn.bkuploader.Constructor = BKUploader;
+    },
+    validate: function(){},
+    beginUpload: function(event){
+        event.preventDefault();     
+        alert('form is being submitted begin the upload process');
+    },
+    onUpload: function(){},
+    beforeUpload: function(){},
+    afterUpload: function(){},
+    abortUpload: function(){}
+};
+//Plugin Defintion
+$.fn.bkuploader = function(option) {
+    return this.each(function() {
+        var $this = $(this)
+        , data = $this.data('bkuploader')
+        , options = typeof option == 'object' && option;
+        if (!data)
+            $this.data('bkuploader', (data = new BKUploader(this, options)));
+    });
+};
+$.fn.bkuploader.defaults = {};
+$.fn.bkuploader.Constructor = BKUploader;
     
-    //Plugin data api
-    $(function() {
-        $('[data-target="budkit-uploader"]').bkuploader();
-    })
+//Plugin data api
+$(function() {
+    $('[data-target="budkit-uploader"]').bkuploader();
+})
 }(window.jQuery);

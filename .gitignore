@@ -1,2 +1,5 @@
 /nbproject/private/
 /config/setup.ini
+.DS_Store
+
+public/socialkit/assets/js/budkit-ck.js

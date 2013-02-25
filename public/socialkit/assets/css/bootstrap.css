@@ -206,8 +206,8 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 12px;
   line-height: 20px;
   color: #333333;
   height: 100%;
@@ -874,7 +874,7 @@ p {
 }
 .lead {
   margin-bottom: 20px;
-  font-size: 19.5px;
+  font-size: 18px;
   font-weight: 200;
   line-height: 30px;
 }
@@ -963,34 +963,34 @@ h3 {
   line-height: 40px;
 }
 h1 {
-  font-size: 35.75px;
+  font-size: 33px;
 }
 h2 {
-  font-size: 29.25px;
+  font-size: 27px;
 }
 h3 {
-  font-size: 22.75px;
+  font-size: 21px;
 }
 h4 {
-  font-size: 16.25px;
+  font-size: 15px;
 }
 h5 {
-  font-size: 13px;
+  font-size: 12px;
 }
 h6 {
-  font-size: 11.049999999999999px;
+  font-size: 10.2px;
 }
 h1 small {
-  font-size: 22.75px;
+  font-size: 21px;
 }
 h2 small {
-  font-size: 16.25px;
+  font-size: 15px;
 }
 h3 small {
-  font-size: 13px;
+  font-size: 12px;
 }
 h4 small {
-  font-size: 13px;
+  font-size: 12px;
 }
 .page-header {
   padding-bottom: 9px;
@@ -1090,7 +1090,7 @@ blockquote {
 }
 blockquote p {
   margin-bottom: 0;
-  font-size: 16.25px;
+  font-size: 15px;
   font-weight: 300;
   line-height: 1.25;
 }
@@ -1135,7 +1135,7 @@ code,
 pre {
   padding: 0 3px 2px;
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
-  font-size: 11px;
+  font-size: 10px;
   color: #333333;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -1152,7 +1152,7 @@ pre {
   display: block;
   padding: 9.5px;
   margin: 0 0 10px;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 20px;
   word-break: break-all;
   word-wrap: break-word;
@@ -1193,7 +1193,7 @@ legend {
   width: 100%;
   padding: 0;
   margin-bottom: 20px;
-  font-size: 19.5px;
+  font-size: 18px;
   line-height: 40px;
   color: #333333;
   border: 0;
@@ -1208,7 +1208,7 @@ input,
 button,
 select,
 textarea {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
   line-height: 20px;
 }
@@ -1216,7 +1216,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 label {
   display: block;
@@ -1243,7 +1243,7 @@ input[type="color"],
   height: 20px;
   padding: 4px 6px;
   margin-bottom: 10px;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 20px;
   color: #555555;
   -webkit-border-radius: 2px;
@@ -1757,7 +1757,7 @@ select:focus:invalid:focus {
 .input-prepend .dropdown-menu,
 .input-append .popover,
 .input-prepend .popover {
-  font-size: 13px;
+  font-size: 12px;
 }
 .input-append input,
 .input-prepend input,
@@ -1788,7 +1788,7 @@ select:focus:invalid:focus {
   height: 20px;
   min-width: 16px;
   padding: 4px 5px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
   line-height: 20px;
   text-align: center;
@@ -3585,7 +3585,7 @@ button.close {
   *zoom: 1;
   padding: 4px 12px;
   margin-bottom: 0;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 20px;
   text-align: center;
   vertical-align: middle;
@@ -3669,7 +3669,7 @@ button.close {
 }
 .btn-large {
   padding: 11px 19px;
-  font-size: 16.25px;
+  font-size: 15px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -3680,7 +3680,7 @@ button.close {
 }
 .btn-small {
   padding: 2px 10px;
-  font-size: 11.049999999999999px;
+  font-size: 10.2px;
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
@@ -3695,7 +3695,7 @@ button.close {
 }
 .btn-mini {
   padding: 0 6px;
-  font-size: 9.75px;
+  font-size: 9px;
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
@@ -4010,16 +4010,16 @@ input[type="submit"].btn.btn-mini {
 .btn-group > .btn,
 .btn-group > .dropdown-menu,
 .btn-group > .popover {
-  font-size: 13px;
+  font-size: 12px;
 }
 .btn-group > .btn-mini {
-  font-size: 9.75px;
+  font-size: 9px;
 }
 .btn-group > .btn-small {
-  font-size: 11.049999999999999px;
+  font-size: 10.2px;
 }
 .btn-group > .btn-large {
-  font-size: 16.25px;
+  font-size: 15px;
 }
 .btn-group > .btn:first-child {
   margin-left: 0;
@@ -4716,7 +4716,7 @@ input[type="submit"].btn.btn-mini {
   width: 195px;
   margin-bottom: 0;
   padding: 4px 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1;
@@ -5419,7 +5419,7 @@ input[type="submit"].btn.btn-mini {
 .pagination-large ul > li > a,
 .pagination-large ul > li > span {
   padding: 11px 19px;
-  font-size: 16.25px;
+  font-size: 15px;
 }
 .pagination-large ul > li:first-child > a,
 .pagination-large ul > li:first-child > span {
@@ -5464,12 +5464,12 @@ input[type="submit"].btn.btn-mini {
 .pagination-small ul > li > a,
 .pagination-small ul > li > span {
   padding: 2px 10px;
-  font-size: 11.049999999999999px;
+  font-size: 10.2px;
 }
 .pagination-mini ul > li > a,
 .pagination-mini ul > li > span {
   padding: 0 6px;
-  font-size: 9.75px;
+  font-size: 9px;
 }
 .pager {
   margin: 20px 0;
@@ -5914,7 +5914,7 @@ a.thumbnail:focus {
 .badge {
   display: inline-block;
   padding: 2px 4px;
-  font-size: 10.998px;
+  font-size: 10.152px;
   font-weight: bold;
   line-height: 14px;
   color: #ffffff;
@@ -6955,7 +6955,7 @@ body {
   display: inline-block;
   padding: 5px;
   margin-bottom: 10px;
-  font-size: 13px;
+  font-size: 12px;
   color: #555555;
   border: 1px solid #ccc;
   -webkit-border-radius: 1px;
@@ -6982,6 +6982,45 @@ body {
 }
 .bkeditor-toolbar {
   margin-top: 0px !important;
+}
+.nav-files {
+  *zoom: 1;
+}
+.nav-files:before,
+.nav-files:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.nav-files:after {
+  clear: both;
+}
+.nav-files {
+  line-height: 14px;
+  padding: 0;
+  margin: 0 0 10px;
+}
+.nav-files > li {
+  margin-bottom: 2px;
+}
+.nav-files > li > a {
+  padding: 8px;
+  line-height: 20px;
+  border: 1px solid #ddd;
+  background: #fcfcfc;
+}
+.nav-files > li > a:hover,
+.nav-files > li > a:focus {
+  background: #f1f1f1;
+}
+.nav-files > .active > a,
+.nav-files > .active > a:hover,
+.nav-files > .active > a:focus {
+  color: #555555;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+  cursor: default;
 }
 /****IMPORTS****/
 #timeline {
