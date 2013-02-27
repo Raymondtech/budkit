@@ -47,16 +47,17 @@ class Attachments extends System\Content {
      */
     final public function upload() {
                 
+        //If uploading, i.e if post, get files and passto model
+         if ($this->input->methodIs("post")) {
+             echo 'We are uploading';
+         }
+        
         //Display the upload form   
         $view = $this->load->view("index");
         //$dashboard  = Controllers\Start\Dashboard::getInstance();
         //$this->output->set("upload", array( "title"=>"Upload Page Title" ));
-        
-        $form       = $this->output->layout("content/uploads/form");
-        $sidebar    = $this->output->layout("sidebar");
-        
-        $this->output->addToPosition("side", $sidebar);
-        $this->output->addToPosition("body", $form);
+        echo 'Uploading Content';
+
     }
     /**
      * Gets an instance of the command class

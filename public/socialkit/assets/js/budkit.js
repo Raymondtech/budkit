@@ -291,6 +291,11 @@
         this.options = $.extend({}, $.fn.bkuploader.defaults, options);
         this.field = $(field);
         this.form = $(field).closest('form');
+        this.iframe = $("<iframe />").attr({
+            height:0,
+            width:0,
+            name:'bkeditor-uploader-route'
+        }).insertAfter(this.field).hide();
         this.selector = $('<a />').addClass('add-on btn no-margin').text(this.field.attr("data-label") || "Choose File").insertAfter(this.field);
         ; 
         this.datalist = this.field.attr('data-display');
@@ -320,37 +325,41 @@
             if(this.datalist){
                 for (var x = 0; x < files.length; x++) {   
                     var pb  = $('<div />').addClass('progress mini-bar progress-striped active').append( $('<div />').addClass('bar'));
-                    ul.append( $('<li/>').append( $('<a />').text(files[x].name ).append( pb )  ) );
+                    ul.append( $('<li/>').append( $('<a />').text( files[x].name ).append( pb ) ) );
                 }
                 $(this.datalist).append(ul);
             }
-            
-    },
-    validate: function(){},
-    beginUpload: function(event){
-        event.preventDefault();     
-        alert('form is being submitted begin the upload process');
-    },
-    onUpload: function(){},
-    beforeUpload: function(){},
-    afterUpload: function(){},
-    abortUpload: function(){}
-};
-//Plugin Defintion
-$.fn.bkuploader = function(option) {
-    return this.each(function() {
-        var $this = $(this)
-        , data = $this.data('bkuploader')
-        , options = typeof option == 'object' && option;
-        if (!data)
-            $this.data('bkuploader', (data = new BKUploader(this, options)));
-    });
-};
-$.fn.bkuploader.defaults = {};
-$.fn.bkuploader.Constructor = BKUploader;
+            //@todo if autoupload
+            this.beginUpload( event );
+        },
+        validate: function(){},
+        beginUpload: function(event){
+            event.preventDefault();     
+            alert('form is being submitted begin the upload process');
+            //before upload
+            //on upload = during upload
+            //after upload
+        },
+        onUpload: function(){},
+        beforeUpload: function(){},
+        afterUpload: function(){},
+        abortUpload: function(){}
+    };
+    //Plugin Defintion
+    $.fn.bkuploader = function(option) {
+        return this.each(function() {
+            var $this = $(this)
+            , data = $this.data('bkuploader')
+            , options = typeof option == 'object' && option;
+            if (!data)
+                $this.data('bkuploader', (data = new BKUploader(this, options)));
+        });
+    };
+    $.fn.bkuploader.defaults = {};
+    $.fn.bkuploader.Constructor = BKUploader;
     
-//Plugin data api
-$(function() {
-    $('[data-target="budkit-uploader"]').bkuploader();
-})
+    //Plugin data api
+    $(function() {
+        $('[data-target="budkit-uploader"]').bkuploader();
+    })
 }(window.jQuery);
