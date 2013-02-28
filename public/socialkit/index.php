@@ -35,7 +35,7 @@
                     <div class="navbar margin-bottom-zero nav-home-page">
                         <div class="navbar-inner padding-zero no-margin">
                             <ul class="nav no-margin">
-                                <li><a href="/" class="nav-home-page-link"><i class="icon-home"></i></a></li>  
+                                <li><a href="/member/profile/view" class="nav-home-page-link"><i class="icon-eye-open"></i></a></li>  
                             </ul>
                         </div>
                     </div>

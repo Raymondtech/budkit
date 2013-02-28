@@ -65,8 +65,8 @@ class Menu extends Parse\Template {
         //We must have the menu id
         if (!isset($tag['ID']))
             return null;
-
-        $menuType = (isset($tag['TYPE'])) ? trim($tag['TYPE']) : "nav-list";
+        $menuId   = $tag['ID'];
+        $menuType = (isset($tag['TYPE'])) ? trim($tag['TYPE']) : null;
         $menuLtr = (isset($tag['POSITION'])) ? trim($tag['POSITION']) : "";
         $menuDepth = (isset($tag['LEVEL'])) ? trim($tag['LEVEL']) : 2;
 
@@ -82,10 +82,10 @@ class Menu extends Parse\Template {
         //print_R($menuItems);
         unset($tag['NAMESPACE']);
         unset($tag['TYPE']);
-        //unset($tag['POSITION']);
+        unset($tag['POSITION']);
 
         $tag['ELEMENT'] = 'ul';
-        $tag['CLASS'] = "nav $menuType $menuLtr";
+        $tag['CLASS'] = "nav $menuType $menuLtr {$tag['CLASS']}"; //Add any developer defined classes to the element;
         $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuLtr);
 
         //print_R($tag);
@@ -99,7 +99,7 @@ class Menu extends Parse\Template {
      * @param type $menuItems
      * @return type 
      */
-    public static function element($menuItems, $menuType = "nav-list", $menuDepth = 2, $menuPosition = '', $menuLevelParent = true) {
+    public static function element($menuItems, $menuType = "nav", $menuDepth = 2, $menuPosition = '', $menuLevelParent = true) {
 
         $li = array();
         $parent = 0;

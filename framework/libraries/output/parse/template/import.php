@@ -66,22 +66,38 @@ class Import extends Parse\Template {
 
         $document   = static::$document;
         $path       = isset($tag['LAYOUT']) ? $tag['LAYOUT'] : null;
-        $layout     = $loader->layout($path, null, ".tpl", FALSE);
+        $directory  = isset($tag['SUBTHEME']) ? $tag['SUBTHEME'] : null;
+        
+        //Get the directory if specified
+        if(!empty($directory)){
+            $parsed = static::getDataAttributeContent("SUBTHEME", $directory);       
+            if(!empty($parsed['replace'])):
+                 $directory = str_ireplace($parsed['searches'], $parsed['replace'], $directory);
+            endif;
+            
+            if(!empty($directory)) {
+                //Getting the subtheme value
+                $directory = FSPATH . 'public' . DS . Library\Config::getParam('template') .DS.'themes'.DS.$directory;
+            }
+        }
+        //Now load the layout
+        $layout     = $loader->layout($path, null, ".tpl", FALSE , $directory );
+        
         
         //Save the layout
         if (!empty($layout) && !isset(static::$imports[$layout])): //Unique layout names
             //static::$imports[$href] = $tag;
             //$path = str_replace(array('/','\\'), DS , $path);
             //$layout = FSPATH . 'public' . DS . $document->template . DS . $path;
-            
-            if(file_exists($layout)):
+                    
+            if(file_exists($layout)):            
                 //TODO@ file get contents might not be the best method here 
                 //to import and parse the file
                 $contents =  file_get_contents( $layout );
-                $layout   = self::_($contents, $document ); //read only
+                       
+                $layout   = self::_($contents, $document ); //read only  
                 //@TODO for lack of a better way to remove the XML declaration 
-                static::$imports[$path] = $layout = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "" , $layout);
-                
+                static::$imports[$path] = $layout = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "" , $layout);              
                 //print_R($layout);
                 $writer->writeRaw( $layout );
                 //print_R(static::$document );

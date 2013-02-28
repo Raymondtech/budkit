@@ -569,7 +569,7 @@ table {
   border-top: 2px solid #dddddd;
 }
 .table .table {
-  background-color: #f7f7f7;
+  background-color: none;
 }
 .table-condensed th,
 .table-condensed td {

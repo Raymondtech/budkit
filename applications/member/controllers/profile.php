@@ -61,7 +61,7 @@ class Profile extends \Platform\Controller {
         
         //check if this is a valid userid or usernameid
             //If it is a valid user, show the view page,
-            return $this->view( );
+            return $this->index( );
             //If its is NOT a valid user, return the 404 not found page
     }
     

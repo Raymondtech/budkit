@@ -37,7 +37,20 @@ final class Display extends Member\Profile{
      */
     public function timeline(){
         
-        $activity   = $this->output->layout("system/timeline");
+        $this->output->setPageTitle( _("Activity stream") );       
+        //Get the view;
+          
+        $user = \Platform\User::getInstance();
+        $model      = $this->load->model('activity' , 'system');
+        $activities = $model->getAll();   
+        
+        $this->set("activities", $activities);   
+        $this->set("dashboard", array("title"=>"Activity stream" ) );
+        $this->set("user", $user);
+        
+
+            
+        $activity   = $this->output->layout("system/activity/timeline");
         $this->output->addToPosition("body", $activity);
         
         return $this->index();

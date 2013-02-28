@@ -151,8 +151,8 @@ final class Schema extends Platform\Model {
         static::$database->query(
                 "INSERT INTO `?menu` (`menu_id`, `menu_parent_id`, `menu_title`, `menu_url`, `menu_classes`, `menu_order`, `menu_group_id`, `menu_type`, `menu_callback`, `lft`, `rgt`, `menu_iscore`) VALUES
                 (38, 0, 'Timeline', '/member/profile/display/timeline', NULL, 0, 5, 'link', NULL, 1, 2, 1),
-                (39, 0, 'About Me', '/member/profile/display/information', NULL, 0, 5, 'link', NULL, 3, 4, 1),
-                (40, 0, 'Achievements', '/member/profile/display/achievements', NULL, 0, 5, 'link', NULL, 5, 6, 1),
+                (39, 0, 'About', '/member/profile/display/information', NULL, 0, 5, 'link', NULL, 3, 4, 1),
+                (40, 0, 'Blog', '/member/profile/display/blog', NULL, 0, 5, 'link', NULL, 5, 6, 1),
                 (41, 0, 'Network', '/member/profile/display/network', NULL, 0, 5, 'link', NULL, 9, 10, 1),
                 (48, 0, 'Messages', '', NULL, 0, 4, 'link', NULL, 1, 6, 1),
                 (49, 48, 'All Messages', '/member/messages/all', NULL, 0, 4, 'link', NULL, 2, 5, 1),

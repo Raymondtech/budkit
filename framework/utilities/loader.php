@@ -179,7 +179,7 @@ final class Loader{
      * @param type $vars
      * @param type $return if false returns the url
      */
-    public function layout($layout,  $app='', $ext='.tpl', $include= FALSE){
+    public function layout($layout,  $app='', $ext='.tpl', $include= FALSE, $directory = null){
         
                 
         //Set the Application
@@ -197,13 +197,19 @@ final class Loader{
         $_layouts    = array( 
             FSPATH . 'public' . DS . $output->template .DS.'layouts'.DS.$layout.$ext,
             FSPATH . 'public' . DS . $output->template .DS.'layouts'.DS.$application.DS.$layout.$ext,
-            FSPATH."applications".DS.$application.DS."layouts".DS.$layout.$ext        
+            FSPATH."applications".DS.$application.DS."layouts".DS.$layout.$ext   
         );
+       
+        if(!empty($directory)){
+            array_unshift($_layouts, $directory.DS.$layout.$ext ); //If a directory is specified, first check in that directory
+        }
         
+        //die;
         //@TODO the ability to add more search paths;
         $path = null;
         
         foreach($_layouts as $i=>$_path){
+            //Debugger::log( $_path );
            if(file_exists($_path)){         
                $path  = $_path;
                break;

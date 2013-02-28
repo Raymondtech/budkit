@@ -106,8 +106,18 @@ abstract class Template extends Output\Parse {
      * 
      * @param type $path
      * @param type $default
+     * @todo  Default values from config data attribute call
      */
-    final public static function getConfigParam($path, $default=""){}
+    final public static function getConfigParam($path, $default=""){
+        
+        $parts      = explode('.', $path , 2);
+        $section    = reset($parts);
+        $key        = end( $parts );
+        
+        $data = Library\Config::getParam($key, $default, $section );
+        
+        return $data;
+    }
     
     /**
      * Converts a data string to an array
