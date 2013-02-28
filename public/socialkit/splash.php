@@ -11,6 +11,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
             <!-- Le styles -->
+            <link href="<?php echo $this->getTemplatePath() ?>/assets/css/prettify.css" rel="stylesheet" />
             <link href="<?php echo $this->getTemplatePath() ?>/assets/css/bootstrap.css" rel="stylesheet" />
             <link href="<?php echo $this->getTemplatePath() ?>/assets/css/bootstrap-responsive.css" rel="stylesheet" />
 
@@ -26,8 +27,7 @@
             <link rel="apple-touch-icon-precomposed" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-57-precomposed.png" />
             <link rel="shortcut icon" href="<?php echo $this->getTemplatePath() ?>/assets/ico/favicon.png" />
         </head>
-        <body>
-
+        <body onload="prettyPrint()">
             <div id="wrap">
                 <div class="container-box">
                     <div class="container-right">
@@ -46,11 +46,16 @@
                                         </div>
                                         <hr />
                                         <div>
-                                            <tpl:block data="page.block.actions" return="true"><a  href="/" tpl:i18n="">Home Page</a></tpl:block>
+                                            <tpl:block data="page.block.actions" return="true"><a  href="/" tpl:i18n="">Return to Home Page</a></tpl:block>
                                         </div>
                                     </article>
                                     <hr />
                                     <tpl:import layout="console" />
+                                    <div class="form-actions padding-left-zero">
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn" tpl:i18n="">Report Bug?</button> 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -65,6 +70,7 @@
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-alert.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-modal.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit-container.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/prettify.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-dropdown.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-scrollspy.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-tab.js"></script>

@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="options[general][site-seo]">Search Engine Optimization</label>
+                        <label class="control-label" for="options[general][site-seo]">SEO</label>
                         <div class="controls">
                             <label class="checkbox">
                                 <input type="checkbox" name="options[general][site-url-suffix]" value="1" />

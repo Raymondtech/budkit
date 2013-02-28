@@ -12,10 +12,10 @@
             <div class="span12">
                 <div class="widget-bucket" id="widget-bucket-1">
 
-                    <div class="widget naked">
-                        <div class="widget-head"><span class="widget-title">What's New</span><a class="widget-close" data-dismiss="widget"><i class="icon-remove"></i></a></div>
+                    <div class="widget">
+                        <!--<div class="widget-head"><span class="widget-title">What's New</span><a class="widget-close" data-dismiss="widget"><i class="icon-remove"></i></a></div>-->
                         <div class="widget-body">
-
+                            Dashboard
                         </div>
                     </div>
                 </div>

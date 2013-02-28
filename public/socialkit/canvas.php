@@ -11,6 +11,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
             <!-- Le styles -->
+            <link href="<?php echo $this->getTemplatePath() ?>/assets/css/prettify.css" rel="stylesheet" />
             <link href="<?php echo $this->getTemplatePath() ?>/assets/css/bootstrap.css" rel="stylesheet" />
             <link href="<?php echo $this->getTemplatePath() ?>/assets/css/bootstrap-responsive.css" rel="stylesheet" />
 
@@ -53,6 +54,7 @@
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-alert.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-modal.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit-container.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/prettify.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-dropdown.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-scrollspy.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-tab.js"></script>
@@ -62,6 +64,15 @@
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-collapse.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-carousel.js"></script>
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-typeahead.js"></script>
+            <script>
+            // @prettify
+            !function ($) {
+              $(function(){
+              window.prettyPrint && prettyPrint()   
+              })
+            }(window.jQuery);
+            // #prettify
+            </script>
         </body>
     </html>
 </tpl:layout>
