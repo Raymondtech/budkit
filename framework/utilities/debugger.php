@@ -72,6 +72,21 @@ final class Debugger extends Library\Log{
 	
         self::log(  static::$time , _t("Start execution time") , "info" );       
     }
+    
+    /**
+     * Provides an alias for the log message method
+     * 
+     * @param mixed $string
+     * @param string $title
+     * @param string $type
+     * @param string $typekey
+     * @param boolean $console
+     * @param boolean $logFile
+     * @return static::_()
+     */
+    public static function log($string,  $title="Console Log", $type="info",  $typekey="" ,$console=TRUE, $logFile=TRUE){
+        return static::_($string,  $title, $type,  $typekey ,$console, $logFile);
+    }
 
     /**
      * Records the debugger stop and stystem stop time

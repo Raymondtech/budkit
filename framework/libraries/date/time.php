@@ -49,6 +49,7 @@ class Time extends \Library\Date {
      */
     public static function now() {
         //returns the current timestamp
+        return \time();
     }
 
     /**

@@ -50,6 +50,62 @@ class Profile extends \Platform\Controller {
         
         $view->profilePage();
     }
+    
+        /**
+     * Displays the profile timeline
+     * @return @return false
+     */
+    public function timeline(){
+        
+        $this->output->setPageTitle( _("Activity stream") );       
+        //Get the view;
+          
+        $user = \Platform\User::getInstance();
+        $model      = $this->load->model('activity' , 'system');
+        $activities = $model->getAll();   
+        
+        $this->set("activities", $activities);   
+        $this->set("dashboard", array("title"=>"Activity stream" ) );
+        $this->set("user", $user);
+        
+
+            
+        $activity   = $this->output->layout("system/activity/timeline");
+        $this->output->addToPosition("body", $activity);
+        
+        return $this->index();
+        
+    }
+    
+    /**
+     * Displays the basic profile inforation
+     * @todo Profile Information
+     * @return void
+     */
+    public function information(){
+        return $this->index();
+    }
+    
+    
+    /**
+     * Displays the profile's achievement
+     * @return void
+     */    
+    public function achievements(){       
+        echo "achievements";
+        return $this->index();
+    }
+    
+    
+    /**
+     * Displays the profile network graph
+     * @return void
+     */   
+    public function network(){
+        echo "network";
+        return $this->index();
+    }
+
 
     /**
      * Use for displaysing profiles requested using vanity username profile calls, e.g /member/profile/livingstone.fultang

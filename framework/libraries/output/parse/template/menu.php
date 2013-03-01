@@ -86,7 +86,13 @@ class Menu extends Parse\Template {
 
         $tag['ELEMENT'] = 'ul';
         $tag['CLASS'] = "nav $menuType $menuLtr {$tag['CLASS']}"; //Add any developer defined classes to the element;
-        $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuLtr);
+        
+        //print_R( \Library\Event::$hooks );
+        
+        \Library\Event::trigger("beforeRenderMenu", $menuId, $menuItems );
+        
+        
+        $tag['CHILDREN'] = static::element((array)$menuItems, $menuType, $menuDepth, $menuLtr);
 
         //print_R($tag);
         //Always return the modified element
@@ -146,7 +152,6 @@ class Menu extends Parse\Template {
                 $id = $item['menu_id'];
                 $parent = $item['menu_parent_id'];
             endif;
-
 
             //Count children
             if (isset($item['children']) && count($item['children']) > 0 && $menuLevelParent ) {

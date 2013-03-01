@@ -49,12 +49,12 @@ abstract class Object {
      */
     protected static $errors = array();
 
-   /**
+    /**
      * A bunch of hooks to run at various stages during parsing
      *
      * @var type
      */
-    protected static $hooks = array();
+    public static $hooks = array();
 
     /**
      * This method prevents object cloning
@@ -62,7 +62,7 @@ abstract class Object {
      * @return void;
      */
     final private function __clone() {
-
+        
     }
 
     /**
@@ -130,13 +130,30 @@ abstract class Object {
                 }
 
                 //Now store the event;
-                array_unshift(static::$hooks[$name], $hook);
+                array_push(static::$hooks[$name], $hook);
             } else {
                 return false; //no callback defined;
             }
         } else {
             return false; //Event can't be stored
         }
+    }
+
+    /**
+     * Solution to passing data by reference, 
+     * http://ca.php.net/manual/en/mysqli-stmt.bind-param.php#96770
+     * @param type $arr
+     * @return type
+     */
+    final private static function referencedArgs($arr) {
+        if (strnatcmp(phpversion(), '5.3') >= 0) { //Reference is required for PHP 5.3+ 
+            $refs = array();
+            foreach ($arr as $key => $value)
+                $refs[$key] = &$arr[$key];
+            return $refs;
+        }
+        
+        return $arr;
     }
 
     /**
@@ -148,30 +165,22 @@ abstract class Object {
      *
      */
     final public static function trigger() { //$event, [$data = '', ]...
-
         //Just arbitrary context so we know who is calling
-        $context = (!isset(static::$eventContext)) ? _t("System events") : static::$eventContext ;
-         
+        $context = (!isset(static::$eventContext)) ? _t("System events") : static::$eventContext;
+
         // get func args
         $args = func_get_args(); //eventName, [callBackargs, ]
-        
         //First argument must be a string with the name of the event
-        if (!is_array($args) || !isset($args[0]) || !is_string($args[0]))  return false;
-        
+        if (!is_array($args) || !isset($args[0]) || !is_string($args[0]))
+            return false;
+
         $event = array_shift($args);  //remove it once we know the event; 
-        $data  = $args; //rest of the arguments;
-        $time   = \microtime( true );
+        $data = $args; //rest of the arguments;
         //if the event is defined
         if (static::isDefined($event)) {
             //for each even execute callback
-
-            //echo $event;
-            
-            //print_R($data);
-
             $events = static::$hooks[$event];
             $results = array();
-            
 
             //triggering the event;
             foreach ($events as $i => $hook) {
@@ -182,14 +191,16 @@ abstract class Object {
                 if (is_callable($callback)) {
 
                     //@TODO group the calls together and output only once! Log in the console
+                    //$time   = \microtime( true );
                     //\Platform\Debugger::log(sprintf(_t("[%s] Calling %1s() at %2s in %3s context"),$time, $callback, $event, $context), $event, "success");
-
                     //@TODO Determine Method Name from
                     //CallBack directive to use as indices in results array
-                    $data = call_user_func_array($callback, $data );
-                    
+                    $data = \call_user_func_array($callback, static::referencedArgs( $args ) );
+
                     //It is important that convention is followed when returning data from a call back
                     //simply return an array with the modified params! e.g trigger(a, b, z) where a is the callback and b, z are data vars return modified data as array(b, z);
+                
+                    
                 }
             }
             //print_R($events);
@@ -208,7 +219,7 @@ abstract class Object {
      * @param mixed $default
      * @return mixed
      */
-    public function get($property, $default=null) {
+    public function get($property, $default = null) {
 
         //if its an array of properties;
         if (is_array($property)) {
@@ -294,7 +305,7 @@ abstract class Object {
      * @param type $value
      * @return type
      */
-    public function set($property, $value = null, $overwrite=false) {
+    public function set($property, $value = null, $overwrite = false) {
 
         $previous = isset($this->$property) ? $this->$property : null;
 

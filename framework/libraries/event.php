@@ -44,9 +44,36 @@ class Event extends \Library\Object {
      * Stores all registered Event hooks
      * @var array 
      */
-    public static $hooks = array();
-   
-    
+    //public static $hooks = array();
+
+    /**
+     * Loads system event hooks
+     * 
+     * @param string $ext
+     * @param string $path
+     */
+    public static function loadHooks($ext = '.inc', $path = "") {
+
+        $hooks = FSPATH . 'hooks' . $ext;
+
+        if (!\Library\Folder\Files::isFile($hooks)) {
+            Log::_('The main system hook file hook' . $ext . ' does not exist.');
+            return false;
+        }
+        //Load the hook file
+        require_once( $hooks );
+        //Find all the config files in apps
+        $_hooks = \Library\Folder::itemizeFind("hooks.inc", APPPATH, 0, TRUE, 1);
+
+        //print_R($routers);
+        foreach ($_hooks as $i => $_hooksFile) {
+            if (!\Library\Folder::is($_hooksFile)) {
+                //include the individual app hooks
+                @require_once rtrim($_hooksFile, DS);
+            }
+        }
+    }
+
     /**
      * Gets an instance of the Library\Exception Object
      * 
@@ -64,5 +91,6 @@ class Event extends \Library\Object {
 
         return $instance;
     }
+
 }
 

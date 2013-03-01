@@ -544,12 +544,9 @@ class Parser extends Files\Xml {
             $uri = end($element['NAMESPACE']);
             $method = $element['ELEMENT'];
 
-            if (array_key_exists($prefix, static::$methods)){
-                
+            if (array_key_exists($prefix, static::$methods)){             
                 $class  = static::$methods[$prefix].ucfirst($method); 
-
                 if(!method_exists($class, "execute")) return $element;
-   
                 return call_user_func("$class::execute", static::$parser, $element, $xmlWriter);
             }
         }
