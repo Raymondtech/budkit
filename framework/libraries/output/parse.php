@@ -75,7 +75,7 @@ class Parse extends Library\Object {
         $DOCUMENT = $XmlParser::getDocument();
         
         //Register callbacks
-        Library\Event::register("_XMLAttributeCallback", "Library\Output\Parse\Template\Element::attribute");
+        Library\Event::register("_XMLAttributeCallback", "\Library\Output\Parse\Template\Element::attribute");
         //Library\Event::register("_XMLContentCallback", "Library\Output\Parse\Template\Element::content");
         
         //Readonly contains an array of the only tpl methods which the parser will execute

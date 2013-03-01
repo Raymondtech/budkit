@@ -145,11 +145,11 @@ abstract class Object {
      * @param type $arr
      * @return type
      */
-    final private static function referencedArgs($arr) {
+    final private static function referencedArgs(&$arr) {
         if (strnatcmp(phpversion(), '5.3') >= 0) { //Reference is required for PHP 5.3+ 
             $refs = array();
             foreach ($arr as $key => $value)
-                $refs[$key] = &$arr[$key];
+                $refs[] = &$arr[$key];
             return $refs;
         }
         
@@ -157,31 +157,23 @@ abstract class Object {
     }
 
     /**
-     * Triggers a registered Event, and returns results
+     * Triggers a registered Event, and returns results.
+     * Maximum of 4 arguments passed by reference
      *
      * @param type $event
      * @param type $data
      * @return false if undefined, results from callback hooks
      *
      */
-    final public static function trigger() { //$event, [$data = '', ]...
-        //Just arbitrary context so we know who is calling
-        $context = (!isset(static::$eventContext)) ? _t("System events") : static::$eventContext;
+    final public static function trigger($event, &$param0 = '', &$param1 = '', &$param2 = '' , &$param3 = '') { //$event, [$data = '', ]...
 
-        // get func args
-        $args = func_get_args(); //eventName, [callBackargs, ]
-        //First argument must be a string with the name of the event
-        if (!is_array($args) || !isset($args[0]) || !is_string($args[0]))
-            return false;
-
-        $event = array_shift($args);  //remove it once we know the event; 
-        $data = $args; //rest of the arguments;
+        $data = $params = array();
+        //print_r($argc);
+        //die;
         //if the event is defined
         if (static::isDefined($event)) {
             //for each even execute callback
             $events = static::$hooks[$event];
-            $results = array();
-
             //triggering the event;
             foreach ($events as $i => $hook) {
 
@@ -195,7 +187,7 @@ abstract class Object {
                     //\Platform\Debugger::log(sprintf(_t("[%s] Calling %1s() at %2s in %3s context"),$time, $callback, $event, $context), $event, "success");
                     //@TODO Determine Method Name from
                     //CallBack directive to use as indices in results array
-                    $data = \call_user_func_array($callback, static::referencedArgs( $args ) );
+                    $data = \call_user_func_array($callback, array(&$param0 ,&$param1, &$param2 , &$param3) );
 
                     //It is important that convention is followed when returning data from a call back
                     //simply return an array with the modified params! e.g trigger(a, b, z) where a is the callback and b, z are data vars return modified data as array(b, z);

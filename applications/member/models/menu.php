@@ -29,39 +29,48 @@ namespace Application\Member\Models;
  * 
  */
 class Menu extends \Platform\Model {
-  
-          
-    public function __construct() {       
-        parent::__construct();        
+
+    public function __construct() {
+        parent::__construct();
     }
-    
-    public static function hook( $menuId, &$menuItems ){
-        //Add items to the profile menu;
-        //print_R($menuItems);
-        
-        $menuItems = array();
-        
+
+    /**
+     * Adds Dynamic menu items
+     * @param type $menuId
+     * @param type $menuItems
+     */
+    public static function hook(&$menuId, &$menuItems) {
+
+        if ($menuId === 'profilemenu') {
+            //Add items to the profile menu;
+            array_unshift($menuItems, Array(
+                "menu_title" => "Home",
+                "menu_url" => "/"
+            ));
+        }
     }
-    
+
     /**
      * This model has no data to display
      * @return boolean
      */
-    public function display(){ return false; }
-    
+    public function display() {
+        return false;
+    }
+
     /**
      * Returns an instance of the user EAV model
      * @staticvar object $instance
      * @return object User
      */
-    public static function getInstance(){     
-        static $instance;      
+    public static function getInstance() {
+        static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
-        $instance =  new self();
+        if (isset($instance))
+            return $instance;
+        $instance = new self();
         return $instance;
     }
-    
-}
 
+}
 

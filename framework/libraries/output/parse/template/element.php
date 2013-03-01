@@ -67,17 +67,15 @@ class Element extends Parse\Template {
      * @param type $writer
      * @return boolean 
      */
-    public static function attribute($attribute, $content, $writer) {
+    public static function attribute(&$attribute, &$content, &$writer) {
 
         //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
         $parsed = static::getDataAttributeContent($attribute, $content);
         
-        //print_R($content);
-        
         if(!empty($parsed)):
              $content = str_ireplace($parsed['searches'], $parsed['replace'], $content);
         endif;
-        
+
         //Automatically internalize HREFs! 
         //@TODO Use call backs of type i.x _XMLAttributeCallbackOn<type> e.g _XMLAttributeCallbackOnHref
         $references = array("HREF", "ACTION");
@@ -85,7 +83,7 @@ class Element extends Parse\Template {
             $content = \Library\Uri::internal($content);
         }
 
-        return array($attribute, $content, $writer);
+        return;
     }
 
     /**

@@ -91,6 +91,7 @@ class Menu extends Parse\Template {
         
         \Library\Event::trigger("beforeRenderMenu", $menuId, $menuItems );
         
+        //echo $menuId;
         
         $tag['CHILDREN'] = static::element((array)$menuItems, $menuType, $menuDepth, $menuLtr);
 
@@ -144,14 +145,6 @@ class Menu extends Parse\Template {
                     )
                 )
             );
-                   
-            //Ammend active path if tab is active;
-            //@TODO am i a child? who is my parent?
-            //@TODO build a tag
-            if ($active):
-                $id = $item['menu_id'];
-                $parent = $item['menu_parent_id'];
-            endif;
 
             //Count children
             if (isset($item['children']) && count($item['children']) > 0 && $menuLevelParent ) {

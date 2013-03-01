@@ -421,15 +421,14 @@ class Parser extends Files\Xml {
                             //Else
                             //@TODO Deal with namespaced attributes
                             //@TODO trigger Last
-                            //echo $element;   
-                            
+                            //echo $element;                              
                             //print_R(\Library\Event::getInstance());
-                            
-                            $return = Library\Event::trigger("_XMLAttributeCallback", $element, $data, $xmlWriter);
-                            
-                            //echo($attribute);
-                            $xmlWriter->startAttribute(strtolower($return[0]));
-                            $xmlWriter->text( $return[1] );
+                            Library\Event::trigger("_XMLAttributeCallback", $element, $data, $xmlWriter);
+
+                            //$xmlWriter->startAttribute(strtolower($return[0]));
+                            //$xmlWriter->text( $return[1] );
+                            $xmlWriter->startAttribute(strtolower($element));
+                            $xmlWriter->text( $data );
                             $xmlWriter->endAttribute();
                         }          
                     endif;

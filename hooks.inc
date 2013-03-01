@@ -24,6 +24,10 @@
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ * 
+ * To modify data passed as argument, hook callback methods must be defined to 
+ * accept variables passed by reference. i.e &$variable. There is a limit number of
+ * variables a trigger can pass to callbacks
  *
  * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
@@ -35,7 +39,6 @@
  * 
  * 
  */
-
 class Hook{
     
     public static function beforeMenuRender($menuId, $menuItems){}
