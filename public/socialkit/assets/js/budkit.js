@@ -32,7 +32,7 @@
         this.editorbar = $("<div/>").hide().addClass("bkeditor-toolbar btn-toolbar").appendTo(this.container);
 
         //iframe
-        this.iframe = $("<iframe/>").addClass("bkeditor-content input").height(this.element.outerHeight()).width(this.element.outerWidth()).appendTo(this.container) //.addClass("bkeditor-content input").appendTo(this.container).width(this.element.outerWidth()).attr("contenteditable", true);                     
+        this.iframe = $("<iframe/>").addClass("bkeditor-content input").height(this.element.outerHeight()).width("100%").appendTo(this.container) //.addClass("bkeditor-content input").appendTo(this.container).width(this.element.outerWidth()).attr("contenteditable", true);                     
 
         //Not all browsers use ContentWindow this will fail in Firefox
         var edit = this.editor = this.iframe[0].contentWindow.document;

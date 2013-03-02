@@ -56,6 +56,7 @@
                     </tpl:condition> 
                 </div>
                 <div class="container-box has-left has-menu-box">
+                    <tpl:import layout="navbar" />
                     <div class="container-left">                 
                         <tpl:import layout="sidebar" />
                     </div>
@@ -64,7 +65,7 @@
                             <tpl:import layout="asidebar" />
                         </div>
                         <div class="container-content">
-                            <tpl:import layout="navbar" />
+                            
                             <div class="container-bucket">
                                 <tpl:block data="page.block.alerts" /> 
                                 <tpl:block data="page.block.body">Content</tpl:block>

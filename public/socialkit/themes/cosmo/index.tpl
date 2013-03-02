@@ -39,7 +39,7 @@
                             <tpl:menu id="profilemenu" type="nav"></tpl:menu>
                             
                             <ul class="nav pull-right">
-                                <li><a href="#">Dashboard</a></li>
+                                <li><a href="/system/start/index">Dashboard</a></li>
                             </ul>
                         </div><!-- /.nav-collapse -->
                     </div>

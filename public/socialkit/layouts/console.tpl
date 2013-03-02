@@ -13,7 +13,7 @@
                 <div class="footer top-pad">
                     <ul class="unstyled">
                         <li><tpl:element type="text" formatting="sprintf" data="debug.speed">Request completed in %s ms. </tpl:element></li>
-                        <li><tpl:element type="text" formatting="sprintf" data="debug.queries">%s database queries executed (excludes session queries). </tpl:element></li>
+                        <li><tpl:element type="text" formatting="sprintf" data="debug.queries">%s database queries executed. </tpl:element></li>
                         <li><tpl:element type="text" formatting="sprintf" data="debug.memory">Memory usage %s</tpl:element></li>
                     </ul>
                 </div>

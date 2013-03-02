@@ -1,9 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar margin-bottom-zero">
-        <div class="navbar-inner  padding-left-half padding-right-half no-margin">
 
-        </div>
-    </div>
     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
         <ul class="nav nav-list">
             <li class="nav-header">Trending</li>
