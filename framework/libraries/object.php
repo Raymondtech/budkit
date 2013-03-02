@@ -25,7 +25,6 @@
 
 namespace Library;
 
-use Platform;
 
 /**
  * What is the purpose of this class, in one sentence?

@@ -39,8 +39,11 @@
  * 
  * 
  */
-class Hook{
-    
-    public static function beforeMenuRender($menuId, $menuItems){}
-    
-}
+//onStart();
+//onShutdown()
+//beforeDispatch();
+//beforeRedirect();
+//beforeMenuRender($menuId, $menuItems);
+//beforeRoute($path);
+//afterRoute(\Library\Router);
+

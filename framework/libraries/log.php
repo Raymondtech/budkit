@@ -116,6 +116,9 @@ class Log extends Object{
     public static function _( $string,  $title="Console Log", $type="info",  $typekey="" ,$console=TRUE, $logFile=TRUE){
   
         $output     = \Library\Output::getInstance();
+        //Remember to set the file;
+        self::$file = Config::getParam("logfile","system.log");
+
         //$output->addToPosition("do:console", $msgString , '', '', FALSE);
         	
         //If isset this $log;
@@ -155,9 +158,6 @@ class Log extends Object{
             return $instance;
 
         $instance = new self;
-
-        //Remember to set the file;
-        self::$file = Config::Param("logfile","system.log");
 
         return $instance;
     }

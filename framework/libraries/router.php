@@ -301,7 +301,7 @@ final class Router extends Object {
      */
     private function whatRoute($path ="", $segments = array(), $segCount = 0) {
 
-        Event::trigger('onBeforeRoute', $path);
+        Event::trigger('beforeRoute', $path);
 
         //Loads all the route maps into $this->routes;
         $this->loadRoutes();
@@ -467,7 +467,7 @@ final class Router extends Object {
                     ->setView($view)
                     ->setFormat($format);
 
-            Event::trigger('onAfterRoute', $this);
+            Event::trigger('afterRoute', $this);
 
             $this->routeMap = $route;
             $this->resolved = true;

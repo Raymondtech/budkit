@@ -175,7 +175,7 @@ final class Dispatcher extends \Library\Object {
         endif; 
         
         //@TODO Should we Allow onBeforeDispatch to modify $this->task?
-        Library\Event::trigger('onBeforeDispatch', $route);
+        Library\Event::trigger('beforeDispatch', $route);
         
         //Register the session lastRequestURL;
         //$referer = $this->task->input->getString("HTTP_REFERER","/","server");
@@ -196,7 +196,7 @@ final class Dispatcher extends \Library\Object {
     public function redirect($url = '', $code = 302, $message = '') {
 
         //Before Dispatch Event
-        Library\Event::trigger('onBeforeRedirect');
+        Library\Event::trigger('beforeRedirect');
         //echo $url;
         //print_R($this->route);
         $redirect = empty($url) ? trim($this->task->redirect) : $url;

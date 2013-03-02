@@ -45,7 +45,7 @@ class Menu extends \Platform\Model {
             //Add items to the profile menu;
             array_unshift($menuItems, Array(
                 "menu_title" => "Home",
-                "menu_url" => "/"
+                "menu_url" => "/member/profile/view"
             ));
         }
     }

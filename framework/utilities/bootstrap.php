@@ -39,6 +39,13 @@ spl_autoload_register(new Platform\Loader("Platform", array( FSPATH . 'framework
 spl_autoload_register(new Platform\Loader("Library", array( FSPATH . 'framework' . DS . 'libraries', FSPATH . 'vendors' . DS . 'libraries') ) );
 spl_autoload_register(new Platform\Loader("Application", array( FSPATH . 'applications', FSPATH .'vendors'.DS. 'applications')));
 
+/*
+ * ------------------------------------------------------
+ *  Start the Debugging and Logging
+ * ------------------------------------------------------
+ */
+Debugger::start();
+
 /**
  * -----------------------------------------------------
  *  Set the default timezone
@@ -68,13 +75,6 @@ register_shutdown_function(array("\Platform\Error", "shutdown"));
  * ------------------------------------------------------
  */
 \Library\Event::loadHooks();
-
-/*
- * ------------------------------------------------------
- *  Start the Debugging and Logging
- * ------------------------------------------------------
- */
-Debugger::start();
 
 /*
  * ------------------------------------------------------
