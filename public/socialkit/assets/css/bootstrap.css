@@ -657,7 +657,7 @@ a:focus {
   position: absolute;
   top: 0;
   bottom: 0px;
-  width: 80px;
+  width: 75px;
   left: 0;
   background: #2f2f2f;
 }
@@ -669,7 +669,7 @@ a:focus {
   bottom: 0;
 }
 .container-box.has-menu-box {
-  left: 80px;
+  left: 75px;
 }
 .container-box .container-left {
   width: 195px;
@@ -6959,7 +6959,7 @@ input.search-query {
   margin: 0px !important;
   line-height: 40px;
   text-align: center;
-  width: 50px;
+  width: 45px;
 }
 .navbar-inner {
   padding-left: 0px;
