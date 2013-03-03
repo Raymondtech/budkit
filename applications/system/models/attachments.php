@@ -232,6 +232,13 @@ class Attachments extends Platform\Entity {
                 $fd = fopen($fullPath, "rb");
             }
         endif;
+        //Attempt to determine the files mimetype
+        $ftype  = "application/octet-stream";
+        $finfo  = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+        $fmtype = finfo_file($finfo, $fullPath); 
+        finfo_close($finfo);    
+        $ftype = !empty($fmtype) ? $fmtype : $ftype;
+
         //Get the file stream
         if(!$fd){ $fd = fopen($fullPath, "rb"); }
         
@@ -241,9 +248,9 @@ class Attachments extends Platform\Entity {
             $attachment->output->setFormat('raw');
             $attachment->output->setHeader("Pragma", null);
             $attachment->output->setHeader("Cache-Control", "");
-            $attachment->output->setHeader("Content-type", "application/octet-stream");
+            $attachment->output->setHeader("Content-type", $ftype);
             $attachment->output->setHeader("Content-Disposition", "attachment; filename=\"" . $fname . "\"");
-            $attachment->output->setHeader("Content-length", $fsize);
+            //$attachment->output->setHeader("Content-length", $fsize);
 
             fpassthru($fd);
         }
