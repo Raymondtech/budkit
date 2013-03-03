@@ -657,7 +657,7 @@ a:focus {
   position: absolute;
   top: 0;
   bottom: 0px;
-  width: 60px;
+  width: 80px;
   left: 0;
   background: #2f2f2f;
 }
@@ -669,7 +669,7 @@ a:focus {
   bottom: 0;
 }
 .container-box.has-menu-box {
-  left: 60px;
+  left: 80px;
 }
 .container-box .container-left {
   width: 195px;
@@ -5125,18 +5125,18 @@ input[type="submit"].btn.btn-mini {
   float: left;
   display: block;
   font-size: 20px;
-  color: #ffffff;
   text-decoration: none;
   font-weight: 400;
   min-width: 250px;
   padding: 20px 1px 8.5px;
-  color: #78c8e6;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  color: #ffffff;
 }
 .topic:hover,
 .topic:focus {
   color: #ffffff;
   text-decoration: none;
+  color: #78c8e6;
 }
 .navbar-subnav .navbar-inner {
   min-height: 37px;
@@ -6958,6 +6958,21 @@ input.search-query {
   font-size: 24px;
   margin: 0px !important;
   line-height: 40px;
+  text-align: center;
+  width: 50px;
+}
+.navbar-inner {
+  padding-left: 0px;
+}
+.navbar-inner .brand {
+  min-width: 195px;
+  padding-left: 4px;
+  padding-right: 0px;
+  background: transparent url(../img/logo.png) 0 5px no-repeat;
+  text-indent: -9999em;
+}
+.navbar-subnav .navbar-inner {
+  padding-left: 4px;
 }
 .bkeditor-content {
   min-height: 29px;

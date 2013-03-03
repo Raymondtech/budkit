@@ -261,8 +261,12 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
         .nav{ border-right: 1px solid #3D79B6; }
     }
 }
-.nav-home-page-link{ font-size: 24px; margin: 0px !important; line-height: 40px; }
-
+.nav-home-page-link{ font-size: 24px; margin: 0px !important; line-height: 40px; text-align:center; width: 50px}
+.navbar-inner{
+     padding-left: 0px;
+    .brand{ min-width: 195px; padding-left:@gridGutterWidth *0.2; padding-right: 0px; background: transparent url(../img/logo.png) 0 5px no-repeat; text-indent: -9999em; }
+}
+.navbar-subnav{.navbar-inner{padding-left:@gridGutterWidth *0.2} }
 .bkeditor-content{ 
     min-height: 29px;
     &:focus{ min-height: 150px; }

@@ -5,11 +5,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </button>                         
+            </button> 
+            <a class="brand" href="/">Budkit</a>
             <div class="nav-collapse collapse">
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-
-                    
                     <ul class="nav pull-right"> 
                         <li class="usermenu dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
