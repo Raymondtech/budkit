@@ -117,6 +117,8 @@ class Output extends Object {
     protected $code = 200;
     protected $format;
     protected static $prints;
+    
+    public $headers = array();
 
     /**
      * Construcst the output object
@@ -144,6 +146,15 @@ class Output extends Object {
      */
     final public function getVariables() {
         return $this->variables;
+    }
+    
+    
+    /**
+     * Returns all the protected output variables
+     * @return array;
+     */
+    final public function getHeaders() {
+        return $this->headers;
     }
 
     /**
@@ -178,11 +189,11 @@ class Output extends Object {
      * @param type $format
      * @return void
      */
-    final public function setFormat($format) {
+    final public function setFormat($format, $headers = array()) {
 
         $this->router->setFormat($format);
-
-        $this->format = $this->router->getFormat();
+        $this->headers = $headers;
+        $this->format  = $this->router->getFormat();
     }
 
     /**
@@ -368,7 +379,7 @@ class Output extends Object {
         //The requested Response format
         $Document = $this->getHandler();
 
-        return $Document->render($template, $httpCode);
+        return $Document->render($template, $httpCode, $this->getHeaders());
     }
 
     /**
@@ -504,7 +515,18 @@ class Output extends Object {
      * @param type $value
      */
     final public function setHeader($name, $value) {
-        @header("{$name} : {$value}");
+        @header("{$name}: {$value}");
+        return $this;
+    }
+    
+    /**
+     * Removes a previously sent header type to the output
+     *
+     * @param type $name
+     * @param type $value
+     */
+    final public function unsetHeader($name) {
+        @header_remove($name);
         return $this;
     }
 
@@ -517,36 +539,6 @@ class Output extends Object {
      */
     final public function headers($mimeType = 'text/html', $charset = 'utf-8') {
 
-        //Response codes;
-        //To satisfy the PRG patter, and prevent form resubmissions, we need to
-        //Check whether the input had any post data in it, in other words chcek uri->getMethod();
-        $method = Input::getMethod();
-
-        //We also do not want to use HTTP_PREDIRECT (301) because some browser won't change to GET
-        if ((strtoupper($method) == "POST") && in_array($this->code, array(HTTP_OK, HTTP_PREDIRECT))) {
-
-            //@TODO make sure the browser does not resubmit the post;
-            $this->setResponseCode(HTTP_OK); //To prevent form resubmission
-            //echo $method;
-        }
-
-        $expires = 60 * 60 * 24 * 14;
-
-        @header("Pragma: public");
-        //@header("Cache-Control: no-cache");
-        //@header("Cache-Control: maxage=" . $expires);
-        //@header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT');
-        $httpStatus = "HTTP/1.1 {$this->code} {$this->getHttpCodeString()}";
-
-        //echo $httpStatus;
-
-        @header($httpStatus);
-
-
-        @header('Content-type: ' . $mimeType . '; charset=' . $charset);
-        @header('Content-language: en_GB');
-
-        return $this;
     }
 
     /**

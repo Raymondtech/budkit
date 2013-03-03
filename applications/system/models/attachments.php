@@ -209,7 +209,7 @@ class Attachments extends Platform\Entity {
      * @param type $object
      * @param type $params
      */
-    final public function load(&$object, &$params) {
+    final public static function load(&$object, &$params) {
         
         //if is object $object
         if (!is_a($object, "\Platform\Entity") || $object->getObjecType() !== "attachment") {
@@ -245,14 +245,24 @@ class Attachments extends Platform\Entity {
         if ($fd) {
             $fsize = filesize($fullPath);
             $fname = basename($fullPath);
-            $attachment->output->setFormat('raw');
-            $attachment->output->setHeader("Pragma", null);
-            $attachment->output->setHeader("Cache-Control", "");
-            $attachment->output->setHeader("Content-type", $ftype);
-            $attachment->output->setHeader("Content-Disposition", "attachment; filename=\"" . $fname . "\"");
+            $headers = array(
+                "Pragma"=>null,
+                "Cache-Control"=>"",
+                "Content-type"=> $ftype,
+            );
+            foreach($headers as $name=>$value){
+                $attachment->output->unsetHeader($name);
+                $attachment->output->setHeader($name, $value);
+            }         
+            fpassthru($fd);         
+            fclose($fd);
+            
+            $attachment->output->setFormat('raw', array());//Headers must be set before output 
+            //
+            $attachment->output->display();
+            //$attachment->output->setHeader("Content-Disposition", "attachment; filename=\"" . $fname . "\"");
             //$attachment->output->setHeader("Content-length", $fsize);
-
-            fpassthru($fd);
+           
         }
 
         //Here is the attachment source, relative to the FSPATH;

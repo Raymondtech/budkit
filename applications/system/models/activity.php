@@ -99,7 +99,7 @@ class Activity extends Platform\Entity {
             $actorObject->set("uri", $object['user_name_id']);
             
             $actorImage  = Activity\MediaLink::getInstance();
-            $actorImageURL = "http://placeskull.com/50/50/999999";
+            $actorImageURL = !empty($object['user_photo'])?"/system/object/{$object['user_photo']}/resize/50/50":"http://placeskull.com/50/50/999999";
             $actorImage->set("url", $actorImageURL);
             $actorImage->set("height", 50);
             $actorImage->set("width", 50);
@@ -159,7 +159,7 @@ class Activity extends Platform\Entity {
             endforeach;
 
             //Join the UserObjects Properties
-            $_actorProperties = $this->load->model("user", "member")->getPropertyModel();
+            $_actorProperties = $this->load->model("profile", "member")->getPropertyModel();
             $actorProperties = array_diff(array_keys($_actorProperties), array("user_password", "user_api_key", "user_email"));
             $count = count($actorProperties);
             if (!empty($actorProperties) || $count < 1):
@@ -241,7 +241,7 @@ class Activity extends Platform\Entity {
         $mediaLink = Activity\MediaLink::getInstance();
 
         //Determine the target
-        if (!$this->saveObject()) {
+        if (!$this->saveObject(null, "activity")) {
             //There is a problem! the error will be in $this->getError();
             return false;
         }

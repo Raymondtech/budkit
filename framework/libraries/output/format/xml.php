@@ -48,11 +48,11 @@ final class XML extends Library\Output\Document {
      * 
      * @return string json
      */
-    public function render($httpCode=null) {
+    public function render($template=null, $httpcode=200, $headers = array()) {
 
         //1. Work on the headers, make sure everything is beautiful
         //json response headers
-        $this->headers('text/xml');
+        $this->setHeaders("Content-type", "text/xml");
 
 
         echo "XML output";

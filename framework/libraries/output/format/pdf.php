@@ -48,11 +48,11 @@ final class PDF extends Library\Output\Document {
      * 
      * @return string json
      */
-    public function render($httpCode=null) {
+    public function render($template=null, $httpcode=200, $headers = array()) {
         
         //1. Work on the headers, make sure everything is beautiful
         //json response headers
-        $this->headers('application/pdf');
+        $this->setHeader('Content-type','application/pdf');
 
         //2. Import JSON Library;
         $json = \Library\Folder::getFile("json");
