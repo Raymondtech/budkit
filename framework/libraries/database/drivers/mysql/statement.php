@@ -61,8 +61,8 @@ final class Statement extends \Library\Database\Results {
         $DB = $this->getDBO();
         //Run the Query;
         $resultId = $DB->exec();
-        $this->setResultId( $resultId )->setConnectionId($DB->getResourceId())->setAffectedRows($this->getAffectedRows());
-        
+        $this->setResultId($resultId)->setConnectionId($DB->getResourceId())->setAffectedRows($this->getAffectedRows());
+
         $DB->resetRun();
 
         return $this;
@@ -187,6 +187,15 @@ final class Statement extends \Library\Database\Results {
     public function fetchObject() {
 
         return mysql_fetch_object($this->getResultId());
+    }
+
+    /**
+     * Returns the ID of the last inserted row
+     * 
+     * @return interger
+     */
+    public function lastInsertId() {
+        return mysql_insert_id($this->getResultId());
     }
 
     /**

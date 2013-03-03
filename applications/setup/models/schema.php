@@ -117,7 +117,8 @@ final class Schema extends Platform\Model {
             (8, 2, '/system/upload([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Uploads'),
             (9, 1, '/system/search(/[a-z0-9-]*)*', 'allow', 'execute', 'System Search'),
             (10, 2, '/system/workspace([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Workspaces'),
-            (11, 2, '/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Read User Profiles');"
+            (11, 2, '/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Read User Profiles'),
+            (12, 1, '/system/object([s]*/[a-z0-9-]*)*', 'allow', 'view', 'System Objects');"
         );
     }
 
@@ -669,6 +670,7 @@ final class Schema extends Platform\Model {
         static::createIndices();
         static::insertPropertyDatatypes();
 
+        static::createPropertyValuesProxyTable("attachment"); //The attachment table
         static::createPropertyValuesProxyTable("activity"); //The activity table
         static::createPropertyValuesProxyTable("user"); //The users table
         //static::createUsermetaTable();

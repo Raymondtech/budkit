@@ -88,12 +88,18 @@ class Folder extends \Library\Object {
     }
 
     /**
-     * Create a folder
+     * Create a folder if not exits
      * 
      * @param string $path 
+     * @return boolean true if success, false on failure, or nothing if folder exists
      */
-    public static function create($path) {
-        
+    public static function create($path, $permission = 0755) {
+        if (!static::is($path)){
+            if(!mkdir($path, $permission, true) ){
+                return false;
+            }
+            return true;
+        }
     }
 
     /**
@@ -468,7 +474,7 @@ class Folder extends \Library\Object {
      * 
      * @return File Class Pdf | Image | Xml
      */
-    final public static function getFile($type = NULL) {
+    final public static function getFile($type = NULL ) {
 
         return \Library\Folder\Files::getInstance($type);
     }

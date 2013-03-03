@@ -91,7 +91,6 @@ class Authority extends Platform\Model {
         }
 
         if (!$table->bindData($aData)) {
-            //print_R($table->getErrors());
             throw new \Platform\Exception($table->getError());
             return false;
         }

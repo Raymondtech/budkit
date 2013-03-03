@@ -46,4 +46,5 @@
 //beforeMenuRender($menuId, $menuItems);
 //beforeRoute($path);
 //afterRoute(\Library\Router);
+//beforeObjectLoad(\Platform\Entity, array $params) an entity with object details
 

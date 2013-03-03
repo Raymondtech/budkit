@@ -95,6 +95,26 @@ class Files extends \Library\Folder {
         }
         return static::$pathinfo[$file]["extension"];
     }
+    
+    /**
+     * Returns only the directory name from the filepath;
+     * 
+     * @param type $file
+     * @param type $default
+     */
+    public static function getPath( $file="", $default=NULL){
+        
+        $file = ( empty($file) && isset(static::$file) ) ? static::$file : $file;
+
+        if (empty($file)) {
+            return $default;
+        }
+        //Determine the file extension
+        if (!isset(static::$pathinfo[$file]["dirname"])) {
+            static::$pathinfo[$file] = pathinfo($file);
+        }
+        return static::$pathinfo[$file]["dirname"];
+    }
 
     /**
      * Reads the contents of a file;

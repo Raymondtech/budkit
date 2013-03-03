@@ -38,6 +38,12 @@ require( FSPATH . 'framework' . DS .'utilities'.DS. 'functions' . EXT);
 spl_autoload_register(new Platform\Loader("Platform", array( FSPATH . 'framework'.DS.'utilities', FSPATH . 'vendors'.DS.'utilities' ) ));
 spl_autoload_register(new Platform\Loader("Library", array( FSPATH . 'framework' . DS . 'libraries', FSPATH . 'vendors' . DS . 'libraries') ) );
 spl_autoload_register(new Platform\Loader("Application", array( FSPATH . 'applications', FSPATH .'vendors'.DS. 'applications')));
+/**
+ * -----------------------------------------------------
+ *  Set the default timezone
+ * -----------------------------------------------------
+ */
+Library\Date::setDefaultTimeZone("UTC");
 
 /*
  * ------------------------------------------------------
@@ -46,12 +52,7 @@ spl_autoload_register(new Platform\Loader("Application", array( FSPATH . 'applic
  */
 Debugger::start();
 
-/**
- * -----------------------------------------------------
- *  Set the default timezone
- * -----------------------------------------------------
- */
-date_default_timezone_set("UTC");
+
 
 /*
  * ------------------------------------------------------

@@ -337,7 +337,7 @@ class Parser extends Files\Xml {
         //For now just arrays! will look to handle objects later
         if (!isset($ROOT) || !is_array($ROOT)) {
             //print_R($ROOT);
-            $this->setError(_t("The document root is invalid"));
+            //$this->setError(_t("The document root is invalid"));
             return false;
         }
 

@@ -43,6 +43,176 @@ use Library\Folder;
 class Image extends \Library\Folder\Files {
 
     /**
+     * The original file dimensions
+     * @var type 
+     */
+    public $dimensionX = NULL;
+    
+    /**
+     * The original height dimension
+     * @var type 
+     */
+    public $dimensionY = NULL;
+    
+    /**
+     * The new file width
+     * @var type 
+     */
+    public $width = NULL;
+    
+    /**
+     * The new file height;
+     * @var type 
+     */
+    public $height = NULL;
+    
+    /**
+     * The target file, path of the resized image
+     * @var type 
+     */
+    public $target = NULL;
+        
+    /**
+     * Creates an Image
+     * 
+     * @param mixed $image
+     * @param mixed $ext
+     * @return
+     */
+    private function createImage($image, $ext) {
+        switch (strtolower($ext)):
+            case "gif": $i = imagecreatefromgif($image);
+                break;
+            case "jpg":
+            case "jpeg":$i = imagecreatefromjpeg($image);
+                break;
+            case "png": $i = imagecreatefrompng($image);
+                break;
+        endswitch;
+
+        return $i;
+    }
+
+    /**
+     * Resizes an image
+     * 
+     * @param mixed $image
+     * @param mixed $width
+     * @param mixed $height
+     * @param bool $square
+     * @return
+     */
+    public function resizeImage($image, $target, $width = null, $height = null, $square = false) {
+        
+        //If target already exists, then don't bother
+        if($this->isFile($target)){
+            return true;
+        }
+        
+        $this->dimensionX = (!empty($width)) ? (int) $width : $this->dimensionX;
+        $this->dimensionY = (!empty($height) && !$square) ? (int) $height : "";
+        $this->target = $target;
+
+        if (!$square && $height <> $width )
+            $this->dimensionY = "auto";
+
+        $ext = $this->getExtension(basename($image));
+        $ourimage = $this->createImage($image, $ext);
+        $currX = @imagesx($ourimage);
+        $currY = @imagesy($ourimage);
+        $newX = $this->dimensionX;
+        $newY = $this->dimensionY;
+
+        //Destroy the image
+        @imagedestroy($image);
+
+        if ($square)
+            return $this->createSquare($image, $this->target, $newX);
+
+        $_x = $newX;
+        $_y = ($newX / $currX) * $currY;
+
+        //Get True Color
+        $truecolor = @imagecreatetruecolor($_x, $_y);
+        if (!$truecolor) {
+            $this->setError("could not create a true color image");
+            return false;
+        }
+        if (!@imagecopyresampled($truecolor, $ourimage, 0, 0, 0, 0, $_x, $_y, $currX, $currY)) {
+           $this->setError("could not create a true color image");
+            return false;
+        }
+        if (!@imagejpeg($truecolor, $this->target, 85)) {
+            $this->setError("svae the target jpg image");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Creates a square image
+     * 
+     * @param mixed $source
+     * @param mixed $target
+     * @param mixed $width
+     * @return
+     */
+    private function createSquare($source, $target, $width) {
+        
+        $tWidth = $width;
+        $tHeight = $width;
+        $imgdata = getimagesize($source);
+        $widthOrig = $imgdata[0];
+        $heightOrig = $imgdata[1];
+        $ext = $this->getExtension(basename($source));
+        $image = $this->createImage($source, $ext);
+
+        //Proportions
+        if ($widthOrig < $heightOrig) {
+            $height = ($tWidth / $widthOrig) * $heightOrig;
+        } else {
+            $width = ($tHeight / $heightOrig) * $widthOrig;
+        }
+
+        //If square this does not really matter? but..
+        if ($width < $tWidth) {
+            $width = $tWidth;
+            $height = ($tWidth / $widthOrig) * $heightOrig;
+        }
+        //If square this does not really matter? but..
+        if ($height < $tHeight) {
+            $height = $tHeight;
+            $width = ($tHeight / $heightOrig) * $widthOrig;
+        }
+
+        //Create True Coolor
+        $thumb = imagecreatetruecolor($width, $height);
+
+        if (!imagecopyresampled($thumb, $image, 0, 0, 0, 0, $width, $height, $widthOrig, $heightOrig)) {
+            $this->setError("a problem errored");
+            return false;
+        }
+
+        $w1 = ($width / 2) - ($tWidth / 2);
+        $h1 = ($height / 2) - ($tHeight / 2);
+
+        $thumb2 = imagecreatetruecolor($tWidth, $tHeight);
+        if (!imagecopyresampled($thumb2, $thumb, 0, 0, $w1, $h1, $tWidth, $tHeight, $tWidth, $tHeight)) {
+            $this->setError("a problem errored");
+            return false;
+        }
+        if (!imagejpeg($thumb2, $target, 85)) {
+            $this->setError("a problem errored");
+            return false;
+        }
+
+        imagedestroy($thumb);
+        imagedestroy($thumb2);
+
+        return true;
+    }
+
+    /**
      * Image handling class
      * 
      * @staticvar self $instance

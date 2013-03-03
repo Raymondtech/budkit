@@ -30,6 +30,7 @@
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit.js"></script>
         </head>
         <body>
+            
             <div id="wrap">
                 <div class="container-menu-box">
                     <div class="navbar margin-bottom-zero nav-home-page">
@@ -69,6 +70,7 @@
                             <div class="container-bucket">
                                 <tpl:block data="page.block.alerts" /> 
                                 <tpl:block data="page.block.body">Content</tpl:block>
+                                
                             </div>
                             <a href="#" class="container-box-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>
                             <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-right"></i></a>

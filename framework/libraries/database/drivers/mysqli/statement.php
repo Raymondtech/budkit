@@ -191,6 +191,16 @@ final class Statement extends \Library\Database\Results {
 
         return mysqli_fetch_object($this->getResultId());
     }
+    
+    
+    /**
+     * Returns the ID of the last inserted row
+     * 
+     * @return interger
+     */
+    public function lastInsertId(){
+        return mysqli_insert_id( $this->getResultId() ); 
+    }
 
     /**
      * Gets an instance of the Statement Object

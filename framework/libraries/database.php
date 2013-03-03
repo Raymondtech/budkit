@@ -435,6 +435,7 @@ abstract class Database extends Object {
      */
     abstract public function startTransaction();
     
+    
     /**
      * This method is intended for use in transsactions
      * 

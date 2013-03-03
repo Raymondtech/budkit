@@ -29,17 +29,51 @@ namespace Application\Member\Models;
  * 
  */
 class Profile extends User {
-   
+
     /**
      * Constructs the Profile Object model
      * @return void
      */
-    public function __construct() {  
-        parent::__construct();   
+    public function __construct() {
+
+        parent::__construct();
         //Extend the User Object Model
         $this->extendPropertyModel(array(
-           "dob" => array("Date of Birth", "date")
-        ));
+            "user_photo" => array("Profile Picture", "mediumtext", 10)
+        ), "user");
+        $this->defineValueGroup("user"); 
+    }
+
+    /**
+     * Updates the user profile data
+     * 
+     * @param type $username
+     * @param type $data
+     */
+    public function update($usernameId, $data = array()) {
+        
+        if (empty($usernameId))
+            return false;
+
+        //Load the username; 
+        $profile        = $this->loadObjectByURI($usernameId, array_keys($this->getPropertyModel()));
+        $this->setObjectId( $profile->getObjectId() );
+        $this->setObjectURI( $profile->getObjectURI() );
+        $profileData    = $profile->getPropertyData();
+        $updatedProfile = array_merge($profileData, $data );
+        foreach ($updatedProfile as $property => $value):
+            $this->setPropertyValue($property, $value);
+        endforeach;
+        
+        $this->defineValueGroup("user");
+        //die;
+        if (!$this->saveObject($this->getPropertyValue("user_name_id"), "user", $this->getObjectId())) { 
+            //Null because the system can autogenerate an ID for this attachment    
+            $profile->setError("Could not save the profile data");
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -48,14 +82,14 @@ class Profile extends User {
      * @staticvar object $instance
      * @return object Profile
      */
-    public static function getInstance(){      
-        static $instance;    
+    public static function getInstance() {
+        static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
-        $instance =  new self();
+        if (isset($instance))
+            return $instance;
+        $instance = new self();
         return $instance;
     }
-    
-}
 
+}
 

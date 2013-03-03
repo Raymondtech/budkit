@@ -4,7 +4,6 @@
             <ul class="nav" id="configurationsmenu">
                 <li class="active"><a data-target="#general" data-toggle="tab"><i class="icon-cog icon icon-16"></i>General</a></li>
                 <li><a data-target="#server" data-toggle="tab"><i class="icon-building icon icon-16"></i>Server</a></li>
-                <li><a data-target="#storage" data-toggle="tab"><i class="icon-hdd icon icon-16"></i>Storage</a></li>
                 <li><a data-target="#profile" data-toggle="tab"><i class="icon-user icon icon-16"></i>Profile</a></li>
                 <li><a data-target="#content" data-toggle="tab"><i class="icon-briefcase icon icon-16"></i>Content</a></li>
                 <li><a data-target="#localization" data-toggle="tab"><i class="icon-globe icon icon-16"></i>Localization</a></li>
@@ -280,6 +279,47 @@
                         </div>
                     </div>
                 </fieldset>
+                <hr />
+                <fieldset class="no-margin">
+                    <div class="control-group">
+                        <label class="control-label" for="options[content][users-folder]"> <?php echo _('Users folder'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[content][users-folder]" class="input-xxlarge" placeholder="/" value="<?php echo $this->config->getParam('users-folder','','content'); ?>" />
+                            <span class="help-block">Used to store all user content, within username subdirectories.</span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="control-group">
+                        <label class="control-label" for="options[content][FTP-server-host]"> <?php echo _('FTP Server Host'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[content][FTP-server-host]" class="input-xxlarge" placeholder="e.g http://proxy.mydomain.com" value="<?php echo $this->config->getParam('FTP-server-host','','content'); ?>"  />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="options[content][FTP-server-port]"> <?php echo _('FTP Server Port'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[content][FTP-server-port]" class="input-xxlarge"  value="<?php echo $this->config->getParam('FTP-server-port','','content'); ?>" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="options[content][FTP-server-username]"> <?php echo _('FTP Username'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[content][FTP-server-username]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-server-username','','content'); ?>" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="options[content][FTP-server-password]"> <?php echo _('FTP Password'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[content][FTP-server-password]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-server-password','','content'); ?>" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="options[content][FTP-root-path]"> <?php echo _('FTP Root Path'); ?></label>
+                        <div class="controls">
+                            <input type="text" name="options[content][FTP-root-path]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-root-path','/','content'); ?>" />
+                        </div>
+                    </div>
+                </fieldset>
 
             </div>
             <div class="tab-pane" id="profile">
@@ -295,49 +335,6 @@
                                 <?php endforeach; ?>
                             </select>
                             <span class="help-block"><?php echo _('The default authority group members will be automatically added to at sign-up'); ?></span>
-                        </div>
-                    </div>
-                </fieldset>
-
-            </div>
-            <div class="tab-pane" id="storage">
-                <fieldset class="no-margin">
-                    <div class="control-group">
-                        <label class="control-label" for="options[storage][static-file-url]"> <?php echo _('Static file URL'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[storage][static-file-url]" class="input-xxlarge" placeholder="http://www.mydomain.com/" value="<?php echo $this->config->getParam('static-file-url','','storage'); ?>" />
-                            <span class="help-block">Used to implement CDN hosting of static files through services such as MaxCDN.</span>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="control-group">
-                        <label class="control-label" for="options[storage][FTP-server-host]"> <?php echo _('FTP Server Host'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[storage][FTP-server-host]" class="input-xxlarge" placeholder="e.g http://proxy.mydomain.com" value="<?php echo $this->config->getParam('FTP-server-host','','storage'); ?>"  />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="options[storage][FTP-server-port]"> <?php echo _('FTP Server Port'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[storage][FTP-server-port]" class="input-xxlarge"  value="<?php echo $this->config->getParam('FTP-server-port','','storage'); ?>" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="options[storage][FTP-server-username]"> <?php echo _('FTP Username'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[storage][FTP-server-username]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-server-username','','storage'); ?>" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="options[storage][FTP-server-password]"> <?php echo _('FTP Password'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[storage][FTP-server-password]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-server-password','','storage'); ?>" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="options[storage][FTP-root-path]"> <?php echo _('FTP Root Path'); ?></label>
-                        <div class="controls">
-                            <input type="text" name="options[storage][FTP-root-path]" class="input-xxlarge" value="<?php echo $this->config->getParam('FTP-root-path','/','storage'); ?>" />
                         </div>
                     </div>
                 </fieldset>

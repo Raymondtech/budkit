@@ -51,6 +51,8 @@ class Entity extends Model {
     protected $listOderByStatement = NULL;
     protected $listLookUpConditions = array();
     protected static $withConditions = false;
+    
+    protected $savedObjectURI = NULL;
 
     /**
      * Sets the property Value before save
@@ -85,6 +87,35 @@ class Entity extends Model {
         $this->objectType = $objectType;
         return $this;
     }
+    /**
+     * Get the Entity Type for the current Entity
+     * 
+     * @param string $entityType
+     * @return void
+     */
+    public function getObjecType() {
+        return $this->objectType;
+    }
+    /**
+     * Set the Entity Type for the current Entity
+     * 
+     * @param string $entityType
+     * @return void
+     */
+    public function setLastSavedObjectURI($objectId) {
+        $this->savedObjectURI = $objectId;
+        return $this;
+    }
+    
+    /**
+     * Get the Entity Type for the current Entity
+     * 
+     * @param string $entityType
+     * @return void
+     */
+    public function getLastSavedObjectURI() {
+        return $this->savedObjectURI;
+    }
 
     /**
      * Set the Entity Type for the current Entity
@@ -96,7 +127,16 @@ class Entity extends Model {
         $this->objectId = $objectId;
         return $this;
     }
-
+    
+    /**
+     * Get the Entity Type for the current Entity
+     * 
+     * @param string $entityType
+     * @return void
+     */
+    public function getObjectId() {
+        return $this->objectId;
+    }
     /**
      * 
      * @param type $objectURI
@@ -107,6 +147,15 @@ class Entity extends Model {
         return $this;
     }
 
+        /**
+     * 
+     * @param type $objectURI
+     * @return \Platform\Entity
+     */
+    public function getObjectURI() {
+        return $this->objectURI;
+ 
+    }
     /**
      * Returns the property definition for a given property by name
      * Use {static::getProperNameFromId} to get the propery name from an Id
@@ -341,12 +390,10 @@ class Entity extends Model {
     
     final public function getObjectById($objectId, $properties = array()){
         if (empty($properties)):
-            if (empty($this->propertyModel))
-                return false; //@TODO Raise error?
-            //Attempt to build a list of properties from datamodel
-            $properties = array_keys($this->propertyModel);
+            if (!empty($this->propertyModel))
+                $properties = array_keys($this->propertyModel);
         endif;
-
+        
         $query = static::getObjectQuery($properties, "?{$this->valueGroup}property_values");
         $query .="\nWHERE o.object_id='{$objectId}' GROUP BY o.object_id";
 
@@ -364,10 +411,8 @@ class Entity extends Model {
     public function loadObjectByURI($objectURI, $properties = array()) {
 
         if (empty($properties)):
-            if (empty($this->propertyModel))
-                return false; //@TODO Raise error?
-            //Attempt to build a list of properties from datamodel
-            $properties = array_keys($this->propertyModel);
+            if (!empty($this->propertyModel))
+                $properties = array_keys($this->propertyModel);
         endif;
 
         $query = static::getObjectQuery($properties,"?{$this->valueGroup}property_values");
@@ -447,12 +492,14 @@ class Entity extends Model {
      */
     final private static function getObjectQuery($properties, $vtable = '?property_values', $objectId=NULL, $objectType=NULL, $objectURI=NULL) {
         //Join Query
-        $query  = "SELECT o.object_id, o.object_uri, o.object_type,";
-        //If we are querying for attributes
-        $count = count($properties);
-        if (!empty($properties) || $count < 1):
+        $query  = "SELECT o.object_id, o.object_uri, o.object_type";
+
+        if (!empty($properties)):
             //Loop through the attributes you need
             $i = 0;
+            $count = \sizeof($properties);
+            //echo $count;
+            $query .= ",";
             foreach ($properties as $alias => $attribute):
                 $alias = (is_int($alias)) ? $attribute : $alias;
                 $query .= "\nMAX(IF(p.property_name = '{$attribute}', v.value_data, null)) AS {$alias}";
@@ -467,7 +514,7 @@ class Entity extends Model {
                     . "\nLEFT JOIN ?properties p ON p.property_id = v.property_id"
                     . "\nLEFT JOIN ?objects o ON o.object_id=v.object_id";
         else:
-            $query .="\nFROM ?objetcs";
+            $query .="\nFROM ?objects o";
         endif;
         
         static::$withConditions = false;
@@ -488,7 +535,7 @@ class Entity extends Model {
                 static::$withConditions = TRUE;
             endif;
         endif;
-
+        
         return $query;
     }
 
@@ -503,11 +550,12 @@ class Entity extends Model {
      * @param type $objectType
      * @return boolean
      */
-    final public function saveObject($objectURI = NULL, $objectType = NULl) {
+    final public function saveObject($objectURI = NULL, $objectType = NULL, $objectId = NULL) {
 
         //Get a randomstring for the objectURI
-        $this->objectURI = $objectURI = ( empty($objectURI) && empty($this->objectURI) ) ? Framework::getRandomString(6) : (!empty($this->objectURI) ? $this->objectURI : $objectURI);
-        $this->objectType = $objectType = ( empty($objectType) && empty($this->objectType) ) ? 'entity' : (!empty($this->objectType) ? $this->objectType : $objectType);
+        $objectURI = empty($objectURI) ?  Framework::getRandomString(6) : $objectURI;
+        $objectType =  empty($objectType) ?   'entity' : $objectType;
+        //$objectId = empty($objectId) ?  (!empty($this->objectId) ? $this->objectId : null ) : $objectId;
         //Ensure we have all the properties
         if (empty($this->propertyModel) ||empty($this->propertyData))
             return false; //We have nothing to save
@@ -528,13 +576,18 @@ class Entity extends Model {
         //update the properties
         $this->database->query( $pquery );
         
+        
+        
         //If objectId is NULL then NEW Create new object
-        if (empty($this->objectId)):  
+        if (empty($objectId)):
             
+            Library\Log::_( "Object ID is ", $objectId );
+        
             $timestamp = \Library\Date\Time::stamp();
             $oquery = $this->database->insert("?objects",array("object_uri" => $this->database->quote($objectURI), "object_type" => $this->database->quote($objectType), "object_created_on"=> $this->database->quote( $timestamp )), FALSE, NULL, FALSE);
             $this->database->query( $oquery );
-            //$this->objectId = $this->database->select("LAST_INSERT_ID() AS object_id")->prepare()->execute()->fetchAll();
+
+            $this->setLastSavedObjectURI($objectURI);
         endif;
 
         //If property exists and value doesnt insert new value row
@@ -563,7 +616,6 @@ class Entity extends Model {
         }
         return true;
     }
-    
 
     /**
      * Returns the current data model
@@ -573,6 +625,7 @@ class Entity extends Model {
     final public function getPropertyModel() {
         return $this->propertyModel;
     }
+    
     
     /**
      * Returns the current data model values

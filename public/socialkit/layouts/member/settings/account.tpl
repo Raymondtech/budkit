@@ -18,9 +18,9 @@
                         <div class="controls">
                             <div class="input-prepend">
                                 <span class="add-on"><?php echo $this->config->getParam('host','').$this->config->getParam('path',''); ?></span>
-                                <input class="input-xlarge" id="username" name="user_name_id" size="20" type="text" value="${user.user_name_id}" />
+                                <input class="input-xlarge" id="username" name="user_name_id" size="20" type="text" value="${user.user_name_id}" disabled="" />
                             </div>
-                            <span class="help-block">Alpha-numeric only (aA-zZ,0-9)</span>
+                            <span class="help-block">You cannot change your username. Its shown here only for your reference</span>
                         </div>
                     </div><!-- /control-group -->
                     <div class="control-group">

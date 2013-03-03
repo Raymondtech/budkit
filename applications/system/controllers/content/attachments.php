@@ -31,34 +31,27 @@ use Application\System\Controllers as System;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
 class Attachments extends System\Content {
-
-    /**
-     * The default fallback method. 
-     * Displays the global system attachment uploader 
-     * @return Attachments::upload()
-     */
-    public function index() {
-        return $this->upload();
-    }
+     
     /**
      * Displays the global system attachment uploader form 
      * @todo    Complete the implementation of the global file upload action
      * @return  void;
      */
-    final public function upload() {
-                
-        //If uploading, i.e if post, get files and passto model
-         if ($this->input->methodIs("post")) {
-             echo 'We are uploading';
-         }
-        
+    final public function form() {
+
         //Display the upload form   
         $view = $this->load->view("index");
         //$dashboard  = Controllers\Start\Dashboard::getInstance();
         //$this->output->set("upload", array( "title"=>"Upload Page Title" ));
-        echo 'Uploading Content';
+        //If uploading, i.e if post, get files and passto model
+         if ($this->input->methodIs("post")) {
+             echo 'We are uploading';
+             $attachment = $this->load->model("attachments");
+             
+         }
 
     }
+    
     /**
      * Gets an instance of the command class
      * @staticvar self $instance

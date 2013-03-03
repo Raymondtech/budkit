@@ -23,6 +23,7 @@
 .padding{ padding : @gridGutterWidth }
 .padding-half{ padding : @gridGutterWidth * 0.5 }
 .padding-left-half{ padding-left : @gridGutterWidth * 0.5 }
+.padding-right{ padding-right : @gridGutterWidth }
 .padding-right-half{ padding-right : @gridGutterWidth * 0.5 }
 .padding-zero{ padding: 0; }
 .padding-right-zero{ padding-right: 0; }
@@ -113,10 +114,19 @@
     }
 }
 
+.usermenu { 
+    width: 195px; 
+    .dropdown-toggle{
+        margin: 0px !important;
+        padding-top: 9px!important;
+        .thumbnail{ display: inline-block; border: none; background: none; .box-shadow(none)}
+    }
+}
 
 .input-append .add-on,.input-prepend .add-on{
     &.btn{ padding-left: 10px; padding-right: 10px;}
 }
+input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 
 
 /****MESSAGES****/

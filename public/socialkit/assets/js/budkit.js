@@ -301,13 +301,18 @@
         this.datalist = this.field.attr('data-display');
         //Hide the remove type="file"
         this.field.hide();
+        this.multiple = false;
        
         //Click to upload
         this.selector.on("click", function(event){
             event.preventDefault();
             $uploader.field.click();
         });
-        this.field.on('change', $.proxy(this.getSelectedFiles, this));
+        
+        if (typeof this.field.attr("multiple") !== 'undefined' && this.field.attr("multiple") !== false) {
+            this.multiple = true;
+        }
+        this.field.on('change', $.proxy(( this.multiple) ? this.getSelectedFiles : this.getSelectedFile, this));
         $(this.form.find('.upload-start')).on('click', $.proxy(this.beginUpload, this));
     };
     //Uploader Class
@@ -316,10 +321,14 @@
         getUploadCount: function(){},
         getDroppedFiles : function(){},
         getUploadedFiles : function(){},
+        getSelectedFile : function(event){
+            event.preventDefault();   
+            this.selector.text( this.field.val() );
+        },
         getSelectedFiles : function(event){
+            event.preventDefault();   
             var files = this.field.prop('files'),
-            ul    = $('<ul />').addClass('nav nav-files');
-            event.preventDefault();       
+            ul    = $('<ul />').addClass('nav nav-files');    
             console.log(files);
             console.log(files.length);
             if(this.datalist){
@@ -330,7 +339,8 @@
                 $(this.datalist).append(ul);
             }
             //@todo if autoupload
-            this.beginUpload( event );
+            //@todo maybe use a data-autoupload attribute?
+            //this.beginUpload( event );
         },
         validate: function(){},
         beginUpload: function(event){

@@ -14,8 +14,11 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\Member\Controllers\Settings;
+
 use \Application\Member\Controllers as Member;
+
 /**
  * The sub actions controller for managing profile settings
  *
@@ -32,9 +35,65 @@ final class Profile extends Member\Settings {
      * Displays the user profile settings
      * @return void
      */
-    public function index() {                 
-        $view   = $this->load->view( 'settings' );
-        return $view->form("settings/profile", "Profile settings"); 
+    public function index() {
+        
+        $user = \Platform\User::getInstance();
+        
+        $view = $this->load->view('settings');
+        $profile = $this->load->model('profile');
+        $profile = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
+        
+        $data   = $profile->getPropertyData();
+        
+        $this->set("profile", $data ); //Sets the profile data;
+        
+        return $view->form("settings/profile", "Profile settings");
+    }
+
+    /**
+     * Updates a user profile
+     * @return type
+     */
+    public function update() {
+        
+        //Get the platform user and ensure that they 
+        //are who they say they are
+        $user = \Platform\User::getInstance();
+        
+        //Check that form was submitted with the POST method
+        if ($this->input->methodIs("post")) {
+            
+            $message     = "Your profile settings have now been updated";
+            $messageType = "success";
+            $attachment = $this->load->model("attachments", "system");
+            $attachment->setAllowedTypes(array("gif", "jpeg" , "jpg", "png"));
+            $attachment->setOwnerNameId( $user->get("user_name_id") );
+            $attachmentfile = $this->input->data("files");
+            
+            $attachment->store( $attachmentfile['profilephoto']);
+            
+            //Now store the users photo to the database;
+            $attachmentURI = $attachment->getLastSavedObjectURI();
+            
+            //unset($attachment);
+            $profile =  $this->load->model('profile');
+     
+            if(!empty($attachmentURI)){
+                if(!$profile->update( $user->get("user_name_id"), array("user_photo"=>$attachmentURI)) ){
+                    $message = "Could not update your profile photo" ;
+                    $messageType = "error";
+                }
+            }
+
+        }
+        
+        //die;
+        $this->alert($message, "", $messageType);
+        
+        //die;
+
+        //Return the user back to the profile update form
+        return $this->redirect("/member/settings/profile");
     }
 
     /**

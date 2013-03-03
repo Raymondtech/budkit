@@ -78,7 +78,7 @@ class Element extends Parse\Template {
 
         //Automatically internalize HREFs! 
         //@TODO Use call backs of type i.x _XMLAttributeCallbackOn<type> e.g _XMLAttributeCallbackOnHref
-        $references = array("HREF", "ACTION");
+        $references = array("HREF", "ACTION", "SRC");
         if (in_array(strtoupper($attribute), $references)) {
             $content = \Library\Uri::internal($content);
         }

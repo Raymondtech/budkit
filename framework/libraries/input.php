@@ -109,7 +109,7 @@ final class Input extends Object {
      *
      * @var array 
      */
-    protected $file = array();
+    protected $files = array();
 
     /**
      *
@@ -143,7 +143,7 @@ final class Input extends Object {
         $this->system = Session::getNamespace();
 
         //Temp
-        $this->files = array_merge($this->file, $_FILES);
+        $this->files = array_merge($this->files, $_FILES);
 
         //Returns an instance of the validate object
         $this->validate = Validate::getInstance();

@@ -44,6 +44,11 @@ class Date extends Object {
      */
 
     protected static $timestamp;
+    
+    
+    public static function setDefaultTimeZone(){
+        date_default_timezone_set('UTC');
+    }
 
     /**
      * Returns todays date timestamp
@@ -51,8 +56,6 @@ class Date extends Object {
      * @return string
      */
     public static function today(){
-        
-        date_default_timezone_set('UTC');
         
         return date('d/M/Y');
     }

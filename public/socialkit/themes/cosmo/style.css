@@ -9,8 +9,9 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
-*/ body {
-    padding-bottom: 40px;
+*/ 
+.footer {
+    margin-bottom: 100px;
 }
 
 /* Main marketing message and sign up button */

@@ -2,22 +2,22 @@
     <div class="navbar navbar-subnav margin-bottom">
         <div class="navbar-inner padding-left-half">
             <ul class="nav" id="profileeditmenu">
-                <li class="active"><a data-target="#profilephoto" data-toggle="tab"><i class="icon-camera-retro icon icon-16"></i>Profile Photo</a></li>                 
+                <li class="active"><a data-target="#appearance" data-toggle="tab"><i class="icon-camera-retro icon icon-16"></i>Appearance</a></li>                 
                 <li><a data-target="#biography" data-toggle="tab"><i class="icon-user icon icon-16"></i>Biography</a></li> 
                 <li><a data-target="#contact" data-toggle="tab"><i class="icon-globe icon icon-16"></i>Contact</a></li>
                 <li><a data-target="#external" data-toggle="tab"><i class=" icon-plus-sign-alt icon icon-16"></i>Linked Profiles</a></li>
-                <li><a data-target="#appearance" data-toggle="tab"><i class=" icon-tint icon icon-16"></i>Appearance</a></li>
+
             </ul>
         </div>
     </div>
-    <form class="form-horizontal" method="POST">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/member/settings/profile/update">
         <div class="tab-content">
-            <div class="tab-pane active" id="profilephoto">
+            <div class="tab-pane active" id="appearance">
                 <div class="control-group">
                     <label class="control-label"  for="middle-name">Photo</label>
                     <div class="controls">
                         <div class="input-append"> 
-                            <input type="file" data-label="Select Photo..." data-target="budkit-uploader" />
+                            <input type="file" name="profilephoto" data-label="Select Photo..." data-target="budkit-uploader" /> 
                             <a class="add-on btn">Chose from existing</a>
                             <div class="btn-group">
                                 <a class="add-on btn dropdown-toggle" data-toggle="dropdown"><i class="icon-globe"></i> Public <b class="caret"></b></a>
@@ -32,12 +32,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label"  for="middle-name">Current</label>
-                    <div class="controls">
-                        <img class="add-on" src="http://placeskull.com/170/170/" />
+                <tpl:condition data="profile.user_photo" test="isset" value="1">
+                    <div class="control-group">
+                        <label class="control-label"  for="middle-name">Current</label>
+                        <div class="controls">
+                            <img class="add-on thumbnail" src="/system/object/${profile.user_photo}/resize/200/200" />
+                        </div>
                     </div>
-                </div>
+                </tpl:condition>
             </div>
             <div class="tab-pane" id="biography">
                 <fieldset>

@@ -392,4 +392,12 @@ abstract class Results extends \Library\Object {
      *  @return array 
      */
     abstract public function fetch();
+    
+    
+   /**
+     *  Fetches a row in a resultset
+     * 
+     *  @return array 
+     */
+    abstract public function lastInsertId();
 }

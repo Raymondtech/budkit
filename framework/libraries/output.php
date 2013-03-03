@@ -504,6 +504,7 @@ class Output extends Object {
      * @param type $value
      */
     final public function setHeader($name, $value) {
+        @header("{$name} : {$value}");
         return $this;
     }
 

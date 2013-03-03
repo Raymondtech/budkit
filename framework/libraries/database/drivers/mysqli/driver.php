@@ -394,21 +394,28 @@ final class Driver extends Library\Database{
          
         if(empty($this->transactions)||!is_array($this->transactions)){
             $this->setError(_t("No transaction queries found"));
+            $this->transactions = array();
+            $this->resourceId->autocommit( TRUE ); //Turns autocommit back on
             return false;
         }
         //Query transactions
         foreach($this->transactions as $query){
             if(!$this->exec($query)){
                 $this->resourceId->rollback(); //Rolls back the transaction;
+                $this->transactions = array();
+                $this->resourceId->autocommit( TRUE ); //Turns autocommit back on
                 return false;
             }
         }
         //Commit the transaction
         if(!$this->resourceId->commit()){
             $this->setError( _t("The transaction could not be committed"));
+            $this->transactions = array();
+            $this->resourceId->autocommit( TRUE ); //Turns autocommit back on
             return false;
         }
         
+        $this->transactions = array();
         $this->resourceId->autocommit( TRUE ); //Turns autocommit back on
         return true;
     }

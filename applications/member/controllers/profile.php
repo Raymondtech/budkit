@@ -35,16 +35,17 @@ class Profile extends \Platform\Controller {
      */
     public function index() {
                /**View Profile**/
+                
+        $user     = \Platform\User::getInstance();
         
         $username = $this->router->getMethod();
         $view     = $this->load->view('profile');
-        $user     = $this->load->model('user');
         $profile  = $this->load->model('profile');
+        $profile  = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
         
-        $row = $profile->loadObjectById(1);
-        $adminId = $profile->loadObjectByURI( "tanya.vyland" )->getPropertyValue("user_first_name");
+        $data     = $profile->getPropertyData();
         
-        print_R($adminId);
+        $this->set("profile", $data ); //Sets the profile data;
         //$row->setPropertyValue("first_name", "Livingstone");
         //$row->saveObject();
         
@@ -63,7 +64,12 @@ class Profile extends \Platform\Controller {
         $user = \Platform\User::getInstance();
         $model      = $this->load->model('activity' , 'system');
         $activities = $model->getAll();   
+        $profile  = $this->load->model('profile');
+        $profile  = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
         
+        $data     = $profile->getPropertyData();
+        
+        $this->set("profile", $data ); //Sets the profile data;
         $this->set("activities", $activities);   
         $this->set("dashboard", array("title"=>"Activity stream" ) );
         $this->set("user", $user);
