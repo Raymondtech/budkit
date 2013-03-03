@@ -34,22 +34,25 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        
+
                         <div class="nav-collapse">
                             <tpl:menu id="profilemenu" type="nav"></tpl:menu>
-                            
+
                             <ul class="nav pull-right">
-                                <li><a href="#">Dashboard</a></li>
+                                <li><a href="/system/start/index">Dashboard</a></li>
                             </ul>
                         </div><!-- /.nav-collapse -->
                     </div>
                 </div><!-- /navbar-inner -->
             </div>
             <div class="container">
-        
+
                 <tpl:block data="page.block.alerts" /> 
-                
-                <div class="jumbotron">
+
+                <div class="jumbotron" align="center">
+                    <tpl:condition data="profile.user_photo" test="isset" value="1">
+                        <img class="thumbnail" src="/system/object/${profile.user_photo}/resize/100/100" style="margin: auto" />
+                    </tpl:condition>
                     <h1 >Livingstone Fultang</h1>
                     <p class="lead">PhD Student in the Medical Molecular Biosciences</p>  
                     <a class="btn btn-success" href="#">Follow</a> 
