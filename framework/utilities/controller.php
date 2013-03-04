@@ -117,6 +117,10 @@ abstract class Controller extends Library\Action {
         $application    =  $this->application;
         $controller     =  $this->controller;
         
+        //Set the upload progress name
+        $up = \Library\Session::getUploadProgressName();
+        $this->output->set("uploadprogress", $up);
+        
         //We might have not yet installed
         if(!$installed && (strtolower($application)!== "setup" ) ){
             $this->redirect("/setup/install/step1");

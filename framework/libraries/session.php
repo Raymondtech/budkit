@@ -91,6 +91,35 @@ class Session extends Object {
     }
 
     /**
+     * Gets the session progess upload name;
+     * 
+     * @return type
+     */
+    final public static function getUploadProgressName(){
+        $name = ini_get("session.upload_progress.name");
+        return $name;
+    }
+    
+    /**
+     * Gets the Upload progressName
+     * 
+     * @param type $formName
+     * @return int
+     */
+    final public static function getUploadProgress( $formName ){
+        
+        $key = ini_get("session.upload_progress.prefix") . $formName;
+        if (!empty($_SESSION[$key])) {
+            $current = $_SESSION[$key]["bytes_processed"];
+            $total = $_SESSION[$key]["content_length"];
+            return $current < $total ? ceil($current / $total * 100) : 100;
+        }
+        else {
+            return 100;
+        }
+    }
+    
+    /**
      * Starts a session
      * 
      * @param type $killPrevious 

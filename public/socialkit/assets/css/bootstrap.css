@@ -7031,8 +7031,16 @@ input.search-query {
 }
 .nav-files > li {
   margin-bottom: 2px;
+  display: inline-block;
 }
 .nav-files > li > a {
+  position: relative;
+  width: 100px;
+  min-height: 70px;
+  margin-bottom: 0px;
+  margin-left: 1px;
+  vertical-align: middle;
+  display: inline-block;
   padding: 8px;
   line-height: 20px;
   border: 1px solid #ddd;
@@ -7041,6 +7049,24 @@ input.search-query {
 .nav-files > li > a:hover,
 .nav-files > li > a:focus {
   background: #f1f1f1;
+}
+.nav-files > li > a .upload-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.68);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 85px;
+  font-size: 30px;
+}
+.nav-files > li > a .upload-progress .icon-ok {
+  color: green;
+}
+.nav-files > li > a .upload-progress.completed {
+  background: transparent;
 }
 .nav-files > .active > a,
 .nav-files > .active > a:hover,

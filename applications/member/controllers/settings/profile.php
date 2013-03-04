@@ -58,7 +58,7 @@ final class Profile extends Member\Settings {
         
         //Get the platform user and ensure that they 
         //are who they say they are
-        $user = \Platform\User::getInstance();
+        //$user = \Platform\User::getInstance();
         
         //Check that form was submitted with the POST method
         if ($this->input->methodIs("post")) {
@@ -67,7 +67,7 @@ final class Profile extends Member\Settings {
             $messageType = "success";
             $attachment = $this->load->model("attachments", "system");
             $attachment->setAllowedTypes(array("gif", "jpeg" , "jpg", "png"));
-            $attachment->setOwnerNameId( $user->get("user_name_id") );
+            $attachment->setOwnerNameId( $this->user->get("user_name_id") );
             $attachmentfile = $this->input->data("files");
             
             $attachment->store( $attachmentfile['profilephoto']);
@@ -79,12 +79,11 @@ final class Profile extends Member\Settings {
             $profile =  $this->load->model('profile');
      
             if(!empty($attachmentURI)){
-                if(!$profile->update( $user->get("user_name_id"), array("user_photo"=>$attachmentURI)) ){
+                if(!$profile->update( $this->user->get("user_name_id"), array("user_photo"=>$attachmentURI)) ){
                     $message = "Could not update your profile photo" ;
                     $messageType = "error";
                 }
             }
-
         }
         
         //die;

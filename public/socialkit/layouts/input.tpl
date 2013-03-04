@@ -4,16 +4,17 @@
             <div class="timeline-item-publisher-box">
                 <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>
                 <fieldset class="timeline-item-publisher no-bottom-margin">
-                    <div class="bucket"></div>
                     <div class="controls">
                         <textarea class="input-100pct focused" data-target="budkit-editor" rows="4" name="activity_content" placeholder="Say something..."></textarea>
-                    </div>                
+                    </div> 
+                    <div class="bucket" data-src="${config|general.path}system/content/attachments/" data-progress="${uploadprogress}"></div>
                     <div class="btn-toolbar no-margin"> 
                         <button class="btn pull-right" type="submit">Submit</button>   
-                        <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload Files" />
+                        <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload Files" autoload="" />
                     </div>              
                 </fieldset>
             </div>
+            <input type="hidden" name="${uploadprogress}" value="timelineupload" />
             <input type="hidden" name="activity_author_id" value="" />
             <input type="hidden" name="activity_verb" value="post" />
             <input type="hidden" name="activity_provider" value="budkit" />

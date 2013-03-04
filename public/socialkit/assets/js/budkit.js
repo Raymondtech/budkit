@@ -294,7 +294,7 @@
         this.iframe = $("<iframe />").attr({
             height:0,
             width:0,
-            name:'bkeditor-uploader-route'
+            name:'bkeditor-uploader-transport'
         }).insertAfter(this.field).hide();
         this.selector = $('<a />').addClass('add-on btn no-margin').text(this.field.attr("data-label") || "Choose File").insertAfter(this.field);
         ; 
@@ -327,28 +327,88 @@
         },
         getSelectedFiles : function(event){
             event.preventDefault();   
+            
+            //Disable the upload button
+            this.selector.off('click').addClass("disabled");
+            //this.field.off('change')
             var files = this.field.prop('files'),
             ul    = $('<ul />').addClass('nav nav-files');    
-            console.log(files);
-            console.log(files.length);
             if(this.datalist){
                 for (var x = 0; x < files.length; x++) {   
-                    var pb  = $('<div />').addClass('progress mini-bar progress-striped active').append( $('<div />').addClass('bar'));
-                    ul.append( $('<li/>').append( $('<a />').text( files[x].name ).append( pb ) ) );
+                    var pb  = $('<div />').addClass('upload-progress'),
+                        file = files[x],
+                        imageType = /image.*/,
+                        img = $('<img />'),
+                        imgName = $('<span />').text( file.name ),
+                        imgPreview = $('<a />');
+                    ;
+                    if (file.type.match(imageType)) {
+                        img = $("<img />");
+                        imgPreview.append( img );
+                        var reader = new FileReader();
+                        reader.onload = (function(aImg) { return function(e) { aImg.attr('src', e.target.result ).attr('width', 100 ); }; })(img);
+                        reader.readAsDataURL(file);          
+                    }
+                    
+                    ul.append( $('<li/>').append( imgPreview.append( pb ) ) );
                 }
                 $(this.datalist).append(ul);
             }
             //@todo if autoupload
             //@todo maybe use a data-autoupload attribute?
-            //this.beginUpload( event );
+            if (typeof this.field.attr("autoload") !== 'undefined' && this.field.attr("autoload") !== false) {
+                this.beginUpload( event );
+            }
         },
         validate: function(){},
         beginUpload: function(event){
-            event.preventDefault();     
-            alert('form is being submitted begin the upload process');
-            //before upload
-            //on upload = during upload
-            //after upload
+            event.preventDefault(); 
+  
+            
+            var uploadurl   = $(this.datalist).attr('data-src'),
+                progresskey = $(this.datalist).attr('data-progress'),
+                bucketlist  = $(this.datalist).find('ul'), 
+                bucket      = $(this.datalist),
+                selector    = this.selector,
+                field       = this.field,
+                filecount   = field[0].files.length,
+                form        = this.form
+                
+            ;
+            
+            //Can we send the files asynchronously?
+            $.each(field[0].files, function(i, file){
+                var data = new FormData(),
+                preview  = bucketlist.eq(i).find('a'),
+                indicator = $('<i />').appendTo(  preview.find('div.upload-progress') );
+                data.append('bkattachment', file);
+                data.append( progresskey, 'bkattachment-'+i );
+                
+                $(indicator).addClass('icon-refresh icon-spin');
+                $.ajax({url:uploadurl+"create/bkattachment.json",data: data, cache: false,contentType: false,processData: false,type: 'POST',
+                    success: function (response) {
+                        var newField = $('<input type="hidden" name="attachment[]" />').val( response.data.object.uri );
+                            form.append( newField );
+                        $(indicator).removeClass('icon-refresh icon-spin');
+                        $(indicator).addClass('icon-ok');
+                        $(indicator).closest('.upload-progress').addClass("completed");
+                    },
+                    complete: function(){
+
+                        //Remove the progress bar, replace with a tick;
+               
+                        
+                        //The last request is complete
+                        if(parseInt(i+1)==filecount){
+                            //Move the uploaded files outof the bucket;
+                            //Clear the val of this.field
+                            field.val("");
+                            //field.on("change");
+                            //Re-enable the upload form
+                        }
+                    }
+                });
+            })
         },
         onUpload: function(){},
         beforeUpload: function(){},

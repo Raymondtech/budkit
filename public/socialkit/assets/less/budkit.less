@@ -311,9 +311,17 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 .nav-files > li {
   margin-bottom: 2px;
   //margin-right: 2px;
+    display: inline-block;
 }
 // Actual tabs (as links)
 .nav-files > li > a {
+    position: relative;
+    width: 100px;
+    min-height: 70px;
+    margin-bottom: 0px;
+    margin-left: 1px;
+    vertical-align: middle;
+    display: inline-block;
   padding: 8px;
   line-height: @baseLineHeight;
   border: 1px solid #ddd;
@@ -324,6 +332,22 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     //border-color: @grayLighter @grayLighter #ddd;
     background: #f1f1f1;
   }
+  .upload-progress{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.68);
+        text-align: center;
+        vertical-align: middle;
+        line-height: 85px;
+        font-size: 30px;
+        .icon-ok{ 
+            color: green; 
+        }
+        &.completed{ background: transparent; }
+   }
 }
 // Active state, and it's :hover/:focus to override normal :hover/:focus
 .nav-files > .active > a,

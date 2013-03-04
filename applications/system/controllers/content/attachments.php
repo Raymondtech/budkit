@@ -52,6 +52,74 @@ class Attachments extends System\Content {
 
     }
     
+    final public function create(){
+        
+        $params = func_get_args();
+        $object = array();
+        //Check that form was submitted with the POST method
+        if ($this->input->methodIs("post") && isset($params[0])) { //param 0 is the name of the input file field
+            $message     = "The attachment has been created successfully";
+            $messageType = "success";
+            $attachment = $this->load->model("attachments", "system");
+            $attachment->setAllowedTypes(array("gif", "jpeg" , "jpg", "png"));
+            $attachment->setOwnerNameId( $this->user->get("user_name_id") );
+            $attachmentfile = $this->input->data("files");
+            
+            $this->set("uploaded", $attachmentfile );
+            $this->set("uploaded-name", $params[0] );
+            
+            $attachment->store( $attachmentfile[$params[0]] ); //Get the first item in the file array;
+            
+            //Now store the users photo to the database;
+            $attachmentURI = $attachment->getLastSavedObjectURI();
+            $attachmentURL = \Library\Uri::internal("/system/object/{$attachmentURI}");
+            
+            $object  = array(
+                "uri"=>$attachmentURI, 
+                "src"=>$attachmentURL
+            );
+            $this->set("object", $object);
+            
+            return $this->output->display(); //If we have succesfully uploaded the attachment display
+        }
+        
+        $this->output->setResponseCode( HTTP_BAD_REQUEST );
+        $this->alert("This method accepts only POST data", "HTTP BAD REQUEST", "error");
+        
+        return $object;
+    }
+    
+    
+    /**
+     * Returns the upload progress
+     * Calculates and returns the upload progress
+     * 
+     * @return void;
+     */
+    final public function uploadprogress(){
+        
+        $params     = func_get_args();
+        $progress   = array();
+        //Check that form was submitted with the POST method
+        if ($this->input->methodIs("get") && isset($params[0])) {
+            $progress["recieved"] = \Library\Session::getUploadProgress( $params[0] );
+            $progress["prefix"] = ini_get("session.upload_progress.prefix") . $params[0];
+            
+      
+            
+            
+            $progress["session"] = $_SESSION;
+            $this->set("progress", $progress);
+            
+            return $this->output->display(); //Return the uploadprogress;
+        }
+        
+        $this->output->setResponseCode( HTTP_BAD_REQUEST );
+        $this->alert("This method accepts only GET data and one parameter corresponding to the upload form identifier", "HTTP BAD REQUEST", "error");
+        
+        return false;
+    }
+    
     /**
      * Gets an instance of the command class
      * @staticvar self $instance

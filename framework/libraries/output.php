@@ -232,7 +232,7 @@ class Output extends Object {
      * @param type $status
      * @return void
      */
-    final public function displayError($format = 'xhtml', $status = '404') {
+    final public function displayError($format = 'xhtml', $status = 404 ) {
 
         //anything that had previously been printed
         $printed = ob_get_contents();
@@ -249,7 +249,7 @@ class Output extends Object {
         static::$prints = $this->restartBuffer();
 
         $this->layout = "splash";
-        $this->display($format, 404, "splash");
+        $this->display($format, $status, "splash");
 
         //Stop any further execution?
         $this->abort();
@@ -346,10 +346,11 @@ class Output extends Object {
      * @return void
      *
      */
-    final public function display($format = 'xhtml', $httpCode = 200, $template = '') {
+    final public function display($format = 'xhtml', $httpcode = null, $template = '') {
 
         //anything that had previously been printed
         $printed = ob_get_contents();
+        $httpcode = empty($httpcode) ? $this->getResponseCode() : $httpcode;
 
         if (!empty($printed)):
             $this->addToPosition("body", $printed, '', true);
@@ -379,7 +380,7 @@ class Output extends Object {
         //The requested Response format
         $Document = $this->getHandler();
 
-        return $Document->render($template, $httpCode, $this->getHeaders());
+        return $Document->render($template, $httpcode, $this->getHeaders());
     }
 
     /**
@@ -660,6 +661,17 @@ class Output extends Object {
         $this->code = is_null($code) ? 200 : $code;
         return $this;
     }
+    
+        /**
+     * Sets the application response code
+     *
+     * @param type $code
+     * @return Output
+     */
+    final public function getResponseCode($default = 200) {
+        $code = is_null($this->code) ? $default : $this->code;
+        return $code;
+    }
 
     /**
      * Adds a page title
@@ -696,6 +708,20 @@ class Output extends Object {
         $this->variables = array_merge($this->variables, $variable);
 
         return $this;
+    }
+    
+    /**
+     * Removes an output variable
+     * 
+     * @param type $param
+     * @return boolean
+     */
+    final public function removeOutputVar($param){
+        $existing = $this->get($param, null);
+        if(!empty($existing)){
+            unset($this->variables[$param]);
+        }
+        return true;
     }
 
     /**
@@ -807,7 +833,7 @@ class Output extends Object {
      * @return string
      */
     final public function getMessages() {
-        
+        return $this->get("alerts");
     }
 
     /**

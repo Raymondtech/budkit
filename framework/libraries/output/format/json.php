@@ -48,26 +48,43 @@ final class JSON extends Library\Output\Document {
      * 
      * @return string json
      */
-    public function render($template=null, $httpcode=200, $headers = array()) {
+    public function render($template=null, $httpcode=null, $headers = array()) {
 
-      
-        $this->setHeader('Content-type','text/json');
+        $httpcode = empty($httpcode) ? $this->getResponseCode() : $httpcode;
         
+        @header("HTTP/1.1 {$httpcode}");
+        $headers = empty($headers)? $this->getHeaders() : $headers;     
+        if(is_array($headers)){
+            foreach($headers as $name=>$value){
+                $this->unsetHeader($name);
+                $this->setHeader($name, $value);
+            }
+        };
+        $this->setHeader('Content-type','text/json');
+        //Will remove some system vars by default. 
+        //@TODO will need to come up with a way for the consumer to request these vars
+        $this->removeOutputVar("debug");
+        $this->removeOutputVar("page");
+        $this->removeOutputVar("user");
+        
+        //Get respone messages, then remove the alerts output var
+        $messages = $this->getMessages();
+        $this->removeOutputVar("alerts");
+        
+        //The response structure
         $this->response = array(
-            "status" => 200,
-            "message" => "",
-            "html" => ""
+            "status" => $httpcode,
+            "messages" => $messages,
+            "data" => $this->getVariables(), //Gets the output variables
+            "template" => $template
         );
 
         //2. Import JSON Library;
-        $json = \Library\Folder::getFile("json");
+        $json       = \Library\Folder::getFile("json");
+        $response   = $json->encode($this->response);
 
-
-        $response = $json->encode($this->response);
-
-
+        //Print out the json output
         print_R($response);
-        
     }
 
     /**

@@ -118,19 +118,18 @@ final class Debugger extends Library\Log{
         self::log( $now , _t("Stop execution time") , "info"  );
         
         $output     = \Library\Output::getInstance();
-                
         $showMessage= \Library\Config::getParam("mode", 1 , "environment");
         if ((int)$showMessage < 2 ) {
             $output = \Library\Output::getInstance();
             $output->set("debug", array("displaylog"=>true ) );
+            $output->set("debug", array("queries"=>$queries ) );
+            $output->set("debug", array("log"=>static::$log ) );
         }
         //Set the debugger output
         $output->set("debug", array("start"=>static::$time ) );
         $output->set("debug", array("stop"=>$now ) );
         $output->set("debug", array("speed"=>$speed ) );
         $output->set("debug", array("memory"=> $memory ) );
-        $output->set("debug", array("queries"=>$queries ) );
-        $output->set("debug", array("log"=>static::$log ) );
 
         //Library\Date::difference($now, $speed);
         //print_R(static::getInstance());

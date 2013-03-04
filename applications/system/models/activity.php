@@ -239,7 +239,34 @@ class Activity extends Platform\Entity {
         //Search for media link
         $targetObject = Activity\Object::getInstance();
         $mediaLink = Activity\MediaLink::getInstance();
-
+        $activityObject = null;
+        
+        //Look for attachedObjects;
+        $attachments = $this->input->getArray("attachment");
+        
+        if(is_array($attachments) && !empty($attachments)){
+            if(sizeof($attachments) > 1 ){
+                //Create a collection and link to the object iD
+                $collection = $this->load->model("collection");
+                $collection->setPropertyValue("collection_items", implode(',', $attachments ));
+                $collection->setPropertyValue("collection_size", count($attachments) );
+                $collection->setPropertyValue("collection_owner", $this->user->get("user_name_id") );
+                //Should we add the activity body to the collection description? there is really no need to, 
+                //As every item will need to be described in details later
+                if(!$collection->saveObject(null, "collection")){
+                    $this->setError( "Could not save attached objects" );
+                    $activityObject = NULL;
+                }
+                //If however we could save, then get the last saved object ID;
+                $activityObject = $collection->getLastSavedObjectURI();
+                unset($collection); //destroys the collection object?       
+            }else{
+                $oneobject = reset($attachments); //Validate. String only
+                $activityObject = !$this->validate->alphaNumeric($oneobject) ? null : $oneobject; //Maybe a much harder validation
+            }
+           $this->setPropertyValue("activity_object", $activityObject);
+        }
+       
         //Determine the target
         if (!$this->saveObject(null, "activity")) {
             //There is a problem! the error will be in $this->getError();

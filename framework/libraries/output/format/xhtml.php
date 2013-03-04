@@ -51,14 +51,18 @@ class xHtml extends \Library\Output\Document {
      * @param type $httpCode
      * @return xHtml
      */
-    final public function render($template="index",$httpCode=null){
-
+    final public function render($template="index",$httpCode=null, $headers=array()){
+        
+        @header("HTTP/1.1 {$httpCode}");   
+        if(is_array($headers)){
+            foreach($headers as $name=>$value){
+                $this->unsetHeader($name);
+                $this->setHeader($name, $value);
+            }
+        };
         $this->setHeaders("Content-type", "text/html");
+        
         $template = empty($template) ? $this->output->layout : $template ;
-                //The response code, default is 200;
-        if(isset($httpCode)&&!is_null($httpCode)){
-            $this->setResponseCode( (int) $httpCode );
-        }
 
         //3.Determine which format of the index we are using
         $layout = FSPATH . 'public' . DS . $this->output->template . DS . $template. $this->output->layoutExt;

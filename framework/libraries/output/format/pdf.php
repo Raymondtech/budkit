@@ -49,7 +49,14 @@ final class PDF extends Library\Output\Document {
      * @return string json
      */
     public function render($template=null, $httpcode=200, $headers = array()) {
-        
+         
+        @header("HTTP/1.1 {$httpcode}");   
+        if(is_array($headers)){
+            foreach($headers as $name=>$value){
+                $this->unsetHeader($name);
+                $this->setHeader($name, $value);
+            }
+        };
         //1. Work on the headers, make sure everything is beautiful
         //json response headers
         $this->setHeader('Content-type','application/pdf');

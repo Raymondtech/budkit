@@ -22,6 +22,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace IS;
 
 const INTERGER = 257;
@@ -29,7 +30,7 @@ const BOOLEAN = 258;
 const STRING = 513;
 const STRIPPED = 513;
 const ENCODED = 514;
-const SPECIAL_CHARS=515;
+const SPECIAL_CHARS = 515;
 const RAW = 516;
 const EMAIL = 517;
 const URL = 518;
@@ -38,7 +39,6 @@ const DECIMAL = 520;
 const ESCAPED = 521;
 const CUSTOM = 1024;
 const FLOAT = 259;
-
 
 namespace Library;
 
@@ -131,7 +131,7 @@ final class Input extends Object {
      */
     public function __construct() {
 
-        $this->unRegisterGlobals();
+        
 
         $this->data = array_merge($this->data, $_REQUEST);
         $this->request = $this->data;
@@ -140,15 +140,17 @@ final class Input extends Object {
         $this->cookie = array_merge($this->cookie, $_COOKIE);
         $this->env = array_merge($this->env, $_ENV);
         $this->server = array_merge($this->server, $_SERVER);
+        $this->session = array_merge($this->session, $_SESSION);
         $this->system = Session::getNamespace();
-
+        
+        $this->unRegisterGlobals();
         //Temp
         $this->files = array_merge($this->files, $_FILES);
 
+        //We need to store the size of files being uploaded for upload progress
         //Returns an instance of the validate object
         $this->validate = Validate::getInstance();
         $this->router = Router::getInstance(); //Used to back trace the request
-        
         //autosanitize;
         $this->sanitize();
     }
@@ -161,7 +163,7 @@ final class Input extends Object {
      * @param type $options
      * @return type 
      */
-    public function data($verb= 'get', $filter = array(), $flags=array(), $options = array()) {
+    public function data($verb = 'get', $filter = array(), $flags = array(), $options = array()) {
 
         //filter_input_array();
         if (!isset($this->$verb)) {
@@ -178,10 +180,11 @@ final class Input extends Object {
      * 
      * @param string $verb 
      */
-    public function getRaw($verb = 'get') {
+    public function getRaw($verb = 'get', $default = array()) {
         //FILTER_UNSAFE_RAW
+        return isset($this->$verb) ? $this->$verb : $default;
     }
-    
+
     /**
      * Gets the contents of a cookie by name
      * 
@@ -245,7 +248,7 @@ final class Input extends Object {
      * @param string $name
      * @param string $verb
      */
-    public function getEscapedVar($name, $default='', $verb='request', $options=array()) {
+    public function getEscapedVar($name, $default = '', $verb = 'request', $options = array()) {
         //FILTER_SANITIZE_MAGIC_QUOTES
         //FILTER_SANITIZE_SPECIAL_CHARS
         $filter = \IS\ESCAPED; //FILTER_SANITIZE_NUMBER_INT
@@ -295,7 +298,7 @@ final class Input extends Object {
      * @param interger  $flags
      * @param array     $options 
      */
-    public function getVar($name, $filter='', $default='', $verb='request', $options=array()) {
+    public function getVar($name, $filter = '', $default = '', $verb = 'request', $options = array()) {
 
         if (strtolower($verb) == 'request') {
             $verb = $this->getVerb();
@@ -371,25 +374,25 @@ final class Input extends Object {
      * @param type $internalize
      * @return type
      */
-    public function getReferer( $internalize = TRUE ){
-        
+    public function getReferer($internalize = TRUE) {
+
         $Session = Session::getInstance();
-        $_url    = $Session->get("referer");
-       
-        if(empty($_url)):
-            $_url     = strtolower($_SERVER['HTTP_REFERER']);
+        $_url = $Session->get("referer");
+
+        if (empty($_url)):
+            $_url = strtolower($_SERVER['HTTP_REFERER']);
         endif;
-        
-        if($internalize){
-            $_url = Uri::internal( $_url );
+
+        if ($internalize) {
+            $_url = Uri::internal($_url);
         }
-        
-        $Session->set("referer", $_url );
-        
+
+        $Session->set("referer", $_url);
+
         //Return the refering URL;
         return (string) $_url;
     }
-    
+
     /**
      * Returns the verb curresponding to the 
      * current request method
@@ -419,7 +422,7 @@ final class Input extends Object {
      * @param type $name
      * @param type $verb 
      */
-    public function getInt($name, $default='', $verb='request', $options=array()) {
+    public function getInt($name, $default = '', $verb = 'request', $options = array()) {
 
         $filter = \IS\INTERGER; //FILTER_SANITIZE_NUMBER_INT
 
@@ -437,7 +440,7 @@ final class Input extends Object {
      * @param type $options
      * @return type 
      */
-    public function getNumber($name, $default='', $verb='request', $decimal=false, $options=array()) {
+    public function getNumber($name, $default = '', $verb = 'request', $decimal = false, $options = array()) {
 
         $filter = ($decimal) ? \IS\FLOAT : \IS\NUMBER; //FILTER_SANITIZE_NUMBER_INT
 
@@ -456,7 +459,7 @@ final class Input extends Object {
      * @param boolean   $allowhtml
      * @param array      $tags 
      */
-    public function getString($name, $default='', $verb='request', $allowhtml = false, $tags = array()) {
+    public function getString($name, $default = '', $verb = 'request', $allowhtml = false, $tags = array()) {
         //FILTER_SANITIZE_STRING
         //FILTER_SANITIZE_STRIPPED
         //\IS\HTML;
@@ -484,15 +487,15 @@ final class Input extends Object {
      * @param string $verb
      * @param array $flags 
      */
-    public function getArray($name, $default = '', $verb='request', $options=array()) {
-        
+    public function getArray($name, $default = '', $verb = 'request', $options = array()) {
+
         if (strtolower($verb) == 'request') {
             $verb = $this->getVerb();
         }
-        
+
         //just form casting
-        $verb   = strtolower($verb);
-        $input  = $this->$verb;
+        $verb = strtolower($verb);
+        $input = $this->$verb;
 
         //Undefined
         if (empty($name) || !isset($input) || !isset($input[$name])) {
@@ -502,27 +505,25 @@ final class Input extends Object {
                 return null; //nothing for that name;
             }
         }
-        
+
         //FILTER_SANITIZE_STRING
         //FILTER_SANITIZE_STRIPPED
         //\IS\HTML;
-        $filter     = \IS\CUSTOM;  //FILTER_CALLBACK;
-        $options    = array(
+        $filter = \IS\CUSTOM;  //FILTER_CALLBACK;
+        $options = array(
             "flags" => FILTER_REQUIRE_ARRAY,
         );
-        
+
         //uhhhnrrr...
         $array = $input[$name];
 
-       //Use the call back filter to clean this array
-
+        //Use the call back filter to clean this array
         //Sub processing for HTML and all that?
         return (array) $array;
-        
     }
-    
-    private static function cleanArray(){
-                //Pre treat;
+
+    private static function cleanArray() {
+        //Pre treat;
         if (get_magic_quotes_gpc() && ($input[$name] != $default) && ($verb != 'files')) {
             $variable = stripslashes($input[$name]); //??
         }
@@ -535,7 +536,7 @@ final class Input extends Object {
      * @param string $verb
      * @param array $flags 
      */
-    public function getFloat($name, $default='', $verb='request', $options=array()) {
+    public function getFloat($name, $default = '', $verb = 'request', $options = array()) {
 
         //FILTER_SANITIZE_NUMBER_FLOAT
         //FILTER_SANITIZE_NUMBER_FLOAT
@@ -559,7 +560,7 @@ final class Input extends Object {
      * @param string $name
      * @param string $verb
      */
-    public function getBoolean($name, $default='', $verb='request', $options=array()) {
+    public function getBoolean($name, $default = '', $verb = 'request', $options = array()) {
         //FILTER_SANITIZE_NUMBER_INT
         $filter = \IS\BOOLEAN;
         $options = array(
@@ -581,7 +582,7 @@ final class Input extends Object {
      * @param string $verb
      * @param array $flags 
      */
-    public function getWord($name, $default='', $verb='request', $options=array()) {
+    public function getWord($name, $default = '', $verb = 'request', $options = array()) {
         //First word in a sanitized string
         $sentence = $this->getString($name, $default, false);
 
@@ -596,7 +597,7 @@ final class Input extends Object {
      * @param string $name
      * @param string $verb 
      */
-    public function getEmail($name, $default='', $verb='request', $options=array()) {
+    public function getEmail($name, $default = '', $verb = 'request', $options = array()) {
         //FILTER_SANITIZE_EMAIL
 
         $filter = \IS\EMAIL;
@@ -616,7 +617,7 @@ final class Input extends Object {
      * @param mixed $value
      * @param string $verb 
      */
-    public function setVar($name, $value, $verb='post') {
+    public function setVar($name, $value, $verb = 'post') {
         
     }
 

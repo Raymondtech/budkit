@@ -48,10 +48,10 @@ final class Raw extends Library\Output\Document {
      * 
      * @return string json
      */
-    public function render($template=null, $httpcode=200, $headers = array()) {
+    public function render($template=null, $httpcode=null, $headers = array()) {
 
         //The response code, default is 200;
-
+        @header("HTTP/1.1 {$httpcode}");
         $headers = empty($headers)? $this->getHeaders() : $headers;     
         if(is_array($headers)){
             foreach($headers as $name=>$value){
