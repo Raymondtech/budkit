@@ -29,7 +29,9 @@
                 </tpl:condition>
                 
             </div><!--/.nav-collapse -->
-            <a class="topic"><tpl:element type="text" data="page.title">SocialKit</tpl:element></a>
+            <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
+                <a class="topic"><tpl:element type="text" data="page.title">SocialKit</tpl:element></a>
+            </tpl:condition>
         </div>
     </div>
 </tpl:layout>
