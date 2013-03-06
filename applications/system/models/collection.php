@@ -61,6 +61,24 @@ class Collection extends Platform\Entity {
     public function display() {
         return false;
     }
+    
+    /**
+     * Models a collection activity object for activity feeds
+     * 
+     * @param type $activityObject
+     * @param type $activityObjectType
+     * @param type $activityObjectId
+     * 
+     * return void;
+     */
+    public function activityObject(&$activityObject, $activityObjectType, $activityObjectId){
+        
+        //If the activity object is not a collection! skip it
+        $objectTypeshaystack = array("collection");
+        if(!in_array($activityObjectType, $objectTypeshaystack)) return; //Nothing to do here if we can't deal with it!
+            print_R($activityObjectId);
+            
+    }
 
     /**
      * Get's an instance of the activity model

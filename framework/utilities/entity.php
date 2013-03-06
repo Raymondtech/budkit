@@ -43,7 +43,7 @@ class Entity extends Model {
     protected $propertyData = array();
     protected $propertyModel = array();
     protected $objectId = NULL;
-    protected $objectType = "object";
+    protected $objectType = NULL;
     protected $objectURI = NULL;
     protected $valueGroup = NULL; //property value groups can be sub categorised;
     protected $listLimit = NULL;

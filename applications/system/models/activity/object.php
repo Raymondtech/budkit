@@ -151,8 +151,10 @@ final class Object {
      * @staticvar object $instance
      * @return object Object
      */
-    public static function getInstance() {
+    public static function getInstance( $recreate = false ) {
 
+        if($recreate) return new self; //If we want to force create a new object
+        
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))

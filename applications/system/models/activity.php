@@ -84,8 +84,7 @@ class Activity extends Platform\Entity {
         //Get the object list
         $objects = $this->getActivityObjectsList()->fetchAll();
         $activities = Activity\Collection::getInstance();
-        
-
+      
         //Parse the activities;
         foreach ($objects as $object) {
 
@@ -111,11 +110,32 @@ class Activity extends Platform\Entity {
                 unset($object[$private]);
             endforeach;
             
+             //Activity Object;
+            //First get the nature of the activity object;
+            $subjectEntity    = Platform\Entity::getInstance(); //An empty entity here because it is impossible to guess the properties of this object
+            $activityObject   = $subjectEntity->loadObjectByURI($object['activity_object'], array()); //Then we load the object    
+            $activityObjectId = $activityObject->getObjectId();
+            
+            if(!empty($activityObjectId) ):
+                //Create an activity object, and fire an event asking callbacks to complete the activity object
+                $activitySubject     = Activity\Object::getInstance(true);
+                $activityObjectType  = $activityObject->getObjecType();         
+                //Fire the event, passing the activitySubject by reference
+                //Although it looks stupid to need to find out the nature of the activity subject before trigger
+                //It actually provides an extra exclusion for callback so not all callbacks go to the database
+                //so for instance if we found an activity subject was a collection, callbacks can first check if the 
+                //trigger is to model a collection before diving ing
+                \Library\Event::trigger("onActivitySubjectModel",  $activitySubject, $activityObjectType , $activityObjectId ); 
+                //You never know what callbacks will do to your subject so we just check
+                //that the activity subject is what we think it is, i.e an activity object
+                if(is_a($activitySubject, 'Activity\Object')) 
+                    $object['activity_object'] =  $activitySubject::getArray(); //If it is then we can set the activity object output vars
+            endif;
             //CleanUp
             foreach( $object as $key=>$value):
                     $object[str_replace(array('activity_','object_'), '', $key)] = $value;
                     unset($object[$key]);
-            endforeach;
+            endforeach; 
             
             $items      = $activities->get("items", array()); //get the collection
             $items[]    = $object; //add to the collection
@@ -126,6 +146,7 @@ class Activity extends Platform\Entity {
             $activities->set("totalItems", count($items) );
             
         }
+  
         $collection = $activities::getArray();
         
         return $collection;
@@ -179,11 +200,11 @@ class Activity extends Platform\Entity {
             $query .= "\nFROM ?activity_property_values v"
             . "\nLEFT JOIN ?properties p ON p.property_id = v.property_id"
             . "\nLEFT JOIN ?objects o ON o.object_id=v.object_id"
-
             //Join the UserObjects Properties tables on userid=actorid
             . "\nLEFT JOIN ?objects q ON q.object_id=v.value_data AND p.property_name ='activity_actor'"
             . "\nLEFT JOIN ?user_property_values u ON u.object_id=q.object_id"
-            . "\nLEFT JOIN ?properties l ON l.property_id = u.property_id";
+            . "\nLEFT JOIN ?properties l ON l.property_id = u.property_id"
+            ;
 
         else:
             $query .="\nFROM ?objetcs";
