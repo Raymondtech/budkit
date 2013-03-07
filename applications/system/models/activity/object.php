@@ -33,7 +33,7 @@ use Library;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-final class Object {
+class Object {
 
     /**
      * An Arrray of one or more additional associated objects
@@ -144,6 +144,14 @@ final class Object {
 
         //If there is no value return the default
         return (empty($value)) ? $default : $value;
+    }
+    
+    /**
+     * Creates a new instance of the activity Object Type
+     * @return \self
+     */
+    public static function getNewInstance(){
+        return new self;
     }
 
     /**

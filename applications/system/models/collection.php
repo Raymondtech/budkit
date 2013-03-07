@@ -71,13 +71,49 @@ class Collection extends Platform\Entity {
      * 
      * return void;
      */
-    public function activityObject(&$activityObject, $activityObjectType, $activityObjectId){
+    public static function activityObject(&$activityObject, $activityObjectType, $activityObjectURI){
         
         //If the activity object is not a collection! skip it
         $objectTypeshaystack = array("collection");
+        $thisModel  = new self;
         if(!in_array($activityObjectType, $objectTypeshaystack)) return; //Nothing to do here if we can't deal with it!
-            print_R($activityObjectId);
+            //1.Load the collection!
+            $collection         = $thisModel->loadObjectByURI( $activityObjectURI );
+            $collectionObject   = new Activity\Collection;
+            //2.Get all the elements in the collection, limit 5 if more than 5
             
+            //3.Trigger their timeline display
+            $collectionObject->set("objectType", "collection"); 
+            $collectionObject->set("uri", $collection->getObjectURI());
+            
+            //Now lets populate our collection with Items
+            $collectionItems = $collection->getPropertyValue("collection_items");
+            $collectionItemize = explode(",", $collectionItems);
+            $collectionObject->set("totalItems", count($collectionItemize));
+            
+            if(is_array($collectionItemize)&&!empty($collectionItemize)){
+                $items = array();
+                foreach($collectionItemize as $item){
+                    $itemObject = new Activity\MediaLink; 
+                    //@TODO Will probably need to query for objectType of items in collection?
+                    $itemObjectURL = !empty($item)?"/system/object/{$item}/":"http://placeskull.com/100/100/999999" ;
+                    $itemObject->set("url", $itemObjectURL );
+                    $itemObject->set("uri", $item );
+                    $itemObject->set("height", null);
+                    $itemObject->set("width", null);
+                    $items[] = $itemObject::getArray();
+                    unset($itemObject);
+                }
+                $collectionObject->set("items", $items);
+            }
+            //Now set the collection Object as the activity Object
+            $activityObject = $collectionObject;
+            
+            unset($collection);
+            unset($collectionObject);
+            
+            //All done
+            return true;
     }
 
     /**

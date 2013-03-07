@@ -78,13 +78,10 @@ class Loop extends Parse\Template {
         
         //'looping method call';
         foreach( $data as $item){
-          
             //Reset the pvariable param;
-            static::$pvariables[$id] = $item;
-            
+            static::$pvariables[$id] = $item;       
             //Now multiply the tag in $_elements;
-            Library\Folder\Files\Xml\Parser::writeXML($writer, $tag['CHILDREN']);
-            
+            Library\Folder\Files\Xml\Parser::writeXML($writer, $tag['CHILDREN']);   
         };
         
         //When we are done with the loop;

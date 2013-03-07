@@ -35,7 +35,13 @@ use Library;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-final class MediaLink {
+final class MediaLink{
+    
+        /**
+     * Identifies the object type 
+     * @var string 
+     */
+    public static $objectType = "medialink";
 
     /**
      * A hint to the consumer about the length, in seconds of the media resource identified by the url property. 
@@ -57,6 +63,12 @@ final class MediaLink {
      */
     public static $url = "/";
 
+    /**
+     * An IRI identifying a resource providing an HTML representation of the object. 
+     * @var string 
+     */
+    public static $uri;
+    
     /**
      * A hint to the consumer about the width, in pixels of the media resource identified by the url peroperty. 
      * A media link may contain a width property when the target resource is a visual media item such as an image, video or embeddable HTML page
@@ -113,6 +125,15 @@ final class MediaLink {
         //If there is no value return the default
         return (empty($value)) ? $default : $value;
     }
+    
+        /**
+     * Creates a new instance of the activity Object Type
+     * @return \self
+     */
+    public static function getNewInstance(){
+        return new self;
+    }
+
 
     /**
      * Returns an instance of the media link model

@@ -37,8 +37,14 @@ use Library;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-final class Collection {
+final class Collection{
 
+    /**
+     * Identifies the object type 
+     * @var string 
+     */
+    public static $objectType = "collection";
+    
     /**
      * A non negative interger specifying the total number of activities within a stream
      * The Stream serialization may contain a "count" property
@@ -55,10 +61,10 @@ final class Collection {
     public static $items = array();
 
     /**
-     * An IRI [RFC3987] Referencing a document containing the full listing of objects in this collection
+     * An IRI identifying a resource providing an HTML representation of the object. 
      * @var string 
      */
-    public static $url = "/";
+    public static $uri;
 
     /**
      * Returns an array with object properties names as keys. 
@@ -108,6 +114,15 @@ final class Collection {
         //If there is no value return the default
         return (empty($value)) ? $default : $value;
     }
+    
+        /**
+     * Creates a new instance of the activity Object Type
+     * @return \self
+     */
+    public static function getNewInstance(){
+        return new self();
+    }
+
 
     /**
      * Returns an instance of the Collection Class

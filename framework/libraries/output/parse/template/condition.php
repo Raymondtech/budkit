@@ -68,25 +68,23 @@ class Condition extends Parse\Template {
     private static function _boolean($tag) {
 
         $data = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
-        $value =  $tag['VALUE'] ;
+        $value = $tag['VALUE'];
         $element = null;
-        
+
         //If the boolean value of value is equal to data then condition is met
-        if ((bool)$data == (bool)$value) {
+        if ((bool) $data == (bool) $value) {
             //Get the layout name; and save it!
             if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
                 static::$writer->writeRaw($tag['CDATA']);
             endif;
-            
+
             //Get the layout name; and save it!
-            if (isset($tag['CHILDREN']) ):
-                $element =  $tag['CHILDREN'] ;
+            if (isset($tag['CHILDREN'])):
+                $element = $tag['CHILDREN'];
             endif;
-            
-        } 
+        }
         //Else remove the tag from the tree;
         return $element;
-        
     }
 
     private static function _compare($tag) {
@@ -94,24 +92,53 @@ class Condition extends Parse\Template {
     }
 
     private static function _isset($tag) {
-        
-        $data       = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
-        $value      = $tag['VALUE'] ;
-        $datatest   = (empty($data)||is_null($data))? false : true;
-        $element    = null;
-        
+
+        $data = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
+        $value = $tag['VALUE'];
+        $datatest = (empty($data) || is_null($data)) ? false : true;
+        $element = null;
+
         //If the boolean value of value is equal to data then condition is met
-        if ((bool)$datatest == (bool)$value) {
+        if ((bool) $datatest == (bool) $value) {
             //Get the layout name; and save it!
             if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
                 static::$writer->writeRaw($tag['CDATA']);
             endif;
-            
+
             //Get the layout name; and save it!
-            if (isset($tag['CHILDREN']) ):
-                $element =  $tag['CHILDREN'] ;
-            endif;  
-        } 
+            if (isset($tag['CHILDREN'])):
+                $element = $tag['CHILDREN'];
+            endif;
+        }
+        //Else remove the tag from the tree;
+        return $element;
+    }
+
+    /**
+     * Checks if data equals
+     * 
+     * @param type $tag
+     * @return type
+     */
+    private static function _equals($tag) {
+
+        $data = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
+        $value = $tag['VALUE'];
+        $datatest = ($data == $value) ? true : false;
+        $element = null;
+
+        //If the boolean value of value is equal to data then condition is met
+        if ((bool) $datatest == (bool) $value) {
+            //Get the layout name; and save it!
+            if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
+                static::$writer->writeRaw($tag['CDATA']);
+            endif;
+
+            //Get the layout name; and save it!
+            if (isset($tag['CHILDREN'])):
+                $element = $tag['CHILDREN'];
+            endif;
+        }
         //Else remove the tag from the tree;
         return $element;
     }
@@ -132,7 +159,7 @@ class Condition extends Parse\Template {
         static::$writer = $writer;
 
         $method = isset($tag['TEST']) ? $tag['TEST'] : 'compare';
-        $submethods = array("count", "boolean", "compare", "isset", "empty");
+        $submethods = array("count", "boolean", "compare", "isset", "empty", "equals");
         $_method = "_" . $method;
 
         //Check that the method exists!

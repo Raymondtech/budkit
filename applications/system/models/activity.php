@@ -83,21 +83,20 @@ class Activity extends Platform\Entity {
         
         //Get the object list
         $objects = $this->getActivityObjectsList()->fetchAll();
-        $activities = Activity\Collection::getInstance();
-      
+        $items   = array();
         //Parse the activities;
         foreach ($objects as $object) {
 
             //1. Collections
             //2.0 THE ACTOR
-            $actorObject = Activity\Object::getInstance();
+            $actorObject = new Activity\Object;
             $actorName   = implode(' ', array($object['user_first_name'], $object['user_last_name']) );
             $actorObject->set("objectType", "user"); //@TODO Not only User objects can be actors! You will need to be able to allow other apps to be actors
             $actorObject->set("displayName", $actorName ); 
             $actorObject->set("id", $object['activity_actor']);
             $actorObject->set("uri", $object['user_name_id']);
             
-            $actorImage  = Activity\MediaLink::getInstance();
+            $actorImage  = new Activity\MediaLink;
             $actorImageURL = !empty($object['user_photo'])?"/system/object/{$object['user_photo']}/resize/50/50":"http://placeskull.com/50/50/999999";
             $actorImage->set("url", $actorImageURL);
             $actorImage->set("height", 50);
@@ -114,39 +113,42 @@ class Activity extends Platform\Entity {
             //First get the nature of the activity object;
             $subjectEntity    = Platform\Entity::getInstance(); //An empty entity here because it is impossible to guess the properties of this object
             $activityObject   = $subjectEntity->loadObjectByURI($object['activity_object'], array()); //Then we load the object    
-            $activityObjectId = $activityObject->getObjectId();
+            $activityObjectURI = $activityObject->getObjectURI();
             
-            if(!empty($activityObjectId) ):
+            if(!empty($activityObjectURI) ):
                 //Create an activity object, and fire an event asking callbacks to complete the activity object
-                $activitySubject     = Activity\Object::getInstance(true);
+                $activitySubject     = new Activity\Object;
                 $activityObjectType  = $activityObject->getObjecType();         
                 //Fire the event, passing the activitySubject by reference
                 //Although it looks stupid to need to find out the nature of the activity subject before trigger
                 //It actually provides an extra exclusion for callback so not all callbacks go to the database
                 //so for instance if we found an activity subject was a collection, callbacks can first check if the 
                 //trigger is to model a collection before diving ing
-                \Library\Event::trigger("onActivitySubjectModel",  $activitySubject, $activityObjectType , $activityObjectId ); 
+                \Library\Event::trigger("onActivitySubjectModel",  $activitySubject, $activityObjectType , $activityObjectURI ); 
                 //You never know what callbacks will do to your subject so we just check
                 //that the activity subject is what we think it is, i.e an activity object
-                if(is_a($activitySubject, 'Activity\Object')) 
+                
+                if(is_object($activitySubject)&&  method_exists($activitySubject, "getArray")){ 
                     $object['activity_object'] =  $activitySubject::getArray(); //If it is then we can set the activity object output vars
+                }
             endif;
             //CleanUp
             foreach( $object as $key=>$value):
                     $object[str_replace(array('activity_','object_'), '', $key)] = $value;
                     unset($object[$key]);
             endforeach; 
-            
-            $items      = $activities->get("items", array()); //get the collection
+           
             $items[]    = $object; //add to the collection
             
             //print_R($items);
             
-            $activities->set("items", $items); //update the collection
-            $activities->set("totalItems", count($items) );
-            
         }
-  
+        
+        $activities = new Activity\Collection;
+        
+        $activities->set("items", $items); //update the collection
+        $activities->set("totalItems", count($items) );
+            
         $collection = $activities::getArray();
         
         return $collection;
