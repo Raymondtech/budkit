@@ -51,6 +51,9 @@ class Loop extends Parse\Template {
 
     static $instance;
     
+    
+    static $loops;
+    
 
     /**
      * Execute the layout
@@ -65,29 +68,27 @@ class Loop extends Parse\Template {
         //First we get the data, and check it is an array or object
         //Get the data;
         if (!isset($tag['DATA'])) return null;
-        $id = isset($tag['ID'])? $tag['ID'] : strval($tag['DATA']);
+        $id     = isset($tag['ID'])? $tag['ID'] : strval($tag['DATA']);
+        $data   = self::getData($tag['DATA'], array()); //echo $data;
         
-        $element   = null;
-        $_elements = array();
+        static::$looping[$id] = true;
         
-        $data = self::getData($tag['DATA'], array()); //echo $data;
-        
-        static::$looping = true;
-        $existing = static::$currentloopid; //get the current loop id we will replace this at the end
-        $current  = static::$currentloopid = $id; //tell the parser what loop we are working with now
+        //get the current loop id we will replace this at the end
+        $existing = static::$currentloopid; 
         
         //'looping method call';
-        foreach( $data as $item){
+        foreach( $data as $item){   
+            static::$currentloopid = $id; //tell the parser what loop we are working with now
             //Reset the pvariable param;
-            static::$pvariables[$id] = $item;       
+            static::$pvariables[$id] = $item;     
             //Now multiply the tag in $_elements;
-            Library\Folder\Files\Xml\Parser::writeXML($writer, $tag['CHILDREN']);   
+            Library\Folder\Files\Xml\Parser::writeXML($writer, $tag['CHILDREN']);        
+            static::$currentloopid = $existing;
         };
         
         //When we are done with the loop;
-        static::$pvariables = array();
-        static::$looping = false;
-        static::$currentloopid = $existing;
+        static::$pvariables[$id] = array();
+        unset( static::$looping[$id] ); //Remove the looping id
         
         //Always return the modified element
         return null;

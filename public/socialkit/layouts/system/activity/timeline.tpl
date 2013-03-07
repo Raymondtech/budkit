@@ -20,7 +20,9 @@
                             <div class="timeline-item-title"><tpl:element type="text" data="content" /></div>
                             <tpl:condition data="object" test="isset" value="1">
                                 <tpl:condition data="object.objectType" test="equals" value="collection">
-<!--                                    <tpl:loop data="activities.items">1</tpl:loop>Why can i not have a loop in a loop?-->
+                                   <tpl:loop data="object.items" id="activity_object">
+                                       <span>Why No SHOW?</span>
+                                   </tpl:loop>
                                 </tpl:condition>
                             </tpl:condition>
                         </div>

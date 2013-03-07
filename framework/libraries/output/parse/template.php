@@ -66,7 +66,7 @@ abstract class Template extends Output\Parse {
     static $writer;
     static $imports = array();
     //Tell the getdata method we are loop
-    static $looping = false;
+    static $looping = array();
     //Specify a loopid for the pvariables
     static $currentloopid = null;
 
@@ -227,7 +227,8 @@ abstract class Template extends Output\Parse {
         //if trying to access parent data from within a loop element, the first element 
         //in the path should be _ e.g _.blah.blah.
         $first = reset($id);
-        if (static::$looping && $first<>"_"){ 
+        $loop  = static::$currentloopid ;
+        if (static::$looping[$loop] && $first<>"_"){ 
             return self::getPersistentData($path, $default);
         }
         
