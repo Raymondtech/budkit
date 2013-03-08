@@ -139,67 +139,67 @@ class Attachments extends Platform\Entity {
      * @param string $group A unique string representing the options group
      * @return boolean true. Will throw an exception upon any failure. 
      */
-    public function store( $file ) {
+    public function store($file) {
 
         $fileHandler = \Library\Folder\Files::getInstance();
         $uploadsFolder = $this->config->getParam('users-folder', '', 'content');
-        
+
 
         //Check User Upload Limit;
         //Check File upload limit;
         //Validate the file
-        
-            $fileName = preg_replace('/[^' . $this->_validChars . ']|\.+$/i', "", basename($file['name']));
-            if (strlen($fileName) == 0 || strlen($fileName) > $this->_maxNameLength) {
-                $this->setError(_("Invalid file Name"));
-                throw new \Platform\Exception($this->getError());
-            }
-            //Check that the file has a valid extension
-            $fileExtension = $fileHandler->getExtension($fileName);
-            if (!in_array(strtolower($fileExtension), $this->allowed)) {
-                $this->setError(_("Attempting to upload an invalid file type"));
-                throw new \Platform\Exception($this->getError());
-            }
-            //The target folder
-            //Check that folder exists, otherwise create it and set the appropriate permission;
-            $uploadsFolder = FSPATH . $uploadsFolder;
-            if (isset($this->_owner)) {
-                $uploadsFolder .= DS . $this->_owner;
-            }
-            $uploadsFolder .= DS . "attachments"; //All uploads are saved in the attachments folder
-            $uploadsFolder = str_replace(array('/', '\\'), DS, $uploadsFolder);
 
-            if (!$fileHandler->is($uploadsFolder, true)) { //if its not a folder
-                $folderHandler = \Library\Folder::getInstance();
-                if (!$folderHandler->create($uploadsFolder)) {
-                    $this->setError(_("Could not create the target uploads folder. Please check that you have write permissions"));
-                    throw new \Platform\Exception($this->getError());
-                }
-            }
-            $uploadFileName = $uploadsFolder . DS . $fileName;
-            if (!move_uploaded_file($file['tmp_name'], $uploadFileName)) {
-                $this->setError(_("Could not move the uploaded folder to the target directory"));
+        $fileName = preg_replace('/[^' . $this->_validChars . ']|\.+$/i', "", basename($file['name']));
+        if (strlen($fileName) == 0 || strlen($fileName) > $this->_maxNameLength) {
+            $this->setError(_("Invalid file Name"));
+            throw new \Platform\Exception($this->getError());
+        }
+        //Check that the file has a valid extension
+        $fileExtension = $fileHandler->getExtension($fileName);
+        if (!in_array(strtolower($fileExtension), $this->allowed)) {
+            $this->setError(_("Attempting to upload an invalid file type"));
+            throw new \Platform\Exception($this->getError());
+        }
+        //The target folder
+        //Check that folder exists, otherwise create it and set the appropriate permission;
+        $uploadsFolder = FSPATH . $uploadsFolder;
+        if (isset($this->_owner)) {
+            $uploadsFolder .= DS . $this->_owner;
+        }
+        $uploadsFolder .= DS . "attachments"; //All uploads are saved in the attachments folder
+        $uploadsFolder = str_replace(array('/', '\\'), DS, $uploadsFolder);
+
+        if (!$fileHandler->is($uploadsFolder, true)) { //if its not a folder
+            $folderHandler = \Library\Folder::getInstance();
+            if (!$folderHandler->create($uploadsFolder)) {
+                $this->setError(_("Could not create the target uploads folder. Please check that you have write permissions"));
                 throw new \Platform\Exception($this->getError());
             }
+        }
+        $uploadFileName = $uploadsFolder . DS . $fileName;
+        if (!move_uploaded_file($file['tmp_name'], $uploadFileName)) {
+            $this->setError(_("Could not move the uploaded folder to the target directory"));
+            throw new \Platform\Exception($this->getError());
+        }
 
-            foreach (array(
-                "attachment_name" => $fileName,
-                "attachment_title" => null, //@todo Wil need to check $file[title],
-                "attachment_size" => $file['size'],
-                "attachment_description" => "", //@todo Wil need to check $file[description],
-                "attachment_src" => str_replace(FSPATH, '', $uploadFileName), //@todo Will need to determine the filetype
-                "attachment_ext" => $fileExtension,
-                "attachment_owner" => $this->_owner,
-            ) as $property => $value):
-                $this->setPropertyValue($property, $value);
-            endforeach;
+        foreach (array(
+    "attachment_name" => $fileName,
+    "attachment_title" => null, //@todo Wil need to check $file[title],
+    "attachment_size" => $file['size'],
+    "attachment_description" => "", //@todo Wil need to check $file[description],
+    "attachment_src" => str_replace(FSPATH, '', $uploadFileName), //@todo Will need to determine the filetype
+    "attachment_ext" => $fileExtension,
+    "attachment_owner" => $this->_owner,
+        ) as $property => $value):
+            $this->setPropertyValue($property, $value);
+        endforeach;
 
-            if (!$this->saveObject(NULL, "attachment")) { //Null because the system can autogenerate an ID for this attachment
-                $fileHandler->delete($uploadFileName);
-                $this->setError(_("Could not store the attachment properties to the database"));
-                throw new \Platform\Exception($this->getError());
-            }
-   
+        if (!$this->saveObject(NULL, "attachment")) { //Null because the system can autogenerate an ID for this attachment
+            $fileHandler->delete($uploadFileName);
+            $this->setError(_("Could not store the attachment properties to the database"));
+            throw new \Platform\Exception($this->getError());
+        }
+
         return true;
     }
 
@@ -210,98 +210,145 @@ class Attachments extends Platform\Entity {
      * @param type $params
      */
     final public static function load(&$object, &$params) {
-        
+
         //if is object $object
         if (!is_a($object, "\Platform\Entity") || $object->getObjecType() !== "attachment") {
             //Attempt to determine what type of object this is or throw an error
             return false; //we only deal with attachments
         }
-       
+
         //Relaod the object
         $attachments = static::getInstance();
         $attachment = $attachments->loadObjectByURI($object->getObjectURI());
 
         $fullPath = FSPATH . DS . $attachment->getPropertyValue("attachment_src");
-        
+
         //Commands
-        if(is_array($params)):
+        if (is_array($params)):
             $modifiers = $params;
-            $modifier  = array_shift( $modifiers );
-            if(method_exists($attachments, $modifier)){
-                $fullPath = $attachments::$modifier($fullPath, $modifiers); 
+            $modifier = array_shift($modifiers);
+            if (method_exists($attachments, $modifier)) {
+                $fullPath = $attachments::$modifier($fullPath, $modifiers);
                 $fd = fopen($fullPath, "rb");
             }
         endif;
         //Attempt to determine the files mimetype
-        $ftype  = "application/octet-stream";
-        $finfo  = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
-        $fmtype = finfo_file($finfo, $fullPath); 
-        finfo_close($finfo);    
+        $ftype = "application/octet-stream";
+        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+        $fmtype = finfo_file($finfo, $fullPath);
+        finfo_close($finfo);
         $ftype = !empty($fmtype) ? $fmtype : $ftype;
 
         //Get the file stream
-        if(!$fd){ $fd = fopen($fullPath, "rb"); }
-        
+        if (!$fd) {
+            $fd = fopen($fullPath, "rb");
+        }
+
         if ($fd) {
             $fsize = filesize($fullPath);
             $fname = basename($fullPath);
             $headers = array(
-                "Pragma"=>null,
-                "Cache-Control"=>"",
-                "Content-type"=> $ftype,
+                "Pragma" => null,
+                "Cache-Control" => "",
+                "Content-type" => $ftype,
             );
-            foreach($headers as $name=>$value){
+            foreach ($headers as $name => $value) {
                 $attachment->output->unsetHeader($name);
                 $attachment->output->setHeader($name, $value);
-            }         
-            fpassthru($fd);         
+            }
+            fpassthru($fd);
             fclose($fd);
-            
-            $attachment->output->setFormat('raw', array());//Headers must be set before output 
+
+            $attachment->output->setFormat('raw', array()); //Headers must be set before output 
             //
             $attachment->output->display();
             //$attachment->output->setHeader("Content-Disposition", "attachment; filename=\"" . $fname . "\"");
             //$attachment->output->setHeader("Content-length", $fsize);
-           
         }
 
         //Here is the attachment source, relative to the FSPATH;
         //print_r($attachment->getPropertyValue("attachment_src"));
     }
-    
+
     /**
      * Resizes an image
      * 
      * @param type $file
      * @param type $params
      */
-    final public static function resize( $file, $params ){
+    final public static function resize($file, $params) {
         //die;
         $fileHandler = \Library\Folder\Files::getInstance('image');
-        $resizable   = array("jpg", "gif", "png", "jpeg");
-        
+        $resizable = array("jpg", "gif", "png", "jpeg");
+
         //If there is no file
-        if(empty($file)) return false; 
-        $fileExtension= $fileHandler->getExtension($file);
-        
+        if (empty($file))
+            return false;
+        $fileExtension = $fileHandler->getExtension($file);
+
         //If we can't resize this type of file
-        if (!in_array(strtolower($fileExtension), $resizable)) return false;
+        if (!in_array(strtolower($fileExtension), $resizable))
+            return false;
         //We need at least the width or height to resize;
-        if(empty($params)) return false;
-        $width       = isset($params[0])? $params[0] : null;
-        $height      = isset($params[1])? $params[1] : null;
-        
-        $isSquare      = ($width == $height)? true : false;
+        if (empty($params))
+            return false;
+        $width = isset($params[0]) ? $params[0] : null;
+        $height = isset($params[1]) ? $params[1] : null;
+
+        $isSquare = ($width == $height) ? true : false;
         //NewName = OriginalName-widthxheight.OriginalExtension
-        $fileName    = $fileHandler->getName($file);
-        $filePath    = $fileHandler->getPath($file);
-        
-        $target      = $filePath.DS.$fileName.(isset($width)?"-".$width:null).(isset($height)?"x".$height:null).".".$fileExtension;
-        
-        if(!$fileHandler->resizeImage($file, $target, $width , $height , $isSquare)){
+        $fileName = $fileHandler->getName($file);
+        $filePath = $fileHandler->getPath($file);
+
+        $target = $filePath . DS . $fileName . (isset($width) ? "-" . $width : null) . (isset($height) ? "x" . $height : null) . "." . $fileExtension;
+
+        if (!$fileHandler->resizeImage($file, $target, $width, $height, $isSquare)) {
             return false; //There was a problem and we could not resize the file
         }
         return $file = $target;
+    }
+
+    /**
+     * Models a collection activity object for activity feeds
+     * 
+     * @param type $activityObject
+     * @param type $activityObjectType
+     * @param type $activityObjectId
+     * 
+     * return void;
+     */
+    public static function activityObject(&$activityObject, $activityObjectType, $activityObjectURI) {
+
+        
+        //If the activity object is not a collection! skip it
+        $objectTypeshaystack = array("attachment");
+        $thisModel = new self;
+        if (!in_array($activityObjectType, $objectTypeshaystack))
+            return; //Nothing to do here if we can't deal with it!
+            
+        //1.Load the collection!
+        $attachment = $thisModel->loadObjectByURI($activityObjectURI);
+        $attachmentObject = new Activity\Medialink;
+        //2.Get all the elements in the collection, limit 5 if more than 5
+        //3.Trigger their timeline display
+        $attachmentObject->set("objectType", "attachment");
+        $attachmentObject->set("uri", $attachment->getObjectURI());
+
+        //Now lets populate our collection with Items
+        //@TODO Will probably need to query for objectType of items in collection?
+        //@TODO Also this will help in removing objects from collections that have previously been deleted
+        $attachmentObjectURL = !empty($activityObjectURI) ? "/system/object/{$activityObjectURI}" : "http://placeskull.com/100/100/999999";
+        $attachmentObject->set("url",  $attachmentObjectURL);
+        $attachmentObject->set("uri", $activityObjectURI);
+        $attachmentObject->set("height", null);
+        $attachmentObject->set("width", null);
+        
+        //echo $activityObjectURI;
+
+        //Now set the collection Object as the activity Object
+        $activityObject =  $attachmentObject;
+        
+        return true;
     }
 
     /**

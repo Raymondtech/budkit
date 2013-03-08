@@ -13,4 +13,5 @@
  * 
  * 
  */
+\Library\Event::register('onActivitySubjectModel', '\Application\System\Models\Attachments::activityObject');
 \Library\Event::register('onActivitySubjectModel', '\Application\System\Models\Collection::activityObject');
