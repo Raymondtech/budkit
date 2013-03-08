@@ -92,6 +92,8 @@
         position: relative;
         
         .timeline-item-media{
+            padding-top: @gridGutterWidth*0.2;
+            margin-bottom: @gridGutterWidth*0.5;
             blockquote{
                 min-height: 120px;
                 h4{
@@ -112,6 +114,17 @@
                         display: block;
                     }
                 }
+            }
+
+            .media-grid{
+                margin-left: -@gridGutterWidth*0.5;
+                list-style: none;
+                .clearfix();
+                > li {
+                   float: left; // Explicity set the float since we don't require .span* classes
+                    margin-bottom: @gridGutterWidth*0.5;
+                    margin-left: @gridGutterWidth*0.5;
+                  }
             }
             
         }
@@ -269,14 +282,13 @@
         }
         &:last-child{ .timeline-item-container{ border-bottom: 1px solid #ddd;} }
         .timeline-item-container{
-            margin: 0px 0px 0px 115px;
+            margin: 0px 0px 10px 115px;
             border: none;
             border-style:solid;
             border-width:1px;
             border-color: inherit;
             border-color: transparent;
             border-color: #ddd;
-            border-color: #ddd #ddd transparent #ddd;
             
             
             .timeline-item-header{

@@ -47,7 +47,7 @@
     min-height: @navbarSubnavHeight;
     #gradient > .vertical(@navbarSubnavBackgroundHighlight, @navbarSubnavBackground);
     border-bottom: 1px solid @navbarSubnavBorder;
-    margin-bottom: 2*@baseLineHeight;
+    margin-bottom: @baseLineHeight;
     .box-shadow(none);
   }
 
@@ -64,14 +64,18 @@
   }
 
    .topic {
+  
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 26px;
+    color: #999999;
+    text-transform: uppercase;
+
+
       float: left;
       display: block;
-      font-size: 20px;
-      color: @navbarSubnavLinkColorActive;
-      font-weight: 400;
       min-width: (125px * 2);
-        margin-left: -20px; // negative indent to left-align the text down the page
-      padding: ((@navbarSubnavHeight - @baseLineHeight) / 2) 20px ((@navbarSubnavHeight - @baseLineHeight) / 2);
+      margin: 2px 0 0px;
     }
 
   .navbar-text {
@@ -79,7 +83,7 @@
   margin-bottom: 0;
   //line-height: @navbarSubnavHeight;
       padding: ((@navbarSubnavHeight - @baseLineHeight) / 4) 14px;
-  .navbarVerticalAlign(48px);
+  .navbarVerticalAlign(@navbarSubnavHeight);
 
  
 

@@ -32,16 +32,12 @@
         <body>
             
             <div id="wrap">
+                <tpl:import layout="navbar" />
                 <div class="container-menu-box">
-                    <div class="navbar margin-bottom-zero nav-home-page">
-                        <div class="navbar-inner padding-zero no-margin">
-                            <ul class="nav no-margin">
-                                <li><a href="/member/profile/view" class="nav-home-page-link"><i class="icon-eye-open"></i></a></li>  
-                            </ul>
-                        </div>
-                    </div>
+                    
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                         <ul class="nav nav-stacked nav-menugroups no-margin" id="menutabs">
+                            <li><a href="/member/profile/view"><i class="icon-eye-open"></i><small>Profile</small></a></li>  
                             <li class="active"><a data-target="#dashboardmenuview" data-toggle="tab"><i class="icon-dashboard"></i><small>Dashboard</small></a></li>  
                             <li><a data-target="#favouritesmenuview" data-toggle="tab"><i class="icon-heart"></i><small>Media</small></a></li>   
                             <li><a data-target="#messagesmenuview" data-toggle="tab"><i class="icon-comments-alt"></i><small>Messages</small></a></li>                                                   
@@ -57,7 +53,7 @@
                     </tpl:condition> 
                 </div>
                 <div class="container-box has-left has-menu-box">
-                    <tpl:import layout="navbar" />
+                    <tpl:block data="page.block.alerts" /> 
                     <div class="container-left">                 
                         <tpl:import layout="sidebar" />
                     </div>
@@ -68,7 +64,7 @@
                         <div class="container-content">
                             
                             <div class="container-bucket">
-                                <tpl:block data="page.block.alerts" /> 
+                                
                                 <tpl:block data="page.block.body">Content</tpl:block>
                                 
                             </div>

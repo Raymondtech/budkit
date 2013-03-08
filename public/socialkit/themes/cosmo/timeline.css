@@ -11,7 +11,7 @@
   clear:left;
 }
 
-.timeline-item-index li,.timeline-items .timeline-item-li:last-child, .timeline-item-index .timeline-item-li:last-child{
+.timeline-item-li,.timeline-items .timeline-item-li:last-child, .timeline-item-index .timeline-item-li:last-child{
     width:48%;
     position: relative;
     border:1px solid #ddd;
@@ -26,10 +26,10 @@
     -moz-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
-    background: #eee;
+    background: rgba(238, 238, 238, 0.2);
     
 }
-.timeline-item-index > li:before,.timeline-item-index > li:after{
+.timeline-item-li:before,.timeline-item-li:after{
   border:7px solid;
   content:'';
   display: block;
@@ -38,14 +38,15 @@
 }
 
 
-.timeline-item-index  > li:nth-child(even):before{ border-width: 10px 10px 10px 0; border-color: transparent #ddd;right:100%;}
-.timeline-item-index  > li:nth-child(even):after{ border-width: 10px 9px 8px 0; border-color: transparent #fff;right:100%;}
-.timeline-item-index  > li:nth-child(odd):after{left:100%;border-width: 10px 0px 10px 10px; border-color:  #fff transparent;}
-.timeline-item-index  > li:nth-child(odd):before{left:100%;border-width: 10px 0px 8px 9px; border-color:  #ddd transparent; background: white;}
+.timeline-item-li:nth-child(even):before{ border-width: 10px 10px 10px 0; border-color: transparent #ddd;right:100%;}
+.timeline-item-li:nth-child(even):after{ border-width: 10px 9px 8px 0; border-color: transparent #fff;right:100%;}
+.timeline-item-li:nth-child(odd):after{left:100%;border-width: 10px 0px 10px 10px; border-color:  #fff transparent;}
+.timeline-item-li:nth-child(odd):before{left:100%;border-width: 10px 0px 8px 9px; border-color:  #ddd transparent; background: white;}
 
 .timeline-item-icon{
   display: none;  
 }
+
 .timeline-item-index .timeline-item-li .timeline-item-container,.timeline-item-index .timeline-item-li:last-child .timeline-item-container{ border: none; }
 
 .timeline-items .timeline-item-li .timeline-item-container:before, .timeline-item-index .timeline-item-li .timeline-item-container:before{border-color: transparent}
@@ -68,4 +69,5 @@
 
 .timeline{position: relative}
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-title{margin: 10px 0px}
+.timeline-item-li .timeline-item-container .timeline-item-header ul.actions{top: 10px !important }
 

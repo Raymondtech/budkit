@@ -1,10 +1,7 @@
 <tpl:layout  name="start" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="navbar navbar-subnav no-margin">
-        <div class="navbar-inner padding-left-half no-margin">
-            <ul class="nav" id="startviewmenu">
-                <li class="active"><a data-target="#events-calendar" data-toggle="tab"><i class="icon-home icon-16"></i>Your Dashboard</a></li>
-                <li><a data-target="#notifications" data-toggle="tab"><i class="icon-bell icon-16"></i>Notifications</a></li>
-            </ul>
+        <div class="navbar-inner">
+           <a class="topic"><tpl:element type="text" data="page.title">SocialKit</tpl:element></a>
         </div>
     </div>
     <div class="padding">

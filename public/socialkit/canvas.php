@@ -30,8 +30,8 @@
         <body>
 
             <div id="wrap">
-                <div class="container-box">
-                    <tpl:import layout="navbar" />
+                <tpl:import layout="navbar" />
+                <div class="container-box">           
                     <div class="container-right">
                         <div class="container-content scroll-y">
                             <div class="container-startup canvas">

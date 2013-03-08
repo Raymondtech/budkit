@@ -3,7 +3,7 @@
         <div class="timeline-line"></div>
         <ol class="timeline-item-index">
             <tpl:loop data="activities.items">
-                <li class="timeline-item-li">
+                <li class="timeline-item-li timeline-item">
                     <div class="timeline-item-container">
                         <div class="timeline-item-header">
                             <div class="timeline-item-icon"><a href="#"><i class="icon-${verb}"></i></a></div>
@@ -19,11 +19,21 @@
                             </ul>
                             <div class="timeline-item-title"><tpl:element type="text" data="content" /></div>
                             <tpl:condition data="object" test="isset" value="1">
-                                <tpl:condition data="object.objectType" test="equals" value="collection">
-                                   <tpl:loop data="object.items" id="activity_object">
-                                       <span>Why No SHOW?</span>
-                                   </tpl:loop>
+                                <tpl:condition data="object.objectType" test="isnot" value="collection">
+                                    <div class="timeline-item-media">
+                                        <img src="/system/object/${object.uri}/resize/500" />
+                                    </div>
                                 </tpl:condition>
+                                <tpl:condition data="object.objectType" test="equals" value="collection">
+                                    <div class="timeline-item-media">	  	
+                                        <ul class="media-grid unstyled bottom-media">	  	
+                                            <tpl:loop data="object.items" id="activity_object">
+                                                <li><a href="#"><img src="/system/object/${uri}/resize/150/150" /></a></li>
+                                            </tpl:loop> 	
+                                        </ul>  	
+                                    </div>
+                                </tpl:condition>
+                                            
                             </tpl:condition>
                         </div>
                     </div>
