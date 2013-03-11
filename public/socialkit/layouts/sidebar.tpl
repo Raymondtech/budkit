@@ -5,8 +5,8 @@
             <div class="tab-pane active" id="dashboardmenuview">
                 <tpl:menu id="dashboardmenu" type="nav-list" />
             </div>
-            <div class="tab-pane" id="favouritesmenuview">           
-                <tpl:menu id="favouritesmenu" type="nav-list" />
+            <div class="tab-pane" id="contentmenuview">           
+                <tpl:menu id="contentmenu" type="nav-list" />
             </div>
             <div class="tab-pane" id="peoplemenuview">           
                 <tpl:menu id="peoplemenu" type="nav-list" />

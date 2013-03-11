@@ -1,7 +1,7 @@
 .profilepics-carousel{ margin-bottom: 0px; }
 .alert {position:relative; z-index: 100};
 .input-xxxlarge   { width: 600px; }
-.input-100pct{width: 100%; }
+.input-100pct{width: 100%; .box-sizing(border-box) }
 .progress{
     &.small-bar{
         height: 10px;
@@ -22,6 +22,7 @@
 .padding-top{ padding-top: @gridGutterWidth !important; }
 .padding{ padding : @gridGutterWidth }
 .padding-half{ padding : @gridGutterWidth * 0.5 }
+.padding-quarter{ padding : @gridGutterWidth * 0.25 }
 .padding-left-half{ padding-left : @gridGutterWidth * 0.5 }
 .padding-right{ padding-right : @gridGutterWidth }
 .padding-right-half{ padding-right : @gridGutterWidth * 0.5 }
@@ -68,6 +69,23 @@
 
 .btn-google {
   .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
+}
+
+.nav-mediagrid > li > a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  .border-radius(1px);
+  color: @grayDark;
+}
+
+// Active state
+.nav-mediagrid > .active > a,
+.nav-mediagrid > .active > a:hover,
+.nav-mediagrid > .active > a:focus {
+  color: @white;
+  background-color: @grayDark;
 }
 
 
@@ -136,43 +154,25 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     left: 0;
     right: 0;
     bottom: 0;
-    .stream-list,.stream-view, .stream-thread{
-        position: absolute;
-        top: 0;
-        bottom: 0;
-    }
     .stream-list{
-        border-right: 1px solid #ddd;
+        position: absolute;
+        //border: 1px solid #ddd;
         overflow-y: auto;
         overflow-x: hidden;
-        left:0; right:0;
-        width: 35%;
+        top:@gridGutterWidth; bottom:auto;
+        left:auto; right:@gridGutterWidth;
+        width: 195px;
+        //background: @white;
+        min-height: 100px;
         z-index: 1;
         .stream-search{
             input{ margin: 3px auto}
         }
     }
     .stream-view{
-        right: 0;
-        width: 65%;
-        left: 35%;
-        .stream-reply{
-            background: #eee;
-            position: absolute; bottom: 0px; right: 0px; left: 0px;
-            height: 170px;
-            border-top: 1px solid #ddd;
-            .stream-reply-textarea{ height: 100px }
-        }
-        .stream-thread{ 
-            overflow-y: auto; right: 0px; left: 0px; 
-        }
+        margin-right: @gridGutterWidth + 195;
     }
     
-}
-
-.activity-box{
-    .stream-list{ left: auto; right:0; border-right: none; border-left: 1px solid #ddd;}
-    .stream-view{ left: auto; right: 35% }
 }
 
 .stream{
@@ -263,7 +263,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 }
 .nav-home-page-link{ font-size: 24px; margin: 0px !important; line-height: 40px; text-align:center; width: 45px}
 .navbar-inner{  
-    .brand{ min-width: 170px; float:right; padding-left:@gridGutterWidth *0.2; padding-right: 0px; background: transparent url(../img/logo.png) 0 5px no-repeat; text-indent: -9999em; }
+    .brand{ min-width: 100px; float:right; padding-left:@gridGutterWidth *0.2; padding-right: 0px; background: transparent url(../img/logo.png) 0 5px no-repeat; text-indent: -9999em; }
 }
 .navbar-subnav{.navbar-inner{padding-left:@gridGutterWidth *0.2} }
 .bkeditor-content{ 
@@ -357,6 +357,30 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
   border: 1px solid #ddd;
   border-bottom-color: transparent;
   cursor: default;
+}
+
+
+.upload-drop{
+    border: 3px dashed #ddd;
+    text-align: center;
+    padding: 125px 0;
+    font-size: 24px;
+    //font-weight: bold;
+    color: #DDD;
+    .upload-select{
+        margin-top: @gridGutterWidth;
+    }
+}
+
+.upload-form{
+
+}
+
+.form-vertical{
+    .form-actions{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 /****IMPORTS****/
 @import "timeline.less";

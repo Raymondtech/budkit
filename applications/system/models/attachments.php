@@ -89,14 +89,15 @@ class Attachments extends Platform\Entity {
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->definePropertyModel(
                 array(
-            "attachment_name" => array("Name", "mediumtext", 50),
-            "attachment_title" => array("Title", "mediumtext", 100),
-            "attachment_size" => array("Size (bytes)", "mediumint", 50),
-            "attachment_description" => array("Description", "mediumtext", 200),
-            "attachment_src" => array("Source", "mediumtext", 100),
-            "attachment_ext" => array("Extension", "mediumtext", 10),
-            "attachment_tags" => array("Tags", "mediumtext", 100),
-            "attachment_owner" => array("Owner user_name_id", "mediumtext", 100)
+                    "attachment_name" => array("Attachment Name", "mediumtext", 50),
+                    "attachment_title" => array("Attachment Name", "mediumtext", 100),
+                    "attachment_size" => array("Attachment Size (bytes)", "mediumint", 50),
+                    "attachment_description" => array("Attachment Description", "mediumtext", 200),
+                    "attachment_src" => array("Attachment Source", "mediumtext", 100),
+                    "attachment_ext" => array("Attachment Extension", "mediumtext", 10),
+                    "attachment_tags" => array("Attachment Tags", "mediumtext", 100),
+                    "attachment_owner" => array("Attachment Owner user_name_id", "mediumtext", 100),
+                    "attachment_type" => array("Attachment Content Type", "mediumtext", 100)
                 ), "attachment"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models or use extendPropertyModel to extend existing models
@@ -143,8 +144,6 @@ class Attachments extends Platform\Entity {
 
         $fileHandler = \Library\Folder\Files::getInstance();
         $uploadsFolder = $this->config->getParam('users-folder', '', 'content');
-
-
         //Check User Upload Limit;
         //Check File upload limit;
         //Validate the file
@@ -181,15 +180,19 @@ class Attachments extends Platform\Entity {
             $this->setError(_("Could not move the uploaded folder to the target directory"));
             throw new \Platform\Exception($this->getError());
         }
+        
+        //Get the attachment content Type;
+        $contentType = "application/octet-stream";
 
         foreach (array(
-    "attachment_name" => $fileName,
-    "attachment_title" => null, //@todo Wil need to check $file[title],
-    "attachment_size" => $file['size'],
-    "attachment_description" => "", //@todo Wil need to check $file[description],
-    "attachment_src" => str_replace(FSPATH, '', $uploadFileName), //@todo Will need to determine the filetype
-    "attachment_ext" => $fileExtension,
-    "attachment_owner" => $this->_owner,
+            "attachment_name" => $fileName,
+            "attachment_title" => null, //@todo Wil need to check $file[title],
+            "attachment_size" => $file['size'],
+            "attachment_description" => "", //@todo Wil need to check $file[description],
+            "attachment_src" => str_replace(FSPATH, '', $uploadFileName), 
+            "attachment_ext" => $fileExtension,
+            "attachment_owner" => $this->_owner,
+            "attachment_type"   => $fileHandler::getMimeType( $uploadFileName )
         ) as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
@@ -219,9 +222,10 @@ class Attachments extends Platform\Entity {
 
         //Relaod the object
         $attachments = static::getInstance();
-        $attachment = $attachments->loadObjectByURI($object->getObjectURI());
-
+        $attachment = $attachments->loadObjectByURI( $object->getObjectURI());
+        
         $fullPath = FSPATH . DS . $attachment->getPropertyValue("attachment_src");
+        $contentType = $attachment->getPropertyValue("attachment_type");
 
         //Commands
         if (is_array($params)):
@@ -233,11 +237,7 @@ class Attachments extends Platform\Entity {
             }
         endif;
         //Attempt to determine the files mimetype
-        $ftype = "application/octet-stream";
-        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
-        $fmtype = finfo_file($finfo, $fullPath);
-        finfo_close($finfo);
-        $ftype = !empty($fmtype) ? $fmtype : $ftype;
+        $ftype = !empty($contentType) ?  $contentType : \Library\Folder\Files::getMimeType( $fullPath ) ;
 
         //Get the file stream
         if (!$fd) {

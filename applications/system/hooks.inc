@@ -15,3 +15,11 @@
  */
 \Library\Event::register('onActivitySubjectModel', '\Application\System\Models\Attachments::activityObject');
 \Library\Event::register('onActivitySubjectModel', '\Application\System\Models\Collection::activityObject');
+
+
+/**
+ * Custom menu Items
+ * 
+ * 
+ */
+\Library\Event::register('beforeRenderMenu', '\Application\System\Models\Menu::content');

@@ -43,7 +43,7 @@ final class Message extends \Platform\Controller {
         $this->set("dashboard", array("title"=>"Activity stream" ) );
         $this->set("user", $user);
         
-        $body = $this->output->layout('messages/lists');
+        $body = $this->output->layout('messages/timeline');
         $this->output->addToPosition("body", $body);
     }
 

@@ -50,6 +50,23 @@ final class Video extends System\Content {
         $fullscreen = false;
         return $view->createForm( $fullscreen );  
     }  
+    
+        /**
+     * Displays a gallery of content items. 
+     * @return void
+     */
+    public function gallery() {
+        
+        $view       = $this->load->view('index');
+        $gallery    = $this->output->layout("content/videos/gallery");
+
+        $this->output->addToPosition("dashboard", $gallery);
+        $this->output->setPageTitle( _t("Videos") );
+        $view->display(); //sample call;   
+        //$this->output->addToPosition("right", $right );
+    }
+    
+    
     /**
      * Updates an existing video.
      * @todo    Implement the video update action method

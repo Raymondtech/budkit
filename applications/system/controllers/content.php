@@ -13,6 +13,7 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
+
 namespace Application\System\Controllers;
 
 /**
@@ -30,7 +31,7 @@ namespace Application\System\Controllers;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-Class Content extends \Platform\Controller{
+Class Content extends \Platform\Controller {
 
     /**
      * The default fall back method. Probably overwritten in child classes
@@ -40,22 +41,18 @@ Class Content extends \Platform\Controller{
         return false;
     }
 
-    /**
-     * Displays a gallery of content items. 
-     * @return void
-     */
-    public function gallery() {
+    public function create() {
         
-        $view       = $this->load->view('index');
-        $gallery    = $this->output->layout("content/gallery");
-        
-        $this->set("dashboard", array("title"=>"Content gallery" ) );
+        $view = $this->load->view('index');
+        $form = $this->output->layout("content/form");
 
-        $this->output->addToPosition("dashboard", $gallery);
-        $this->output->setPageTitle( _t("Content gallery") );
+        $this->output->addToPosition("dashboard", $form);
+        $this->output->setPageTitle(_t("Add New Content"));
+        
         $view->display(); //sample call;   
         //$this->output->addToPosition("right", $right );
     }
+
     /**
      * Returns an instance of the content controller
      * @staticvar self $instance
@@ -70,7 +67,6 @@ Class Content extends \Platform\Controller{
         $instance = new self;
         return $instance;
     }
+
 }
-
-
 

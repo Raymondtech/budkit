@@ -15,10 +15,10 @@
  * 
  */
 
-namespace Application\Member\Models;
+namespace Application\System\Models;
 
 /**
- * The User EAV model. 
+ * Models the system menu items for display
  *
  * @category  Application
  * @package   Data Model
@@ -30,22 +30,22 @@ namespace Application\Member\Models;
  */
 class Menu extends \Platform\Model {
 
-    public function __construct() {
-        parent::__construct();
-    }
-
     /**
-     * Adds Dynamic menu items
+     * Adds Dynamic content menu items
      * @param type $menuId
      * @param type $menuItems
      */
-    public static function hook(&$menuId, &$menuItems) {
-
-        if ($menuId === 'profilemenu') {
+    public static function content(&$menuId, &$menuItems) {
+        //Add the default upload links
+        if ($menuId === 'contentmenu') {
             //Add items to the profile menu;
             array_unshift($menuItems, Array(
-                "menu_title" => "Home",
-                "menu_url" => "/member/profile/view"
+                "menu_title" => "Your Content",
+                "children" => array(
+                    array("menu_title"=>"Add New", "menu_url"=>"/system/content/create"),
+                    array("menu_title"=>"Collections", "menu_url"=>"/system/content/collection/gallery"),
+                    array("menu_title"=>"Download", "menu_url"=>"/")
+                )
             ));
         }
     }

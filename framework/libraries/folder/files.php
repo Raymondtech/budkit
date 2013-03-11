@@ -216,10 +216,18 @@ class Files extends \Library\Folder {
 
 
     /**
-     * Get File MIME Type
+     * Get the MimeType of a file;
+     * @param type $path
+     * @param type $default
      */
-    public static function getMimeType() {
+    public static function getMimeType($path, $default="application/octet-stream") {
         
+        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+        $fmtype = finfo_file($finfo, $path);
+        
+        finfo_close($finfo);
+        
+        return !empty($fmtype) ? $fmtype : $default;
     }
 
     /**

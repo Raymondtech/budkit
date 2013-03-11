@@ -59,6 +59,23 @@ final class Article extends System\Content {
         }
         return $view->createForm( $fullscreen );  
     }  
+    
+        
+        /**
+     * Displays a gallery of content items. 
+     * @return void
+     */
+    public function gallery() {
+        
+        $view       = $this->load->view('index');
+        $gallery    = $this->output->layout("content/articles/gallery");
+
+        $this->output->addToPosition("dashboard", $gallery);
+        $this->output->setPageTitle( _t("Articles") );
+        $view->display(); //sample call;   
+        //$this->output->addToPosition("right", $right );
+    }
+    
     /**
      * Updates an existing article.
      * @todo    Implement the article update action method

@@ -184,12 +184,11 @@ final class Schema extends Platform\Model {
                 (81, 79, 'Appearance', '/system/admin/settings/appearance', '', 21, 2, 'link', '', 3, 8, 1),
                 (82, 79, 'Maintenance', '/system/admin/settings/maintenance', '', 22, 2, 'link', '', 4, 7, 1),
                 (83, 79, 'Navigation', '/system/admin/settings/navigation', '', 23, 2, 'link', '', 5, 6, 1),
-                (84, 0, 'Published Content', '', '', 19, 1, 'link', '', 1, 12, 1),
-                (85, 84, 'Collections', '/system/content/collections/gallery', NULL, 0, 1, 'link', NULL, 2, 11, 1),
-                (86, 84, 'Photos', '/system/content/photos/gallery', NULL, 0, 1, 'link', NULL, 3, 10, 1),
+                (84, 0, 'Published', '', '', 19, 1, 'link', '', 1, 12, 1),
+                (86, 84, 'Photos', '/system/content/photo/gallery', NULL, 0, 1, 'link', NULL, 3, 10, 1),
                 (87, 84, 'Audio', '/system/content/audio/gallery', NULL, 0, 1, 'link', NULL, 4, 9, 1),
-                (88, 84, 'Videos', '/system/content/videos/gallery', NULL, 0, 1, 'link', NULL, 5, 8, 1),
-                (89, 84, 'Articles', '/system/content/articles/gallery', '', 23, 1, 'link', '', 6, 7, 1),
+                (88, 84, 'Videos', '/system/content/video/gallery', NULL, 0, 1, 'link', NULL, 5, 8, 1),
+                (89, 84, 'Articles', '/system/content/article/gallery', '', 23, 1, 'link', '', 6, 7, 1),
                 (90, 0, 'Relationships', '', NULL, 0, 6, 'link', NULL, 1, 10, 1),
                 (91, 90, 'Find People', '/member/relationship/suggestions', NULL, 0, 6, 'link', NULL, 2, 9, 1),
                 (92, 90, 'Following', '/member/relationship/following', NULL, 0, 6, 'link', NULL, 3, 8, 1),
@@ -222,7 +221,7 @@ final class Schema extends Platform\Model {
         ");
         static::$database->query(
                 "INSERT INTO `?menu_group` (`menu_group_id`, `menu_group_title`, `menu_group_order`, `menu_group_uid`, `menu_group_iscore`) VALUES
-            (1, 'Favourites Menu', 1, 'favouritesmenu', 1),
+            (1, 'Content Menu', 1, 'contentmenu', 1),
             (2, 'Settings Menu', 2, 'settingsmenu', 1),
             (3, 'Dashboard Menu', 3, 'dashboardmenu', 1),
             (4, 'Messages menu', 4, 'messagesmenu', 1),

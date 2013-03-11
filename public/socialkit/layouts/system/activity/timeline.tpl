@@ -12,11 +12,7 @@
                                 <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                              
                             </a>
                             <a href="/system/activity/view/${uri}" title="${published}" class="published-time"><tpl:element type="time" data="published" /></a>
-                            <ul class="actions">
-                                <li class="action-like"><a href="/system/activity/favourite/${uri}"><span class="like" title="Like">Like</span></a></li>
-                                <li class="action-reply"><a href="/system/activity/reply/${uri}"><span class="reply" title="Reply">Reply</span></a></li>
-                                <li class="action-delete"><a href="/system/activity/delete/${uri}"><span class="delete" title="Delete">Delete</span></a></li>
-                            </ul>
+
                             <div class="timeline-item-title"><tpl:element type="text" data="content" /></div>
                             <tpl:condition data="object" test="isset" value="1">
                                 <tpl:condition data="object.objectType" test="isnot" value="collection">
@@ -33,8 +29,18 @@
                                         </ul>  	
                                     </div>
                                 </tpl:condition>
-                                            
+
                             </tpl:condition>
+                        </div>
+                        <div class="timeline-item-footer">
+                            <ul class="actions">
+                                <li class="action-fans"><a href="/system/activity/fans/${uri}"><span class="delete" title="See Fans"><i class="icon-heart"></i><strong>24</strong> fans</span></a></li>
+                                <li class="action-like hover"><a href="/system/activity/favourite/${uri}"><span class="like" title="Like">Like this</span></a></li>
+                                <li class="action-comments"><a href="/system/activity/comments/${uri}"><span class="delete" title="See Comments"><i class="icon-comments"></i><strong>22</strong> comments</span></a></li>
+                                <li class="action-reply hover"><a href="/system/activity/reply/${uri}"><span class="reply" title="Reply">Add comment</span></a></li>   
+                                <li class="action-delete hover"><a href="/system/activity/delete/${uri}"><span class="delete" title="Delete"><strong>Trash this</strong></span></a></li>
+                            </ul>
+                            
                         </div>
                     </div>
                 </li>

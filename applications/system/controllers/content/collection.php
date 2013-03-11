@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * audio.php
+ * collection.php
  *
  * Requires PHP version 5.4
  *
@@ -17,10 +17,10 @@
 namespace Application\System\Controllers\Content;
 use Application\System\Controllers as System;
 /**
- * Audio files management CRUD action controller for system content 
+ * Content collection management CRUD action controller for system content 
  *
  * This class implements the action controller that manages the creation, 
- * view and edit of audio files within various posts/media types.
+ * view and edit of content collections of various posts/media types.
  *
  * @category  Application
  * @package   Action Controller
@@ -29,44 +29,60 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Audio extends System\Content {
+final class Collection extends System\Content {
 
     /**
      * The default fall-back method. 
-     * @return Audio::read()
+     * @return Collection::read()
      */
     public function index() {
-        $view = $this->load->view('audio');
+        $view = $this->load->view('collection');
     }
     /**
-     * Displays the form required to creates a new audio. 
+     * Displays the form required to creates a new collection. 
      * @todo    Implement the create action method
-     * @return  {@link \Application\System\Views\Content\Audio::createForm()}
+     * @return  {@link \Application\System\Views\Content\Collection::createForm()}
      */
     public function create() {
-        $view = $this->load->view('audio');
+        $view = $this->load->view('collection');
         return $view->createform();
     }
     /**
-     * Updates details of an existing audio files.
-     * @todo    Implement the audio content update action method
+     * Updates details of an existing collection.
+     * @todo    Implement the collection content update action method
      * @return  void
      */
-    public function update($audioid = null) {
+    public function update($collectionid = null) {
         //There many ways to get the arguents passed here
         $args1 = func_get_args();
         $args = $this->getRequestArgs();
         //print_R($args); print_r($args1); echo $videoid;
     }
     /**
-     * Displays an audio content.
-     * @todo    Implement the audio read action method
+     * Displays an collection content.
+     * @todo    Implement the collection read action method
      * @return  void
      */
     public function read() {
         echo $this->router->getView() . "<br />";
         echo $this->router->getFormat();
     }
+    
+        /**
+     * Displays a gallery of content items. 
+     * @return void
+     */
+    public function gallery() {
+        
+        $view       = $this->load->view('index');
+        $gallery    = $this->output->layout("content/collections/gallery");
+
+        $this->output->addToPosition("dashboard", $gallery);
+        $this->output->setPageTitle( _t("Collections") );
+        $view->display(); //sample call;   
+        //$this->output->addToPosition("right", $right );
+    }
+    
     /**
      * Deletes an existing audio file.
      * @todo    Implement the audio content delete action method

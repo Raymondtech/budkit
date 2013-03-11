@@ -47,6 +47,23 @@ final class Audio extends System\Content {
         $view = $this->load->view('audio');
         return $view->createform();
     }
+    
+        
+        /**
+     * Displays a gallery of content items. 
+     * @return void
+     */
+    public function gallery() {
+        
+        $view       = $this->load->view('index');
+        $gallery    = $this->output->layout("content/audios/gallery");
+
+        $this->output->addToPosition("dashboard", $gallery);
+        $this->output->setPageTitle( _t("Audio") );
+        $view->display(); //sample call;   
+        //$this->output->addToPosition("right", $right );
+    }
+    
     /**
      * Updates details of an existing audio files.
      * @todo    Implement the audio content update action method

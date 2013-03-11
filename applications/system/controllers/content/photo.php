@@ -57,18 +57,19 @@ final class Photo extends System\Content{
     public function edit(){
         
     }
+    
     /**
-     * Displays a photo gallery.
-     * @todo    Implement the photo gallery display option
-     * @return  void
+     * Displays a gallery of content items. 
+     * @return void
      */
-    public function gallery() {      
+    public function gallery() {
+        
         $view       = $this->load->view('index');
-        $this->output->setPageTitle( _t("Photo - Born in the USA") );
+        $gallery    = $this->output->layout("content/gallery");
 
-        $body       = $this->output->layout('photos/photo');
-        //$right      = _("Notifications filter");        
-        $this->output->addToPosition("body", $body);
+        $this->output->addToPosition("dashboard", $gallery);
+        $this->output->setPageTitle( _t("Photos") );
+        $view->display(); //sample call;   
         //$this->output->addToPosition("right", $right );
     }
     /**
