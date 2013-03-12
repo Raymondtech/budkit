@@ -256,6 +256,10 @@
             }],
             h4: ['h4', 'H4', function($this){
                 $this.formatBlock($this.browserIsMsie()?"Heading 4":"h4");
+            }],
+            fullscreen: ['fullscreen','',function($this, btn){
+                  $(".bkeditor-fullscreen").toggleClass("fullscreen");
+                  $(btn).toggleClass("active");  
             }]
         },
         addSeperator: function() {
@@ -315,12 +319,13 @@
         hidetoolbar:true,
         showtoolbaronedit: false,
         toolbar: [    
-        ["bold", "italic", "underline", "strikethrough"],
-        ["h1", "h2", "h3", "h4", "paragraph"],
-        ["unorderedlist","orderedlist"],
-        ["indent", "outdent","horizontalrule"],
-        ["link","unlink","image"],
-        ["redo","undo"]
+            ["bold", "italic", "underline", "strikethrough"],
+            ["h1", "h2", "h3", "h4", "paragraph"],
+            ["unorderedlist","orderedlist"],
+            ["indent", "outdent","horizontalrule"],
+            ["link","unlink","image"],
+            ["redo","undo"],
+            ["fullscreen"]
         ],
         stylesheet: "../../socialkit/assets/css/editor.css"
     };

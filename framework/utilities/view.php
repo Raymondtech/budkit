@@ -36,12 +36,15 @@ abstract class View extends \Library\Object {
      * @return void
      */
     public function __construct() {
-        $this->output = \Library\Output::getInstance();        
+        
+        $this->output = \Library\Output::getInstance();              
         $authenticated  = \Platform\User::getAuthenticated();
+        
+        
+        
         $this->output->set("authenticated", $authenticated );
         
         //Navigator::menu();
-        
     }
 
     /**

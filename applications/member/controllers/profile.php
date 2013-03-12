@@ -41,7 +41,7 @@ class Profile extends \Platform\Controller {
         $username = $this->router->getMethod();
         $view     = $this->load->view('profile');
         $profile  = $this->load->model('profile');
-        $profile  = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
+        $profile  = $profile->loadObjectByURI( $this->user->get("user_name_id"), array_keys($profile->getPropertyModel()));
         
         $data     = $profile->getPropertyData();
         

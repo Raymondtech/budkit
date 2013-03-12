@@ -18,7 +18,7 @@
         <ul class="thumbnails media-grid media-gallery">
             <?php for ($i = 0; $i < 30; $i++): ?>
             <li>
-                <a href="#">
+                <a href="#" data-target="budkit-slider">
                     <div class="thumbnail">
                         <div class="feature column"><img src="http://lorempixel.com/250/200/sports/<?php echo rand(1,10);?>/" /></div>                      
                         <div class="description column">

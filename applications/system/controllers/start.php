@@ -37,15 +37,13 @@ class Start extends \Platform\Controller {
      * @ return void;
      */
     public function index() {
-        $user = \Platform\User::getInstance();
   
-        $view = $this->load->view('index') ;   
-        $this->set("user2", "livingstone");
-        
+        $view = $this->load->view('index') ;        
         $this->output->setPageTitle(_("Dashboard"));
 
         $today = $this->output->layout("start");
         $this->output->addToPosition("dashboard", $today);
+        
         
         $this->load->view("index")->display();      
         //$this->output();

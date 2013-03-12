@@ -20,10 +20,10 @@
             <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                 <div class="tab-content">
                     <div class="tab-pane" id="typeit">
-                        <fieldset class="no-margin bk-publisher">
+                        <fieldset class="no-margin bk-publisher bkeditor-fullscreen">
                             <div class="control-group">
                                 <div class="controls">
-                                    <textarea class="input-100pct bkeditor-typeit" toolbar="1" data-target="budkit-editor" rows="4" name="post_content" placeholder="&lt;h1&gt;Your eye catching title goes here&lt;/h1&gt; &lt;p&gt;Share your passion with your friends. Here you can type in as much text as you wish. Keep it anatomically correct, concise and enjoyable to read. If you haven't provided a title, the first line will be used as your title. The first paragraph is considered the excerpt of your article&lt;/p&gt;
+                                    <textarea class="input-100pct bkeditor-typeit" toolbar="1" data-target="budkit-editor" rows="6" name="post_content" placeholder="&lt;h1&gt;Your eye catching title goes here&lt;/h1&gt; &lt;p&gt;Share your passion with your friends. Here you can type in as much text as you wish. Keep it anatomically correct, concise and enjoyable to read. If you haven't provided a title, the first line will be used as your title. The first paragraph is considered the excerpt of your article&lt;/p&gt;
 &lt;h2&gt;Consider this&lt;/h2&gt;
 &lt;p&gt;
 Here are some other publishing rules you should adhere to. 
