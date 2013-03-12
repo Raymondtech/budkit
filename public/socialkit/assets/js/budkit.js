@@ -30,10 +30,15 @@
         this.element = $(element);
         this.container = $("<div/>").addClass("bkeditor").insertAfter(this.element);
         this.editorbar = $("<div/>").hide().addClass("bkeditor-toolbar btn-toolbar").appendTo(this.container);
-
+        
         //iframe
-        this.iframe = $("<iframe/>").addClass("bkeditor-content input").height(this.element.outerHeight()).width("100%").appendTo(this.container) //.addClass("bkeditor-content input").appendTo(this.container).width(this.element.outerWidth()).attr("contenteditable", true);                     
-
+        this.iframe = $("<iframe/>").addClass("bkeditor-content input").appendTo(this.container) //.addClass("bkeditor-content input").appendTo(this.container).width(this.element.outerWidth()).attr("contenteditable", true);                     
+        
+        //are we showing the toolbar?
+        if (typeof this.element.attr("toolbar") !== 'undefined' && this.element.attr("toolbar") !== false) {        
+            this.options.hidetoolbar = false;
+        }
+        
         //Not all browsers use ContentWindow this will fail in Firefox
         var edit = this.editor = this.iframe[0].contentWindow.document;
         edit.designMode = 'on';
@@ -62,6 +67,18 @@
         });
 
         this.togglePlaceHolder();
+        
+        //Determining the height of the editor is not  straightforward with hidden editors
+        //Not the best solution but it works for now
+        var clonedEditor = this.element.clone();
+        $("body").append(clonedEditor);
+        var editorHeight = clonedEditor.height();
+            //editorScrollHeight = clonedEditor.prop('scrollHeight');
+        //editorWidth  = clonedEditor.outerWidth();
+        clonedEditor.remove();
+        
+        //console.log(editorScrollHeight);
+        this.iframe.height( editorHeight ).attr("width", "100%");
         this.element.hide();
 
         //Initialize the toolbar
@@ -77,16 +94,12 @@
         updateElement: function() {
             //this.toolbar.build();
             //console.log("Element:::: scrollheight: "+$(this.editor.body).outerHeight()+", iframeheight: "+ this.iframe.height() );
-            this.element.val(this.toString(true)).height($(this.editor.body).outerHeight());
-            //Autoresize
-            if ($(this.editor.body).outerHeight() > this.iframe.height())
-                this.iframe.height($(this.editor.body).outerHeight(true) + 40);
+            this.element.val(this.toString(true));
+            //this.updateEditor()
+            //console.log($(this.element).prop('scrollHeight'));
         },
         updateEditor: function() {
             $(this.editor.body).html(this.element.val());
-            //Autoresize
-            if ($(this.editor.body).outerHeight() > this.iframe.height())
-                this.iframe.height($(this.editor.body).outerHeight() + 40);
         },
         copyAttributes: function(attributesToCopy) {
             return {
@@ -104,6 +117,12 @@
                     };
                 }
             };
+        },
+        browserIsMsie: function(){
+            return /msie/.test(navigator.userAgent.toLowerCase());
+        },
+        formatBlock: function(value){
+            this.ec("formatblock", false, value || null);
         },
         togglePlaceHolder: function() {
             var CLASS_NAME = "placeholder",
@@ -142,55 +161,102 @@
         }
     };
     var BKEditorToolbar = function($this, options) {
-
         var $toolbar = this;
         this.options = $.extend({}, options);
+       
         if(this.options.hidetoolbar) return $toolbar;
         //console.log(this.options.toolbar);
-
         $.each(this.options.toolbar, function(i, commands) {
             if ($.isArray(commands)) {
-                //Then we are defining a custom object
+                //Then we are defining a custom object 
                 //or it is a lonely item;
                 $toolbar.getBtnGroup(commands, $this).appendTo($this.editorbar);
             }
         });
         //Show toolbar on focus, hide onexit;
         //console.log( $this.editor.html());
-        $($this.editor.body).on("click focus keydown keyup mousedown", function() {
+        if(this.options.showtoolbaronedit){
+            $($this.editor.body).on("click focus keydown keyup mousedown", function() {
+                $this.editorbar.show();
+            });
+        }
+        else{
             $this.editorbar.show();
-        });
+        }
     };
     BKEditorToolbar.prototype = {
         commands: {
-            bold: ['bold', 'Bold', function($this) {
+            //class, title, onClick, onAfterExecute,
+            bold: ['bold', '', function($this, btn) {
+                //Todo we need to check the selected text;
+                $(btn).toggleClass("active");     
                 $this.ec("bold")
-            }], //class, title, onClick, onAfterExecute,
-            italic: ['italics', 'italic', function($this) {
+            }], 
+            italic: ['italic', '', function($this, btn) {
+                $(btn).toggleClass("active");  
                 $this.ec("italic")
             }],
-            underline: ['underline', 'Underline', function($this) {
+            underline: ['underline', '', function($this,btn) {
+                $(btn).toggleClass("active");  
                 $this.ec("underline");
             }],
-            strikethrough: ['strikethrough', 'Strike through', function($this) {
+            strikethrough: ['strikethrough', '', function($this,btn) {
+                $(btn).toggleClass("active");  
                 $this.ec("strikethrough");
             }],
-            orderedlist: ['list-ol', 'Insert ordered list', function($this) {
+            orderedlist: ['list-ol', '', function($this) {
                 $this.ec("insertorderedlist");
             }],
-            unorderedlist: ['list-ul', 'Insert unordered list', function($this) {
+            unorderedlist: ['list-ul', '', function($this) {
                 $this.ec("insertunorderedlist");
             }],
-            outdent: ['indent-right', 'Indent right'],
-            indent: ['indent-left', 'Indent-left'],
-            leftalign: ['align-left', 'Left Align'],
-            centeralign: ['align-center', 'Centralize'],
-            rightalign: ['align-right', 'Right Align'],
-            blockjustify: ['align-justify', 'Justify'],
-            undo: ['undo', 'Undo'],
-            redo: ['repeat', 'Redo'],
-            image: ['photo', 'Insert image'],
-            link: ['link', 'Createlink']
+            horizontalrule: ['minus', '', function($this) {
+                $this.ec("insertHorizontalRule", false);
+            }],
+            outdent: ['indent-right', '', function($this) {
+                $this.ec("outdent");
+            }],
+            indent: ['indent-left', '', function($this) {
+                $this.ec("indent");
+            }],
+            undo: ['undo', '', function($this) {
+                $this.ec("undo");
+            }],
+            redo: ['repeat', '', function($this) {
+                $this.ec("redo");
+            }],
+            paragraph: ['paragraph', 'P', function($this) {
+                $this.formatBlock("<p>")
+            }],
+            link: ['link', '', function($this) {
+                if ($this.browserIsMsie()) {
+                    $this.ec("createLink", true);
+                } else {
+                    $this.ec("createLink", false, prompt("URL:", "http://"));
+                }
+            }],
+            unlink: ['unlink', 'unlink', function($this) {
+                $this.ec("unlink", false, []);
+            }],
+            image: ['picture', '', function($this){
+                if ($this.browserIsMsie()) {
+                    $this.ec("insertImage", true);
+                } else {
+                    $this.ec("insertImage", false, prompt("URL:", "http://"));
+                }
+            }],
+            h1: ['h1', 'H1', function($this){
+                $this.formatBlock($this.browserIsMsie()?"Heading 1":"h1");
+            }],
+            h2: ['h2', 'H2', function($this){
+                $this.formatBlock($this.browserIsMsie()?"Heading 2":"h2");
+            }],
+            h3: ['h3', 'H3', function($this){
+                $this.formatBlock($this.browserIsMsie()?"Heading 3":"h3");
+            }],
+            h4: ['h4', 'H4', function($this){
+                $this.formatBlock($this.browserIsMsie()?"Heading 4":"h4");
+            }]
         },
         addSeperator: function() {
         },
@@ -214,11 +280,14 @@
 
             if ($.isArray(btnObj)) {
                 btnicon.addClass("icon-" + btnObj[0]).appendTo(btn);
+                if(btnObj[1]&&typeof btnObj[1] == "string"){
+                    btn.append(btnObj[1]);
+                }
                 //console.log(btnObj);
                 //Add Button method;
                 if (btnObj[2] && typeof btnObj[2] == "function") {
                     btn.on('click', function() {
-                        btnObj[2]($this);
+                        btnObj[2]($this, this);
                     });
                 }
                 return btn;
@@ -240,18 +309,18 @@
             , options = typeof option == 'object' && option;
             if (!data)
                 $this.data('bkeditor', (data = new BKEditor(this, options)));
-        //data.editor.on('click keyup keydown mousedown blur', function(){ data.updateElement()}).on('click', function(){ data.editor.focus() } ) 
-
         });
     };
     $.fn.bkeditor.defaults = {
         hidetoolbar:true,
-        toolbar: [
+        showtoolbaronedit: false,
+        toolbar: [    
         ["bold", "italic", "underline", "strikethrough"],
-        ["unorderedlist"],
-        ["indent", "outdent"],
-        ["leftalign", "centeralign", "rightalign", "blockjustify"],
-        ["link", "image"]
+        ["h1", "h2", "h3", "h4", "paragraph"],
+        ["unorderedlist","orderedlist"],
+        ["indent", "outdent","horizontalrule"],
+        ["link","unlink","image"],
+        ["redo","undo"]
         ],
         stylesheet: "../../socialkit/assets/css/editor.css"
     };
@@ -336,17 +405,21 @@
             if(this.datalist){
                 for (var x = 0; x < files.length; x++) {   
                     var pb  = $('<div />').addClass('upload-progress'),
-                        file = files[x],
-                        imageType = /image.*/,
-                        img = $('<img />'),
-                        imgName = $('<span />').text( file.name ),
-                        imgPreview = $('<a />');
+                    file = files[x],
+                    imageType = /image.*/,
+                    img = $('<img />'),
+                    imgName = $('<span />').text( file.name ),
+                    imgPreview = $('<a />');
                     ;
                     if (file.type.match(imageType)) {
                         img = $("<img />");
                         imgPreview.append( img );
                         var reader = new FileReader();
-                        reader.onload = (function(aImg) { return function(e) { aImg.attr('src', e.target.result ).attr('width', 100 ); }; })(img);
+                        reader.onload = (function(aImg) {
+                            return function(e) {
+                                aImg.attr('src', e.target.result ).attr('width', 100 );
+                            };                        
+                        })(img);
                         reader.readAsDataURL(file);          
                     }
                     
@@ -366,13 +439,13 @@
   
             
             var uploadurl   = $(this.datalist).attr('data-src'),
-                progresskey = $(this.datalist).attr('data-progress'),
-                bucketlist  = $(this.datalist).find('ul'), 
-                bucket      = $(this.datalist),
-                selector    = this.selector,
-                field       = this.field,
-                filecount   = field[0].files.length,
-                form        = this.form
+            progresskey = $(this.datalist).attr('data-progress'),
+            bucketlist  = $(this.datalist).find('ul'), 
+            bucket      = $(this.datalist),
+            selector    = this.selector,
+            field       = this.field,
+            filecount   = field[0].files.length,
+            form        = this.form
                 
             ;
             
@@ -385,10 +458,16 @@
                 data.append( progresskey, 'bkattachment-'+i );
                 
                 $(indicator).addClass('icon-refresh icon-spin');
-                $.ajax({url:uploadurl+"create/bkattachment.json",data: data, cache: false,contentType: false,processData: false,type: 'POST',
+                $.ajax({
+                    url:uploadurl+"create/bkattachment.json",
+                    data: data, 
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
                     success: function (response) {
                         var newField = $('<input type="hidden" name="attachment[]" />').val( response.data.object.uri );
-                            form.append( newField );
+                        form.append( newField );
                         $(indicator).removeClass('icon-refresh icon-spin');
                         $(indicator).addClass('icon-ok');
                         $(indicator).closest('.upload-progress').addClass("completed");
@@ -403,8 +482,8 @@
                             //Move the uploaded files outof the bucket;
                             //Clear the val of this.field
                             field.val("");
-                            //field.on("change");
-                            //Re-enable the upload form
+                        //field.on("change");
+                        //Re-enable the upload form
                         }
                     }
                 });
@@ -431,5 +510,58 @@
     //Plugin data api
     $(function() {
         $('[data-target="budkit-uploader"]').bkuploader();
+    })
+}(window.jQuery);
+
+/* ===================================================
+ * budkit-slider.js v0.0.1
+ * http://budkit.org/docs/editor
+ * ===================================================
+ * Copyright 2012 The BudKit Team
+ *
+ * This source file is subject to version 3.01 of the GNU/GPL License 
+ * that is available through the world-wide-web at the following URI:
+ * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
+ * the GPL License and are unable to obtain it through the web, please
+ * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ========================================================== */
+!function($) {
+    "use strict"
+    var BKSlider = function(object, options) {
+        this.options = options
+        this.$element = $(object)
+        this.$element.bind("click", function(e){
+            e.preventDefault();
+            //Get the item: AJAX,
+            //determine its type!
+            //create into #budkit-slider
+            //display #budkit-slider
+            $("#budkit-slider").modal("show");
+        });
+    };
+    //Uploader Class
+    BKSlider.prototype = {};
+        //Plugin Defintion
+    $.fn.bkslider = function(option) {
+        return this.each(function() {
+            var $this = $(this)
+            , data = $this.data('bkslider')
+            , options = typeof option == 'object' && option;
+            if (!data)
+                $this.data('bkslider', (data = new BKSlider(this, options)));
+        });
+    };
+    $.fn.bkslider.defaults = {};
+    $.fn.bkslider.Constructor = BKSlider;
+    
+    //Plugin data api
+    $(function() {
+        $('[data-target="budkit-slider"]').bkslider();
     })
 }(window.jQuery);

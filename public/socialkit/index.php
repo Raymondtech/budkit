@@ -30,14 +30,14 @@
             <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit.js"></script>
         </head>
         <body>
-            
+
             <div id="wrap">
                 <tpl:import layout="navbar" />
                 <div class="container-menu-box">
-                    
+
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                         <ul class="nav nav-stacked nav-menugroups no-margin" id="menutabs">
-                            
+
                             <li class="active"><a data-target="#dashboardmenuview" data-toggle="tab"><i class="icon-dashboard"></i><small>Dashboard</small></a></li>  
                             <li><a data-target="#contentmenuview" data-toggle="tab"><i class="icon-heart"></i><small>Media</small></a></li>   
                             <li><a data-target="#messagesmenuview" data-toggle="tab"><i class="icon-comments-alt"></i><small>Messages</small></a></li>                                                   
@@ -54,7 +54,7 @@
                     </tpl:condition> 
                 </div>
                 <div class="container-box has-left has-menu-box resize">
-                    
+
                     <div class="container-left">                 
                         <tpl:import layout="sidebar" />
                     </div>
@@ -63,11 +63,11 @@
                             <tpl:import layout="asidebar" />
                         </div>
                         <div class="container-content">
-                            
+
                             <div class="container-bucket">
                                 <tpl:block data="page.block.alerts" /> 
                                 <tpl:block data="page.block.body">Content</tpl:block>
-                                
+
                             </div>
 <!--                            <a href="#" class="container-box-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>-->
                             <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-right"></i></a>
@@ -75,6 +75,8 @@
                     </div>
                 </div><!--/.fluid-container-->
             </div>
+            <!--/.content-slider-->
+            <tpl:import layout="slider" />
             <!-- Le javascript
             ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->

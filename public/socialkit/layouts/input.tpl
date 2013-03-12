@@ -9,7 +9,10 @@
                     </div> 
                     <div class="bucket" data-src="${config|general.path}system/content/attachments/" data-progress="${uploadprogress}"></div>
                     <div class="btn-toolbar no-margin"> 
-                        <button class="btn pull-right" type="submit">Submit</button>   
+                        <div class="btn-group pull-right">
+                            <button type="submit" class="btn" href="#">Publish</button>  
+                            <tpl:import layout="privacylist" />
+                        </div>   
                         <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload Files" autoload="" />
                     </div>              
                 </fieldset>

@@ -17,14 +17,16 @@
                             <tpl:condition data="object" test="isset" value="1">
                                 <tpl:condition data="object.objectType" test="isnot" value="collection">
                                     <div class="timeline-item-media">
-                                        <img src="/system/object/${object.uri}/resize/500" />
+                                        <a href="/system/object/${object.uri}/" data-target="budkit-slider">
+                                            <img src="/system/object/${object.uri}/resize/500" />
+                                        </a>
                                     </div>
                                 </tpl:condition>
                                 <tpl:condition data="object.objectType" test="equals" value="collection">
                                     <div class="timeline-item-media">	  	
                                         <ul class="media-grid unstyled bottom-media">	  	
                                             <tpl:loop data="object.items" id="activity_object">
-                                                <li><a href="#"><img src="/system/object/${uri}/resize/150/150" /></a></li>
+                                                <li><a href="/system/object/${uri}/" data-target="budkit-slider"><img src="/system/object/${uri}/resize/150/150" /></a></li>
                                             </tpl:loop> 	
                                         </ul>  	
                                     </div>
