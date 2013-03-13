@@ -59,18 +59,42 @@ final class Photo extends System\Content{
     }
     
     /**
+     * Displays an collection content.
+     * @todo    Implement the collection read action method
+     * @return  void
+     */
+    public function view( $photoId = null ) {
+        $this->output->setPageTitle(_("Photo Title"));
+        //Throws an error if no collectionId is passed
+        //Loads the collectionItem from the databse
+        $model = $this->load->model("attachments");
+        
+        //Get the format of the item;
+        $format = $this->router->getFormat();
+        $collection = $this->output->layout("content/photos/photo");
+        
+        if($format !=="raw"):
+            $this->output->addToPosition("dashboard", $collection);
+        else:
+            //Raw displays whatever is in the body block only;
+            $this->output->addToPosition("body", $collection);
+        endif;
+        $this->load->view("index")->display(); 
+    }
+    
+    /**
      * Displays a gallery of content items. 
      * @return void
      */
     public function gallery() {
-        
-        $view       = $this->load->view('index');
-        $gallery    = $this->output->layout("content/gallery");
+               
+        $this->output->setPageTitle(_("Photos"));
 
-        $this->output->addToPosition("dashboard", $gallery);
-        $this->output->setPageTitle( _t("Photos") );
-        $view->display(); //sample call;   
-        //$this->output->addToPosition("right", $right );
+        $today = $this->output->layout("content/gallery");
+        $this->output->addToPosition("dashboard", $today);
+        
+        
+        $this->load->view("index")->display();   
     }
     /**
      * Deletes an existing photo.

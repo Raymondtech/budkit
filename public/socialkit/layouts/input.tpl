@@ -13,7 +13,10 @@
                             <button type="submit" class="btn" href="#">Publish</button>  
                             <tpl:import layout="privacylist" />
                         </div>   
-                        <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload Files" autoload="" />
+                        <div class="btn-group no-margin">
+                            <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload Files" autoload="" />
+                            <a class="btn">Chose from existing</a>
+                        </div>
                     </div>              
                 </fieldset>
             </div>

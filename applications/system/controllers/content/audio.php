@@ -49,19 +49,20 @@ final class Audio extends System\Content {
     }
     
         
-        /**
+    
+    /**
      * Displays a gallery of content items. 
      * @return void
      */
     public function gallery() {
         
-        $view       = $this->load->view('index');
-        $gallery    = $this->output->layout("content/audios/gallery");
+        $this->output->setPageTitle(_("Audios"));
 
-        $this->output->addToPosition("dashboard", $gallery);
-        $this->output->setPageTitle( _t("Audio") );
-        $view->display(); //sample call;   
-        //$this->output->addToPosition("right", $right );
+        $today = $this->output->layout("content/gallery");
+        $this->output->addToPosition("dashboard", $today);
+        
+        
+        $this->load->view("index")->display();   
     }
     
     /**

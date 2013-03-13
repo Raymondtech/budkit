@@ -51,19 +51,20 @@ final class Video extends System\Content {
         return $view->createForm( $fullscreen );  
     }  
     
-        /**
+    
+    /**
      * Displays a gallery of content items. 
      * @return void
      */
     public function gallery() {
         
-        $view       = $this->load->view('index');
-        $gallery    = $this->output->layout("content/videos/gallery");
+        $this->output->setPageTitle(_("Videos"));
 
-        $this->output->addToPosition("dashboard", $gallery);
-        $this->output->setPageTitle( _t("Videos") );
-        $view->display(); //sample call;   
-        //$this->output->addToPosition("right", $right );
+        $today = $this->output->layout("content/gallery");
+        $this->output->addToPosition("dashboard", $today);
+        
+        
+        $this->load->view("index")->display();   
     }
     
     

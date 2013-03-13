@@ -5,20 +5,10 @@
         </div>
     </div>
     <div class="padding">  
-        <div class="clearfix">
-            <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="photogridtoggler">
-                <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
-                <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
-            </ul>
-            <ul class="nav nav-pills no-margin">
-                <li class="highlighted"><a href="/system/content/create" >Add New</a></li>
-            </ul>
-        </div>
-        <hr />
         <ul class="thumbnails media-grid media-gallery">
             <?php for ($i = 0; $i < 30; $i++): ?>
-            <li>
-                <a href="/system/content/photo/view/aU2e9d" data-target="budkit-slider">
+            <li class="media-stack">
+                <a href="/system/content/collection/browse/Ytq90e" data-target="budkit-slider">
                     <div class="thumbnail">
                         <div class="feature column"><img src="http://lorempixel.com/250/200/sports/<?php echo rand(1,10);?>/" /></div>                      
                         <div class="description column">

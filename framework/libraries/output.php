@@ -86,6 +86,8 @@ class Output extends Object {
             "activesidebar" => false
         )
     );
+    
+    static $instance;
 
     /**
      * Contains a list of references to scripts
@@ -876,14 +878,13 @@ class Output extends Object {
      */
     public static function getInstance() {
 
-        static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
+        if (isset(static::$instance))
+            return static::$instance;
 
-        $instance = new Output();
+        static::$instance = new Output();
 
-        return $instance;
+        return static::$instance;
     }
 
     /**

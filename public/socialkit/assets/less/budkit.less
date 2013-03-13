@@ -98,9 +98,31 @@
         position: relative;
         .feature{ border-bottom: 1px solid #ddd; }
         .caption{ padding: 8px 5px 0px; text-decoration: none; color: @grayLight; font-size: 11px; }
-        .description{ position: absolute; top:4px; left:4px; right: 4px; height: 130px; background: rgba(255,255,255,0.8); padding: 10px; display: none}
+        .description{ position: absolute; top:4px; left:4px; right: 4px; height: 180px; background: rgba(255,255,255,0.8); padding: 10px; display: none}
        &:hover{
             .description{ display: block; }
+        }
+    }
+    .media-stack{
+        .thumbnail{ position: relative; z-index: 29; margin-bottom: @baseLineHeight}
+        .thumbnail:after, .thumbnail:before {
+            background: @white;
+            border: 1px solid #ccc;
+            bottom: -14px;
+            content: '';
+            height: 250px;
+            left: 2px;
+            position: absolute;
+            width: 260px;
+            z-index: -11;
+            .box-shadow( 0 1px 3px rgba(0, 0, 0, 0.055) )
+        }
+        .thumbnail:before {
+            bottom: -10px;
+            left: -6px;
+        }
+       .thumbnail:after{
+            left: -2px;
         }
     }
 }
@@ -307,16 +329,16 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
    }
 }
 .bkeditor-fullscreen{
-    &.fullscreen{ position: fixed; top:0; left:0; right:0; bottom:0; z-index:1000}
+    &.fullscreen{ position: fixed; top:0; left:0; right:0; bottom:0; z-index:1000;     
+    background-color: #f5f5f5;
+    border: 1px solid #ddd; padding: @baseLineHeight*0.5 ;}
 }
 .bkeditor-typeit{visibility: visible; min-height: 400px; display: block }
 .bk-publisher{    
-    padding: @baseLineHeight*0.5 ;
     //margin: @gridGutterWidth;
     //margin-bottom: @baseLineHeight;
     margin-left: 115px;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
+
     //padding-bottom:5px;
     //margin:0 60px;
     .bkeditor-content{ padding: @gridGutterWidth*0.5 @gridGutterWidth*0.7 }
@@ -328,7 +350,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
   top: 10%; bottom: 10%;
   left: 10%; right: 10%;
   z-index: @zindexModal;
-  overflow: hidden;
+  overflow: scroll;
   width: auto;
   margin: auto;
   background-color: @white;
@@ -340,13 +362,12 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
   .background-clip(padding-box);
   // Remove focus outline from opened modal
   outline: none;
-
   &.fade {
     .transition(none);
     top: 10%;
   }
   &.fade.in { top: 10%; }
-  .close{ margin: 0px 5px;}
+  .close{ margin: 10px 10px 5px;}
 }
 .modal-backdrop,
 .modal-backdrop.fade.in {

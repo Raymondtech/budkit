@@ -164,11 +164,12 @@ class Element extends Parse\Template {
                 //Replace the CDATA;
                 $data = $text;
             endif;
-
+                                 
             $tag['CDATA'] = $data;
             //If we do not have a default empty it
             if (is_null($tag['_DEFAULT']))
                 unset($tag['_DEFAULT']);
+                   
         //die;
         endif;
 

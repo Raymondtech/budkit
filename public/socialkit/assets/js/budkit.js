@@ -73,7 +73,7 @@
         var clonedEditor = this.element.clone();
         $("body").append(clonedEditor);
         var editorHeight = clonedEditor.height();
-            //editorScrollHeight = clonedEditor.prop('scrollHeight');
+        //editorScrollHeight = clonedEditor.prop('scrollHeight');
         //editorWidth  = clonedEditor.outerWidth();
         clonedEditor.remove();
         
@@ -95,8 +95,8 @@
             //this.toolbar.build();
             //console.log("Element:::: scrollheight: "+$(this.editor.body).outerHeight()+", iframeheight: "+ this.iframe.height() );
             this.element.val(this.toString(true));
-            //this.updateEditor()
-            //console.log($(this.element).prop('scrollHeight'));
+        //this.updateEditor()
+        //console.log($(this.element).prop('scrollHeight'));
         },
         updateEditor: function() {
             $(this.editor.body).html(this.element.val());
@@ -134,7 +134,7 @@
                 }
                 $editor.removeClass(CLASS_NAME);
             },
-            set = function() {
+            set = function(){
                 if ($editor.is(":empty")) {
                     $editor.html($this.element.attr("placeholder"));
                     $editor.addClass(CLASS_NAME);
@@ -258,8 +258,8 @@
                 $this.formatBlock($this.browserIsMsie()?"Heading 4":"h4");
             }],
             fullscreen: ['fullscreen','',function($this, btn){
-                  $(".bkeditor-fullscreen").toggleClass("fullscreen");
-                  $(btn).toggleClass("active");  
+                $(".bkeditor-fullscreen").toggleClass("fullscreen");
+                $(btn).toggleClass("active");  
             }]
         },
         addSeperator: function() {
@@ -319,13 +319,13 @@
         hidetoolbar:true,
         showtoolbaronedit: false,
         toolbar: [    
-            ["bold", "italic", "underline", "strikethrough"],
-            ["h1", "h2", "h3", "h4", "paragraph"],
-            ["unorderedlist","orderedlist"],
-            ["indent", "outdent","horizontalrule"],
-            ["link","unlink","image"],
-            ["redo","undo"],
-            ["fullscreen"]
+        ["bold", "italic", "underline", "strikethrough"],
+        ["h1", "h2", "h3", "h4", "paragraph"],
+        ["unorderedlist","orderedlist"],
+        ["indent", "outdent","horizontalrule"],
+        ["link","unlink","image"],
+        ["redo","undo"],
+        ["fullscreen"]
         ],
         stylesheet: "../../socialkit/assets/css/editor.css"
     };
@@ -365,14 +365,10 @@
         this.options = $.extend({}, $.fn.bkuploader.defaults, options);
         this.field = $(field);
         this.form = $(field).closest('form');
-        this.iframe = $("<iframe />").attr({
-            height:0,
-            width:0,
-            name:'bkeditor-uploader-transport'
-        }).insertAfter(this.field).hide();
-        this.selector = $('<a />').addClass('add-on btn no-margin').text(this.field.attr("data-label") || "Choose File").insertAfter(this.field);
-        ; 
+     
+        this.selector = $('<a />').addClass('add-on btn no-margin').text(this.field.attr("data-label") || "Choose File").insertAfter(this.field);  
         this.datalist = this.field.attr('data-display');
+        
         //Hide the remove type="file"
         this.field.hide();
         this.multiple = false;
@@ -513,7 +509,10 @@
     $.fn.bkuploader.Constructor = BKUploader;
     
     //Plugin data api
-    $(function() {
+    
+    //Plugin data api
+    $(document).ready(function (e) {
+        //e.preventDefault();
         $('[data-target="budkit-uploader"]').bkuploader();
     })
 }(window.jQuery);
@@ -540,33 +539,36 @@
     "use strict"
     var BKSlider = function(object, options) {
         this.options = options
-        this.$element = $(object)
-        this.$element.bind("click", function(e){
-            e.preventDefault();
-            //Get the item: AJAX,
-            //determine its type!
-            //create into #budkit-slider
-            //display #budkit-slider
-            $("#budkit-slider").modal("show");
-        });
+        this.$element = $(object);
+
+        this.href = this.$element.attr("href"),
+        this.remote = !/#/.test(this.href) && this.href;
+        //Get the item: AJAX,
+        //determine its type!
+        //create into #budkit-slider
+        //display #budkit-slider
+        this.remote && $("#budkit-slider").find('.budkit-slider-content:first').empty().load( this.remote+".raw" ); 
+        //$("#budkit-slider").modal({ remote: !/#/.test(href) && href });
+        $("#budkit-slider").modal("show")
+        
     };
     //Uploader Class
     BKSlider.prototype = {};
-        //Plugin Defintion
+    //Plugin Defintion
     $.fn.bkslider = function(option) {
         return this.each(function() {
             var $this = $(this)
-            , data = $this.data('bkslider')
             , options = typeof option == 'object' && option;
-            if (!data)
-                $this.data('bkslider', (data = new BKSlider(this, options)));
+            //I probably should not be doing this but hey?
+            $this.data('bkslider', (new BKSlider(this, options)))
         });
     };
     $.fn.bkslider.defaults = {};
     $.fn.bkslider.Constructor = BKSlider;
     
     //Plugin data api
-    $(function() {
-        $('[data-target="budkit-slider"]').bkslider();
+    $(document).on('click.bkslider', '[data-target="budkit-slider"]', function (e) {
+        e.preventDefault();
+        $(this).bkslider();
     })
 }(window.jQuery);

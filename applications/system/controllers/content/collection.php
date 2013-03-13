@@ -63,24 +63,39 @@ final class Collection extends System\Content {
      * @todo    Implement the collection read action method
      * @return  void
      */
-    public function read() {
-        echo $this->router->getView() . "<br />";
-        echo $this->router->getFormat();
+    public function browse( $collectionId = null ) {
+        $this->output->setPageTitle(_("CollectionName Gallery"));
+        //Throws an error if no collectionId is passed
+        //Loads the collectionItem from the databse
+        $model = $this->load->model("collection");
+        
+        //Get the format of the item;
+        $format = $this->router->getFormat();
+        $collection = $this->output->layout("content/gallery");
+        
+        if($format !=="raw"):
+            $this->output->addToPosition("dashboard", $collection);
+        else:
+            //Raw displays whatever is in the body block only;
+            $this->output->addToPosition("body", $collection);
+        endif;
+        $this->load->view("index")->display(); 
     }
     
-        /**
+    
+    /**
      * Displays a gallery of content items. 
      * @return void
      */
     public function gallery() {
         
-        $view       = $this->load->view('index');
-        $gallery    = $this->output->layout("content/collections/gallery");
+        $this->output->setPageTitle(_("Collections"));
 
-        $this->output->addToPosition("dashboard", $gallery);
-        $this->output->setPageTitle( _t("Collections") );
-        $view->display(); //sample call;   
-        //$this->output->addToPosition("right", $right );
+        $today = $this->output->layout("content/collections");
+        $this->output->addToPosition("dashboard", $today);
+        
+        
+        $this->load->view("index")->display();   
     }
     
     /**

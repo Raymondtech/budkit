@@ -61,17 +61,19 @@ final class Article extends System\Content {
     }  
     
         
-        /**
+    
+    /**
      * Displays a gallery of content items. 
      * @return void
      */
     public function gallery() {
         
         $view       = $this->load->view('index');
-        $gallery    = $this->output->layout("content/articles/gallery");
+        $gallery    = $this->output->layout("content/gallery");
 
+        $this->output->setPageTitle( _("Articles") );
         $this->output->addToPosition("dashboard", $gallery);
-        $this->output->setPageTitle( _t("Articles") );
+        
         $view->display(); //sample call;   
         //$this->output->addToPosition("right", $right );
     }

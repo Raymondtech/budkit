@@ -101,12 +101,12 @@ class xHtml extends \Library\Output\Document {
      */
     final public static function getInstance() {
 
-                static $instance;
+        static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
 
-        $instance = new self;
+        $instance = new xHtml();
 
         return $instance;
     }

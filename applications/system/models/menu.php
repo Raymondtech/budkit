@@ -40,11 +40,13 @@ class Menu extends \Platform\Model {
         if ($menuId === 'contentmenu') {
             //Add items to the profile menu;
             array_unshift($menuItems, Array(
-                "menu_title" => "Your Content",
+                "menu_title" => "Content",
                 "children" => array(
-                    array("menu_title"=>"Add New", "menu_url"=>"/system/content/create"),
                     array("menu_title"=>"Collections", "menu_url"=>"/system/content/collection/gallery"),
-                    array("menu_title"=>"Download", "menu_url"=>"/")
+                    array("menu_title"=>"Drag and Drop", "menu_url"=>"/system/content/create"), 
+                    array("menu_title"=>"Text Editor", "menu_url"=>"/system/content/create/text"), 
+                    array("menu_title"=>"Import", "menu_url"=>"/system/content/create/import"), 
+                    array("menu_title"=>"Snap", "menu_url"=>"/system/content/create/snap")
                 )
             ));
         }

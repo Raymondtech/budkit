@@ -41,15 +41,20 @@ Class Content extends \Platform\Controller {
         return false;
     }
 
-    public function create() {
+    public function create($action = "") {
         
-        $view = $this->load->view('index');
-        $form = $this->output->layout("content/form");
+        //create action types
+        $actions = array(
+            "drop" , "snap" , "text" , "import"
+        );
+        //form
+        $_form  = !in_array($action, $actions) ? "drop" : $action ;
+        $form   = $this->output->layout("content/form/{$_form}");
 
         $this->output->addToPosition("dashboard", $form);
-        $this->output->setPageTitle(_t("Add New Content"));
+        $this->output->setPageTitle(_("Add New Content"));
         
-        $view->display(); //sample call;   
+        $this->load->view('index')->display(); //sample call;   
         //$this->output->addToPosition("right", $right );
     }
 
