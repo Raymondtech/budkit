@@ -26,7 +26,7 @@
                                     <div class="timeline-item-media">	  	
                                         <ul class="media-grid unstyled bottom-media">	  	
                                             <tpl:loop data="object.items" id="activity_object">
-                                                <li><a href="/system/content/photo/view/${object.uri}" data-target="budkit-slider"><img src="/system/object/${uri}/resize/150/150" /></a></li>
+                                                <li><a href="/system/content/photo/view/${uri}" data-target="budkit-slider"><img src="/system/object/${uri}/resize/150/150" /></a></li>
                                             </tpl:loop> 	
                                         </ul>  	
                                     </div>

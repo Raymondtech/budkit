@@ -49,23 +49,6 @@ class Start extends \Platform\Controller {
         //$this->output();
     }
    
-    
-    /**
-     * The default homepage action
-     * Displays a lists of featured content on the homepage
-     * @return void
-     */
-     public function featured(){
-        //To set the pate title use
-        $this->output->setPageTitle("Featured");
-        
-        $frontpage      = $this->output->layout("system/frontpage"); 
-        
-        $this->output->addToPosition("body" , $frontpage); 
-        
-        //$this->output->setLayout("canvas");
-    }
-
 
     /**
      * Returns and instantiated Instance of the __CLASS__ class

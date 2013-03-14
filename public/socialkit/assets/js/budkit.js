@@ -546,6 +546,8 @@
         //Get the item: AJAX,
         //determine its type!
         //create into #budkit-slider
+        console.log(this.remote);
+        
         //display #budkit-slider
         this.remote && $("#budkit-slider").find('.budkit-slider-content:first').empty().load( this.remote+".raw" ); 
         //$("#budkit-slider").modal({ remote: !/#/.test(href) && href });

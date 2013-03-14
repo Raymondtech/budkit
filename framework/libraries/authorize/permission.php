@@ -170,12 +170,12 @@ final class Permission extends Library\Observer {
         //What about the public?
         $public_authority = \Library\Config::getParam( "public-authority", NULL, "profile" );
         //@TODO Replace the exception list with actual route map paths!
-        if(array_key_exists($public_authority, $permissionTree) || in_array( $actionRoute , array("/", "/index.php", "/sign-out", "/sign-in" )) ) $allowed = true; //We need the home page to be public
+        if(array_key_exists($public_authority, $permissionTree) || in_array( $actionRoute , array("/sign-out", "/sign-in" )) ) $allowed = true; //We need the home page to be public
         
         if(!$allowed):  
             //If User does not have permission to view this page, redirect to..
             $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '', 'error');
-            $actionController->redirect( ($actionUser->isAuthenticated())? "/":"/sign-in" );
+            $actionController->redirect( ($actionUser->isAuthenticated())? "/system/start/dashboard":"/sign-in" );
             
         endif;
        

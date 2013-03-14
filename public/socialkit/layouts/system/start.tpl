@@ -4,7 +4,9 @@
            <a class="topic"><tpl:element type="text" data="page.title">SocialKit</tpl:element></a>
         </div>
     </div>
+    <tpl:import layout="system/frontpage" />
     <div class="padding">
+        
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-bucket" id="widget-bucket-1">

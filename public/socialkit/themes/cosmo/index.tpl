@@ -15,7 +15,7 @@
 
             <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
             <!--[if lt IE 9]>
-              <script src="<?php echo $this->getTemplatePath() ?>/assets/js/html5shiv.js"></script>
+              <script src="/${config|general.template}/assets/js/html5shiv.js"></script>
             <![endif]-->
 
             <!-- Fav and touch icons -->
@@ -24,6 +24,10 @@
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/${config|general.template}/assets/ico/apple-touch-icon-72-precomposed.png" />
             <link rel="apple-touch-icon-precomposed" href="/${config|general.template}/assets/ico/apple-touch-icon-57-precomposed.png" />
             <link rel="shortcut icon" href="/${config|general.template}/assets/ico/favicon.png" />
+            
+            <!-- jQuery here because if placed at bottom, in-line scripts (i.e script tags in .tpl files) won't work -->
+            <script type="text/javaScript" src="/${config|general.template}/assets/js/jquery.js"></script>
+            <script type="text/javaScript" src="/${config|general.template}/assets/js/budkit.js"></script>
         </head>
         <body>
             <div class="navbar navbar-inverse">
@@ -62,163 +66,23 @@
                     <a class="btn" href="#">380 Followers</a>
                 </div>
                 <hr />
-
-                <h3>Timeline    </h3>
                 <tpl:block data="page.block.body">Content</tpl:block>
-                <hr />
-                <h3>Photos</h3>
-                <ul class="thumbnails media-grid media-gallery">
-                    <li>
-                        <a href="#">
-                            <div class="thumbnail">
-                                <div class="feature column"><img src="http://lorempixel.com/210/150/sports/1/" /></div>                      
-                                <div class="description column">
-                                    This is the description of this image
-                                </div>
-                                <div class="caption column">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="thumbnail">
-                                <div class="feature column"><img src="http://lorempixel.com/210/150/sports/3/" /></div>                      
-                                <div class="description column">
-                                    This is the description of this image
-                                </div>
-                                <div class="caption column">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="thumbnail">
-                                <div class="feature column"><img src="http://lorempixel.com/210/150/sports/5/" /></div>                      
-                                <div class="description column">
-                                    This is the description of this image
-                                </div>
-                                <div class="caption column">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="thumbnail">
-                                <div class="feature column"><img src="http://lorempixel.com/210/150/sports/4/" /></div>                      
-                                <div class="description column">
-                                    This is the description of this image
-                                </div>
-                                <div class="caption column">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-
-                <!--                <div class="row-fluid marketing">
-                                    <div class="span6">
-                                        <h4>Subheading</h4>
-                                        <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-                
-                                        <h4>Subheading</h4>
-                                        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-                
-                                        <h4>Subheading</h4>
-                                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-                                    </div>
-                
-                                    <div class="span6">
-                                        <h4>Subheading</h4>
-                                        <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-                
-                                        <h4>Subheading</h4>
-                                        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-                
-                                        <h4>Subheading</h4>
-                                        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-                                    </div>
-                                </div>-->
-
-                <hr >
-                <h3>Videos</h3>
-                <ul class="thumbnails media-grid media-gallery">
-                    <li>
-                        <a href="#">
-                            <div class="thumbnail">
-                                <div class="feature column"><img src="http://lorempixel.com/210/150/sports/1/" /></div>                      
-                                <div class="description column">
-                                    This is the description of this image
-                                </div>
-                                <div class="caption column">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="thumbnail">
-                                <div class="feature column"><img src="http://lorempixel.com/210/150/sports/3/" /></div>                      
-                                <div class="description column">
-                                    This is the description of this image
-                                </div>
-                                <div class="caption column">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="thumbnail">
-                                <div class="feature column"><img src="http://lorempixel.com/210/150/sports/5/" /></div>                      
-                                <div class="description column">
-                                    This is the description of this image
-                                </div>
-                                <div class="caption column">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="thumbnail">
-                                <div class="feature column"><img src="http://lorempixel.com/210/150/sports/4/" /></div>                      
-                                <div class="description column">
-                                    This is the description of this image
-                                </div>
-                                <div class="caption column">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-
+                <tpl:import layout="slider" />
                 <div class="footer">
-                    <p>© Company 2013</p>
+                    <p>Company 2013</p>
                 </div>
-
             </div>
-            <!-- Le javascript
-            ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="/${config|general.template}/assets/js/jquery.js"></script>
+            
+                        <!-- Placed at the end of the document so the pages load faster -->
             <script src="/${config|general.template}/assets/js/bootstrap-transition.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-alert.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-modal.js"></script>
             <script src="/${config|general.template}/assets/js/budkit-container.js"></script>
+            <script src="/${config|general.template}/assets/js/budkit-mediagrid.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-dropdown.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-scrollspy.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-tab.js"></script>
+            <script src="/${config|general.template}/assets/js/bootstrap-affix.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-tooltip.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-popover.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-button.js"></script>

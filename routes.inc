@@ -46,6 +46,6 @@ $route["index"] = array(
     "path" => '/',
     "application" => 'system',
     "controller" => 'start',
-    "method" => 'featured'
+    "method" => 'dashboard'
 );
 

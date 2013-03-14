@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button> 
-            <a class="brand" href="/">Budkit</a>
+            <a class="brand" href="/">bk</a>
             <div class="nav-collapse collapse">
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                     <form class="navbar-search pull-left input-append">   

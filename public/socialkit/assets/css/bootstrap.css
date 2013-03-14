@@ -728,6 +728,10 @@ a:focus {
   right: -1px;
   border-right: none;
 }
+.container-box .container-right .container-content .toggler.container-left-toggle {
+  margin-left: -1px;
+  border-left: none;
+}
 .container-box .container-right.has-aside .container-aside {
   display: block;
 }
@@ -866,6 +870,72 @@ a:focus {
 }
 .container-startup .startup-alternatives .btn-block + .btn-block {
   margin-left: 0;
+}
+.container-placeholder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  /* IE6-7 */
+
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+.container-placeholder .placeholder {
+  position: relative;
+  left: 0;
+  top: 0;
+  margin-right: 400px;
+  bottom: 0;
+  overflow-y: scroll;
+  height: 100%;
+  background: #000;
+}
+.container-placeholder .placeholder img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+}
+.container-placeholder .discussion {
+  position: absolute;
+  top: 0;
+  width: 400px;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  background-color: #ffffff;
+}
+.placeholder .toggler {
+  position: absolute;
+  display: none;
+  top: 45%;
+  padding: 20px;
+  font-size: 40px;
+  color: #474747;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  text-decoration: none;
+}
+.placeholder .toggler.slider-previous {
+  left: 0;
+}
+.placeholder .toggler.slider-next {
+  right: 0;
+}
+.placeholder .toggler:hover {
+  color: #d6d6d6;
+}
+.placeholder:hover .toggler {
+  display: block;
 }
 p {
   margin: 0 0 10px;
@@ -1384,6 +1454,34 @@ textarea:-ms-input-placeholder {
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
   color: #999999;
+}
+input .toggler,
+textarea .toggler {
+  position: absolute;
+  display: none;
+  top: 45%;
+  padding: 20px;
+  font-size: 40px;
+  color: #474747;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  text-decoration: none;
+}
+input .toggler.slider-previous,
+textarea .toggler.slider-previous {
+  left: 0;
+}
+input .toggler.slider-next,
+textarea .toggler.slider-next {
+  right: 0;
+}
+input .toggler:hover,
+textarea .toggler:hover {
+  color: #d6d6d6;
+}
+input:hover .toggler,
+textarea:hover .toggler {
+  display: block;
 }
 .radio,
 .checkbox {
@@ -6859,11 +6957,12 @@ input.search-query {
 }
 /****MESSAGES****/
 .stream-box {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  min-height: 100%;
 }
 .stream-box .stream-list {
   position: absolute;
@@ -6995,12 +7094,23 @@ input.search-query {
   width: 45px;
 }
 .navbar-inner .brand {
-  min-width: 100px;
-  float: right;
   padding-left: 4px;
   padding-right: 0px;
+  font-family: verdana;
+  font-size: 33px;
+  letter-spacing: -3px;
+  color: #1f5881;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
+  font-weight: bold;
+  margin-left: -10px;
+}
+.navbar-inner .brand.logoimg {
+  min-width: 100px;
   background: transparent url(../img/logo.png) 0 5px no-repeat;
   text-indent: -9999em;
+}
+.navbar-inner .navbar-search {
+  margin-left: 20px;
 }
 .navbar-subnav .navbar-inner {
   padding-left: 4px;
@@ -7075,26 +7185,19 @@ input.search-query {
 }
 .bk-slider {
   position: fixed;
-  top: 10%;
-  bottom: 10%;
-  left: 10%;
-  right: 10%;
+  top: 5%;
+  bottom: 5%;
+  left: 5%;
+  right: 5%;
   z-index: 1050;
   overflow: scroll;
   width: auto;
   margin: auto;
-  background-color: #ffffff;
-  border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  *border: 1px solid #999;
-  /* IE6-7 */
-
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding-box;
   background-clip: padding-box;
@@ -7112,6 +7215,10 @@ input.search-query {
 }
 .bk-slider .close {
   margin: 10px 10px 5px;
+  position: relative;
+  z-index: 10000;
+  position: absolute;
+  right: 0;
 }
 .modal-backdrop,
 .modal-backdrop.fade.in {

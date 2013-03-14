@@ -64,6 +64,7 @@ final class Photo extends System\Content{
      * @return  void
      */
     public function view( $photoId = null ) {
+        
         $this->output->setPageTitle(_("Photo Title"));
         //Throws an error if no collectionId is passed
         //Loads the collectionItem from the databse
@@ -75,9 +76,12 @@ final class Photo extends System\Content{
         
         if($format !=="raw"):
             $this->output->addToPosition("dashboard", $collection);
-        else:
-            //Raw displays whatever is in the body block only;
-            $this->output->addToPosition("body", $collection);
+        else:     
+            //Add the collection to the placeholder image;
+            $this->output->addToPosition("placeholder", $collection); //Add the collection to the placeholder
+            //Raw displays whatever is in the body block only; 
+            $placeholder = $this->output->layout("content/placeholder");
+            $this->output->addToPosition("body", $placeholder);
         endif;
         $this->load->view("index")->display(); 
     }

@@ -71,13 +71,17 @@ final class Collection extends System\Content {
         
         //Get the format of the item;
         $format = $this->router->getFormat();
+        $this->output->set("gallery", array("hidetitle"=>true,"hideheader"=>true));
         $collection = $this->output->layout("content/gallery");
         
         if($format !=="raw"):
             $this->output->addToPosition("dashboard", $collection);
         else:
-            //Raw displays whatever is in the body block only;
-            $this->output->addToPosition("body", $collection);
+            //Add the collection to the placeholder image;
+            $this->output->addToPosition("placeholder", $collection); //Add the collection to the placeholder
+            //Raw displays whatever is in the body block only; 
+            $placeholder = $this->output->layout("content/placeholder");
+            $this->output->addToPosition("body", $placeholder);
         endif;
         $this->load->view("index")->display(); 
     }

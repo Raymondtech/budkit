@@ -76,7 +76,7 @@ class Timeline extends \Platform\Controller {
      * @return void; 
      */
     public function stream() {       
-        $this->output->setPageTitle( _("Activity stream") );       
+        $this->output->setPageTitle( _("Timeline stream") );       
         //Get the view;
         $view = $this->load->view('index');        
         $user = \Platform\User::getInstance();

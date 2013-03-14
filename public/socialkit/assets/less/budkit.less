@@ -174,11 +174,11 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 
 /****MESSAGES****/
 .stream-box{
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0; min-height: 100%;
     .stream-list{
         position: absolute;
         //border: 1px solid #ddd;
@@ -288,7 +288,18 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 }
 .nav-home-page-link{ font-size: 24px; margin: 0px !important; line-height: 40px; text-align:center; width: 45px}
 .navbar-inner{  
-    .brand{ min-width: 100px; float:right; padding-left:@gridGutterWidth *0.2; padding-right: 0px; background: transparent url(../img/logo.png) 0 5px no-repeat; text-indent: -9999em; }
+    .brand{ 
+        padding-left:@gridGutterWidth *0.2; padding-right: 0px; 
+        font-family: verdana;
+        font-size: 33px;
+        letter-spacing: -3px;
+        color: rgb(31, 88, 129);
+        text-shadow:0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255,255,255,.125);
+        font-weight: bold;
+        margin-left: -10px;
+        &.logoimg{min-width: 100px; background: transparent url(../img/logo.png) 0 5px no-repeat; text-indent: -9999em; }
+    }
+    .navbar-search{ margin-left: @gridGutterWidth; }
 }
 .navbar-subnav{.navbar-inner{padding-left:@gridGutterWidth *0.2} }
 .bkeditor-content{ 
@@ -347,18 +358,15 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 // Base modal
 .bk-slider {
   position: fixed;
-  top: 10%; bottom: 10%;
-  left: 10%; right: 10%;
+  top: 5%; bottom: 5%;
+  left: 5%; right: 5%;
   z-index: @zindexModal;
   overflow: scroll;
   width: auto;
   margin: auto;
-  background-color: @white;
-  border: 1px solid #999;
-  border: 1px solid rgba(0,0,0,.3);
-  *border: 1px solid #999; /* IE6-7 */
-  .border-radius(0px);
-  .box-shadow(0 3px 7px rgba(0,0,0,0.3));
+  background-color: transparent;
+  border: none;
+  .box-shadow(none);
   .background-clip(padding-box);
   // Remove focus outline from opened modal
   outline: none;
@@ -367,7 +375,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     top: 10%;
   }
   &.fade.in { top: 10%; }
-  .close{ margin: 10px 10px 5px;}
+  .close{ margin: 10px 10px 5px; position:relative; z-index: 10000; position: absolute; right:0;}
 }
 .modal-backdrop,
 .modal-backdrop.fade.in {

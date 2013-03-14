@@ -69,7 +69,7 @@
                                 <tpl:block data="page.block.body">Content</tpl:block>
                                 
                             </div>
-<!--                            <a href="#" class="container-box-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>-->
+                            <a href="#" class="container-left-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>
                             <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-right"></i></a>
                         </div>
                     </div>
