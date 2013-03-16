@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * settings.php
+ * member.php
  *
  * Requires PHP version 5.4
  *
@@ -13,7 +13,7 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
-namespace Application\Member\Views;
+namespace Application\Settings\Views;
 
 /**
  * Member Settings View
@@ -26,7 +26,7 @@ namespace Application\Member\Views;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-class Settings extends \Platform\View {
+class Member extends \Platform\View {
 
     /**
      * Default settings display
@@ -44,7 +44,7 @@ class Settings extends \Platform\View {
      * @param string $app
      * @return void
      */
-    final public function form($form = 'settings/account', $title="Account settings", $app = 'member') {
+    final public function form($form = 'member/account', $title="Account settings", $app = 'settings') {
 
         $this->output->setPageTitle($title);
 

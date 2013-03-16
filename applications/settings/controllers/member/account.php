@@ -14,8 +14,9 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers\Settings;
-use \Application\Member\Controllers as Member;
+namespace Application\Settings\Controllers\Member;
+
+use \Application\Settings\Controllers as Settings;
 /**
  * The sub actions controller for managing account settings
  *
@@ -26,7 +27,7 @@ use \Application\Member\Controllers as Member;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Account extends Member\Settings {
+final class Account extends Settings\Member {
 
     
     /**
@@ -34,7 +35,7 @@ final class Account extends Member\Settings {
      * @return void
      */
     public function index(){      
-        $view   = $this->load->view( 'settings' ); 
+        $view   = $this->load->view( 'member' ); 
         return $view->form();    
     }
 

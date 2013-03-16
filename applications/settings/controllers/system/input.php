@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * content.php
+ * input.php
  *
  * Requires PHP version 5.4
  *
@@ -15,8 +15,9 @@
  * 
  */
 
-namespace Application\System\Controllers\Admin;
-use Application\System\Controllers as System;
+namespace Application\Settings\Controllers\System;
+
+use \Application\Settings\Controllers as Settings;
 
 /**
  * Admin action controller for managing system content 
@@ -30,18 +31,19 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Content extends System\Admin {
+class Input extends Settings\System {
     
     /**
      * Displays a lists of content needing moderation
      * @return  \Application\System\Views\Content::listContent()
      */    
-    public function moderation($type = "articles"){
-       
-        $view = $this->load->view('content') ;   
+    public function index($type = "articles"){     
+        $view = $this->load->view('system') ;   
         $this->set("content-type", $type ); 
-        $view->listContent() ; //sample call; //$this->output();
+        $view->form("system/input") ; //sample call; //$this->output();
     }
+    
+    
     
     /**
      * Returns an instance of the content class

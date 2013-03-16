@@ -15,8 +15,7 @@
  * 
  */
 
-namespace Application\System\Controllers\Admin;
-use Application\System\Controllers as System;
+namespace Application\System\Controllers;
 
 /**
  * Admin action controller for managing system content 
@@ -30,59 +29,15 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Extensions extends System\Admin {
+class Extension extends \Platform\Controller {
 
-    /**
-     * The Extension Update worflow
-     * @todo The extensions update workflow
-     * @return void
-     */
-    public function update() {
-
-        $view = $this->load->view('extensions');
-        $this->set("user2", "livingstone");
-        $view->updateExtensions(); //sample call;        
-        //$this->output();
-    }
-    
-    /**
-     * Adds an extensions
-     * @todo Extension installation workflow
-     * @return void
-     */
-    public function add() {
-
-        $view = $this->load->view('extensions');
-        $this->set("user2", "livingstone");
-        $view->installExtensions(); //sample call;        
-        //$this->output();
-    }
 
     /**
      * Extensions controller, fallback method
      * @Return void
      */
-    public function index() {
+    public function index() {}
 
-        $view = $this->load->view('extensions');
-        $this->set("user2", "livingstone");
-
-        $view->lists(); //sample call;        
-        //$this->output();
-    }
-
-    /**
-     * Displays the extension repository
-     * @todo Extension repository view
-     * @return void;
-     */
-    public function repositories() {
-
-        $view = $this->load->view('extensions');
-        $this->set("user2", "livingstone");
-
-        $view->repositories(); //sample call;        
-    }
     
     /**
      * Returns and instance of the extension class

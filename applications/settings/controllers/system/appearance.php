@@ -15,8 +15,9 @@
  * 
  */
 
-namespace Application\System\Controllers\Admin;
-use Application\System\Controllers as System;
+namespace Application\Settings\Controllers\System;
+
+use \Application\Settings\Controllers as Settings;
 
 /**
  * Action controller for managing system appearance 
@@ -31,7 +32,23 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Appearance extends System\Admin {
+class Appearance extends Settings\System {
+    
+
+    /**
+     * Displays the appearance configuration form
+     * @return boolean
+     */
+    public function index() {
+
+        $this->output->setPageTitle(_("Appearance Settings"));
+        //Get the Menus
+        $menus = \Platform\Navigator::getAllMenus();
+        $this->set("menus", $menus);
+    
+        $view   = $this->load->view( 'system' ); 
+        return $view->form('system/appearance');    
+    }
     
     /**
      * Returns an instance of the appearance class

@@ -15,10 +15,7 @@
  * 
  */
 
-namespace Application\System\Models;
-
-use Platform;
-use Library;
+namespace Application\Settings\Models;
 
 /**
  * Options management model
@@ -33,7 +30,7 @@ use Library;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-class Options extends Platform\Model {
+class Options extends \Platform\Model {
 
     /**
      * Default display method for every model 

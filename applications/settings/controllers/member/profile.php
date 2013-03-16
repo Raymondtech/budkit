@@ -15,9 +15,9 @@
  * 
  */
 
-namespace Application\Member\Controllers\Settings;
+namespace Application\Settings\Controllers\Member;
 
-use \Application\Member\Controllers as Member;
+use \Application\Settings\Controllers as Settings;
 
 /**
  * The sub actions controller for managing profile settings
@@ -29,7 +29,7 @@ use \Application\Member\Controllers as Member;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Profile extends Member\Settings {
+final class Profile extends Settings\Member {
 
     /**
      * Displays the user profile settings
@@ -39,15 +39,15 @@ final class Profile extends Member\Settings {
         
         $user = \Platform\User::getInstance();
         
-        $view = $this->load->view('settings');
-        $profile = $this->load->model('profile');
+        $view = $this->load->view('member');
+        $profile = $this->load->model('profile', 'member');
         $profile = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
         
         $data   = $profile->getPropertyData();
         
         $this->set("profile", $data ); //Sets the profile data;
         
-        return $view->form("settings/profile", "Profile settings");
+        return $view->form("member/profile", "Profile settings");
     }
 
     /**

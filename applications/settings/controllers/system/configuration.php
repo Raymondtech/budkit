@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * settings.php
+ * configuration.php
  *
  * Requires PHP version 5.4
  *
@@ -15,8 +15,9 @@
  * 
  */
 
-namespace Application\System\Controllers\Admin;
-use Application\System\Controllers as System;
+namespace Application\Settings\Controllers\System;
+
+use \Application\Settings\Controllers as Settings;
 
 /**
  * Admin settings action controller
@@ -31,110 +32,14 @@ use Application\System\Controllers as System;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @todo      System manage action methods
  */
-class Settings extends System\Admin {
+class Configuration extends Settings\System {
     
     /**
-     * Displays the configuration form
+     * Displays the default setting form
      * @return void
      */
-    public function configuration() {
-        //2. Load Model
-        $model = $this->load->model("authority");
-        //3. Get the authorities list
-        $authorities = $model->getAuthorities();
-        //4. Set Properties
-        $this->set("authorities", $authorities);
-        $form = $this->load->view('settings');
-
-        $form->configurationForm();
-    }
-
-    /**
-     * Displays the appearance configuration form
-     * @return void
-     */
-    public function appearance() {
-        $form = $this->load->view('settings');
-        $form->appearanceConfigForm();
-    }
-
-    /**
-     * Displays the navigation settings
-     * @return void
-     */
-    public function navigation(){
-       $form = $this->load->view('settings');
-       $form->navigationConfigForm();
-    }
-
-    /**
-     * Displays the moderation queue configuration settings
-     * @return void
-     */
-    public function moderation() {
-        $form = $this->load->view('settings');
-        $form->moderationConfigForm();
-    }
-    
-    /**
-     * Saves configuraiton settings
-     * @return boolean
-     */
-    public function save(){
-        
-        $referer    = $this->input->getReferer();
-        $view       = $this->load->view('settings') ;
-        $options    = $this->load->model('options') ;
-        
-        //Check that we have post data;
-        if (!$this->input->methodIs("post")) {
-            $this->alert("No configuration data recieved",'Something went wrong','error' );
-            $this->redirect( $referer );
-            return false;
-        }
-        //Get the data;
-        if(($data = $this->input->getArray("options", array(), "post") ) == FALSE ){
-            $this->alert("No input data recieved",'Something went wrong','error' );
-            $this->redirect( $referer );
-            return false; //useless
-        }
-        
-        //Check that we have a group value
-//        if(($group = $this->input->getString("options_group", "system-config", "post") ) == FALSE ){
-//            $this->alert("No input data group recieved",'Settings not saved','error' );
-//            $this->redirect( $referer );
-//            return false; //useless
-//        }
-        //Check we have all the information we need!
-        if(!$options->save( $data , null)){
-            $this->alert($options->getError(),'Something went wrong','error');
-            $this->redirect( $referer );
-            return false;
-        }
-        //Report on state saved
-        $this->alert( "Your configuration settings have now been saved","Everthing worked","success");
-        $this->redirect( $referer ); //Redirect back to the page sending in the data;
-        
-        return true;
-    }
-
-    /**
-     * Displays the input setting form
-     * @todo admin input form
-     * @return void
-     */
-    public function input() {
-        $form = $this->load->view('settings');
-        $form->inputConfigForm();
-    }
-
-    /**
-     * Displays the maintenance settings form 
-     * @return void
-     */
-    public function maintenance() {
-        $form = $this->load->view('settings');
-        $form->maintenanceConfigForm();
+    public function index() {
+        return $this->form();
     }
 
     /**

@@ -107,7 +107,7 @@ final class Schema extends Platform\Model {
         //Dumping default permission data to authority_permission tablegit
         static::$database->query(
                 "INSERT INTO `?authority_permissions` (`authority_permission_key`, `authority_id`, `permission_area_uri`, `permission`, `permission_type`, `permission_title`) VALUES
-            (1, 4, '/system/admin(/[a-z0-9-]*)*', 'allow', 'special', 'Admin Panel'),
+            (1, 4, '/settings/system(/[a-z0-9-]*)*', 'allow', 'special', 'System Settings'),
             (2, 1, '/member/session(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Login'),
             (3, 1, '/member/account(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Signup'),
             (4, 2, '/system/timeline(/[a-z0-9-]*)*', 'allow', 'execute', 'Update Status'),
@@ -116,9 +116,9 @@ final class Schema extends Platform\Model {
             (7, 2, '/system/start(/[a-z0-9-]*)*', 'allow', 'view', 'Start Pages'),
             (8, 2, '/system/upload([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Uploads'),
             (9, 1, '/system/search(/[a-z0-9-]*)*', 'allow', 'execute', 'System Search'),
-            (10, 2, '/system/workspace([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Workspaces'),
-            (11, 2, '/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Read User Profiles'),
-            (12, 1, '/system/object([s]*/[a-z0-9-]*)*', 'allow', 'view', 'System Objects');"
+            (11, 2, '/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Execute Member actions'),
+            (12, 1, '/system/object([s]*/[a-z0-9-]*)*', 'allow', 'view', 'System Objects'),
+            (13, 2, '/settings/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Member Settings');"
         );
     }
 
@@ -173,17 +173,17 @@ final class Schema extends Platform\Model {
                 (65, 0, 'Applications', '', NULL, 0, 3, 'link', NULL, 1, 4, 1),
                 (66, 65, 'Repository', '/system/extensions/repository', NULL, 0, 3, 'link', NULL, 2, 3, 1),
                 (72, 0, 'Personal Settings', '', NULL, 0, 2, 'link', NULL, 1, 10, 1),
-                (73, 72, 'Account', '/member/settings/account', '', 0, 2, 'link', NULL, 2, 9, 1),
-                (74, 72, 'Profile', '/member/settings/profile', NULL, 0, 2, 'link', NULL, 3, 8, 1),
-                (75, 72, 'Notifications', '/member/settings/notifications', NULL, 0, 2, 'link', NULL, 4, 7, 1),
-                (76, 72, 'Privacy', '/member/settings/privacy', NULL, 0, 2, 'link', NULL, 5, 6, 1),
+                (73, 72, 'Account', '/settings/member/account', '', 0, 2, 'link', NULL, 2, 9, 1),
+                (74, 72, 'Profile', '/settings/member/profile', NULL, 0, 2, 'link', NULL, 3, 8, 1),
+                (75, 72, 'Notifications', '/settings/member/notifications', NULL, 0, 2, 'link', NULL, 4, 7, 1),
+                (76, 72, 'Privacy', '/settings/member/privacy', NULL, 0, 2, 'link', NULL, 5, 6, 1),
                 (77, 0, 'Network Settings', '', NULL, 0, 2, 'link', NULL, 1, 4, 1),
-                (78, 77, 'Permissions', '/system/admin/network/authorities', '', 9, 2, 'link', '', 2, 3, 1),
+                (78, 77, 'Permissions', '/settings/system/permissions', '', 9, 2, 'link', '', 2, 3, 1),
                 (79, 0, 'System Settings', '', '', 19, 2, 'link', '', 1, 10, 1),
-                (80, 79, 'Configuration', '/system/admin/settings/configuration', '', 20, 2, 'link', '', 2, 9, 1),
-                (81, 79, 'Appearance', '/system/admin/settings/appearance', '', 21, 2, 'link', '', 3, 8, 1),
-                (82, 79, 'Maintenance', '/system/admin/settings/maintenance', '', 22, 2, 'link', '', 4, 7, 1),
-                (83, 79, 'Navigation', '/system/admin/settings/navigation', '', 23, 2, 'link', '', 5, 6, 1),
+                (80, 79, 'Configuration', '/settings/system/configuration', '', 20, 2, 'link', '', 2, 9, 1),
+                (81, 79, 'Appearance', '/settings/system/appearance', '', 21, 2, 'link', '', 3, 8, 1),
+                (82, 79, 'Maintenance', '/settings/system/maintenance', '', 22, 2, 'link', '', 4, 7, 1),
+                (83, 79, 'Navigation', '/settings/system/navigation', '', 23, 2, 'link', '', 5, 6, 1),
                 (84, 0, 'Published', '', '', 19, 1, 'link', '', 1, 12, 1),
                 (86, 84, 'Photos', '/system/content/photo/gallery', NULL, 0, 1, 'link', NULL, 3, 10, 1),
                 (87, 84, 'Audio', '/system/content/audio/gallery', NULL, 0, 1, 'link', NULL, 4, 9, 1),

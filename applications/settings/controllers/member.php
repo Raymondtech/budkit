@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * settings.php
+ * member.php
  *
  * Requires PHP version 5.4
  *
@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers;
+namespace Application\Settings\Controllers;
 
 /**
  * The Member Settings parent action controller
@@ -26,7 +26,7 @@ namespace Application\Member\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Settings extends \Platform\Controller {
+class Member extends \Platform\Controller {
 
     
     /**
@@ -42,8 +42,8 @@ class Settings extends \Platform\Controller {
      * @return void
      */
     public function form(){  
-        $view   = $this->load->view( 'settings' ); 
-        return $view->form('settings/account');
+        $view   = $this->load->view( 'member' ); 
+        return $view->form('member/account');
     }
 
     /**

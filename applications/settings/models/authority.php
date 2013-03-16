@@ -15,10 +15,7 @@
  * 
  */
 
-namespace Application\System\Models;
-
-use Platform;
-use Library;
+namespace Application\Settings\Models;
 
 /**
  * Authority group model
@@ -43,7 +40,7 @@ use Library;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-class Authority extends Platform\Model {
+class Authority extends \Platform\Model {
 
     /**
      * Default model method

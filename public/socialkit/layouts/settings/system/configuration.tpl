@@ -12,7 +12,7 @@
             </ul>
         </div>
     </div>
-    <form method="POST" action="/system/admin/settings/save" class="form-horizontal margin-top">
+    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top">
         <div class="tab-content">
             <div class="tab-pane active" id="general">
                 <fieldset class="no-margin">

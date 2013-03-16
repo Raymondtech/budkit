@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * settings.php
+ * system.php
  *
  * Requires PHP version 5.4
  *
@@ -14,7 +14,8 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers;
+
+namespace Application\Settings\Controllers;
 
 /**
  * The Member Settings parent action controller
@@ -26,9 +27,8 @@ namespace Application\Member\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Settings extends \Platform\Controller {
+class System extends \Platform\Controller {
 
-    
     /**
      * Displays the default setting form
      * @return void
@@ -38,12 +38,56 @@ class Settings extends \Platform\Controller {
     }
 
     /**
-     * Displays the default account settings form
-     * @return void
+     * Displays the configuration form
+     * @return boolean
      */
-    public function form(){  
-        $view   = $this->load->view( 'settings' ); 
-        return $view->form('settings/account');
+    public function form() {
+        $this->output->setPageTitle(_("System Preferences"));
+        //$aside  = "Settings Instructions"; 
+        $view = $this->load->view('system');
+        return $view->form('system/configuration');
+    }
+
+    /**
+     * Saves configuraiton settings
+     * @return boolean
+     */
+    public function save() {
+
+        $referer = $this->input->getReferer();
+        $view = $this->load->view('system');
+        $options = $this->load->model('options');
+
+        //Check that we have post data;
+        if (!$this->input->methodIs("post")) {
+            $this->alert("No configuration data recieved", 'Something went wrong', 'error');
+            $this->redirect($referer);
+            return false;
+        }
+        //Get the data;
+        if (($data = $this->input->getArray("options", array(), "post") ) == FALSE) {
+            $this->alert("No input data recieved", 'Something went wrong', 'error');
+            $this->redirect($referer);
+            return false; //useless
+        }
+
+        //Check that we have a group value
+//        if(($group = $this->input->getString("options_group", "system-config", "post") ) == FALSE ){
+//            $this->alert("No input data group recieved",'Settings not saved','error' );
+//            $this->redirect( $referer );
+//            return false; //useless
+//        }
+        //Check we have all the information we need!
+        if (!$options->save($data, null)) {
+            $this->alert($options->getError(), 'Something went wrong', 'error');
+            $this->redirect($referer);
+            return false;
+        }
+        //Report on state saved
+        $this->alert("Your configuration settings have now been saved", "Everthing worked", "success");
+        $this->redirect($referer); //Redirect back to the page sending in the data;
+
+        return true;
     }
 
     /**
@@ -59,4 +103,5 @@ class Settings extends \Platform\Controller {
         $instance = new self;
         return $instance;
     }
+
 }

@@ -627,6 +627,9 @@ class Output extends Object {
 
         return $this;
     }
+    
+    final public function addMenu(){}
+    final public function addMenuToPosition(){}
 
     /**
      * Returns the template folder name

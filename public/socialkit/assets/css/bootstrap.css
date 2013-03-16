@@ -655,7 +655,7 @@ a:focus {
 .container-menu-box {
   float: left;
   position: absolute;
-  top: 0;
+  top: 60px;
   bottom: 0px;
   width: 75px;
   left: 0;
@@ -664,7 +664,7 @@ a:focus {
 .container-box {
   background: #f2f2f2;
   position: absolute;
-  top: 0;
+  top: 60px;
   left: 0px;
   right: 0;
   bottom: 0;
@@ -683,7 +683,7 @@ a:focus {
   background: #e9e9e9;
   position: absolute;
   bottom: 0px ;
-  top: 60px;
+  top: 0;
 }
 .container-box .container-right .container-aside {
   width: 195px;
@@ -692,7 +692,7 @@ a:focus {
   background: #e9e9e9;
   position: absolute;
   bottom: 0px;
-  top: 60px;
+  top: 0;
   right: 0px;
 }
 .container-box .container-right .container-content {
@@ -715,8 +715,8 @@ a:focus {
 }
 .container-box .container-right .container-content .toggler {
   position: absolute;
-  margin-top: 7px;
-  top: 60px;
+  margin-top: 2.5px;
+  top: 6px;
   text-decoration: none;
   color: #999999;
   padding: 0px 2px;
@@ -738,9 +738,6 @@ a:focus {
 .container-box .container-right.has-aside .container-content {
   margin-right: 195px;
   *margin-right: 195px;
-}
-.container-box .container-right.has-aside .container-bucket {
-  border-right: 1px solid #ccc;
 }
 .container-box.has-left .container-left {
   display: block;
@@ -775,7 +772,7 @@ a:focus {
   left: -1px;
   right: -1px;
   bottom: 0;
-  top: 60px;
+  top: 0;
 }
 .container-bucket:before,
 .container-bucket:after {
@@ -4727,6 +4724,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand {
   float: left;
   display: block;
+  width: 195px;
   padding: 20px 20px 20px;
   margin-left: 5px;
   font-size: 20px;

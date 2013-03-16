@@ -15,8 +15,9 @@
  * 
  */
 
-namespace Application\System\Controllers\Admin;
-use Application\System\Controllers as System;
+namespace Application\Settings\Controllers\System;
+
+use \Application\Settings\Controllers as Settings;
 
 /**
  * Network action controller
@@ -31,57 +32,17 @@ use Application\System\Controllers as System;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @todo      System manage action methods
  */
-class Network extends System\Admin {
+class Permissions extends Settings\System {
 
-    /**
-     * Adds a node to the network
-     * @todo Adding network nodes
-     * @return void
-     */
-    public function add() {
-        $view = $this->load->view('network');
-        $this->set("user2", "livingstone");
-        $view->addNetworkMember();
-    }
-
-    /**
-     * Displays a lists of all network members
-     * @todo Network members  lists
-     * @param string $type
-     * @return void
-     */
-    public function lists($type = "") {
-        $view = $this->load->view('network');
-        $this->set("content-type", $type);
-        $view->listNetworkMembers(); //sample call; //$this->output();
-    }
-    /**
-     * Displays comprehensive network analysis
-     * @todo Network analytics
-     * @return void
-     */
-    public function analytics() {
-        $view = $this->load->view('network');
-        $view->analytics();
-    }
-    /**
-     * Displays a graph of network relationships
-     * @todo Implement a graph of network relationships
-     * @return void
-     */
-    public function relationships() {     
-        $view = $this->load->view('network');
-        $view->relationships();
-    }
     /**
      * Displays a list of network authority groups
      * @todo Implement the ability to modify groups
      * @param string $edit
      * @return void
      */
-    public function authorities($edit = "") {
+    public function index($edit = "") {
 
-        $form   = $this->load->view('network');
+        $view   = $this->load->view('system');
         $params = $this->getRequestArgs();
         
         //1. Load the model
@@ -93,20 +54,20 @@ class Network extends System\Admin {
                 $errors = $this->getErrorString();
                 $this->alert($errors, null , "error");
             }  $this->alert(_("Changes have been saved successfully"), "", "success");        
-            $this->redirect( $this->output->link("/system/admin/network/authorities") );
+            $this->redirect( $this->output->link("/settings/system/permissions") );
         endif;
-      
-        $form->accessControl();
+        
+        //1. The page Title
+        $this->output->setPageTitle(_("Permission settings"));
+        //3. Get the authorities list
+        $authorities = $authority->getAuthorities();
+        //4. Set Properties
+        $this->set("authorities", $authorities);
+        //5. The layout
+        $view->form('system/permissions');
+
     }
-    /**
-     * Displays a lists of network memebers
-     * @todo Implement network memembers list
-     * @return void.
-     */
-    public function members() {
-        $view = $this->load->view('network');
-        $view->listNetworkMembers();
-    }
+
     /**
      * Gets an instance of the network class
      * @staticvar object $instance

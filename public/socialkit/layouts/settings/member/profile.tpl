@@ -10,7 +10,7 @@
             </ul>
         </div>
     </div>
-    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/member/settings/profile/update">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/settings/member/profile/update">
         <div class="tab-content">
             <div class="tab-pane active" id="appearance">
                 <div class="control-group">

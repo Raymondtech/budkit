@@ -14,8 +14,9 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers\Settings;
-use \Application\Member\Controllers as Member;
+namespace Application\Settings\Controllers\Member;
+
+use \Application\Settings\Controllers as Settings;
 /**
  * The sub actions controller for notification settings
  *
@@ -26,15 +27,15 @@ use \Application\Member\Controllers as Member;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Notifications extends Member\Settings {
+final class Notifications extends Settings\Member {
 
     /**
      * Displays the notification settings
      * @return void
      */
     public function index() {           
-        $view   = $this->load->view( 'settings' );
-        return $view->form("settings/notifications", "Notificaiton settings");
+        $view   = $this->load->view( 'member' );
+        return $view->form("member/notifications", "Notificaiton settings");
     }
 
     /**
