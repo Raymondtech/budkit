@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * admin.php
+ * privacy.php
  *
  * Requires PHP version 5.4
  *
@@ -14,13 +14,10 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers;
-
+namespace Application\Member\Controllers\Settings;
+use \Application\Member\Controllers as Member;
 /**
- * The parent system admin action controller.  
- *
- * This class implements the action controller for key system administrative task.
- * Every other action is implemented in their respective subclasses.
+ * The sub actions controller for privacy settings
  *
  * @category  Application
  * @package   Action Controller
@@ -29,30 +26,21 @@ namespace Application\System\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Admin extends \Platform\Controller {
+final class Privacy extends Member\Settings {
 
     /**
-     * Admin action controller constructor
+     * Displays the privacy settings form
      * @return void
      */
-    public function __construct() {
-       
-        parent::__construct();     
-        //Construct the parent
-        $this->set('pageid', 'adminpage');       
-        $this->view = $this->load->view('admin');
+    public function index() {                  
+        $view   = $this->load->view( 'settings' );   
+        return $view->form("settings/privacy", "Privacy settings");    
     }
+
     /**
-     * The default fall back method
-     * @return boolean false 
-     */
-    public function index() {
-        return false;
-    }
-    /**
-     * Returns an instance of the admin controller
-     * @staticvar self $instance
-     * @return Admin 
+     * Returns an instance of the privacy settings action class
+     * @staticvar object $instance
+     * @return object Privacy
      */
     public static function getInstance() {
 
@@ -61,7 +49,8 @@ class Admin extends \Platform\Controller {
         if (isset($instance))
             return $instance;
         $instance = new self;
+
         return $instance;
     }
-}
 
+}

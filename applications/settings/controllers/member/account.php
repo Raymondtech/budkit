@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * manage.php
+ * account.php
  *
  * Requires PHP version 5.4
  *
@@ -14,14 +14,10 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-
-namespace Application\System\Controllers\Admin;
-use Application\System\Controllers as System;
-
+namespace Application\Member\Controllers\Settings;
+use \Application\Member\Controllers as Member;
 /**
- * Action controller for system management actions
- *
- * This class implements the action methods for system management.. 
+ * The sub actions controller for managing account settings
  *
  * @category  Application
  * @package   Action Controller
@@ -29,14 +25,23 @@ use Application\System\Controllers as System;
  * @version   1.0.0
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * @todo      System manage action methods
  */
-class Manage extends System\Admin {
+final class Account extends Member\Settings {
+
+    
+    /**
+     * Displays the account settings form
+     * @return void
+     */
+    public function index(){      
+        $view   = $this->load->view( 'settings' ); 
+        return $view->form();    
+    }
 
     /**
-     * Returns an instance of the manage class
-     * @staticvar self $instance
-     * @return object Manage
+     * Returns an instance of the account settings action controller
+     * @staticvar object $instance
+     * @return object Account
      */
     public static function getInstance() {
         static $instance;
@@ -46,5 +51,5 @@ class Manage extends System\Admin {
         $instance = new self;
         return $instance;
     }
-}
 
+}

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * manager.php
+ * appearance.php
  *
  * Requires PHP version 5.4
  *
@@ -12,46 +12,39 @@
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ * 
  */
-namespace Application\System\Views;
-use Platform;
+
+namespace Application\System\Controllers\Admin;
+use Application\System\Controllers as System;
 
 /**
- * Manager View
- * 
- * Draws system management and configuration screens
+ * Action controller for managing system appearance 
+ *
+ * This class implements an interface for experessing admin defined system appearance
+ * settings. 
  *
  * @category  Application
- * @package   View
+ * @package   Action Controller
  * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version   1.0.0
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * 
  */
-class Manager extends Platform\View {
-
-    /**
-     * The default manager view display method
-     * @param string $panel
-     * @return boolean
-     */
-    public function display($panel = "") {
-        return $this->output->addToPosition("body", $panel);
-    }
+class Appearance extends System\Admin {
     
     /**
-     * Returns an instance of the manager view class
+     * Returns an instance of the appearance class
+     * 
      * @staticvar object $instance
-     * @return object Manager
+     * @return object Appearance
      */
-    final static function getInstance() {
+    public static function  getInstance() {   
         static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
-        $instance = new self();
-        return $instance;
+        if (isset($instance) ) return $instance ;
+        $instance =  new self;
+        return $instance;   
     }
-
 }
+
