@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * account.php
+ * group.php
  *
  * Requires PHP version 5.4
  *
@@ -14,10 +14,10 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers\Settings;
-use \Application\Member\Controllers as Member;
+namespace Application\Member\Controllers;
+
 /**
- * The sub actions controller for managing account settings
+ * Group CRUD action controller
  *
  * @category  Application
  * @package   Action Controller
@@ -26,29 +26,30 @@ use \Application\Member\Controllers as Member;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Account extends Member\Settings {
+final class Group extends \Platform\Controller {
 
-    
     /**
-     * Displays the account settings form
-     * @return void
+     * The default group action
+     * @return boolean
      */
-    public function index(){      
-        $view   = $this->load->view( 'settings' ); 
-        return $view->form();    
+    public function index() {
+        return false;
     }
 
     /**
-     * Returns an instance of the account settings action controller
+     * Returns an instance of the Group CRUD action conroller
      * @staticvar object $instance
-     * @return object Account
+     * @return object Group
      */
     public static function getInstance() {
+
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
+
         $instance = new self;
+
         return $instance;
     }
 
