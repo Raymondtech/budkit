@@ -35,14 +35,14 @@
                         <div class="container-content scroll-y">
                             <div class="container-fluid">
                                 <div class="container-startup signup">
-                                    <form class="form-horizontal" name="form" method="post" action="/member/account/update">
+                                    <form class="form-horizontal" name="form" method="post" action="/settings/member/account/update">
                                         <div class="startup-header">
                                             <h3>Register a new account</h3>
                                         </div>
                                         <tpl:block data="page.block.alerts" />
                                         <div class="startup-alternatives">
                                                 <ul class="unstyled no-margin no-bottom-margin">
-                                                    <li><a href="/member/session/start">Already have an account? Sign-in</a></li>
+                                                    <li><a href="/system/authenticate/login">Already have an account? Sign-in</a></li>
                                                 </ul>
                                             </div>
                                         

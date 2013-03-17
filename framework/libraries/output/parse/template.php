@@ -206,6 +206,27 @@ abstract class Template extends Output\Parse {
 
         return (!empty($value) ) ? $value : $default;
     }
+    
+    
+    /**
+     * Adds menuItems to Blocks at runtime
+     * 
+     * @param type $menuNameId
+     * @param type $default
+     * @return type
+     */
+    final public static function getBlockMenuGroup($menuNameId, $default=array()){
+        
+        //Get an instance of the Output Document class. 
+        //We will need this for templates?
+        static::$output = Library\Output::getInstance();
+        static::$menugroups = static::$output->getMenuGroups();
+
+        $menu = isset( static::$menugroups[$menuNameId] )? static::$menugroups[$menuNameId] : $default;
+    
+
+        return (!empty($menu) ) ? $menu : $default;
+    }
 
     /**
      * Generic get Data method

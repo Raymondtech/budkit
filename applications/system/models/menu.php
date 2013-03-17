@@ -39,14 +39,19 @@ class Menu extends \Platform\Model {
         //Add the default upload links
         if ($menuId === 'contentmenu') {
             //Add items to the profile menu;
-            array_unshift($menuItems, Array(
+            array_unshift($menuItems, array(
                 "menu_title" => "Content",
                 "children" => array(
-                    array("menu_title"=>"Collections", "menu_url"=>"/system/content/collection/gallery"),
-                    array("menu_title"=>"Drag and Drop", "menu_url"=>"/system/content/create"), 
-                    array("menu_title"=>"Text Editor", "menu_url"=>"/system/content/create/text"), 
-                    array("menu_title"=>"Import", "menu_url"=>"/system/content/create/import"), 
-                    array("menu_title"=>"Snap", "menu_url"=>"/system/content/create/snap")
+                    array("menu_title" => "All Content", "menu_url" => "/system/content/media"),
+                    array("menu_title" => "Collections", "menu_url" => "/system/content/collection/gallery")
+                )
+                    ), array(
+                "menu_title" => "Add New",
+                "children" => array(
+                    array("menu_title" => "Drag and Drop", "menu_url" => "/system/content/create"),
+                    array("menu_title" => "Text Editor", "menu_url" => "/system/content/create/text"),
+                    array("menu_title" => "Import", "menu_url" => "/system/content/create/import"),
+                    array("menu_title" => "Snap", "menu_url" => "/system/content/create/snap")
                 )
             ));
         }

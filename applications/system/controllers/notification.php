@@ -37,6 +37,7 @@ final class Notification extends \Platform\Controller {
      * @return See Notifications::list()
      */
     public function index() {
+        
         $this->output->setPageTitle(_("Task and Notifications"));
         $view = $this->load->view("index");
         $body = $this->output->layout('notifications');

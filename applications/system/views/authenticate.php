@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * index.php
+ * authenticate.php
  *
  * Requires PHP version 5.4
  *
@@ -13,10 +13,10 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
-namespace Application\Member\Views;
+namespace Application\System\Views;
 
 /**
- * Member Index View
+ * Authentication views
  *
  * @category  Application
  * @package   View
@@ -26,7 +26,7 @@ namespace Application\Member\Views;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-class Index extends \Platform\View {
+class Authenticate extends \Platform\View {
     
     /**
      * The default member index view

@@ -26,14 +26,15 @@ namespace Application\Member\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Group extends \Platform\Controller {
+class Network extends \Platform\Controller {
 
     /**
      * The default group action
      * @return boolean
      */
     public function index() {
-        return false;
+        $this->output->addMenuGroupToPosition("side", "peoplemenu");
+        echo "network";
     }
 
     /**

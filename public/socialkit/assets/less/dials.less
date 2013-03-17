@@ -1,0 +1,45 @@
+.dials{
+    text-align: center;
+    &:first-child{padding-top: @gridGutterWidth*0.5;}
+    .clearfix();
+    .dial{
+        position: relative;
+        background: rgba(255,255,255,0.7);
+        @boxshadow: inset 0 0px 0 2px transparent, 0 0px 0 4px #4884C0;
+        .box-shadow(@boxshadow);
+        color: #4884C0;
+        .border-radius(50em);
+        padding: 5px;
+        width: 100px;
+        height: 100px;
+        margin: 10px auto;
+        i{
+            font-size: 30px;
+            position: absolute;
+            top: 25%;
+            left: 0px;
+            margin-top: 0px;
+            width: 100%;
+            text-align: center;
+        }
+        .unit{         
+            font-size: 14px;
+            position: absolute;
+            top: 55%;
+            margin-left: 65px;
+        }
+        input{ 
+            cursor: default;
+            box-shadow: none;
+            border: none;
+            height: auto;
+            position: absolute;
+            top: 25px;
+            left: 105px;
+            border-color: none 
+        }
+        &.green{ color: #4EA209; @boxshadow: inset 0 0px 0 2px transparent, 0 0px 0 4px #4EA209; .box-shadow(@boxshadow);}
+        &.red{ color: #B94848; @boxshadow: inset 0 0px 0 2px transparent, 0 0px 0 4px #B94848; .box-shadow(@boxshadow);}
+    }
+    .dial-title{width: 100%; margin: 10px auto; color: @grayLight; text-shadow: 0px 1px 1px @white;}
+}

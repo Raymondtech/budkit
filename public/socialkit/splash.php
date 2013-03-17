@@ -29,6 +29,7 @@
         </head>
         <body onload="prettyPrint()">
             <div id="wrap">
+                <tpl:import layout="navbar" />
                 <div class="container-box">
                     <div class="container-right">
                         <div class="container-content scroll-y">

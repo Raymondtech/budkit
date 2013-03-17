@@ -48,20 +48,6 @@ class Index extends Platform\View {
     }
 
     /**
-     * Draws the system index page
-     * @return void
-     */
-    public function index() {
-
-        $indexpage = "Welcome page";
-        $indexpage2 = "Side panel";
-
-        $this->output->addToPosition("body", $indexpage);
-        $this->output->addToPosition("side", $indexpage2);
-        
-    }
-
-    /**
      * The default system view
      * @return void
      */
@@ -90,7 +76,8 @@ class Index extends Platform\View {
         $dashboard = $this->output->layout("dashboard");
         $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
-
+        
+        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
         $this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );

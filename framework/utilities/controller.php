@@ -318,7 +318,7 @@ abstract class Controller extends Library\Action {
             }
         }
 
-        $view = $this->load->view("index", "member");
+        $view = $this->load->view("authenticate", "system");
 
         $view->userLoginForm();
 

@@ -32,7 +32,7 @@ use \Application\Settings\Controllers as Settings;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Appearance extends Settings\System {
+class Navigation extends Settings\System {
     
 
     /**
@@ -41,13 +41,12 @@ class Appearance extends Settings\System {
      */
     public function index() {
 
-        $this->output->setPageTitle(_("Navigation Settings"));
         //Get the Menus
         $menus = \Platform\Navigator::getAllMenus();
         $this->set("menus", $menus);
     
         $view   = $this->load->view( 'system' ); 
-        return $view->form('system/navigation');    
+        return $view->form('system/navigation', _("Navigation Settings"));    
     }
     
     /**

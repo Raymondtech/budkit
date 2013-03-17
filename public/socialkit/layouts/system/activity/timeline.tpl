@@ -1,7 +1,7 @@
 <tpl:layout  name="timeline" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl"> 
     <div class="timeline">
         <div class="timeline-line"></div>
-        <ol class="timeline-item-index">
+        <ol class="timeline-item-index timeline-stream">
             <tpl:loop data="activities.items">
                 <li class="timeline-item-li timeline-item">
                     <div class="timeline-item-container">

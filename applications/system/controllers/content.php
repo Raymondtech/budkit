@@ -33,12 +33,35 @@ namespace Application\System\Controllers;
  */
 Class Content extends \Platform\Controller {
 
+    
     /**
      * The default fall back method. Probably overwritten in child classes
      * @return boolean false 
      */
-    public function index() {
-        return false;
+    public function index( $collectionId = null ) {
+        
+        $this->output->setPageTitle(_("CollectionName Gallery"));
+        //Throws an error if no collectionId is passed
+        //Loads the collectionItem from the databse
+        $model = $this->load->model("collection");
+        
+        //Get the format of the item;
+        $format = $this->router->getFormat();
+        
+        $collection = $this->output->layout("content/gallery");
+        
+        if($format !=="raw"):
+            $this->output->addToPosition("dashboard", $collection);
+        else:
+            $this->output->set("gallery", array("hidetitle"=>true,"hideheader"=>true));
+            //Add the collection to the placeholder image;
+            $this->output->addToPosition("placeholder", $collection); //Add the collection to the placeholder
+            //Raw displays whatever is in the body block only; 
+            $placeholder = $this->output->layout("content/placeholder");
+            $this->output->addToPosition("body", $placeholder);
+        endif;
+        $this->load->view("content")->display(); 
+    
     }
 
     public function create($action = "") {
@@ -54,7 +77,7 @@ Class Content extends \Platform\Controller {
         $this->output->addToPosition("dashboard", $form);
         $this->output->setPageTitle(_("Add New Content"));
         
-        $this->load->view('index')->display(); //sample call;   
+        $this->load->view('content')->display(); //sample call;   
         //$this->output->addToPosition("right", $right );
     }
 

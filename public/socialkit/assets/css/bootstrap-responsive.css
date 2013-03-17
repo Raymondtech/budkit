@@ -1119,10 +1119,6 @@
   .container-box.has-menu-box {
     left: 0;
   }
-  .container-box .container-left {
-    overflow-y: scroll;
-    background: #2f2f2f;
-  }
   .container-box .container-left .tab-pane {
     display: block;
     visibility: visible;
@@ -1169,23 +1165,6 @@
   }
   .container-box.has-left .container-bucket {
     border-left: none;
-  }
-  .container-left .nav-list > li.nav-header,
-  .container-aside .nav-list > li.nav-header {
-    border-bottom: 1px solid #2b2b2b;
-  }
-  .container-left .nav-list > li > a,
-  .container-aside .nav-list > li > a {
-    font-size: 12px;
-    color: #999999;
-  }
-  .container-left .nav-list > .active > a,
-  .container-aside .nav-list > .active > a,
-  .container-left .nav-list > .active > a:hover,
-  .container-aside .nav-list > .active > a:hover,
-  .container-left .nav-list > .active > a:focus,
-  .container-aside .nav-list > .active > a:focus {
-    color: #ffffff;
   }
   .container-startup.signin {
     max-width: 400px;

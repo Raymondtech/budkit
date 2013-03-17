@@ -1,5 +1,5 @@
 <tpl:layout name="inputsettings" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form action="/system/timeline/create" method="POST" enctype="multipart/form-data">
+    <form action="/system/timeline/create" class="no-margin" method="POST" enctype="multipart/form-data">
         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
             <div class="timeline-item-publisher-box">
                 <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>

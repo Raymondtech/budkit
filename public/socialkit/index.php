@@ -33,7 +33,7 @@
 
             <div id="wrap">
                 <tpl:import layout="navbar" />
-                <div class="container-menu-box">
+<!--                <div class="container-menu-box">
 
                     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                         <ul class="nav nav-stacked nav-menugroups no-margin" id="menutabs">
@@ -42,7 +42,7 @@
                             <li><a data-target="#contentmenuview" data-toggle="tab"><i class="icon-heart"></i><small>Media</small></a></li>   
                             <li><a data-target="#messagesmenuview" data-toggle="tab"><i class="icon-comments-alt"></i><small>Messages</small></a></li>                                                   
                             <li><a data-target="#settingsmenuview" data-toggle="tab"><i class="icon-cogs"></i><small>Settings</small></a></li>                            
-                            <li><a data-target="#peoplemenuview" data-toggle="tab"><i class="icon-group"></i><small>People</small></a></li>     <!--Use  class="highlighted" on new notifications-->
+                            <li><a data-target="#peoplemenuview" data-toggle="tab"><i class="icon-group"></i><small>People</small></a></li>     Use  class="highlighted" on new notifications
                             <li><a href="/member/profile/view"><i class="icon-eye-open"></i><small>Profile</small></a></li>  
                             <li><a href="/member/session/stop"><i class="icon-signout"></i><small>Sign Out</small></a></li>
                         </ul>
@@ -52,13 +52,13 @@
                             <li><a href="/member/session/start"><i class="icon-signin"></i><small>Sign In</small></a></li>
                         </ul> 
                     </tpl:condition> 
-                </div>
-                <div class="container-box has-left has-menu-box resize">
+                </div>-->
+                <div class="container-box has-left">
                     
                     <div class="container-left">                 
                         <tpl:import layout="sidebar" />
                     </div>
-                    <div class="container-right has-aside">
+                    <div class="container-right">
                         <div class="container-aside">
                             <tpl:import layout="asidebar" />
                         </div>
@@ -70,7 +70,7 @@
                                 
                             </div>
                             <a href="#" class="container-left-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>
-                            <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-right"></i></a>
+                            <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-left"></i></a>
                         </div>
                     </div>
                 </div><!--/.fluid-container-->

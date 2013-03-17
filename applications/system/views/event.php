@@ -14,8 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
 
-namespace Application\System\Views\Content;
-use \Application\System\Views;
+namespace Application\System\Views;
 
 /**
  * Event Sub View class
@@ -28,30 +27,45 @@ use \Application\System\Views;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-final class Event extends Views\Content{
+final class Event extends \Platform\View{
     
-    /**
-     * Events view constructor
-     * @return void
-     */
-    public function __construct(){       
-        //Construct the parent
-        parent::__construct();       
-        $this->output->setPageTitle("Events");      
-    }
+
     
     /**
      * Event view display
      * @return void
      */
     public function display(){
+        
+             //To specify a layout, else default will be used
+        //$this->setLayout("page");
+        //To get a previously set property;
+        //echo $this->get("user2");
+        //TODO only set if not already set To set the pate title use
+        //$this->output->setPageTitle("Welcome to diddat");
+        //to add some js file
+        $this->output->addScript("some.js");
+
+        //to add some js file
+        $this->output->addStyle("some.css");
+
+        //to output just the layout use
+        //$this->output->raw();
+        //to output just the xml use
+        //$this->output->xml();
+        //to output as json use
+        //$this->output->json();
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
-        $dashboard      = $this->output->layout( "dashboard" , "system" );
-        $sidebar        = $this->output->layout( "sidebar" , "system"  );
+        $dashboard = $this->output->layout("dashboard");
+        $sidebar = null;
+        //$rightaside     = $this->output->layout( "cpanel"  );
         
-        $this->output->addToPosition("side",   $sidebar);
-        $this->output->addToPosition("body",    $dashboard);
+        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
+        $this->output->addToPosition("side", $sidebar);
+        $this->output->addToPosition("body", $dashboard);
+        //$this->output->addToPosition("aside",   $rightaside );
+        
     }
     
     /**
@@ -59,10 +73,13 @@ final class Event extends Views\Content{
      * @return void
      */
     public function drawCalendar(){
-    
-        $this->set("dashboard", array("title"=>"Event Calendar" ) );        
-        $calendar = $this->output->layout( "content/events/calendar" );     
-        $this->output->addToPosition("body",    $calendar);   
+        
+        $this->output->setPageTitle(_("Event calendar"));    
+          
+        $calendar = $this->output->layout( "events/calendar" );     
+        $this->output->addToPosition("dashboard", $calendar); 
+        
+        return $this->display();
     }
     
     

@@ -82,11 +82,10 @@ class Output extends Object {
      */
     protected $variables = array(
         "pageid" => "_page",
-        "page"  => array(
+        "page" => array(
             "activesidebar" => false
         )
     );
-    
     static $instance;
 
     /**
@@ -119,8 +118,8 @@ class Output extends Object {
     protected $code = 200;
     protected $format;
     protected static $prints;
-    
     public $headers = array();
+    public $menugroups = array();
 
     /**
      * Construcst the output object
@@ -134,7 +133,7 @@ class Output extends Object {
         $this->config = Config::getInstance();
         $this->router = Router::getInstance();
         $this->template = $this->config->getParam('template', 'default');
-        $this->theme    = $this->config->getParam('theme', '' , 'resume');
+        $this->theme = $this->config->getParam('theme', '', 'resume');
 
         //$this->pageTitle = $this->config->getParam('');
         //$this->user     = \Platform\User::getInstance(); //Cannot use this here, because the output class is loaded way before auth and session
@@ -149,8 +148,7 @@ class Output extends Object {
     final public function getVariables() {
         return $this->variables;
     }
-    
-    
+
     /**
      * Returns all the protected output variables
      * @return array;
@@ -195,7 +193,7 @@ class Output extends Object {
 
         $this->router->setFormat($format);
         $this->headers = $headers;
-        $this->format  = $this->router->getFormat();
+        $this->format = $this->router->getFormat();
     }
 
     /**
@@ -234,7 +232,7 @@ class Output extends Object {
      * @param type $status
      * @return void
      */
-    final public function displayError($format = 'xhtml', $status = 404 ) {
+    final public function displayError($format = 'xhtml', $status = 404) {
 
         //anything that had previously been printed
         $printed = ob_get_contents();
@@ -521,7 +519,7 @@ class Output extends Object {
         @header("{$name}: {$value}");
         return $this;
     }
-    
+
     /**
      * Removes a previously sent header type to the output
      *
@@ -541,7 +539,7 @@ class Output extends Object {
      * @return void
      */
     final public function headers($mimeType = 'text/html', $charset = 'utf-8') {
-
+        
     }
 
     /**
@@ -627,9 +625,68 @@ class Output extends Object {
 
         return $this;
     }
+
+
+    /**
+     * Adds a custom link to a menugroup. 
+     * 
+     * @param type $menuNameId
+     * @param type $link
+     */
+    final public function addLinkToMenuGroup($menuNameId, $link = array()) {
+        
+    }
     
-    final public function addMenu(){}
-    final public function addMenuToPosition(){}
+    /**
+     * Returns all the defined menugroups
+     * @return type
+     */
+    final public function getMenuGroups(){
+        return $this->menugroups;
+    }
+    
+    /**
+     * Returns the menu group
+     * 
+     * @param type $groupName
+     * @param type $default
+     * @return type
+     */
+    final public function getMenuGroup($groupName, $default = array()) {
+        //IF the group nae exists return it, else return default
+        return isset($this->menugroups[$groupName])? $this->menugroups[$groupName] :  $default;
+        
+    }
+
+    /**
+     * Add a menu to a block position
+     * 
+     * @param string $name the block name position 
+     * @param type $menuNameId
+     * @param type $menuItems
+     */
+    final public function addMenuGroupToPosition($blockName, $menuNameId, $menuType = "nav-list", $menuItems = array(), $overwrite = false) {
+        
+        //The menu layout
+        
+        //menuItems
+        if (!empty($menuItems)):
+            //Check if the param already exists
+            $existing = $this->getMenuGroup($menuNameId, null);
+
+            if (!empty($existing) && is_array($existing) && !$overwrite) {
+                //Just fascilitates using namespaces
+                $items = is_array($menuItems) ? array_merge($existing, $menuItems) : null;
+                $group = array($menuNameId => $items);
+            }
+            $this->menugroups = array_merge($this->menugroups, $group);
+        endif;
+        
+        //Add the menu name to the page menus
+        $this->variables["page"]['block'][$blockName]["menus"][] = array("ELEMENT"=>"ul", "ID"=>$menuNameId,"TYPE"=>$menuType);
+                
+        return $this;
+    }
 
     /**
      * Returns the template folder name
@@ -666,8 +723,8 @@ class Output extends Object {
         $this->code = is_null($code) ? 200 : $code;
         return $this;
     }
-    
-        /**
+
+    /**
      * Sets the application response code
      *
      * @param type $code
@@ -714,16 +771,16 @@ class Output extends Object {
 
         return $this;
     }
-    
+
     /**
      * Removes an output variable
      * 
      * @param type $param
      * @return boolean
      */
-    final public function removeOutputVar($param){
+    final public function removeOutputVar($param) {
         $existing = $this->get($param, null);
-        if(!empty($existing)){
+        if (!empty($existing)) {
             unset($this->variables[$param]);
         }
         return true;
@@ -901,9 +958,9 @@ class Output extends Object {
 
         //if is array loop through each;
         if ($this->hasPosition($name)) {
-            
-            foreach ($this->variables["page"]["block"][$name] as $block) {
-                if (!is_array($block) || !isset($block['content']) ) {
+
+            foreach ($this->variables["page"]["block"][$name]["data"] as $block) {
+                if (!is_array($block) || !isset($block['content'])) {
                     continue;
                 }
                 //process the callback
@@ -925,10 +982,10 @@ class Output extends Object {
      * @param type $name
      * @return boolean true if or false if not
      */
-    public function hasPosition($name) {
+    public function hasPosition($blockName) {
         //If we have data that goes into this position, return true else false;
         //return (isset($this->positionVars[$name]) && sizeof($this->positionVars[$name]) > 0 ) ? true : false;
-        return (isset($this->variables["page"]["block"][$name]) && sizeof($this->variables["page"]["block"][$name]) > 0 ) ? true : false;
+        return (isset($this->variables["page"]["block"][$blockName]["data"]) && sizeof($this->variables["page"]["block"][$blockName]["data"]) > 0 ) ? true : false;
     }
 
     /**
@@ -938,33 +995,34 @@ class Output extends Object {
      * @param type $default
      * @param type $callback
      */
-    public function addToPosition($name, $content = '', $title = "", $params = array(), $prepend = FALSE) {
+    public function addToPosition($blockName, $content = '', $title = "", $params = array(), $prepend = FALSE) {
 
-        if (!isset($this->variables["page"]["block"][$name])) {
-            $this->variables["page"]["block"][$name] = array();
+        if (!isset($this->variables["page"]["block"][$blockName]["data"])) {
+            $this->variables["page"]["block"][$blockName]["data"] = array();
         }
 
         if ($prepend) {
-            array_unshift($this->variables["page"]["block"][$name], array(
+            array_unshift($this->variables["page"]["block"][$blockName]["data"], array(
                 "content" => $content,
                 "title" => $title,
                 "params" => $params
+              
             ));
         } else {
-            array_push($this->variables["page"]["block"][$name], array(
+            array_push($this->variables["page"]["block"][$blockName]["data"], array(
                 "content" => $content,
                 "title" => $title,
                 "params" => $params
             ));
         }
-        
-        if(strtolower($name)=="side"){
+
+        if (strtolower($blockName) == "side") {
             $this->variables["page"]["activesidebar"] = true;
         }
-        if(strtolower($name)=="aside"){
+        if (strtolower($blockName) == "aside") {
             $this->variables["page"]["activeaside"] = true;
         }
-        
+
         return $this;
     }
 

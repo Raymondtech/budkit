@@ -45,19 +45,7 @@ final class Article extends System\Content {
      */
     public function create() {     
          
-        $view = $this->load->view('content\article');        
-        //get passparams
-        $params     = func_get_args();
-        $fullscreen = false;
-        
-        //param1 = fullscreen 
-        //param2 = autoplay
-        if(isset($params) && is_array($params)){
-            if(isset($params[0]) && strtolower($params[0])=="fullscreen"){
-                $fullscreen = true;
-            }
-        }
-        return $view->createForm( $fullscreen );  
+ 
     }  
     
         
@@ -68,7 +56,7 @@ final class Article extends System\Content {
      */
     public function gallery() {
         
-        $view       = $this->load->view('index');
+        $view       = $this->load->view('content');
         $gallery    = $this->output->layout("content/gallery");
 
         $this->output->setPageTitle( _("Articles") );

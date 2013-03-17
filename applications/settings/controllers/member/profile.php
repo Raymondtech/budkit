@@ -76,7 +76,7 @@ final class Profile extends Settings\Member {
             $attachmentURI = $attachment->getLastSavedObjectURI();
             
             //unset($attachment);
-            $profile =  $this->load->model('profile');
+            $profile =  $this->load->model('profile', "member");
      
             if(!empty($attachmentURI)){
                 if(!$profile->update( $this->user->get("user_name_id"), array("user_photo"=>$attachmentURI)) ){
@@ -92,7 +92,7 @@ final class Profile extends Settings\Member {
         //die;
 
         //Return the user back to the profile update form
-        return $this->redirect("/member/settings/profile");
+        return $this->redirect("/settings/member/profile");
     }
 
     /**

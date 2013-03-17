@@ -44,3 +44,25 @@ $route["search"] = array(
     "controller" => 'commands',
     "method" => 'search'
 );
+
+$route["signin"] = array(
+    "path" => '/sign-in/',
+    "application" => 'system',
+    "controller" => 'authenticate',
+    "method" => 'login'
+);
+
+$route["signout"] = array(
+    "path" => '/sign-out/',
+    "application" => 'system',
+    "controller" => 'authenticate',
+    "method" => 'logout'
+);
+
+
+$route["signup"] = array(
+    "path" => '/sign-up/',
+    "application" => 'system',
+    "controller" => 'authenticate',
+    "method" => 'create'
+);

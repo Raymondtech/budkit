@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers;
+namespace Application\System\Controllers;
 
 /**
  * Action Controller for managing member sessions
@@ -26,7 +26,7 @@ namespace Application\Member\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Session extends \Platform\Controller {
+final class Authenticate extends \Platform\Controller {
 
     /**
      * This action controller does not need an index
@@ -36,21 +36,9 @@ final class Session extends \Platform\Controller {
         //@TODO raise an error!
     }
     
-    /**
-     * Stops a member session
-     * @return void
-     */
-    public function stop(){
-        $this->logout();
-    }
-
-    /**
-     * Starts a user session. Displays a form to collection authentication details
-     * and authenticates the user. 
-     * @return void
-     */
-    public function start() {
-        return $this->login();
+    public function create(){
+        $view = $this->load->view("authenticate");
+        $view->newUserAccountForm();
     }
     
     /**

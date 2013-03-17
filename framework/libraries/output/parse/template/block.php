@@ -69,49 +69,62 @@ class Block extends Parse\Template {
      * @return type
      */
     public static function execute($parser, $tag, $writer) {
+
+        if (!isset($tag['DATA']))
+            return null;
+
+        $default = isset($tag['_DEFAULT']) ? $tag['_DEFAULT'] : null;
+        $data = self::getData($tag['DATA'], $default); //echo $data;
         
-        if(!isset($tag['DATA'])) return null;
-        
-        $default = isset($tag['_DEFAULT'] ) ? $tag['_DEFAULT'] : null;
-        $data = self::getData($tag['DATA'], $default ); //echo $data;
-        //print_R($data);
-        //$name = $tag[]
         //if is array loop through each;
         if (!empty($data)) {
-            
+         
+            //Are there any menus in this block add with Output::addMenuGroupToPosition?
+            if (is_array($data['menus']) && is_array($data['menus'])) {
+                foreach ($data['menus'] as $blockMenu) {
+                   
+                    if (is_array($blockMenu) && isset($blockMenu["ID"])):
+                        $menu = Menu::execute($parser, $blockMenu, $writer);
+                    
+                        \Library\Folder\Files\Xml\Parser::writeXML( $writer, $menu ); //Not nice but might be my only choice?
+                        //$writer->writeRaw($menu); //Let's write the dynamic menu;
+                        unset($data['menus']);
+                    endif;
+                }
+            }
+
             //print_R($data);
-            foreach ($data as $key=>$block) {
-                if (!is_array($block) || !isset($block['content']) ) {
+            foreach ($data["data"] as $key => $block) {
+                if (!is_array($block) || !isset($block['content'])) {
                     continue;
                 }
-                
+
                 //process the callback
                 $callback = isset($block['callback']) ? $block['callback'] : null;
                 $string = isset($block['content']) ? $block['content'] : null;
-                
+
                 //Parse the block content!
                 //Slows things down! Maybe check if block is parsable
                 //$string = static::$document->parse( $string , static::$document); 
-                
                 //print_R($string);
                 //@TODO Execute the callback after writing
-                $writer->writeRaw( $string );
+                $writer->writeRaw($string);
             }
             return true; // Successfull
         }
-        
+
         //Using default and return data
-        if(isset($tag['RETURN']) && (bool)$tag['RETURN']){
-            if(isset($tag['CDATA']) && !empty($tag['CDATA'])):
-                $writer->writeRaw( $tag['CDATA'] );
+        if (isset($tag['RETURN']) && (bool) $tag['RETURN']) {
+            if (isset($tag['CDATA']) && !empty($tag['CDATA'])):
+                $writer->writeRaw($tag['CDATA']);
                 return true;
             endif;
-            
-            if(isset($tag['CHILDREN'])&&!empty($tag['CHILDREN'])):
+
+            if (isset($tag['CHILDREN']) && !empty($tag['CHILDREN'])):
                 return $tag['CHILDREN'];
             endif;
         }
-       return false;
+        return false;
     }
 
     /**

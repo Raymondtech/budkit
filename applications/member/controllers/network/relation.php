@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * settings.php
+ * relation.php
  *
  * Requires PHP version 5.4
  *
@@ -14,10 +14,11 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers;
+namespace Application\Member\Controllers\Network;
 
+use Application\Member\Controllers as Member;
 /**
- * The Member Settings parent action controller
+ * The Member Relationship action controller
  *
  * @category  Application
  * @package   Action Controller
@@ -26,25 +27,25 @@ namespace Application\Member\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Settings extends \Platform\Controller {
+class Relation extends Member\Network {
 
-    
-    /**
-     * Displays the default setting form
-     * @return void
+     /**
+     * The default relation action
+     * @return boolean
      */
     public function index() {
-        return $this->form();
-    }
+        return false;
+    }   
+    
+    
+    public function suggest(){}
+    
+    public function followers(){}
+    
+    public function following(){}
+    
+    public function request(){} //Invites etc
 
-    /**
-     * Displays the default account settings form
-     * @return void
-     */
-    public function form(){  
-        $view   = $this->load->view( 'settings' ); 
-        return $view->form('settings/account');
-    }
 
     /**
      * Returns an instance of the Settings class

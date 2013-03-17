@@ -83,7 +83,8 @@ final class Photo extends System\Content{
             $placeholder = $this->output->layout("content/placeholder");
             $this->output->addToPosition("body", $placeholder);
         endif;
-        $this->load->view("index")->display(); 
+        
+        $this->load->view("content")->display(); 
     }
     
     /**
@@ -98,7 +99,7 @@ final class Photo extends System\Content{
         $this->output->addToPosition("dashboard", $today);
         
         
-        $this->load->view("index")->display();   
+        $this->load->view("content")->display();   
     }
     /**
      * Deletes an existing photo.

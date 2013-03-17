@@ -41,13 +41,18 @@ class Appearance extends Settings\System {
      */
     public function index() {
 
-        $this->output->setPageTitle(_("Appearance Settings"));
+        $this->output->setPageTitle(_("Themes"));
         //Get the Menus
         $menus = \Platform\Navigator::getAllMenus();
         $this->set("menus", $menus);
     
         $view   = $this->load->view( 'system' ); 
         return $view->form('system/appearance');    
+    }
+    
+    
+    public function themes(){
+        return $this->index();
     }
     
     /**

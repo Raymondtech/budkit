@@ -50,8 +50,7 @@ class Menu extends Parse\Template {
      */
 
     static $instance,
-    
-           $hasActive = false;
+            $hasActive = false;
 
     /**
      * Execute the layout
@@ -65,12 +64,12 @@ class Menu extends Parse\Template {
         //We must have the menu id
         if (!isset($tag['ID']))
             return null;
-        $menuId   = $tag['ID'];
+        $menuId = $tag['ID'];
         $menuType = (isset($tag['TYPE'])) ? trim($tag['TYPE']) : null;
         $menuLtr = (isset($tag['POSITION'])) ? trim($tag['POSITION']) : "";
         $menuDepth = (isset($tag['LEVEL'])) ? trim($tag['LEVEL']) : 2;
 
-        $database = Library\Database::getInstance();
+        //$database = Library\Database::getInstance();
         $uniqueId = $tag['ID'];
 
         //1. Get all menu items for this menu id from the table
@@ -86,14 +85,13 @@ class Menu extends Parse\Template {
 
         $tag['ELEMENT'] = 'ul';
         $tag['CLASS'] = "nav $menuType $menuLtr {$tag['CLASS']}"; //Add any developer defined classes to the element;
-        
         //print_R( \Library\Event::$hooks );
-        
-        \Library\Event::trigger("beforeRenderMenu", $menuId, $menuItems );
-        
+
+        \Library\Event::trigger("beforeRenderMenu", $menuId, $menuItems);
+
         //echo $menuId;
-        
-        $tag['CHILDREN'] = static::element((array)$menuItems, $menuType, $menuDepth, $menuLtr);
+
+        $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuLtr);
 
         //print_R($tag);
         //Always return the modified element
@@ -114,14 +112,14 @@ class Menu extends Parse\Template {
 
         //$hasActive  = false;
         foreach ($menuItems as $item) {
-            
+
             //@TODO Menu Plugins
             //Search for all plugin placemarkers in menu item names
             //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
             if (preg_match_all('/(?:(?<=\%\{)).*?(?=\})/i', $item['menu_title'], $matches)) {
                 $placemarkers = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
                 foreach ($placemarkers as $k => $dataid) {
-                    //@TODO Now call all menu items plugins
+                    //@TODO Now call all menu items plugins 
                     $item['menu_title'] = $dataid;
                 }
                 //Replace with data;
@@ -131,34 +129,37 @@ class Menu extends Parse\Template {
             //@TODO check if this is the current menu item and set it as active
             $query = \Library\Uri::getInstance()->getQuery();
             $active = ( \Library\Uri::internal($item['menu_url']) <> \Library\Uri::internal($query) ) ? false : true;
-            static::$hasActive = ($active && !static::$hasActive)? true : false; 
-            
-          
+            static::$hasActive = ($active && !static::$hasActive) ? true : false;
+
+            $class = str_replace(array(" ", "(", ")", "-", "&", "%", ",", "#"), '-', strtolower($item['menu_title'])) ;
             $link = array(
                 "ELEMENT" => 'li',
-                "CLASS" => ((isset($item['menu_classes']) && !empty($item['menu_classes'])) ? $item['menu_classes'] : "") . (($active) ? " active" : "").' link-'.str_replace(array(" ","(",")","-","&","%",",","#" ), '-', strtolower($item['menu_title'])),
+                "CLASS" => 'link-' . $class . " " . ((isset($item['menu_classes']) && !empty($item['menu_classes'])) ? $item['menu_classes'] : "") . (($active) ? " active " : ""),
                 "CHILDREN" => array(
                     array(
                         "ELEMENT" => "a",
                         "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
-                        "CDATA" => $item['menu_title']
+                        "CHILDREN" => array(
+                           // array("ELEMENT" => "i", "CLASS" => "icon-{$class}"), @todo menu icons
+                            array("ELEMENT" => "span", "CDATA" => $item['menu_title'])
+                        )
                     )
                 )
             );
 
             //Count children
-            if (isset($item['children']) && count($item['children']) > 0 && $menuLevelParent ) {
+            if (isset($item['children']) && count($item['children']) > 0 && $menuLevelParent) {
                 $link['CLASS'] .= ' nav-header';
                 $link['CDATA'] = $item['menu_title'];
                 unset($link['CHILDREN']);
                 $children = static::element((array) $item['children'], $menuType, $menuDepth, $menuPosition, false);
-                $li[]   = $link;
-                $li     = array_merge($li , $children);
-            }else{
+                $li[] = $link;
+                $li = array_merge($li, $children);
+            } else {
                 $li[] = $link;
             }
 
-            
+
             //$li[] = $link;
         }
 

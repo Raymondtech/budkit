@@ -14,8 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers\Content;
-use Application\System\Controllers as System;
+namespace Application\System\Controllers;
 
 /**
  * Event CRUD action controller. 
@@ -30,7 +29,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Event extends System\Content {
+final class Event extends \Platform\Controller {
     
     /**
      * Displays the form required to creates a new event. 
@@ -38,7 +37,7 @@ final class Event extends System\Content {
      * @return  \Application\System\Views\Content\Event::createForm()
      */
     public function create() {
-        $view = $this->load->view('content\event');
+        $view = $this->load->view('event');
         return $view->createForm();
     }
     /**
@@ -59,11 +58,11 @@ final class Event extends System\Content {
      * @return  See {@link \Application\System\Views\Content\Event::drawCalendar()}
      */
     public function calendar() {
-        $view = $this->load->view('content\event');
+        
+        $view = $this->load->view('event');
         $user = \Platform\User::getInstance();
 
-        $this->set("user", $user);
-        $this->output->setPageTitle(_("Event calendar"));      
+        $this->set("user", $user);  
         $view->drawCalendar();
     }
     /**

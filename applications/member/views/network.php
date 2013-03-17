@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * page.php
+ * network.php
  *
  * Requires PHP version 5.4
  *
@@ -16,7 +16,7 @@
 namespace Application\Member\Views;
 
 /**
- * Member Page View
+ * Member Network View
  *
  * @category  Application
  * @package   View
@@ -26,16 +26,8 @@ namespace Application\Member\Views;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-final class Page extends \Platform\View{
+final class Network extends \Platform\View{
    
-    /**
-     * Constructs the page view class
-     * @return void
-     */
-    public function __construct(){
-        parent::__construct();   
-        $this->output->setPageTitle("Pages");   
-    }
     
     /**
      * The default page index view

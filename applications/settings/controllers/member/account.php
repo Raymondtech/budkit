@@ -38,6 +38,64 @@ final class Account extends Settings\Member {
         $view   = $this->load->view( 'member' ); 
         return $view->form();    
     }
+        /**
+     * Updates an existing account
+     * @return boolean
+     */
+    public function update() {
+
+        //1. Load the model
+        $account = $this->load->model("user", "member");
+        $encrypt = \Library\Encrypt::getInstance();
+
+
+        //2. Prevalidate passwords and other stuff;
+        $username = $this->input->getString("user_first_name", "", "post", FALSE, array());
+        $usernameid = $this->input->getString("user_name_id", "", "post", FALSE, array());
+        $userpass = $this->input->getString("user_password", "", "post", FALSE, array());
+        $userpass2 = $this->input->getString("user_password_2", "", "post", FALSE, array());
+        $useremail = $this->input->getString("user_email", "", "post", FALSE, array());
+        //3. Encrypt validated password if new users!
+        //4. If not new user, check user has update permission on this user
+        //5. MailOut
+
+        if (empty($userpass) || empty($username) || empty($usernameid) || empty($useremail)) {
+            //Display a message telling them what can't be empty
+            $this->alert(_t('Please provide at least a Name, Username, E-mail and Password'), _t('Not enough information!'), "error");
+            return $this->create();
+        }
+
+        //3. Encrypt validated password if new users!
+        //4. If not new user, check user has update permission on this user
+        //5. MailOut
+
+        if (empty($userpass) || empty($username) || empty($usernameid) || empty($useremail)) {
+            //Display a message telling them what can't be empty
+            $this->setError(_t('Please provide at least a Name, Username, E-mail and Password'));
+            return false;
+        }
+
+        //Validate the passwords
+        if ($userpass <> $userpass2) {
+            $this->setError(_t('The user passwords do not match'));
+            return false;
+        }
+
+        //6. Store the user
+        $account->store($this->input->data("post"));
+
+        //7. Browser Messages
+        //Return to index
+        //return $this->view();
+    }
+
+
+    /**
+     * Deletes a member account
+     * @todo Member account deleting
+     * @return void
+     */
+    public function delete(){}
 
     /**
      * Returns an instance of the account settings action controller

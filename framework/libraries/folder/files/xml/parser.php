@@ -394,9 +394,6 @@ class Parser extends Files\Xml {
                     //continue;
                     break;
                 case "CDATA":
-                    
-                    
-                    
                     if (!Library\Event::isDefined("_XMLContentCallback")) {
                         $xmlWriter->writeRaw(trim($data));
                     }else{
@@ -409,8 +406,6 @@ class Parser extends Files\Xml {
                     break;
                 default:
                     if (!is_array($data)):
-
-                       
                         //If no default callback is defined
                         if (!Library\Event::isDefined("_XMLAttributeCallback")) {
                             $xmlWriter->writeAttribute($element, $data);

@@ -14,8 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers\Content;
-use Application\System\Controllers as System;
+namespace Application\System\Controllers;
 
 /**
  * Location CRUD action controller for system content 
@@ -30,7 +29,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Location extends System\Content {
+final class Location extends \Platform\Controller {
 
     /**
      * The default fallback method. 

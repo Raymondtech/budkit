@@ -42,9 +42,8 @@ class Start extends \Platform\Controller {
         $this->output->setPageTitle(_("Dashboard"));
 
         $today = $this->output->layout("start");
+        
         $this->output->addToPosition("dashboard", $today);
-        
-        
         $this->load->view("index")->display();      
         //$this->output();
     }

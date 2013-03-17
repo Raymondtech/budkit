@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
 namespace Application\System\Views;
-use Platform;
+
 
 /**
  * Index view
@@ -29,37 +29,8 @@ use Platform;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-class Index extends Platform\View {
+class Message extends \Platform\View {
     
-    /**
-     * Draws the system dashboard
-     * @return string
-     */
-    public function dashboard() {
-        
-        $this->output->setPageTitle(_("Your Dashboard"));
-
-        $activity = $this->output->layout("dashblock");
-        $this->output->addToPosition("dashboard", $activity);
-        //you can add stuff you want displayed;
-        //$user = $this->get('user');
-
-        return $this->display();
-    }
-
-    /**
-     * Draws the system index page
-     * @return void
-     */
-    public function index() {
-
-        $indexpage = "Welcome page";
-        $indexpage2 = "Side panel";
-
-        $this->output->addToPosition("body", $indexpage);
-        $this->output->addToPosition("side", $indexpage2);
-        
-    }
 
     /**
      * The default system view
@@ -90,7 +61,8 @@ class Index extends Platform\View {
         $dashboard = $this->output->layout("dashboard");
         $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
-
+        
+        $this->output->addMenuGroupToPosition("side", "messagesmenu");
         $this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );

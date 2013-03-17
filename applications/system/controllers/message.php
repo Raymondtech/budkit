@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers;
+namespace Application\System\Controllers;
 
 /**
  * Messages CRUD action controller
@@ -36,15 +36,16 @@ final class Message extends \Platform\Controller {
         
         //$this->output->addToPosition("side", $sidebar);
         $user = \Platform\User::getInstance();
-        $model      = $this->load->model('activity','system');
+        $model      = $this->load->model('activity');
         $activities = $model->getAll();   
         
         $this->set("activities", $activities);   
-        $this->set("dashboard", array("title"=>"Activity stream" ) );
         $this->set("user", $user);
         
-        $body = $this->output->layout('messages/timeline');
-        $this->output->addToPosition("body", $body);
+        $layout = $this->output->layout('messages/timeline');
+        $this->output->addToPosition("dashboard", $layout);
+        
+        $this->load->view("message")->display();  
     }
 
     /**

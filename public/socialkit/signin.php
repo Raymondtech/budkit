@@ -34,7 +34,7 @@
                         <div class="container-content scroll-y">
                             <div class="container-fluid">
                                 <div class="container">
-                                    <form id="form" name="login_form" method="post" action="/member/session/start">                       
+                                    <form id="form" name="login_form" method="post" action="/system/authenticate/login">                       
                                         <div class="container-startup signin">
                                             <div class="startup-header">
                                                 <h3>Sign in to your account</h3>
@@ -42,7 +42,7 @@
                                             <tpl:block data="page.block.alerts" />
                                             <div class="startup-alternatives">
                                                 <ul class="unstyled no-margin no-bottom-margin">
-                                                    <li><a href="/member/account/create">Don't have an account?</a></li>
+                                                    <li><a href="/system/authenticate/create">Don't have an account?</a></li>
                                                 </ul>
                                             </div>
                                             <div class="startup-body">                                               

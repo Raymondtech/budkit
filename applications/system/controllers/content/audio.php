@@ -62,7 +62,7 @@ final class Audio extends System\Content {
         $this->output->addToPosition("dashboard", $today);
         
         
-        $this->load->view("index")->display();   
+        $this->load->view("content")->display();   
     }
     
     /**

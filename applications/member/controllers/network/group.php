@@ -14,7 +14,9 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Member\Controllers;
+namespace Application\Member\Controllers\Network;
+
+use Application\Member\Controllers as Member;
 
 /**
  * Group CRUD action controller
@@ -26,7 +28,7 @@ namespace Application\Member\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Group extends \Platform\Controller {
+final class Group extends Member\Network{
 
     /**
      * The default group action
@@ -35,6 +37,9 @@ final class Group extends \Platform\Controller {
     public function index() {
         return false;
     }
+    
+    
+    public function subscriptions(){}
 
     /**
      * Returns an instance of the Group CRUD action conroller

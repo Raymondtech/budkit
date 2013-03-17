@@ -39,24 +39,3 @@ $route["profile"] = array(
     "method" => 'view'
 );
 
-$route["signin"] = array(
-    "path" => '/sign-in/',
-    "application" => 'member',
-    "controller" => 'session',
-    "method" => 'start'
-);
-
-$route["signout"] = array(
-    "path" => '/sign-out/',
-    "application" => 'member',
-    "controller" => 'session',
-    "method" => 'stop'
-);
-
-
-$route["signup"] = array(
-    "path" => '/sign-up/',
-    "application" => 'member',
-    "controller" => 'account',
-    "method" => 'create'
-);

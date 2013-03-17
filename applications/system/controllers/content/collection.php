@@ -64,26 +64,7 @@ final class Collection extends System\Content {
      * @return  void
      */
     public function browse( $collectionId = null ) {
-        $this->output->setPageTitle(_("CollectionName Gallery"));
-        //Throws an error if no collectionId is passed
-        //Loads the collectionItem from the databse
-        $model = $this->load->model("collection");
-        
-        //Get the format of the item;
-        $format = $this->router->getFormat();
-        $this->output->set("gallery", array("hidetitle"=>true,"hideheader"=>true));
-        $collection = $this->output->layout("content/gallery");
-        
-        if($format !=="raw"):
-            $this->output->addToPosition("dashboard", $collection);
-        else:
-            //Add the collection to the placeholder image;
-            $this->output->addToPosition("placeholder", $collection); //Add the collection to the placeholder
-            //Raw displays whatever is in the body block only; 
-            $placeholder = $this->output->layout("content/placeholder");
-            $this->output->addToPosition("body", $placeholder);
-        endif;
-        $this->load->view("index")->display(); 
+        return $this->index();
     }
     
     
@@ -99,7 +80,7 @@ final class Collection extends System\Content {
         $this->output->addToPosition("dashboard", $today);
         
         
-        $this->load->view("index")->display();   
+        $this->load->view("content")->display();   
     }
     
     /**
