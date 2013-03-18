@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <form id="form" name="setup-form" class="form-vertical" method="POST" action="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') + 1) ); ?>">
+    <form id="form" name="setup-form" class="form-horizontal" method="POST" action="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') + 1) ); ?>">
         <fieldset>
 
             <?php switch ($step): 
@@ -42,14 +42,14 @@
             <?php break;
             endswitch; ?>
         </fieldset>
-        <div class="form-actions page-end">
+        <div class="form-actions">
             <div class="clearfix">
                 <?php if($step>1) : ?>
-                <a href="/setup/install/step'.((int) $this->get('step') - 1) " class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
+                <a href="/setup/install/step'.((int) $this->get('step') - 1) " class="btn" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
                 <?php else: ?>
-                     <span style="display: block" class="pull-left"><input type="checkbox" name="eula_accept" value="1"  /> <?php echo _(' I <strong>ACCEPT</strong> the terms and conditions'); ?></span>
+                     <p><span style="display: block"><input type="checkbox" name="eula_accept" value="1"  /><?php echo _(' I <strong>ACCEPT</strong> the terms and conditions'); ?></span></p> 
                 <?php endif; ?>
-                <button type="submit" class="btn pull-right"><?php echo "Next Step" ?></button>
+                <button type="submit" class="btn"><?php echo "Next Step" ?></button>
             </div>
         </div>
 

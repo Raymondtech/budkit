@@ -2,106 +2,99 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <html class="no-js" lang="en">
         <head>
-            <title><tpl:element type="text" data="page.title">Default Title</tpl:element></title>
-            <meta charset="utf-8" />
+            <meta charset="utf-8"/>
+            <title><tpl:element type="text" data="page.title">SocialKit</tpl:element></title>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta name="description" content="<?php echo $this->getPageDescription(); ?>" />
             <meta name="author" content="<?php echo $this->getPageAuthor(); ?>" />
             <meta name="keywords" content="<?php echo $this->getPageAuthor(); ?>" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-            <!-- Le fav and touch icons -->
-            <link rel="shortcut icon" href="images/favicon.ico" />
-            <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-            <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
-            <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
-            <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
+            <!-- Le styles -->
+            <link href="<?php echo $this->getTemplatePath() ?>/assets/css/bootstrap.css" rel="stylesheet" />
+            <link href="<?php echo $this->getTemplatePath() ?>/assets/css/bootstrap-responsive.css" rel="stylesheet" />
 
-            <!-- Scripts -->
-            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
-            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
-            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
-            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.js" type="text/javascript"></script>  
-            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/budkit-1.0.0.min.js" type="text/javascript"></script>
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+            <!--[if lt IE 9]>
+              <script src="<?php echo $this->getTemplatePath() ?>/assets/js/html5shiv.js"></script>
+            <![endif]-->
 
+            <!-- Fav and touch icons -->
+            <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-144-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-114-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-72-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-57-precomposed.png" />
+            <link rel="shortcut icon" href="<?php echo $this->getTemplatePath() ?>/assets/ico/favicon.png" />
+            <!-- jQuery here because if placed at bottom, in-line scripts (i.e script tags in .tpl files) won't work -->
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/jquery.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit.js"></script>
         </head>
-        <body class="responsive-body  dark-bg">
-            <div class="wrap">
-                <div class="container-fluid large">
-                    <tpl:import layout="toolbar" />
-                </div>
-                <div class="container large">
-                    <tpl:import layout="navbar" />
-                    <tpl:block data="page.block.alerts" />             
-                    <tpl:block data="page.block.banner">Banner</tpl:block>
-                    <tpl:condition data="page.activesidebar" test="boolean" value="1"> 
-                        <section class="layout-block boxed has-bg has-aside-block has-main-block-aside">  
-                            <div class="aside-block right-pad">  
-                                <div class="row-fluid">
-                                    <tpl:block data="page.block.side">Sidebar</tpl:block>
-                                </div>
+        <body>
+
+            <div id="wrap">
+                <tpl:import layout="navbar" />
+<!--                <div class="container-menu-box">
+
+                    <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
+                        <ul class="nav nav-stacked nav-menugroups no-margin" id="menutabs">
+
+                            <li class="active"><a data-target="#dashboardmenuview" data-toggle="tab"><i class="icon-dashboard"></i><small>Dashboard</small></a></li>  
+                            <li><a data-target="#contentmenuview" data-toggle="tab"><i class="icon-heart"></i><small>Media</small></a></li>   
+                            <li><a data-target="#messagesmenuview" data-toggle="tab"><i class="icon-comments-alt"></i><small>Messages</small></a></li>                                                   
+                            <li><a data-target="#settingsmenuview" data-toggle="tab"><i class="icon-cogs"></i><small>Settings</small></a></li>                            
+                            <li><a data-target="#peoplemenuview" data-toggle="tab"><i class="icon-group"></i><small>People</small></a></li>     Use  class="highlighted" on new notifications
+                            <li><a href="/member/profile/view"><i class="icon-eye-open"></i><small>Profile</small></a></li>  
+                            <li><a href="/member/session/stop"><i class="icon-signout"></i><small>Sign Out</small></a></li>
+                        </ul>
+                    </tpl:condition>
+                    <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
+                        <ul class="nav nav-stacked nav-menugroups no-margin"> 
+                            <li><a href="/member/session/start"><i class="icon-signin"></i><small>Sign In</small></a></li>
+                        </ul> 
+                    </tpl:condition> 
+                </div>-->
+                <div class="container-box has-left">
+                    
+                    <div class="container-left">                 
+                        <tpl:import layout="sidebar" />
+                    </div>
+                    <div class="container-right">
+                        <div class="container-aside">
+                            <tpl:import layout="asidebar" />
+                        </div>
+                        <div class="container-content">
+                            
+                            <div class="container-bucket">
+                                <tpl:block data="page.block.alerts" /> 
+                                <tpl:block data="page.block.body">Content</tpl:block>
+                                
                             </div>
-                            <tpl:condition data="page.activeaside" test="boolean" value="1"> 
-                                <div class="main-block has-main-block-aside">
-                                    <div class="main-block-aside top-pad bottom-pad right-pad">
-                                        <tpl:block data="page.block.aside">Asidebar</tpl:block>
-                                    </div>
-                                    <div class="main-block-content">
-                                        <div class="row-fluid">
-                                            <div class="span12"> 
-                                                <tpl:block data="page.block.body">Content</tpl:block>
-                                            </div>
-                                        </div>
-                                    </div>         
-                                </div>
-                            </tpl:condition>
-                            <tpl:condition data="page.activeaside" test="boolean" value="0"> 
-                                <div class="main-block">
-                                    <div class="main-block-content">
-                                        <div class="row-fluid">
-                                            <div class="span12"> 
-                                                <tpl:block data="page.block.body">Content</tpl:block>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </tpl:condition>
-                        </section>
-                    </tpl:condition>
-                    <tpl:condition data="page.activesidebar" test="boolean" value="0"> 
-                        <section class="layout-block boxed">  
-                            <tpl:condition data="page.activeaside" test="boolean" value="1"> 
-                                <div class="main-block has-main-block-aside">
-                                    <div class="main-block-aside  top-pad bottom-pad right-pad">
-                                        <tpl:block data="page.block.aside">Asidebar</tpl:block>
-                                    </div>
-                                    <div class="main-block-content">
-                                        <div class="row-fluid">
-                                            <div class="span12"> 
-                                                <tpl:block data="page.block.body">Content</tpl:block>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </tpl:condition>
-                            <tpl:condition data="page.activeaside" test="boolean" value="0"> 
-                                <div class="main-block">
-                                    <div class="main-block-content">
-                                        <div class="row-fluid">
-                                            <div class="span12"> 
-                                                <tpl:block data="page.block.body">Content</tpl:block>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </tpl:condition>
-                        </section>
-                    </tpl:condition>
-                    <tpl:import layout="footer" />    
-                </div>
-                <tpl:import layout="console" />
+                            <a href="#" class="container-left-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>
+                            <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-left"></i></a>
+                        </div>
+                    </div>
+                </div><!--/.fluid-container-->
             </div>
-            
+            <!--/.content-slider-->
+            <tpl:import layout="slider" />
+            <!-- Le javascript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-transition.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-alert.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-modal.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit-container.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/budkit-mediagrid.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-dropdown.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-scrollspy.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-tab.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-affix.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-tooltip.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-popover.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-button.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-collapse.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-carousel.js"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/assets/js/bootstrap-typeahead.js"></script>
         </body>
     </html>
 </tpl:layout>
