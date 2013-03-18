@@ -3,7 +3,7 @@
     <html class="no-js" lang="en">
         <head>
             <meta charset="utf-8"/>
-            <title><tpl:element type="text" data="page.title">SocialKit</tpl:element></title>
+            <title><tpl:element type="text" data="page.title">BudKit</tpl:element></title>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta name="description" content="<?php echo $this->getPageDescription(); ?>" />
             <meta name="author" content="<?php echo $this->getPageAuthor(); ?>" />

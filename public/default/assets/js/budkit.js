@@ -327,7 +327,7 @@
         ["redo","undo"],
         ["fullscreen"]
         ],
-        stylesheet: "../../socialkit/assets/css/editor.css"
+        stylesheet: "../../default/assets/css/editor.css"
     };
     $.fn.bkeditor.Constructor = BKEditor;
     /* EDITOR DATA-API

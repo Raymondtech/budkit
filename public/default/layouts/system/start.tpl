@@ -42,7 +42,7 @@
                                         <div class="dial blue">
                                             <i class="icon-thumbs-up"></i>
                                             <span class="unit">%</span>   
-                                            <input type="text" value="75" class="bluedial" data-linecap="round"  />
+                                            <input type="text" value="35" class="bluedial" data-linecap="round"  />
                                         </div>
                                         <div class="dial-title">Content fans</div>
                                     </div>
@@ -54,7 +54,8 @@
 
                 <hr />
                 <div class="widget-bucket" id="widget-bucket-2">
-                    <div class="widget naked">                     
+                    <div class="widget naked"> 
+                        
                         <div class="widget-body"><tpl:import layout="input" /></div>
                     </div>
                 </div>

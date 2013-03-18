@@ -141,6 +141,14 @@ $requirements = array(
             "terminal" => true,
         )
     ),
+    "limits" => array(
+        "upload_max_filesize" => array(
+            "status" => "200M",
+            "compare"=> "greater",
+            "type"=>"bytesize",
+            "terminal" => true,
+        )
+    ),
     "server" => array(
         "PHP" => array(
             "version" => "5.4.0",
@@ -160,6 +168,12 @@ $requirements = array(
             "title" => "Sessions folder",
             "writable" => true,
             "path" => APPPATH . "setup" . DS . 'sessions',
+            "terminal" => true,
+        ),
+        "users" => array(
+            "title" => "Users folder",
+            "writable" => true,
+            "path" => FSPATH . "users",
             "terminal" => true,
         )
     )

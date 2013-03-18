@@ -40,23 +40,29 @@ final class Requirements extends Platform\Model {
     public function display() {
         return false;
     }
-    
+
     /**
      * Test file upload size limits
      * @todo Implement file upload system requirements test at install
      */
-    public function testFileUploads(){}
-    
+    public function testFileUploads() {
+        
+    }
+
     /**
      * Test for available memore
      * @todo Implement system memory test at install
      */
-    public function testMemory(){}  
-    
+    public function testMemory() {
+        
+    }
+
     /**
      * Test float?
      */
-    public function testFloat(){}
+    public function testFloat() {
+        
+    }
 
     /**
      * Checks required modules
@@ -109,7 +115,7 @@ final class Requirements extends Platform\Model {
      * @return boolean
      */
     public function testFolderPermissions($path, $directive = array()) {
-        
+
         //Test install directory is writable, readable
         //Test we are not trying to overide an installation
         $return = array(
@@ -118,21 +124,20 @@ final class Requirements extends Platform\Model {
 
         if (is_array($directive)) {
             //If the extension is loaded
-            $return['status']     = ((bool)$directive['writable']) ? "Writable" : "Not Writable";
-           if(\Library\Folder\Files::isWritable($path) && (bool)$directive['writable']){
-               $return['current'] = _t("Is Writable") ;
-               $return['test']    =  true;
-           }elseif(!\Library\Folder\Files::isWritable($path) && !(bool)$directive['writable']){
-              $return['test']     =  true; 
-           }
-           
-           if(\Library\Folder\Files::isWritable($path)){
-               $return['current'] = _t("Is Writable");
-           }
+            $return['status'] = ((bool) $directive['writable']) ? "Writable" : "Not Writable";
+            if (\Library\Folder\Files::isWritable($path) && (bool) $directive['writable']) {
+                $return['current'] = _t("Is Writable");
+                $return['test'] = true;
+            } elseif (!\Library\Folder\Files::isWritable($path) && !(bool) $directive['writable']) {
+                $return['test'] = true;
+            }
+
+            if (\Library\Folder\Files::isWritable($path)) {
+                $return['current'] = _t("Is Writable");
+            }
         }
         //Return test result;
         return $return;
-        
     }
 
     /**
@@ -167,6 +172,74 @@ final class Requirements extends Platform\Model {
     }
 
     /**
+     * Converts human readable file size (e.g. 10 MB, 200.20 GB) into bytes. 
+     * 
+     * @param string $str 
+     * @return int the result is in bytes 
+     * @author Livingstone Fultang <livingstone@budkit.org> modified to include M, K, KiB etc...
+     */
+    public static function sizeToBytes($string) {
+        $bytes = 0;
+        $bytesTable = array(
+            'B' => 1,
+            'K' => 1024,
+            'KB' => 1024,
+            'M' => 1024 * 1024,
+            'MB' => 1024 * 1024,
+            'G' => 1024 * 1024 * 1024,
+            'T' => 1024 * 1024 * 1024 * 1024,
+            'P' => 1024 * 1024 * 1024 * 1024 * 1024,
+        );
+
+        preg_match('/(\d+)(\w+)/', $string, $units);
+        $unit   = strtoupper($units[2]);
+        $bytes  = floatval($units[1]);
+        if (array_key_exists($unit, $bytesTable)) {
+            $bytes *= $bytesTable[$unit];
+        }
+
+        $bytes = intval(round($bytes, 2));
+
+        return $bytes;
+    }
+
+    /**
+     * Tests required system resource limits
+     * 
+     * @param type $name
+     * @param type $directive
+     */
+    public function testLimit($name, $directive = array()) {
+        $operator = array("equals", "greater", "less");
+        $return = array(
+            "title" => $name, "current" => "", "status" => $directive['status'], "test" => false
+        );
+        if (!isset($directive['compare']) || !in_array($directive['compare'], $operator))
+            return $return;
+        //For now we can only check boolean variables
+        if (isset($name) && !empty($name) && is_array($directive)) {
+            $return['current'] = ini_get($name);
+            if(isset($directive['type'])&& $directive['type']=="bytesize"){
+                $current = static::sizeToBytes( $return['current'] );
+                $status = static::sizeToBytes( $return['status'] );
+            }
+            $return['test'] = false;
+            switch ($directive['compare']):
+                case "equals":
+                    $return['test'] = (intval($current) == intval($status)) ? true : false;
+                    break;
+                case "greater":
+                    $return['test'] = (intval($current) > intval($status)) ? true : false;
+                    break;
+                case "less":
+                    $return['test'] = (intval($current) < intval($status)) ? true : false;
+                    break;
+            endswitch;
+        }
+        return $return;
+    }
+
+    /**
      * Checks the current version 
      * 
      * @param string $component
@@ -193,5 +266,6 @@ final class Requirements extends Platform\Model {
         $instance = new self;
         return $instance;
     }
+
 }
 
