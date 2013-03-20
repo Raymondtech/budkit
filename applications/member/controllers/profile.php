@@ -58,11 +58,11 @@ class Profile extends \Platform\Controller {
      */
     public function timeline(){
         
-        $this->output->setPageTitle( _("Activity stream") );       
+        $this->output->setPageTitle( _("Media Timeline") );       
         //Get the view;
           
         $user = \Platform\User::getInstance();
-        $model      = $this->load->model('activity' , 'system');
+        $model      = $this->load->model('media' , 'system');
         $activities = $model->getAll();   
         $profile  = $this->load->model('profile');
         $profile  = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
@@ -76,8 +76,8 @@ class Profile extends \Platform\Controller {
         
 
             
-        $activity   = $this->output->layout("system/activity/timeline");
-        $this->output->addToPosition("body", $activity);
+        $media   = $this->output->layout("system/media/timeline");
+        $this->output->addToPosition("body", $media);
         
         return $this->index();
         
@@ -110,21 +110,6 @@ class Profile extends \Platform\Controller {
     public function network(){
         echo "network";
         return $this->index();
-    }
-
-
-    /**
-     * Use for displaysing profiles requested using vanity username profile calls, e.g /member/profile/livingstone.fultang
-     * @param string $name
-     * @param string $arguments
-     * @return void
-     */
-    final public function __call($name, $arguments) {
-        
-        //check if this is a valid userid or usernameid
-            //If it is a valid user, show the view page,
-            return $this->index( );
-            //If its is NOT a valid user, return the 404 not found page
     }
     
     

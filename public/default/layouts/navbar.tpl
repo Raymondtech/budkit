@@ -6,16 +6,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button> 
-            <a class="brand" href="/system/start/dashboard">bk</a>
+            <a class="brand" href="/system/start/dashboard">:/budkit</a>
             <div class="nav-collapse collapse">
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                     <form class="navbar-search pull-right input-append">   
                         <i class="icon-search add-on"></i>
-                        <input type="text" class="search-query" placeholder="Search" />
+                        <input type="text" class="search-query span4" placeholder="Search for people, files or discussions" />
                     </form>
-                    <ul class="nav pull-right" id="menubartabs">
+                    <ul class="nav" id="menubartabs">
+                        <li><a href="/system/start/dashboard">Home</a></li>
                         <li><a href="/member/profile/view">Profile</a></li> 
-                        <li><a href="/system/content/media">Media</a></li>   
+                        <li><a href="/system/media/timeline">Timeline</a></li>   
                         <li><a href="/system/messages/all">Messages</a></li>                                                                              
                         <li><a href="/member/network/graph">Network</a></li>     <!--Use  class="highlighted" on new notifications-->
                          <li><a href="/settings/member/account">Settings</a></li> 

@@ -63,25 +63,25 @@ class Collection extends Platform\Entity {
     }
 
     /**
-     * Models a collection activity object for activity feeds
+     * Models a collection media object for media feeds
      * 
-     * @param type $activityObject
-     * @param type $activityObjectType
-     * @param type $activityObjectId
+     * @param type $mediaObject
+     * @param type $mediaObjectType
+     * @param type $mediaObjectId
      * 
      * return void;
      */
-    public static function activityObject(&$activityObject, $activityObjectType, $activityObjectURI) {
+    public static function mediaObject(&$mediaObject, $mediaObjectType, $mediaObjectURI) {
 
-        //If the activity object is not a collection! skip it
+        //If the media object is not a collection! skip it
         $objectTypeshaystack = array("collection");
         $thisModel = new self;
-        if (!in_array($activityObjectType, $objectTypeshaystack))
+        if (!in_array($mediaObjectType, $objectTypeshaystack))
             return; //Nothing to do here if we can't deal with it!
             
         //1.Load the collection!
-        $collection = $thisModel->loadObjectByURI($activityObjectURI);
-        $collectionObject = new Activity\Collection;
+        $collection = $thisModel->loadObjectByURI($mediaObjectURI);
+        $collectionObject = new Media\Collection;
         //2.Get all the elements in the collection, limit 5 if more than 5
         //3.Trigger their timeline display
         $collectionObject->set("objectType", "collection");
@@ -95,7 +95,7 @@ class Collection extends Platform\Entity {
         if (is_array($collectionItemize) && !empty($collectionItemize)) {
             $items = array();
             foreach ($collectionItemize as $item) {
-                $itemObject = new Activity\MediaLink;
+                $itemObject = new Media\MediaLink;
                 //@TODO Will probably need to query for objectType of items in collection?
                 //@TODO Also this will help in removing objects from collections that have previously been deleted
                 $itemObjectURL = !empty($item) ? "/system/object/{$item}/" : "http://placeskull.com/100/100/999999";
@@ -108,8 +108,8 @@ class Collection extends Platform\Entity {
             }
             $collectionObject->set("items", $items);
         }
-        //Now set the collection Object as the activity Object
-        $activityObject = $collectionObject;
+        //Now set the collection Object as the media Object
+        $mediaObject = $collectionObject;
 
         unset($collection);
         unset($collectionObject);
@@ -119,7 +119,7 @@ class Collection extends Platform\Entity {
     }
 
     /**
-     * Get's an instance of the activity model
+     * Get's an instance of the media model
      * @staticvar object $instance
      * @return object \Application\System\Models\Options 
      */

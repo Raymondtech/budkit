@@ -14,10 +14,10 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers\Content;
+namespace Application\System\Controllers\Media;
 use Application\System\Controllers as System;
 /**
- * Audio files management CRUD action controller for system content 
+ * Audio files management CRUD action controller for system media 
  *
  * This class implements the action controller that manages the creation, 
  * view and edit of audio files within various posts/media types.
@@ -29,7 +29,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Audio extends System\Content {
+final class Audio extends System\Media {
 
     /**
      * The default fall-back method. 
@@ -41,7 +41,7 @@ final class Audio extends System\Content {
     /**
      * Displays the form required to creates a new audio. 
      * @todo    Implement the create action method
-     * @return  {@link \Application\System\Views\Content\Audio::createForm()}
+     * @return  {@link \Application\System\Views\Media\Audio::createForm()}
      */
     public function create() {
         $view = $this->load->view('audio');
@@ -51,23 +51,23 @@ final class Audio extends System\Content {
         
     
     /**
-     * Displays a gallery of content items. 
+     * Displays a gallery of media items. 
      * @return void
      */
     public function gallery() {
         
         $this->output->setPageTitle(_("Audios"));
 
-        $today = $this->output->layout("content/gallery");
+        $today = $this->output->layout("media/gallery");
         $this->output->addToPosition("dashboard", $today);
         
         
-        $this->load->view("content")->display();   
+        $this->load->view("media")->display();   
     }
     
     /**
      * Updates details of an existing audio files.
-     * @todo    Implement the audio content update action method
+     * @todo    Implement the audio media update action method
      * @return  void
      */
     public function update($audioid = null) {
@@ -77,7 +77,7 @@ final class Audio extends System\Content {
         //print_R($args); print_r($args1); echo $videoid;
     }
     /**
-     * Displays an audio content.
+     * Displays an audio media.
      * @todo    Implement the audio read action method
      * @return  void
      */
@@ -87,7 +87,7 @@ final class Audio extends System\Content {
     }
     /**
      * Deletes an existing audio file.
-     * @todo    Implement the audio content delete action method
+     * @todo    Implement the audio media delete action method
      * @return  void
      */
     public function delete() {  

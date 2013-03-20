@@ -38,28 +38,15 @@ final class Notification extends \Platform\Controller {
      */
     public function index() {
         
-        $this->output->setPageTitle(_("Task and Notifications"));
-        $view = $this->load->view("index");
-        $body = $this->output->layout('notifications');
-        $this->output->addToPosition("body", $body);
-    }
+        $view = $this->load->view('index') ;        
+        $this->output->setPageTitle(_("Notifications"));
 
-    /**
-     * Creates a new system notification. 
-     * @todo    Implement the Notifications creation workflow
-     * @return  Void
-     */
-    public function create() {
+        $today = $this->output->layout("notifications");
         
-    }
-
-    /**
-     * Displays a new notification. 
-     * @todo    Implement the Notifications view workflow
-     * @return  Void
-     */
-    public function view() {
-        echo "viewing account";
+        $this->output->addToPosition("dashboard", $today);
+        $this->load->view("index")->display();      
+        //$this->output();
+        
     }
 
     /**
@@ -71,14 +58,6 @@ final class Notification extends \Platform\Controller {
         
     }
 
-    /**
-     * Displays a lists of notifications
-     * @todo Notificaitons lists
-     * @return void
-     */
-    public function lists() {
-        
-    }
 
     /**
      * Gets an instance of the notificaiton controller

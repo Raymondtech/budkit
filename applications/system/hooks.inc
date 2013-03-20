@@ -3,18 +3,18 @@
 /**
  * Disiplays system attachments
  * 
- * Outputs the file content to the browser
+ * Outputs the file media to the browser
  */
 \Library\Event::register('beforeObjectLoad', '\Application\System\Models\Attachments::load');
 
 
 /**
- * Models a collection for activity feeds
+ * Models a collection for media feeds
  * 
  * 
  */
-\Library\Event::register('onActivitySubjectModel', '\Application\System\Models\Attachments::activityObject');
-\Library\Event::register('onActivitySubjectModel', '\Application\System\Models\Collection::activityObject');
+\Library\Event::register('onMediaSubjectModel', '\Application\System\Models\Attachments::mediaObject');
+\Library\Event::register('onMediaSubjectModel', '\Application\System\Models\Collection::mediaObject');
 
 
 /**
@@ -22,4 +22,4 @@
  * 
  * 
  */
-\Library\Event::register('beforeRenderMenu', '\Application\System\Models\Menu::content');
+\Library\Event::register('beforeRenderMenu', '\Application\System\Models\Menu::media');

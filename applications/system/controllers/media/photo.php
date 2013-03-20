@@ -14,11 +14,11 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers\Content;
+namespace Application\System\Controllers\Media;
 use Application\System\Controllers as System;
 
 /**
- * Photo CRUD action controller for system content 
+ * Photo CRUD action controller for system media 
  *
  * This class implements the action controller that manages the creation, 
  * view and edit of photo.
@@ -30,12 +30,12 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Photo extends System\Content{
+final class Photo extends System\Media{
 
     /**
      * Displays the form required to creates a new photo. 
      * @todo    Implement the create photo action method
-     * @return  \Application\System\Views\Content\Photo::createForm()
+     * @return  \Application\System\Views\Media\Photo::createForm()
      */
     public function create() {    
         $view       = $this->load->view('photo');        
@@ -59,7 +59,7 @@ final class Photo extends System\Content{
     }
     
     /**
-     * Displays an collection content.
+     * Displays an collection media.
      * @todo    Implement the collection read action method
      * @return  void
      */
@@ -72,7 +72,7 @@ final class Photo extends System\Content{
         
         //Get the format of the item;
         $format = $this->router->getFormat();
-        $collection = $this->output->layout("content/photos/photo");
+        $collection = $this->output->layout("media/photos/photo");
         
         if($format !=="raw"):
             $this->output->addToPosition("dashboard", $collection);
@@ -80,26 +80,26 @@ final class Photo extends System\Content{
             //Add the collection to the placeholder image;
             $this->output->addToPosition("placeholder", $collection); //Add the collection to the placeholder
             //Raw displays whatever is in the body block only; 
-            $placeholder = $this->output->layout("content/placeholder");
+            $placeholder = $this->output->layout("media/placeholder");
             $this->output->addToPosition("body", $placeholder);
         endif;
         
-        $this->load->view("content")->display(); 
+        $this->load->view("media")->display(); 
     }
     
     /**
-     * Displays a gallery of content items. 
+     * Displays a gallery of media items. 
      * @return void
      */
     public function gallery() {
                
         $this->output->setPageTitle(_("Photos"));
 
-        $today = $this->output->layout("content/gallery");
+        $today = $this->output->layout("media/gallery");
         $this->output->addToPosition("dashboard", $today);
         
         
-        $this->load->view("content")->display();   
+        $this->load->view("media")->display();   
     }
     /**
      * Deletes an existing photo.

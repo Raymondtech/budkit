@@ -14,12 +14,13 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers;
+namespace Application\System\Controllers\Media;
+use Application\System\Controllers as System;
 
 /**
  * Timeline action controller 
  *
- * This class implements the action controller for displaying activity streams.
+ * This class implements the action controller for displaying media streams.
  *
  * @category  Application
  * @package   Action Controller
@@ -28,20 +29,19 @@ namespace Application\System\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Timeline extends \Platform\Controller {
+class Timeline extends System\Media  {
 
     /**
-     * The default page, consider this the homepage
-     * of the application, You can change this to anything else in the config/routes.php 
+     * The timeline stream
      * 
-     * @return void 
+     * @return type
      */
-    public function index() {
-
-        return null;
+    public function stream(){
+        return $this->index();
     }
+    
     /**
-     * Creates a new activity in the defined timeline. 
+     * Creates a new media in the defined timeline. 
      * @return  \Platform\Controller::returnRequest()
      */
     public function create() {
@@ -50,12 +50,12 @@ class Timeline extends \Platform\Controller {
         //Is the input method submitted via POST;
 
         if ($this->input->methodIs("post")) {
-            $model = $this->load->model("activity");
+            $model = $this->load->model("media");
             //@1 Check where the form is comming from
             //@2 Validate the user permission
             //@3 Privacy settings, If posting to wall can the user post to the wall
             //@4 Add the post;
-            if (!$model->addActivity()) {
+            if (!$model->addMedia()) {
                 $this->alert(_("Could not add your post"), null, "error");
             } else {
                 $this->alert(_("You post has been saved and publised"), null, "success");
@@ -65,7 +65,7 @@ class Timeline extends \Platform\Controller {
         $this->returnRequest();
     }
     /**
-     * Alias for listing all activity posts;
+     * Alias for listing all media posts;
      * @return Timeline::stream()
      */
     public function read() {
@@ -75,16 +75,15 @@ class Timeline extends \Platform\Controller {
      * Lists all published activities within this timeline;
      * @return void; 
      */
-    public function stream() {       
-        $this->output->setPageTitle( _("Timeline stream") );       
+    public function index() {       
+        $this->output->setPageTitle( _("Timeline") );       
         //Get the view;
-        $view = $this->load->view('index');        
+        $view = $this->load->view('media');        
         $user = \Platform\User::getInstance();
-        $model      = $this->load->model('activity');
+        $model      = $this->load->model('media');
         $activities = $model->getAll();   
         
         $this->set("activities", $activities);   
-        $this->set("dashboard", array("title"=>"Activity stream" ) );
         $this->set("user", $user);
         
         $timeline = $this->output->layout("timeline");
@@ -97,7 +96,7 @@ class Timeline extends \Platform\Controller {
         //$this->output();
     }
     /**
-     * Deletes an activity from the timeline;
+     * Deletes an media from the timeline;
      * @return Timeline::read();
      */
     public function delete() {

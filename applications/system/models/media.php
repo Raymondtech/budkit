@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * activity.php
+ * media.php
  *
  * Requires PHP version 5.4
  *
@@ -21,9 +21,9 @@ use Platform;
 use Library;
 
 /**
- * Activity stream object model
+ * Media stream object model
  *
- * In its simplest form, an activity consists of an actor, a verb, an an object, 
+ * In its simplest form, an media consists of an actor, a verb, an an object, 
  * and a target. It tells the story of a person performing an action on or with 
  * an object -- "Geraldine posted a photo to her album" or "John shared a video". 
  * In most cases these components will be explicit, but they may also be implied.
@@ -36,8 +36,8 @@ use Library;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-class Activity extends Platform\Entity {
-    
+class Media extends Platform\Entity {
+
     /**
      * Static array of default system verbs
      * @var array 
@@ -47,7 +47,7 @@ class Activity extends Platform\Entity {
     );
 
     /**
-     * The activity stream model constructor. 
+     * The media stream model constructor. 
      * @return void
      */
     public function __construct() {
@@ -55,119 +55,124 @@ class Activity extends Platform\Entity {
         parent::__construct();
 
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
-        $this->definePropertyModel( array(
-            "activity_published" => array("Published", "datetime", 50),
-            "activity_content" => array("Content", "varchar", 1000),
-            "activity_summary" => array("Summary", "mediumtext", 50, NULL),
-            "activity_comment_status" => array("Allow Comments", "tinyint", 1, 0), //*
-            "activity_parent" => array("Parent", "smallint", 10, 0), //*
-            "activity_generator" => array("Generator", "mediumtext", 100),
-            "activity_provider" => array("Provider", "mediumtext", 100),
-            "activity_mentions" => array("Mentions", "varchar", 1000), //*
-            "activity_actor" => array("Actor", "varchar", 1000),
-            "activity_verb" => array("Verb", "mediumtext", 20, "post"),
-            "activity_geotags" => array("Geotags", "varchar", 1000), //*
-            "activity_object" => array("Object", "varchar", 1000),
-            "activity_target" => array("Target", "varchar", 1000),
-            "activity_permissions" => array("Permissions", "mediumtext", 50), //* //allo:{},deny:{}
-        ), "activity");
+        $this->definePropertyModel(array(
+            "media_published" => array("Published", "datetime", 50),
+            "media_content" => array("Content", "varchar", 1000),
+            "media_summary" => array("Summary", "mediumtext", 50, NULL),
+            "media_comment_status" => array("Allow Comments", "tinyint", 1, 0), //*
+            "media_parent" => array("Parent", "smallint", 10, 0), //*
+            "media_generator" => array("Generator", "mediumtext", 100),
+            "media_provider" => array("Provider", "mediumtext", 100),
+            "media_mentions" => array("Mentions", "varchar", 1000), //*
+            "media_actor" => array("Actor", "varchar", 1000),
+            "media_verb" => array("Verb", "mediumtext", 20, "post"),
+            "media_geotags" => array("Geotags", "varchar", 1000), //*
+            "media_object" => array("Object", "varchar", 1000),
+            "media_target" => array("Target", "varchar", 1000),
+            "media_permissions" => array("Permissions", "mediumtext", 50), //* //allo:{},deny:{}
+                ), "media");
 
-        $this->defineValueGroup("activity");
+        $this->defineValueGroup("media");
     }
 
     /**
-     * Returns all the published activity stories
-     * @return array An array of activity stream objects see {@link Activity\Collecion}
+     * Returns all the published media stories
+     * @return array An array of media stream objects see {@link Media\Collecion}
      */
     public function getAll() {
-        
+
         //Get the object list
-        $objects = $this->getActivityObjectsList()->fetchAll();
-        $items   = array();
-        //Parse the activities;
+        $objects = $this->getMediaObjectsList()->fetchAll();
+
+        $items = array();
+        //Parse the mediacollections;
         foreach ($objects as $object) {
 
             //1. Collections
             //2.0 THE ACTOR
-            $actorObject = new Activity\Object;
-            $actorName   = implode(' ', array($object['user_first_name'], $object['user_last_name']) );
+            $actorObject = new Media\Object;
+            $actorName = implode(' ', array($object['user_first_name'], $object['user_last_name']));
             $actorObject->set("objectType", "user"); //@TODO Not only User objects can be actors! You will need to be able to allow other apps to be actors
-            $actorObject->set("displayName", $actorName ); 
-            $actorObject->set("id", $object['activity_actor']);
+            $actorObject->set("displayName", $actorName);
+            $actorObject->set("id", $object['media_actor']);
             $actorObject->set("uri", $object['user_name_id']);
-            
-            $actorImage  = new Activity\MediaLink;
-            $actorImageURL = !empty($object['user_photo'])?"/system/object/{$object['user_photo']}/resize/50/50":"http://placeskull.com/50/50/999999";
+
+            $actorImage = new Media\MediaLink;
+            $actorImageURL = !empty($object['user_photo']) ? "/system/object/{$object['user_photo']}/resize/50/50" : "http://placeskull.com/50/50/999999";
             $actorImage->set("url", $actorImageURL);
             $actorImage->set("height", 50);
             $actorImage->set("width", 50);
             $actorObject->set("image", $actorImage::getArray());
 
-            $object['activity_actor'] =  $actorObject::getArray();
+            $object['media_actor'] = $actorObject::getArray();
             //Remove user model sensitive Data
-            foreach( array_keys( $this->load->model("user","member")->getPropertyModel() ) as $private ):
+            foreach (array_keys($this->load->model("user", "member")->getPropertyModel()) as $private):
                 unset($object[$private]);
             endforeach;
-            
-             //Activity Object;
-            //First get the nature of the activity object;
-            $subjectEntity    = Platform\Entity::getInstance(); //An empty entity here because it is impossible to guess the properties of this object
-            $activityObject   = $subjectEntity->loadObjectByURI($object['activity_object'], array()); //Then we load the object    
-            $activityObjectURI = $activityObject->getObjectURI();
-            
-            if(!empty($activityObjectURI) ):
-                //Create an activity object, and fire an event asking callbacks to complete the activity object
-                $activitySubject     = new Activity\Object;
-                $activityObjectType  = $activityObject->getObjecType();         
-                //Fire the event, passing the activitySubject by reference
-                //Although it looks stupid to need to find out the nature of the activity subject before trigger
+
+            //Media Object;
+            //First get the nature of the media object;
+            $subjectEntity = Platform\Entity::getInstance(); //An empty entity here because it is impossible to guess the properties of this object
+            $mediaObject = $subjectEntity->loadObjectByURI($object['media_object'], array()); //Then we load the object    
+            $mediaObjectURI = $mediaObject->getObjectURI();
+
+            if (!empty($mediaObjectURI)):
+                //Create an media object, and fire an event asking callbacks to complete the media object
+                $mediaSubject = new Media\Object;
+                $mediaObjectType = $mediaObject->getObjecType();
+                //Fire the event, passing the mediaSubject by reference
+                //Although it looks stupid to need to find out the nature of the media subject before trigger
                 //It actually provides an extra exclusion for callback so not all callbacks go to the database
-                //so for instance if we found an activity subject was a collection, callbacks can first check if the 
+                //so for instance if we found an media subject was a collection, callbacks can first check if the 
                 //trigger is to model a collection before diving ing
-                \Library\Event::trigger("onActivitySubjectModel",  $activitySubject, $activityObjectType , $activityObjectURI ); 
+                \Library\Event::trigger("onMediaSubjectModel", $mediaSubject, $mediaObjectType, $mediaObjectURI);
                 //You never know what callbacks will do to your subject so we just check
-                //that the activity subject is what we think it is, i.e an activity object
-                
-                if(is_object($activitySubject)&&  method_exists($activitySubject, "getArray")){ 
-                    $object['activity_object'] =  $activitySubject::getArray(); //If it is then we can set the activity object output vars
-                }
+                //that the media subject is what we think it is, i.e an media object
+
+                if (is_object($mediaSubject) && method_exists($mediaSubject, "getArray")):
+                    $object['media_object'] = $mediaSubject::getArray(); //If it is then we can set the media object output vars
+                endif;
+            else:
+                //If there no explicitly defined mediaObjects, in media_object
+                //parse media_content for medialinks
+                //Parse media targets medialinks
+                $mediaLinks = Media\MediaLink::parse($object['media_content']);
+            
             endif;
             //CleanUp
-            foreach( $object as $key=>$value):
-                    $object[str_replace(array('activity_','object_'), '', $key)] = $value;
-                    unset($object[$key]);
-            endforeach; 
-           
-            $items[]    = $object; //add to the collection
-            
+            foreach ($object as $key => $value):
+                $object[str_replace(array('media_', 'object_'), '', $key)] = $value;
+                unset($object[$key]);
+            endforeach;
+
+            $items[] = $object; //add to the collection
             //print_R($items);
-            
         }
-        
-        $activities = new Activity\Collection;
-        
-        $activities->set("items", $items); //update the collection
-        $activities->set("totalItems", count($items) );
-            
-        $collection = $activities::getArray();
-        
+
+        $mediacollections = new Media\Collection;
+
+        $mediacollections->set("items", $items); //update the collection
+        $mediacollections->set("totalItems", count($items));
+
+        $collection = $mediacollections::getArray();
+
         return $collection;
     }
 
     /**
-     * Prepares and executes a database query for fetching activity objects
+     * Prepares and executes a database query for fetching media objects
      * @param interger $objectId
      * @param string $objectURI
      * @return object Database resultset
      */
-    public function getActivityObjectsList($objectId = NULL, $objectURI = NULL) {
+    public function getMediaObjectsList($objectId = NULL, $objectURI = NULL) {
         //Join Query
-        $objectType = 'activity';
+        $objectType = 'media';
         $query = "SELECT o.object_id, o.object_uri, o.object_type,";
         //If we are querying for attributes
         $_properties = $this->getPropertyModel();
         $properties = array_keys((array) $_properties);
-        
+
         $count = count($properties);
         if (!empty($properties) || $count < 1):
             //Loop through the attributes you need
@@ -186,7 +191,7 @@ class Activity extends Platform\Entity {
             $actorProperties = array_diff(array_keys($_actorProperties), array("user_password", "user_api_key", "user_email"));
             $count = count($actorProperties);
             if (!empty($actorProperties) || $count < 1):
-                $query .= ","; //after the last activity property   
+                $query .= ","; //after the last media property   
                 $i = 0;
                 foreach ($actorProperties as $alias => $attribute):
                     $alias = (is_int($alias)) ? $attribute : $alias;
@@ -199,13 +204,13 @@ class Activity extends Platform\Entity {
             endif;
 
             //The data Joins
-            $query .= "\nFROM ?activity_property_values v"
-            . "\nLEFT JOIN ?properties p ON p.property_id = v.property_id"
-            . "\nLEFT JOIN ?objects o ON o.object_id=v.object_id"
-            //Join the UserObjects Properties tables on userid=actorid
-            . "\nLEFT JOIN ?objects q ON q.object_id=v.value_data AND p.property_name ='activity_actor'"
-            . "\nLEFT JOIN ?user_property_values u ON u.object_id=q.object_id"
-            . "\nLEFT JOIN ?properties l ON l.property_id = u.property_id"
+            $query .= "\nFROM ?media_property_values v"
+                    . "\nLEFT JOIN ?properties p ON p.property_id = v.property_id"
+                    . "\nLEFT JOIN ?objects o ON o.object_id=v.object_id"
+                    //Join the UserObjects Properties tables on userid=actorid
+                    . "\nLEFT JOIN ?objects q ON q.object_id=v.value_data AND p.property_name ='media_actor'"
+                    . "\nLEFT JOIN ?user_property_values u ON u.object_id=q.object_id"
+                    . "\nLEFT JOIN ?properties l ON l.property_id = u.property_id"
             ;
 
         else:
@@ -239,10 +244,10 @@ class Activity extends Platform\Entity {
     }
 
     /**
-     * Adds a new activity object to the database
+     * Adds a new media object to the database
      * @return boolean Returns true on save, or false on failure
      */
-    public function addActivity() {
+    public function addMedia() {
 
         $inputModel = $this->getPropertyModel();
         //
@@ -255,43 +260,43 @@ class Activity extends Platform\Entity {
         endforeach;
 
         //@TODO determine the user has permission to post;
-        $this->setPropertyValue("activity_actor", $this->user->get("user_id"));
-        $this->setPropertyValue("activity_published", \Library\Date\Time::stamp());
+        $this->setPropertyValue("media_actor", $this->user->get("user_id"));
+        $this->setPropertyValue("media_published", \Library\Date\Time::stamp());
 
 
         //Search for media link
-        $targetObject = Activity\Object::getInstance();
-        $mediaLink = Activity\MediaLink::getInstance();
-        $activityObject = null;
-        
+        $targetObject = Media\Object::getInstance();
+        $mediaLink = Media\MediaLink::getInstance();
+        $mediaObject = null;
+
         //Look for attachedObjects;
         $attachments = $this->input->getArray("attachment");
-        
-        if(is_array($attachments) && !empty($attachments)){
-            if(sizeof($attachments) > 1 ){
+
+        if (is_array($attachments) && !empty($attachments)) {
+            if (sizeof($attachments) > 1) {
                 //Create a collection and link to the object iD
                 $collection = $this->load->model("collection");
-                $collection->setPropertyValue("collection_items", implode(',', $attachments ));
-                $collection->setPropertyValue("collection_size", count($attachments) );
-                $collection->setPropertyValue("collection_owner", $this->user->get("user_name_id") );
-                //Should we add the activity body to the collection description? there is really no need to, 
+                $collection->setPropertyValue("collection_items", implode(',', $attachments));
+                $collection->setPropertyValue("collection_size", count($attachments));
+                $collection->setPropertyValue("collection_owner", $this->user->get("user_name_id"));
+                //Should we add the media body to the collection description? there is really no need to, 
                 //As every item will need to be described in details later
-                if(!$collection->saveObject(null, "collection")){
-                    $this->setError( "Could not save attached objects" );
-                    $activityObject = NULL;
+                if (!$collection->saveObject(null, "collection")) {
+                    $this->setError("Could not save attached objects");
+                    $mediaObject = NULL;
                 }
                 //If however we could save, then get the last saved object ID;
-                $activityObject = $collection->getLastSavedObjectURI();
+                $mediaObject = $collection->getLastSavedObjectURI();
                 unset($collection); //destroys the collection object?       
-            }else{
+            } else {
                 $oneobject = reset($attachments); //Validate. String only
-                $activityObject = !$this->validate->alphaNumeric($oneobject) ? null : $oneobject; //Maybe a much harder validation
+                $mediaObject = !$this->validate->alphaNumeric($oneobject) ? null : $oneobject; //Maybe a much harder validation
             }
-           $this->setPropertyValue("activity_object", $activityObject);
+            $this->setPropertyValue("media_object", $mediaObject);
         }
-       
+
         //Determine the target
-        if (!$this->saveObject(null, "activity")) {
+        if (!$this->saveObject(null, "media")) {
             //There is a problem! the error will be in $this->getError();
             return false;
         }
@@ -299,9 +304,9 @@ class Activity extends Platform\Entity {
     }
 
     /**
-     * Get's an instance of the activity model
+     * Get's an instance of the media model
      * @staticvar object $instance
-     * @return object \Application\System\Models\Activity 
+     * @return object \Application\System\Models\Media 
      */
     public static function getInstance() {
 

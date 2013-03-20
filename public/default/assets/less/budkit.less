@@ -96,10 +96,10 @@
 .media-grid{
      a{ text-decoration: none; }
     .thumbnail{
-        position: relative;
+        position: relative; padding: 5px;
         .feature{ border-bottom: 1px solid #ddd; }
-        .caption{ padding: 8px 5px 0px; text-decoration: none; color: @grayLight; font-size: 11px; }
-        .description{ position: absolute; top:4px; left:4px; right: 4px; height: 180px; background: rgba(255,255,255,0.8); padding: 10px; display: none}
+        .caption{ padding: 5px 0px 0px; text-decoration: none; color: @grayDark; font-size: 11px; }
+        .description{ position: absolute; top:4px; left:4px; right: 4px; min-height: 50px; background: rgba(255,255,255,0.8); padding: 10px; display: none}
        &:hover{
             .description{ display: block; }
         }
@@ -116,6 +116,7 @@
             position: absolute;
             width: 260px;
             z-index: -11;
+            padding: 5px;
             .box-shadow( 0 1px 3px rgba(0, 0, 0, 0.055) )
         }
         .thumbnail:before {
@@ -196,6 +197,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
             input{ margin: 3px auto}
         }
     }
+    .stream-alerts{ margin-left: 115px }
     .stream-view{
         margin-right: @gridGutterWidth + 195;
     }
@@ -293,9 +295,9 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     .brand{ 
         padding-left:@gridGutterWidth *0.2; padding-right: 0px; 
         font-family: verdana;
-        font-size: 33px;
-        letter-spacing: -3px;
-        color: rgb(31, 88, 129);
+        font-size: 19px;
+        letter-spacing: -2px;
+        color: rgba(26, 78, 116, 0.84);
         text-shadow:0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255,255,255,.125);
         font-weight: bold;
         margin-left: -10px;
@@ -469,6 +471,31 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
         padding-left: 0px;
         padding-right: 0px;
     }
+}
+
+/****RATINGS****/
+.rating{
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    font-size: 15px;
+    .star {
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        &:before {
+            content: "\f006";
+            padding-right: 0px;
+            color: #999;
+        }
+    }
+}
+.rating > span.active:before,
+.rating > span.active ~ span:before, 
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\f005";
+   color: #e3cf7a;
 }
 /****IMPORTS****/
 @import "timeline.less";

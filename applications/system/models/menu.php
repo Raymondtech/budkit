@@ -31,27 +31,27 @@ namespace Application\System\Models;
 class Menu extends \Platform\Model {
 
     /**
-     * Adds Dynamic content menu items
+     * Adds Dynamic media menu items
      * @param type $menuId
      * @param type $menuItems
      */
-    public static function content(&$menuId, &$menuItems) {
+    public static function media(&$menuId, &$menuItems){
         //Add the default upload links
-        if ($menuId === 'contentmenu') {
+        if ($menuId === 'mediamenu') {
             //Add items to the profile menu;
             array_unshift($menuItems, array(
                 "menu_title" => "Content",
                 "children" => array(
-                    array("menu_title" => "All Content", "menu_url" => "/system/content/media"),
-                    array("menu_title" => "Collections", "menu_url" => "/system/content/collection/gallery")
+                    array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"),
+                    array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
                 )
                     ), array(
                 "menu_title" => "Add New",
                 "children" => array(
-                    array("menu_title" => "Drag and Drop", "menu_url" => "/system/content/create"),
-                    array("menu_title" => "Text Editor", "menu_url" => "/system/content/create/text"),
-                    array("menu_title" => "Import", "menu_url" => "/system/content/create/import"),
-                    array("menu_title" => "Snap", "menu_url" => "/system/content/create/snap")
+                    array("menu_title" => "Drag and Drop", "menu_url" => "/system/media/create"),
+                    array("menu_title" => "Text Editor", "menu_url" => "/system/media/create/text"),
+                    array("menu_title" => "Import", "menu_url" => "/system/media/create/import"),
+                    array("menu_title" => "Snap", "menu_url" => "/system/media/create/snap")
                 )
             ));
         }

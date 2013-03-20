@@ -14,13 +14,13 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers\Content;
+namespace Application\System\Controllers\Media;
 use Application\System\Controllers as System;
 /**
- * Content collection management CRUD action controller for system content 
+ * Media collection management CRUD action controller for system media 
  *
  * This class implements the action controller that manages the creation, 
- * view and edit of content collections of various posts/media types.
+ * view and edit of media collections of various posts/media types.
  *
  * @category  Application
  * @package   Action Controller
@@ -29,7 +29,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Collection extends System\Content {
+final class Collection extends System\Media {
 
     /**
      * The default fall-back method. 
@@ -41,7 +41,7 @@ final class Collection extends System\Content {
     /**
      * Displays the form required to creates a new collection. 
      * @todo    Implement the create action method
-     * @return  {@link \Application\System\Views\Content\Collection::createForm()}
+     * @return  {@link \Application\System\Views\Media\Collection::createForm()}
      */
     public function create() {
         $view = $this->load->view('collection');
@@ -49,7 +49,7 @@ final class Collection extends System\Content {
     }
     /**
      * Updates details of an existing collection.
-     * @todo    Implement the collection content update action method
+     * @todo    Implement the collection media update action method
      * @return  void
      */
     public function update($collectionid = null) {
@@ -59,7 +59,7 @@ final class Collection extends System\Content {
         //print_R($args); print_r($args1); echo $videoid;
     }
     /**
-     * Displays an collection content.
+     * Displays an collection media.
      * @todo    Implement the collection read action method
      * @return  void
      */
@@ -69,23 +69,23 @@ final class Collection extends System\Content {
     
     
     /**
-     * Displays a gallery of content items. 
+     * Displays a gallery of media items. 
      * @return void
      */
     public function gallery() {
         
         $this->output->setPageTitle(_("Collections"));
 
-        $today = $this->output->layout("content/collections");
+        $today = $this->output->layout("media/collections");
         $this->output->addToPosition("dashboard", $today);
         
         
-        $this->load->view("content")->display();   
+        $this->load->view("media")->display();   
     }
     
     /**
      * Deletes an existing audio file.
-     * @todo    Implement the audio content delete action method
+     * @todo    Implement the audio media delete action method
      * @return  void
      */
     public function delete() {  

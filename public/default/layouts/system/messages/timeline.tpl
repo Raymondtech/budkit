@@ -26,8 +26,9 @@
         <div class="stream-view">
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
-                    <tpl:import layout="input" />                   
-                    <tpl:import layout="activity/timeline" />
+                    <tpl:import layout="input" />    
+                    <div class="stream-alerts"><hr /></div>
+                    <tpl:import layout="media/timeline" />
                     <!--Just A styling dummy timeline Item for trying out different styles -->
                     <ul class="timeline-item-index styling-dummy">
                         <li class="timeline-item-li timeline-item">
@@ -42,7 +43,7 @@
                                         <img class="profile-avatar thumbnail" src="/system/object/xZiSAU/resize/50/50" alt="Livingstone Fultang" width="50" height="50" />
                                         <strong class="profile-name">Livingstone Fultang</strong>
                                     </a>
-                                    <a href="/system/activity/view/j6Nkri" title="2013-03-08 02:56:49" class="published-time">1 day ago</a>
+                                    <a href="/system/media/timeline/view/j6Nkri" title="2013-03-08 02:56:49" class="published-time">1 day ago</a>
 
                                     <div class="timeline-item-title">Justa picture! From dribbble for design inspiration</div>
                                     <div class="timeline-item-media">
@@ -53,17 +54,17 @@
                                 <div class="timeline-item-footer">
                                     <ul class="actions">
                                         <li class="action-like">
-                                            <a href="/system/activity/favourite/j6Nkri">
+                                            <a href="/system/media/timeline/favourite/j6Nkri">
                                                 <span class="like" title="Like"><i class="icon-heart"></i> Like this</span>
                                             </a>
                                         </li>
                                         <li class="action-reply">
-                                            <a href="/system/activity/reply/j6Nkri">
+                                            <a href="/system/media/timeline/reply/j6Nkri">
                                                 <span class="reply" title="Reply">Reply</span>
                                             </a>
                                         </li>
                                         <li class="action-delete">
-                                            <a href="/system/activity/delete/j6Nkri">
+                                            <a href="/system/media/timeline/delete/j6Nkri">
                                                 <span class="delete" title="Delete">Delete</span>
                                             </a>
                                         </li>

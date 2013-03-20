@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * search.php
+ * media.php
  *
  * Requires PHP version 5.4
  *
@@ -12,15 +12,16 @@
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
- * 
  */
 
 namespace Application\System\Controllers;
 
 /**
- * Search Controller
+ * The parent action controller for all system media types
  *
- * This class implements the action controller that governs complete content search
+ * Defines common action methods for the managing the default system media types
+ * It is important that you inherit the key features defined in this class
+ * when defining media types
  *
  * @category  Application
  * @package   Action Controller
@@ -28,45 +29,45 @@ namespace Application\System\Controllers;
  * @version   1.0.0
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
-class Search extends \Platform\Controller {
-    
-    /**
-     * The default fallback method. 
-     * @return void
-     */
-    public function index() {}
+Class Media extends \Platform\Controller {
 
-    /**
-     * Executes the search command
-     * @todo Implement the search action
-     * @return void
-     */
-    final public function term() {
+    public function index(){
+        return false;
+    }
 
-        //get search params;
-        $params = func_get_args();
-        $view = $this->load->view('index') ;        
-        $this->output->setPageTitle(_("Search"));
+    public function create($action = "") {
         
-        $this->output->addToPosition("dashboard", "searching for stuff");
-        $this->load->view("index")->display();      
-        //$this->output();
+        //create action types
+        $actions = array(
+            "drop" , "snap" , "text" , "import"
+        );
+        //form
+        $_form  = !in_array($action, $actions) ? "drop" : $action ;
+        $form   = $this->output->layout("media/form/{$_form}");
+
+        $this->output->addToPosition("dashboard", $form);
+        $this->output->setPageTitle(_("Add New Media"));
+        
+        $this->load->view('media')->display(); //sample call;   
+        //$this->output->addToPosition("right", $right );
     }
 
     /**
-     * Gets an instance of the search class
+     * Returns an instance of the media controller
      * @staticvar self $instance
-     * @return self 
+     * @return Media 
      */
     public static function getInstance() {
+
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
         $instance = new self;
         return $instance;
     }
+
 }
 

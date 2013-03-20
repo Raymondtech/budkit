@@ -15,13 +15,13 @@
  * 
  */
 
-namespace Application\System\Models\Activity;
+namespace Application\System\Models\Media;
 
 use Platform;
 use Library;
 
 /**
- * Activity stream object model
+ * Media stream object model
  *
  * Provides a model to activity stream objects
  *
@@ -104,7 +104,7 @@ class Object {
      * @return type
      */
     public static function getArray() {
-        $object = new \ReflectionClass('\Application\System\Models\Activity\Object');
+        $object = new \ReflectionClass('\Application\System\Models\Media\Object');
         $properties = $object->getProperties(\ReflectionProperty::IS_PUBLIC);
         $array = array();
 
@@ -125,7 +125,7 @@ class Object {
      */
     public static function set($property, $value = NULL) {
 
-        $object = new \ReflectionClass('\Application\System\Models\Activity\Object');
+        $object = new \ReflectionClass('\Application\System\Models\Media\Object');
         $object->setStaticPropertyValue($property, $value);
 
         return true;
@@ -139,7 +139,7 @@ class Object {
      */
     public static function get($property, $default = NULL) {
 
-        $object = new \ReflectionClass('\Application\System\Models\Activity\Object');
+        $object = new \ReflectionClass('\Application\System\Models\Media\Object');
         $value = $object->getStaticPropertyValue($property);
 
         //If there is no value return the default

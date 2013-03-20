@@ -4,7 +4,7 @@
            <a class="topic"><tpl:element type="text" data="page.title">SocialKit</tpl:element></a>
         </div>
     </div>
-    <div class="stream-box row-fluid activity-box">
+    <div class="stream-box row-fluid media-box">
         <div class="stream-list">
             <div class="widget">
                 <div class="widget-head"><span class="widget-title">News Feeds</span><a class="widget-close" data-dismiss="widget"><i class="icon-remove"></i></a></div>
@@ -27,8 +27,8 @@
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
                     <tpl:import layout="input" />     
-                    <hr />
-                    <tpl:import layout="activity/timeline" />
+                    <div class="stream-alerts"><hr /></div>
+                    <tpl:import layout="media/timeline" />
                 </div>
             </div>
         </div>

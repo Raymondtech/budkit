@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * article.php
+ * video.php
  *
  * Requires PHP version 5.4
  *
@@ -14,14 +14,14 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers\Content;
+namespace Application\System\Controllers\Media;
 use Application\System\Controllers as System;
 
 /**
- * Article CRUD action controller for system content 
+ * Video CRUD action controller for system media 
  *
  * This class implements the action controller that manages the creation, 
- * view and edit of articles.
+ * view and edit of a video.
  *
  * @category  Application
  * @package   Action Controller
@@ -30,75 +30,77 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Article extends System\Content {
+final class Video extends System\Media {
     /**
      * The default fallback method. 
-     * @return Article::read()
+     * @return Video::read()
      */
     public function index() {
         return $this->read();
     }   
     /**
-     * Displays the form required to creates a new article. 
+     * Displays the form required to creates a new video. 
      * @todo    Implement the create action method
-     * @return  \Application\System\Views\Content\Article::createForm()
+     * @return  \Application\System\Views\Media\Video::createForm()
      */
-    public function create() {     
-         
- 
+    public function create() {            
+        $view = $this->load->view('media\video');        
+        //get passparams
+        $params     = func_get_args();
+        $fullscreen = false;
+        return $view->createForm( $fullscreen );  
     }  
     
-        
     
     /**
-     * Displays a gallery of content items. 
+     * Displays a gallery of media items. 
      * @return void
      */
     public function gallery() {
         
-        $view       = $this->load->view('content');
-        $gallery    = $this->output->layout("content/gallery");
+        $this->output->setPageTitle(_("Videos"));
 
-        $this->output->setPageTitle( _("Articles") );
-        $this->output->addToPosition("dashboard", $gallery);
+        $today = $this->output->layout("media/gallery");
+        $this->output->addToPosition("dashboard", $today);
         
-        $view->display(); //sample call;   
-        //$this->output->addToPosition("right", $right );
+        
+        $this->load->view("media")->display();   
     }
     
+    
     /**
-     * Updates an existing article.
-     * @todo    Implement the article update action method
+     * Updates an existing video.
+     * @todo    Implement the video update action method
      * @return  void
      */
     public function update() {}  
     /**
-     * Edits an existing article.
-     * @todo    Implement the article edit action method
+     * Edits an existing video.
+     * @todo    Implement the video edit action method
      * @return  void
      */
     public function edit(){   
         echo "editing Applications";       
     }
     /**
-     * Displays an article.
-     * @todo    Implement the article read action method
+     * Displays an video.
+     * @todo    Implement the video read action method
      * @return  void
      */
     public function read() {
-         $view = $this->load->view('content\article');
+         $view = $this->load->view('media\video');
     }
     /**
-     * Deletes an existing article.
-     * @todo    Implement the article delete action method
+     * Deletes an existing video.
+     * @todo    Implement the video delete action method
      * @return  void
      */
     public function delete(){}   
     /**
-     * Returns an instance of the article controller, only creating one if does not
+     * Returns an instance of the video controller, only creating one if does not
      * exists
      * @staticvar self $instance
-     * @return an instance of {@link Article}
+     * @return an instance of {@link Video}
      */
     public static function getInstance() {
         static $instance;

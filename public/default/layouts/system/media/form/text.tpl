@@ -40,7 +40,7 @@
     <script type="text/javaScript">
             <![CDATA[
                     !function($){        
-                        $('#budkit-editor').bkeditor({stylesheet: "../../../socialkit/assets/css/editor.css"});
+                        $('#budkit-editor').bkeditor({stylesheet: "../../../default/assets/css/editor.css"});
                     }( window.jQuery );
             ]]> 
     </script>

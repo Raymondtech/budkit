@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\System\Controllers\Content;
+namespace Application\System\Controllers\Media;
 use Application\System\Controllers as System;
 
 /**
@@ -30,7 +30,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Attachments extends System\Content {
+class Attachments extends System\Media {
      
     /**
      * Displays the global system attachment uploader form 

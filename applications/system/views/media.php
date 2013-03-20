@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * content.php
+ * media.php
  *
  * Requires PHP version 5.4
  *
@@ -17,10 +17,10 @@ namespace Application\System\Views;
 use Platform;
 
 /**
- * Content view parent class
+ * Media view parent class
  *
- * System Content view parent class. Special methods for managing deferent content
- * classes are defined in the content sub namepsace 
+ * System Media view parent class. Special methods for managing deferent media
+ * classes are defined in the media sub namepsace 
  *
  * @category  Application
  * @package   View
@@ -30,7 +30,7 @@ use Platform;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-class Content extends Platform\View {
+class Media extends Platform\View {
 
     /**
      * The default system view
@@ -62,16 +62,16 @@ class Content extends Platform\View {
         $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
         
-        $this->output->addMenuGroupToPosition("side", "contentmenu");
+        $this->output->addMenuGroupToPosition("side", "mediamenu");
         $this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );
     }
     
    /**
-    * Gets an instance of the content class
+    * Gets an instance of the media class
     * @staticvar object $instance
-    * @return object Content
+    * @return object Media
     */
    public static function getInstance(){     
         static $instance;        

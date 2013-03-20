@@ -309,26 +309,26 @@ class Attachments extends Platform\Entity {
     }
 
     /**
-     * Models a collection activity object for activity feeds
+     * Models a collection media object for media feeds
      * 
-     * @param type $activityObject
-     * @param type $activityObjectType
-     * @param type $activityObjectId
+     * @param type $mediaObject
+     * @param type $mediaObjectType
+     * @param type $mediaObjectId
      * 
      * return void;
      */
-    public static function activityObject(&$activityObject, $activityObjectType, $activityObjectURI) {
+    public static function mediaObject(&$mediaObject, $mediaObjectType, $mediaObjectURI) {
 
         
-        //If the activity object is not a collection! skip it
+        //If the media object is not a collection! skip it
         $objectTypeshaystack = array("attachment");
         $thisModel = new self;
-        if (!in_array($activityObjectType, $objectTypeshaystack))
+        if (!in_array($mediaObjectType, $objectTypeshaystack))
             return; //Nothing to do here if we can't deal with it!
             
         //1.Load the collection!
-        $attachment = $thisModel->loadObjectByURI($activityObjectURI);
-        $attachmentObject = new Activity\Medialink;
+        $attachment = $thisModel->loadObjectByURI($mediaObjectURI);
+        $attachmentObject = new Media\Medialink;
         //2.Get all the elements in the collection, limit 5 if more than 5
         //3.Trigger their timeline display
         $attachmentObject->set("objectType", "attachment");
@@ -337,22 +337,22 @@ class Attachments extends Platform\Entity {
         //Now lets populate our collection with Items
         //@TODO Will probably need to query for objectType of items in collection?
         //@TODO Also this will help in removing objects from collections that have previously been deleted
-        $attachmentObjectURL = !empty($activityObjectURI) ? "/system/object/{$activityObjectURI}" : "http://placeskull.com/100/100/999999";
+        $attachmentObjectURL = !empty($mediaObjectURI) ? "/system/object/{$mediaObjectURI}" : "http://placeskull.com/100/100/999999";
         $attachmentObject->set("url",  $attachmentObjectURL);
-        $attachmentObject->set("uri", $activityObjectURI);
+        $attachmentObject->set("uri", $mediaObjectURI);
         $attachmentObject->set("height", null);
         $attachmentObject->set("width", null);
         
-        //echo $activityObjectURI;
+        //echo $mediaObjectURI;
 
-        //Now set the collection Object as the activity Object
-        $activityObject =  $attachmentObject;
+        //Now set the collection Object as the media Object
+        $mediaObject =  $attachmentObject;
         
         return true;
     }
 
     /**
-     * Get's an instance of the activity model
+     * Get's an instance of the media model
      * @staticvar object $instance
      * @return object \Application\System\Models\Options 
      */

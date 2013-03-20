@@ -15,19 +15,19 @@
  * 
  */
 
-namespace Application\System\Models\Activity;
+namespace Application\System\Models\Media;
 
 use Platform;
 use Library;
 
 /**
- * Activity stream collection model class
+ * Media stream collection model class
  *
- * An Activity Stream is a collection one or more individual activities. This provides
+ * An Media Stream is a collection one or more individual activities. This provides
  * methods for modelling a collection of activities within a stream. A "collection" 
  * is a generic list of Objects of any object type. The objectType of each item 
  * in the collection MAY be omitted if the type of object can be established 
- * through context. The collection is used primarily as the root of an Activity Streams
+ * through context. The collection is used primarily as the root of an Media Streams
  *
  * @category  Application
  * @package   Data Model
@@ -73,7 +73,7 @@ final class Collection{
      * @return array of items in collection
      */
     public static function getArray() {
-        $object = new \ReflectionClass('\Application\System\Models\Activity\Collection');
+        $object = new \ReflectionClass('\Application\System\Models\Media\Collection');
         $properties = $object->getProperties(\ReflectionProperty::IS_PUBLIC);
         $array = array();
 
@@ -94,7 +94,7 @@ final class Collection{
      */
     public static function set($property, $value = NULL) {
 
-        $object = new \ReflectionClass('\Application\System\Models\Activity\Collection');
+        $object = new \ReflectionClass('\Application\System\Models\Media\Collection');
         $object->setStaticPropertyValue($property, $value);
 
         return true;
@@ -108,7 +108,7 @@ final class Collection{
      */
     public static function get($property, $default = NULL) {
 
-        $object = new \ReflectionClass('\Application\System\Models\Activity\Collection');
+        $object = new \ReflectionClass('\Application\System\Models\Media\Collection');
         $value = $object->getStaticPropertyValue($property);
 
         //If there is no value return the default

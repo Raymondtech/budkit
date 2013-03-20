@@ -109,8 +109,7 @@ final class Schema extends Platform\Model {
                 "INSERT INTO `?authority_permissions` (`authority_permission_key`, `authority_id`, `permission_area_uri`, `permission`, `permission_type`, `permission_title`) VALUES
             (1, 4, '/settings/system(/[a-z0-9-]*)*', 'allow', 'special', 'System Settings'),
             (2, 1, '/system/authenticate(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Login'),
-            (4, 2, '/system/timeline(/[a-z0-9-]*)*', 'allow', 'execute', 'Update Status'),
-            (5, 2, '/system/content([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'View Content'),
+            (5, 2, '/system/media([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'View Content'),
             (6, 1, '/setup/install(/[a-z0-9-]*)*', 'allow', 'execute', 'Setup Installer'),
             (7, 2, '/system/start(/[a-z0-9-]*)*', 'allow', 'view', 'Start Pages'),
             (8, 2, '/system/upload([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Uploads'),
@@ -165,7 +164,6 @@ final class Schema extends Platform\Model {
                 (54, 51, 'All forums', '/system/messages/forums', NULL, 0, 4, 'link', NULL, 2, 3, 1),
                 (55, 0, 'Start Here', '', NULL, 0, 3, 'link', NULL, 1, 10, 1),
                 (56, 55, 'Dashboard', '/system/start/dashboard', NULL, 0, 3, 'link', NULL, 2, 9, 1),
-                (57, 55, 'Timeline', '/system/timeline/stream', NULL, 0, 3, 'link', NULL, 3, 8, 1),
                 (58, 55, 'Notifications', '/system/notifications/list', NULL, 0, 3, 'link', NULL, 4, 7, 1),
                 (59, 55, 'Events', '/system/event/calendar', NULL, 0, 3, 'link', NULL, 5, 6, 1),
                 (65, 0, 'Applications', '', NULL, 0, 3, 'link', NULL, 1, 4, 1),
@@ -193,10 +191,10 @@ final class Schema extends Platform\Model {
                 (27, 81, 'Widgets', '/settings/system/appearance/widgets', '', 21, 2, 'link', '', 3, 7, 1),             
                 (26, 81, 'Navigation', '/settings/system/apperance/navigation', '', 23, 2, 'link', '', 5, 6, 1),
                 (84, 0, 'Published', '', '', 19, 1, 'link', '', 1, 12, 1),
-                (86, 84, 'Photos', '/system/content/photo/gallery', NULL, 0, 1, 'link', NULL, 3, 10, 1),
-                (87, 84, 'Audio', '/system/content/audio/gallery', NULL, 0, 1, 'link', NULL, 4, 9, 1),
-                (88, 84, 'Videos', '/system/content/video/gallery', NULL, 0, 1, 'link', NULL, 5, 8, 1),
-                (89, 84, 'Articles', '/system/content/article/gallery', '', 23, 1, 'link', '', 6, 7, 1),
+                (86, 84, 'Photos', '/system/media/photo/gallery', NULL, 0, 1, 'link', NULL, 3, 10, 1),
+                (87, 84, 'Audio', '/system/media/audio/gallery', NULL, 0, 1, 'link', NULL, 4, 9, 1),
+                (88, 84, 'Videos', '/system/media/video/gallery', NULL, 0, 1, 'link', NULL, 5, 8, 1),
+                (89, 84, 'Articles', '/system/media/article/gallery', '', 23, 1, 'link', '', 6, 7, 1),
                 (90, 0, 'Relations', '', NULL, 0, 6, 'link', NULL, 1, 10, 1),
                 (91, 90, 'Suggestions', '/member/network/relation/suggestions', NULL, 0, 6, 'link', NULL, 2, 9, 1),
                 (92, 90, 'Following', '/member/network/relation/following', NULL, 0, 6, 'link', NULL, 3, 8, 1),
@@ -229,7 +227,7 @@ final class Schema extends Platform\Model {
         ");
         static::$database->query(
                 "INSERT INTO `?menu_group` (`menu_group_id`, `menu_group_title`, `menu_group_order`, `menu_group_uid`, `menu_group_iscore`) VALUES
-            (1, 'Content Menu', 1, 'contentmenu', 1),
+            (1, 'Media Menu', 1, 'mediamenu', 1),
             (2, 'Settings Menu', 2, 'settingsmenu', 1),
             (3, 'Dashboard Menu', 3, 'dashboardmenu', 1),
             (4, 'Messages menu', 4, 'messagesmenu', 1),
@@ -678,7 +676,7 @@ final class Schema extends Platform\Model {
         static::insertPropertyDatatypes();
 
         static::createPropertyValuesProxyTable("attachment"); //The attachment table
-        static::createPropertyValuesProxyTable("activity"); //The activity table
+        static::createPropertyValuesProxyTable("media"); //The media table
         static::createPropertyValuesProxyTable("user"); //The users table
         //static::createUsermetaTable();
         //static::createUsersTable();

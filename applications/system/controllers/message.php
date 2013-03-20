@@ -36,7 +36,7 @@ final class Message extends \Platform\Controller {
         
         //$this->output->addToPosition("side", $sidebar);
         $user = \Platform\User::getInstance();
-        $model      = $this->load->model('activity');
+        $model      = $this->load->model('media');
         $activities = $model->getAll();   
         
         $this->set("activities", $activities);   

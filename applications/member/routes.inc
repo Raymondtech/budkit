@@ -36,6 +36,6 @@ $route["profile"] = array(
     "path" => '/profile/',
     "application" => 'member',
     "controller" => 'profile',
-    "method" => 'view'
+    "method" => 'page'
 );
 

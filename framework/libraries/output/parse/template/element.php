@@ -164,6 +164,31 @@ class Element extends Parse\Template {
                 //Replace the CDATA;
                 $data = $text;
             endif;
+            
+            //Parse medialinks
+            if(isset($tag['MEDIALINKS'])):
+                //need to convert data back to its entities cahracter
+                $data = html_entity_decode( $data );
+                //Match mentions, urls, and hastags
+                preg_match_all('/^|\s?@([\\d\\w]+)/', $data, $mentions);
+                preg_match_all('/^|\s?[^\&]#([\\d\\w]+)/', $data, $hashTags);//There must be a space between two hastags;
+                preg_match_all('/((http|https|ftp|ftps)\:\/\/)([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-zA-Z0-9\-\.]+)\.([a-zA-Z]{2,3})(\:[0-9]{2,5})?(\/([a-zA-Z0-9+\$_-]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/', $data, $openLinks);
+                $searches = array_merge($mentions[0], $hashTags[0], $openLinks[0]);
+                $fMentions = array_map(function($uri, $title){
+                    $profile = Library\Uri::internal("/member/profile/{$uri}");
+                    return "<a class=\"mention\" href=\"{$profile}\">{$title}</a>";
+                }, $mentions[1], $mentions[0]);
+                $fHashTags = array_map(function($uri, $title){
+                    $search = Library\Uri::internal("/system/search/term/{$uri}");
+                    return "<a class=\"hashtag\" href=\"{$search}\">{$title}</a>";
+                }, $hashTags[1], $hashTags[0]);
+                $fOpenLinks= array_map(function($uri){
+                    return "<a class=\"openlink\" href=\"{$uri}\">{$uri}</a>";
+                }, $openLinks[0]);
+                $replaces = array_merge($fMentions, $fHashTags, $fOpenLinks);
+                $data = str_replace($searches, $replaces, (string) $data);
+
+            endif;
                                  
             $tag['CDATA'] = $data;
             //If we do not have a default empty it

@@ -31,21 +31,29 @@ namespace Application\System\Controllers;
  */
 class Extension extends \Platform\Controller {
 
-
     /**
      * Extensions controller, fallback method
      * @Return void
      */
-    public function index() {}
+    public function index() {
+        
+        $view = $this->load->view('index');
+        $this->output->setPageTitle(_("Application Repository"));
 
-    
+        $today = $this->output->layout("extensions");
+
+        $this->output->addToPosition("dashboard", $today);
+        $this->load->view("index")->display();
+        //$this->output();
+    }
+
     /**
      * Returns and instance of the extension class
      *
      * @staticvar object $instance
      * @return object Extensions 
      */
-    public static function getInstance(){
+    public static function getInstance() {
 
         static $instance;
         //If the class was already instantiated, just return it
