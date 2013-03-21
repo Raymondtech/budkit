@@ -74,7 +74,7 @@ final class Raw extends Library\Output\Document {
         ob_flush();
         ob_end_flush();
         
-        exit();
+        $this->output->abort();
     }
 
     /**

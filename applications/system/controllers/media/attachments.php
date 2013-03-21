@@ -58,10 +58,11 @@ class Attachments extends System\Media {
         $object = array();
         //Check that form was submitted with the POST method
         if ($this->input->methodIs("post") && isset($params[0])) { //param 0 is the name of the input file field
-            $message     = "The attachment has been created successfully";
+            
+            $message     = "The attachment has been saved successfully";
             $messageType = "success";
+            
             $attachment = $this->load->model("attachments", "system");
-            $attachment->setAllowedTypes(array("gif", "jpeg" , "jpg", "png"));
             $attachment->setOwnerNameId( $this->user->get("user_name_id") );
             $attachmentfile = $this->input->data("files");
             

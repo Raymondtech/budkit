@@ -49,19 +49,19 @@ final class MediaLink {
     public static $objectType = "medialink";
 
     /**
-     * The resource type. Valid values, along with type-specific parameters include
-     * photo, video, link, rich*, article
+     * The resource mime/type. Valid values, along with type-specific parameters include
      * 
      * @var string (optional)
      */
     public static $type = "";
-
+    
+    
     /**
-     * The oEmbed version number. This must be 1.0.
+     * Defines the medialink file name. Include the extension
      * 
-     * @var string (required) 
+     * @var type 
      */
-    public static $version = "1.0";
+    public static $name = "";
 
     /**
      * A text title, describing the resource.
@@ -104,7 +104,7 @@ final class MediaLink {
      * @var string (optional) 
      */
     public static $providerName = "";
-    
+
     /**
      * A URL to a thumbnail image representing the resource. The thumbnail must 
      * respect any maxwidth and maxheight parameters. If this paramater is present, 
@@ -113,7 +113,7 @@ final class MediaLink {
      * @var string (optional)
      */
     public static $thumbnailUrl = "";
-    
+
     /**
      * The width of the optional thumbnail. If this paramater is present, thumbnailUrl 
      * and thumbnailHeight must also be present.
@@ -121,7 +121,7 @@ final class MediaLink {
      * @var string (optional) 
      */
     public static $thumbnailWidth = "";
-    
+
     /**
      * The height of the optional thumbnail. If this paramater is present, 
      * thumbnailUrl and thumbnailWidth must also be present
@@ -151,7 +151,7 @@ final class MediaLink {
      * @var interger (required for rich, photo, and video types)
      */
     public static $height = 0;
-    
+
     /**
      *
      * @var string (required for rich and some video types) 
@@ -163,7 +163,7 @@ final class MediaLink {
      * 
      * @var string 
      */
-    public static $url = "/";
+    public static $url = "";
 
     /**
      * An IRI identifying a resource providing an HTML representation of the object. 
@@ -177,6 +177,25 @@ final class MediaLink {
      * @var interger 
      */
     public static $width = 0;
+
+    /**
+     * Creates a new Medialink with defaultvariables
+     * 
+     * @return \Application\System\Models\Media\MediaLink
+     */
+    public static function getNew() {
+        //Get the default properties;
+        $class = new MediaLink;
+        $medialink = get_class_vars(get_class($class));
+
+        //Reset this class!
+        foreach ($medialink as $name => $default):
+            $class::set($name, null);
+            $class::set("objectType", "medialink");
+        endforeach;
+
+        return $class;
+    }
 
     /**
      * Returns an array with object properties names as keys. 
@@ -198,32 +217,31 @@ final class MediaLink {
         }
         return $array;
     }
-    
+
     /**
      * Parses a string returns media links etc
      * 
      * @param type $string
      */
-    public static function parse( &$string ){
-        
+    public static function parse(&$string) {
+
         $media = array(
             "objects" => array(), //All @mentions, you can mention anytype of object
-            "hashes"  => array(), //You can use any kind of hashes
-            "links"   => array(), //Will attempt to fetch link descriptions where possible
+            "hashes" => array(), //You can use any kind of hashes
+            "links" => array(), //Will attempt to fetch link descriptions where possible
         );
-        
+
         //Match mentions, urls, and hastags
         preg_match_all('#@([\\d\\w]+)#', $string, $mentions);
         preg_match_all('/#([\\d\\w]+)/', $string, $hashTags);
         preg_match_all('/((http|https|ftp|ftps)\:\/\/)([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-zA-Z0-9\-\.]+)\.([a-zA-Z]{2,3})(\:[0-9]{2,5})?(\/([a-z0-9+\$_-]\.?)+)*\/?/', $data, $openLinks);
-        
+
         //print_R($mentions);
         //print_R($hashTags);
         //print_R($openLinks);
         //$string = "parsed";
-        
+
         return $media;
-        
     }
 
     /**
@@ -253,14 +271,6 @@ final class MediaLink {
 
         //If there is no value return the default
         return (empty($value)) ? $default : $value;
-    }
-
-    /**
-     * Creates a new instance of the activity Object Type
-     * @return \self
-     */
-    public static function getNewInstance() {
-        return new self;
     }
 
     /**

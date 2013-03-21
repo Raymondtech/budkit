@@ -123,7 +123,7 @@ class Config extends Object {
      * @param type $section
      * @param type $adapter 
      */
-    public static function getParam($name, $default = '', $section = 'general', $adapter = NULL) {
+    public static function getParam($name, $default = '', $section = 'general', $callback = NULL) {
         //validate item before using
         //$config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 

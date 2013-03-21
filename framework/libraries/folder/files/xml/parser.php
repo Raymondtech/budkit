@@ -368,86 +368,9 @@ class Parser extends Files\Xml {
         $key = null;
         $iterator = 0;
         $children = sizeof($root);
-
-        $root = self::callback($root, $xmlWriter, $readonly);
         
-        if(!is_array($root)) return ;
+        return new Render($root, $xmlWriter);
 
-        foreach ($root as $element => $data) {
-
-            //If it is a child element
-            if (is_array($data) && $element !== 'NAMESPACE') {
-                $key = $element;
-                static::writeXML($xmlWriter, $data);
-         
-                //$xmlWriter->endElement();$tag
-            }
-            //If the element is not array
-            switch ((string)$element):
-                case "ELEMENT": //We found an element tag;
-                    $tag = $data;
-                    if (!empty($tag)):
-                        $tag = strtolower($tag);
-                        $xmlWriter->startElement($tag);
-                    //\Platform\Debugger::log($tag);
-                    endif;
-                    //continue;
-                    break;
-                case "CDATA":
-                    if (!Library\Event::isDefined("_XMLContentCallback")) {
-                        $xmlWriter->writeRaw(trim($data));
-                    }else{
-                        //$xmlWriter->startCdata( );
-                        $cdata = Library\Event::trigger("_XMLContentCallback", $data );
-                        $xmlWriter->writeRaw(trim($cdata[0])); 
-                    }
-                    //$xmlWriter->endCdata();
-                    //continue;
-                    break;
-                default:
-                    if (!is_array($data)):
-                        //If no default callback is defined
-                        if (!Library\Event::isDefined("_XMLAttributeCallback")) {
-                            $xmlWriter->writeAttribute($element, $data);
-                            //$xmlWriter->startAttribute(strtolower($element));
-                            //$xmlWriter->text($data);
-                            //$xmlWriter->endAttribute();
-                        }else{
-                            //Else
-                            //@TODO Deal with namespaced attributes
-                            //@TODO trigger Last
-                            //echo $element;                              
-                            //print_R(\Library\Event::getInstance());
-                            Library\Event::trigger("_XMLAttributeCallback", $element, $data, $xmlWriter);
-
-                            //$xmlWriter->startAttribute(strtolower($return[0]));
-                            //$xmlWriter->text( $return[1] );
-                            $xmlWriter->startAttribute(strtolower($element));
-                            $xmlWriter->text( $data );
-                            $xmlWriter->endAttribute();
-                        }          
-                    endif;
-                    //continue;
-                    break;
-            endswitch;
-            //@TODO: WHERE DO WE CLOSE THE TAG
-            //This is a very hackish way of determining if we are at the end of
-            //an element. But it works.
-            if ($iterator + 1 == $children) {
-                if (empty($key) && !empty($tag) || ($key == 'CHILDREN') && !empty($tag)) {
-                    $selfclosing = array("area", "base", "basefont", "br", "col", "frame", "hr", "img", "input", "link", "meta", "param");
-                    //empty tags e.g script etc
-                    if(!in_array($tag, $selfclosing)){
-                            $xmlWriter->fullEndElement();
-                    }else{
-                        $xmlWriter->endElement();
-                     }
-                    //if (!empty($tag)):
-                    //endif;
-                }
-            }
-            $iterator++;
-        }
     }
 
     /**
@@ -523,7 +446,7 @@ class Parser extends Files\Xml {
      * @param type $element
      * @return type
      */
-    final protected static function callback($element, \XMLWriter $xmlWriter) {
+    final public static function callback($element, \XMLWriter $xmlWriter) {
 
         if (isset($element['NAMESPACE'])) {
             reset($element['NAMESPACE']);

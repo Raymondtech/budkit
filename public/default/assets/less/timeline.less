@@ -85,15 +85,15 @@
                     }
                 }
             }
-
             .media-grid{
-                margin-left: -@gridGutterWidth*0.5;
+                //margin-left: -@gridGutterWidth*0.5;
                 list-style: none;
                 .clearfix();
-                > li {
-                   float: left; // Explicity set the float since we don't require .span* classes
-                    margin-bottom: @gridGutterWidth*0.5;
-                    margin-left: @gridGutterWidth*0.5;
+                .media-item {
+                   //float: left; // Explicity set the float since we don't require .span* classes
+                    display: inline-block;
+                    margin-bottom:  @baseLineHeight*0.5;
+                    margin-right: @baseLineHeight*0.5;
                   }
             }
             

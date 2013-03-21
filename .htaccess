@@ -93,9 +93,15 @@ AddType application/x-font-ttf    ttf ttc
 AddType font/opentype                  otf
 AddType application/x-font-woff        woff
 
-# Assorted types                                      
+# Other Image types                                     
 AddType image/x-icon                   ico
 AddType image/webp                     webp
+AddType image/jpeg                      jpeg jpg jpe
+AddType image/png                       png
+AddType image/svg+xml                   svg
+AddType image/tiff                      tiff tif
+
+# Assorted types 
 AddType text/cache-manifest            appcache manifest
 AddType text/x-component               htc
 AddType application/x-chrome-extension crx

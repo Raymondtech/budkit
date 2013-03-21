@@ -86,7 +86,7 @@ final class Loader{
      * @param type $model
      * @return type 
      */
-    public function model( $model , $app='' ){
+    public function model( $model , $app='' , $new = false ){
         
         //Get the Router to determine what application we are in;
         $Router     = Library\Router::getInstance();
@@ -100,6 +100,12 @@ final class Loader{
         //Specifics
         $class      = "Application\\".$application."\models\\".$model ;
         $file       = "";
+        
+        //If we want a new class then
+        if($new){ 
+            return new $class();
+        }
+ 
         
         $model = $class::getInstance();
 

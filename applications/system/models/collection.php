@@ -95,15 +95,24 @@ class Collection extends Platform\Entity {
         if (is_array($collectionItemize) && !empty($collectionItemize)) {
             $items = array();
             foreach ($collectionItemize as $item) {
-                $itemObject = new Media\MediaLink;
+                $itemObject = Media\MediaLink::getNew();
                 //@TODO Will probably need to query for objectType of items in collection?
                 //@TODO Also this will help in removing objects from collections that have previously been deleted
+                $itemObjectEntity = $thisModel->load->model("attachments", "system")->loadObjectByURI( $item ); //Load the item with the attachment to get all its properties
+                //Now check object_id exists;
+                //If not delete the object all together;
+                //Also check if attachments_src is defined and exsits;
+                //If attachments id does not exists, delete the item from this collection;
+                
                 $itemObjectURL = !empty($item) ? "/system/object/{$item}/" : "http://placeskull.com/100/100/999999";
                 $itemObject->set("url", $itemObjectURL);
                 $itemObject->set("uri", $item);
                 $itemObject->set("height", null);
                 $itemObject->set("width", null);
+                $itemObject->set("type", $itemObjectEntity->getPropertyValue("attachment_type") );
+                $itemObject->set("name", $itemObjectEntity->getPropertyValue("attachment_name"));
                 $items[] = $itemObject::getArray();
+                
                 unset($itemObject);
             }
             $collectionObject->set("items", $items);

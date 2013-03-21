@@ -43,6 +43,7 @@ Class Media extends \Platform\Controller {
         $actions = array(
             "drop" , "snap" , "text" , "import"
         );
+        
         //form
         $_form  = !in_array($action, $actions) ? "drop" : $action ;
         $form   = $this->output->layout("media/form/{$_form}");

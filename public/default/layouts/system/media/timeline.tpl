@@ -2,7 +2,7 @@
     <div class="timeline">
         <div class="timeline-line"></div>
         <ol class="timeline-item-index timeline-stream">
-            <tpl:loop data="activities.items">
+            <tpl:loop data="activities.items" id="timeline-items">
                 <li class="timeline-item-li timeline-item">
                     <div class="timeline-item-container">
                         <div class="timeline-item-header">
@@ -11,23 +11,21 @@
                                 <img class="profile-avatar thumbnail" src="${actor.image.url}" alt="${actor.displayName}" width="${actor.image.width}" height="${actor.image.height}" />
                                 <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                              
                             </a>
-                            <a href="/system//media/timeline/view/${uri}" title="${published}" class="published-time"><tpl:element type="time" data="published" /></a>
+                            <a href="/system/media/timeline/view/${uri}" title="${published}" class="published-time"><tpl:element type="time" data="published" /></a>
                             <div class="timeline-item-title"><tpl:element type="text" data="content" medialinks="true" /></div>
                             <tpl:condition data="object" test="isset" value="1">
                                 <tpl:condition data="object.objectType" test="isnot" value="collection">
-                                    <div class="timeline-item-media">
-                                        <a href="/system/media/photo/view/${object.uri}" data-target="budkit-slider">
-                                            <img src="/system/object/${object.uri}/resize/500" />
-                                        </a>
+                                    <div class="timeline-item-media">                                   
+                                        <tpl:media uri="object.uri" name="object.name" url="object.url" link="true" type="object.type" data-target="budkit-slider" width="800"></tpl:media>             
                                     </div>
                                 </tpl:condition>
                                 <tpl:condition data="object.objectType" test="equals" value="collection">
                                     <div class="timeline-item-media">	  	
-                                        <ul class="media-grid unstyled bottom-media">	  	
-                                            <tpl:loop data="object.items" id="activity_object">
-                                                <li><a href="/system/media/photo/view/${uri}" data-target="budkit-slider"><img src="/system/object/${uri}/resize/150/150" /></a></li>
+                                        <div class="media-grid bottom-media">	  	
+                                            <tpl:loop data="object.items" id="media-items">
+                                                <tpl:media uri="uri"  type="type" link="true" url="url" class="media-item" name="name"  data-target="budkit-slider" width="170" height="170" />
                                             </tpl:loop> 	
-                                        </ul>  	
+                                        </div>  	
                                     </div>
                                 </tpl:condition>
                             </tpl:condition>
@@ -40,15 +38,10 @@
                                 <li class="action-reply hover"><a href="/system/media/timeline/reply/${uri}"><span class="reply" title="Reply">Add comment</span></a></li>   
                                 <li class="action-delete hover"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete"><strong>Trash this</strong></span></a></li>
                             </ul>
-
                         </div>
                     </div>
                 </li>
             </tpl:loop>  
-        </ol>
-        <div  class="timeline-more-items">
-            <button class="btn input-100pct">Load more</button>
-        </div>
     </div>
 
 </tpl:layout>

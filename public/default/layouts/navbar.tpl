@@ -16,7 +16,7 @@
                     <ul class="nav" id="menubartabs">
                         <li><a href="/system/start/dashboard">Home</a></li>
                         <li><a href="/member/profile/view">Profile</a></li> 
-                        <li><a href="/system/media/timeline">Timeline</a></li>   
+                        <li><a href="/system/media/timeline">Media</a></li>   
                         <li><a href="/system/messages/all">Messages</a></li>                                                                              
                         <li><a href="/member/network/graph">Network</a></li>     <!--Use  class="highlighted" on new notifications-->
                          <li><a href="/settings/member/account">Settings</a></li> 

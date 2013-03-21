@@ -56,21 +56,21 @@ class Media extends Platform\Entity {
 
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->definePropertyModel(array(
-            "media_published" => array("Published", "datetime", 50),
-            "media_content" => array("Content", "varchar", 1000),
-            "media_summary" => array("Summary", "mediumtext", 50, NULL),
-            "media_comment_status" => array("Allow Comments", "tinyint", 1, 0), //*
-            "media_parent" => array("Parent", "smallint", 10, 0), //*
-            "media_generator" => array("Generator", "mediumtext", 100),
-            "media_provider" => array("Provider", "mediumtext", 100),
-            "media_mentions" => array("Mentions", "varchar", 1000), //*
-            "media_actor" => array("Actor", "varchar", 1000),
-            "media_verb" => array("Verb", "mediumtext", 20, "post"),
-            "media_geotags" => array("Geotags", "varchar", 1000), //*
-            "media_object" => array("Object", "varchar", 1000),
-            "media_target" => array("Target", "varchar", 1000),
-            "media_permissions" => array("Permissions", "mediumtext", 50), //* //allo:{},deny:{}
-                ), "media");
+                "media_published" => array("Published", "datetime", 50),
+                "media_content" => array("Content", "varchar", 1000),
+                "media_summary" => array("Summary", "mediumtext", 50, NULL),
+                "media_comment_status" => array("Allow Comments", "tinyint", 1, 0), //*
+                "media_parent" => array("Parent", "smallint", 10, 0), //*
+                "media_generator" => array("Generator", "mediumtext", 100),
+                "media_provider" => array("Provider", "mediumtext", 100),
+                "media_mentions" => array("Mentions", "varchar", 1000), //*
+                "media_actor" => array("Actor", "varchar", 1000),
+                "media_verb" => array("Verb", "mediumtext", 20, "post"),
+                "media_geotags" => array("Geotags", "varchar", 1000), //*
+                "media_object" => array("Object", "varchar", 1000),
+                "media_target" => array("Target", "varchar", 1000),
+                "media_permissions" => array("Permissions", "mediumtext", 50), //* //allo:{},deny:{}
+        ), "media");
 
         $this->defineValueGroup("media");
     }
@@ -83,8 +83,8 @@ class Media extends Platform\Entity {
 
         //Get the object list
         $objects = $this->getMediaObjectsList()->fetchAll();
-
         $items = array();
+        
         //Parse the mediacollections;
         foreach ($objects as $object) {
 
@@ -97,8 +97,10 @@ class Media extends Platform\Entity {
             $actorObject->set("id", $object['media_actor']);
             $actorObject->set("uri", $object['user_name_id']);
 
-            $actorImage = new Media\MediaLink;
+            $actorImage = Media\MediaLink::getNew();
+            $actorImageEntity = $this->load->model("attachments", "system")->loadObjectByURI($object['user_photo']);
             $actorImageURL = !empty($object['user_photo']) ? "/system/object/{$object['user_photo']}/resize/50/50" : "http://placeskull.com/50/50/999999";
+            $actorImage->set("type", $actorImageEntity->getPropertyValue("attachment_type") );
             $actorImage->set("url", $actorImageURL);
             $actorImage->set("height", 50);
             $actorImage->set("width", 50);
@@ -136,6 +138,7 @@ class Media extends Platform\Entity {
                 //If there no explicitly defined mediaObjects, in media_object
                 //parse media_content for medialinks
                 //Parse media targets medialinks
+                //@todo;
                 $mediaLinks = Media\MediaLink::parse($object['media_content']);
             
             endif;
@@ -155,6 +158,8 @@ class Media extends Platform\Entity {
         $mediacollections->set("totalItems", count($items));
 
         $collection = $mediacollections::getArray();
+        
+        //print_r($collection);
 
         return $collection;
     }
@@ -263,7 +268,7 @@ class Media extends Platform\Entity {
         $this->setPropertyValue("media_actor", $this->user->get("user_id"));
         $this->setPropertyValue("media_published", \Library\Date\Time::stamp());
 
-
+        //@TODO
         //Search for media link
         $targetObject = Media\Object::getInstance();
         $mediaLink = Media\MediaLink::getInstance();
@@ -275,7 +280,7 @@ class Media extends Platform\Entity {
         if (is_array($attachments) && !empty($attachments)) {
             if (sizeof($attachments) > 1) {
                 //Create a collection and link to the object iD
-                $collection = $this->load->model("collection");
+                $collection = $this->load->model("collection", "system");
                 $collection->setPropertyValue("collection_items", implode(',', $attachments));
                 $collection->setPropertyValue("collection_size", count($attachments));
                 $collection->setPropertyValue("collection_owner", $this->user->get("user_name_id"));

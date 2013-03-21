@@ -76,7 +76,7 @@ class Attachments extends Platform\Entity {
      * 
      * @static array
      */
-    public $allowed = array("mp3", "jpg", "gif", "png", "jpeg", "zip");
+    public $allowed = array("mp3"=>"", "jpg"=>"", "gif"=>"", "png"=>"", "jpeg"=>"", "zip"=>"", "pdf"=>"", "doc"=>"", "txt"=>"");
 
     /**
      * Defines the attachment properties
@@ -115,6 +115,8 @@ class Attachments extends Platform\Entity {
     /**
      * Defines allowed attachment types before save
      * Any not explicitly defined here will be skipped
+     * 
+     * @deprecated since version 1.0.0 use attachments.ini
      * @param array $types
      */
     public function setAllowedTypes(array $types) {
@@ -144,18 +146,19 @@ class Attachments extends Platform\Entity {
 
         $fileHandler = \Library\Folder\Files::getInstance();
         $uploadsFolder = $this->config->getParam('users-folder', '', 'content');
+        $allowedTypes = $this->config->getParam("allowed-types", $this->allowed ,"attachments");
         //Check User Upload Limit;
         //Check File upload limit;
         //Validate the file
 
         $fileName = preg_replace('/[^' . $this->_validChars . ']|\.+$/i', "", basename($file['name']));
         if (strlen($fileName) == 0 || strlen($fileName) > $this->_maxNameLength) {
-            $this->setError(_("Invalid file Name"));
+            $this->setError(_("Invalid file name"));
             throw new \Platform\Exception($this->getError());
         }
         //Check that the file has a valid extension
         $fileExtension = $fileHandler->getExtension($fileName);
-        if (!in_array(strtolower($fileExtension), $this->allowed)) {
+        if (!array_key_exists(strtolower($fileExtension), $allowedTypes)) {
             $this->setError(_("Attempting to upload an invalid file type"));
             throw new \Platform\Exception($this->getError());
         }
@@ -181,8 +184,12 @@ class Attachments extends Platform\Entity {
             throw new \Platform\Exception($this->getError());
         }
         
-        //Get the attachment content Type;
-        $contentType = "application/octet-stream";
+        //Get the uploaded file extension type.
+        $this->_fileType = $fileHandler::getMimeType( $uploadFileName );
+        //Validate the file MimeType against the allowed extenion type, if fails,
+        //delete the file and throw an error.
+
+        
 
         foreach (array(
             "attachment_name" => $fileName,
@@ -192,7 +199,7 @@ class Attachments extends Platform\Entity {
             "attachment_src" => str_replace(FSPATH, '', $uploadFileName), 
             "attachment_ext" => $fileExtension,
             "attachment_owner" => $this->_owner,
-            "attachment_type"   => $fileHandler::getMimeType( $uploadFileName )
+            "attachment_type"   => $this->_fileType
         ) as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
@@ -250,7 +257,7 @@ class Attachments extends Platform\Entity {
             $headers = array(
                 "Pragma" => null,
                 "Cache-Control" => "",
-                "Content-type" => $ftype,
+                "Content-Type" => $ftype,
             );
             foreach ($headers as $name => $value) {
                 $attachment->output->unsetHeader($name);
@@ -283,12 +290,12 @@ class Attachments extends Platform\Entity {
 
         //If there is no file
         if (empty($file))
-            return false;
+            return $file; 
         $fileExtension = $fileHandler->getExtension($file);
 
         //If we can't resize this type of file
         if (!in_array(strtolower($fileExtension), $resizable))
-            return false;
+            return $file;//If we can't resize it just return the file
         //We need at least the width or height to resize;
         if (empty($params))
             return false;
@@ -318,7 +325,9 @@ class Attachments extends Platform\Entity {
      * return void;
      */
     public static function mediaObject(&$mediaObject, $mediaObjectType, $mediaObjectURI) {
-
+       
+        //Allowed media objects
+        $types = \Library\Config::getParam("allowed-types", array(), "attachments");
         
         //If the media object is not a collection! skip it
         $objectTypeshaystack = array("attachment");
@@ -328,7 +337,7 @@ class Attachments extends Platform\Entity {
             
         //1.Load the collection!
         $attachment = $thisModel->loadObjectByURI($mediaObjectURI);
-        $attachmentObject = new Media\Medialink;
+        $attachmentObject = Media\Medialink::getNew();
         //2.Get all the elements in the collection, limit 5 if more than 5
         //3.Trigger their timeline display
         $attachmentObject->set("objectType", "attachment");
@@ -338,10 +347,15 @@ class Attachments extends Platform\Entity {
         //@TODO Will probably need to query for objectType of items in collection?
         //@TODO Also this will help in removing objects from collections that have previously been deleted
         $attachmentObjectURL = !empty($mediaObjectURI) ? "/system/object/{$mediaObjectURI}" : "http://placeskull.com/100/100/999999";
-        $attachmentObject->set("url",  $attachmentObjectURL);
-        $attachmentObject->set("uri", $mediaObjectURI);
+        $attachmentObject->set("url",    $attachmentObjectURL);
+        $attachmentObject->set("uri",    $mediaObjectURI);
+        //AttachmentType
+        //$mediaType  =  $attachment->getPropertyValue("attachment_type");
+        
+        $attachmentObject->set("name", $attachment->getPropertyValue("attachment_name"));
+        $attachmentObject->set("type",   $attachment->getPropertyValue("attachment_type") );
         $attachmentObject->set("height", null);
-        $attachmentObject->set("width", null);
+        $attachmentObject->set("width",  null);
         
         //echo $mediaObjectURI;
 

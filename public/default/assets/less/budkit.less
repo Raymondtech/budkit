@@ -497,6 +497,35 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
    content: "\f005";
    color: #e3cf7a;
 }
+
+
+.media-file{ 
+    display: inline-block;
+    padding: 10px;
+    line-height: @baseLineHeight;
+    background: #f9fdff;
+    box-shadow: none;
+    width: 150px;
+    min-height: 50px;
+    text-align: center;
+    text-decoration: none; 
+    margin-bottom:  @baseLineHeight*0.5;
+    margin-right: @baseLineHeight*0.5;
+    border: 1px solid #ecf4f8;
+    .border-radius(0 15px 0 15px);
+    .box-sizing(border-box);
+    .media-type{ 
+        display: block;
+        text-align: center;
+        font-size: 24px; line-height: 32px; text-transform: uppercase;
+        color: @grayLight;
+        font-weight: bold;
+    }
+    .media-help{ font-size: 11px; }
+    &:hover{ text-decoration: none; background: #ecf4f8 }
+}
+
+
 /****IMPORTS****/
 @import "timeline.less";
 @import "wizard.less";
