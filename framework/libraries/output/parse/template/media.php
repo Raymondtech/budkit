@@ -61,7 +61,7 @@ class Media extends Parse\Template {
         $attachmentTypes = \Library\Config::getParam("allowed-types", array(), "attachments");
         
         $images = array("image/bmp", "image/gif", "image/jpeg", "image/jpeg", "image/jpg");
-        $videos = array();
+        $videos = array("video/mp4");
         $audio = array();
         $rich = array(); //Rich Html embed for swf etc
 
@@ -127,6 +127,22 @@ class Media extends Parse\Template {
                     if(empty($image['HEIGHT'])) unset($image['HEIGHT']);
                     $tag['CHILDREN'][] = $image;
                     //$tag = array("ELEMENT"=>"span","CDATA"=>"Single Image");
+                endif;
+                
+                if(in_array($mime, $videos) && !empty($uri)):
+                    $videoLink = \Library\Uri::internal("/system/object/".$uri);
+                    $video = array(
+                        "ELEMENT" => "video",
+                        "CONTROLS"=>"true",
+                        "CHILDREN"=>array(
+                            array(
+                                "ELEMENT"=>"SOURCE",
+                                "SRC"=> $videoLink,
+                                "TYPE"=> $mime,
+                            )
+                        )
+                    );
+                    $tag = $video;
                 endif;
             endif;
         
