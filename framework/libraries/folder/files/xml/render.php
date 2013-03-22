@@ -82,7 +82,7 @@ final class Render {
         //ELEMENT CONTENT
         foreach ($tree as $index => $element) {
             //EVERYTHING ELSE IS AN ATTRIBUTE;
-            if (!is_array($element)):
+            if (!is_array($element) && $index !=="CDATA"):
                 $attribute = $index;
                 $value = $element;
                 $xml->startAttribute(strtolower($attribute));
@@ -98,7 +98,7 @@ final class Render {
             //ANYCDATA?
             if (isset($tree['CDATA'])):
                 $data = $tree['CDATA'];
-                \Library\Event::trigger("_XMLContentCallback", $data ); //Callbacks should accept data by reference
+                //\Library\Event::trigger("_XMLContentCallback", $data ); //Callbacks should accept data by reference
                 $xml->writeRaw(trim($data));
                 unset($tree['CDATA']);
             endif;
