@@ -64,8 +64,11 @@ class Media extends Parse\Template {
         $videos = array("video/mp4");
         $audio = array();
         $rich = array(); //Rich Html embed for swf etc
-
-
+        
+        //@TODO media thumbnail mode
+        $mode = $tag['MODE']; //thumbnail, icon etc...
+        
+        
         $name = static::getData($tag['NAME'], $tag['NAME']);
         $type = static::getData($tag['TYPE'], $tag['TYPE']);
         $uri = static::getData($tag['URI'], $tag['URI']);
@@ -111,6 +114,7 @@ class Media extends Parse\Template {
 
             //Type specific
             if (!empty($type)):
+                
                 //@TODO will need to determine browser support for the various
                 //mime types shown here, for instance only safari browsers support image/tiff;
                 if (in_array($mime, $images) && !empty($url)):
@@ -157,6 +161,7 @@ class Media extends Parse\Template {
         unset($tag['TYPE']);
         unset($tag['URL']);
         unset($tag['URI']);
+        unset($tag['MODE']);
         unset($tag['LINK']);
         unset($tag['CDATA']);
         

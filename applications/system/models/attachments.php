@@ -273,14 +273,19 @@ class Attachments extends Platform\Entity {
             else: //If the file is not browsable, force the browser to download the original file;
                 //Move the file to the temp public download directory
                 $downloadPath = FSPATH . "public" . DS . "downloads" . DS . $object->getObjectURI();
-                $downloadPath.= Platform\Framework::getRandomString($length); //So people won't be guessing!;;
+                //For personalized link we will need to randomize the filename.
+                $downloadPath.= Platform\Framework::getRandomString(5); //So people won't be guessing!;;
                 $downloadPath.= ".". \Library\Folder\Files::getExtension($fname);
                 if (\Library\Folder\Files::copy($fullPath, $downloadPath)) {
                     if(file_exists($downloadPath)):
+                        
+                        //We still want to delete the file even after the user
+                        //is gone
+                        ignore_user_abort(true);
                         //$attachment->output->setHeader("Expires", "0");
                         //Content-Disposition is not part of HTTP/1.1
-                        //$downloadName = basename($downloadPath);
-                        //$attachment->output->setHeader("Content-Disposition", " attachment; filename={$downloadName}");
+                        $downloadName = basename($downloadPath);
+                        $attachment->output->setHeader("Content-Disposition", "inline; filename={$downloadName}");
                         //Will need to restart the outputbuffer with no gziphandler
                         $noGzip = $attachment->output->restartBuffer(null); //use null rather than "" for no gzip handler;
                         ob_end_clean(); //ob level 0; output buffering and binary transfer is a nightmare
@@ -288,7 +293,8 @@ class Attachments extends Platform\Entity {
                         $attachment->output->setHeader("Cache-Control","must-revalidate");
                         $attachment->output->setHeader("Content-Length", $fsize);
                         readfile($downloadPath);
-                        
+
+                         //Delete after download.
                         unlink($downloadPath);       
                         //$attachment->output->abort();
                         $attachment->output->setFormat('raw', array()); //Headers must be set before output 
