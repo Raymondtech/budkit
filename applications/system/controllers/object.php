@@ -42,8 +42,9 @@ class Object extends \Platform\Controller {
         
         $object     = $entity->loadObjectByURI( $resourceId ); //@todo Validate URI
         //$objectType = $object->getPropertyValue("objectType");
-        
+        //Loads all the system objects;
         \Library\Event::trigger("beforeObjectLoad", $object , $params);
+
     }
 
 
