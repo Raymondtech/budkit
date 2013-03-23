@@ -15,13 +15,13 @@
                             <div class="timeline-item-title"><tpl:element type="text" data="content" medialinks="true" /></div>
                             <tpl:condition data="object" test="isset" value="1">
                                 <tpl:condition data="object.objectType" test="isnot" value="collection">
-                                    <div class="timeline-item-media">                                   
-                                        <tpl:media uri="object.uri" name="object.name" url="object.url" link="true" type="object.type" data-target="budkit-slider" width="800"></tpl:media>             
+                                    <div class="timeline-item-media clearfix">                                   
+                                        <tpl:media uri="object.uri" name="object.name" url="object.url" link="true" type="object.type" data-target="budkit-slider" width="700"></tpl:media>             
                                     </div>
                                 </tpl:condition>
                                 <tpl:condition data="object.objectType" test="equals" value="collection">
                                     <div class="timeline-item-media">	  	
-                                        <div class="media-grid bottom-media">	  	
+                                        <div class="media-grid bottom-media clearfix">	  	
                                             <tpl:loop data="object.items" id="media-items">
                                                 <tpl:media uri="uri"  type="type" link="true" url="url" class="media-item" name="name"  data-target="budkit-slider" width="170" height="170" />
                                             </tpl:loop> 	

@@ -198,12 +198,12 @@ class Output extends Object {
 
     /**
      * Starts the output buffer
-     *
+     * @handler the ob handler callback; NOTE, use null rather than "" for no handler
      * @return void
      */
-    final public static function startBuffer() {
+    final public static function startBuffer($handler = "ob_gzhandler") {
         //2.output buffer start
-        if (!ob_start("ob_gzhandler"))
+        if (!ob_start($handler))
             ob_start();
     }
 
@@ -284,10 +284,10 @@ class Output extends Object {
 
     /**
      * Restarts the output buffer
-     *
+     * @handler the ob handler callback; NOTE, use null rather than "" for no handler
      * @return type
      */
-    final public function restartBuffer() {
+    final public function restartBuffer($handler = "ob_gzhandler") {
         //anything that had previously been printed
         $printed = ob_get_contents();
 
@@ -296,7 +296,7 @@ class Output extends Object {
         ob_end_clean();
 
         //We now start a new buffer, to deal with the template!
-        $this->startBuffer();
+        $this->startBuffer($handler);
 
         return $printed;
     }

@@ -97,9 +97,9 @@ class Media extends Parse\Template {
             
             if (!empty($name)):
                 $fileExtension = \Library\Folder\Files::getExtension($name, "file");
-                 
+                $fileExtension = strtolower( $fileExtension );  
                 $linkable = array("ELEMENT"=>"a", "HREF"=> \Library\Uri::internal($url), "CLASS"=>"media-{$fileExtension} media-file",  ); 
-                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-type media-{$fileExtension}", "CDATA"=>$fileExtension);
+                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-type media-{$fileExtension}", "CDATA"=>"<i class='icon-file'></i>".$fileExtension);
                 $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-filename", "CDATA"=> $name );
                 $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-help help-block", "CDATA"=> $mime );
                 //We cannot have two a > a
@@ -134,6 +134,8 @@ class Media extends Parse\Template {
                     $video = array(
                         "ELEMENT" => "video",
                         "CONTROLS"=>"true",
+                        "WIDTH" => !empty($width) ? $width : null,
+                        "HEIGHT" => !empty($height) ? $height : null,
                         "CHILDREN"=>array(
                             array(
                                 "ELEMENT"=>"SOURCE",
@@ -142,6 +144,8 @@ class Media extends Parse\Template {
                             )
                         )
                     );
+                    if(empty($video['WIDTH'])) unset($video['WIDTH']);
+                    if(empty($video['HEIGHT'])) unset($video['HEIGHT']);
                     $tag = $video;
                 endif;
             endif;

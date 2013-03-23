@@ -108,9 +108,25 @@ class Folder extends \Library\Object {
      * @param type $path
      * @param type $toPath
      * @param type $replace 
+     * @todo Will always replace for now.
      */
     public static function move($path, $toPath, $replace = TRUE) {
-        
+        if(copy($path, $toPath)){
+            //@todo Delete the original;
+        }
+    }
+    
+     /**
+     * Copies the file or folder to a new destination
+     * 
+     * @param type $path
+     * @param type $toPath
+     * @param type $replace 
+     * @todo Will always replace for now.
+     */
+    public static function copy($path, $toPath) {
+        if(empty($path)||empty($toPath)) return false;
+        return copy($path, $toPath);
     }
 
     /**

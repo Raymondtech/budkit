@@ -175,6 +175,12 @@ $requirements = array(
             "writable" => true,
             "path" => FSPATH . "users",
             "terminal" => true,
+        ),
+        "users" => array(
+            "title" => "Downloads folder",
+            "writable" => true,
+            "path" => FSPATH . "public".DS."downloads",
+            "terminal" => true,
         )
     )
 );
