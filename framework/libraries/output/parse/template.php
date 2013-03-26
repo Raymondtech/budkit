@@ -191,6 +191,7 @@ abstract class Template extends Output\Parse {
      */
     final public static function getPersistentData($path, $default = "") {
 
+        
         $id = explode('.', $path);
         $value = isset(static::$currentloopid) ? static::$pvariables[static::$currentloopid] : array();
         
@@ -242,6 +243,17 @@ abstract class Template extends Output\Parse {
         static::$output = Library\Output::getInstance();
         static::$variables = static::$output->getVariables();
      
+        //Modified data variables
+        $parts = explode("|", $path, 2);     
+        if(isset($parts[1])){
+            $modifier = $parts[0];
+            if(array_key_exists($modifier, static::$allowedDataModifiers)):
+                $method = static::$allowedDataModifiers[$modifier];
+                $path   = end( $parts );
+                return self::$method( $path );                   
+            endif;
+        }
+        
         $id = explode('.', $path);
         $value = static::$variables;
         

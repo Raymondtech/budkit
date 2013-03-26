@@ -175,6 +175,25 @@ class Condition extends Parse\Template {
     
     private static function _empty($tag) {
         
+        $data = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
+        $value = $tag['VALUE'];
+        $datatest = (empty($data) !== (bool)$value) ? true : false;
+        $element = null;
+
+        //If the boolean value of value is equal to data then condition is met
+        if ((bool) $datatest == (bool) $value) {
+            //Get the layout name; and save it!
+            if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
+                static::$writer->writeRaw($tag['CDATA']);
+            endif;
+
+            //Get the layout name; and save it!
+            if (isset($tag['CHILDREN'])):
+                $element = $tag['CHILDREN'];
+            endif;
+        }
+        //Else remove the tag from the tree;
+        return $element;
     }
 
     /**

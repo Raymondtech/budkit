@@ -28,7 +28,6 @@
 namespace Library\Output\Parse\Template;
 
 use Library;
-use Library\Output; 
 use Library\Output\Parse;
 
 /**
@@ -67,24 +66,32 @@ class Loop extends Parse\Template {
         //print_R($tag['CHILDREN']);
         //First we get the data, and check it is an array or object
         //Get the data;
-        if (!isset($tag['DATA'])) return null;
+        if (!isset($tag['DATA'])&&!isset($tag['LIMIT'])) return null;
+        
         $id     = isset($tag['ID'])? $tag['ID'] : strval($tag['DATA']);
         $data   = self::getData($tag['DATA'], array()); //echo $data;
+        $limit  = self::getData($tag['LIMIT'], $tag['LIMIT']); //echo $data;
         
         static::$looping[$id] = true;
         
         //get the current loop id we will replace this at the end
         $existing = static::$currentloopid; 
+        $limit    = empty($limit)? count($data): $limit;
         
+        //echo $limit;
+        
+        reset($data);
         //'looping method call';
-        foreach( $data as $item){   
+        for( $i=0; $i<$limit; $i++){   
             static::$currentloopid = $id; //tell the parser what loop we are working with now
+            $item = current($data);
             //Reset the pvariable param;
-            static::$pvariables[$id] = $item;     
+            static::$pvariables[$id] = $item ;     
             //Now multiply the tag in $_elements;
             Library\Folder\Files\Xml\Parser::writeXML($writer, $tag['CHILDREN']);
             
             static::$currentloopid = $existing;
+            next($data); //move the pointer
         };
         
         //When we are done with the loop;

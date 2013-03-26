@@ -33,19 +33,7 @@ final class Message extends \Platform\Controller {
      * @return void
      */
     public function index() {
-        
-        //$this->output->addToPosition("side", $sidebar);
-        $user = \Platform\User::getInstance();
-        $model      = $this->load->model('media');
-        $activities = $model->getAll();   
-        
-        $this->set("activities", $activities);   
-        $this->set("user", $user);
-        
-        $layout = $this->output->layout('messages/timeline');
-        $this->output->addToPosition("dashboard", $layout);
-        
-        $this->load->view("message")->display();  
+         return $this->inbox();
     }
 
     /**
@@ -53,8 +41,20 @@ final class Message extends \Platform\Controller {
      * @return void
      */
     public function inbox() {
-        $this->output->setPageTitle(_("Inbox"));
-        return $this->index();
+        
+        $this->output->setPageTitle(_("Private Messages"));
+                //$this->output->addToPosition("side", $sidebar);
+        $user = \Platform\User::getInstance();
+        $model      = $this->load->model('media');
+        $activities = $model->getAll();   
+        
+        $this->set("activities", $activities);   
+        $this->set("user", $user);
+        
+        $layout = $this->output->layout('timeline');
+        $this->output->addToPosition("dashboard", $layout);
+        
+        $this->load->view("message")->display(); 
     }
 
     /**

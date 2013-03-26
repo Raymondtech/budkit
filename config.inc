@@ -112,7 +112,7 @@ $config = array(
  'general' => 
     array(
         'host' => 'mb.local',
-        'path' => '/',
+        'path' => '/~livingstonefultang/',
         'template' => 'default',
         'site-name' => 'awesome-secret',
         'site-meta-description'=>'The social network',

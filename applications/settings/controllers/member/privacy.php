@@ -14,9 +14,11 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\Settings\Controllers\Member;
 
 use \Application\Settings\Controllers as Settings;
+
 /**
  * The sub actions controller for privacy settings
  *
@@ -33,9 +35,17 @@ final class Privacy extends Settings\Member {
      * Displays the privacy settings form
      * @return void
      */
-    public function index() {                  
-        $view   = $this->load->view( 'member' );   
-        return $view->form("member/privacy", "Privacy settings");    
+    public function index() {
+        $view = $this->load->view('member');
+        return $view->form("member/privacy", "Privacy settings");
+    }
+
+    /**
+     * Privacy Lists
+     */
+    public function group() {
+        $view = $this->load->view('member');
+        return $view->form("member/privacy", "Privacy lists");
     }
 
     /**

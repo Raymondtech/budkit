@@ -7,19 +7,19 @@
     <div class="stream-box row-fluid media-box">
         <div class="stream-list">
             <div class="widget">
-                <div class="widget-head"><span class="widget-title">News Feeds</span><a class="widget-close" data-dismiss="widget"><i class="icon-remove"></i></a></div>
+                <div class="widget-head"><span class="widget-title">Filters</span><a class="widget-close" data-dismiss="widget"><i class="icon-remove"></i></a></div>
                 <div class="widget-body">
                     <ul class="nav nav-list margin-zero padding-quarter">
-                        <li class="active"><a href="#">Public</a></li>
-                        <li><a href="#">Following</a></li>
+                        <li><a href="#">My Timeline</a></li>
+                        <li class="active"><a href="#">Recent</a></li>
+                        <li><a href="#">Shared with me</a></li>
+                        <li><a href="#">Liked</a></li>
+                        <li class="divider"></li>
                         <li><a href="#">Followers</a></li>
-                        <li class="nav-header">Personalized Feeds</li>
-                        <li><a href="#">Closest friends</a></li>
-                        <li><a href="#">People in Newcastle</a></li>
                     </ul>
                 </div>
                 <div class="widget-footer">
-                    <a href="#">Edit Lists</a>
+                    <a href="/settings/member/privacy/lists">Edit Lists</a>
                 </div>
             </div>
         </div>

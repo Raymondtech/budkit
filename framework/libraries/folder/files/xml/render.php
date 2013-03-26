@@ -69,8 +69,7 @@ final class Render {
         
         //EXECUTE TPL CALLBACKS BEFORE ELEMENT RENDERING;
         $tree = Parser::callback($tree, $xml);
-        
-        
+              
         //WE DON'T NEED NAMESPACES?
         unset($tree['NAMESPACE']); //We don't need namespaces;
         //OPEN THE TAG;

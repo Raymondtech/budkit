@@ -250,10 +250,7 @@ class Authority extends \Platform\Model {
 
                 $authority['permissions'] = $this->database->select('p.*')->from("?authority_permissions p")->where("p.authority_id =", $authority['authority_id'])->run()->fetchAll();
             }
-            $node = array(
-                "authority" => $authority,
-            );
-            $authorities[] = $node;
+            $authorities[] = $authority;
             $right[] = $authority['rgt'];
         }
 
