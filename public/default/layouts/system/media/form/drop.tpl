@@ -7,7 +7,7 @@
     <div class="padding">
         <form action="/system/content/create" method="POST" class="form-vertical"  enctype="multipart/form-data">
             <div class="clearfix">
-               <p>Drag and drop files from your computer to upload. Can't upload? <a href="/system/content/create/import">Try this importing.</a> You can also <a href="/system/content/create/snap">record videos or audio</a> with your webcam if supported </p>
+               <p>Drag and drop files from your computer to upload. Can't upload? <a href="/system/content/create/import">Try importing.</a> You can also <a href="/system/content/create/snap">record videos or audio</a> with your webcam if supported </p>
             </div>
             <hr />
             <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >

@@ -27,11 +27,11 @@
                                 </a>
                             </div>
                             <div id="group${authority_id}" class="accordion-body collapse">
-                                <div class="accordion-inner">
+                                <div class="accordion-inner" style="padding-left: ${indent}5px">
                                     <table class="table no-margin">
                                         <thead>
                                             <th class="span1">Type</th>
-                                            <th class="span2">Title</th>
+                                            <th class="span2">Description</th>
                                             <th class="span6">Area</th>
                                             <th class="span2">Permission</th>
                                             <th>Action</th>
@@ -49,9 +49,9 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <form method="POST" action="/system/admin/network/authorities/permissions/add" class="no-margin">
-                                                    <input type="hidden" name="area-authority" value="" />
-                                                    <input type="hidden" name="authority-id"  value="" />
+                                                <form method="POST" action="/settings/system/permissions/addrule" class="no-margin">
+                                                    <input type="hidden" name="area-authority" value="${authority_id}" />
+                                                    <input type="hidden" name="authority-id"  value="${authority_id}" />
                                                     <td>
                                                         <select name="area-action">
                                                             <option value="view">View</option>
@@ -61,10 +61,10 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="area-title"  placeholder="e.g Marketplace" />
+                                                        <input type="text" name="area-title"  placeholder="e.g Marketplace" class="span2" />
                                                     </td>                                        
                                                     <td class="control-group">
-                                                        <input type="text" name="area-uri" placeholder="e.g /marketplace/*" />
+                                                        <input type="text" name="area-uri" placeholder="e.g /marketplace/*" class="span6" />
                                                     </td>                         
                                                     <td>
                                                         <select name="area-permission">

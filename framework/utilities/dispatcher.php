@@ -26,8 +26,8 @@
 namespace Platform;
 
 use Library;
-use Application\System;
-use Application\System\Controllers;
+//use Application\System;
+//use Application\System\Controllers;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -155,8 +155,6 @@ final class Dispatcher extends \Library\Object {
                 }
             }
         }
-        //If the request arguments have changed, modify in Router
-        $route->setParameter("arguments", array_merge(array(), $argmts)); //Using array merge to reset the indices
 
         if (!method_exists($class, $method)) {
             if (method_exists($class, "index")) {
@@ -165,6 +163,11 @@ final class Dispatcher extends \Library\Object {
                 throw new \Platform\Exception("Method $method does not exists in $class");
             }
         }
+        //If the request arguments have changed, modify in Router
+        //Using array merge to reset the indices
+        
+        $route->setParameter("arguments", array_merge(array(), $argmts)); 
+        $route->setParameter("subtask", $method);
         
         if($this->task->config->getParam( "installed", NULL, "database" )):
             //Check Permissions only if we are not installing?

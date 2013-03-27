@@ -134,7 +134,7 @@ final class Router extends Object {
     public function getMap() {
         return $this->routeMap;
     }
-
+    
     /**
      * Returns the called controller
      */
@@ -251,12 +251,12 @@ final class Router extends Object {
      * @param type $value 
      */
     public function setParameter($name, $value) {
-
         if (isset($this->parameters[$name])) {
-            $default = $this->getParameter($name);
+            //$default = $this->getParameter($name);
+            $this->parameters[$name] = $value;
+        }else{
             $this->parameters[$name] = $value;
         }
-
         return $this;
     }
 
@@ -449,7 +449,8 @@ final class Router extends Object {
                 $pCount++;
                 if (!empty($pName)) {
                     $params[$pName] = $segment;
-                } else {
+                } else {                
+                    $params["subtask"] = null; //Subcontrollers, this is needed by the dispatcher
                     $params["arguments"][] = $segment;
                 }
             }
@@ -665,12 +666,27 @@ final class Router extends Object {
     }
     
     /**
-     * Resolves URL aliases into full URLs
-     * and vice versa
-     * 
+     * Resolves the actuall action URL from request URL
+     * @return and uninternalized path
      */
     public function getRealPath(){
-        
+        //Bulid a real path from the request
+        $path  =  "/".$this->getApplication();
+        $path .= "/".$this->getController();
+        $path .= "/".$this->getMethod();
+        //Subtasks;
+        $subtask = $this->parameters['subtask'];
+        if(isset($subtask) && !empty($subtask)):
+            $path .="/".trim($subtask);
+        endif;
+        $arguments = $this->parameters['arguments'];
+        if(!empty($arguments)):
+            foreach($arguments as $k=>$segment):
+                $path .="/".$segment;
+            endforeach;
+        endif;
+
+        return $path;  
     }
 
     /**

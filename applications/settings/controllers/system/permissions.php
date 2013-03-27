@@ -40,58 +40,62 @@ class Permissions extends Settings\System {
      * @param string $edit
      * @return void
      */
-    public function index($edit = "") {
-
-        $view   = $this->load->view('system');
-        $params = $this->getRequestArgs();
-        
+    public function addRule() {
         //1. Load the model
         $authority = $this->load->model("authority");
-        
         //2. If we are editing the authority, save
         if ($this->input->methodIs("post")):
-            if(!$authority->store( $edit , $params)){
+            if (!$authority->storePermissions()) {
                 $errors = $this->getErrorString();
-                $this->alert($errors, null , "error");
-            }  $this->alert(_("Changes have been saved successfully"), "", "success");        
-            $this->redirect( $this->output->link("/settings/system/permissions") );
+                $this->alert($errors, null, "error");
+            } else {
+                //Succesffully added
+                $this->alert(_("Permisison rule has been added successfully"), "", "success");
+            }
+        endif;
+        //Redirect back to the settings page
+        $this->redirect($this->output->link("/settings/system/permissions"));
+    }
+
+    public function authorities($edit = "") {
+
+        $view = $this->load->view('system');
+        $params = $this->getRequestArgs();
+
+        //1. Load the model
+        $authority = $this->load->model("authority");
+
+        //2. If we are editing the authority, save
+        if ($this->input->methodIs("post")):
+            if (!$authority->store($edit, $params)) {
+                $errors = $this->getErrorString();
+                $this->alert($errors, null, "error");
+            } $this->alert(_("Changes have been saved successfully"), "", "success");
+            $this->redirect($this->output->link("/settings/system/permissions/authorities"));
         endif;
 
+        //3. Get the authorities list
+        $authorities = $authority->getAuthorities();
+
+        //print_r($authorities);
+        //4. Set Properties
+        $this->set("authorities", $authorities);
+        //5. The layout
+        $view->form('system/authorities', 'Authorities');
+    }
+
+    public function index($edit = "") {
+
+        $view = $this->load->view('system');
+
+        //1. Load the model
+        $authority = $this->load->model("authority");
         //3. Get the authorities list
         $authorities = $authority->getAuthorities();
         //4. Set Properties
         $this->set("authorities", $authorities);
         //5. The layout
         $view->form('system/permissions', "Permissions");
-
-    }
-    
-    public function authorities($edit = "") {
-
-        $view   = $this->load->view('system');
-        $params = $this->getRequestArgs();
-        
-        //1. Load the model
-        $authority = $this->load->model("authority");
-        
-        //2. If we are editing the authority, save
-        if ($this->input->methodIs("post")):
-            if(!$authority->store( $edit , $params)){
-                $errors = $this->getErrorString();
-                $this->alert($errors, null , "error");
-            }  $this->alert(_("Changes have been saved successfully"), "", "success");        
-            $this->redirect( $this->output->link("/settings/system/permissions/authorities") );
-        endif;
-       
-        //3. Get the authorities list
-        $authorities = $authority->getAuthorities();
-        
-        //print_r($authorities);
-        //4. Set Properties
-        $this->set("authorities", $authorities);
-        //5. The layout
-        $view->form('system/authorities', 'Authorities');
-
     }
 
     /**
@@ -107,5 +111,6 @@ class Permissions extends Settings\System {
         $instance = new self;
         return $instance;
     }
+
 }
 

@@ -59,17 +59,22 @@ final class Permission extends Library\Observer {
         
         //If action not in our types return false;
         if(!array_key_exists(strtolower($action), $permissionTypes)) return false;
-        
+        $router           = \Library\Router::getInstance();
+        $actionRealRoute  = $router->getRealPath();
         
         $actionController = $params["action"];
         $actionRoute      = $params["route"];
         $actionUser       = $params["user"];
         $action           = trim($action);
         $database         = Library\Database::getInstance();
-        
+       
 
         //Get Permission Definitions
-        $premissionsSQLc  = "SELECT p.*, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?authority_permissions AS p LEFT JOIN ?authority AS a ON p.authority_id=a.authority_id WHERE {$database->quote($actionRoute)} REGEXP p.permission_area_uri ORDER BY a.lft ASC"; 
+        $permissionsSQLd = NULL;
+        if(!empty($actionRealRoute) && ($actionRoute <> $actionRealRoute) ):
+            $permissionsSQLd = "OR {$database->quote($actionRealRoute)} REGEXP p.permission_area_uri";
+        endif;
+        $premissionsSQLc  = "SELECT p.*, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?authority_permissions AS p LEFT JOIN ?authority AS a ON p.authority_id=a.authority_id WHERE {$database->quote($actionRoute)} REGEXP p.permission_area_uri {$permissionsSQLd} ORDER BY a.lft ASC"; 
         $permissionsSQL   = $database->prepare( $premissionsSQLc );
         $permissions      = $permissionsSQL->execute()->fetchAll();
         
@@ -170,7 +175,7 @@ final class Permission extends Library\Observer {
         //What about the public?
         $public_authority = \Library\Config::getParam( "public-authority", NULL, "profile" );
         //@TODO Replace the exception list with actual route map paths!
-        if(array_key_exists($public_authority, $permissionTree) || in_array( $actionRoute , array("/sign-out", "/sign-in" )) ) $allowed = true; //We need the home page to be public
+        if(array_key_exists($public_authority, $permissionTree) || in_array( $actionRoute , array("/sign-out", "/sign-in" )) ) $allowed = true; //We need the sign-in sign-up page to be public
         
         if(!$allowed):  
             //If User does not have permission to view this page, redirect to..

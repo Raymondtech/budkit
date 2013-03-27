@@ -114,12 +114,6 @@ class Authority extends \Platform\Model {
      */
     public function store($data = "", $params = array()) {
 
-        if (!empty($params)) {
-            if (isset($params[0]) && strtolower($params[0]) == "permissions") {
-                return $this->storePermissions($params);
-            }
-        }
-
         //1. Load Helpers
         $encrypt = \Library\Encrypt::getInstance();
 
