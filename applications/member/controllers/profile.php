@@ -34,8 +34,8 @@ class Profile extends \Platform\Controller {
      * @return false;
      */
     public function index() {
-               /**View Profile**/
-                
+        
+        /**View Profile**/             
         $user     = \Platform\User::getInstance();
         
         $username = $this->router->getMethod();
@@ -50,6 +50,7 @@ class Profile extends \Platform\Controller {
         //$row->saveObject();
         
         $view->profilePage();
+        
     }
     
         /**
