@@ -45,6 +45,36 @@ final class Permission extends Library\Observer {
     
     protected static $grantedTo = array();
     protected static $rejectedTo = array(); 
+    protected static $loaded = array();
+    
+    
+    /**
+     * Cacheing the permission tree query
+     * 
+     * @param type $actionRoute
+     * @param type $actionRealRoute
+     * @return type
+     */
+    public static function getPermissionMap( $actionRoute, $actionRealRoute="" ){
+        
+        if(isset(static::$loaded[$actionRoute.$actionResolvedRoute])){
+            return static::$loaded[$actionRoute.$actionResolvedRoute];
+        }
+        $database         = Library\Database::getInstance();
+        //Get Permission Definitions
+        $permissionsSQLd = NULL;
+        if(!empty($actionRealRoute) && ($actionRoute <> $actionRealRoute) ):
+            $permissionsSQLd = "OR {$database->quote($actionRealRoute)} REGEXP p.permission_area_uri";
+        endif;
+        $premissionsSQLc  = "SELECT p.*, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?authority_permissions AS p LEFT JOIN ?authority AS a ON p.authority_id=a.authority_id WHERE {$database->quote($actionRoute)} REGEXP p.permission_area_uri {$permissionsSQLd} ORDER BY a.lft ASC"; 
+        $permissionsSQL   = $database->prepare( $premissionsSQLc );
+        $permissions      = $permissionsSQL->execute()->fetchAll();
+        
+        static::$loaded[$actionRoute.$actionResolvedRoute] = $permissions;
+        
+        return static::$loaded[$actionRoute.$actionResolvedRoute];
+  
+    }
 
     /** 
      * Checks a user has permission to execute
@@ -53,14 +83,14 @@ final class Permission extends Library\Observer {
      * @param array $array
      * @return type 
      */
-    public static function execute($action, $params = NULL) {
+    public static function execute($action, $params = NULL, $realPath="", $redirect = true) {
         
         $permissionTypes  = array("view"=>1,"execute"=>2,"modify"=>3,"special"=>4);
         
         //If action not in our types return false;
         if(!array_key_exists(strtolower($action), $permissionTypes)) return false;
         $router           = \Library\Router::getInstance();
-        $actionRealRoute  = $router->getRealPath();
+        $actionRealRoute  = empty($realPath) ? $router->getRealPath() : $realPath;
         
         $actionController = $params["action"];
         $actionRoute      = $params["route"];
@@ -70,13 +100,7 @@ final class Permission extends Library\Observer {
        
 
         //Get Permission Definitions
-        $permissionsSQLd = NULL;
-        if(!empty($actionRealRoute) && ($actionRoute <> $actionRealRoute) ):
-            $permissionsSQLd = "OR {$database->quote($actionRealRoute)} REGEXP p.permission_area_uri";
-        endif;
-        $premissionsSQLc  = "SELECT p.*, a.lft, a.rgt, a.authority_name,a.authority_parent_id FROM ?authority_permissions AS p LEFT JOIN ?authority AS a ON p.authority_id=a.authority_id WHERE {$database->quote($actionRoute)} REGEXP p.permission_area_uri {$permissionsSQLd} ORDER BY a.lft ASC"; 
-        $permissionsSQL   = $database->prepare( $premissionsSQLc );
-        $permissions      = $permissionsSQL->execute()->fetchAll();
+        $permissions     = static::getPermissionMap($actionRoute, $actionRealRoute);
         
         //Build Permission Tree;
         //@TODO We will eventually need to crunch this permission tree maps based on area_uri to find the best fit.
@@ -178,10 +202,12 @@ final class Permission extends Library\Observer {
         if(array_key_exists($public_authority, $permissionTree) || in_array( $actionRoute , array("/sign-out", "/sign-in" )) ) $allowed = true; //We need the sign-in sign-up page to be public
         
         if(!$allowed):  
-            //If User does not have permission to view this page, redirect to..
-            $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '', 'error');
-            $actionController->redirect( ($actionUser->isAuthenticated())? "/system/start/dashboard":"/sign-in" );
-            
+            if($redirect):
+                //If User does not have permission to view this page, redirect to..
+                $actionController->alert("You do not have the relevant authority to access this section of the platform. Permission denied for \"{$action}\" on \"{$actionRoute}\"", '', 'error');
+                $actionController->redirect( ($actionUser->isAuthenticated())? "/system/start/dashboard":"/sign-in" );   
+            endif;
+            return false;
         endif;
        
         return true;

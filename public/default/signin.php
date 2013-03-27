@@ -41,6 +41,7 @@
                                             </div>
                                             <tpl:block data="page.block.alerts" />
                                             <div class="startup-alternatives">
+
                                                 <ul class="unstyled no-margin no-bottom-margin">
                                                     <li><a href="/system/authenticate/create">Don't have an account?</a></li>
                                                 </ul>
@@ -64,8 +65,12 @@
                                                 <input type="hidden" name="auth_handler" value="dbauth" />
                                                 <input type="hidden" name="redirect" value="" />
 
-                                                <div class="margin-bottom">                                                  
-                                                       <button type="submit" class="btn margin-top margin-bottom input-xxxlarge" >Sign-in to Account</button> 
+                                                <div class="margin-bottom clearfix">                                                  
+                                                    <button type="submit" class="btn margin-top margin-bottom-half input-xxxlarge" >Sign-in to Account</button>
+                                                    <div class="row-fluid margin-bottom">
+                                                        <a href="" class="btn btn-facebook span6 btn-medium">Sign-In with Facebook</a>
+                                                        <a href="" class="btn btn-twitter span6 btn-medium">Sign-In with Twitter</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -48,7 +48,6 @@ final class Account extends Settings\Member {
         $account = $this->load->model("user", "member");
         $encrypt = \Library\Encrypt::getInstance();
 
-
         //2. Prevalidate passwords and other stuff;
         $username = $this->input->getString("user_first_name", "", "post", FALSE, array());
         $usernameid = $this->input->getString("user_name_id", "", "post", FALSE, array());
@@ -62,7 +61,7 @@ final class Account extends Settings\Member {
         if (empty($userpass) || empty($username) || empty($usernameid) || empty($useremail)) {
             //Display a message telling them what can't be empty
             $this->alert(_t('Please provide at least a Name, Username, E-mail and Password'), _t('Not enough information!'), "error");
-            return $this->create();
+            return false;
         }
 
         //3. Encrypt validated password if new users!
@@ -71,19 +70,24 @@ final class Account extends Settings\Member {
 
         if (empty($userpass) || empty($username) || empty($usernameid) || empty($useremail)) {
             //Display a message telling them what can't be empty
-            $this->setError(_t('Please provide at least a Name, Username, E-mail and Password'));
+            $this->alert(_t('Please provide at least a Name, Username, E-mail and Password'));
             return false;
         }
 
         //Validate the passwords
         if ($userpass <> $userpass2) {
-            $this->setError(_t('The user passwords do not match'));
+            $this->alert(_t('The user passwords do not match'));
             return false;
         }
 
         //6. Store the user
-        $account->store($this->input->data("post"));
-
+        if(!$account->store($this->input->data("post")) ):
+            $this->alert( $this->getError() );
+            return false;
+        endif;
+        
+        
+        return true;
         //7. Browser Messages
         //Return to index
         //return $this->view();

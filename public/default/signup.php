@@ -35,7 +35,7 @@
                         <div class="container-content scroll-y">
                             <div class="container-fluid">
                                 <div class="container-startup signup">
-                                    <form class="form-horizontal" name="form" method="post" action="/settings/member/account/update">
+                                    <form class="form-horizontal" name="form" method="post" action="/sign-up">
                                         <div class="startup-header">
                                             <h3>Register a new account</h3>
                                         </div>
@@ -48,13 +48,13 @@
                                         
                                         <div class="startup-body">
                                             <div class="control-group">
-                                                <label class="control-label" for="user_name"><tpl:i18n>First Name</tpl:i18n><em class="mandatory">*</em></label>
+                                                <label class="control-label" for="user_first_name"><tpl:i18n>First Name</tpl:i18n><em class="mandatory">*</em></label>
                                                 <div class="controls">
                                                     <input class="input-large focused" id="first_name" name="user_first_name" type="text" placeholder="First Name" />
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label" for="user_name"><tpl:i18n>Last Name</tpl:i18n><em class="mandatory">*</em></label>
+                                                <label class="control-label" for="user_last_name"><tpl:i18n>Last Name</tpl:i18n><em class="mandatory">*</em></label>
                                                 <div class="controls">
                                                     <input class="input-large focused" id="last_name" name="user_last_name" type="text" placeholder="Last Name" />
                                                 </div>
@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="form-actions">
                                                 <div class="btn-group">
-                                                    <button type="submit" class="btn" tpl:i18n="">Create an Account</button> 
+                                                    <button type="submit" class="btn">Create an Account</button> 
                                                 </div>
                                             </div>
                                         </div>

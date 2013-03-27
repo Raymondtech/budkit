@@ -36,6 +36,7 @@
 .margin{ margin : @gridGutterWidth }
 .margin-top{ margin-top : @gridGutterWidth }
 .margin-top-zero{ margin-top : 0 !important;  }
+.margin-top-half{margin-top : @gridGutterWidth *0.5 }
 .margin-bottom{ margin-bottom : @gridGutterWidth }
 .margin-bottom-half{ margin-bottom : @gridGutterWidth * 0.5 }
 .margin-bottom-zero{ margin-bottom : 0 !important;  }
@@ -63,18 +64,18 @@
   .buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
 }
 // Inverse appears as dark gray
-.btn-facebook {
-  .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
+.btn-twitter{
+    .buttonBackground(#1AB9F0, #229AE1);
 }
 
-.btn-twitter {
-  .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
+.btn-facebook{
+    .buttonBackground(#5771A7, #3B5998);
 }
 
 .btn-google {
   .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
 }
-
+.btn-medium{padding: 6px;}
 .nav-mediagrid > li > a {
   padding-top: 8px;
   padding-bottom: 8px;

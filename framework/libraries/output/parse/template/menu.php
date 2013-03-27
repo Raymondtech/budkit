@@ -89,8 +89,6 @@ class Menu extends Parse\Template {
 
         \Library\Event::trigger("beforeRenderMenu", $menuId, $menuItems);
 
-        //echo $menuId;
-
         $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuLtr);
 
         //print_R($tag);
@@ -113,6 +111,19 @@ class Menu extends Parse\Template {
         //$hasActive  = false;
         foreach ($menuItems as $item) {
 
+            //if has no link and is not a nav-header, ignore it
+            if (empty($item['menu_url']) && (!isset($item['children']) || empty($item['children']) )):
+                continue;
+            endif;
+
+            //if this user does not have access to this menu ignore it
+            if (!empty($item['menu_url'])):
+                //check has permission;
+                if(!static::hasPermission($item['menu_url'])):
+                    continue;
+                endif;
+            endif;
+
             //@TODO Menu Plugins
             //Search for all plugin placemarkers in menu item names
             //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
@@ -131,7 +142,7 @@ class Menu extends Parse\Template {
             $active = ( \Library\Uri::internal($item['menu_url']) <> \Library\Uri::internal($query) ) ? false : true;
             static::$hasActive = ($active && !static::$hasActive) ? true : false;
 
-            $class = str_replace(array(" ", "(", ")", "-", "&", "%", ",", "#"), '-', strtolower($item['menu_title'])) ;
+            $class = str_replace(array(" ", "(", ")", "-", "&", "%", ",", "#"), '-', strtolower($item['menu_title']));
             $link = array(
                 "ELEMENT" => 'li',
                 "CLASS" => 'link-' . $class . " " . ((isset($item['menu_classes']) && !empty($item['menu_classes'])) ? $item['menu_classes'] : "") . (($active) ? " active " : ""),
@@ -140,7 +151,7 @@ class Menu extends Parse\Template {
                         "ELEMENT" => "a",
                         "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
                         "CHILDREN" => array(
-                           // array("ELEMENT" => "i", "CLASS" => "icon-{$class}"), @todo menu icons
+                            // array("ELEMENT" => "i", "CLASS" => "icon-{$class}"), @todo menu icons
                             array("ELEMENT" => "span", "CDATA" => $item['menu_title'])
                         )
                     )
@@ -153,17 +164,34 @@ class Menu extends Parse\Template {
                 $link['CDATA'] = $item['menu_title'];
                 unset($link['CHILDREN']);
                 $children = static::element((array) $item['children'], $menuType, $menuDepth, $menuPosition, false);
-                $li[] = $link;
-                $li = array_merge($li, $children);
+                //if this menu has no children, remove it
+                if (!empty($children)):
+                    $li[] = $link;
+                    $li = array_merge($li, $children);
+                endif;
             } else {
+                //if the last link is a nav header and it is not my parent, remove it;
                 $li[] = $link;
             }
-
-
             //$li[] = $link;
         }
 
         return $li;
+    }
+
+    /**
+     * Determines if a user has permission to view a link
+     * 
+     * @param type $url
+     * @return type
+     */
+    public static function hasPermission($url) {
+        
+        $user   = \Platform\User::getInstance();
+        $params = array_merge( array("action" => "view", "user" => $user, "route" => $url));
+        
+        //Check that the user has permission to view this menu;
+        return Library\Authorize\Permission::execute("view" , $params, $url, false );
     }
 
     /**

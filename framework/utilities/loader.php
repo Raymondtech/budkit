@@ -136,10 +136,32 @@ final class Loader{
     }
 
     /**
-     *
-     * @param type $controller 
+     * Loads a controller. 
+     * 
+     * @param type $controller
+     * @param type $app
+     * @param type $vars
+     * @param type $return
+     * @param type $namespace
+     * @return type
+     * @todo Needs some reworking
+     * 
      */
-    public function controller( $controller , $app=''){}
+    public function controller( $controller , $app='', $vars = array(), $return = FALSE , $namespace = ""){
+       
+       //Get the Router to determine what application we are in;
+        $Router     = Library\Router::getInstance();
+        //Set the Application
+        $this->application = $Router->getApplication();
+        //2nd Search in the application specific folder;
+        $application = (!empty($app))?$app : $this->application ;
+        //Specifics
+        $class          = "Application\\".$application."\Controllers\\".$controller ;
+       
+        $controller     = $class::getInstance( $vars );
+       
+       return $controller;
+    }
 
     /**
      * Loads the view from within an application!

@@ -36,8 +36,20 @@ final class Authenticate extends \Platform\Controller {
         //@TODO raise an error!
     }
     
+    /**
+     * Creates a new user
+     * @return void
+     */
     public function create(){
         $view = $this->load->view("authenticate");
+        //Get the member account controller;
+        if($this->input->methodIs('post')):
+            $account = $this->load->controller("member\account", "settings"); //The member account controlle
+            if($account->update()){
+                $this->alert("The account has been created. Please check your email on what to do next. If your account has already been verified, you can now log-in below","Fantastico!","success");
+                $this->redirect("/sign-in"); //Now signIn
+            }
+        endif;
         $view->newUserAccountForm();
     }
     
