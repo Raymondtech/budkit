@@ -37,10 +37,10 @@ class Input extends Settings\System {
      * Displays a lists of content needing moderation
      * @return  \Application\System\Views\Content::listContent()
      */    
-    public function index($type = "articles"){     
+    public function index(){     
         $view = $this->load->view('system') ;   
         $this->set("content-type", $type ); 
-        $view->form("system/input") ; //sample call; //$this->output();
+        $view->form("system/input","Input Settings") ; //sample call; //$this->output();
     }
     
     

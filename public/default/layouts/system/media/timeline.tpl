@@ -32,11 +32,11 @@
                         </div>
                         <div class="timeline-item-footer">
                             <ul class="actions">
-                                <li class="action-fans"><a href="/system/media/timeline/fans/${uri}"><span class="delete" title="See Fans"><i class="icon-heart"></i><strong>24</strong> fans</span></a></li>
-                                <li class="action-like hover"><a href="/system/media/timeline/favourite/${uri}"><span class="like" title="Like">Like this</span></a></li>
-                                <li class="action-comments"><a href="/system/media/timeline/comments/${uri}"><span class="delete" title="See Comments"><i class="icon-comments"></i><strong>22</strong> comments</span></a></li>
-                                <li class="action-reply hover"><a href="/system/media/timeline/reply/${uri}"><span class="reply" title="Reply">Add comment</span></a></li>   
-                                <li class="action-delete hover"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete"><strong>Trash this</strong></span></a></li>
+                                <li class="action-fans"><a href="/system/media/timeline/fans/${uri}"><span class="delete" title="See Fans"><i class="icon-heart"></i>24</span></a></li>
+<!--                                <li class="action-comments"><a href="/system/media/timeline/comments/${uri}"><span class="delete" title="See Comments">22 replies</span></a></li>-->
+                                <li class="action-like hover"><a href="/system/media/timeline/favourite/${uri}"><span class="like" title="Like">Like</span></a></li>
+                                <li class="action-reply hover"><a href="/system/media/timeline/reply/${uri}"><span class="reply" title="Reply">Reply</span></a></li>   
+                                <li class="action-delete hover"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete"><strong>Trash</strong></span></a></li>
                             </ul>
                         </div>
                     </div>

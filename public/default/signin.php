@@ -37,9 +37,9 @@
                                 <div class="container">
                                     <form id="form" name="login_form" method="post" action="/system/authenticate/login">                       
                                         <div class="container-startup signin">
-                                            <div class="startup-header">
+<!--                                            <div class="startup-header">
                                                 <h3>Sign in to your account</h3>
-                                            </div>
+                                            </div>-->
                                             <tpl:block data="page.block.alerts" />
                                             <div class="startup-alternatives">
 

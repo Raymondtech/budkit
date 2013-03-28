@@ -37,9 +37,9 @@
                             <div class="container-fluid">
                                 <div class="container-startup signup">
                                     <form class="form-horizontal" name="form" method="post" action="/sign-up">
-                                        <div class="startup-header">
+<!--                                        <div class="startup-header">
                                             <h3>Register a new account</h3>
-                                        </div>
+                                        </div>-->
                                         <tpl:block data="page.block.alerts" />
                                         <div class="startup-alternatives">
                                                 <ul class="unstyled no-margin no-bottom-margin">

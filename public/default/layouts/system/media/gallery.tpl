@@ -24,7 +24,7 @@
             <li>
                 <a href="/system/content/photo/view/aU2e9d" data-target="budkit-slider">
                     <div class="thumbnail">
-                        <div class="feature column"><img src="http://lorempixel.com/250/200/sports/<?php echo rand(1,10);?>/" /></div>                      
+                        <div class="feature column"><img src="http://lorempixel.com/150/150/sports/<?php echo rand(1,10);?>/" /></div>                      
                         <div class="description column">
                             This is the description of this image
                         </div>

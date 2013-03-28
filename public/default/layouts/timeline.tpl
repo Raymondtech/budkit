@@ -14,12 +14,11 @@
                         <li class="active"><a href="#">Recent</a></li>
                         <li><a href="#">Shared with me</a></li>
                         <li><a href="#">Liked</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Followers</a></li>
+                        <li><a href="#">Following</a></li>
                     </ul>
                 </div>
                 <div class="widget-footer">
-                    <a href="/settings/member/privacy/lists">Edit Lists</a>
+                    <a href="/settings/member/privacy">Edit Lists</a>
                 </div>
             </div>
         </div>
