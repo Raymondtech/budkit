@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * update.php
+ * maintenance.php
  *
  * Requires PHP version 5.4
  *
@@ -14,12 +14,15 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Setup\Controllers;
+
+namespace Application\Settings\Controllers\System;
+
+use \Application\Settings\Controllers as Settings;
 
 /**
- * Update actions controller 
+ * Admin settings action controller
  *
- * This class implements a controller for managing the system Update process.
+ * Displays and update system configuration settings. 
  *
  * @category  Application
  * @package   Action Controller
@@ -27,8 +30,19 @@ namespace Application\Setup\Controllers;
  * @version   1.0.0
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * @todo      System manage action methods
  */
-final class Update extends \Platform\Controller {
+class Maintenance extends Settings\System {
+    
+    public function index(){
+        
+        $this->output->setPageTitle(_("System Maintenance"));
+        //$aside  = "Settings Instructions"; 
+        $view = $this->load->view('system');
+        
+        $view->form('system/maintenance',"System Maintenance");
+        
+    }
 
     /**
      * Gets an instance of the Update Controller
