@@ -29,9 +29,11 @@
         </head>
         <body onload="prettyPrint()">
             <div id="wrap">
-                <tpl:import layout="navbar" />
+                
                 <div class="container-box">
+                    
                     <div class="container-right">
+                        <tpl:import layout="navbar" />
                         <div class="container-content scroll-y">
                             <div class="container-startup canvas">
                                 <div class="startup-header">

@@ -181,12 +181,9 @@ class Media extends Parse\Template {
      * @return object layout
      */
     public static function getInstance() {
-
         if (is_object(static::$instance) && is_a(static::$instance, 'media'))
             return static::$instance;
-
         static::$instance = new self();
-
         return static::$instance;
     }
 

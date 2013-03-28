@@ -111,7 +111,18 @@ abstract class Controller extends Library\Action {
         $this->authority = $this->getAuthority();
         $this->authhandler = "dbauth";
         
+        //@TODO remove the user password from $this->user;
         $this->output->set("user", $this->user );
+        
+        if($this->user->isAuthenticated()){
+            //Load the user profile
+            $this->profile     = $this->load->model("profile", "member");
+            $this->profile     = $this->profile->loadObjectByURI( $this->user->get("user_name_id"), array_keys($this->profile->getPropertyModel()));       
+            //@TODO remove the user password from $this->profile;
+            $profile           = $this->profile->getPropertyData();
+            unset($profile['user_password']);
+            $this->set("profile", $profile );
+        }
         
         $installed      =  $this->config->getParam("installed", false ,"database");
         $application    =  $this->application;

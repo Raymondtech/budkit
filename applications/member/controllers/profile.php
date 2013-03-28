@@ -33,24 +33,9 @@ class Profile extends \Platform\Controller {
      * @todo Profile display
      * @return false;
      */
-    public function index() {
-        
-        /**View Profile**/             
-        $user     = \Platform\User::getInstance();
-        
-        $username = $this->router->getMethod();
+    public function index(){     
         $view     = $this->load->view('profile');
-        $profile  = $this->load->model('profile');
-        $profile  = $profile->loadObjectByURI( $this->user->get("user_name_id"), array_keys($profile->getPropertyModel()));
-        
-        $data     = $profile->getPropertyData();
-        
-        $this->set("profile", $data ); //Sets the profile data;
-        //$row->setPropertyValue("first_name", "Livingstone");
-        //$row->saveObject();
-        
-        $view->profilePage();
-        
+        $view->profilePage();    
     }
     
         /**
@@ -61,27 +46,16 @@ class Profile extends \Platform\Controller {
         
         $this->output->setPageTitle( _("Media Timeline") );       
         //Get the view;
-          
-        $user = \Platform\User::getInstance();
         $model      = $this->load->model('media' , 'system');
         $activities = $model->getAll();   
-        $profile  = $this->load->model('profile');
-        $profile  = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
-        
-        $data     = $profile->getPropertyData();
-        
-        $this->set("profile", $data ); //Sets the profile data;
+   
         $this->set("activities", $activities);   
         $this->set("dashboard", array("title"=>"Activity stream" ) );
-        $this->set("user", $user);
         
-
-            
         $media   = $this->output->layout("system/media/timeline");
         $this->output->addToPosition("body", $media);
         
         return $this->index();
-        
     }
     
     /**
@@ -120,7 +94,6 @@ class Profile extends \Platform\Controller {
      * @return object
      */
     public static function getInstance() {
-
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))

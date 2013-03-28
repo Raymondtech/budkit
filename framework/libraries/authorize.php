@@ -113,12 +113,12 @@ class Authorize extends \Library\Object {
     final public function getPermissions($authenticated) {
 
         //$authority      = $this;
-        $this->userid = (int) $authenticated->get("userid");
+        $this->userid = (int) $authenticated->get("user_id");
 
         //Authenticated?
         if ($authenticated->authenticated && !empty($this->userid)) {
             //At least we know the user is authenticated
-            $this->setAuthority(AUTHROITY_IMPLIED_AUTHENTICATED);
+            $this->setAuthority( AUTHROITY_IMPLIED_AUTHENTICATED );
         }
     }
 

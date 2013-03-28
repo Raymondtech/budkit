@@ -54,6 +54,10 @@ class Entity extends Model {
     
     protected $savedObjectURI = NULL;
 
+    public function __construct() {
+        parent::__construct();
+    }
+    
     /**
      * Sets the property Value before save
      * 
@@ -167,6 +171,7 @@ class Entity extends Model {
     public function getPropertyDefinition($propertyName) {
         
     }
+    
 
     /**
      * Returns an entity property value by propery name if exists
