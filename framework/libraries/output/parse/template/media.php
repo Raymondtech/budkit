@@ -129,6 +129,7 @@ class Media extends Parse\Template {
                     );
                     if(empty($image['WIDTH'])) unset($image['WIDTH']);
                     if(empty($image['HEIGHT'])) unset($image['HEIGHT']);
+                    $tag['HREF']    = \Library\Uri::internal("/system/media/photo/view/".$uri);
                     $tag['CHILDREN'][] = $image;
                     //$tag = array("ELEMENT"=>"span","CDATA"=>"Single Image");
                 endif;

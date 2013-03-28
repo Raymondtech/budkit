@@ -20,7 +20,7 @@
 }
 
 .padding-top{ padding-top: @gridGutterWidth !important; }
-.padding{ padding : @gridGutterWidth }
+.padding{ padding : @gridGutterWidth!important; }
 .padding-half{ padding : @gridGutterWidth * 0.5 }
 .padding-quarter{ padding : @gridGutterWidth * 0.25 }
 .padding-left-half{ padding-left : @gridGutterWidth * 0.5 }
@@ -76,89 +76,6 @@
   .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
 }
 .btn-medium{padding: 6px;}
-.nav-mediagrid > li > a {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  .border-radius(1px);
-  color: @grayDark;
-}
-
-// Active state
-.nav-mediagrid > .active > a,
-.nav-mediagrid > .active > a:hover,
-.nav-mediagrid > .active > a:focus {
-  color: @white;
-  background-color: @grayDark;
-}
-
-
-.media-grid{
-     a{ text-decoration: none; }
-    .thumbnail{
-        position: relative; padding: 5px;
-        .feature{ border-bottom: 1px solid #ddd; }
-        .caption{ padding: 5px 0px 0px; text-decoration: none; color: @grayDark; font-size: 11px; }
-        .description{ position: absolute; top:4px; left:4px; right: 4px; min-height: 50px; background: rgba(255,255,255,0.8); padding: 10px; display: none}
-       &:hover{
-            .description{ display: block; }
-        }
-    }
-    .media-stack{
-        .thumbnail{ position: relative; z-index: 29; margin-bottom: @baseLineHeight}
-        .thumbnail:after, .thumbnail:before {
-            background: @white;
-            border: 1px solid #ccc;
-            bottom: -14px;
-            content: '';
-            height: 250px;
-            left: 2px;
-            position: absolute;
-            width: 260px;
-            z-index: -11;
-            padding: 5px;
-            .box-shadow( 0 1px 3px rgba(0, 0, 0, 0.055) )
-        }
-        .thumbnail:before {
-            bottom: -10px;
-            left: -6px;
-        }
-       .thumbnail:after{
-            left: -2px;
-        }
-    }
-}
-
-.media-list{
-     li{ 
-        float:none; clear:both; display:block; border-bottom: 1px solid #ddd; padding-bottom: @gridGutterWidth; margin-bottom: 0px; padding-top: @gridGutterWidth; 
-        &:first-child{ padding-top: 0px }
-        &:last-child{ border-bottom: none; padding-top: 0px }
-    }
-     a{ text-decoration: none; }
-    .thumbnail{
-        padding: 0px;
-        position: relative;
-        .box-shadow( none );
-        background: none;
-        border: none;
-        .column{display: inline-block; padding-right: @gridGutterWidth; vertical-align: top; }
-        .feature{ 
-            img{
-                border-bottom: 1px solid #ddd;   padding: 4px;
-                line-height: @baseLineHeight;
-                border: 1px solid #ddd;
-                .border-radius(@baseBorderRadius);
-                .box-shadow(0 1px 3px rgba(0,0,0,.055));
-                .transition(all .2s ease-in-out);
-                background: #fff;
-            }
-        }
-        .caption{ padding: 0px; text-decoration: none; color: @grayLight; }
-        .description{ }
-    }
-}
 
 .usermenu { 
     width: 195px; 
@@ -599,6 +516,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 }
 .indenter{ color: @grayLighter}
 /****IMPORTS****/
+@import "media-grid.less";
 @import "timeline.less";
 @import "wizard.less";
 @import "widgets.less";
