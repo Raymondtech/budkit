@@ -31,4 +31,5 @@ III. Credits and Acknowledgments
 IV. Resources
 --------------------------------
 [Budkit Blog](http://budkit.org/blog)
+
 [Budkit API](http://drstonyhills.github.com/budkit)
