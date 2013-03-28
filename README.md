@@ -5,11 +5,19 @@ BudKit (BK) is a free open-source platform for building applications for social 
 
 The BK project culminates from years of frustration at the inability to find a FREE, non bloated and complete social networking solution for individuals and institutions, allowing for subgroup management of social data, hence eliminating the increasing privacy quagmires plaguing other large social networking solutions.
 
-Privacy is a concern. A distributed network empowers your user to their own data and access thereof.  BK aims to fill the requirement for a distributed networking platform allowing for decentralized social content yet still allowing for robust communication between nodes, such that a a member on a private localised network such as a family social network powered by BK can very easily ‘leap’ unto another network e.g. a school or other institution. There in lies the future of social networking.
+Privacy is a concern. A distributed network empowers your user to their own data and access thereof.  BK aims to fill the requirement for a distributed networking platform allowing for decentralized social content yet still allowing for robust communication between nodes, such that a a member on a private localized network such as a family social network powered by BK can very easily ‘leap’ unto another network e.g. a school or other institution. There in lies the future of social networking.
 
 I. Requirements
 -----------------
-	
+NOTE: Whilst several other web apps compromise performance in order to attain wider usability, we believe that a forward web is one employing the latest and the best technology available to guarantee performance. Whilst we have not tested BK on a shared host or other restrictive environment, the requirements listed here are the lowest common denominator for the required performance. 
+
+### PHP 5.4+
+[PHP5]: http://php.net/releases/5_4_0.php
+You will need a version of the [PHP 5.4.0][PHP5] or higher installed
+
+### MySQL 5.5+
+[MySQL55]: http://dev.mysql.com/tech-resources/articles/introduction-to-mysql-55.html
+BK  users a nifty entity attribute value data model. If you intend to use MySQL as your data store the minimum required version is [MySQL 5.5+][MySQL] or higher. 	
 
 II. Demo
 ---------
@@ -17,6 +25,7 @@ As of yet there is no hosted demo. We encourage you to download and try BK by in
 
 III. Credits and Acknowledgments
 --------------------------------
+
 
 
 IV. Resources
