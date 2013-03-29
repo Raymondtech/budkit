@@ -20,8 +20,8 @@
 // Gradient is applied to its own element because overflow visible is not honored by IE when filter is present
 .navbar-inner {
   min-height: @navbarHeight;
-  padding-left:  20px;
-  padding-right: 20px;
+  padding-left:  10px;
+  padding-right: 10px;
   #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
   //border-bottom: 1px solid @navbarBorder;
   //.border-radius(@baseBorderRadius);
@@ -47,11 +47,11 @@
 // Brand: website or project name
 // -------------------------
 .navbar .brand {
-  float: left;
+  //float: left;
   display: block;
-  width: 195px;
+  //width: 195px;
   // Vertically center the text given @navbarHeight
-  padding: ((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
+  padding: ((@navbarHeight - @baseLineHeight) / 2) 10px ((@navbarHeight - @baseLineHeight) / 2);
   margin-left: 5px; // negative indent to left-align the text down the page
   //min-width: (125px * 2);
   font-size: 20px;

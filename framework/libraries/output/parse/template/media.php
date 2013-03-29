@@ -60,6 +60,7 @@ class Media extends Parse\Template {
 
         $attachmentTypes = \Library\Config::getParam("allowed-types", array(), "attachments");
         
+        $modes = array("icon","thumbnail");
         $images = array("image/bmp", "image/gif", "image/jpeg", "image/jpeg", "image/jpg");
         $videos = array("video/mp4");
         $audio = array();
@@ -96,15 +97,15 @@ class Media extends Parse\Template {
         //
         //Can we render this media link?
         $renderable = array_merge($images, $videos, $audio, $rich);
-        if (!in_array($mime, $renderable)) {
+        if ((in_array($mime, array_merge($videos, $audio, $rich))&&$mode=="icon")||!in_array($mime, $renderable)) {
             
             if (!empty($name)):
                 $fileExtension = \Library\Folder\Files::getExtension($name, "file");
                 $fileExtension = strtolower( $fileExtension );  
                 $linkable = array("ELEMENT"=>"a", "HREF"=> \Library\Uri::internal($url), "CLASS"=>"media-{$fileExtension} media-file",  ); 
                 $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-type media-{$fileExtension}", "CDATA"=>"<i class='icon-file'></i>".$fileExtension);
-                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-filename", "CDATA"=> $name );
-                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-help help-block", "CDATA"=> $mime );
+                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-filename list-hide", "CDATA"=> $name );
+                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-help list-hide help-block", "CDATA"=> $mime );
                 //We cannot have two a > a
                 return $linkable;
                 
@@ -135,6 +136,7 @@ class Media extends Parse\Template {
                 endif;
                 
                 if(in_array($mime, $videos) && !empty($uri)):
+                    
                     $videoLink = \Library\Uri::internal("/system/object/".$uri);
                     $video = array(
                         "ELEMENT" => "video",

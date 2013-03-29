@@ -4725,8 +4725,8 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-inner {
   min-height: 40px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #276b9e;
   background-image: -moz-linear-gradient(top, #2971a6, #246392);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2971a6), to(#246392));
@@ -4754,10 +4754,8 @@ input[type="submit"].btn.btn-mini {
   overflow: visible;
 }
 .navbar .brand {
-  float: left;
   display: block;
-  width: 195px;
-  padding: 10px 20px 10px;
+  padding: 10px 10px 10px;
   margin-left: 5px;
   font-size: 20px;
   font-weight: 200;
@@ -7274,8 +7272,6 @@ input.search-query {
   height: 170px;
   text-align: center;
   text-decoration: none;
-  margin-bottom: 10px;
-  margin-right: 12px;
   border: 3px dashed #ecf4f8;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7516,6 +7512,10 @@ input.search-query {
 }
 .auth-user {
   padding: 5px;
+  min-height: 40px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   background-color: #276b9e;
   background-image: -moz-linear-gradient(top, #2971a6, #246392);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2971a6), to(#246392));
@@ -7572,6 +7572,19 @@ input.search-query {
 .media-list {
   padding: 0px;
   margin: 0px;
+  *zoom: 1;
+}
+.media-grid:before,
+.media-list:before,
+.media-grid:after,
+.media-list:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.media-grid:after,
+.media-list:after {
+  clear: both;
 }
 .media-grid li,
 .media-list li {
@@ -7594,8 +7607,8 @@ input.search-query {
 }
 .media-grid li {
   display: inline-block;
-  margin: 0 2.127659574468085% 2.127659574468085% 0;
-  *margin: 0 2.074468085106383% 2.074468085106383% 0;
+  float: left;
+  margin: 0 12px 12px 0;
 }
 .media-grid li .grid-hide {
   display: none;
@@ -7793,6 +7806,14 @@ input.search-query {
 .media-list li.list-header [class*="mgcol"] {
   min-height: 20px;
 }
+.media-list li .feature .media-file {
+  border: none;
+  width: auto;
+  height: auto;
+}
+.media-list li .feature .media-file .media-type {
+  margin: 0 auto;
+}
 .timeline-stream {
   min-height: 1000px;
 }
@@ -7921,8 +7942,6 @@ input.search-query {
 .timeline-items .timeline-item-li .timeline-item-media .media-grid .media-item,
 .timeline-item-index .timeline-item-li .timeline-item-media .media-grid .media-item {
   display: inline-block;
-  margin-bottom: 10px;
-  margin-right: 10px;
 }
 .timeline-items .timeline-item-li .timeline-item-container,
 .timeline-item-index .timeline-item-li .timeline-item-container {

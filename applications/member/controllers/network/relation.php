@@ -29,22 +29,27 @@ use Application\Member\Controllers as Member;
  */
 class Relation extends Member\Network {
 
-     /**
-     * The default relation action
-     * @return boolean
-     */
+    
     public function index() {
-        return false;
-    }   
+        parent::index();
+    }
     
     
-    public function suggest(){}
+    public function suggestions(){
+        return $this->index();
+    }
     
-    public function followers(){}
+    public function followers(){
+        return $this->index();
+    }
     
-    public function following(){}
+    public function following(){
+        return $this->index();
+    }
     
-    public function request(){} //Invites etc
+    public function request(){
+        return $this->index();
+    } //Invites etc
 
 
     /**

@@ -14,6 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\Member\Controllers;
 
 /**
@@ -33,8 +34,7 @@ class Network extends \Platform\Controller {
      * @return boolean
      */
     public function index() {
-        $this->output->addMenuGroupToPosition("side", "peoplemenu");
-        echo "network";
+        $this->load->view("network", "member")->display();
     }
 
     /**

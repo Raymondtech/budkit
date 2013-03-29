@@ -51,11 +51,8 @@
                         <div class="feature mgcol1">
                             <div class="thumbnail">
                                 <a href="/system/media/photo/view/aU2e9d" data-target="budkit-slider" >
-                                    <img src="/system/object/BpDkhy/resize/170/170" />
+                                    <img src="/system/object/SiJzNl/resize/170/170" />
                                 </a>
-                                <div class="caption list-hide">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
                             </div>
                         </div>   
                         <div class="name grid-hide mgcol2">
@@ -85,5 +82,6 @@
                 </ul>  
             </div>
         </div>
+        <tpl:import layout="pagination" />
     </div>
 </tpl:layout>

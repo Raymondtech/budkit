@@ -193,7 +193,7 @@ class Attachments extends Platform\Entity {
 
         foreach (array(
             "attachment_name" => $fileName,
-            "attachment_title" => null, //@todo Wil need to check $file[title],
+            "attachment_title" => basename($file['name']), //@todo Wil need to check $file[title],
             "attachment_size" => $file['size'],
             "attachment_description" => "", //@todo Wil need to check $file[description],
             "attachment_src" => str_replace(FSPATH, '', $uploadFileName), 

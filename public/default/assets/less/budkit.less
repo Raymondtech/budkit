@@ -431,8 +431,8 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     height: 170px;
     text-align: center;
     text-decoration: none; 
-    margin-bottom:  @baseLineHeight*0.5;
-    margin-right: @baseLineHeight*0.6;
+    //margin-bottom:  @baseLineHeight*0.5;
+    //margin-right: @baseLineHeight*0.6;
     border: 3px dashed #ecf4f8;
     //.border-radius(0 15px 0 15px);
     .box-sizing(border-box);
@@ -506,6 +506,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 
 .auth-user{
     padding: 5px;
+    min-height: @navbarHeight; .box-sizing(border-box);
     @top : darken(@navbarBackgroundHighlight, 0%);
     @bottom: darken(@navbarBackground, 0%);
     #gradient > .vertical(@top, @bottom);

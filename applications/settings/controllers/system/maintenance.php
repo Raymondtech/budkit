@@ -43,7 +43,34 @@ class Maintenance extends Settings\System {
         $view->form('system/maintenance',"System Maintenance");
         
     }
-
+    
+    public function reset(){
+        
+        //1.Verify Capatcha;
+        //2.Require authentication
+        //3.Check User is superadministrator
+        //4.Delete setup.ini
+        //Job DOne
+        
+        $this->redirect("/setup/install/step1"); //This will take them to installer
+    }
+    
+    public function check(){
+        $update = '<a href="/settings/system/maintenance/update">Please update now</a>';
+        //Check
+        $this->alert($update,"Version 0.9.2 is available.", "info");
+        //
+        return  $this->index();
+    }
+    
+    
+    public function update(){
+        //Check
+        $this->alert("BudKit 0.9.2 installed successfully.","Update Complete", "success");
+        //
+        return  $this->index();
+    }
+    
     /**
      * Gets an instance of the Update Controller
      * 

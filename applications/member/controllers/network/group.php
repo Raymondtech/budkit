@@ -35,11 +35,13 @@ final class Group extends Member\Network{
      * @return boolean
      */
     public function index() {
-        return false;
+        parent::index();
     }
     
     
-    public function subscriptions(){}
+    public function subscriptions(){
+         return $this->index();
+    }
 
     /**
      * Returns an instance of the Group CRUD action conroller

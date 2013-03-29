@@ -21,11 +21,11 @@
                                 </tpl:condition>
                                 <tpl:condition data="object.objectType" test="equals" value="collection">
                                     <div class="timeline-item-media">	  	
-                                        <div class="media-grid bottom-media clearfix">	  	
+                                        <ul class="media-grid bottom-media clearfix">	  	
                                             <tpl:loop data="object.items" id="media-items">
-                                                <tpl:media uri="uri"  type="type" link="true" mode="thumbnail" url="url" class="media-item" name="name"  data-target="budkit-slider" width="170" height="170" />
+                                                <li><tpl:media uri="uri"  type="type" link="true" mode="thumbnail" url="url" class="media-item" name="name"  data-target="budkit-slider" width="170" height="170" /></li>
                                             </tpl:loop> 	
-                                        </div>  	
+                                        </ul>  	
                                     </div>
                                 </tpl:condition>
                             </tpl:condition>

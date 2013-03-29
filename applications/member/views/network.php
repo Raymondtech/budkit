@@ -33,7 +33,11 @@ final class Network extends \Platform\View{
      * The default page index view
      * @return void
      */
-    public function display(){}
+    public function display(){
+        
+        $this->output->addMenuGroupToPosition("side", "peoplemenu");
+        
+    }
     
     /**
      * Returns an instance of the page View object

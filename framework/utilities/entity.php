@@ -378,12 +378,14 @@ class Entity extends Model {
      */
     final public function getObjectsList($objectType, $properties = array() ) {
 
+        if (empty($properties)):
+            if (!empty($this->propertyModel))
+                $properties = array_keys($this->propertyModel);
+        endif;
+        
         $query = static::getObjectQuery($properties,"?{$this->valueGroup}property_values", NULL, $objectType );
         
         //echo($this->withConditions) ;
-        
-        
-        
         $query .="\nGROUP BY o.object_id";
         $query .= $this->getListOrderByStatement();
 

@@ -18,6 +18,9 @@
             <!--[if lt IE 9]>
               <script src="<?php echo $this->getTemplatePath() ?>/assets/js/html5shiv.js"></script>
             <![endif]-->
+            <!--[if IE 7]>
+                <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/assets/css/font-awesome-ie7.css">
+            <![endif]-->
 
             <!-- Fav and touch icons -->
             <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $this->getTemplatePath() ?>/assets/ico/apple-touch-icon-144-precomposed.png" />

@@ -14,7 +14,7 @@
                     <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
                 </ul>
                 <ul class="nav nav-pills no-margin">
-                    <li class="highlighted"><a href="/system/content/create" >Add New</a></li>
+                    <li class="highlighted"><a href="/system/media/create" >Add New</a></li>
                 </ul>
             </div>
             <hr />
@@ -46,44 +46,39 @@
                             <strong>Actions</strong>
                         </div>
                     </li>
-                    <?php for ($i = 0; $i < 30; $i++): ?>
-                    <li class="mgrow-fluid">
-                        <div class="feature mgcol1">
-                            <div class="thumbnail">
-                                <a href="/system/media/photo/view/aU2e9d" data-target="budkit-slider" >
-                                    <img src="/system/object/BpDkhy/resize/170/170" />
-                                </a>
-                                <div class="caption list-hide">  
-                                    <span><i class="icon-heart"></i> 2678</span> <span><i class="icon-time"></i> 10 days ago</span>
-                                </div>
+                    <tpl:loop data="gallery.items" id="gallery-items">
+                        <li class="mgrow-fluid">
+                            <div class="feature mgcol1">
+                                <tpl:media uri="object_uri"  type="attachment_type" link="true" mode="icon" url="attachment_url" class="media-item" name="attachment_name"  width="170" height="170" /> 
+                            </div>   
+                            <div class="name grid-hide mgcol2">
+                                <strong>Image title</strong>
+                                <span class="help-block">By Livingstone Fultang</span>
                             </div>
-                        </div>   
-                        <div class="name grid-hide mgcol2">
-                            <strong>Image title</strong>
-                            <span class="help-block">By Livingstone Fultang</span>
-                        </div>
-                        <div class="grid-hide mgcol2">
-                            <span class="rating">
-                                <span class="star"></span><span class="star"></span><span class="star active"></span><span class="star"></span><span class="star"></span>
-                            </span>
-                            <a href="#"><span class="help-block">250 comments</span></a>
-                        </div>
-                        <div class="description grid-hide mgcol4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean massa nibh, congue non tempus ut, congue in dui. Pellentesque accumsan dolor eu libero blandit quis sagittis nisl mattis.
-                        </div>
-                        <div class="kind grid-hide mgcol1">
-                            image/jpg
-                        </div>
-                        <div class="modified grid-hide mgcol1">
-                            <?php echo date('Y-m-d H:i:s'); ?>
-                        </div>
-                        <div class="actions grid-hide mgcol1">
-                            <a href="#" class="btn btn-small">View</a>
-                        </div>
-                    </li>
-                    <?php endfor; ?>
+                            <div class="grid-hide mgcol2">
+                                <span class="rating">
+                                    <span class="star"></span><span class="star"></span><span class="star active"></span><span class="star"></span><span class="star"></span>
+                                </span>
+                                <a href="#"><span class="help-block">250 comments</span></a>
+                            </div>
+                            <div class="description grid-hide mgcol4">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean massa nibh, congue non tempus ut, congue in dui. Pellentesque accumsan dolor eu libero blandit quis sagittis nisl mattis.
+                            </div>
+                            <div class="kind grid-hide mgcol1">
+                                image/jpg
+                            </div>
+                            <div class="modified grid-hide mgcol1">
+                                <?php echo date('Y-m-d H:i:s'); ?>
+                            </div>
+                            <div class="actions grid-hide mgcol1">
+                                <a href="#" class="btn btn-small">View</a>
+                            </div>
+                        </li>
+                    </tpl:loop>
                 </ul>  
             </div>
         </div>
+        <tpl:import layout="pagination" />
     </div>
+
 </tpl:layout>
