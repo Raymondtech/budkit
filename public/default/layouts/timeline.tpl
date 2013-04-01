@@ -26,7 +26,7 @@
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
                     <tpl:import layout="input" />     
-                    <div class="stream-alerts"><hr /></div>
+                    <div class="stream-alerts"></div>
                     <tpl:import layout="media/timeline" />
                 </div>
             </div>
