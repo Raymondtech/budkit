@@ -32,6 +32,7 @@
                 <div class="container-box">
                     <tpl:import layout="navbar" />
                     <div class="container-right">
+                        <div align="center"><tpl:block data="page.block.alerts" /></div>
                         <div class="container-content scroll-y">
                             <div class="container-fluid">
                                 <div class="container">
@@ -40,7 +41,7 @@
 <!--                                            <div class="startup-header">
                                                 <h3>Sign in to your account</h3>
                                             </div>-->
-                                            <tpl:block data="page.block.alerts" />
+                                            
                                             <div class="startup-alternatives">
 
                                                 <ul class="unstyled no-margin no-bottom-margin">
@@ -64,7 +65,7 @@
                                                     <li><a href="/index.php">Forgot your password?</a></li>
                                                 </ul>
                                                 <input type="hidden" name="auth_handler" value="dbauth" />
-                                                <input type="hidden" name="redirect" value="" />
+                                                <input type="hidden" name="redirect" value="${lasturl}" />
 
                                                 <div class="margin-bottom clearfix">                                                  
                                                     <button type="submit" class="btn margin-top margin-bottom-half input-xxxlarge" >Sign-in to Account</button>

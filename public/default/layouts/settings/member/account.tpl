@@ -208,7 +208,7 @@
                             <option value="1901">1901</option>
                             <option value="1900">1900</option>
                         </select>
-                        <span class="help-block">We will not show your date of birth on your profile, unless you <a href="#">tell us to</a></span>
+                        <p class="help-block">We will not show your date of birth on your profile, unless you <a href="#">tell us</a> to</p>
                     </div>
                 </div><!-- /control-group -->
 

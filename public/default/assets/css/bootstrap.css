@@ -6903,6 +6903,8 @@ input.search-query {
 }
 .stream-box .stream-alerts {
   margin-left: 115px;
+  display: block;
+  min-height: 10px;
 }
 .stream-box .stream-view {
   margin-right: 255px;

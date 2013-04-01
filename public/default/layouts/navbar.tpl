@@ -11,7 +11,7 @@
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
 
                     <ul class="nav" id="menubartabs">
-                        <li><a href="/system/start/dashboard">Home</a></li>
+                        <li><a href="/system/start/dashboard">Dashboard</a></li>
                         <li><a href="/system/media/timeline">Timeline</a></li>   
                         <li><a href="/system/messages/all">Messages</a></li>                                                                              
                         <li><a href="/member/network/relation">Network</a></li>     <!--Use  class="highlighted" on new notifications-->

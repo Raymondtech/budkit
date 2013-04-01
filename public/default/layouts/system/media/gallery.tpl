@@ -25,25 +25,22 @@
                 <ul class="media-grid media-gallery">
                     <li class="mgrow-fluid grid-hide list-header">
                         <div class="feature grid-hide mgcol1">
-                            <strong>Icon</strong>
+                            
                         </div>   
-                        <div class="name grid-hide mgcol2">
+                        <div class="name grid-hide mgcol4">
                             <strong>Title</strong>
                         </div>
                         <div class="grid-hide mgcol2">
                             <strong>Rating</strong>
                         </div>
-                        <div class="description grid-hide mgcol4">
-                            <strong>Description</strong>
-                        </div>
-                        <div class="kind grid-hide mgcol1">
+                        <div class="kind grid-hide mgcol2">
                             <strong>Kind</strong>
                         </div>
-                        <div class="modified grid-hide mgcol1">
+                        <div class="modified grid-hide mgcol2">
                             <strong>Created</strong>
                         </div>
                         <div class="actions grid-hide mgcol1">
-                            <strong>Actions</strong>
+                          
                         </div>
                     </li>
                     <tpl:loop data="gallery.items" id="gallery-items">
@@ -51,24 +48,21 @@
                             <div class="feature mgcol1">
                                 <tpl:media uri="object_uri"  type="attachment_type" link="true" mode="icon" url="attachment_url" class="media-item" name="attachment_name"  width="170" height="170" /> 
                             </div>   
-                            <div class="name grid-hide mgcol2">
-                                <strong>Image title</strong>
-                                <span class="help-block">By Livingstone Fultang</span>
+                            <div class="name grid-hide mgcol4">
+                                <strong><tpl:element type="text" data="attachment_title"/></strong>
+                                <span class="help-block"><tpl:element type="text" data="attachment_size"/></span>
                             </div>
                             <div class="grid-hide mgcol2">
                                 <span class="rating">
-                                    <span class="star"></span><span class="star"></span><span class="star active"></span><span class="star"></span><span class="star"></span>
+                                    <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star active"></span>
                                 </span>
-                                <a href="#"><span class="help-block">250 comments</span></a>
+                                <a href="#"><span class="help-block">0 comments</span></a>
                             </div>
-                            <div class="description grid-hide mgcol4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean massa nibh, congue non tempus ut, congue in dui. Pellentesque accumsan dolor eu libero blandit quis sagittis nisl mattis.
+                            <div class="kind grid-hide mgcol2">
+                                <tpl:element type="text" data="attachment_type"/>
                             </div>
-                            <div class="kind grid-hide mgcol1">
-                                image/jpg
-                            </div>
-                            <div class="modified grid-hide mgcol1">
-                                <?php echo date('Y-m-d H:i:s'); ?>
+                            <div class="modified grid-hide mgcol2">
+                                <tpl:element type="time" data="object_created_on"/>
                             </div>
                             <div class="actions grid-hide mgcol1">
                                 <a href="#" class="btn btn-small">View</a>
