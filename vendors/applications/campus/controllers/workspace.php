@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * course.php
+ * workspace.php
  *
  * Requires PHP version 5.4
  *
@@ -17,14 +17,12 @@
 namespace Application\Campus\Controllers;
 
 use Platform;
-use Library;
-use Application\Campus\Views as View;
 
 /**
- * Course CRUD action controller for Campus 
+ * Workspace CRUD action controller for Campus 
  *
- * The course class implements the action controller that manages the creation, 
- * view and edit of courses within the campus application.
+ * The workspace class implements the action controller that manages the creation, 
+ * view and edit of workspaces within the campus application.
  *
  * @category  Application
  * @package   Action Controller
@@ -40,58 +38,15 @@ final class Workspace extends Platform\Controller {
      * @return  void
      */
     public function index() {
-        return null;
+        return $this->load->view('workspace')->display();
     }
 
-    /**
-     * Creates a new course.
-     * @todo    Implement the course creation action
-     * @return  void
-     */
-    public function create() {
-        
-    }
 
     /**
-     * Updates an existing course.
-     * @return  void
-     */
-    public function update() {
-        
-    }
-
-    /**
-     * Edits an existing course.
-     * @todo    Implement the course edit action
-     * @return  void
-     */
-    public function edit() {
-        
-    }
-
-    /**
-     * Displays course information.
-     * @todo    Implement the course display action
-     * @return  void
-     */
-    public function read() {
-        
-    }
-
-    /**
-     * Deletes a course.
-     * @todo    Implement the course deletion action
-     * @return  void
-     */
-    public function delete() {
-        
-    }
-
-    /**
-     * Get's an instance of the Course controller only creating one if does not
+     * Get's an instance of the Workspace controller only creating one if does not
      * exists
      * @staticvar self $instance
-     * @return an instance of {@link Course}
+     * @return an instance of {@link Workspace}
      * 
      */
     public static function getInstance() {

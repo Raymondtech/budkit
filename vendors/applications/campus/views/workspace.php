@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * calendar.php
+ * workspace.php
  *
  * Requires PHP version 5.4
  *
@@ -17,7 +17,7 @@
 namespace Application\Campus\Views;
 
 /**
- * Calendar Sub View class
+ * Workspace Sub View class
  *
  * @category  Application
  * @package   View
@@ -25,14 +25,14 @@ namespace Application\Campus\Views;
  * @version   1.0.0
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
- * 
+ * ˙
  */
-final class Calendar extends \Platform\View{
+final class Workspace extends \Platform\View{
     
 
     
     /**
-     * Calendar view display
+     * Workspace view display
      * @return void
      */
     public function display(){
@@ -58,50 +58,21 @@ final class Calendar extends \Platform\View{
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
         $dashboard = $this->output->layout("dashboard");
-        $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
         
-        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
-        $this->output->addToPosition("side", $sidebar);
+        $this->output->addMenuGroupToPosition("side", "campusmenu");
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );
         
     }
     
-    /**
-     * Displays the calendar calendar
-     * @return void
-     */
-    public function drawCalendar(){
-        
-        $this->output->setPageTitle(_("Calendar calendar"));    
-          
-        $calendar = $this->output->layout( "calendars/calendar" );     
-        $this->output->addToPosition("dashboard", $calendar); 
-        
-        return $this->display();
-    }
+    
     
     
     /**
-     * The new article create form
-     * @return void
-     */
-    public function createform(){       
-        //Page Title
-         $this->output->setPageTitle("Calendars | Create new Calendar");
-                
-        //form
-        $form  = $this->output->layout( "calendars/form" );  
-        $this->output->addToPosition("dashboard",   $form);
-     
-        return $this->display();
-    }
-    
-    /**
-     * Gets an instance of the calendar class
+     * Gets an instance of the workspace class
      * @staticvar object $instance
-     * @return object Calendar
+     * @return object Workspace
      */
     public static function getInstance(){
         

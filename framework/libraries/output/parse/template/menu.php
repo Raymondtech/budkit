@@ -76,7 +76,7 @@ class Menu extends Parse\Template {
         $menuItems = \Platform\Navigator::menu($uniqueId);
 
         if (empty($menuItems))
-            return null;
+            $menuItems = array();
 
         //print_R($menuItems);
         unset($tag['NAMESPACE']);
@@ -88,6 +88,9 @@ class Menu extends Parse\Template {
         //print_R( \Library\Event::$hooks );
 
         \Library\Event::trigger("beforeRenderMenu", $menuId, $menuItems);
+
+        if (empty($menuItems))
+            return null;
 
         $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuLtr);
 
@@ -119,7 +122,7 @@ class Menu extends Parse\Template {
             //if this user does not have access to this menu ignore it
             if (!empty($item['menu_url'])):
                 //check has permission;
-                if(!static::hasPermission($item['menu_url'])):
+                if (!static::hasPermission($item['menu_url'])):
                     continue;
                 endif;
             endif;
@@ -186,12 +189,12 @@ class Menu extends Parse\Template {
      * @return type
      */
     public static function hasPermission($url) {
-        
-        $user   = \Platform\User::getInstance();
-        $params = array_merge( array("action" => "view", "user" => $user, "route" => $url));
-        
+
+        $user = \Platform\User::getInstance();
+        $params = array_merge(array("action" => "view", "user" => $user, "route" => $url));
+
         //Check that the user has permission to view this menu;
-        return Library\Authorize\Permission::execute("view" , $params, $url, false );
+        return Library\Authorize\Permission::execute("view", $params, $url, false);
     }
 
     /**
