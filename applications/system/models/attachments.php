@@ -90,7 +90,7 @@ class Attachments extends Platform\Entity {
         $this->definePropertyModel(
                 array(
                     "attachment_name" => array("Attachment Name", "mediumtext", 50),
-                    "attachment_title" => array("Attachment Name", "mediumtext", 100),
+                    "attachment_title" => array("Attachment Title", "mediumtext", 100),
                     "attachment_size" => array("Attachment Size (bytes)", "mediumint", 50),
                     "attachment_description" => array("Attachment Description", "mediumtext", 200),
                     "attachment_src" => array("Attachment Source", "mediumtext", 100),

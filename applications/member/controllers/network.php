@@ -34,7 +34,30 @@ class Network extends \Platform\Controller {
      * @return boolean
      */
     public function index() {
-        $this->load->view("network", "member")->display();
+        return $this->gallery();
+    }
+
+    public function gallery() {
+        
+        $this->output->setPageTitle(_("Network"));
+        
+        $view  = $this->load->view("network");
+        $model = $this->load->model("profile", "member");
+
+        $users = $model->getObjectsList("user");
+        $items = array("title"=>"Members");
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $users->fetchAssoc()) {
+            $row['user_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+        }
+        $this->set("gallery", $items);
+
+        $gallery = $this->output->layout("gallery");
+        $this->output->addToPosition("body", $gallery);
+
+        $view->display();
     }
 
     /**

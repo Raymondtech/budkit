@@ -64,23 +64,11 @@ class Index extends Platform\View {
 
         //to add some js file
         $this->output->addStyle("some.css");
-
-        //to output just the layout use
-        //$this->output->raw();
-        //to output just the xml use
-        //$this->output->xml();
-        //to output as json use
-        //$this->output->json();
-        //parse Layout Demo;
-        //$sidebar      = $this->output->layout( "index_sidebar" );
-        $dashboard = $this->output->layout("dashboard");
-        $sidebar = null;
-        //$rightaside     = $this->output->layout( "cpanel"  );
-        
         $this->output->addMenuGroupToPosition("side", "dashboardmenu");
-        $this->output->addToPosition("side", $sidebar);
-        $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );
+                //$this->output->addToPosition("side", $sidebar);
+         $dashboard = $this->output->layout("dashboard");
+        $this->output->addToPosition("body", $dashboard);
     }
 
     /**

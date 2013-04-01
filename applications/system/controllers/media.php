@@ -54,6 +54,11 @@ Class Media extends \Platform\Controller {
         $this->load->view('media')->display(); //sample call;   
         //$this->output->addToPosition("right", $right );
     }
+    
+    public function timeline(){
+        $timeline = $this->load->controller("media\\timeline","system");
+        return $timeline->index();
+    }
 
     /**
      * Returns an instance of the media controller
