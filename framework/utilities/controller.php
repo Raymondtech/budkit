@@ -281,7 +281,9 @@ abstract class Controller extends Library\Action {
      */
     final public function login() {
         
-        static::actionStateAs("view");
+        static::actionStateAs("view"); 
+        $lastURL    =  \Library\Session::get("lastRequestURL");    
+        $this->set("lasturl", $lastURL);
         //@TODO Kill any logged in session
         //@TODO If already logged in, redirect to homepage or somewhere else;
         //$this->redirect( '/index.php' );
@@ -317,9 +319,11 @@ abstract class Controller extends Library\Action {
                     if ($authenticate->attest($credentials)) {
                         //get the user data
                         $this->user = User::getInstance();
-                        $lastURL    =  \Library\Session::get("lastRequestURL");
+                       
                         $this->alert( _t('Welcome back ').$lastURL , sprintf(_t('Howdy %s,'), $this->user->user_full_name), "success");
-                        $this->redirect( $this->output->link( "/system/start/index") );
+                        
+                        
+                        $this->redirect( $this->output->link( "/system/media/timeline") );
                         
                     } else {
                         //if not show the form...with messages maybe?;

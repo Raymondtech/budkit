@@ -164,8 +164,7 @@ final class Dispatcher extends \Library\Object {
             }
         }
         //If the request arguments have changed, modify in Router
-        //Using array merge to reset the indices
-        
+        //Using array merge to reset the indices       
         $route->setParameter("arguments", array_merge(array(), $argmts)); 
         $route->setParameter("subtask", $method);
         

@@ -63,8 +63,9 @@ class Event extends \Library\Object {
         //Load the hook file
         require_once( $hooks );
         //Find all the config files in apps
-        $_hooks = \Library\Folder::itemizeFind("hooks.inc", APPPATH, 0, TRUE, 1);
-
+        $_ahooks = \Library\Folder::itemizeFind("hooks.inc", APPPATH, 0, TRUE, 1);
+        $_vhooks = \Library\Folder::itemizeFind("hooks.inc", VENDORPATH."applications".DS, 0, TRUE, 1);      
+        $_hooks  = array_merge($_ahooks, $_vhooks);
         //print_R($routers);
         foreach ($_hooks as $i => $_hooksFile) {
             if (!\Library\Folder::is($_hooksFile)) {

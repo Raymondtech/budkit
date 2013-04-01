@@ -51,6 +51,7 @@ define('EXT',       '.php');
 define('SELF',      pathinfo(__FILE__, PATHINFO_BASENAME));
 define('FSPATH',    str_replace(SELF, '', __FILE__)).DS;
 define('APPPATH',   FSPATH.'applications'.DS );
+define('VENDORPATH',   FSPATH.'vendors'.DS );
 
 /*
 |---------------------------------------------------------------

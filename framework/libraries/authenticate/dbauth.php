@@ -71,15 +71,15 @@ class DbAuth extends \Library\Authenticate {
         
         $objects->defineValueGroup("user"); //Means we are getting the data from the users value proxy table;
         
-        $object     = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password", "user_name_id", "user_email","user_first_name","user_last_name"));
+        $object     = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password", "user_name_id", "user_email","user_first_name","user_last_name","user_middle_name"));
         
 
         if ($validate->email($credentials['usernameid'])) {
             //treat as user_email, 
-            $statement = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password","user_name_id", "user_email","user_first_name","user_last_name")); //Use EAV to get data;
+            $statement = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password","user_name_id", "user_email","user_first_name","user_last_name","user_middle_name")); //Use EAV to get data;
         } else {
             //use as user_name_id
-            $statement = $objects->getObjectsByPropertyValueMatch( array("user_name_id"), array( $usernameid ) , array("user_password","user_name_id", "user_email","user_first_name","user_last_name")); //Use EAV to get the data
+            $statement = $objects->getObjectsByPropertyValueMatch( array("user_name_id"), array( $usernameid ) , array("user_password","user_name_id", "user_email","user_first_name","user_last_name","user_middle_name")); //Use EAV to get the data
         }
 
         $result = $statement->execute();
@@ -115,7 +115,8 @@ class DbAuth extends \Library\Authenticate {
         $authenticate->user_name_id = $userobject->user_name_id;
         $authenticate->user_email = $userobject->user_email;
         $authenticate->user_first_name = $userobject->user_first_name;
-        $authenticate->user_full_name    = implode(' ', array($userobject->user_first_name, $userobject->user_last_name) );
+        $authenticate->user_last_name = $userobject->user_last_name;
+        $authenticate->user_full_name    = implode(' ', array($userobject->user_first_name, $userobject->user_middle_name, $userobject->user_last_name) );
 
         //Update
         $session->set("handler", $authenticate, "auth");

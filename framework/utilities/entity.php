@@ -499,7 +499,7 @@ class Entity extends Model {
      */
     final private static function getObjectQuery($properties, $vtable = '?property_values', $objectId=NULL, $objectType=NULL, $objectURI=NULL) {
         //Join Query
-        $query  = "SELECT o.object_id, o.object_uri, o.object_type";
+        $query  = "SELECT o.object_id, o.object_uri, o.object_type, o.object_created_on, object_updated_on, object_status";
 
         if (!empty($properties)):
             //Loop through the attributes you need
