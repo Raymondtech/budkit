@@ -21,30 +21,30 @@ We have not tested BK on anything other than [Apache2][APACHE2]. So expect the u
 You will need a version of the [PHP 5.4.0][PHP5] or higher installed. 
 
 The following PHP extensions are required
-    gd - Image Manipultation
-    mcrypt - Cryptography Handling	
-    gettext - Localization
-    tokenizer - Tokenizer
-    pcre - Perl Compatible RegEx
-    json - javaScript Object Notation
-    iconv - IconV Character-Set Conversion
-    imap - IMAP extension
-    mbstring - Multibyte Strings
-    ctype - Character-Type checking
-    libxml - XML Manipulation
-    zlib - Zlib Compression
+;gd - Image Manipultation
+;mcrypt - Cryptography Handling	
+;gettext - Localization
+;tokenizer - Tokenizer
+;pcre - Perl Compatible RegEx
+;json - javaScript Object Notation
+;iconv - IconV Character-Set Conversion
+;imap - IMAP extension
+;mbstring - Multibyte Strings
+;ctype - Character-Type checking
+;libxml - XML Manipulation
+;zlib - Zlib Compression
 
 The following PHP directives are required
-    safe_mode -	Off		
-    display_errors -	Off		
-    magic_quotes_sybase -	Off	
-    magic_quotes_gpc -	Off	
-    magic_quotes_runtime - Off	
-    session.auto_start -	Off	
-    output_buffering -	On	
-    register_globals -	Off	
-    file_uploads -	On
-    upload_max_filesize	> 200M (for uploading large files e.g videos)
+;safe_mode -	Off		
+;display_errors -	Off		
+;magic_quotes_sybase -	Off	
+;magic_quotes_gpc -	Off	
+;magic_quotes_runtime - Off	
+;session.auto_start -	Off	
+;output_buffering -	On	
+;register_globals -	Off	
+;file_uploads -	On
+;upload_max_filesize	> 200M (for uploading large files e.g videos)
 
 ### MySQL 5.5+
 [MySQL55]: http://dev.mysql.com/tech-resources/articles/introduction-to-mysql-55.html
