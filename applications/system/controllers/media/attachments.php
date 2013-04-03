@@ -103,7 +103,7 @@ class Attachments extends System\Media {
         $this->output->setPageTitle(_("Attachments"));
 
         $model  = $this->load->model("attachments", "system");
-        $attachments = $model->getObjectsList("attachment");
+        $attachments = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
         $model->setPagination(); //Set the pagination vars
         $items     = array();
         //Loop through fetched attachments;
