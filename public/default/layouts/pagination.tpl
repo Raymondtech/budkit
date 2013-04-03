@@ -6,7 +6,7 @@
                 <li><a href="${pagination.previous}">Previous</a></li>
             </tpl:condition>
             <tpl:condition data="pagination.previous" test="isset" value="0">
-                <li class="disabled"><a>Prev</a></li>
+                <li class="disabled"><a>Previous</a></li>
             </tpl:condition>
             <tpl:loop data="pagination.pages" id="pagination-items">
                 <li  class="page ${state}"><a href="${link}"><tpl:element type="text" data="title" /></a></li>
