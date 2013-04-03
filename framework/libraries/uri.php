@@ -57,7 +57,7 @@ final class Uri extends Object {
      * Path
      * @var string 
      */
-    private $path = "/";
+    protected $path = "/";
     
     /**
      * The Request script
@@ -93,6 +93,8 @@ final class Uri extends Object {
      */
     private $fragment;
     
+    
+    private $variables;
 
     /**
      * Constructor for the URI Library Object
@@ -111,6 +113,7 @@ final class Uri extends Object {
             $this->path = $this->parts["path"];
             $this->host = $this->parts["host"];
             $this->scheme = $this->parts["scheme"];
+            $this->variables = $this->parts["variables"];
 
             if (isset($this->parts["fragment"])) {
                 $this->fragment = $this->parts["fragment"];
@@ -266,6 +269,14 @@ final class Uri extends Object {
     public function getQuery() {
         return $this->path;
     }
+    
+    /**
+     * Returns all variables found in the request query
+     * @return type
+     */
+    public function getQueryVariables(){
+        return $this->variables;
+    }
 
     /**
      * Returns the request host
@@ -337,7 +348,7 @@ final class Uri extends Object {
      * @param string $path 
      * 
      */
-    private function setPath($path) {
+    public function setPath($path) {
         $this->path = $path;
     }
 
@@ -398,10 +409,31 @@ final class Uri extends Object {
 
             $file = $link['file'] = empty($file) ? "/index.php" : $file;
 
+            //find Budkit query vars in the request e.g /page:1/format:json/ variables 
+            //echo $path; 
+            $format = null;
+            $segments = explode("/", $path);
+            $variables = array();
+            foreach($segments as $key=> $segment):
+                if (( stripos($segment, ":") ) !== FALSE) {
+                    $variable = explode(":",$segments[$key], 2);
+                    //If this segment has a dot?
+                    $value = end($variable);
+                    if(stripos($value,'.') !==FALSE){
+                        $parts = explode('.',$value,2);
+                        $format = ".".end($parts);
+                    }
+                    
+                    $variables[reset($variable)]= $value;
+                    unset($segments[$key]);
+                }
+            endforeach;
+            $path = implode("/",$segments).$format;
+            //echo "<br />".$path.$format; die;
+            $link['variables'] = $variables;
             //3. The [query]#[fragment]
             $path = $link['path'] = empty($path) ? "/" : $path;
-
-
+            
             //4. The username and password;
             //5. Compile the resource
             $resource = $scheme . "://" . $host . $path;

@@ -102,9 +102,9 @@ class Attachments extends System\Media {
 
         $this->output->setPageTitle(_("Attachments"));
 
-        $model   = $this->load->model("attachments", "system");
-  
+        $model  = $this->load->model("attachments", "system");
         $attachments = $model->getObjectsList("attachment");
+        $model->setPagination(); //Set the pagination vars
         $items     = array();
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying

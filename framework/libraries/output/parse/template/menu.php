@@ -149,17 +149,24 @@ class Menu extends Parse\Template {
             $link = array(
                 "ELEMENT" => 'li',
                 "CLASS" => 'link-' . $class . " " . ((isset($item['menu_classes']) && !empty($item['menu_classes'])) ? $item['menu_classes'] : "") . (($active) ? " active " : ""),
+            );
+
+            $anchor = array(
+                "ELEMENT" => "a",
+                "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
                 "CHILDREN" => array(
-                    array(
-                        "ELEMENT" => "a",
-                        "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
-                        "CHILDREN" => array(
-                            // array("ELEMENT" => "i", "CLASS" => "icon-{$class}"), @todo menu icons
-                            array("ELEMENT" => "span", "CDATA" => $item['menu_title'])
-                        )
-                    )
+                    // array("ELEMENT" => "i", "CLASS" => "icon-{$class}"), @todo menu icons
+                    array("ELEMENT" => "span", "CDATA" => $item['menu_title'])
                 )
             );
+            //Item count
+            if (isset($item['menu_count'])) {
+                //If we have a menu count
+                $important = (isset($item['menu_count_unimportant'])&&(bool)$item['menu_count_unimportant'])?null : "label-important";
+                $anchor['CHILDREN'][] = array("ELEMENT" => "span", "CLASS"=>"label pull-right {$important}", "CDATA" => $item['menu_count']);
+            }
+            //Add the menu anchor
+            $link["CHILDREN"][] = $anchor;
 
             //Count children
             if (isset($item['children']) && count($item['children']) > 0 && $menuLevelParent) {

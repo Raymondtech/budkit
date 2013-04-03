@@ -110,7 +110,7 @@ $Output->recallAlerts();
  */
 $Dispatcher = Platform\Dispatcher::getInstance();
 
-$Dispatcher->execute($Router->findRoute($Uri->getQuery()));
+$Dispatcher->execute($Router->findRoute($Uri->getQuery(), $Uri->getQueryVariables()));
 $Dispatcher->redirect();
 
 /*

@@ -225,7 +225,8 @@ final class Loader{
         $_layouts    = array( 
             FSPATH . 'public' . DS . $output->template .DS.'layouts'.DS.$layout.$ext,
             FSPATH . 'public' . DS . $output->template .DS.'layouts'.DS.$application.DS.$layout.$ext,
-            FSPATH."applications".DS.$application.DS."layouts".DS.$layout.$ext   
+            FSPATH."applications".DS.$application.DS."layouts".DS.$layout.$ext,
+            VENDORPATH."applications".DS.$application.DS."layouts".DS.$layout.$ext  
         );
        
         if(!empty($directory)){

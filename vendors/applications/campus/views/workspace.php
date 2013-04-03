@@ -57,7 +57,7 @@ final class Workspace extends \Platform\View{
         //$this->output->json();
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
-        $dashboard = $this->output->layout("dashboard");
+        $dashboard = $this->output->layout("dashboard", "system");
         //$rightaside     = $this->output->layout( "cpanel"  );
         
         $this->output->addMenuGroupToPosition("side", "campusmenu");

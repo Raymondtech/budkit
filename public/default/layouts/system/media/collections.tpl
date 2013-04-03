@@ -20,7 +20,7 @@
             <hr />
         </tpl:condition>
         <div class="widget">
-            <div class="widget-head"><span class="widget-title">Media</span><a class="widget-close" data-dismiss="widget"><i class="icon-refresh"></i></a></div>
+<!--            <div class="widget-head"><span class="widget-title">Media</span><a class="widget-close" data-dismiss="widget"><i class="icon-refresh"></i></a></div>-->
             <div class="widget-body">
                 <ul class="media-grid media-gallery">
                     <li class="mgrow-fluid grid-hide list-header">

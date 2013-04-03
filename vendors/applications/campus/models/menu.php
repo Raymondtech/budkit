@@ -43,7 +43,7 @@ class Menu extends \Platform\Model {
         if ($menuId === 'dashboardmenu') {
             array_push($menuItems, array(
                 "menu_title" => "Workspace",
-                "menu_url" => "/campus/workspace/projects"
+                "menu_url" => "/campus/workspace/project"
                     )
             );
         } elseif ($menuId === 'campusmenu') {
@@ -52,15 +52,15 @@ class Menu extends \Platform\Model {
             //print_r($menuItems);
             array_push($menuItems, array(
                 "menu_title" => "Workspace",
-                "children" => array(
-                    array("menu_title" => "Projects", "menu_url" => "/campus/workspace/projects"),
-                    array("menu_title" => "Calendar", "menu_url" => "/campus/workspace/calendar"),
-                    array("menu_title" => "Courses", "menu_url" => "/campus/workspace/course"),
-                    array("menu_title" => "Tasks", "menu_url" => "/campus/workspace/tasks"),
-                    array("menu_title" => "Portfolio", "menu_url" => "/campus/portfolio/gallery"),
-                // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
-                )
+                    "children" => array(
+                        array("menu_title" => "Projects", "menu_url" => "/campus/workspace/project","menu_count"=>7),
+                        array("menu_title" => "Calendar", "menu_url" => "/campus/workspace/calendar"),
+                        array("menu_title" => "Courses", "menu_url" => "/campus/workspace/course"),
+                        array("menu_title" => "Tasks", "menu_url" => "/campus/workspace/task", "menu_count"=>10), //add  menu_count_unimportant=true to remove highlight
+                        array("menu_title" => "Portfolio", "menu_url" => "/campus/workspace/portfolio"),
+                    // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
                     )
+                )
             );
         }
     }

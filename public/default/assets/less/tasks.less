@@ -1,0 +1,24 @@
+.media-grid{
+    &.tasks{
+        .task-item{
+            border: 1px solid @warningBorder;
+            padding: 10px;
+            background: @warningBackground;
+            &.late{
+                border: 1px solid @errorBorder;
+                background: @errorBackground;
+            }
+            &.completed{
+                border: 1px solid @successBorder;
+                background: @successBackground;
+            }
+        } 
+    } 
+}
+
+.media-list{
+    &.tasks{
+        .task-item{
+        }
+    }
+}

@@ -103,6 +103,11 @@ final class Router extends Object {
      * @var type 
      */
     protected $parameters = array();
+        /**
+     *
+     * @var type 
+     */
+    protected $variables = array();
     protected $uri;
 
     /**
@@ -238,8 +243,10 @@ final class Router extends Object {
      * @param type $paramArray 
      */
     public function setParameters($paramArray) {
-
-        $this->parameters = $paramArray;
+        
+        if(!is_array($paramArray)) return false;
+        
+        $this->parameters = array_merge($this->parameters, $paramArray);
 
         return $this;
     }
@@ -264,21 +271,27 @@ final class Router extends Object {
      * Determines what route to follow
      * 
      * @param type $query
-     * @return type 
+     * @param type $queryVars
+     * @return type
      */
-    public function findRoute($query) {
+    public function findRoute($query, $queryVars = array()) {
 
         // echo $query;
 
         $segmentCount = 0;
         $segments = explode('/', $query);
         $request = null;
-        $params = null;
+        //$params = null;
         $path = null;
+        if(is_array($queryVars)&&!empty($queryVars)):
+            foreach($queryVars as $key=>$value):
+                $this->setRequestVar($key, $value);
+            endforeach;
+        endif;
 
         foreach ($segments as $key => $segment) {
-            if (( stripos($segment, "=") ) !== FALSE) {
-                $params = $segments[$key];
+            if (( stripos($segment, ":") ) !== FALSE) {
+                $params = explode(":",$segments[$key], 2);
                 unset($segments[$key]);
             }
             if (empty($segment)) {
@@ -512,6 +525,32 @@ final class Router extends Object {
         $this->url = $url;
 
         return $this;
+    }
+    
+    /**
+     * Sets a query variable
+     * 
+     * @param type $varname
+     * @param type $value
+     * 
+     */
+    public function setRequestVar($name, $value){ 
+      if (isset($this->variables[$name])) {
+            //$default = $this->getParameter($name);
+            $this->variables[$name] = $value;
+        }else{
+            $this->variables[$name] = $value;
+        }
+        return $this;
+    }
+    
+    /**
+     * Please note that variables obtained here will be unsanitized
+     * @todo Will need to use $input->getVar to get healthy variables;
+     * @return type
+     */
+    public function getRequestVars(){
+        return $this->variables;
     }
 
     /**

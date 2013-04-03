@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * course.php
+ * project.php
  *
  * Requires PHP version 5.4
  *
@@ -20,10 +20,10 @@ use Application\Campus\Controllers as Campus;
 
 
 /**
- * Course CRUD action controller. 
+ * Project CRUD action controller. 
  *
  * This class implements the action controller that manages the creation, 
- * view and edit of courses.
+ * view and edit of projects.
  *
  * @category  Application
  * @package   Action Controller
@@ -32,7 +32,7 @@ use Application\Campus\Controllers as Campus;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Course extends Campus\Workspace {
+final class Project extends Campus\Workspace {
 
     /**
      * The default fallback method. 
@@ -40,9 +40,9 @@ final class Course extends Campus\Workspace {
      */
     public function index() {
         
-        $this->output->setPageTitle( _("Courses") );
+        $this->output->setPageTitle( _("Projects") );
 
-        $model   = $this->load->model("attachments", "system"); //This will change of course but for now
+        $model   = $this->load->model("attachments", "system"); //This will change of project but for now
   
         $attachments = $model->getObjectsList("attachment");
         $items     = array();
@@ -61,10 +61,10 @@ final class Course extends Campus\Workspace {
     }
 
     /**
-     * Get's an instance of the Course controller only creating one if does not
+     * Get's an instance of the Project controller only creating one if does not
      * exists
      * @staticvar self $instance
-     * @return an instance of {@link Course}
+     * @return an instance of {@link Project}
      * 
      */
     public static function getInstance() {

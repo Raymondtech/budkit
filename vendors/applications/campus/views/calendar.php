@@ -57,11 +57,14 @@ final class Calendar extends \Platform\View{
         //$this->output->json();
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
-        $dashboard = $this->output->layout("dashboard");
+        $dashboard = $this->output->layout("dashboard", "system");
+        
+        //print_R($dashboard);
+        
         $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
         
-        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
+        $this->output->addMenuGroupToPosition("side", "campusmenu");
         $this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );
@@ -74,9 +77,8 @@ final class Calendar extends \Platform\View{
      */
     public function drawCalendar(){
         
-        $this->output->setPageTitle(_("Calendar calendar"));    
-          
-        $calendar = $this->output->layout( "calendars/calendar" );     
+        $this->output->setPageTitle( _("Workspace Calendar"));            
+        $calendar = $this->output->layout( "events/calendar" );       
         $this->output->addToPosition("dashboard", $calendar); 
         
         return $this->display();
@@ -92,7 +94,7 @@ final class Calendar extends \Platform\View{
          $this->output->setPageTitle("Calendars | Create new Calendar");
                 
         //form
-        $form  = $this->output->layout( "calendars/form" );  
+        $form  = $this->output->layout( "events/form" );  
         $this->output->addToPosition("dashboard",   $form);
      
         return $this->display();

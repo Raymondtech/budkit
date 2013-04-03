@@ -41,24 +41,6 @@ namespace Platform;
 final class Navigator extends Model {
 
     /**
-     * The current state or possition in the system
-     * @var static $state 
-     */
-    static $state;
-
-    /**
-     * The current total in a navigable record set
-     * @var static total
-     */
-    static $total;
-
-    /**
-     * The current state of the pages menu
-     * @var static pagination
-     */
-    static $pagination;
-
-    /**
      * Instantiate the cnavigator
      * 
      * @return object
@@ -199,28 +181,9 @@ final class Navigator extends Model {
 
     public static function pathway() {
         //@TODO: Renders the pathway or current location of the site
-
         return self::display();
     }
 
-    /**
-     * a.k.a pagination
-     * 
-     * @return type 
-     */
-    public static function pages() {
-        //@TODO: Calculates the pages from a recordset or an array of results
-        //Get the current page state from the request;
-        $limit = self::getState();
-        $start = self::getState();
-
-        // In case limit has been changed, adjust it
-        self::setState('limit', $limit);
-        self::setState('limitstart', $limitstart);
-
-
-        return self::display();
-    }
 
     public function display() {
         //@TODO: Renders the display data, as per other models
@@ -237,14 +200,5 @@ final class Navigator extends Model {
     public static function add() {
         
     }
-
-    private static function getState() {
-        
-    }
-
-    private static function setState() {
-        
-    }
-
 }
 

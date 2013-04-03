@@ -23,9 +23,10 @@
     *margin-left: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%) + @fluidGridGutterWidth - (.5 / @gridRowWidth * 100 * 1%);
   }
 
-  .mgcol (@columns) {
+  .mgcol(@columns) {
     width: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1));
     *width: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%);
+    .clearfix();
   }
 
   .mgrow-fluid {
@@ -72,9 +73,10 @@
   li{ 
     display: inline-block; 
     float: left;
-    margin: 0 @gridGutterWidth*0.6 @gridGutterWidth*0.6 0;
+    margin: 0 @gridGutterWidth*0.9 @gridGutterWidth*0.9 0;
     .grid-hide{ display:none}
     &.list-header{display:none}
+    .clearfix();
   }
 }
 .media-list{

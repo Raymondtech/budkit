@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * workspace.php
+ * task.php
  *
  * Requires PHP version 5.4
  *
@@ -14,15 +14,16 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Campus\Controllers;
+namespace Application\Campus\Controllers\Workspace;
 
-use Platform;
+use Application\Campus\Controllers as Campus;
+
 
 /**
- * Workspace CRUD action controller for Campus 
+ * Task CRUD action controller. 
  *
- * The workspace class implements the action controller that manages the creation, 
- * view and edit of workspaces within the campus application.
+ * This class implements the action controller that manages the creation, 
+ * view and edit of tasks.
  *
  * @category  Application
  * @package   Action Controller
@@ -31,22 +32,39 @@ use Platform;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Workspace extends Platform\Controller {
+final class Task extends Campus\Workspace {
 
     /**
      * The default fallback method. 
      * @return  void
      */
     public function index() {
-        return $this->load->view('workspace')->display();
+        
+        $this->output->setPageTitle( _("Tasks") );
+
+        $model   = $this->load->model("attachments", "system"); //This will change of task but for now
+  
+        $attachments = $model->getObjectsList("attachment");
+        $items     = array();
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $attachments->fetchAssoc()){
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+        }
+        $this->set("gallery", $items );
+        
+        $gallery = $this->output->layout("tasks/lists");
+        $this->output->addToPosition("dashboard", $gallery);
+        
+        $this->load->view('workspace')->display();
     }
 
-
     /**
-     * Get's an instance of the Workspace controller only creating one if does not
+     * Get's an instance of the Task controller only creating one if does not
      * exists
      * @staticvar self $instance
-     * @return an instance of {@link Workspace}
+     * @return an instance of {@link Task}
      * 
      */
     public static function getInstance() {

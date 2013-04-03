@@ -14,7 +14,10 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Campus\Controllers;
+namespace Application\Campus\Controllers\Workspace;
+
+use Application\Campus\Controllers as Campus;
+
 
 /**
  * Calendar CRUD action controller. 
@@ -29,7 +32,7 @@ namespace Application\Campus\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Calendar extends \Platform\Controller {
+final class Calendar extends Campus\Workspace {
     
     /**
      * Displays the form required to creates a new calendar. 
@@ -57,10 +60,13 @@ final class Calendar extends \Platform\Controller {
      * @todo    Implement the listing of calendars within the displayed calendar
      * @return  See {@link \Application\System\Views\Content\Calendar::drawCalendar()}
      */
-    public function calendar() {
+    public function index() {
         
         $view = $this->load->view('calendar');
+        
         $user = \Platform\User::getInstance();
+        
+        //die;
   
         $view->drawCalendar();
     }

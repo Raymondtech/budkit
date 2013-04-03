@@ -131,8 +131,8 @@ final class Input extends Object {
      */
     public function __construct() {
 
-        
-
+        //We need to store the size of files being uploaded for upload progress
+        //Returns an instance of the validate object
         $this->data = array_merge($this->data, $_REQUEST);
         $this->request = $this->data;
         $this->get = array_merge($this->get, $_GET);
@@ -146,11 +146,10 @@ final class Input extends Object {
         $this->unRegisterGlobals();
         //Temp
         $this->files = array_merge($this->files, $_FILES);
-
-        //We need to store the size of files being uploaded for upload progress
-        //Returns an instance of the validate object
+        
         $this->validate = Validate::getInstance();
         $this->router = Router::getInstance(); //Used to back trace the request
+        
         //autosanitize;
         $this->sanitize();
     }
@@ -617,8 +616,28 @@ final class Input extends Object {
      * @param mixed $value
      * @param string $verb 
      */
-    public function setVar($name, $value, $verb = 'post') {
+    public function setVar($name, $value, $verb ='get') {
+        if(isset($this->$verb)){
+            $this->$verb = array_merge( $this->$verb, array($name => $value) );
+        }
+    }
+    
+    /**
+     * Gets all the calculated request Variables
+     * for sanitization
+     * 
+     */
+    public function getRequestVars($method="get"){
         
+        $router = Router::getInstance();
+        $requestVars  = $router->getRequestVars();
+        
+        $requestMethod = (empty($method)||!isset($this->$method)) ? $this->getVerb() : $method;
+        foreach($requestVars as $name=>$value):
+            $this->setVar($name, $value, $requestMethod);
+        endforeach;
+        
+        return $this->$requestMethod;
     }
 
     /**

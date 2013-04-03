@@ -100,8 +100,9 @@ abstract class Controller extends Library\Action {
         foreach ($classes as $var => $class) {
             $this->$var = $class::getInstance();
         }
-                                        
-
+        //Not elegant, but just forcing the input class
+        //to pull request vars from router;
+        $this->input->getRequestVars();
         //$output = Library\Output::getInstance();
         //testing: throw new Exception("We could not deal with the heat" );
 
