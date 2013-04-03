@@ -43,8 +43,8 @@ final class Task extends Campus\Workspace {
         $this->output->setPageTitle( _("Tasks") );
 
         $model   = $this->load->model("attachments", "system"); //This will change of task but for now
-  
-        $attachments = $model->getObjectsList("attachment");
+        $attachments = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
+        $model->setPagination(); //Set the pagination vars
         $items     = array();
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying

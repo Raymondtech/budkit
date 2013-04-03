@@ -43,8 +43,8 @@ final class Portfolio extends Campus\Workspace {
         $this->output->setPageTitle( _("Portfolio") );
 
         $model   = $this->load->model("attachments", "system"); //This will change of portfolio but for now
-  
-        $attachments = $model->getObjectsList("attachment");
+        $attachments = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
+        $model->setPagination(); //Set the pagination vars
         $items     = array();
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
