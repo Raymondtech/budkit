@@ -14,7 +14,9 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\System\Controllers\Media;
+
 use Application\System\Controllers as System;
 
 /**
@@ -30,17 +32,18 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Photo extends System\Media{
+final class Photo extends System\Media {
 
     /**
      * Displays the form required to creates a new photo. 
      * @todo    Implement the create photo action method
      * @return  \Application\System\Views\Media\Photo::createForm()
      */
-    public function create() {    
-        $view       = $this->load->view('photo');        
-        return $view->createform(); 
+    public function create() {
+        $view = $this->load->view('photo');
+        return $view->createform();
     }
+
     /**
      * Updates an existing photo.
      * @todo    Implement the photo update action method
@@ -49,58 +52,72 @@ final class Photo extends System\Media{
     public function update() {
         
     }
+
     /**
      * Edits an existing photo.
      * @todo    Implement the photo edit action method
      * @return  void
      */
-    public function edit(){
+    public function edit() {
         
     }
-    
+
     /**
      * Displays an collection media.
      * @todo    Implement the collection read action method
      * @return  void
      */
-    public function view( $photoId = null ) {
-        
-        $this->output->setPageTitle(_("Photo Title"));
+    public function view($photoURI = null) {
         //Throws an error if no collectionId is passed
         //Loads the collectionItem from the databse
         $model = $this->load->model("attachments");
+        $attachment = $model->loadObjectByURI($photoURI);
+        $item   = $attachment->getPropertyData();
+        $item['object_uri'] = $attachment->getObjectURI();
+        //Set the photo display properties     
+        $this->output->setPageTitle($attachment->getPropertyValue("attachment_title"));
+        $this->set("item", $item);
+        
+        print_R($item);
         
         //Get the format of the item;
         $format = $this->router->getFormat();
-        $collection = $this->output->layout("media/photos/photo");
-        
-        if($format !=="raw"):
-            $this->output->addToPosition("dashboard", $collection);
-        else:     
-            //Add the collection to the placeholder image;
-            $this->output->addToPosition("placeholder", $collection); //Add the collection to the placeholder
-            //Raw displays whatever is in the body block only; 
-            $placeholder = $this->output->layout("media/placeholder");
-            $this->output->addToPosition("body", $placeholder);
-        endif;
-        
-        $this->load->view("media")->display(); 
+        $photo = $this->output->layout("media/photos/photo");
+
+        switch ($format):
+            case "raw":
+            case "json":
+                case "xml":
+                //Add the collection to the placeholder image;
+                $this->output->addToPosition("placeholder", $photo); //Add the collection to the placeholder
+                //Raw displays whatever is in the body block only; 
+                $slide = $this->output->layout("media/slider");
+                $this->output->addToPosition("body", $slide);
+                break;
+            default:
+                //Raw displays whatever is in the body block only; 
+                $photo = $this->output->layout("media/item");
+                $this->output->addToPosition("body", $photo);
+                break;
+        endswitch;
+        $this->load->view("media")->display();
     }
-    
+
     /**
      * Displays a gallery of media items. 
      * @return void
      */
     public function gallery() {
-               
+
         $this->output->setPageTitle(_("Photos"));
 
         $today = $this->output->layout("media/gallery");
         $this->output->addToPosition("dashboard", $today);
-        
-        
-        $this->load->view("media")->display();   
+
+
+        $this->load->view("media")->display();
     }
+
     /**
      * Deletes an existing photo.
      * @todo    Implement the photo delete action method
@@ -109,6 +126,7 @@ final class Photo extends System\Media{
     public function delete() {
         
     }
+
     /**
      * Get's an instance of the photo controller, only creating one if does not
      * exists
@@ -124,4 +142,5 @@ final class Photo extends System\Media{
         $instance = new self;
         return $instance;
     }
+
 }

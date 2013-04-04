@@ -118,7 +118,7 @@ class Media extends Parse\Template {
                 
                 //@TODO will need to determine browser support for the various
                 //mime types shown here, for instance only safari browsers support image/tiff;
-                if (in_array($mime, $images) && !empty($url)):
+                if (in_array($mime, $images) ):
                     //Create an image element
                     $imageLink = \Library\Uri::internal("/system/object/".$uri);
                     $image = array(
@@ -130,7 +130,9 @@ class Media extends Parse\Template {
                     );
                     if(empty($image['WIDTH'])) unset($image['WIDTH']);
                     if(empty($image['HEIGHT'])) unset($image['HEIGHT']);
-                    $tag['HREF']    = \Library\Uri::internal("/system/media/photo/view/".$uri);
+                    if(isset($link) && !empty($url)):
+                        $tag['HREF']    = \Library\Uri::internal("/system/media/photo/view/".$uri);
+                    endif;
                     $tag['CHILDREN'][] = $image;
                     //$tag = array("ELEMENT"=>"span","CDATA"=>"Single Image");
                 endif;
