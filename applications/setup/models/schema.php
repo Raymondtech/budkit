@@ -404,6 +404,28 @@ final class Schema extends Platform\Model {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
         );
     }
+    
+    /**
+     * Creates the object rating table
+     * @return void;
+     */
+    private static function createObjectsRatingTable(){
+        static::$database->query("DROP TABLE IF EXISTS `?objects_rating`;");
+        static::$database->query(
+            "CREATE TABLE IF NOT EXISTS `?objects_rating` (
+                `rating_id` int(11) NOT NULL AUTO_INCREMENT ,
+                `object_id` int(11) NOT NULL ,
+                `rating_user` varchar(50) NOT NULL,
+                `rating` int(11) NOT NULL DEFAULT '0',
+                `rating_datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                PRIMARY KEY (`rating_id`) ,
+                UNIQUE KEY `object_rating` (`rating_user`,`object_id`),
+                KEY `object_id_idx` (`object_id`),
+                CONSTRAINT `objects_rating_ibfk_1` FOREIGN KEY (`object_id` ) REFERENCES `?objects` (`object_id` )
+             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+       );
+        //CONSTRAINT `objects_rating_ibfk_1` FOREIGN KEY (`object_id` ) REFERENCES `?objects` (`object_id` )
+    }
 
     /**
      * Creates the objects table
@@ -668,12 +690,13 @@ final class Schema extends Platform\Model {
 
         static::createObjectsTable();
         static::createObjectsAuthorityTable();
+
         static::createPropertiesTable();
         static::createPropertyDatatypeTable();
         static::createPropertyValuesTable();
         static::createIndices();
         static::insertPropertyDatatypes();
-
+        static::createObjectsRatingTable();
         static::createPropertyValuesProxyTable("attachment"); //The attachment table
         static::createPropertyValuesProxyTable("media"); //The media table
         static::createPropertyValuesProxyTable("user"); //The users table
