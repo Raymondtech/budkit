@@ -44,6 +44,7 @@
                                     <tpl:block data="page.block.body" /> 
                                 </div>
                             </div>
+<!--                            <tpl:import layout="console" />-->
                         </div>
                     </div>
                 </div><!--/.fluid-container-->

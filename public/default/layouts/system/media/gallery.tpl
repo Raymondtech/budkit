@@ -54,7 +54,7 @@
                             </div>
                             <div class="grid-hide mgcol2">
                                 <span class="rating">
-                                    <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star active"></span>
+                                    <span class="star"></span><span class="star"></span><span class="star active"></span><span class="star"></span><span class="star"></span>
                                 </span>
                                 <a href="#"><span class="help-block">0 comments</span></a>
                             </div>

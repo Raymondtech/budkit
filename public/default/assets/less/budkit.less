@@ -396,30 +396,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     }
 }
 
-/****RATINGS****/
-.rating{
-    unicode-bidi: bidi-override;
-    direction: rtl;
-    font-size: 15px;
-    .star {
-        font-family: FontAwesome;
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        &:before {
-            content: "\f006";
-            padding-right: 0px;
-            color: #999;
-        }
-    }
-}
-.rating > span.active:before,
-.rating > span.active ~ span:before, 
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\f005";
-   color: #e3cf7a;
-}
+
 
 
 .media-file{ 
@@ -517,8 +494,10 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     .clearfix();
 }
 .indenter{ color: @grayLighter}
+
 /****IMPORTS****/
 @import "media-grid.less";
+@import "ratings.less";
 @import "tasks.less";
 @import "timeline.less";
 @import "wizard.less";

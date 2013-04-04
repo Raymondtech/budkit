@@ -172,7 +172,10 @@
                             margin-right: 10px;
                             &.hover{ display: none; }
                             &.action-fans{ 
-                                a{  color: #D14535  }
+                                a{  
+                                    .average{ color: #D14535; font-weight: bold } 
+                                    .total{ color: @grayLight; font-size: 8px; }
+                                }
                             }
                             &.action-comments{ a{ color: @grayLight; } }
                             &.action-delete{

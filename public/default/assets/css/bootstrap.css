@@ -7243,30 +7243,6 @@ input.search-query {
   padding-left: 0px;
   padding-right: 0px;
 }
-/****RATINGS****/
-.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  font-size: 15px;
-}
-.rating .star {
-  font-family: FontAwesome;
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-}
-.rating .star:before {
-  content: "\f006";
-  padding-right: 0px;
-  color: #999;
-}
-.rating > span.active:before,
-.rating > span.active ~ span:before,
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-  content: "\f005";
-  color: #e3cf7a;
-}
 .media-file {
   float: left;
   padding: 10px;
@@ -7949,6 +7925,47 @@ input.search-query {
 .media-list li .feature .media-file .media-type {
   margin: 0 auto;
 }
+/****RATINGS****/
+.rating {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+.rating span {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  cursor: pointer;
+}
+.rating span:before {
+  padding-right: 0px;
+  color: #eee;
+}
+.rating span.active:before,
+.rating span.active ~ span:before,
+.rating span:hover:before,
+.rating span:hover ~ span:before {
+  color: #D14535;
+}
+.rating span.star:before {
+  content: "\f006";
+}
+.rating span.star.active:before,
+.rating span.star.active ~ span:before,
+.rating span.star:hover:before,
+.rating span.star:hover ~ span:before {
+  content: "\f005";
+  color: #f4d416;
+}
+.rating span.heart:before {
+  content: "\f08a";
+}
+.rating span.heart.active:before,
+.rating span.heart.active ~ span:before,
+.rating span.heart:hover:before,
+.rating span.heart:hover ~ span:before {
+  content: "\f004";
+}
 .media-grid.tasks .task-item {
   border: 1px solid #fbeed5;
   padding: 10px;
@@ -8188,9 +8205,15 @@ input.search-query {
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.hover {
   display: none;
 }
-.timeline-items .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-fans a,
-.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-fans a {
-  color: #d14535;
+.timeline-items .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-fans a .average,
+.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-fans a .average {
+  color: #D14535;
+  font-weight: bold;
+}
+.timeline-items .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-fans a .total,
+.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-fans a .total {
+  color: #999999;
+  font-size: 8px;
 }
 .timeline-items .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-comments a,
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-comments a {

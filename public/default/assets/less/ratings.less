@@ -1,0 +1,46 @@
+
+/****RATINGS****/
+.rating{
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    span{        
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        cursor: pointer;
+        &:before {
+            padding-right: 0px;
+            color: #eee;
+        }
+        &.active:before,
+        &.active ~ span:before, 
+        &:hover:before,
+        &:hover ~ span:before {
+           color: #D14535;
+        }
+        &.star {
+            &:before {
+                content: "\f006";
+            }
+            &.active:before,
+            &.active ~ span:before, 
+            &:hover:before,
+            &:hover ~ span:before {
+               content: "\f005";
+               color: #f4d416;
+            }
+        }
+        &.heart {
+            &:before {
+                content: "\f08a";
+            }
+            &.active:before,
+            &.active ~ span:before, 
+            &:hover:before,
+            &:hover ~ span:before {
+               content: "\f004";
+            }
+        }
+    }
+}
