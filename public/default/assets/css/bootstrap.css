@@ -6950,6 +6950,9 @@ input.search-query {
 .stream li:last-child {
   border-bottom: none;
 }
+.stream-object {
+  margin-left: 115px;
+}
 .accordion-nav .accordion-group {
   margin-bottom: 0px;
   border-bottom: 1px solid #eee;

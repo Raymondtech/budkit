@@ -6,19 +6,15 @@
     </div>
     <div class="stream-box row-fluid media-box">
         <div class="stream-list">
-            <div class="widget">
-                <div class="widget-head"><span class="widget-title">Filters</span><a class="widget-close" data-dismiss="widget"><i class="icon-remove"></i></a></div>
+            <div class="widget naked">
                 <div class="widget-body">
                     <ul class="nav nav-list margin-zero padding-quarter">
                         <li><a href="#">My Timeline</a></li>
-                        <li class="active"><a href="#">Recent</a></li>
+                        <li><a href="#">Recent</a></li>
                         <li><a href="#">Shared with me</a></li>
                         <li><a href="#">Liked</a></li>
                         <li><a href="#">Following</a></li>
                     </ul>
-                </div>
-                <div class="widget-footer">
-                    <a href="/settings/member/privacy">Edit Lists</a>
                 </div>
             </div>
         </div>
