@@ -16,7 +16,7 @@
                             <tpl:condition data="object" test="isset" value="1">
                                 <tpl:condition data="object.objectType" test="isnot" value="collection">
                                     <div class="timeline-item-media clearfix">                                   
-                                        <tpl:media uri="object.uri" name="object.name" url="object.url" link="true" type="object.type" data-target="budkit-slider" width="700"></tpl:media>             
+                                        <tpl:media uri="object.uri" name="object.name" url="object.url" link="true" type="object.type" data-target="budkit-slider"></tpl:media>             
                                     </div>
                                 </tpl:condition>
                                 <tpl:condition data="object.objectType" test="equals" value="collection">
