@@ -1,6 +1,6 @@
 
 
-.timeline-stream{
+.long-stream{
     min-height: 1000px;
 }
 .timeline-more-items{ margin-left: 115px}
@@ -102,7 +102,7 @@
             min-height: 50px;
             background: #fff;
             border: 1px solid #ddd;
-            padding: 15px;
+            padding: 10px;
             margin: 10px 60px;
             &:before{
                 content: "";
@@ -220,29 +220,6 @@
         &:last-child{
             border-bottom: none;
         }
-        //Comments
-        .timeline-item-interaction{
-            margin-left: 45px;
-            margin-right: -12px;
-            margin-top:10px;
-            border-top: 1px solid #ddd;
-            position: relative;
-            .profile-avatar{left: 3px !important;}
-            ul{
-                list-style:none; margin:0
-            }
-            &:before {
-                content: '';
-                display: inline-block;
-                border-left:  7px solid transparent;
-                border-right: 7px solid transparent;
-                border-bottom: 7px solid #ccc;
-                border-bottom-color: #ddd;
-                position: absolute;
-                top: -7px;
-                left: 17px;
-            }
-        }
         
     }
 }
@@ -291,6 +268,11 @@
                 &.top-media{margin-bottom: 15px; margin-top: 0px; } &.bottom-media{margin-top: 15px } 
             }
             .timeline-item-footer{
+                margin: 10px -10px -10px -10px;
+                padding: 5px 10px;
+                border-top: 1px dashed #ddd;
+                position: relative; 
+                background: #fcfafa;
                 .label{
                     line-height: 18px;
                     padding: 4px 8px 1px;
@@ -308,7 +290,7 @@
                     #gradient > .vertical( #f9f9f9, #f2f2f2);
                      border-bottom: 1px solid #dedede;
                      line-height: @baseLineHeight;   
-                     padding: 15px;
+                     padding: 10px;
                      .timeline-item-title{
                         font-weight: bold;
                         font-size: 125%;
@@ -378,3 +360,4 @@
         
     }
  }
+.comment-form{margin: 5px auto 5px;}

@@ -14,7 +14,9 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\System\Controllers\Media;
+
 use Application\System\Controllers as System;
 
 /**
@@ -29,17 +31,17 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Timeline extends System\Media  {
+class Timeline extends System\Media {
 
     /**
      * The timeline stream
      * 
      * @return type
      */
-    public function stream(){
+    public function stream() {
         return $this->index();
     }
-    
+
     /**
      * Creates a new media in the defined timeline. 
      * @return  \Platform\Controller::returnRequest()
@@ -64,37 +66,74 @@ class Timeline extends System\Media  {
         //Returns the request back tot the reffer;
         $this->returnRequest();
     }
+
     /**
-     * Alias for listing all media posts;
-     * @return Timeline::stream()
+     * Displays a media Item.
+     * 
+     * @todo    Implement the collection read action method
+     * @return  void
      */
-    public function read() {
-        return $this->stream();
+    public function view($photoURI = null) {
+        //Throws an error if no collectionId is passed
+        //Loads the collectionItem from the databse
+        $model = $this->load->model("attachments");
+        $attachment = $model->loadObjectByURI($photoURI);
+        $item   = $attachment->getPropertyData();
+        $item['object_uri'] = $attachment->getObjectURI();
+        //Set the photo display properties     
+        $this->output->setPageTitle($attachment->getPropertyValue("attachment_title"));
+        $this->set("item", $item);
+        
+        print_R($item);
+        
+        //Get the format of the item;
+        $format = $this->router->getFormat();
+        $photo = $this->output->layout("media/photos/photo");
+
+        switch ($format):
+            case "raw":
+            case "json":
+                case "xml":
+                //Add the collection to the placeholder image;
+                $this->output->addToPosition("placeholder", $photo); //Add the collection to the placeholder
+                //Raw displays whatever is in the body block only; 
+                $slide = $this->output->layout("media/slider");
+                $this->output->addToPosition("body", $slide);
+                break;
+            default:
+                //Raw displays whatever is in the body block only; 
+                $photo = $this->output->layout("media/item");
+                $this->output->addToPosition("body", $photo);
+                break;
+        endswitch;
+        $this->load->view("media")->display();
     }
+
     /**
      * Lists all published activities within this timeline;
      * @return void; 
      */
-    public function index() {       
-        $this->output->setPageTitle( _("Timeline") );       
+    public function index() {
+        $this->output->setPageTitle(_("Timeline"));
         //Get the view;
-        $view = $this->load->view('media');        
+        $view = $this->load->view('media');
         $user = \Platform\User::getInstance();
-        $model      = $this->load->model('media');
-        $activities = $model->getAll();   
-        
-        $this->set("activities", $activities);   
+        $model = $this->load->model('media');
+        $activities = $model->getAll();
+
+        $this->set("activities", $activities);
         $this->set("user", $user);
-        
+
         $timeline = $this->output->layout("timeline");
         //$timelineside = $this->output->layout("timelinenotes");
-             
+
         $this->output->addToPosition("dashboard", $timeline);
         //$this->output->addToPosition("aside", $timelineside );
-             
+
         $view->display(); //sample call;        
         //$this->output();
     }
+
     /**
      * Deletes an media from the timeline;
      * @return Timeline::read();
@@ -103,6 +142,7 @@ class Timeline extends System\Media  {
         $this->alert(_("Could not delete your post."), _("There seems to be a problem with authenticating this session"), "error");
         return $this->read();
     }
+
     /**
      * Gets an instance of the timeline controller
      * @staticvar self $instance
@@ -116,5 +156,6 @@ class Timeline extends System\Media  {
         $instance = new self;
         return $instance;
     }
+
 }
 

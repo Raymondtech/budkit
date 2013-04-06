@@ -86,8 +86,6 @@ final class Photo extends System\Media {
 
         switch ($format):
             case "raw":
-            case "json":
-                case "xml":
                 //Add the collection to the placeholder image;
                 $this->output->addToPosition("placeholder", $photo); //Add the collection to the placeholder
                 //Raw displays whatever is in the body block only; 

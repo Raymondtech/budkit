@@ -7053,7 +7053,6 @@ input.search-query {
 .bkeditor-content.input {
   display: inline-block;
   padding: 5px;
-  margin-bottom: 10px;
   font-size: 12px;
   color: #555555;
   border: 1px solid #ccc;
@@ -7982,7 +7981,7 @@ input.search-query {
   border: 1px solid #d6e9c6;
   background: #dff0d8;
 }
-.timeline-stream {
+.long-stream {
   min-height: 1000px;
 }
 .timeline-more-items {
@@ -8116,7 +8115,7 @@ input.search-query {
   min-height: 50px;
   background: #fff;
   border: 1px solid #ddd;
-  padding: 15px;
+  padding: 10px;
   margin: 10px 60px;
 }
 .timeline-items .timeline-item-li .timeline-item-container:before,
@@ -8234,35 +8233,6 @@ input.search-query {
 .timeline-item-index .timeline-item-li:last-child {
   border-bottom: none;
 }
-.timeline-items .timeline-item-li .timeline-item-interaction,
-.timeline-item-index .timeline-item-li .timeline-item-interaction {
-  margin-left: 45px;
-  margin-right: -12px;
-  margin-top: 10px;
-  border-top: 1px solid #ddd;
-  position: relative;
-}
-.timeline-items .timeline-item-li .timeline-item-interaction .profile-avatar,
-.timeline-item-index .timeline-item-li .timeline-item-interaction .profile-avatar {
-  left: 3px !important;
-}
-.timeline-items .timeline-item-li .timeline-item-interaction ul,
-.timeline-item-index .timeline-item-li .timeline-item-interaction ul {
-  list-style: none;
-  margin: 0;
-}
-.timeline-items .timeline-item-li .timeline-item-interaction:before,
-.timeline-item-index .timeline-item-li .timeline-item-interaction:before {
-  content: '';
-  display: inline-block;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom: 7px solid #ccc;
-  border-bottom-color: #ddd;
-  position: absolute;
-  top: -7px;
-  left: 17px;
-}
 .timeline-item-index {
   margin-bottom: 20px;
   list-style: none;
@@ -8308,6 +8278,13 @@ input.search-query {
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-media.bottom-media {
   margin-top: 15px;
 }
+.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer {
+  margin: 10px -10px -10px -10px;
+  padding: 5px 10px;
+  border-top: 1px dashed #ddd;
+  position: relative;
+  background: #fcfafa;
+}
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer .label {
   line-height: 18px;
   padding: 4px 8px 1px;
@@ -8330,7 +8307,7 @@ input.search-query {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff9f9f9', endColorstr='#fff2f2f2', GradientType=0);
   border-bottom: 1px solid #dedede;
   line-height: 20px;
-  padding: 15px;
+  padding: 10px;
 }
 .timeline-item-index .timeline-item-li.timeline-item-object .timeline-item-container .timeline-item-header .timeline-item-title {
   font-weight: bold;
@@ -8406,6 +8383,9 @@ input.search-query {
   left: 107px;
   border-width: 8px 10px 8px 0;
   border-color: transparent #f5f5f5;
+}
+.comment-form {
+  margin: 5px auto 5px;
 }
 .wizard {
   margin-bottom: 20px;

@@ -41,7 +41,7 @@
     </div>
     <script type="text/javaScript">
             <![CDATA[
-                    !function($){        
+             !function($){        
                 $('#budkit-editor').bkeditor({stylesheet: "../../../default/assets/css/editor.css"});
             }( window.jQuery );
         ]]> 
