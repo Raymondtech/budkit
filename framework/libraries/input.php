@@ -339,7 +339,7 @@ final class Input extends Object {
                 case "string":
                     $filter = \IS\STRING;
                     $options = array(
-                        "flags" => FILTER_FLAG_STRIP_LOW,
+                        "flags" => !FILTER_FLAG_STRIP_LOW,
                         "options" => $options
                     );
                     break;
@@ -350,7 +350,7 @@ final class Input extends Object {
                 default:
                     $filter = \IS\RAW;
                     $options = array(
-                        "flags" => FILTER_FLAG_STRIP_LOW,
+                        "flags" => !FILTER_FLAG_STRIP_LOW,
                         "options" => $options
                     );
                     break;
@@ -448,6 +448,35 @@ final class Input extends Object {
         //@TODO validate is interger or double before return
 
         return (empty($number)) ? (int) '0' : (int) $number;
+    }
+    
+    /**
+     * Returns a formatted string
+     * 
+     * @param type $name
+     * @param type $default
+     * @param type $verb
+     * @param type $allowedtags
+     */
+    public function getFormattedString($name, $default = '', $verb = 'posts', $allowedtags = array()) {
+        //FILTER_SANITIZE_STRING
+        //FILTER_SANITIZE_STRIPPED
+        //\IS\HTML;
+
+        $filter = \IS\SPECIAL_CHARS; 
+        $options = array(
+            "flags" => FILTER_FLAG_STRIP_HIGH, 
+            "options" => array()
+        );
+
+        //if (is_array($html)) $str = strip_tags($str, implode('', $html));
+        //elseif (preg_match('|<([a-z]+)>|i', $html)) $str = strip_tags($str, $html);
+        //elseif ($html !== true) $str = strip_tags($str);
+        $string = $this->getVar($name, $filter, $default, $verb, $options);
+        
+        //Some tags we really don't need
+        return $string;
+
     }
 
     /**

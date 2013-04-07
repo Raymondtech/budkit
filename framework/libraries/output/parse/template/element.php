@@ -172,7 +172,7 @@ class Element extends Parse\Template {
                 //Match mentions, urls, and hastags
                 preg_match_all('/^|\s?[^a-zA-Z0-9+!*(),;?&=\$_.-]@([\\d\\w]+)/', $data, $mentions); //[^a-zA-Z0-9+!*(),;?&=\$_.-] added to prevent it picking up emails;
                 preg_match_all('/^|\s?[^\&]#([\\d\\w]+)/', $data, $hashTags);//There must be a space between two hastags;
-                preg_match_all('/((http|https|ftp|ftps)\:\/\/)([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-zA-Z0-9\-\.]+)\.([a-zA-Z]{2,3})(\:[0-9]{2,5})?(\/([a-zA-Z0-9+\$_-]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/', $data, $openLinks);
+                preg_match_all('/(?<!"|a>)((http|https|ftp|ftps)\:\/\/)([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-zA-Z0-9\-\.]+)\.([a-zA-Z]{2,3})(\:[0-9]{2,5})?(\/([a-zA-Z0-9+\$_-]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/', $data, $openLinks);
                 $searches = array_merge($mentions[0], $hashTags[0], $openLinks[0]);
                 $fMentions = array_map(function($uri, $title){
                     $profile = Library\Uri::internal("/member/profile/{$uri}");
@@ -188,6 +188,12 @@ class Element extends Parse\Template {
                 $replaces = array_merge($fMentions, $fHashTags, $fOpenLinks);
                 $data = str_replace($searches, $replaces, (string) $data);
 
+            endif;
+            
+            //HTML;
+            if(strtolower($tag['TYPE']) == "html" ):
+                //print_R($data); 
+                //$data = nl2br( $data );
             endif;
                                  
             $tag['CDATA'] = $data;

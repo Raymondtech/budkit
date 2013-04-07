@@ -182,42 +182,42 @@
 @navbarCollapseDesktopWidth:      @navbarCollapseWidth + 1;
 
 @navbarHeight:                    40px;
-@navbarBackgroundHighlight:       #2971a6;//#356AA0;//#2b77ae; 
-@navbarBackground:                darken(@navbarBackgroundHighlight, 5%);
-@navbarBorder:                    #3e7d9c;
+@navbarBackground:                #2F2F2F;
+@navbarBackgroundHighlight:       #2F2F2F;
+@navbarBorder:                    #222222;
 
-@navbarText:                      #78c8e6;
-@navbarLinkColor:                 #78c8e6;
+@navbarText:                      @grayLight;
+@navbarLinkColor:                 @grayLight;
 @navbarLinkColorHover:            @white;
-@navbarLinkColorActive:           @white;
+@navbarLinkColorActive:           @navbarInverseLinkColorHover;
 @navbarLinkBackgroundHover:       transparent;
-@navbarLinkBackgroundActive:      darken(@navbarBackground, 5%);
+@navbarLinkBackgroundActive:      @navbarInverseBackground;
 
 @navbarSearchBackground:          transparent;
 @navbarSearchBackgroundFocus:     transparent;
-@navbarSearchBorder:              rgba(255, 255, 255, 0.21);
-@navbarSearchPlaceholderColor:    #78c8e6;
+@navbarSearchBorder:              @navbarInverseBackground;
+@navbarSearchPlaceholderColor:    #ccc;
 
-@navbarBrandColor:                @navbarLinkColor;
+@navbarBrandColor:                @navbarInverseLinkColor;
 
-// Inverted navbar
-@navbarInverseBackground:                #111111;
-@navbarInverseBackgroundHighlight:       #222222;
-@navbarInverseBorder:                    #222222;
+//Inverted navbar
+@navbarInverseBackgroundHighlight:       #2971a6;//#356AA0;//#2b77ae; 
+@navbarInverseBackground:                darken(@navbarBackgroundHighlight, 5%);
+@navbarInverseBorder:                    #3e7d9c;
 
-@navbarInverseText:                      @grayLight;
-@navbarInverseLinkColor:                 @grayLight;
+@navbarInverseText:                      #78c8e6;
+@navbarInverseLinkColor:                 #78c8e6;
 @navbarInverseLinkColorHover:            @white;
-@navbarInverseLinkColorActive:           @navbarInverseLinkColorHover;
+@navbarInverseLinkColorActive:           @white;
 @navbarInverseLinkBackgroundHover:       transparent;
-@navbarInverseLinkBackgroundActive:      @navbarInverseBackground;
+@navbarInverseLinkBackgroundActive:      darken(@navbarBackground, 5%);
 
-@navbarInverseSearchBackground:          lighten(@navbarInverseBackground, 25%);
-@navbarInverseSearchBackgroundFocus:     @white;
-@navbarInverseSearchBorder:              @navbarInverseBackground;
-@navbarInverseSearchPlaceholderColor:    #ccc;
+@navbarInverseSearchBackground:          transparent;
+@navbarInverseSearchBackgroundFocus:     transparent;
+@navbarInverseSearchBorder:              rgba(255, 255, 255, 0.21);
+@navbarInverseSearchPlaceholderColor:    #78c8e6;
 
-@navbarInverseBrandColor:                @navbarInverseLinkColor;
+@navbarInverseBrandColor:                @navbarLinkColor;
 
 
 // Pagination

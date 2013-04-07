@@ -68,24 +68,25 @@ final class Photo extends System\Media {
      * @return  void
      */
     public function view($photoURI = null) {
+        
         //Throws an error if no collectionId is passed
         //Loads the collectionItem from the databse
-        $model = $this->load->model("attachments");
-        $attachment = $model->loadObjectByURI($photoURI);
-        $item   = $attachment->getPropertyData();
-        $item['object_uri'] = $attachment->getObjectURI();
+        $model = $this->load->model("attachments", 'system');
+        $collection = $model->getMedia("attachment", $photoURI);
         //Set the photo display properties     
-        $this->output->setPageTitle($attachment->getPropertyValue("attachment_title"));
-        $this->set("item", $item);
-        
-        print_R($item);
-        
-        //Get the format of the item;
+      
+        $first = reset($collection['items']);
+        $this->set("object", $collection);
+        $now = \Library\Date\Time::stamp();
+        $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
+        $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
+        $this->output->setPageTitle( $title );
+     
         $format = $this->router->getFormat();
-        $photo = $this->output->layout("media/photos/photo");
-
+        
         switch ($format):
             case "raw":
+                $photo = $this->output->layout("media/photos/photo");
                 //Add the collection to the placeholder image;
                 $this->output->addToPosition("placeholder", $photo); //Add the collection to the placeholder
                 //Raw displays whatever is in the body block only; 
@@ -98,6 +99,7 @@ final class Photo extends System\Media {
                 $this->output->addToPosition("body", $photo);
                 break;
         endswitch;
+        
         $this->load->view("media")->display();
     }
 

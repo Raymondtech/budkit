@@ -60,7 +60,7 @@ class Timeline extends System\Media {
             if (!$model->addMedia()) {
                 $this->alert(_("Could not add your post"), null, "error");
             } else {
-                $this->alert(_("You post has been saved and publised"), null, "success");
+                $this->alert(_("Your post has been saved and publised"), null, "success");
             }
         }
         //Returns the request back tot the reffer;
@@ -73,39 +73,24 @@ class Timeline extends System\Media {
      * @todo    Implement the collection read action method
      * @return  void
      */
-    public function view($photoURI = null) {
+    public function view($itemURI = null) {
         //Throws an error if no collectionId is passed
         //Loads the collectionItem from the databse
-        $model = $this->load->model("attachments");
-        $attachment = $model->loadObjectByURI($photoURI);
-        $item   = $attachment->getPropertyData();
-        $item['object_uri'] = $attachment->getObjectURI();
+        $model = $this->load->model("media");
+        $collection = $model->getMedia("media", $itemURI);
         //Set the photo display properties     
-        $this->output->setPageTitle($attachment->getPropertyValue("attachment_title"));
-        $this->set("item", $item);
-        
-        print_R($item);
-        
-        //Get the format of the item;
-        $format = $this->router->getFormat();
-        $photo = $this->output->layout("media/photos/photo");
 
-        switch ($format):
-            case "raw":
-            case "json":
-                case "xml":
-                //Add the collection to the placeholder image;
-                $this->output->addToPosition("placeholder", $photo); //Add the collection to the placeholder
-                //Raw displays whatever is in the body block only; 
-                $slide = $this->output->layout("media/slider");
-                $this->output->addToPosition("body", $slide);
-                break;
-            default:
-                //Raw displays whatever is in the body block only; 
-                $photo = $this->output->layout("media/item");
-                $this->output->addToPosition("body", $photo);
-                break;
-        endswitch;
+        $first = reset($collection['items']);
+        $this->set("object", $collection);
+        $now = \Library\Date\Time::stamp();
+        $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
+        $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
+        $this->output->setPageTitle( $title );
+
+        //Raw displays whatever is in the body block only; 
+        $post = $this->output->layout("media/item");
+        $this->output->addToPosition("body", $post);
+
         $this->load->view("media")->display();
     }
 
@@ -140,7 +125,7 @@ class Timeline extends System\Media {
      */
     public function delete() {
         $this->alert(_("Could not delete your post."), _("There seems to be a problem with authenticating this session"), "error");
-        return $this->read();
+        return $this->index();
     }
 
     /**

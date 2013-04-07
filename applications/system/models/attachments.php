@@ -76,7 +76,7 @@ class Attachments extends Platform\Entity {
      * 
      * @static array
      */
-    public $allowed = array("mp3"=>"", "jpg"=>"", "gif"=>"", "png"=>"", "jpeg"=>"", "zip"=>"", "pdf"=>"", "doc"=>"", "txt"=>"");
+    public $allowed = array("mp3" => "", "jpg" => "", "gif" => "", "png" => "", "jpeg" => "", "zip" => "", "pdf" => "", "doc" => "", "txt" => "");
 
     /**
      * Defines the attachment properties
@@ -89,15 +89,15 @@ class Attachments extends Platform\Entity {
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->definePropertyModel(
                 array(
-                    "attachment_name" => array("Attachment Name", "mediumtext", 50),
-                    "attachment_title" => array("Attachment Title", "mediumtext", 100),
-                    "attachment_size" => array("Attachment Size (bytes)", "mediumint", 50),
-                    "attachment_description" => array("Attachment Description", "mediumtext", 200),
-                    "attachment_src" => array("Attachment Source", "mediumtext", 100),
-                    "attachment_ext" => array("Attachment Extension", "mediumtext", 10),
-                    "attachment_tags" => array("Attachment Tags", "mediumtext", 100),
-                    "attachment_owner" => array("Attachment Owner user_name_id", "mediumtext", 100),
-                    "attachment_type" => array("Attachment Content Type", "mediumtext", 100)
+            "attachment_name" => array("Attachment Name", "mediumtext", 50),
+            "attachment_title" => array("Attachment Title", "mediumtext", 100),
+            "attachment_size" => array("Attachment Size (bytes)", "mediumint", 50),
+            "attachment_description" => array("Attachment Description", "mediumtext", 200),
+            "attachment_src" => array("Attachment Source", "mediumtext", 100),
+            "attachment_ext" => array("Attachment Extension", "mediumtext", 10),
+            "attachment_tags" => array("Attachment Tags", "mediumtext", 100),
+            "attachment_owner" => array("Attachment Owner user_name_id", "mediumtext", 100),
+            "attachment_type" => array("Attachment Content Type", "mediumtext", 100)
                 ), "attachment"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models or use extendPropertyModel to extend existing models
@@ -146,7 +146,7 @@ class Attachments extends Platform\Entity {
 
         $fileHandler = \Library\Folder\Files::getInstance();
         $uploadsFolder = $this->config->getParam('users-folder', '', 'content');
-        $allowedTypes = $this->config->getParam("allowed-types", $this->allowed ,"attachments");
+        $allowedTypes = $this->config->getParam("allowed-types", $this->allowed, "attachments");
         //Check User Upload Limit;
         //Check File upload limit;
         //Validate the file
@@ -183,23 +183,23 @@ class Attachments extends Platform\Entity {
             $this->setError(_("Could not move the uploaded folder to the target directory"));
             throw new \Platform\Exception($this->getError());
         }
-        
+
         //Get the uploaded file extension type.
-        $this->_fileType = $fileHandler::getMimeType( $uploadFileName );
+        $this->_fileType = $fileHandler::getMimeType($uploadFileName);
         //Validate the file MimeType against the allowed extenion type, if fails,
         //delete the file and throw an error.
 
-        
+
 
         foreach (array(
             "attachment_name" => $fileName,
             "attachment_title" => basename($file['name']), //@todo Wil need to check $file[title],
             "attachment_size" => $file['size'],
             "attachment_description" => "", //@todo Wil need to check $file[description],
-            "attachment_src" => str_replace(FSPATH, '', $uploadFileName), 
+            "attachment_src" => str_replace(FSPATH, '', $uploadFileName),
             "attachment_ext" => $fileExtension,
             "attachment_owner" => $this->_owner,
-            "attachment_type"   => $this->_fileType
+            "attachment_type" => $this->_fileType
         ) as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
@@ -211,6 +211,131 @@ class Attachments extends Platform\Entity {
         }
 
         return true;
+    }
+
+    /**
+     * Prepares and executes a database query for fetching media objects
+     * @param interger $objectId
+     * @param string $objectURI
+     * @return object Database resultset
+     */
+    final private function getMediaObjectsList($objectType = 'attachment', $objectURI = NULL, $objectId = NULL) {
+        //Join Query
+        //$objectType = 'media';
+        $query = "SELECT o.object_id, o.object_uri, o.object_type,o.object_created_on, o.object_updated_on, o.object_status";
+        //If we are querying for attributes
+        $_properties = $this->getPropertyModel();
+        $properties = array_keys((array) $_properties);
+
+        $count = count($properties);
+        if (!empty($properties) || $count < 1):
+            //Loop through the attributes you need
+            $i = 0;
+            $query .= ",";
+            foreach ($properties as $alias => $attribute):
+                $alias = (is_int($alias)) ? $attribute : $alias;
+                $query .= "\nMAX(IF(p.property_name = '{$attribute}', v.value_data, null)) AS {$alias}";
+                if ($i + 1 < $count):
+                    $query .= ",";
+                    $i++;
+                endif;
+            endforeach;
+            //Join the UserObjects Properties
+            $_actorProperties = $this->load->model("profile", "member")->getPropertyModel();
+            $actorProperties = array_diff(array_keys($_actorProperties), array("user_password", "user_api_key", "user_email"));
+            $count = count($actorProperties);
+            if (!empty($actorProperties) || $count < 1):
+                $query .= ","; //after the last media property   
+                $i = 0;
+                foreach ($actorProperties as $alias => $attribute):
+                    $alias = (is_int($alias)) ? $attribute : $alias;
+                    $query .= "\nMAX(IF(l.property_name = '{$attribute}', u.value_data, null)) AS {$alias}";
+                    if ($i + 1 < $count):
+                        $query .= ",";
+                        $i++;
+                    endif;
+                endforeach;
+            endif;
+            //The data Joins
+            $query .= "\nFROM ?attachment_property_values v"
+                    . "\nLEFT JOIN ?properties p ON p.property_id = v.property_id"
+                    . "\nLEFT JOIN ?objects o ON o.object_id=v.object_id"
+                    //Join the UserObjects Properties tables on userid=actorid
+                    . "\nLEFT JOIN ?objects q ON q.object_uri=v.value_data AND p.property_name ='attachment_owner'"
+                    . "\nLEFT JOIN ?user_property_values u ON u.object_id=q.object_id"
+                    . "\nLEFT JOIN ?properties l ON l.property_id = u.property_id"
+            ;
+
+        else:
+            $query .="\nFROM ?objetcs";
+        endif;
+
+        $withConditions = false;
+
+        if (!empty($objectId) || !empty($objectURI) || !empty($objectType)):
+            $query .="\nWHERE";
+            if (!empty($objectType)):
+                $query .= "\to.object_type='{$objectType}'";
+                $withConditions = TRUE;
+            endif;
+            if (!empty($objectURI)):
+                $query .= ($withConditions) ? "\t AND" : "";
+                $query .= "\to.object_uri='{$objectURI}'";
+                $withConditions = TRUE;
+            endif;
+            if (!empty($objectId)):
+                $query .= ($withConditions) ? "\t AND \t" : "";
+                $query .= "\to.object_id='{$objectId}'";
+                $withConditions = TRUE;
+            endif;
+        endif;
+
+        $query .="\nGROUP BY o.object_id";
+        $query .= $this->setListOrderBy(array("o.object_updated_on"), "DESC")->getListOrderByStatement();
+
+        $result = $this->database->prepare($query)->execute();
+        
+        return $result;
+    }
+
+    /**
+     * Returns an attachment object, wrapped in a media/Object class for
+     * presentation. Suitable for viewing single file attachments;
+     * All this method does, is load the attachment, then manuall adds 
+     * attachment properties to a media object;
+     * 
+     * @return collection;
+     */
+    final public function getMedia($objectType="attachment", $objectURI = NULL, $objectId = NULL) {
+        
+        $media   = $this->load->model('media', 'system'); //get the media model;
+        //Get the object list
+        $objects = $this->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
+        $items = array();
+        
+        //Parse the mediacollections;
+        foreach ($objects as $object) {
+            $object = $media->getActor($object, $object['attachment_owner']);
+            $object['media_object'] = $media->getObject($object['object_uri']); //add to the collection
+            //Required Media Properities
+            $object['media_published'] = $object['object_created_on'];
+            //CleanUp
+            foreach ($object as $key => $value):
+                $object[str_replace(array('media_', 'object_'), '', $key)] = $value;
+                unset($object[$key]);
+            endforeach;
+
+            $items[] = $object;
+            //print_R($items);
+        }
+        $mediacollections = new Media\Collection;
+        $mediacollections->set("items", $items); //update the collection
+        $mediacollections->set("totalItems", count($items));
+
+        $collection = $mediacollections::getArray();
+        //print_r($collection);
+
+        return $collection;
     }
 
     /**
@@ -229,9 +354,9 @@ class Attachments extends Platform\Entity {
 
         //Relaod the object
         $attachments = static::getInstance();
-        $attachment = $attachments->loadObjectByURI( $object->getObjectURI());
-        $browsable  = array("image/jpg","image/jpeg","image/png","image/gif"); 
-        
+        $attachment = $attachments->loadObjectByURI($object->getObjectURI());
+        $browsable = array("image/jpg", "image/jpeg", "image/png", "image/gif");
+
         $fullPath = FSPATH . DS . $attachment->getPropertyValue("attachment_src");
         $contentType = $attachment->getPropertyValue("attachment_type");
 
@@ -245,8 +370,8 @@ class Attachments extends Platform\Entity {
             }
         endif;
         //Attempt to determine the files mimetype
-        $ftype = !empty($contentType) ?  $contentType : \Library\Folder\Files::getMimeType( $fullPath ) ;
-        
+        $ftype = !empty($contentType) ? $contentType : \Library\Folder\Files::getMimeType($fullPath);
+
 
         //Get the file stream
         if (!$fd) {
@@ -265,7 +390,7 @@ class Attachments extends Platform\Entity {
                 $attachment->output->unsetHeader($name);
                 $attachment->output->setHeader($name, $value);
             }
-            if(in_array($ftype, $browsable)):
+            if (in_array($ftype, $browsable)):
                 fpassthru($fd);
                 fclose($fd);
                 $attachment->output->setFormat('raw', array()); //Headers must be set before output 
@@ -275,10 +400,10 @@ class Attachments extends Platform\Entity {
                 $downloadPath = FSPATH . "public" . DS . "downloads" . DS . $object->getObjectURI();
                 //For personalized link we will need to randomize the filename.
                 $downloadPath.= Platform\Framework::getRandomString(5); //So people won't be guessing!;;
-                $downloadPath.= ".". \Library\Folder\Files::getExtension($fname);
+                $downloadPath.= "." . \Library\Folder\Files::getExtension($fname);
                 if (\Library\Folder\Files::copy($fullPath, $downloadPath)) {
-                    if(file_exists($downloadPath)):
-                        
+                    if (file_exists($downloadPath)):
+
                         //We still want to delete the file even after the user
                         //is gone
                         ignore_user_abort(true);
@@ -289,13 +414,13 @@ class Attachments extends Platform\Entity {
                         //Will need to restart the outputbuffer with no gziphandler
                         $noGzip = $attachment->output->restartBuffer(null); //use null rather than "" for no gzip handler;
                         ob_end_clean(); //ob level 0; output buffering and binary transfer is a nightmare
-                        
-                        $attachment->output->setHeader("Cache-Control","must-revalidate");
+
+                        $attachment->output->setHeader("Cache-Control", "must-revalidate");
                         $attachment->output->setHeader("Content-Length", $fsize);
                         readfile($downloadPath);
 
-                         //Delete after download.
-                        unlink($downloadPath);       
+                        //Delete after download.
+                        unlink($downloadPath);
                         //$attachment->output->abort();
                         $attachment->output->setFormat('raw', array()); //Headers must be set before output 
                         $attachment->output->display();
@@ -326,13 +451,14 @@ class Attachments extends Platform\Entity {
 
         //If there is no file
         if (empty($file))
-            return $file; 
+            return $file;
         $fileExtension = $fileHandler->getExtension($file);
 
         //If we can't resize this type of file
         if (!in_array(strtolower($fileExtension), $resizable))
-            return $file;//If we can't resize it just return the file
-        //We need at least the width or height to resize;
+            return $file; //If we can't resize it just return the file
+            
+//We need at least the width or height to resize;
         if (empty($params))
             return false;
         $width = isset($params[0]) ? $params[0] : null;
@@ -361,15 +487,16 @@ class Attachments extends Platform\Entity {
      * return void;
      */
     public static function mediaObject(&$mediaObject, $mediaObjectType, $mediaObjectURI) {
-       
+
         //Allowed media objects
         $types = \Library\Config::getParam("allowed-types", array(), "attachments");
-        
+
         //If the media object is not a collection! skip it
         $objectTypeshaystack = array("attachment");
         $thisModel = new self;
         if (!in_array($mediaObjectType, $objectTypeshaystack))
             return; //Nothing to do here if we can't deal with it!
+
             
         //1.Load the collection!
         $attachment = $thisModel->loadObjectByURI($mediaObjectURI);
@@ -383,21 +510,20 @@ class Attachments extends Platform\Entity {
         //@TODO Will probably need to query for objectType of items in collection?
         //@TODO Also this will help in removing objects from collections that have previously been deleted
         $attachmentObjectURL = !empty($mediaObjectURI) ? "/system/object/{$mediaObjectURI}" : "http://placeskull.com/100/100/999999";
-        $attachmentObject->set("url",    $attachmentObjectURL);
-        $attachmentObject->set("uri",    $mediaObjectURI);
+        $attachmentObject->set("url", $attachmentObjectURL);
+        $attachmentObject->set("uri", $mediaObjectURI);
         //AttachmentType
         //$mediaType  =  $attachment->getPropertyValue("attachment_type");
-        
-        $attachmentObject->set("name", $attachment->getPropertyValue("attachment_name"));
-        $attachmentObject->set("type",   $attachment->getPropertyValue("attachment_type") );
-        $attachmentObject->set("height", null);
-        $attachmentObject->set("width",  null);
-        
-        //echo $mediaObjectURI;
 
+        $attachmentObject->set("name", $attachment->getPropertyValue("attachment_name"));
+        $attachmentObject->set("type", $attachment->getPropertyValue("attachment_type"));
+        $attachmentObject->set("height", null);
+        $attachmentObject->set("width", null);
+
+        //echo $mediaObjectURI;
         //Now set the collection Object as the media Object
-        $mediaObject =  $attachmentObject;
-        
+        $mediaObject = $attachmentObject;
+
         return true;
     }
 

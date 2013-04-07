@@ -12,8 +12,9 @@
                                     <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                              
                                 </a>
                                 <a href="/system/media/timeline/view/${uri}" title="${published}" class="published-time"><tpl:element type="time" data="published" /></a>
-                                <div class="timeline-item-title"><tpl:element type="text" data="content" medialinks="true" /></div>
+                                <div class="timeline-item-title"><tpl:element type="text" data="title" medialinks="true" /></div>
                             </div>
+                            <div class="timeline-item-content"><tpl:element type="html" data="content" medialinks="true" /></div>
                             <tpl:condition data="object" test="isset" value="1">
                                 <tpl:condition data="object.objectType" test="isnot" value="collection">
                                     <div class="timeline-item-media clearfix">                                   
@@ -47,7 +48,7 @@
                                     <tpl:import layout="media/form/comment" /> 
                                 </div> 
                             </div>
-                            
+
                         </div>
                     </li>
                 </tpl:loop> 

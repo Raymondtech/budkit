@@ -9,8 +9,8 @@
             <div class="widget naked">
                 <div class="widget-body">
                     <ul class="nav nav-list margin-zero padding-quarter">
-                        <li><a href="#">My Timeline</a></li>
                         <li><a href="#">Recent</a></li>
+                        <li><a href="#">Posted by me</a></li>
                         <li><a href="#">Shared with me</a></li>
                         <li><a href="#">Liked</a></li>
                         <li><a href="#">Following</a></li>

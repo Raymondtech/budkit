@@ -213,10 +213,10 @@
             horizontalrule: ['minus', '', function($this) {
                 $this.ec("insertHorizontalRule", false);
             }],
-            outdent: ['indent-right', '', function($this) {
+            outdent: ['indent-left', '', function($this) {
                 $this.ec("outdent");
             }],
-            indent: ['indent-left', '', function($this) {
+            indent: ['indent-right', '', function($this) {
                 $this.ec("indent");
             }],
             undo: ['undo', '', function($this) {
@@ -325,7 +325,7 @@
         ["indent", "outdent","horizontalrule"],
         ["link","unlink","image"],
         ["redo","undo"],
-        ["fullscreen"]
+        //["fullscreen"]
         ],
         stylesheet: "/../../default/assets/css/editor.css" //../..
     };

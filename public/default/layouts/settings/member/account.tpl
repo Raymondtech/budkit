@@ -7,28 +7,18 @@
     <div class="account-settings">
         <form class="form-horizontal" action="/" method="POST">
             <fieldset>
-                <div class="control-group">
-                    <label class="control-label"  for="username">Username</label>
-                    <div class="controls">
-                        <div class="input-prepend">
-                            <span class="add-on btn">
-                                <?php echo $this->config->getParam('host','').$this->config->getParam('path',''); ?></span>
-                            <input class="input-xlarge" id="username" name="user_name_id" size="20" type="text" value="${user.user_name_id}" disabled="" />
-                        </div>
-                        <span class="help-block">You cannot change your username. Its shown here only for your reference</span>
-                    </div>
-                </div><!-- /control-group -->
+                
                 <div class="control-group">
                     <label class="control-label"  for="first-name">First Name</label>
                     <div class="controls">
-                        <input class="input-xxlarge" id="first-name" name="user_first_name" size="30" type="text" value="${user.user_first_name}" />
+                        <input class="input-xlarge" id="first-name" name="user_first_name" size="30" type="text" value="${user.user_first_name}" />
                         <span class="help-block">Common, or given names</span>
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
                     <label class="control-label"  for="last-name">Last Name</label>
                     <div class="controls">
-                        <input class="input-xxlarge" id="first-name" name="user_last_name" size="30" type="text" value="${user.user_last_name}" />
+                        <input class="input-xlarge" id="first-name" name="user_last_name" size="30" type="text" value="${user.user_last_name}" />
                         <span class="help-block">Surname, or Family name</span>
                     </div>
                 </div><!-- /control-group -->
@@ -36,7 +26,7 @@
                     <label class="control-label"  for="email">Email address</label>
                     <div class="controls">
                         <div class="input-prepend">
-                            <input class="input-xxlarge" id="email" name="user_email" size="100" type="text" value="${user.user_email}" />
+                            <input class="input-xlarge" id="email" name="user_email" size="100" type="text" value="${user.user_email}" />
                         </div>
                         <span class="help-block">Its important that this be valid</span>
                     </div>
@@ -211,7 +201,17 @@
                         <p class="help-block">We will not show your date of birth on your profile, unless you <a href="#">tell us</a> to</p>
                     </div>
                 </div><!-- /control-group -->
-
+                <div class="control-group">
+                    <label class="control-label"  for="username">Username</label>
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on">
+                                <?php echo $this->config->getParam('host','').$this->config->getParam('path',''); ?></span>
+                            <input id="username" name="user_name_id" size="20" type="text" value="${user.user_name_id}" disabled="" />
+                        </div>
+                        <span class="help-block">You cannot change your username. Its shown here only for your reference</span>
+                    </div>
+                </div><!-- /control-group -->
             </fieldset>
 <!--            <hr />
             <fieldset>

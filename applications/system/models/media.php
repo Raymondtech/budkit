@@ -56,109 +56,66 @@ class Media extends Platform\Entity {
 
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->definePropertyModel(array(
-                "media_published" => array("Published", "datetime", 50),
-                "media_content" => array("Content", "varchar", 1000),
-                "media_summary" => array("Summary", "mediumtext", 50, NULL),
-                "media_comment_status" => array("Allow Comments", "tinyint", 1, 0), //*
-                "media_parent" => array("Parent", "smallint", 10, 0), //*
-                "media_generator" => array("Generator", "mediumtext", 100),
-                "media_provider" => array("Provider", "mediumtext", 100),
-                "media_mentions" => array("Mentions", "varchar", 1000), //*
-                "media_actor" => array("Actor", "varchar", 1000),
-                "media_verb" => array("Verb", "mediumtext", 20, "post"),
-                "media_geotags" => array("Geotags", "varchar", 1000), //*
-                "media_object" => array("Object", "varchar", 1000),
-                "media_target" => array("Target", "varchar", 1000),
-                "media_permissions" => array("Permissions", "mediumtext", 50), //* //allo:{},deny:{}
-        ), "media");
+            "media_published" => array("Published", "datetime", 50),
+            "media_content" => array("Content", "varchar", 1000),
+            "media_summary" => array("Summary", "mediumtext", 50, NULL),
+            "media_comment_status" => array("Allow Comments", "tinyint", 1, 0), //*
+            "media_parent" => array("Parent", "smallint", 10, 0), //*
+            "media_generator" => array("Generator", "mediumtext", 100),
+            "media_provider" => array("Provider", "mediumtext", 100),
+            "media_mentions" => array("Mentions", "varchar", 1000), //*
+            "media_actor" => array("Actor", "varchar", 1000),
+            "media_verb" => array("Verb", "mediumtext", 20, "post"),
+            "media_geotags" => array("Geotags", "varchar", 1000), //*
+            "media_object" => array("Object", "varchar", 1000),
+            "media_target" => array("Target", "varchar", 1000),
+            "media_permissions" => array("Permissions", "mediumtext", 50), //* //allo:{},deny:{}
+                ), "media");
 
         $this->defineValueGroup("media");
+    }
+
+    /**
+     * Gets a collection with a single item;
+     * 
+     * @param type $objectType
+     * @param type $objectURI
+     * @param type $objectId
+     * @return type
+     */
+    public function getMedia($objectType = 'media', $objectURI = NULL, $objectId = NULL) {
+        //An alias method for getall
+        return $this->getAll($objectType, $objectURI, $objectId);
     }
 
     /**
      * Returns all the published media stories
      * @return array An array of media stream objects see {@link Media\Collecion}
      */
-    public function getAll() {
+    public function getAll($objectType = 'media', $objectURI = NULL, $objectId = NULL) {
 
         //Get the object list
-        $objects = $this->getMediaObjectsList()->fetchAll();
+        $objects = $this->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
         $items = array();
-        
+
         //Parse the mediacollections;
         foreach ($objects as $object) {
-
-            //1. Collections
-            //2.0 THE ACTOR
-            $actorObject = new Media\Object;
-            $actorName = implode(' ', array($object['user_first_name'], $object['user_last_name']));
-            $actorObject->set("objectType", "user"); //@TODO Not only User objects can be actors! You will need to be able to allow other apps to be actors
-            $actorObject->set("displayName", $actorName);
-            $actorObject->set("id", $object['media_actor']);
-            $actorObject->set("uri", $object['user_name_id']);
-
-            $actorImage = Media\MediaLink::getNew();
-            $actorImageEntity = $this->load->model("attachments", "system")->loadObjectByURI($object['user_photo']);
-            $actorImageURL = !empty($object['user_photo']) ? "/system/object/{$object['user_photo']}/resize/50/50" : "http://placeskull.com/50/50/999999";
-            $actorImage->set("type", $actorImageEntity->getPropertyValue("attachment_type") );
-            $actorImage->set("url", $actorImageURL);
-            $actorImage->set("height", 50);
-            $actorImage->set("width", 50);
-            $actorObject->set("image", $actorImage::getArray());
-
-            $object['media_actor'] = $actorObject::getArray();
-            //Remove user model sensitive Data
-            foreach (array_keys($this->load->model("user", "member")->getPropertyModel()) as $private):
-                unset($object[$private]);
-            endforeach;
-
-            //Media Object;
-            //First get the nature of the media object;
-            $subjectEntity = Platform\Entity::getInstance(); //An empty entity here because it is impossible to guess the properties of this object
-            $mediaObject = $subjectEntity->loadObjectByURI($object['media_object'], array()); //Then we load the object    
-            $mediaObjectURI = $mediaObject->getObjectURI();
-
-            if (!empty($mediaObjectURI)):
-                //Create an media object, and fire an event asking callbacks to complete the media object
-                $mediaSubject = new Media\Object;
-                $mediaObjectType = $mediaObject->getObjecType();
-                //Fire the event, passing the mediaSubject by reference
-                //Although it looks stupid to need to find out the nature of the media subject before trigger
-                //It actually provides an extra exclusion for callback so not all callbacks go to the database
-                //so for instance if we found an media subject was a collection, callbacks can first check if the 
-                //trigger is to model a collection before diving ing
-                \Library\Event::trigger("onMediaSubjectModel", $mediaSubject, $mediaObjectType, $mediaObjectURI);
-                //You never know what callbacks will do to your subject so we just check
-                //that the media subject is what we think it is, i.e an media object
-
-                if (is_object($mediaSubject) && method_exists($mediaSubject, "getArray")):
-                    $object['media_object'] = $mediaSubject::getArray(); //If it is then we can set the media object output vars
-                endif;
-            else:
-                //If there no explicitly defined mediaObjects, in media_object
-                //parse media_content for medialinks
-                //Parse media targets medialinks
-                //@todo;
-                $mediaLinks = Media\MediaLink::parse($object['media_content']);
-            
-            endif;
+            $object = $this->getActor($object, $object['media_actor']);
+            $object['media_object'] = $this->getObject($object['media_object'], $object['media_content']); //add to the collection
             //CleanUp
             foreach ($object as $key => $value):
                 $object[str_replace(array('media_', 'object_'), '', $key)] = $value;
                 unset($object[$key]);
             endforeach;
 
-            $items[] = $object; //add to the collection
+            $items[] = $object;
             //print_R($items);
         }
-
         $mediacollections = new Media\Collection;
-
         $mediacollections->set("items", $items); //update the collection
         $mediacollections->set("totalItems", count($items));
 
         $collection = $mediacollections::getArray();
-        
         //print_r($collection);
 
         return $collection;
@@ -170,10 +127,10 @@ class Media extends Platform\Entity {
      * @param string $objectURI
      * @return object Database resultset
      */
-    public function getMediaObjectsList($objectId = NULL, $objectURI = NULL) {
+    public function getMediaObjectsList($objectType = 'media', $objectURI = NULL, $objectId = NULL) {
         //Join Query
-        $objectType = 'media';
-        $query = "SELECT o.object_id, o.object_uri, o.object_type,";
+        //$objectType = 'media';
+        $query = "SELECT o.object_id, o.object_uri, o.object_type, o.object_created_on, o.object_updated_on, o.object_status";
         //If we are querying for attributes
         $_properties = $this->getPropertyModel();
         $properties = array_keys((array) $_properties);
@@ -182,6 +139,7 @@ class Media extends Platform\Entity {
         if (!empty($properties) || $count < 1):
             //Loop through the attributes you need
             $i = 0;
+            $query .= ",";
             foreach ($properties as $alias => $attribute):
                 $alias = (is_int($alias)) ? $attribute : $alias;
                 $query .= "\nMAX(IF(p.property_name = '{$attribute}', v.value_data, null)) AS {$alias}";
@@ -248,6 +206,81 @@ class Media extends Platform\Entity {
         return $this->database->prepare($query)->execute();
     }
 
+    public function getActor($object, $actorId) {
+
+        if (!is_array($object) || !isset($object['user_name_id']))
+            return null;
+
+        //2.0 THE ACTOR
+        $actorObject = new Media\Object;
+        $actorName = implode(' ', array($object['user_first_name'], $object['user_last_name']));
+        $actorObject->set("objectType", "user"); //@TODO Not only User objects can be actors! You will need to be able to allow other apps to be actors
+        $actorObject->set("displayName", $actorName);
+        $actorObject->set("id", $actorId);
+        $actorObject->set("uri", $object['user_name_id']);
+
+        $actorImage = Media\MediaLink::getNew();
+        $actorImageEntity = $this->load->model("attachments", "system")->loadObjectByURI($object['user_photo']);
+        $actorImageURL = !empty($object['user_photo']) ? "/system/object/{$object['user_photo']}/resize/50/50" : "http://placeskull.com/50/50/999999";
+        $actorImage->set("type", $actorImageEntity->getPropertyValue("attachment_type"));
+        $actorImage->set("url", $actorImageURL);
+        $actorImage->set("height", 50);
+        $actorImage->set("width", 50);
+        $actorObject->set("image", $actorImage::getArray());
+
+        $object['media_actor'] = $actorObject::getArray();
+        //Remove user model sensitive Data
+        foreach (array_keys($this->load->model("user", "member")->getPropertyModel()) as $private):
+            unset($object[$private]);
+        endforeach;
+
+        return $object;
+    }
+
+    /**
+     * Wraps a media entity with accesorry data, like author, attachments, targets, etc...
+     * 
+     * @param type $object
+     * @return type
+     */
+    public function getObject($objectURI, $string = NULL) {
+
+        //1. getActor
+        //Media Object;;
+        //First get the nature of the media object;
+        $subjectEntity = Platform\Entity::getInstance(); //An empty entity here because it is impossible to guess the properties of this object
+        $mediaObject = $subjectEntity->loadObjectByURI($objectURI, array()); //Then we load the object    
+        $mediaObjectURI = $mediaObject->getObjectURI();
+        $object = NULL;
+
+        if (!empty($mediaObjectURI)):
+            //Create an media object, and fire an event asking callbacks to complete the media object
+            $mediaSubject = new Media\Object;
+            $mediaObjectType = $mediaObject->getObjecType();
+            //Fire the event, passing the mediaSubject by reference
+            //Although it looks stupid to need to find out the nature of the media subject before trigger
+            //It actually provides an extra exclusion for callback so not all callbacks go to the database
+            //so for instance if we found an media subject was a collection, callbacks can first check if the 
+            //trigger is to model a collection before diving ing
+            \Library\Event::trigger("onMediaSubjectModel", $mediaSubject, $mediaObjectType, $mediaObjectURI);
+            //You never know what callbacks will do to your subject so we just check
+            //that the media subject is what we think it is, i.e an media object
+
+            if (is_object($mediaSubject) && method_exists($mediaSubject, "getArray")):
+                $object = $mediaSubject::getArray(); //If it is then we can set the media object output vars
+            endif;
+        else:
+            //If there no explicitly defined mediaObjects, in media_object
+            //parse media_content for medialinks
+            //Parse media targets medialinks
+            //@todo;
+            $mediaLinks = Media\MediaLink::parse($string);
+
+        endif;
+        
+        return $object;
+    }
+
     /**
      * Adds a new media object to the database
      * @return boolean Returns true on save, or false on failure
@@ -258,12 +291,17 @@ class Media extends Platform\Entity {
         //
 
         foreach ($inputModel as $property => $definition):
-            $value = $this->input->getVar($property);
+            $value = $this->input->getVar( $property );
             if (!empty($value)):
                 $this->setPropertyValue($property, $value);
             endif;
         endforeach;
 
+        //Allow some HTML in media content;
+        $mediaContent = $this->input->getFormattedString("media_content","","post",true );
+        
+        $this->setPropertyValue("media_content", $mediaContent );
+        
         //@TODO determine the user has permission to post;
         $this->setPropertyValue("media_actor", $this->user->get("user_id"));
         $this->setPropertyValue("media_published", \Library\Date\Time::stamp());

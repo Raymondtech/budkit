@@ -5,9 +5,9 @@
                 <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>
                 <fieldset class="timeline-item-publisher no-bottom-margin">
                     <div class="controls">
-                        <textarea class="input-100pct focused" data-target="budkit-editor" rows="4" name="media_content" placeholder="Say something..."></textarea>
+                        <textarea class="input-100pct focused" data-target="budkit-editor" toolbar="1" titlebar="1" rows="4" name="media_content" placeholder="Say something..."></textarea>
                     </div> 
-                    <div class="bucket" data-src="${config|general.path}system/media/attachments/" data-progress="${uploadprogress}"></div>
+                    <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/" data-progress="${uploadprogress}"></div>
                     <div class="btn-toolbar margin-bottom-zero"> 
                         <div class="btn-group pull-right">
                             <button type="submit" class="btn" href="#">Publish</button>  
