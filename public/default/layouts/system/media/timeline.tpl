@@ -14,8 +14,7 @@
                                     <img class="profile-avatar thumbnail" src="${actor.image.url}" alt="${actor.displayName}" width="${actor.image.width}" height="${actor.image.height}" />
                                     <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                              
                                 </a>
-                                <a href="/system/media/timeline/view/${uri}" title="${published}" class="published-time"><tpl:element type="time" data="published" /></a>
-                                
+                                <a href="/system/media/timeline/view/${uri}" title="${published}" class="published-time"><tpl:element type="time" data="published" /></a>                           
                             </div>
                             <div class="timeline-item-content"><tpl:element type="html" data="content" medialinks="true" /></div>
                             <tpl:condition data="object" test="isset" value="1">
@@ -43,7 +42,6 @@
                                     </li>
                                     <li class="action-fans"><a href="/system/media/timeline/fans/${uri}"><span class="average" title="See Fans">8.9</span><span class="total">/10</span></a></li>
     <!--                                <li class="action-comments"><a href="/system/media/timeline/comments/${uri}"><span class="delete" title="See Comments">22 replies</span></a></li>-->
-
                                     <li class="action-reply hover"><a href="/system/media/timeline/reply/${uri}"><span class="reply" title="Reply" data-toggle="action-comment">Reply</span></a></li>   
                                     <li class="action-delete hover"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete"><strong>Trash</strong></span></a></li>
                                 </ul>
@@ -51,7 +49,6 @@
                                     <tpl:import layout="media/form/comment" /> 
                                 </div> 
                             </div>
-
                         </div>
                     </li>
                 </tpl:loop> 

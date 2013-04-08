@@ -64,7 +64,7 @@
                         </tpl:loop> 
                     </ol>
                     <tpl:import layout="input" />     
-                    <div class="stream-alerts"></div>
+              
                     <tpl:import layout="media/timeline" />
                 </div>
             </div>

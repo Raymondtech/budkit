@@ -60,7 +60,9 @@ class Timeline extends System\Media {
             if (!$model->addMedia()) {
                 $this->alert(_("Could not add your post"), null, "error");
             } else {
-                $this->alert(_("Your post has been saved and publised"), null, "success");
+                $mediaURI = $model->getLastSavedObjectURI();
+                $mediaURL = \Library\Uri::internal("/system/media/timeline/view/$mediaURI");
+                $this->alert( sprintf( _("Your post has been saved and publised. <a href=\"%s\">View Post</a>"), $mediaURL), null, "success");
             }
         }
         //Returns the request back tot the reffer;
@@ -79,12 +81,17 @@ class Timeline extends System\Media {
         $model = $this->load->model("media");
         $collection = $model->getMedia("media", $itemURI);
         //Set the photo display properties     
-
+        
         $first = reset($collection['items']);
         $this->set("object", $collection);
-        $now = \Library\Date\Time::stamp();
-        $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
-        $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
+        
+        if(!isset($first['summary']) && !empty($first['summary'])):
+            $now = \Library\Date\Time::stamp();
+            $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
+            $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
+        else:
+            $title = $first['summary'];
+        endif;
         $this->output->setPageTitle( $title );
 
         //Raw displays whatever is in the body block only; 
