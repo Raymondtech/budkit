@@ -30,6 +30,9 @@
                         <tpl:loop data="object.items" id="timeline-items">
                             <li class="timeline-item-li timeline-item">
                                 <div class="timeline-item-container">
+                                    <tpl:condition data="summary" test="isset" value="1">
+                                        <div class="timeline-item-title"><tpl:element type="text" data="summary" medialinks="true" /></div>
+                                    </tpl:condition>
                                     <div class="timeline-item-header">
                                         <div class="timeline-item-icon"><a href="#"><i class="icon-${verb}"></i></a></div>
                                         <a class="publisher-profile" href="#">
@@ -37,7 +40,7 @@
                                             <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                              
                                         </a>
                                         <span title="${published}" class="published-time"><tpl:element type="time" data="published" /></span>
-                                        <div class="timeline-item-title"><tpl:element type="text" data="summary" medialinks="true" /></div>
+
                                     </div>
                                     <div class="timeline-item-content"><tpl:element type="text" data="content" medialinks="true" /></div>
                                     <tpl:condition data="object" test="isset" value="1">

@@ -142,14 +142,13 @@ final class Input extends Object {
         $this->server = array_merge($this->server, $_SERVER);
         $this->session = array_merge($this->session, $_SESSION);
         $this->system = Session::getNamespace();
-        
+
         $this->unRegisterGlobals();
         //Temp
         $this->files = array_merge($this->files, $_FILES);
-        
+
         $this->validate = Validate::getInstance();
         $this->router = Router::getInstance(); //Used to back trace the request
-        
         //autosanitize;
         $this->sanitize();
     }
@@ -449,7 +448,7 @@ final class Input extends Object {
 
         return (empty($number)) ? (int) '0' : (int) $number;
     }
-    
+
     /**
      * Returns a formatted string
      * 
@@ -458,35 +457,59 @@ final class Input extends Object {
      * @param type $verb
      * @param type $allowedtags
      */
-    public function getFormattedString($name, $default = '', $verb = 'posts', $blacklisted = array()) {
+    public function getFormattedString($name, $default = '', $verb = 'post', $blacklisted = array()) {
         //FILTER_SANITIZE_STRING
         //FILTER_SANITIZE_STRIPPED
         //\IS\HTML;
+        //just form casting
+        if (strtolower($verb) == 'request') {
+            $verb = $this->getVerb();
+        }
+        $verb = strtolower($verb);
+        $input = $this->$verb;
+        //Undefined
+        if (empty($name) || !isset($input) || !isset($input[$name])) {
+            if (isset($default) && !empty($default)) {
+                return $default;
+            } else {
+                return null; //nothing for that name;
+            }
+        }
+        //uhhhnrrr...
+        $string = $input[$name];
 
-        $filter = \IS\SPECIAL_CHARS; 
+        $doc = new \DOMDocument();
+        $doc->loadHTML($string); //Load XML here, if you use loadHTML the string will be wrapped in HTML tags. Not good.
+        $xpath = new \DOMXPath($doc);
+        //@TODO remove tags that are not allowed;
+        //Remove attributes
+        $nodes = $xpath->query('//*[@style]');
+
+        foreach ($nodes as $node):
+            $node->removeAttribute('style'); //Removes the style attribute;
+        endforeach;
+        
+        //We don't want to wrap in HTML tags
+        $original = $xpath->query("body/*");
+        if ($original->length > 0) {
+            $string = '';
+            foreach ($original as $node) {
+                $string .= $doc->saveHTML($node);
+            }
+        }
+
+        $filter = \IS\SPECIAL_CHARS;
         $options = array(
-            "flags" => FILTER_FLAG_STRIP_HIGH, 
+            "flags" => FILTER_FLAG_STRIP_HIGH,
             "options" => array()
         );
 
         //if (is_array($html)) $str = strip_tags($str, implode('', $html));
         //elseif (preg_match('|<([a-z]+)>|i', $html)) $str = strip_tags($str, $html);
         //elseif ($html !== true) $str = strip_tags($str);
-        $string = $this->getVar($name, $filter, $default, $verb, $options);
-        
-        $doc = new \DOMDocument();
-        $doc->loadHTML( $string );
-        $xpath = new \DOMXPath( $doc );
-        //@TODO remove tags that are not allowed;
-        //Remove attributes
-        foreach($xpath->query("//*[@style]") as $node):
-            $node->removeAttribute('style'); //Removes the style attribute;
-        endforeach;
-        $string = $doc->saveHTML();
-        
-        //Some tags we really don't need
-        return $string;
 
+        //Some tags we really don't need
+        return $this->filter($string, $filter, $options);
     }
 
     /**
@@ -655,27 +678,27 @@ final class Input extends Object {
      * @param mixed $value
      * @param string $verb 
      */
-    public function setVar($name, $value, $verb ='get') {
-        if(isset($this->$verb)){
-            $this->$verb = array_merge( $this->$verb, array($name => $value) );
+    public function setVar($name, $value, $verb = 'get') {
+        if (isset($this->$verb)) {
+            $this->$verb = array_merge($this->$verb, array($name => $value));
         }
     }
-    
+
     /**
      * Gets all the calculated request Variables
      * for sanitization
      * 
      */
-    public function getRequestVars($method="get"){
-        
+    public function getRequestVars($method = "get") {
+
         $router = Router::getInstance();
-        $requestVars  = $router->getRequestVars();
-        
-        $requestMethod = (empty($method)||!isset($this->$method)) ? $this->getVerb() : $method;
-        foreach($requestVars as $name=>$value):
+        $requestVars = $router->getRequestVars();
+
+        $requestMethod = (empty($method) || !isset($this->$method)) ? $this->getVerb() : $method;
+        foreach ($requestVars as $name => $value):
             $this->setVar($name, $value, $requestMethod);
         endforeach;
-        
+
         return $this->$requestMethod;
     }
 
