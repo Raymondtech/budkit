@@ -6,7 +6,7 @@
                     <li class="timeline-item-li timeline-item">
                         <div class="timeline-item-container">
                             <tpl:condition data="summary" test="isset" value="1">
-                                <div class="timeline-item-title"><tpl:element type="text" data="summary" medialinks="true" /></div>
+                                <div class="timeline-item-title"><a href="/system/media/timeline/view/${uri}"><tpl:element type="text" data="summary" medialinks="true" /></a></div>
                             </tpl:condition>
                             <div class="timeline-item-header">
                                 <div class="timeline-item-icon"><a href="#"><i class="icon-${verb}"></i></a></div>
