@@ -65,7 +65,7 @@
                                 <tpl:element type="time" data="object_created_on"/>
                             </div>
                             <div class="actions grid-hide mgcol1">
-                                <a href="#" class="btn btn-small">View</a>
+                                <a href="/system/media/attachments/view/${object_uri}" class="btn btn-small">View</a>
                             </div>
                         </li>
                     </tpl:loop>

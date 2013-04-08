@@ -87,10 +87,46 @@ class Attachments extends System\Media {
 
         return $object;
     }
-    
-    public function shared(){
+
+    public function shared() {
         //List all attachments i don't own that are shared with me
         return $this->gallery();
+    }
+
+    public function view($attachmentURI = null) {
+
+        //Throws an error if no collectionId is passed
+        //Loads the collectionItem from the databse
+        $model = $this->load->model("attachments", 'system');
+        $collection = $model->getMedia("attachment", $attachmentURI);
+        //Set the photo display properties     
+
+        $first = reset($collection['items']);
+        $this->set("object", $collection);
+        $now = \Library\Date\Time::stamp();
+        $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
+        $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
+        $this->output->setPageTitle($title);
+
+        $format = $this->router->getFormat();
+
+        switch ($format):
+            case "raw":
+                $attachment = $this->output->layout("media/photos/photo");
+                //Add the collection to the placeholder image;
+                $this->output->addToPosition("placeholder", $attachment); //Add the collection to the placeholder
+                //Raw displays whatever is in the body block only; 
+                $slide = $this->output->layout("media/slider");
+                $this->output->addToPosition("body", $slide);
+                break;
+            default:
+                //Raw displays whatever is in the body block only; 
+                $attachment = $this->output->layout("media/item");
+                $this->output->addToPosition("body", $attachment);
+                break;
+        endswitch;
+
+        $this->load->view("media")->display();
     }
 
     /*
@@ -98,22 +134,23 @@ class Attachments extends System\Media {
      * 
      * @return void;
      */
+
     public function gallery() {
 
         $this->output->setPageTitle(_("Attachments"));
 
-        $model  = $this->load->model("attachments", "system");
+        $model = $this->load->model("attachments", "system");
         $attachments = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
         $model->setPagination(); //Set the pagination vars
-        $items     = array();
+        $items = array();
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
-        while ($row = $attachments->fetchAssoc()){
+        while ($row = $attachments->fetchAssoc()) {
             $row['attachment_url'] = "/system/object/{$row['object_uri']}";
             $items["items"][] = $row;
         }
-        $this->set("gallery", $items );
-        
+        $this->set("gallery", $items);
+
         $gallery = $this->output->layout("media/gallery");
         $this->output->addToPosition("dashboard", $gallery);
 
