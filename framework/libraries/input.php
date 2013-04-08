@@ -458,7 +458,7 @@ final class Input extends Object {
      * @param type $verb
      * @param type $allowedtags
      */
-    public function getFormattedString($name, $default = '', $verb = 'posts', $allowedtags = array()) {
+    public function getFormattedString($name, $default = '', $verb = 'posts', $blacklisted = array()) {
         //FILTER_SANITIZE_STRING
         //FILTER_SANITIZE_STRIPPED
         //\IS\HTML;
@@ -473,6 +473,16 @@ final class Input extends Object {
         //elseif (preg_match('|<([a-z]+)>|i', $html)) $str = strip_tags($str, $html);
         //elseif ($html !== true) $str = strip_tags($str);
         $string = $this->getVar($name, $filter, $default, $verb, $options);
+        
+        $doc = new \DOMDocument();
+        $doc->loadHTML( $string );
+        $xpath = new \DOMXPath( $doc );
+        //@TODO remove tags that are not allowed;
+        //Remove attributes
+        foreach($xpath->query("//*[@style]") as $node):
+            $node->removeAttribute('style'); //Removes the style attribute;
+        endforeach;
+        $string = $doc->saveHTML();
         
         //Some tags we really don't need
         return $string;
