@@ -48,7 +48,7 @@ The following PHP directives are required
 
 ### MySQL 5.5+
 [MySQL55]: http://dev.mysql.com/tech-resources/articles/introduction-to-mysql-55.html
-BK  users a nifty entity attribute value data model. If you intend to use MySQL as your data store the minimum required version is [MySQL 5.5+][MySQL55] or higher. 	
+BK  uses a nifty entity attribute value data model. If you intend to use MySQL as your data store the minimum required version is [MySQL 5.5+][MySQL55] or higher. 	
 
 II. Demo
 ---------
