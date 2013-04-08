@@ -31,7 +31,6 @@
     border: 1px solid #ddd;
     //padding-bottom:5px;
     //margin:0 60px;
-    
     .publisher-profile{
         font-size: 1.1em;
         color: @grayDark;
@@ -45,6 +44,16 @@
         //margin-bottom:5px;
         .box-sizing(border-box);
         padding: 13px 5px;
+    }
+    input.publisher-title{
+        padding: 15px 0px 20px;
+        font-weight: 400;
+        font-size: 16px;
+        border: none;
+        .box-shadow(none);
+        border-bottom: 1px dashed @grayLight;
+        text-shadow: none;
+        color: @grayDark;
     }
 }
 .timeline-item-publisher-actions{
@@ -62,7 +71,7 @@
         position: relative;
         
         .timeline-item-media{
-            padding-top: @gridGutterWidth*0.5;
+            margin-top: @gridGutterWidth;
             margin-bottom: 0;
             blockquote{
                 min-height: 120px;
@@ -74,7 +83,7 @@
             .carousel{
                 .carousel-caption{
                     color: @white;
-                    padding: 15px;
+                    padding: @gridGutterWidth;
                 }
                 .carousel-control{
                     display: none;
@@ -102,7 +111,7 @@
             min-height: 50px;
             background: #fff;
             border: 1px solid #ddd;
-            padding: 15px;
+            padding: @gridGutterWidth;
             margin: 10px 60px;
             &:before{
                 content: "";
@@ -156,7 +165,7 @@
             }
             .timeline-item-body{}
             .timeline-item-footer{          
-                margin-top: 10px;
+                margin-top: @gridGutterWidth;
                 ul.actions{
                         margin: 0px;
                         list-style:none;
@@ -246,7 +255,7 @@
             
             .timeline-item-header{
                 //min-height: 70px;
-                margin-bottom: 0px !important;
+                //margin-bottom: 0px !important;
                 //.profile-name{ display: block}
                 .published-summary{ margin: 0;}
                 .published-time{ float:right;}
@@ -260,7 +269,14 @@
                     }
                 }
             }
-            .timeline-item-title{ margin: 5px 0 0 0px;}
+            .timeline-item-title{ 
+                font-size: 19px;
+                margin-bottom: 5px;
+                border-bottom: 1px dashed @grayLight;
+                padding-bottom: 10px;
+                font-weight: bold;
+                &:empty{ display: none}
+            }
             .timeline-item-body, .timeline-item-footer{
      
             }
@@ -268,7 +284,7 @@
                 &.top-media{margin-bottom: 15px; margin-top: 0px; } &.bottom-media{margin-top: 15px } 
             }
             .timeline-item-footer{
-                margin: 10px -15px -15px -15px;
+                margin: @gridGutterWidth -@gridGutterWidth*0.9 -@gridGutterWidth*0.9 -@gridGutterWidth*0.9;
                 padding: 5px 10px;
                 border-top: 1px dashed #ddd;
                 position: relative; 
@@ -281,39 +297,18 @@
                 }
             }
         }
-        &.timeline-item-object{
-            .timeline-item-container{ 
-                padding: 0px; 
-                margin-bottom: 8px; 
-                border-bottom: 1px solid #ddd;
-                .timeline-item-header{
-                    #gradient > .vertical( #f9f9f9, #f2f2f2);
-                     border-bottom: 1px solid #dedede;
-                     line-height: @baseLineHeight;   
-                     padding: 10px;
-                     .timeline-item-title{
-                        font-weight: bold;
-                        font-size: 125%;
-                     }
-                }
-                .timeline-item-media{ 
-                    background: #f1f1f1; padding: 15px 15px 10px; border-bottom: 1px solid #ddd;
-                }
-                &:after{ border-color: transparent #f5f5f5; }
-            }
-        }
     }
 }
 
 //ICONS
 .timeline-item-icon{
     position: absolute;
-    top: 30px; left: 72px;
+    top: 25px; left: 72px;
     display: none;
     .border-radius(50%);
     a {
         background: #DDD ;
-        padding: 5px;
+        padding: 4px 5px;
         .border-radius(50%);
         font-size: 13px;
         text-decoration: none;
@@ -321,7 +316,7 @@
         &:hover{ background: #999 }
     }
     &.toolset{
-        a{padding: 4px 7px;}
+        a{padding: 3px 7px;}
     }
 }
 .icon-post:before { content: "\f040"; }
