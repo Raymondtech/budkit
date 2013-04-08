@@ -30,7 +30,7 @@
         <body onload="prettyPrint()">
             <div id="wrap">
                 
-                <div class="container-box">
+                <div class="container-box has-navbar">
                     
                     <div class="container-right">
                         <tpl:import layout="navbar" />

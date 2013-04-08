@@ -38,7 +38,7 @@
                 <div class="container-left">                 
                     <tpl:import layout="sidebar" />
                 </div>
-                <div class="container-box has-left">
+                <div class="container-box has-left has-navbar">
 
                     <tpl:import layout="navbar" />
                     <div class="container-right">

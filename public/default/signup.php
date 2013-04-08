@@ -31,7 +31,6 @@
             <div id="wrap">
                 
                 <div class="container-box">
-                    <tpl:import layout="navbar" />
                     <div class="container-right">
                         <div class="container-content scroll-y">
                             <div class="container-fluid">

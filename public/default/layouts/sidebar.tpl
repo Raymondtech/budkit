@@ -1,13 +1,15 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-        <div class="auth-user">
-            <tpl:condition data="profile.user_photo" test="isset" value="1">
-                <a href="/member/profile/view" class="profile-link">
-                    <img src="/system/object/${profile.user_photo}/resize/30/30"  />
-                </a>
-            </tpl:condition>
-            <span class="intro"><tpl:element type="text" formatting="sprintf" cdata="Hi %s" data="profile.user_first_name"  /></span>
+    <div class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button> 
+            <a class="brand logo" href="/system/start/dashboard">:/budkit</a>
         </div>
+    </div>
+    <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
         <tpl:block data="page.block.side" />
     </tpl:condition>
     <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >

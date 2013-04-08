@@ -6,10 +6,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button> 
-            <a class="brand pull-right" href="/system/start/dashboard">:/budkit</a>
+            
             <div class="nav-collapse collapse">
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-
+                    <div class="platform-user pull-right">
+                        <tpl:condition data="profile.user_photo" test="isset" value="1">
+                            <a href="/member/profile/view" class="profile-link">
+                                <img src="/system/object/${profile.user_photo}/resize/30/30"  />
+                            </a>
+                        </tpl:condition>
+                        <span class="intro"><tpl:element type="text" formatting="sprintf" cdata="Hi %s" data="user.user_first_name"  /></span>
+                    </div>
                     <ul class="nav" id="menubartabs">
                         <li><a href="/system/start/dashboard">Dashboard</a></li>
                         <li><a href="/system/media/timeline">Timeline</a></li>   
