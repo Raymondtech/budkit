@@ -36,8 +36,12 @@ Class Media extends \Platform\Controller {
     public function index(){
         return false;
     }
+    
+    public function create($action="text"){
+        return $this->edit($action);
+    }
 
-    public function create($action = "") {
+    public function edit($action = "text") {
         
         //create action types
         $actions = array(
@@ -45,7 +49,7 @@ Class Media extends \Platform\Controller {
         );
         
         //form
-        $_form  = !in_array($action, $actions) ? "drop" : $action ;
+        $_form  = !in_array($action, $actions) ? "text" : $action ;
         $form   = $this->output->layout("media/form/{$_form}");
 
         $this->output->addToPosition("dashboard", $form);

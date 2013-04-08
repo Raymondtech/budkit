@@ -1,11 +1,6 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="navbar" id="navbar">
         <div class="navbar-inner">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button> 
             <a class="brand logo" href="/system/start/dashboard">:/budkit</a>
         </div>
     </div>

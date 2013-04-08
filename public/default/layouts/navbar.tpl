@@ -1,12 +1,6 @@
 <tpl:layout name="navbar" xmlns:tpl="http://budkit.org/tpl">
     <div class="navbar" id="navbar">
         <div class="navbar-inner">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button> 
-            
             <div class="nav-collapse collapse">
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                     <div class="platform-user pull-right">
