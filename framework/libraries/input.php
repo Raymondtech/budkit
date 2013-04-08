@@ -97,7 +97,7 @@ final class Input extends Object {
      *
      * @var array 
      */
-    protected $session;
+    protected $session = array();
 
     /**
      *
@@ -140,7 +140,7 @@ final class Input extends Object {
         $this->cookie = array_merge($this->cookie, $_COOKIE);
         $this->env = array_merge($this->env, $_ENV);
         $this->server = array_merge($this->server, $_SERVER);
-        $this->session = array_merge($this->session, $_SESSION);
+        $this->session = array_merge($this->session, isset($_SESSION)?$_SESSION:array());
         $this->system = Session::getNamespace();
 
         $this->unRegisterGlobals();
