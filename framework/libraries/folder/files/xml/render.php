@@ -66,35 +66,47 @@ final class Render {
         if (empty($tree) && !is_array($tree))
             return null;
         $tag = null;
-
+        $cdata = null;
+        $children = null;
         //EXECUTE TPL CALLBACKS BEFORE ELEMENT RENDERING;
         $tree = Parser::callback($tree, $xml);
 
         //WE DON'T NEED NAMESPACES?
         unset($tree['NAMESPACE']); //We don't need namespaces;
-        //OPEN THE TAG;
+        //FIRST GET THE ELEMENT;
         if (isset($tree['ELEMENT'])) {
             $tag = $tree['ELEMENT'];
             $xml->startElement($tag);
-            unset($tree['ELEMENT']);
+            unset($tree['ELEMENT']); //Remove it from the tree;
         }
-        //ELEMENT CONTENT
-        foreach ($tree as $index => $element) {
-            //EVERYTHING ELSE IS AN ATTRIBUTE;
-            if (!is_array($element) && $index !== "CDATA"):
+        //CHECK FOR CDATA;
+//        //CHECK FOR CHILDREN;
+//        if (!empty($tag) && isset($tree['CHILDREN'])) {
+//            $children = $tree['CHILDREN'];
+//            unset($tree['CHILDREN']); //Remove it from the tree;
+//        }
+        //CHECK FOR ALL OTHER ATTRIBUTES;
+        foreach ($tree as $index => $element) :
+            //CHILDREN WILL BE CHILDREN AGAIN
+            if (is_array($element)):
+                $this->__($element, $xml);
+                unset($tree[$index]);
+            elseif (!empty($tag)&& !in_array($index, array("CDATA","CHILDREN"))):
                 $attribute = $index;
                 $value = $element;
-                $xml->startAttribute(strtolower($attribute));
-                \Library\Event::trigger("_XMLAttributeCallback", $attribute, $value, $xmlWriter);
-                $xml->text($value);
-                $xml->endAttribute();
-            //CHILDREN WILL BE CHILDREN
-            elseif (is_array($element) || $index == "CHILDREN"):
-                $this->__($element, $xml);
+                //$xml->startAttribute(strtolower($attribute));
+                \Library\Event::trigger("_XMLAttributeCallback", $attribute, $value, $xml);
+                //$xml->text($value);
+                $xml->writeAttribute($attribute, $value);
+                unset($tree[$index]); //Remove it from the tree
+            elseif (!empty($tag) && $index == "CDATA") :
+                $cdata = $element;
+                $xml->writeRaw(trim($cdata));
+                unset($tree[$index]); //Remove it from the tree;
             endif;
-        }
-        if (!empty($tag)) {
-            $this->cdata($tree, $xml);
+        endforeach;
+        //If an only if there is an open tag;
+        if (!empty($tag)):
             //CLOSE THE TAG
             $selfclosing = array("area", "base", "basefont", "br", "col", "frame", "hr", "img", "input", "link", "meta", "param");
             //empty tags e.g script etc
@@ -103,17 +115,6 @@ final class Render {
             } else {
                 $xml->endElement();
             }
-        }
-    }
-
-    public function cdata(&$tree, $xml) {
-        //ANYCDATA?
-        if (isset($tree['CDATA'])):
-            $data = $tree['CDATA'];
-            //\Library\Event::trigger("_XMLContentCallback", $data ); //Callbacks should accept data by reference
-            $xml->writeRaw(trim($data));
-            unset($tree['CDATA']);
         endif;
     }
-
 }

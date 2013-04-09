@@ -1,5 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div style="background: #fff; border: 1px solid #ddd; margin:0; padding: 15px; margin-bottom: 20px">
+    <div>
         <p>
             This software license (the "Agreement") is a legal agreement between you ("you", "licensee"), and StonyhillsHQ (http://www.stonyhillshq.com) (the "Developer", "we", "our" or "us") that describes the terms and conditions applicable to your use of the Software. By clicking 'I ACCEPT' below, you indicate that you have read, understood and assent to be bound by the terms of this Agreement. If you do not agree to the terms of this Agreement, you are not granted any rights whatsoever in the Software, and you will not be able to access or use the Software.
         </p><p>

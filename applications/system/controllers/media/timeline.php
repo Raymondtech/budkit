@@ -111,6 +111,7 @@ class Timeline extends System\Media {
         $view = $this->load->view('media');
         $user = \Platform\User::getInstance();
         $model = $this->load->model('media');
+        $model->setPagination(); //Set the pagination vars
         $activities = $model->getAll();
 
         $this->set("activities", $activities);

@@ -43,7 +43,6 @@ namespace Library\Output\Format;
  */
 class xHtml extends \Library\Output\Document {
 
-
     /**
      * Renders the output
      *
@@ -51,46 +50,54 @@ class xHtml extends \Library\Output\Document {
      * @param type $httpCode
      * @return xHtml
      */
-    final public function render($template="index",$httpCode=null, $headers=array()){
-        
-        @header("HTTP/1.1 {$httpCode}");   
-        if(is_array($headers)){
-            foreach($headers as $name=>$value){
+    final public function render($template = "index", $httpCode = null, $headers = array()) {
+
+        @header("HTTP/1.1 {$httpCode}");
+        if (is_array($headers)) {
+            foreach ($headers as $name => $value) {
                 $this->unsetHeader($name);
                 $this->setHeader($name, $value);
             }
         };
         $this->setHeaders("Content-type", "text/html");
-        
-        $template = empty($template) ? $this->output->layout : $template ;
+
+        $template = empty($template) ? $this->output->layout : $template;
 
         //3.Determine which format of the index we are using
-        $layout = FSPATH . 'public' . DS . $this->output->template . DS . $template. $this->output->layoutExt;
-        
-        
-        
+        $layout = FSPATH . 'public' . DS . $this->output->template . DS . $template . $this->output->layoutExt;
+
+
+
         //4. Include the main index file
         include_once( $layout );
 
         //echo $layout; die; 
-        
         //parse the set layout as the final output;
         //5. Close and Flush buffer
-        $output     = $this->restartBuffer();
-        
+        $output = $this->restartBuffer();
+
         //echo $output
-        $document   = $this->parse( $output , $this );
-        
+        $string = $this->parse($output, $this);
+
+        //$string = $document;
+
+        $doc = new \DOMDocument();
+        $doc->loadHTML($string); //Load XML here, if you use loadHTML the string will be wrapped in HTML tags. Not good.
+        foreach ($doc->getElementsByTagName("html") as $node):
+            $doc->saveHTML($node);
+        endforeach;
+
+        //$document = $string;
         //print_R(\Platform\Debugger::$log);
         //Print to client
-        print( "<!DOCTYPE html>\n".trim($document) );
+        print( "<!DOCTYPE html>\n" . trim($string));
+        //print_R($document);
 
         ob_flush();
         ob_end_flush();
 
         return $this;
     }
-
 
     /**
      * Gets an instance of the registry element

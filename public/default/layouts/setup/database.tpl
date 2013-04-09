@@ -1,17 +1,14 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="page-header">
-<!--        <h1><?php echo _('Database Connection') ; ?></h1><br />-->
         <small><?php echo _('Please enter your database connection details below.' ) ; ?></small>
     </div>
-
     <div class="control-group">
         <label class="control-label"><?php echo _('Database Name') ; ?></label>
         <div class="controls">
-            <input type="text" name="dbname" id="dbname" class="input-xxlarge" placeholder="" />
+            <input type="text" name="dbname" id="dbname" class="input-xxlarge"  />
             <span class="help-block">The name of the existing database. We won't create the database for you</span>
         </div>
     </div>
-
     <div class="control-group">
         <label class="control-label"><?php echo _('Database Server Username') ; ?></label>
         <div class="controls">
@@ -19,7 +16,6 @@
             <span class="help-block">The Username used to access this database</span>
         </div>
     </div>
-
     <div class="control-group">
         <label class="control-label"><?php echo _('Database Server User Password') ; ?></label>
         <div class="controls">
@@ -27,8 +23,6 @@
             <span class="help-block">The Password with which you use to access this database.</span>
         </div>
     </div>
-
-
     <div class="control-group">
         <label class="control-label"><?php echo _('Database Host') ; ?></label>
         <div class="controls">
@@ -48,9 +42,9 @@
     <div class="control-group">
         <label class="control-label"><?php echo _('Database RDBMS Driver') ; ?></label>
         <div class="controls">
-            <select id="dbdriver" name="dbdriver" style="width:30%">
+            <select id="dbdriver" name="dbdriver">
                 <option value="MySQLi" selected="selected"><?php echo _('MySQLi') ; ?></option>
-                <option value="MySQL"><?php echo _('MySQL') ; ?></option>
+                <option value="MySQL" disabled="disabled"><?php echo _('MySQL') ; ?></option>
                 <option value="SQLite3" disabled="disabled"><?php echo _('SQLite3') ; ?></option>
                 <option value="PostgreSQL" disabled="disabled"><?php echo _('PostgreSQL') ; ?></option>
             </select>

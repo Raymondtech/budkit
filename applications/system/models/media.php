@@ -202,8 +202,16 @@ class Media extends Platform\Entity {
 
         $query .="\nGROUP BY o.object_id";
         $query .= $this->setListOrderBy(array("o.object_updated_on"), "DESC")->getListOrderByStatement();
+        $query .= $this->getLimitClause();
+        
+        $total   = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first
+        $results = $this->database->prepare($query)->execute();
+         //Could use SQL_CALC_FOUND here but just the same as just using a second query really;
+        //$queries = $this->database->getQueryLog();
+        
+        $this->setListTotal( $total );
 
-        return $this->database->prepare($query)->execute();
+        return $results;
     }
 
     public function getActor($object, $actorId) {

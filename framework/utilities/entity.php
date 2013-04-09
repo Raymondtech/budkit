@@ -353,21 +353,21 @@ class Entity extends Model {
      * @return type $statement
      * 
      */
-    final public function getObjectsList($objectType, $properties = array()) {
+    final public function getObjectsList($objectType, $properties = array(),$objectURI = NULL, $objectId = NULL) {
 
         if (empty($properties)):
             if (!empty($this->propertyModel))
                 $properties = array_keys($this->propertyModel);
         endif;
 
-        $query = static::getObjectQuery($properties, "?{$this->valueGroup}property_values", NULL, $objectType);
+        $query = static::getObjectQuery($properties, "?{$this->valueGroup}property_values", NULL, $objectType, $objectURI, $objectId);
 
         //echo($this->withConditions) ;
         $query .="\nGROUP BY o.object_id";
         $query .= $this->getListOrderByStatement();
         $query .= $this->getLimitClause();
         
-        $total   = $this->getObjectsListCount($objectType, $properties); //Count first
+        $total   = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first
         $results = $this->database->prepare($query)->execute();
          //Could use SQL_CALC_FOUND here but just the same as just using a second query really;
         //$queries = $this->database->getQueryLog();
@@ -376,12 +376,21 @@ class Entity extends Model {
         return $results;
     }
 
-    final public function getObjectsListCount($objectType, $properties = array()) {
+    /**
+     * Gets the object List Count
+     * 
+     * @param type $objectType
+     * @param type $properties
+     * @param type $objectURI
+     * @param type $objectId
+     * @return type
+     */
+    final public function getObjectsListCount($objectType, $properties = array(), $objectURI = NULL, $objectId = NULL) {
         if (empty($properties)):
             if (!empty($this->propertyModel))
                 $properties = array_keys($this->propertyModel);
         endif;
-        $query = static::getObjectCountQuery($properties, "?{$this->valueGroup}property_values", NULL, $objectType, NULL, true);
+        $query = static::getObjectCountQuery($properties, "?{$this->valueGroup}property_values", $objectId, $objectType, $objectURI);
         //echo($this->withConditions) ;
         $query .="\nGROUP BY o.object_id";
         $query .= $this->getListOrderByStatement();

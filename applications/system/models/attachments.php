@@ -219,7 +219,7 @@ class Attachments extends Platform\Entity {
      * @param string $objectURI
      * @return object Database resultset
      */
-    final private function getMediaObjectsList($objectType = 'attachment', $objectURI = NULL, $objectId = NULL) {
+    final private function getAttachmentObjectsList($objectType = 'attachment', $objectURI = NULL, $objectId = NULL) {
         //Join Query
         //$objectType = 'media';
         $query = "SELECT o.object_id, o.object_uri, o.object_type,o.object_created_on, o.object_updated_on, o.object_status";
@@ -310,7 +310,7 @@ class Attachments extends Platform\Entity {
         
         $media   = $this->load->model('media', 'system'); //get the media model;
         //Get the object list
-        $objects = $this->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
+        $objects = $this->getAttachmentObjectsList($objectType, $objectURI, $objectId)->fetchAll();
         $items = array();
         
         //Parse the mediacollections;
