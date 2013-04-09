@@ -1,19 +1,22 @@
 <tpl:layout name="inputsettings" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form action="/system/media/timeline/create" class="comment-form" method="POST" enctype="multipart/form-data">
+    <form action="/system/media/timeline/create" class="no-margin" method="POST" enctype="multipart/form-data">
         <div class="timeline-item-publisher-box">
-            <fieldset class="no-margin">
+            <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>
+            <fieldset class="timeline-item-publisher no-bottom-margin">
                 <div class="controls">
-                    <textarea class="input-100pct focused" data-target="budkit-editor" rows="2" name="media_content" placeholder="Enter your reply..."></textarea>
+                    <textarea class="input-100pct focused" data-target="budkit-editor" rows="4" name="media_content" placeholder="Add Comment"></textarea>
                 </div> 
-                <div class="bucket" data-src="${config|general.path}system/media/attachments/" data-progress="${uploadprogress}"></div>
-                <div class="btn-toolbar margin-bottom-zero hide"> 
+                <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/" data-progress="${uploadprogress}"></div>
+                <div class="btn-toolbar margin-bottom-zero"> 
                     <div class="btn-group">
-                        <button type="submit" class="btn" href="#">Reply</button>  
-                    </div>   
-                    <!--<div class="btn-group no-margin">
-                        <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload Files" autoload="" />
-                            <a class="btn">Chose from existing</a>
-                    </div>-->
+                        <button type="submit" class="btn" href="#">Add Comment</button>  
+                        <!--                        <tpl:import layout="privacylist" />-->
+                    </div>
+                    <div class="btn-group no-margin ">
+                        <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload..." autoload="" />
+                        <!--                            <a class="btn">Chose from existing</a>-->
+                    </div>
+
                 </div>              
             </fieldset>
         </div>

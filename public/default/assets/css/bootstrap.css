@@ -8209,6 +8209,16 @@ input.search-query {
 .timeline-item-index .timeline-item-li:last-child {
   border-bottom: none;
 }
+.action-comment form .timeline-item-publisher-box .timeline-item-publisher {
+  margin: 0 !important;
+}
+.action-comment form .timeline-item-publisher-box .timeline-item-publisher:before,
+.action-comment form .timeline-item-publisher-box .timeline-item-publisher:after {
+  display: none !important;
+}
+.action-comment form .timeline-item-publisher-box .timeline-item-icon {
+  display: none !important;
+}
 .timeline-item-index {
   margin-bottom: 20px;
   list-style: none;
