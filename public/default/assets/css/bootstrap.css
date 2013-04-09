@@ -8253,7 +8253,8 @@ input.search-query {
   font-size: 21px;
   margin-bottom: 10px;
   border-bottom: 1px dashed #999999;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  line-height: 36px;
   font-weight: bold;
 }
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-title:empty {
