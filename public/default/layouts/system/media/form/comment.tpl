@@ -12,7 +12,7 @@
                         <button type="submit" class="btn" href="#">Add Comment</button>  
                         <!--                        <tpl:import layout="privacylist" />-->
                     </div>
-                    <div class="btn-group no-margin ">
+                    <div class="btn-group">
                         <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload..." autoload="" />
                         <!--                            <a class="btn">Chose from existing</a>-->
                     </div>

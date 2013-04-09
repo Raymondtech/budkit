@@ -8210,7 +8210,8 @@ input.search-query {
   border-bottom: none;
 }
 .action-comment form .timeline-item-publisher-box .timeline-item-publisher {
-  margin: 0 !important;
+  margin-left: 0 !important;
+  margin-bottom: 5px;
 }
 .action-comment form .timeline-item-publisher-box .timeline-item-publisher:before,
 .action-comment form .timeline-item-publisher-box .timeline-item-publisher:after {
