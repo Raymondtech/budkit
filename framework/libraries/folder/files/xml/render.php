@@ -61,15 +61,15 @@ final class Render {
      * @return null
      */
     public function __($tree, $xml) {
-        
+
         //Returns the XML
         if (empty($tree) && !is_array($tree))
             return null;
         $tag = null;
-        
+
         //EXECUTE TPL CALLBACKS BEFORE ELEMENT RENDERING;
         $tree = Parser::callback($tree, $xml);
-              
+
         //WE DON'T NEED NAMESPACES?
         unset($tree['NAMESPACE']); //We don't need namespaces;
         //OPEN THE TAG;
@@ -81,7 +81,7 @@ final class Render {
         //ELEMENT CONTENT
         foreach ($tree as $index => $element) {
             //EVERYTHING ELSE IS AN ATTRIBUTE;
-            if (!is_array($element) && $index !=="CDATA"):
+            if (!is_array($element) && $index !== "CDATA"):
                 $attribute = $index;
                 $value = $element;
                 $xml->startAttribute(strtolower($attribute));
@@ -94,13 +94,7 @@ final class Render {
             endif;
         }
         if (!empty($tag)) {
-            //ANYCDATA?
-            if (isset($tree['CDATA'])):
-                $data = $tree['CDATA'];
-                //\Library\Event::trigger("_XMLContentCallback", $data ); //Callbacks should accept data by reference
-                $xml->writeRaw(trim($data));
-                unset($tree['CDATA']);
-            endif;
+            $this->cdata($tree, $xml);
             //CLOSE THE TAG
             $selfclosing = array("area", "base", "basefont", "br", "col", "frame", "hr", "img", "input", "link", "meta", "param");
             //empty tags e.g script etc
@@ -110,6 +104,16 @@ final class Render {
                 $xml->endElement();
             }
         }
+    }
+
+    public function cdata(&$tree, $xml) {
+        //ANYCDATA?
+        if (isset($tree['CDATA'])):
+            $data = $tree['CDATA'];
+            //\Library\Event::trigger("_XMLContentCallback", $data ); //Callbacks should accept data by reference
+            $xml->writeRaw(trim($data));
+            unset($tree['CDATA']);
+        endif;
     }
 
 }

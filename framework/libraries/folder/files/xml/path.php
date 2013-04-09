@@ -60,15 +60,6 @@ class Path extends Document{
     }
 
     /**
-     * Backward compatibility for class name constructors 
-     * 
-     * @return object path
-     */
-    public static function Path() {
-        return self::getInstance();
-    }
-
-    /**
      * Returns and instantiated Instance of the path class
      * 
      * NOTE: As of PHP5.3 it is vital that you include constructors in your class

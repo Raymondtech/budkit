@@ -39,18 +39,16 @@
                     <tpl:import layout="sidebar" />
                 </div>
                 <div class="container-box has-left has-navbar">
-
+                    
                     <tpl:import layout="navbar" />
                     <div class="container-right">
                         <div class="container-aside">
                             <tpl:import layout="asidebar" />
                         </div>
                         <div class="container-content">
-
                             <div class="container-bucket">
                                 <tpl:block data="page.block.alerts" /> 
-                                <tpl:block data="page.block.body">Content</tpl:block>
-
+                                <tpl:block data="page.block.body" />
                             </div>
 <!--                            <a href="#" class="container-left-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>-->
                             <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-left"></i></a>

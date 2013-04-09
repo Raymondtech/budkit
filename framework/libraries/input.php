@@ -24,10 +24,10 @@
  */
 
 namespace IS;
-
+ 
 const INTERGER = 257;
 const BOOLEAN = 258;
-const STRING = 513;
+const STRING = FILTER_SANITIZE_STRING;
 const STRIPPED = 513;
 const ENCODED = 514;
 const SPECIAL_CHARS = 515;
@@ -280,7 +280,6 @@ final class Input extends Object {
     public static function methodIs($verb) {
 
         $method = static::getVerb();
-
         $return = ($method === strtolower($verb)) ? true : false;
 
         return $return;

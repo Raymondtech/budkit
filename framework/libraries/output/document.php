@@ -62,7 +62,9 @@ abstract class Document extends Library\Object {
         static::$_prepared  = Parse::_(static::$_source, $object);
         
         if(!$xml):
-            static::$_prepared  = str_replace('<?xml version="1.0" encoding="UTF-8"?>',NULL,  static::$_prepared );
+             $doc = new \DOMDocument();
+             $doc->loadHTML( static::$_prepared );
+             static::$_prepared = $doc->saveHTML();  
         endif;
 
         //4. Return source;

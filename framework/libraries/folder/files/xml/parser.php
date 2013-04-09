@@ -146,7 +146,6 @@ class Parser extends Files\Xml {
         xml_set_object(self::$parser, self::$document);
         xml_set_element_handler(self::$parser, "start", "end");
         xml_set_character_data_handler(self::$parser, "cdata");
-
         xml_set_start_namespace_decl_handler(self::$parser, "namespacedStart");
         xml_set_end_namespace_decl_handler(self::$parser, "namespacedEnd");
         xml_set_external_entity_ref_handler(self::$parser, "externalEntity");
@@ -202,15 +201,15 @@ class Parser extends Files\Xml {
     final public static function externalEntity($parser, $openEntityNames, $base, $systemId, $publicId) {
 
         //die;
-
         if ($systemId) {
+
             if (!list($parser, $fp) = new_xml_parser($systemId)) {
-                self::setError(sprintf( _t("Could not open entity %s at %s\n"), $openEntityNames, $systemId ) );
+                self::setError(sprintf(_t("Could not open entity %s at %s\n"), $openEntityNames, $systemId));
                 return false;
             }
             while ($data = fread($fp, 4096)) {
                 if (!xml_parse($parser, $data, feof($fp))) {
-                    self::setError(sprintf( _t("XML error: %s at line %d while parsing entity %s\n"), xml_error_string(xml_get_error_code($parser)), xml_get_current_line_number($parser), $openEntityNames) );
+                    self::setError(sprintf(_t("XML error: %s at line %d while parsing entity %s\n"), xml_error_string(xml_get_error_code($parser)), xml_get_current_line_number($parser), $openEntityNames));
                     xml_parser_free($parser);
                     return false;
                 }
@@ -285,20 +284,41 @@ class Parser extends Files\Xml {
      *
      * @return void
      */
-    final public static function run($xml=null, $reverse = FALSE) {
+    final public static function run($xml = null, $reverse = FALSE) {
 
         static $literal2NumericEntity;
-        
-        $xml = !empty($xml) ? $xml : self::$xml ;
+
+        $xml = !empty($xml) ? $xml : self::$xml;
 
         if (empty($literal2NumericEntity)) {
-            $transTbl = get_html_translation_table(HTML_ENTITIES);
+            $transTbl = get_html_translation_table( HTML_ENTITIES );
             foreach ($transTbl as $char => $entity) {
                 if (strpos('&"<>', $char) !== FALSE)
                     continue;
-                $literal2NumericEntity[$entity] = '&#' . ord($char) . ';';
+                $hx = ord($char{0});
+                $string = NULL;
+                if ($hx <= 0x7F) {
+                    $string = $char;
+                } else if ($hx < 0xC2) {
+                    $string = $char;
+                }
+                if ($hx <= 0xDF) {
+                    $hx = ($hx & 0x1F) << 6 | (ord($char{1}) & 0x3F);
+                    $hx = "&#" . $hx . ";";
+                    $string = $hx;
+                } else if ($hx <= 0xEF) {
+                    $hx = ($hx & 0x0F) << 12 | (ord($char{1}) & 0x3F) << 6 | (ord($char{2}) & 0x3F);
+                    $hx = "&#" . $hx . ";";
+                    $string = $hx;
+                } else if ($hx <= 0xF4) {
+                    $hx = ($hx & 0x0F) << 18 | (ord($char{1}) & 0x3F) << 12 | (ord($char{2}) & 0x3F) << 6 | (ord($char{3}) & 0x3F);
+                    $hx = "&#" . $hx . ";";
+                    $string = $hx;
+                }
+                $literal2NumericEntity[$entity] = $string;
             }
         }
+
         if ($reverse) {
             $xml = strtr($xml, array_flip($literal2NumericEntity));
         } else {
@@ -332,7 +352,7 @@ class Parser extends Files\Xml {
 
 
         //Use a user supplied root, or try using our root
-        $ROOT = !empty($ROOT) ? $ROOT :  ((isset(self::$tree['CHILDREN'][0])) ? self::$tree['CHILDREN'][0] : null );
+        $ROOT = !empty($ROOT) ? $ROOT : ((isset(self::$tree['CHILDREN'][0])) ? self::$tree['CHILDREN'][0] : null );
 
         //For now just arrays! will look to handle objects later
         if (!isset($ROOT) || !is_array($ROOT)) {
@@ -351,7 +371,7 @@ class Parser extends Files\Xml {
         static::writeXML($xmlWriter, $ROOT, $readonly);
 
         $xmlWriter->endDocument();
-        
+
         return $xmlWriter->outputMemory(true);
     }
 
@@ -368,9 +388,8 @@ class Parser extends Files\Xml {
         $key = null;
         $iterator = 0;
         $children = sizeof($root);
-        
-        return new Render($root, $xmlWriter);
 
+        return new Render($root, $xmlWriter);
     }
 
     /**
@@ -461,9 +480,10 @@ class Parser extends Files\Xml {
             $uri = end($element['NAMESPACE']);
             $method = $element['ELEMENT'];
 
-            if (array_key_exists($prefix, static::$methods)){             
-                $class  = static::$methods[$prefix].ucfirst($method); 
-                if(!method_exists($class, "execute")) return $element;
+            if (array_key_exists($prefix, static::$methods)) {
+                $class = static::$methods[$prefix] . ucfirst($method);
+                if (!method_exists($class, "execute"))
+                    return $element;
                 return call_user_func("$class::execute", static::$parser, $element, $xmlWriter);
             }
         }
@@ -497,9 +517,10 @@ class Parser extends Files\Xml {
 
         //Data Handler
         $data = ltrim($data);
-        
-        if(empty($data)) return true;
-        
+
+        if (empty($data))
+            return true;
+
         //$data = preg_replace('s/\s+</</g',' ',$data);
         $data = preg_replace('/^([a-z]+;)/', '&\1', $data);
         $data = preg_replace('/^(#[0-9]+;)/', '&\1', $data);
@@ -537,14 +558,12 @@ class Parser extends Files\Xml {
                     $children = $children + 1;
                     //return;
                     if (($i + 1) == $howmany) {
-                       
                         unset($last['CHILDREN']);
                     }
                 }
             }
             //cocatenate
-            $last['CDATA'] = $old . $data; //Dealing with Whitespace
-
+            $last['CDATA'] = $old.$data; //Dealing with Whitespace
             //$section++;
         }
     }
@@ -562,19 +581,19 @@ class Parser extends Files\Xml {
         static $tag = '';
 
         if (!empty($wrap)) {
-            $xml .= "<$wrap>";
+            $xml .= "&#032;<$wrap>";
         }
         foreach ($array as $key => $value) {
             switch (strtoupper($key)):
                 case "ELEMENT" :
                     $tag = strtolower($value);
-                    $xml .=" <$tag";
+                    $xml .="&#032;<$tag";
                     break;
                 default :
                     if (!is_array($value) && $key != 'CDATA') {
-                        $references = array("HREF","ACTION");
-                        if( in_array(strtoupper($key) , $references) ){
-                            $value = \Library\Uri::internal( $value );
+                        $references = array("HREF", "ACTION");
+                        if (in_array(strtoupper($key), $references)) {
+                            $value = \Library\Uri::internal($value);
                         }
                         $attribute = ' ' . strtolower($key) . '="' . $value . '"';
                         $xml .=$attribute;
@@ -587,9 +606,9 @@ class Parser extends Files\Xml {
         if (isset($array['CDATA']) && !empty($array['CDATA'])) {
             $xml.= trim($array['CDATA']);
         }
-        $xml .="</$tag>\n";
+        $xml .="</$tag>&#032;";
         if (!empty($wrap)) {
-            $xml .= "</$wrap>";
+            $xml .= "</$wrap>&#032;";
         }
         return $xml;
     }
