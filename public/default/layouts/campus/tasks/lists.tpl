@@ -1,11 +1,4 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <tpl:condition data="gallery.hidetitle" test="boolean" value="0">
-        <div class="navbar navbar-subnav no-margin">
-            <div class="navbar-inner padding-left-half no-margin">
-                <a class="topic"><tpl:element type="text" data="page.title">Gallery</tpl:element></a>
-            </div>
-        </div>
-    </tpl:condition>
     <div class="padding">  
         <tpl:condition data="gallery.hideheader" test="boolean" value="0">
             <div class="clearfix">
@@ -20,7 +13,7 @@
             <hr />
         </tpl:condition>
         <div class="widget">
-            <!--            <div class="widget-head"><span class="widget-title">Media</span><a class="widget-close" data-dismiss="widget"><i class="icon-refresh"></i></a></div>-->
+            <div class="widget-head"><span class="widget-title"><tpl:element type="text" data="page.title">Media Gallery</tpl:element></span></div>
             <div class="widget-body">
                 <ul class="media-grid media-gallery tasks">
                     <li class="mgrow-fluid grid-hide list-header">

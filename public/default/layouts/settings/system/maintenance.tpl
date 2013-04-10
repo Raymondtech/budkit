@@ -1,11 +1,4 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <tpl:condition data="gallery.hidetitle" test="boolean" value="0">
-        <div class="navbar navbar-subnav no-margin">
-            <div class="navbar-inner padding-left-half no-margin">
-                <a class="topic"><tpl:element type="text" data="page.title">Maintenance</tpl:element></a>
-            </div>
-        </div>
-    </tpl:condition>
     <form class="form-horizontal padding-top">
         <div class="control-group">
             <label class="control-label" ><i class="icon-user-md icon-2x"></i></label>

@@ -1,5 +1,5 @@
 <tpl:layout name="navbar" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar" id="navbar">
+    <div class="navbar navbar-subnav" id="navbar">
         <div class="navbar-inner">
             <div class="nav-collapse collapse">
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
@@ -11,7 +11,7 @@
                         </tpl:condition>
                         <span class="intro"><tpl:element type="text" formatting="sprintf" cdata="Hi %s" data="user.user_first_name"  /></span>
                     </div>
-                    <ul class="nav" id="menubartabs">
+                    <ul class="nav pull-right" id="menubartabs">
                         <li><a href="/system/start/dashboard">Dashboard</a></li>
                         <li><a href="/system/media/timeline">Timeline</a></li>   
                         <li><a href="/system/messages/all">Messages</a></li>                                                                              

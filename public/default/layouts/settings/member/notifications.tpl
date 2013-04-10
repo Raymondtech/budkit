@@ -1,9 +1,4 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar navbar-subnav margin-bottom">
-        <div class="navbar-inner padding-left-half">
-            <a class="topic"><tpl:element type="text" data="page.title">Notification Settings</tpl:element></a>
-        </div>
-    </div>
     <form method="POST" action="/system/admin/settings/save" class="form-horizontal margin-top">
         <fieldset>
             <div class="control-group">

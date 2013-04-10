@@ -1,10 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar navbar-subnav">
-        <div class="navbar-inner">
-            <a class="topic"><tpl:element type="text" data="page.title">Account Settings</tpl:element></a>
-        </div>
-    </div>
-    <div class="account-settings">
+    <div class="account-settings padding-top">
         <form class="form-horizontal" action="/" method="POST">
             <fieldset>
                 

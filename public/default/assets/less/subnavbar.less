@@ -2,7 +2,7 @@
 @navbarSubnavBackground:                #efefef;
 @navbarSubnavBackgroundHighlight:       #eeeeee;
 @navbarSubnavBorder:                    #ddd;
-@navbarSubnavHeight:                    33px;
+@navbarSubnavHeight:                    40px;
 @navbarSubnavText:                      @grayDark;
 @navbarSubnavLinkColor:                 @grayDark;
 @navbarSubnavLinkColorHover:            @grayDarker;
@@ -10,8 +10,8 @@
 @navbarSubnavLinkBackgroundHover:       transparent;
 @navbarSubnavLinkBackgroundActive:      @navbarSubnavBorder;
 
-@navbarSubnavSearchBackground:          lighten(@navbarSubnavBackground, 25%);
-@navbarSubnavSearchBackgroundFocus:     @white;
+@navbarSubnavSearchBackground:          transparent;
+@navbarSubnavSearchBackgroundFocus:     transparent;
 @navbarSubnavSearchBorder:              @navbarSubnavBackground;
 @navbarSubnavSearchPlaceholderColor:    #ccc;
 
@@ -49,6 +49,8 @@
     border-bottom: 1px solid @navbarSubnavBorder;
     margin-bottom: @baseLineHeight;
     .box-shadow(none);
+    position:relative;
+    z-index: 1000;
   }
 
   .brand,.topic,
@@ -65,13 +67,11 @@
 
    .topic {
   
-    font-size: 11px;
+    font-size: @baseFontSize*0.9;
     font-weight: bold;
     line-height: 26px;
     color: #999999;
     text-transform: uppercase;
-
-
       float: left;
       display: block;
       min-width: (125px * 2);
@@ -87,6 +87,10 @@
 
   .nav > li > a{
      padding-left: 7px !important;
+         //text-transform: uppercase;
+             //font-size: @baseFontSize*0.9;;
+    text-shadow: 0 1px 0 @white;
+    color: @navbarSubnavLinkColor;
    }
 
   .nav > li > a:focus,
@@ -95,6 +99,7 @@
     color: @navbarSubnavLinkColorHover;
         padding: ((@navbarSubnavHeight - @baseLineHeight) / 4) 14px;
     margin: ((@navbarSubnavHeight - @baseLineHeight) / 4) 0;
+
   }
 
   .nav .active > a,
@@ -102,6 +107,7 @@
   .nav .active > a:focus {
     color: @navbarSubnavLinkColorActive;
     background-color: @navbarSubnavLinkBackgroundActive;
+    text-transform: uppercase;
     .box-shadow(none);
         padding: ((@navbarSubnavHeight - @baseLineHeight) / 4) 14px;
     margin: ((@navbarSubnavHeight - @baseLineHeight) / 4) 0;
@@ -157,23 +163,24 @@
   // Navbar search
   .navbar-search {
     .search-query {
-      color: @white;
+      color: @navbarSubnavLinkColor;
       background-color: @navbarSubnavSearchBackground;
-      border-color: @navbarSubnavSearchBorder;
-      .box-shadow(~"inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15)");
+      border: none;
+      border-bottom: 1px dashed @navbarSubnavSearchBorder;
+      //.box-shadow(~"inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15)");
       .transition(none);
+      text-shadow: 0 1px 0 @white;
       .placeholder(@navbarSubnavSearchPlaceholderColor);
 
       // Focus states (we use .focused since IE7-8 and down doesn't support :focus)
       &:focus,
       &.focused {
-        padding: 5px 15px;
+        //padding: 5px 15px;
         color: @grayDark;
         text-shadow: 0 1px 0 @white;
-        background-color: @navbarSubnavSearchBackgroundFocus;
-        border: 0;
-        .box-shadow(0 0 3px rgba(0,0,0,.15));
-        outline: 0;
+        //.box-shadow(0 0 3px rgba(0,0,0,.15));
+        //outline: 0;
+        //border: none;
       }
     }
   }

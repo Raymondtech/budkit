@@ -1,9 +1,4 @@
 <tpl:layout name="input" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar navbar-subnav no-margin">
-        <div class="navbar-inner padding-left-half no-margin">
-            <a class="topic"><tpl:element type="text" data="page.title">Add New Content</tpl:element></a>
-        </div>
-    </div>
     <div class="padding">
         <form action="/system/content/create" method="POST" class="form-vertical"  enctype="multipart/form-data">
             <div class="clearfix">

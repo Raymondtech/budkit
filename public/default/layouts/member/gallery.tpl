@@ -1,9 +1,4 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar navbar-subnav no-margin">
-        <div class="navbar-inner padding-left-half no-margin">
-            <a class="topic"><tpl:element type="text" data="page.title">Gallery</tpl:element></a>
-        </div>
-    </div>
     <div class="padding">  
         <div class="clearfix">
             <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="photogridtoggler">

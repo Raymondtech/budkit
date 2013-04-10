@@ -1,9 +1,4 @@
 <tpl:layout  name="start" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar navbar-subnav no-margin">
-        <div class="navbar-inner no-margin">
-            <a class="topic"><tpl:element type="text" data="page.title">Notifications</tpl:element></a>
-        </div>
-    </div>
     <div class="padding">
         <div class="row-fluid">
             <div class="span8">           
