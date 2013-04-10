@@ -46,6 +46,11 @@ class Object extends \Platform\Controller {
         \Library\Event::trigger("beforeObjectLoad", $object , $params);
 
     }
+    
+    public function rate(){
+        
+        
+    }
 
 
     /**

@@ -10,12 +10,14 @@
                 <div class="widget-body">
                     <ul class="nav nav-list margin-zero padding-quarter media-item-actions">
                         <li><a href="#">Share</a></li>
-                        <li><a href="#">Download</a></li>   
+                        <li><a href="#">Download</a></li> 
+                        <li>
+                            <span class="rating">
+                                <span class="star"></span><span class="star"></span><span class="star"></span><span class="star active"></span><span class="star"></span>
+                            </span>
+                        </li>
                         <li class="action-like hover">
                             <a>
-                                <span class="rating">
-                                    <span class="star"></span><span class="star"></span><span class="star"></span><span class="star active"></span><span class="star"></span>
-                                </span>
                                 <span class="average" title="See Fans">8.9</span><span class="total">/10</span>
                             </a>
                         </li>
