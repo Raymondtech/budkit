@@ -316,7 +316,7 @@ class Attachments extends Platform\Entity {
         //Parse the mediacollections;
         foreach ($objects as $object) {
             $object = $media->getActor($object, $object['attachment_owner']);
-            $object['media_object'] = $media->getObject($object['object_uri']); //add to the collection
+            $object['media_object'] = $object['object_uri']; //$media->getObject($object['object_uri']); //add to the collection
             //Required Media Properities
             $object['media_published'] = $object['object_created_on'];
             //CleanUp

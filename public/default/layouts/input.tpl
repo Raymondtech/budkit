@@ -10,7 +10,7 @@
                     <div class="controls">
                         <textarea class="input-100pct focused" data-target="budkit-editor" toolbar="1"  rows="4" name="media_content" placeholder="Say something..."></textarea>
                     </div> 
-                    <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/" data-progress="${uploadprogress}"></div>
+                    <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/"></div>
                     <div class="btn-toolbar margin-bottom-zero"> 
                         <div class="btn-group pull-right">
                             <button type="submit" class="btn" href="#">Publish</button>  

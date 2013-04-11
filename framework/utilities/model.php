@@ -305,6 +305,7 @@ abstract class Model extends \Library\Object {
 
         //Sets the pagination output;
         $this->output->set("pagination", $pages);
+ 
     }
 
     /**

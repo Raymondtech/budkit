@@ -6901,7 +6901,8 @@ input.search-query {
 .stream-box .stream-list .stream-search input {
   margin: 3px auto;
 }
-.stream-box .stream-alerts {
+.stream-box .stream-alerts,
+.stream-box .stream-more {
   margin-left: 115px;
   display: block;
   min-height: 10px;
@@ -7925,6 +7926,9 @@ input.search-query {
   display: inline-block;
   cursor: pointer;
 }
+.rating span input {
+  display: none;
+}
 .rating span:before {
   padding-right: 0px;
   color: #ddd;
@@ -8187,10 +8191,6 @@ input.search-query {
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-fans a .total {
   color: #999999;
   font-size: 8px;
-}
-.timeline-items .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-comments a,
-.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-comments a {
-  color: #999999;
 }
 .timeline-items .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-delete,
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions li.action-delete {

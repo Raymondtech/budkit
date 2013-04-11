@@ -81,12 +81,6 @@ class xHtml extends \Library\Output\Document {
 
         //$string = $document;
 
-        $doc = new \DOMDocument();
-        $doc->loadHTML($string); //Load XML here, if you use loadHTML the string will be wrapped in HTML tags. Not good.
-        foreach ($doc->getElementsByTagName("html") as $node):
-            $doc->saveHTML($node);
-        endforeach;
-
         //$document = $string;
         //print_R(\Platform\Debugger::$log);
         //Print to client

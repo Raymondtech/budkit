@@ -1,6 +1,6 @@
 <tpl:layout name="console" xmlns:tpl="http://budkit.org/tpl">
     <tpl:condition data="debug.displaylog" test="boolean" value="1"> 
-        <div class="console">
+        <div class="console padding">
             <div class="console-inner">
                 <div class="body">
                     <tpl:loop data="debug.log">

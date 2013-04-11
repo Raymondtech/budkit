@@ -17,9 +17,9 @@
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
                     <tpl:import layout="input" />     
-                    <div class="stream-alerts"><tpl:import layout="pagination" /></div>
-                    <tpl:import layout="media/timeline" />
-                    
+                    <div class="stream-alerts"></div>
+                    <tpl:import layout="media/timeline" />  
+                    <div class="stream-more"><tpl:import layout="pagination" /></div>
                 </div>
             </div>
         </div>

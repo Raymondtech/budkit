@@ -42,7 +42,7 @@
                                     <div class="timeline-item-content"><tpl:element type="text" data="content" medialinks="true" /></div>
                                     <tpl:condition data="object" test="isset" value="1">
                                         <div class="timeline-item-media clearfix">                                   
-                                            <tpl:media uri="object" link="true"  data-target="budkit-slider" />             
+                                            <tpl:media uri="object" link="true" />             
                                         </div>                     
                                     </tpl:condition>
                                     <div class="timeline-item-footer">
