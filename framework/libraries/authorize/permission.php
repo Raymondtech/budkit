@@ -57,8 +57,8 @@ final class Permission extends Library\Observer {
      */
     public static function getPermissionMap( $actionRoute, $actionRealRoute="" ){
         
-        if(isset(static::$loaded[$actionRoute.$actionResolvedRoute])){
-            return static::$loaded[$actionRoute.$actionResolvedRoute];
+        if(isset(static::$loaded[$actionRoute.$actionRealRoute])){
+            return static::$loaded[$actionRoute.$actionRealRoute];
         }
         $database         = Library\Database::getInstance();
         //Get Permission Definitions
@@ -70,9 +70,9 @@ final class Permission extends Library\Observer {
         $permissionsSQL   = $database->prepare( $premissionsSQLc );
         $permissions      = $permissionsSQL->execute()->fetchAll();
         
-        static::$loaded[$actionRoute.$actionResolvedRoute] = $permissions;
+        static::$loaded[$actionRoute.$actionRealRoute] = $permissions;
         
-        return static::$loaded[$actionRoute.$actionResolvedRoute];
+        return static::$loaded[$actionRoute.$actionRealRoute];
   
     }
 

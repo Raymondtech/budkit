@@ -291,7 +291,9 @@ class Parser extends Files\Xml {
         $xml = !empty($xml) ? $xml : self::$xml;
 
         if (empty($literal2NumericEntity)) {
-            $transTbl = get_html_translation_table( HTML_ENTITIES );
+            $transTbl = get_html_translation_table( HTML_ENTITIES, ENT_QUOTES | ENT_HTML5 );
+            //print_r($transTbl); die;
+            
             foreach ($transTbl as $char => $entity) {
                 if (strpos('&"<>', $char) !== FALSE)
                     continue;

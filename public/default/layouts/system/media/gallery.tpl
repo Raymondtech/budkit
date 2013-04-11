@@ -39,7 +39,7 @@
                     <tpl:loop data="gallery.items" id="gallery-items">
                         <li class="mgrow-fluid">
                             <div class="feature mgcol1">
-                                <tpl:media uri="object_uri"  type="attachment_type" link="true" mode="icon" url="attachment_url" class="media-item" name="attachment_name"  width="170" height="170" /> 
+                                <tpl:media uri="object_uri" link="true" mode="icon"  class="media-item" name="attachment_name"  width="170" height="170" /> 
                             </div>   
                             <div class="name grid-hide mgcol4">
                                 <strong><tpl:element type="text" data="attachment_title"/></strong>

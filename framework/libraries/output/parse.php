@@ -66,10 +66,8 @@ class Parse extends Library\Object {
 
         //Just give the parser the document
         static::$document = $document;
-        
-        
-        $xhtml = $buffer;
-        $XmlParser = new Xml\Parser($xhtml, true, true, static::$methods);
+      
+        $XmlParser = new Xml\Parser($buffer, true, true, static::$methods);
         
         //The XML document
         $DOCUMENT = $XmlParser::getDocument();

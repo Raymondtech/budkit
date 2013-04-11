@@ -8204,15 +8204,14 @@ input.search-query {
 .timeline-item-index .timeline-item-li:last-child {
   border-bottom: none;
 }
-.action-comment form .timeline-item-publisher-box .timeline-item-publisher {
-  margin-left: 0 !important;
-  margin-bottom: 5px;
+.timeline-item-comment form .timeline-item-publisher-box .timeline-item-publisher {
+  margin-bottom: 10px;
 }
-.action-comment form .timeline-item-publisher-box .timeline-item-publisher:before,
-.action-comment form .timeline-item-publisher-box .timeline-item-publisher:after {
+.timeline-item-comment form .timeline-item-publisher-box .timeline-item-publisher:before,
+.timeline-item-comment form .timeline-item-publisher-box .timeline-item-publisher:after {
   display: none !important;
 }
-.action-comment form .timeline-item-publisher-box .timeline-item-icon {
+.timeline-item-comment form .timeline-item-publisher-box .timeline-item-icon {
   display: none !important;
 }
 .timeline-item-index {

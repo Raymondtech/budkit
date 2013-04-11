@@ -345,16 +345,18 @@ class Attachments extends Platform\Entity {
      * @param type $params
      */
     final public static function load(&$object, &$params) {
-
-        //if is object $object
-        if (!is_a($object, "\Platform\Entity") || $object->getObjecType() !== "attachment") {
-            //Attempt to determine what type of object this is or throw an error
-            return false; //we only deal with attachments
-        }
-
         //Relaod the object
         $attachments = static::getInstance();
-        $attachment = $attachments->loadObjectByURI($object->getObjectURI());
+        $attachment =& $object;
+        //if is object $object
+        if (!is_a($attachment, "\Platform\Entity") ) {
+            //Attempt to determine what type of object this is or throw an error
+            $attachment = $attachments->loadObjectByURI( $attachment );
+            //Make sure its an object;
+        }
+        
+        if($attachment->getObjectType() !== "attachment" ) return false; //we only deal with attachments, let others deal withit
+        
         $browsable = array("image/jpg", "image/jpeg", "image/png", "image/gif");
 
         $fullPath = FSPATH . DS . $attachment->getPropertyValue("attachment_src");

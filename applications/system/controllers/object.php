@@ -40,10 +40,10 @@ class Object extends \Platform\Controller {
         $resourceId = $this->router->getMethod();
         $params     = func_get_args();
         
-        $object     = $entity->loadObjectByURI( $resourceId ); //@todo Validate URI
+        //$object     = $entity->loadObjectByURI( $resourceId ); //@todo Validate URI
         //$objectType = $object->getPropertyValue("objectType");
         //Loads all the system objects;
-        \Library\Event::trigger("beforeObjectLoad", $object , $params);
+        \Library\Event::trigger("beforeObjectLoad", $resourceId , $params);
 
     }
     

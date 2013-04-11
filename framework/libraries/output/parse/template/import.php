@@ -81,7 +81,7 @@ class Import extends Parse\Template {
             }
         }
         //Now load the layout
-        $layout     = $loader->layout($path, null, ".tpl", FALSE , $directory );
+        $layout     = $loader->layout($path, null,".tpl", FALSE , $directory );
         
         
         //Save the layout
@@ -94,8 +94,10 @@ class Import extends Parse\Template {
                 //TODO@ file get contents might not be the best method here 
                 //to import and parse the file
                 $contents =  file_get_contents( $layout );
-                       
-                $layout   = self::_($contents, $document ); //read only  
+                    
+                static::$importing = true;
+                    $layout   = static::_($contents, $document ); //read only  //Parse the layout;
+                static::$importing = false; 
                 //@TODO for lack of a better way to remove the XML declaration 
                 static::$imports[$path] = $layout = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "" , $layout);              
                 //print_R($layout);

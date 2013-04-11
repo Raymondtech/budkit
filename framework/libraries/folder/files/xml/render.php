@@ -69,7 +69,7 @@ final class Render {
         $cdata = null;
         $children = null;
         //EXECUTE TPL CALLBACKS BEFORE ELEMENT RENDERING;
-        $tree = Parser::callback($tree, $xml);
+        $tree = (array)Parser::callback($tree, $xml);
 
         //WE DON'T NEED NAMESPACES?
         unset($tree['NAMESPACE']); //We don't need namespaces;
@@ -97,7 +97,7 @@ final class Render {
                 //$xml->startAttribute(strtolower($attribute));
                 \Library\Event::trigger("_XMLAttributeCallback", $attribute, $value, $xml);
                 //$xml->text($value);
-                $xml->writeAttribute($attribute, $value);
+                $xml->writeAttribute( strtolower($attribute), $value);
                 unset($tree[$index]); //Remove it from the tree
             elseif (!empty($tag) && $index == "CDATA") :
                 $cdata = $element;

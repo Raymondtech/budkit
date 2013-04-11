@@ -18,20 +18,9 @@
                             </div>
                             <div class="timeline-item-content"><tpl:element type="html" data="content" medialinks="true" /></div>
                             <tpl:condition data="object" test="isset" value="1">
-                                <tpl:condition data="object.objectType" test="isnot" value="collection">
-                                    <div class="timeline-item-media clearfix">                                   
-                                        <tpl:media uri="object.uri" name="object.name" url="object.url" link="true" type="object.type" data-target="budkit-slider"></tpl:media>             
-                                    </div>
-                                </tpl:condition>
-                                <tpl:condition data="object.objectType" test="equals" value="collection">
-                                    <div class="timeline-item-media">	  	
-                                        <ul class="media-grid bottom-media clearfix">	  	
-                                            <tpl:loop data="object.items" id="media-items">
-                                                <li><tpl:media uri="uri"  type="type" link="true" mode="thumbnail" url="url" class="media-item" name="name"  data-target="budkit-slider" width="170" height="170" /></li>
-                                            </tpl:loop> 	
-                                        </ul>  	
-                                    </div>
-                                </tpl:condition>
+                                <div class="timeline-item-media clearfix">                                   
+                                    <tpl:media uri="object" link="true"  data-target="budkit-slider" />             
+                                </div>                     
                             </tpl:condition>
                             <div class="timeline-item-footer">
                                 <ul class="actions">
@@ -50,11 +39,11 @@
                                     <li class="action-edit hover"><a href="/system/media/timeline/edit/${uri}"><span class="edit" title="Delete">Edit</span></a></li>
                                     <li class="action-delete hover"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete"><strong>Trash</strong></span></a></li>
                                 </ul>
-                                <div class="action-comment hide">
-                                    <tpl:import layout="media/form/comment" /> 
-                                </div> 
                             </div>
-                        </div>
+                        </div>                                
+                        <div class="timeline-item-comment hide">
+                            <tpl:import layout="media/form/comment" /> 
+                        </div> 
                     </li>
                 </tpl:loop> 
             </ol>

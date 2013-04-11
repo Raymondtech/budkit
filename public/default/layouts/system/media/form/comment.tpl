@@ -21,6 +21,7 @@
             </fieldset>
         </div>
         <input type="hidden" name="${uploadprogress}" value="timelineupload" />
+        <input type="hidden" name="media_target" value="${comment_target}" />
         <input type="hidden" name="media_author_id" value="" />
         <input type="hidden" name="media_verb" value="post" />
         <input type="hidden" name="media_provider" value="budkit" />

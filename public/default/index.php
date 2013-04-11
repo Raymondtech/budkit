@@ -2,7 +2,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <html class="no-js" lang="en">
         <head>
-            <meta charset="utf-8"/>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title><tpl:element type="text" data="page.title">BudKit</tpl:element></title>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta name="description" content="<?php echo $this->getPageDescription(); ?>" />
@@ -48,6 +48,7 @@
                             <div class="container-bucket">
                                 <tpl:block data="page.block.alerts" /> 
                                 <tpl:block data="page.block.body" />
+                                <tpl:import layout="footer" />
                             </div>
 <!--                            <a href="#" class="container-left-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>-->
                             <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-left"></i></a>
@@ -57,6 +58,7 @@
             </div>
             <!--/.content-slider-->
             <tpl:import layout="slider" />
+            
             <!-- Le javascript
             ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->

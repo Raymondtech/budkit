@@ -92,6 +92,8 @@ class Timeline extends System\Media {
         else:
             $title = $first['summary'];
         endif;
+        
+        $this->set("comment_target", $itemURI);
         $this->output->setPageTitle( $title );
 
         //Raw displays whatever is in the body block only; 
@@ -116,6 +118,7 @@ class Timeline extends System\Media {
 
         $this->set("activities", $activities);
         $this->set("user", $user);
+        $this->set("target_uri","asdtqXs");
 
         $timeline = $this->output->layout("timeline");
         //$timelineside = $this->output->layout("timelinenotes");

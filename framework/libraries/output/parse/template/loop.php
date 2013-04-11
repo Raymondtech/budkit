@@ -70,7 +70,7 @@ class Loop extends Parse\Template {
         
         $id     = isset($tag['ID'])? $tag['ID'] : strval($tag['DATA']);
         $data   = self::getData($tag['DATA'], array()); //echo $data;
-        $limit  = self::getData($tag['LIMIT'], $tag['LIMIT']); //echo $data;
+        $limit  = isset($tag['LIMIT'])?self::getData($tag['LIMIT'], $tag['LIMIT']):NULL; //echo $data;
         
         static::$looping[$id] = true;
         

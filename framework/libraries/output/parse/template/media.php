@@ -48,117 +48,111 @@ class Media extends Parse\Template {
      */
 
     static $instance;
+    protected static $modes = array("icon", "thumbnail");
+    protected static $images = array("image/bmp", "image/gif", "image/jpeg", "image/jpeg", "image/jpg");
+    protected static $videos = array("video/mp4");
+    protected static $audio = array();
+    protected static $rich = array(); //Rich Html embed for swf etc
 
-    /**
-     * Execute the layout
-     * 
-     * @param type $parser
-     * @param type $tag
-     * @return type
-     */
-    public static function execute($parser, $tag, $writer) {
+    private static function tag($media, $tag = NULL) {
 
-        $attachmentTypes = \Library\Config::getParam("allowed-types", array(), "attachments");
+        $tag = empty($tag) ? array() : $tag;
+        //Media must be a platform entity object
+        //if(!is_a($media, '\Platform\Entity')) return null;
+        //$attachmentTypes = \Library\Config::getParam("allowed-types", array(), "attachments");
+        $name = $media->getPropertyValue("attachment_name");
+        $type = $media->getPropertyValue("attachment_type");
+        $uri    = $media->getObjectURI();
+        $url    = "/system/object/" . $uri;
         
-        $modes = array("icon","thumbnail");
-        $images = array("image/bmp", "image/gif", "image/jpeg", "image/jpeg", "image/jpg");
-        $videos = array("video/mp4");
-        $audio = array();
-        $rich = array(); //Rich Html embed for swf etc
-        
-        //@TODO media thumbnail mode
-        $mode = $tag['MODE']; //thumbnail, icon etc...
-        
-        
-        $name = static::getData($tag['NAME'], $tag['NAME']);
-        $type = static::getData($tag['TYPE'], $tag['TYPE']);
-        $uri = static::getData($tag['URI'], $tag['URI']);
-        $url = static::getData($tag['URL'], $tag['URL']);
-        $link = static::getData($tag['LINK'], $tag['LINK']);
-        $class = static::getData($tag['CLASS'], $tag['CLASS']);
-        $height = static::getData($tag['HEIGHT'], $tag['HEIGHT']);
-        $width = static::getData($tag['WIDTH'], $tag['WIDTH']);
+        $mode = isset($tag['MODE']) ? $tag['MODE'] : "thumbnail"; //thumbnail, icon etc...
+        $link = isset($tag['LINK']) ? TRUE : FALSE;
+
+
+        $class = isset($tag['CLASS']) ? static::getData($tag['CLASS'], $tag['CLASS']) : null;
+        $height = isset($tag['HEIGHT']) ? static::getData($tag['HEIGHT'], $tag['HEIGHT']) : null;
+        $width = isset($tag['WIDTH']) ? static::getData($tag['WIDTH'], $tag['WIDTH']) : null;
         $mime = strtolower($type);
-
         //unset($tag['NAMESPACE']);
-        
+
+        $basename = \Library\Folder\Files::getExtension($name, "file");
+        $fileExtension = strtolower($basename);
+
         //If the medialink is linkable...
-        if (isset($link) && !empty($url)):
+        if ($link):
             $tag['ELEMENT'] = 'a';
             $tag['HREF'] = \Library\Uri::internal($url);
-            unset($tag['WIDTH']);
-            unset($tag['HEIGHT']);
         else:
             $tag['ELEMENT'] = 'div';
-            $tag['CLASS'] = "medialink\n". !empty($class) ? $class : null;
+            $tag['CLASS'] = "medialink\n" . !empty($class) ? $class : null;
         endif;
 
         //@TODO determine browser compatibility and addmime to the above arrays i.e images, videos, audio, rich;
-        //
         //Can we render this media link?
-        $renderable = array_merge($images, $videos, $audio, $rich);
-        if ((in_array($mime, array_merge($videos, $audio, $rich))&&$mode=="icon")||!in_array($mime, $renderable)) {
-            
-            if (!empty($name)):
-                $fileExtension = \Library\Folder\Files::getExtension($name, "file");
-                $fileExtension = strtolower( $fileExtension );  
-                $linkable = array("ELEMENT"=>"a", "HREF"=> \Library\Uri::internal($url), "CLASS"=>"media-{$fileExtension} media-file",  ); 
-                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-type media-{$fileExtension}", "CDATA"=>"<i class='icon-file'></i>".$fileExtension);
-                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-filename list-hide", "CDATA"=> $name );
-                $linkable["CHILDREN"][] = array("ELEMENT"=>"span","CLASS"=>"media-help list-hide help-block", "CDATA"=> $mime );
-                //We cannot have two a > a
-                return $linkable;
-                
-            endif;
-            
-        }else{
+        $renderable = array_merge(static::$images, static::$videos, static::$audio, static::$rich);
+
+        //Videos, audio rich
+        if ((in_array($mime, array_merge(static::$videos, static::$audio, static::$rich)) && $mode == "icon") || !in_array($mime, $renderable)) {
+
+            $linkable = array("ELEMENT" => "a", "HREF" => \Library\Uri::internal($url), "CLASS" => "media-{$fileExtension} media-file",);
+            $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-type media-{$fileExtension}", "CDATA" => "<i class='icon-file'></i>" . $fileExtension);
+            $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-filename list-hide", "CDATA" => $name);
+            $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-help list-hide help-block", "CDATA" => $mime);
+            //We cannot have two a > a
+            return $linkable;
+        } else {
 
             //Type specific
             if (!empty($type)):
-                
+
                 //@TODO will need to determine browser support for the various
                 //mime types shown here, for instance only safari browsers support image/tiff;
-                if (in_array($mime, $images) ):
+                if (in_array($mime, static::$images)):
                     //Create an image element
-                    $imageLink = \Library\Uri::internal("/system/object/".$uri);
+                    $imageLink = \Library\Uri::internal("/system/object/" . $uri);
                     $image = array(
                         "ELEMENT" => "img",
-                        "SRC" => $imageLink. (!empty($width) ? "/resize/{$width}" . (!empty($height) ? "/{$height}" : null) : null),
+                        "SRC" => $imageLink . (!empty($width) ? "/resize/{$width}" . (!empty($height) ? "/{$height}" : null) : null),
                         "ALT" => !empty($name) ? $name : null,
                         "WIDTH" => !empty($width) ? $width : null,
                         "HEIGHT" => !empty($height) ? $height : null
                     );
-                    if(empty($image['WIDTH'])) unset($image['WIDTH']);
-                    if(empty($image['HEIGHT'])) unset($image['HEIGHT']);
-                    if(isset($link) && !empty($url)):
-                        $tag['HREF']    = \Library\Uri::internal("/system/media/photo/view/".$uri);
+                    if (empty($image['WIDTH']))
+                        unset($image['WIDTH']);
+                    if (empty($image['HEIGHT']))
+                        unset($image['HEIGHT']);
+                    if (isset($link) && !empty($url)):
+                        $tag['HREF'] = \Library\Uri::internal("/system/media/photo/view/" . $uri);
                     endif;
                     $tag['CHILDREN'][] = $image;
-                    //$tag = array("ELEMENT"=>"span","CDATA"=>"Single Image");
+                //$tag = array("ELEMENT"=>"span","CDATA"=>"Single Image");
                 endif;
-                
-                if(in_array($mime, $videos) && !empty($uri)):
-                    
-                    $videoLink = \Library\Uri::internal("/system/object/".$uri);
+
+                if (in_array($mime, static::$videos) && !empty($uri)):
+
+                    $videoLink = \Library\Uri::internal("/system/object/" . $uri);
                     $video = array(
                         "ELEMENT" => "video",
-                        "CONTROLS"=>"true",
+                        "CONTROLS" => "true",
                         "WIDTH" => !empty($width) ? $width : null,
                         "HEIGHT" => !empty($height) ? $height : null,
-                        "CHILDREN"=>array(
+                        "CHILDREN" => array(
                             array(
-                                "ELEMENT"=>"SOURCE",
-                                "SRC"=> $videoLink,
-                                "TYPE"=> $mime,
+                                "ELEMENT" => "SOURCE",
+                                "SRC" => $videoLink,
+                                "TYPE" => $mime,
                             )
                         )
                     );
-                    if(empty($video['WIDTH'])) unset($video['WIDTH']);
-                    if(empty($video['HEIGHT'])) unset($video['HEIGHT']);
+                    if (empty($video['WIDTH']))
+                        unset($video['WIDTH']);
+                    if (empty($video['HEIGHT']))
+                        unset($video['HEIGHT']);
                     $tag = $video;
                 endif;
             endif;
-        
+            unset($tag['WIDTH']);
+            unset($tag['HEIGHT']);
         }
         //This is a strange bug, if the children element is the last
         //element in the array, the element is not closed properly.
@@ -169,7 +163,52 @@ class Media extends Parse\Template {
         unset($tag['MODE']);
         unset($tag['LINK']);
         unset($tag['CDATA']);
+
+        return $tag;
+    }
+
+    /**
+     * Execute the layout
+     * 
+     * @param type $parser
+     * @param type $tag
+     * @return type
+     */
+    public static function execute($parser, $tag, $writer) {
+
+        $attachmentModel = \Application\System\Models\Attachments::getInstance();
+        $collectionModel = \Application\System\Models\Collection::getInstance();
+
+        //@TODO media thumbnail mode
+        if (!isset($tag['URI'])&&empty($tag['URI']))
+            return null;
+        $uri = static::getData($tag['URI'], $tag['URI']);
+
+        $mediaObject = $attachmentModel->loadObjectByURI( $uri );
+        $type = $mediaObject->getObjectType();
         
+        if ($type !== "attachment"):
+            //1.Load the collection!
+            $collection = $collectionModel->loadObjectByURI( $uri );
+            //Now lets populate our collection with Items
+            $collectionItems = $collection->getPropertyValue("collection_items");
+            $collectionItemize = explode(",", $collectionItems);
+            if (is_array($collectionItemize) && !empty($collectionItemize)):
+                $ul   = array("ELEMENT"=>"ul", "CLASS"=>"media-grid bottom-media clearfix") ;
+                $tag['WIDTH'] = \Library\Config::getParam('gallery-thumbnail-width', 170, 'content');
+                $tag['HEIGHT'] = \Library\Config::getParam('gallery-thumbnail-height', 170, 'content');
+                foreach ($collectionItemize as $item) {
+                    $li = array("ELEMENT"=>"li","CHILDREN"=>static::tag( $attachmentModel->loadObjectByURI($item) , $tag));
+                    $ul["CHILDREN"][] = $li;
+                }
+                //Lots of child elements;
+                $tag = $ul;
+            endif;
+        else:
+            $tag = static::tag($mediaObject, $tag);
+        endif;
+
+
         return $tag;
     }
 

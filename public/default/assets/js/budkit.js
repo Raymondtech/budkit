@@ -625,8 +625,8 @@
         $('[data-timeline]').bktimeline();
         $(document).on("click.reply-button",'[data-toggle="action-comment"]',function(e){
             e.preventDefault();
-            $('.action-comment').hide();
-            $( $(this).closest('.actions') ).next('.action-comment').show();
+            $('.timeline-item-comment').hide();
+            $( $(this).closest('.timeline-item-container') ).next('.timeline-item-comment').show();
         });
     })
 }(window.jQuery);

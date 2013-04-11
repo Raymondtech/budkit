@@ -30,7 +30,7 @@ const BOOLEAN = 258;
 const STRING = FILTER_SANITIZE_STRING;
 const STRIPPED = 513;
 const ENCODED = 514;
-const SPECIAL_CHARS = 515;
+const SPECIAL_CHARS = FILTER_SANITIZE_FULL_SPECIAL_CHARS;
 const RAW = 516;
 const EMAIL = 517;
 const URL = 518;
@@ -476,8 +476,13 @@ final class Input extends Object {
         }
         //uhhhnrrr...
         $string = $input[$name];
-
-        $doc = new \DOMDocument();
+        
+        //DOMDocument will screw up the encoding so we utf8 encode everything?
+        $string = mb_convert_encoding($string, 'utf-8', mb_detect_encoding($string));
+        $string = mb_convert_encoding($string, 'html-entities', 'utf-8'); 
+        
+        $doc = new \DOMDocument('1.0', 'UTF-8');
+        //$doc->substituteEntities = TRUE;
         $doc->loadHTML($string); //Load XML here, if you use loadHTML the string will be wrapped in HTML tags. Not good.
         $xpath = new \DOMXPath($doc);
         //@TODO remove tags that are not allowed;
@@ -499,16 +504,17 @@ final class Input extends Object {
 
         $filter = \IS\SPECIAL_CHARS;
         $options = array(
-            "flags" => FILTER_FLAG_STRIP_HIGH,
+            "flags" => FILTER_FLAG_ENCODE_LOW, //or strip?
             "options" => array()
         );
 
         //if (is_array($html)) $str = strip_tags($str, implode('', $html));
         //elseif (preg_match('|<([a-z]+)>|i', $html)) $str = strip_tags($str, $html);
         //elseif ($html !== true) $str = strip_tags($str);
-
         //Some tags we really don't need
-        return $this->filter($string, $filter, $options);
+        $string = $this->filter($string, $filter, $options);
+        
+        return $string;
     }
 
     /**

@@ -55,8 +55,7 @@ class Textarea extends Form {
     public function __constructor() {
         
     }
-    public static function execute($parser, $tag, $writer){
-        
+    public static function execute($parser, $tag, $writer){    
         return $tag;
     }
     

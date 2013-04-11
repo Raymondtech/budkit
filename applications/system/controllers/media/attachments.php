@@ -107,7 +107,8 @@ class Attachments extends System\Media {
         $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
         $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
         $this->output->setPageTitle($title);
-
+        
+        $this->set("comment_target", $attachmentURI);
         $format = $this->router->getFormat();
 
         switch ($format):

@@ -94,22 +94,24 @@ class Media extends Platform\Entity {
      */
     public function getAll($objectType = 'media', $objectURI = NULL, $objectId = NULL) {
 
-        //Get the object list
-        $objects = $this->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
-        $items = array();
+        //Get the object list of items which have no target for the timeline;
+        //The timeline is for root objects only, any item with a target is the result of an interaction
+        //For instance blah commented on itemtarget etc... and should be shown on a seperate activity feed
+        $objects =  $this->setListLookUpConditions("media_target", "")->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
+        $items = array(); 
 
         //Parse the mediacollections;
         foreach ($objects as $object) {
             $object = $this->getActor($object, $object['media_actor']);
-            $object['media_object'] = $this->getObject($object['media_object'], $object['media_content']); //add to the collection
+            //$object['media_object'] = $this->getObject($object['media_object'], $object['media_content']); //add to the collection
+            $object['media_comment_target'] = $object['object_uri']; 
             //CleanUp
-            foreach ($object as $key => $value):
+            foreach ($object as $key => $value):             
                 $object[str_replace(array('media_', 'object_'), '', $key)] = $value;
                 unset($object[$key]);
             endforeach;
 
             $items[] = $object;
-            //print_R($items);
         }
         $mediacollections = new Media\Collection;
         $mediacollections->set("items", $items); //update the collection
@@ -201,14 +203,15 @@ class Media extends Platform\Entity {
         endif;
 
         $query .="\nGROUP BY o.object_id";
+        $query .= $this->getListLookUpConditionsClause();
         $query .= $this->setListOrderBy(array("o.object_updated_on"), "DESC")->getListOrderByStatement();
         $query .= $this->getLimitClause();
         
         $total   = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first
         $results = $this->database->prepare($query)->execute();
-         //Could use SQL_CALC_FOUND here but just the same as just using a second query really;
-        //$queries = $this->database->getQueryLog();
         
+        //ALWAYS RESET;
+        $this->resetListLookUpConditions();           
         $this->setListTotal( $total );
 
         return $results;
@@ -264,7 +267,7 @@ class Media extends Platform\Entity {
         if (!empty($mediaObjectURI)):
             //Create an media object, and fire an event asking callbacks to complete the media object
             $mediaSubject = new Media\Object;
-            $mediaObjectType = $mediaObject->getObjecType();
+            $mediaObjectType = $mediaObject->getObjectType();
             //Fire the event, passing the mediaSubject by reference
             //Although it looks stupid to need to find out the nature of the media subject before trigger
             //It actually provides an extra exclusion for callback so not all callbacks go to the database

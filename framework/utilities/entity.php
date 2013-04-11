@@ -48,8 +48,10 @@ class Entity extends Model {
     protected $valueGroup = NULL; //property value groups can be sub categorised;
     protected $listOderByStatement = NULL;
     protected $listLookUpConditions = array();
+    protected $listLookUpConditionProperties = array();
     protected static $withConditions = false;
     protected $savedObjectURI = NULL;
+    protected $registry = array();
 
     public function __construct() {
         parent::__construct();
@@ -95,7 +97,7 @@ class Entity extends Model {
      * @param string $entityType
      * @return void
      */
-    public function getObjecType() {
+    public function getObjectType() {
         return $this->objectType;
     }
 
@@ -260,6 +262,17 @@ class Entity extends Model {
     }
 
     /**
+     * Sets a property conditional value for the select query
+     * 
+     * @param type $property
+     * @param type $value
+     * 
+     */
+    public function setPropertyValueCondition($property, $value) {
+        return $this->setListLookUpConditions($property, $value);
+    }
+
+    /**
      * Return Object lists with properties matching the given value
      * 
      * @param type $properties list of properties to match to values, must have exactly a value pair in the values array and must be included in the select array
@@ -341,8 +354,75 @@ class Entity extends Model {
         return $this->listOrderByStatement;
     }
 
-    final public function setListLookUpConditions() {
+    /**
+     * Sets lookup conditions for entity table search
+     * 
+     * @param type $key
+     * @param type $value
+     * @param type $type
+     * @param type $escape
+     * @return \Platform\Entity
+     */
+    final public function setListLookUpConditions($key, $value = NULL, $type = 'AND', $escape = TRUE) {
+
+        if (empty($key)) {
+            return $this;
+        }
+        if (!is_array($key)) {
+            if (is_null($value)) { //some values could be '' so don't use empty here
+                return $this;
+            }
+            $key = array($key => $value);
+        }
+        //print_R($key);
+        $dataModel = $this->getPropertyModel();
+        foreach ($key as $k => $v) {
+
+            //For count queries, we will only add properties if their value is in having or where clause;
+            if (array_key_exists($k, $dataModel)):
+                $this->listLookUpConditionProperties[] = $k;
+            endif;
+
+            //The firs item adds the and prefix;
+            $prefix = (count($this->listLookUpConditions) == 0 AND count($this->listLookUpConditions) == 0) ? '' : $type . "\t";
+            if ($escape === TRUE) {
+                $v = $this->database->escape($v);
+                //$v = $this->quote( stripslashes($v) );
+            }
+            if (empty($v)) {
+                // value appears not to have been set, assign the test to IS NULL 
+                // IFNULL(xxx, '')
+                $v = " IS NULL";
+            } else {
+                $v = " LIKE '%{$v}%'";
+            }
+            $this->listLookUpConditions[] = $prefix . $k . $v;
+        }
+
         return $this;
+    }
+
+    /**
+     * Returns the list select clause additional conditions
+     * 
+     * @return string or null if no conditions
+     */
+    public function getListLookUpConditionsClause() {
+        $query = null;
+        if (is_array($this->listLookUpConditions) && !empty($this->listLookUpConditions)):
+            $query .= "\nHAVING\t";
+            $query .= implode("\t", $this->listLookUpConditions);
+        endif;
+        //Reset the listLookUp after the query has been generated, to avoid issues;
+        //$this->resetListLookUpConditions();
+        return $query;
+    }
+
+    /**
+     * Resets the list lookUpconditions after each query;
+     */
+    public function resetListLookUpConditions() {
+        $this->listLookUpConditions = array();
     }
 
     /**
@@ -353,7 +433,7 @@ class Entity extends Model {
      * @return type $statement
      * 
      */
-    final public function getObjectsList($objectType, $properties = array(),$objectURI = NULL, $objectId = NULL) {
+    final public function getObjectsList($objectType, $properties = array(), $objectURI = NULL, $objectId = NULL) {
 
         if (empty($properties)):
             if (!empty($this->propertyModel))
@@ -364,14 +444,16 @@ class Entity extends Model {
 
         //echo($this->withConditions) ;
         $query .="\nGROUP BY o.object_id";
+        $query .= $this->getListLookUpConditionsClause();
         $query .= $this->getListOrderByStatement();
         $query .= $this->getLimitClause();
-        
-        $total   = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first
+
+        $total = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first
         $results = $this->database->prepare($query)->execute();
-         //Could use SQL_CALC_FOUND here but just the same as just using a second query really;
+        //Could use SQL_CALC_FOUND here but just the same as just using a second query really;
         //$queries = $this->database->getQueryLog();
-        $this->setListTotal( $total );
+        $this->resetListLookUpConditions();
+        $this->setListTotal($total);
 
         return $results;
     }
@@ -390,9 +472,10 @@ class Entity extends Model {
             if (!empty($this->propertyModel))
                 $properties = array_keys($this->propertyModel);
         endif;
-        $query = static::getObjectCountQuery($properties, "?{$this->valueGroup}property_values", $objectId, $objectType, $objectURI);
+        $query = $this->getObjectCountQuery($properties, "?{$this->valueGroup}property_values", $objectId, $objectType, $objectURI);
         //echo($this->withConditions) ;
         $query .="\nGROUP BY o.object_id";
+        $query .= $this->getListLookUpConditionsClause();
         $query .= $this->getListOrderByStatement();
         $cquery = "SELECT SUM(total_objects) as count FROM ($query) AS total_entities";
         $results = $this->database->prepare($cquery)->execute();
@@ -433,7 +516,15 @@ class Entity extends Model {
         $query = static::getObjectQuery($properties, "?{$this->valueGroup}property_values");
         $query .="\nWHERE o.object_uri='{$objectURI}' GROUP BY o.object_id";
 
-        $results = $this->database->prepare($query)->execute();
+        $key = sha1($query);
+        //Can we limit the number of times we load by URI?
+        //$results = $this->database->prepare($query)->execute();
+        if ($this->registry->issetVar($key)):
+            $results = $this->registry->getVar($key);
+        else:
+            $results = $this->database->prepare($query)->execute();
+            $this->registry->setVar($key, $results);
+        endif;
 
         $n = 0;
         $object = new Entity();
@@ -564,23 +655,26 @@ class Entity extends Model {
      * @param type $objectURI
      * @return type
      */
-    final private static function getObjectCountQuery($properties, $vtable = '?property_values', $objectId = NULL, $objectType = NULL, $objectURI = NULL) {
+    final private function getObjectCountQuery($properties, $vtable = '?property_values', $objectId = NULL, $objectType = NULL, $objectURI = NULL) {
 
         //Join Query
-        $query = "SELECT COUNT(DISTINCT o.object_id) as total_objects, o.object_id, o.object_uri, o.object_type, o.object_created_on, object_updated_on, object_status";
+        $query = "SELECT COUNT(DISTINCT o.object_id) as total_objects, o.object_id, o.object_uri, o.object_type, o.object_created_on, o.object_updated_on, o.object_status";
 
         if (!empty($properties)):
             //Loop through the attributes you need
             $i = 0;
             $count = \sizeof($properties);
             //echo $count;
-            $query .= ",";
             foreach ($properties as $alias => $attribute):
-                $alias = (is_int($alias)) ? $attribute : $alias;
-                $query .= "\nMAX(IF(p.property_name = '{$attribute}', v.value_data, null)) AS {$alias}";
-                if ($i + 1 < $count):
-                    $query .= ",";
-                    $i++;
+                //For count queries, there is no need to have added properties.
+                //We will only add does we need in the having clause, which is executed after grouping..
+                if (in_array($attribute, $this->listLookUpConditionProperties)):
+                    if ($i + 1 < $count):
+                        $query .= ",";
+                        $i++;
+                    endif;
+                    $alias = (is_int($alias)) ? $attribute : $alias;
+                    $query .= "\nMAX(IF(p.property_name = '{$attribute}', v.value_data, null)) AS {$alias}";
                 endif;
             endforeach;
 
@@ -635,6 +729,12 @@ class Entity extends Model {
         if (empty($this->propertyModel) || empty($this->propertyData))
             return false; //We have nothing to save
 
+
+
+
+
+
+
             
 //Use a transaction;
         $this->database->startTransaction();
@@ -678,6 +778,12 @@ class Entity extends Model {
             //@TODO validate the data?
             if (empty($valueData))
                 continue; //There is no point in storing empty values;
+
+
+
+
+
+
 
                 
 //@TODO also check that value data has data for fields demarkated as allowempty=false;

@@ -321,7 +321,7 @@ abstract class Controller extends Library\Action {
                         //get the user data
                         $this->user = User::getInstance();
                        
-                        $this->alert( _t('Welcome back ').$lastURL , sprintf(_t('Howdy %s,'), $this->user->user_full_name), "success");
+                        $this->alert( _t('Welcome back ') , sprintf(_t('Howdy %s,'), $this->user->user_full_name), "success");
                         
                         
                         $this->redirect( $this->output->link( "/system/media/timeline") );

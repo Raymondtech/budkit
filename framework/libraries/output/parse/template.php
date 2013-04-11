@@ -65,6 +65,7 @@ abstract class Template extends Output\Parse {
     static $variables = array();
     static $writer;
     static $imports = array();
+    static $importing = false;
     //Tell the getdata method we are loop
     static $looping = array();
     //Specify a loopid for the pvariables
@@ -146,6 +147,7 @@ abstract class Template extends Output\Parse {
         return $path;
     }
     
+    
     final public static function getDataAttributeContent($attribute, $content){
         
         $parsed = array();
@@ -189,7 +191,7 @@ abstract class Template extends Output\Parse {
      * @param type $default
      * @return type 
      */
-    final public static function getPersistentData($path, $default = "") {
+    final public static function getPersistentData($path ) {
 
         
         $id = explode('.', $path);
@@ -199,13 +201,12 @@ abstract class Template extends Output\Parse {
         foreach ($id as $i => $index) {
             if (!isset($value[$index])) {
                 //If we can't find the element, return the default value;
-                return $default;
-                break;
+                return null;
             };
             $value = $value[$index];
         }
 
-        return (!empty($value) ) ? $value : $default;
+        return $value;
     }
     
     
@@ -261,10 +262,13 @@ abstract class Template extends Output\Parse {
         //in the path should be _ e.g _.blah.blah.
         $first = reset($id);
         $loop  = static::$currentloopid ;
-        if (static::$looping[$loop] && $first<>"_"){ 
-            return self::getPersistentData($path, $default);
+        if (isset(static::$looping[$loop])&&static::$looping[$loop] && $first<>"_"){ 
+            $return = self::getPersistentData($path, $default);
+            if(!empty($return) ) return $return;
+            if(empty($return) && !static::$importing ) return $default;
+            //if(empty($value) && static::$importing) $value = static::$variables;
         }
-        
+           
         //From string representation to array;	 
         foreach ($id as $i => $index) {
             

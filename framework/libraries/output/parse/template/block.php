@@ -80,7 +80,7 @@ class Block extends Parse\Template {
         if (!empty($data)) {
          
             //Are there any menus in this block add with Output::addMenuGroupToPosition?
-            if (is_array($data['menus']) && is_array($data['menus'])) {
+            if (isset($data['menus'])&&is_array($data['menus']) && is_array($data['menus'])) {
                 foreach ($data['menus'] as $blockMenu) {
                    
                     if (is_array($blockMenu) && isset($blockMenu["ID"])):

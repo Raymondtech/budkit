@@ -83,6 +83,7 @@ abstract class Model extends \Library\Object {
             'validate' => 'Library\Validate',
             'output' => 'Library\Output',
             'database' => 'Library\Database',
+            'registry' => 'Platform\Registry'
         );
 
         foreach ($classes as $var => $class) {
@@ -174,7 +175,7 @@ abstract class Model extends \Library\Object {
      * @param type $limit
      * @return \Platform\Entity
      */
-    public function setListLimit($default = NULL) {
+    public function setListLimit($limit = NULL) {
         $this->setState("limit", intval($limit));
         return $this;
     }
@@ -251,7 +252,7 @@ abstract class Model extends \Library\Object {
         if (!empty($limit)):
             $this->setListLimit($limit);
             $this->setListLimit($offset);
-            $query = "\tLIMIT {$offset}, {$limit}\t";
+            $query = "\nLIMIT {$offset}, {$limit}\t";
         endif;
         
         //Return limit query
