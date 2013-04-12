@@ -93,43 +93,6 @@ class Attachments extends System\Media {
         return $this->gallery();
     }
 
-    public function view($attachmentURI = null) {
-
-        //Throws an error if no collectionId is passed
-        //Loads the collectionItem from the databse
-        $model = $this->load->model("attachments", 'system');
-        $collection = $model->getMedia("attachment", $attachmentURI);
-        //Set the photo display properties     
-
-        $first = reset($collection['items']);
-        $this->set("object", $collection);
-        $now = \Library\Date\Time::stamp();
-        $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
-        $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
-        $this->output->setPageTitle($title);
-
-        $this->set("comment_target", $attachmentURI);
-        $format = $this->router->getFormat();
-
-        switch ($format):
-            case "raw":
-                $attachment = $this->output->layout("media/photos/photo");
-                //Add the collection to the placeholder image;
-                $this->output->addToPosition("placeholder", $attachment); //Add the collection to the placeholder
-                //Raw displays whatever is in the body block only; 
-                $slide = $this->output->layout("media/slider");
-                $this->output->addToPosition("body", $slide);
-                break;
-            default:
-                //Raw displays whatever is in the body block only; 
-                $attachment = $this->output->layout("media/item");
-                $this->output->addToPosition("body", $attachment);
-                break;
-        endswitch;
-
-        $this->load->view("media")->display();
-    }
-
     /*
      * All system attachments
      * 

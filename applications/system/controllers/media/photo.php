@@ -63,54 +63,6 @@ final class Photo extends System\Media {
     }
 
     /**
-     * Displays an collection media.
-     * @todo    Implement the collection read action method
-     * @return  void
-     */
-    public function view($photoURI = null) {
-        
-        //Throws an error if no collectionId is passed
-        //Loads the collectionItem from the databse
-        $model = $this->load->model("attachments", 'system');
-        $collection = $model->getMedia("attachment", $photoURI);
-        //Set the photo display properties     
-      
-        $first = reset($collection['items']);
-        $this->set("media", $collection);
-        $now = \Library\Date\Time::stamp();
-        $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
-        $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
-        $this->output->setPageTitle( $title );
-     
-        //If commentcount is greater than 1
-        $mediaModel = $this->load->model("media", 'system');
-        $comments   = $mediaModel->setListLookUpConditions("media_target", $photoURI)->getAll();
-        
-        $this->set("activities", $comments );
-        $this->set("comment_target", $photoURI);
-        
-        $format = $this->router->getFormat();
-        
-        switch ($format):
-            case "raw":
-                $photo = $this->output->layout("media/photos/photo");
-                //Add the collection to the placeholder image;
-                $this->output->addToPosition("placeholder", $photo); //Add the collection to the placeholder
-                //Raw displays whatever is in the body block only; 
-                $slide = $this->output->layout("media/slider");
-                $this->output->addToPosition("body", $slide);
-                break;
-            default:
-                //Raw displays whatever is in the body block only; 
-                $photo = $this->output->layout("media/item");
-                $this->output->addToPosition("body", $photo);
-                break;
-        endswitch;
-        
-        $this->load->view("media")->display();
-    }
-
-    /**
      * Displays a gallery of media items. 
      * @return void
      */

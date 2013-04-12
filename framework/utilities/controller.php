@@ -303,7 +303,7 @@ abstract class Controller extends Library\Action {
             //authentication;
             $authhandler = $this->input->getString('auth_handler');
             $authenticate = "Library\Authenticate\\" . $authhandler;
-
+           
             //failure
             $failure = _t("The password or username you provided did not match any user");
 

@@ -33,34 +33,82 @@ namespace Application\System\Controllers;
  */
 Class Media extends \Platform\Controller {
 
-    public function index(){
+    public function index() {
         return false;
     }
-    
-    public function create($action="editor"){
+
+    public function create($action = "editor") {
         return $this->edit($action);
     }
 
     public function edit($action = "editor") {
-        
+
         //create action types
         $actions = array(
-            "drop" , "snap" , "editor" , "import"
-        );     
+            "drop", "snap", "editor", "import"
+        );
         //form
-        $_form  = !in_array($action, $actions) ? "editor" : $action ;
-        $form   = $this->output->layout("media/form/{$_form}");
+        $_form = !in_array($action, $actions) ? "editor" : $action;
+        $form = $this->output->layout("media/form/{$_form}");
 
         $this->output->addToPosition("dashboard", $form);
         $this->output->setPageTitle(_("Add New Media"));
-        
+
         $this->load->view('media')->display(); //sample call;   
         //$this->output->addToPosition("right", $right );
     }
-    
-    public function timeline(){
-        $timeline = $this->load->controller("media\\timeline","system");
+
+    public function timeline() {
+        $timeline = $this->load->controller("media\\timeline", "system");
         return $timeline->index();
+    }
+
+    /**
+     * Displays an collection media.
+     * @todo    Implement the collection read action method
+     * @return  void
+     */
+    public function view($mediaObjectURI = null) {
+
+        //Throws an error if no collectionId is passed
+        //Loads the collectionItem from the databse
+        $model = $this->load->model("attachments", 'system');
+        $collection = $model->getMedia("attachment", $mediaObjectURI);
+        //Set the photo display properties     
+
+        $first = reset($collection['items']);
+        $this->set("media", $collection);
+        $now = \Library\Date\Time::stamp();
+        $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
+        $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
+        $this->output->setPageTitle($title);
+
+        //If commentcount is greater than 1
+        $mediaModel = $this->load->model("media", 'system');
+        $comments = $mediaModel->setListLookUpConditions("media_target", $mediaObjectURI)->getAll();
+
+        $this->set("activities", $comments);
+        $this->set("comment_target", $mediaObjectURI);
+
+        $format = $this->router->getFormat();
+
+        switch ($format):
+            case "raw":
+                $mediaObject = $this->output->layout("media/photos/photo");
+                //Add the collection to the placeholder image;
+                $this->output->addToPosition("placeholder", $mediaObject); //Add the collection to the placeholder
+                //Raw displays whatever is in the body block only; 
+                $slide = $this->output->layout("media/slider");
+                $this->output->addToPosition("body", $slide);
+                break;
+            default:
+                //Raw displays whatever is in the body block only; 
+                $mediaObject = $this->output->layout("media/item");
+                $this->output->addToPosition("body", $mediaObject);
+                break;
+        endswitch;
+
+        $this->load->view("media")->display();
     }
 
     /**
