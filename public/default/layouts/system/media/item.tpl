@@ -24,7 +24,7 @@
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
                     <ol class="timeline-item-index timeline-stream single-item" data-timeline="true">
-                        <tpl:loop data="object.items" id="timeline-items">
+                        <tpl:loop data="media.items" id="timeline-items">
                             <li class="timeline-item-li timeline-item">
                                 <div class="timeline-item-container">
                                     <tpl:condition data="summary" test="isset" value="1">
@@ -55,8 +55,10 @@
                             </li>
                         </tpl:loop> 
                     </ol>
-                    <tpl:import layout="media/form/comment" />    
+                    <tpl:import layout="media/form/comment" /> 
+                    <div class="stream-alerts margin-bottom-half"></div>
                     <tpl:import layout="media/timeline" />
+                    <div class="stream-more"><tpl:import layout="pagination" /></div>
                 </div>
             </div>
         </div>

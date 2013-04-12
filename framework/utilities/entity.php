@@ -477,7 +477,7 @@ class Entity extends Model {
         $query .="\nGROUP BY o.object_id";
         $query .= $this->getListLookUpConditionsClause();
         $query .= $this->getListOrderByStatement();
-        $cquery = "SELECT SUM(total_objects) as count FROM ($query) AS total_entities";
+        $cquery = "SELECT COUNT(total_objects) as count FROM ($query) AS total_entities";
         $results = $this->database->prepare($cquery)->execute();
         $count = 0;
         while ($row = $results->fetchAssoc()) {
@@ -658,8 +658,8 @@ class Entity extends Model {
     final private function getObjectCountQuery($properties, $vtable = '?property_values', $objectId = NULL, $objectType = NULL, $objectURI = NULL) {
 
         //Join Query
-        $query = "SELECT COUNT(DISTINCT o.object_id) as total_objects, o.object_id, o.object_uri, o.object_type, o.object_created_on, o.object_updated_on, o.object_status";
-
+        $query = "SELECT DISTINCT o.object_id as total_objects";
+        $hasProperties = FALSE;
         if (!empty($properties)):
             //Loop through the attributes you need
             $i = 0;
@@ -675,13 +675,14 @@ class Entity extends Model {
                     endif;
                     $alias = (is_int($alias)) ? $attribute : $alias;
                     $query .= "\nMAX(IF(p.property_name = '{$attribute}', v.value_data, null)) AS {$alias}";
+                    $hasProperties = TRUE;
                 endif;
             endforeach;
 
             //The data Joins
-            $query .= "\nFROM {$vtable} v"
-                    . "\nLEFT JOIN ?properties p ON p.property_id = v.property_id"
-                    . "\nLEFT JOIN ?objects o ON o.object_id=v.object_id";
+            $query .= "\nFROM {$vtable} v";
+            $query .= ($hasProperties) ? "\nLEFT JOIN ?properties p ON p.property_id = v.property_id" : NULL;
+            $query .= "\nLEFT JOIN ?objects o ON o.object_id=v.object_id";
         else:
             $query .="\nFROM ?objects o";
         endif;
@@ -735,6 +736,7 @@ class Entity extends Model {
 
 
 
+
             
 //Use a transaction;
         $this->database->startTransaction();
@@ -778,6 +780,7 @@ class Entity extends Model {
             //@TODO validate the data?
             if (empty($valueData))
                 continue; //There is no point in storing empty values;
+
 
 
 

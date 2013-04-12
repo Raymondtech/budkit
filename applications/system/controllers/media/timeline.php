@@ -83,7 +83,7 @@ class Timeline extends System\Media {
         //Set the photo display properties     
         
         $first = reset($collection['items']);
-        $this->set("object", $collection);
+        $this->set("media", $collection);
         
         if(!isset($first['summary']) && !empty($first['summary'])):
             $now = \Library\Date\Time::stamp();
@@ -93,6 +93,10 @@ class Timeline extends System\Media {
             $title = $first['summary'];
         endif;
         
+        //If commentcount is greater than 1
+        $comments = $model->setListLookUpConditions("media_target", $itemURI)->getAll();
+        
+        $this->set("activities", $comments );
         $this->set("comment_target", $itemURI);
         $this->output->setPageTitle( $title );
 
@@ -114,12 +118,11 @@ class Timeline extends System\Media {
         $user = \Platform\User::getInstance();
         $model = $this->load->model('media');
         
-        $activities = $model->getAll();
+        $activities = $model->setListLookUpConditions("media_target", "")->getAll();
         $model->setPagination(); //Set the pagination vars
 
         $this->set("activities", $activities);
         $this->set("user", $user);
-        $this->set("target_uri","asdtqXs");
 
         $timeline = $this->output->layout("timeline");
         //$timelineside = $this->output->layout("timelinenotes");

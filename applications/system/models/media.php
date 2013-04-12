@@ -97,7 +97,7 @@ class Media extends Platform\Entity {
         //Get the object list of items which have no target for the timeline;
         //The timeline is for root objects only, any item with a target is the result of an interaction
         //For instance blah commented on itemtarget etc... and should be shown on a seperate activity feed
-        $objects =  $this->setListLookUpConditions("media_target", "")->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
+        $objects =  $this->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
         $items = array(); 
 
         //Parse the mediacollections;
@@ -209,6 +209,10 @@ class Media extends Platform\Entity {
         
         $total   = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first
         $results = $this->database->prepare($query)->execute();
+        
+        $queries = $this->database->getQueryLog();
+        
+        print_R($queries);
         
         //ALWAYS RESET;
         $this->resetListLookUpConditions();           

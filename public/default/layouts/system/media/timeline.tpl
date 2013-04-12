@@ -38,7 +38,7 @@
                                     <li class="action-comments"><a href="/system/media/timeline/view/${uri}"><span class="delete" title="See Comments">22 Replies</span></a></li>
 
                                     <li class="action-edit hover"><a href="/system/media/timeline/edit/${uri}"><span class="edit" title="Delete">Edit</span></a></li>
-                                    <li class="action-delete hover"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete"><strong>Trash</strong></span></a></li>
+                                    <li class="action-delete hover pull-right"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete">Trash</span></a></li>
                                 </ul>
                             </div>
                         </div>                                

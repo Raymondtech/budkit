@@ -8246,7 +8246,7 @@ input.search-query {
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-title {
   font-size: 21px;
   margin-bottom: 10px;
-  border-bottom: 1px dashed #999999;
+  border-bottom: 1px dashed #bfbfbf;
   padding-bottom: 10px;
   line-height: 36px;
   font-weight: bold;

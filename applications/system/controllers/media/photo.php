@@ -76,12 +76,19 @@ final class Photo extends System\Media {
         //Set the photo display properties     
       
         $first = reset($collection['items']);
-        $this->set("object", $collection);
+        $this->set("media", $collection);
         $now = \Library\Date\Time::stamp();
         $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
         $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
         $this->output->setPageTitle( $title );
      
+        //If commentcount is greater than 1
+        $mediaModel = $this->load->model("media", 'system');
+        $comments   = $mediaModel->setListLookUpConditions("media_target", $photoURI)->getAll();
+        
+        $this->set("activities", $comments );
+        $this->set("comment_target", $photoURI);
+        
         $format = $this->router->getFormat();
         
         switch ($format):
