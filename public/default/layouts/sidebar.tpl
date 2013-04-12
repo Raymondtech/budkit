@@ -9,7 +9,7 @@
     </tpl:condition>
     <tpl:condition  data="user.isauthenticated" test="boolean" value="0" >
         <div class="padding-half">
-            <p class="alert alert-info">Login to Personalize your experience</p>
+            <p class="text-info">Login to Personalize your experience</p>
         </div>
     </tpl:condition>
 </tpl:layout>

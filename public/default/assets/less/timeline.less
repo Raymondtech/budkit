@@ -5,7 +5,13 @@
 }
 .timeline-more-items{ margin-left: 115px}
 
-.timeline-item-publisher-box{position:relative; }
+.timeline-item-publisher-box{
+    position:relative; 
+    .publisher-profile{
+        position: absolute;
+        left:0px; top:5px;
+    }
+}
 .timeline-item-publisher{
     padding: @baseLineHeight*0.5;
     //margin: @gridGutterWidth;
@@ -14,12 +20,6 @@
     border: 1px solid #ddd;
     //padding-bottom:5px;
     //margin:0 60px;
-    .publisher-profile{
-        font-size: 1.1em;
-        color: @grayDark;
-        position: absolute;
-        left:0px; top:0px;
-    }
     textarea{
         .box-sizing(border-box);
     }

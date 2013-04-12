@@ -19,6 +19,11 @@
                     <form action="/system/media/timeline/create" class="no-margin" method="POST" enctype="multipart/form-data">
                         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                             <div class="timeline-item-publisher-box">
+                                <tpl:condition data="profile.user_photo" test="isset" value="1">
+                                    <a href="/member/profile/view" class="publisher-profile">
+                                        <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/50/50"  />
+                                    </a>
+                                </tpl:condition>
                                 <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>
                                 <fieldset class="timeline-item-publisher no-bottom-margin">
                                     <div class="controls">           

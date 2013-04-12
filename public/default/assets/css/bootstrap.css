@@ -7980,17 +7980,15 @@ input.search-query {
 .timeline-item-publisher-box {
   position: relative;
 }
+.timeline-item-publisher-box .publisher-profile {
+  position: absolute;
+  left: 0px;
+  top: 5px;
+}
 .timeline-item-publisher {
   padding: 12px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
-}
-.timeline-item-publisher .publisher-profile {
-  font-size: 1.1em;
-  color: #333333;
-  position: absolute;
-  left: 0px;
-  top: 0px;
 }
 .timeline-item-publisher textarea {
   -webkit-box-sizing: border-box;

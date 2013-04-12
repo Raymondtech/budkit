@@ -28,26 +28,22 @@
         </head>
         <body>
             <div id="wrap">
-                
+
                 <div class="container-box">
                     <div class="container-right">
                         <div align="center"><tpl:block data="page.block.alerts" /></div>
                         <div class="container-content scroll-y">
                             <div class="container-fluid">
                                 <div class="container">
-                                    <form id="form" name="login_form" method="post" action="/system/authenticate/login">                       
-                                        <div class="container-startup signin">
-<!--                                            <div class="startup-header">
-                                                <h3>Sign in to your account</h3>
-                                            </div>-->
-                                            
-                                            <div class="startup-alternatives">
+                                    <div class="container-startup signin">
+                                        <div class="startup-alternatives">
 
-                                                <ul class="unstyled no-margin no-bottom-margin">
-                                                    <li><a href="/system/authenticate/create">Don't have an account?</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="startup-body">                                               
+                                            <ul class="unstyled no-margin no-bottom-margin">
+                                                <li><a href="/system/authenticate/create">Don't have an account?</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="startup-body"> 
+                                            <form id="form" name="login_form" method="post" action="/system/authenticate/login">  
                                                 <div class="control-group">
                                                     <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
                                                     <div class="controls row-fluid">
@@ -66,16 +62,22 @@
                                                 <input type="hidden" name="auth_handler" value="dbauth" />
                                                 <input type="hidden" name="redirect" value="${lasturl}" />
 
-                                                <div class="margin-bottom clearfix">                                                  
-                                                    <button type="submit" class="btn margin-top margin-bottom-half input-xxxlarge" >Sign-in to Account</button>
-                                                    <div class="row-fluid margin-bottom">
-                                                        <a href="" class="btn btn-facebook span6 btn-medium">Sign-In with Facebook</a>
-                                                        <a href="" class="btn btn-twitter span6 btn-medium">Sign-In with Twitter</a>
-                                                    </div>
+                                                <div class="clearfix">                                                  
+                                                    <button type="submit" class="btn margin-top margin-bottom-zero input-xxxlarge" >Sign-in to Account</button>
                                                 </div>
+                                            </form>
+                                            <div class="row-fluid margin-bottom">
+                                                <form id="form" name="login_form" method="post" action="/system/authenticate/login" class="span6"> 
+                                                    <input type="hidden" name="auth_handler" value="facebook\connect" />
+                                                    <button type="submit" class="btn btn-facebook input-xxxlarge">facebook</button>
+                                                </form>
+                                                <form id="form" name="login_form" method="post" action="/system/authenticate/login" class="span6"> 
+                                                    <input type="hidden" name="auth_handler" value="twitter\oauth" />
+                                                    <button type="submit" class="btn btn-twitter input-xxxlarge">twitter</button>
+                                                </form>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
