@@ -56,18 +56,20 @@ class Profile extends User {
             return false;
 
         //Load the username; 
-        $profile        = $this->loadObjectByURI($usernameId, array_keys($this->getPropertyModel()));
+        $profile = $this->loadObjectByURI( $usernameId, array_keys( $this->getPropertyModel() ) );
         $this->setObjectId( $profile->getObjectId() );
         $this->setObjectURI( $profile->getObjectURI() );
+               
         $profileData    = $profile->getPropertyData();
+        
         $updatedProfile = array_merge($profileData, $data );
         foreach ($updatedProfile as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
-        
+        $data = $this->getPropertyData(); 
         $this->defineValueGroup("user");
         //die;
-        if (!$this->saveObject($this->getPropertyValue("user_name_id"), "user", $this->getObjectId())) { 
+        if (!$this->saveObject( $this->getPropertyValue("user_name_id"), "user", $this->getObjectId())) { 
             //Null because the system can autogenerate an ID for this attachment    
             $profile->setError("Could not save the profile data");
             return false;

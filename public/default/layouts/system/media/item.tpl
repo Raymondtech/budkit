@@ -6,16 +6,6 @@
                     <ul class="nav nav-list margin-zero padding-quarter media-item-actions">
                         <li><a href="#">Share</a></li>
                         <li><a href="#">Download</a></li> 
-                        <li>
-                            <span class="rating">
-                                <span class="star"></span><span class="star"></span><span class="star"></span><span class="star active"></span><span class="star"></span>
-                            </span>
-                        </li>
-                        <li class="action-like hover">
-                            <a>
-                                <span class="average" title="See Fans">8.9</span><span class="total">/10</span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -47,8 +37,22 @@
                                     </tpl:condition>
                                     <div class="timeline-item-footer">
                                         <ul class="actions">
+
+                                            <li class="action-like">
+                                                <span class="rating">
+                                                    <span class="star"><input type="radio" name="rating" value="5" /></span>
+                                                    <span class="star"><input type="radio" name="rating" value="4" /></span>
+                                                    <span class="star"><input type="radio" name="rating" value="3" /></span>
+                                                    <span class="star active"><input type="radio" name="rating" value="2" checked="" /></span>
+                                                    <span class="star"><input type="radio" name="rating" value="1" /></span>
+                                                </span>
+                                            </li>
+                                            <li class="action-fans"><a href="/system/media/timeline/fans/${uri}"><span class="average" title="See Fans">8.9</span><span class="total">/10</span></a></li>
+                                            <tpl:condition data="target_count" test="isset" value="1">
+                                                <li class="action-comments"><a href="/system/media/timeline/view/${uri}#comments"><span class="delete" title="See Comments"><tpl:element type="text" formatting="sprintf" cdata="%d Replies" data="target_count"  /></span></a></li>
+                                            </tpl:condition>
                                             <li class="action-edit"><a href="/system/media/timeline/edit/${uri}"><span class="edit" title="Delete">Edit</span></a></li>
-                                            <li class="action-delete"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete"><strong>Trash</strong></span></a></li>
+                                            <li class="action-delete pull-right"><a href="/system/media/timeline/delete/${uri}"><span class="delete" title="Delete">Trash</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -57,7 +61,7 @@
                     </ol>
                     <tpl:import layout="media/form/comment" /> 
                     <div class="stream-alerts margin-bottom-half"></div>
-                    <tpl:import layout="media/timeline" />
+                    <div id="comments"><tpl:import layout="media/timeline" /></div>
                     <div class="stream-more"><tpl:import layout="pagination" /></div>
                 </div>
             </div>

@@ -40,31 +40,27 @@ namespace Platform;
  */
 final class Registry {
 
-    static protected $variables = array();
+    public $variables = array();
 
-    /**
-     * Localization
-     * 
-     * @var array 
-     */
-    static $object = array();
-
-    public static function setVar($name, $value = null) {
-        static::$variables[$name] = $value;
+    public function setVar($name, $value = null) {
+        $this->variables[$name] = $value;
         return true;
     }
 
-    public static function getVar($name, $default = NULL) {
-        if(static::issetVar($name))
-            return static::$variables[$name];
+    public function getVar($name, $default = NULL) {
+        if($this->issetVar($name)):
+            return $this->variables[$name];
+        else:
+            return $default;
+        endif;
     }
 
-    public static function issetVar($name) {
-        return isset(static::$variables[$name]);
+    public function issetVar($name) {
+        return isset($this->variables[$name]);
     }
 
-    public static function unsetVar($name){
-        unset(static::$variables[$name]);
+    public function unsetVar($name){
+        unset($this->variables[$name]);
         return true;
     }
 

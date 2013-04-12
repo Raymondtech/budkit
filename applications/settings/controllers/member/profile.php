@@ -79,6 +79,8 @@ final class Profile extends Settings\Member {
             $profile =  $this->load->model('profile', "member");
      
             if(!empty($attachmentURI)){
+                //echo $attachmentURI;
+                
                 if(!$profile->update( $this->user->get("user_name_id"), array("user_photo"=>$attachmentURI)) ){
                     $message = "Could not update your profile photo" ;
                     $messageType = "error";

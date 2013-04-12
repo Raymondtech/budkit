@@ -15,7 +15,7 @@
         </div>
         <div class="stream-view">
             <div class="stream-thread">              
-                <div class="stream-body padding" >
+                <div class="stream-body padding" id="timeline" >
                     <form action="/system/media/timeline/create" class="no-margin" method="POST" enctype="multipart/form-data">
                         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                             <div class="timeline-item-publisher-box">
@@ -25,7 +25,7 @@
                                         <input type="text" name="media_summary" placeholder="Title (Optional) " class="publisher-title input-100pct" />
                                     </div>
                                     <div class="controls">
-                                        <textarea class="input-100pct focused" data-target="budkit-editor" toolbar="1"  rows="20" name="media_content" placeholder="Say something..."></textarea>
+                                        <textarea class="input-100pct focused" data-target="budkit-editor" toolbar="1"  rows="18" name="media_content" placeholder="Say something..."></textarea>
                                     </div> 
                                     <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/" data-progress="${uploadprogress}"></div>
                                     <div class="btn-toolbar margin-bottom-zero"> 

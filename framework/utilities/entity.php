@@ -515,39 +515,39 @@ class Entity extends Model {
 
         $query = static::getObjectQuery($properties, "?{$this->valueGroup}property_values");
         $query .="\nWHERE o.object_uri='{$objectURI}' GROUP BY o.object_id";
-
+        $rows = array();
         $key = sha1($query);
         //Can we limit the number of times we load by URI?
         //$results = $this->database->prepare($query)->execute();
         if ($this->registry->issetVar($key)):
-            $results = $this->registry->getVar($key);
+            $rows = $this->registry->getVar($key);
         else:
             $results = $this->database->prepare($query)->execute();
-            $this->registry->setVar($key, $results);
+            $rows = reset($results->fetchAll());
+
+            $this->registry->setVar($key, $rows);
         endif;
 
         $n = 0;
         $object = new Entity();
         $object->definePropertyModel($this->propertyModel);
 
-        while ($row = $results->fetchAssoc()) {
-            foreach ($row as $property => $value):
-                if (strtolower($property) == "object_type") {
-                    $object->setObjectType($value);
-                    continue;
-                }
-                if (strtolower($property) == "object_id") {
-                    $object->setObjectId($value);
-                    continue;
-                }
-                if (strtolower($property) == "object_uri") {
-                    $object->setObjectURI($value);
-                    continue;
-                }
-                $object->setPropertyValue($property, $value);
-            endforeach;
-            $n++;
-        }
+        foreach ($rows as $property => $value):
+            if (strtolower($property) == "object_type") {
+                $object->setObjectType($value);
+                continue;
+            }
+            if (strtolower($property) == "object_id") {
+                $object->setObjectId($value);
+                continue;
+            }
+            if (strtolower($property) == "object_uri") {
+                $object->setObjectURI($value);
+                continue;
+            }
+            $object->setPropertyValue($property, $value);
+        endforeach;
+
         return $object;
     }
 
@@ -737,6 +737,7 @@ class Entity extends Model {
 
 
 
+
             
 //Use a transaction;
         $this->database->startTransaction();
@@ -780,6 +781,7 @@ class Entity extends Model {
             //@TODO validate the data?
             if (empty($valueData))
                 continue; //There is no point in storing empty values;
+
 
 
 

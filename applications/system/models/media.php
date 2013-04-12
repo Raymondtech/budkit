@@ -97,16 +97,16 @@ class Media extends Platform\Entity {
         //Get the object list of items which have no target for the timeline;
         //The timeline is for root objects only, any item with a target is the result of an interaction
         //For instance blah commented on itemtarget etc... and should be shown on a seperate activity feed
-        $objects =  $this->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
-        $items = array(); 
+        $objects = $this->getMediaObjectsList($objectType, $objectURI, $objectId)->fetchAll();
+        $items = array();
 
         //Parse the mediacollections;
         foreach ($objects as $object) {
             $object = $this->getActor($object, $object['media_actor']);
             //$object['media_object'] = $this->getObject($object['media_object'], $object['media_content']); //add to the collection
-            $object['media_comment_target'] = $object['object_uri']; 
+            $object['media_comment_target'] = $object['object_uri'];
             //CleanUp
-            foreach ($object as $key => $value):             
+            foreach ($object as $key => $value):
                 $object[str_replace(array('media_', 'object_'), '', $key)] = $value;
                 unset($object[$key]);
             endforeach;
@@ -168,6 +168,17 @@ class Media extends Platform\Entity {
                 endforeach;
             endif;
 
+            //Get subitems count correlated subquery;
+            $query .= ",\n(SELECT SUM(total) FROM"
+                    . "\n\t(SELECT COUNT(DISTINCT so.object_id) as total,"
+                    . "\n\tMAX(IF(sp.property_name = 'media_target', sv.value_data, null)) AS media_target"
+                    . "\n\tFROM ?media_property_values sv"
+                    . "\n\tLEFT JOIN ?properties sp ON sp.property_id = sv.property_id"
+                    . "\n\tLEFT JOIN ?objects so ON so.object_id=sv.object_id"
+                    . "\n\tWHERE  so.object_type='media'"
+                    . "\n\tGROUP BY so.object_id) AS target_counter"
+                    . "\nWHERE media_target=o.object_uri) AS media_target_count";
+
             //The data Joins
             $query .= "\nFROM ?media_property_values v"
                     . "\nLEFT JOIN ?properties p ON p.property_id = v.property_id"
@@ -206,17 +217,13 @@ class Media extends Platform\Entity {
         $query .= $this->getListLookUpConditionsClause();
         $query .= $this->setListOrderBy(array("o.object_updated_on"), "DESC")->getListOrderByStatement();
         $query .= $this->getLimitClause();
-        
-        $total   = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first
+
+        $total = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first
         $results = $this->database->prepare($query)->execute();
-        
-        $queries = $this->database->getQueryLog();
-        
-        print_R($queries);
-        
+
         //ALWAYS RESET;
-        $this->resetListLookUpConditions();           
-        $this->setListTotal( $total );
+        $this->resetListLookUpConditions();
+        $this->setListTotal($total);
 
         return $results;
     }
@@ -292,7 +299,7 @@ class Media extends Platform\Entity {
             $mediaLinks = Media\MediaLink::parse($string);
 
         endif;
-        
+
         return $object;
     }
 
@@ -306,17 +313,17 @@ class Media extends Platform\Entity {
         //
 
         foreach ($inputModel as $property => $definition):
-            $value = $this->input->getVar( $property );
+            $value = $this->input->getVar($property);
             if (!empty($value)):
                 $this->setPropertyValue($property, $value);
             endif;
         endforeach;
 
         //Allow some HTML in media content;
-        $mediaContent = $this->input->getFormattedString("media_content","","post",true );
-        
-        $this->setPropertyValue("media_content", $mediaContent );
-        
+        $mediaContent = $this->input->getFormattedString("media_content", "", "post", true);
+
+        $this->setPropertyValue("media_content", $mediaContent);
+
         //@TODO determine the user has permission to post;
         $this->setPropertyValue("media_actor", $this->user->get("user_id"));
         $this->setPropertyValue("media_published", \Library\Date\Time::stamp());

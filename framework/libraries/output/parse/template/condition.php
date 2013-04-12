@@ -63,6 +63,25 @@ class Condition extends Parse\Template {
 
     private static function _count($tag) {
         
+        $data = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
+        $value = $tag['VALUE'];
+        $operator = $tag['OPERATOR'];
+        $element = null;
+
+        //If the boolean value of value is equal to data then condition is met
+        if ((bool) $data == (bool) $value) {
+            //Get the layout name; and save it!
+            if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
+                static::$writer->writeRaw($tag['CDATA']);
+            endif;
+
+            //Get the layout name; and save it!
+            if (isset($tag['CHILDREN'])):
+                $element = $tag['CHILDREN'];
+            endif;
+        }
+        //Else remove the tag from the tree;
+        return $element; 
     }
 
     private static function _boolean($tag) {

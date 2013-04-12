@@ -5,10 +5,12 @@
                 <div class="timeline-item-icon toolset"><a href="#"><i class="icon-plus"></i></a></div>
                 <fieldset class="timeline-item-publisher no-bottom-margin">
                     <div class="controls">           
-                        <input type="text" name="media_summary" placeholder="Title (Optional) " class="publisher-title input-100pct" />
+                        <input type="text" name="media_summary" placeholder="Title (Optional) " class="publisher-title input-100pct" value="${media_summary}" />
                     </div>
                     <div class="controls">
-                        <textarea class="input-100pct focused" data-target="budkit-editor" toolbar="1"  rows="4" name="media_content" placeholder="Say something..."></textarea>
+                        <textarea class="input-100pct focused" data-target="budkit-editor" toolbar="1"  rows="4" name="media_content" placeholder="Say something...">
+                            <tpl:element type="html" data="content" medialinks="true" />
+                        </textarea>
                     </div> 
                     <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/"></div>
                     <div class="btn-toolbar margin-bottom-zero"> 

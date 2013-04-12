@@ -37,19 +37,18 @@ Class Media extends \Platform\Controller {
         return false;
     }
     
-    public function create($action="text"){
+    public function create($action="editor"){
         return $this->edit($action);
     }
 
-    public function edit($action = "text") {
+    public function edit($action = "editor") {
         
         //create action types
         $actions = array(
-            "drop" , "snap" , "text" , "import"
-        );
-        
+            "drop" , "snap" , "editor" , "import"
+        );     
         //form
-        $_form  = !in_array($action, $actions) ? "text" : $action ;
+        $_form  = !in_array($action, $actions) ? "editor" : $action ;
         $form   = $this->output->layout("media/form/{$_form}");
 
         $this->output->addToPosition("dashboard", $form);

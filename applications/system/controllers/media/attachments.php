@@ -107,7 +107,7 @@ class Attachments extends System\Media {
         $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
         $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
         $this->output->setPageTitle($title);
-        
+
         $this->set("comment_target", $attachmentURI);
         $format = $this->router->getFormat();
 
@@ -141,16 +141,18 @@ class Attachments extends System\Media {
         $this->output->setPageTitle(_("Attachments"));
 
         $model = $this->load->model("attachments", "system");
-        $attachments = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
+        $attachments = $model->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
         $model->setPagination(); //Set the pagination vars
-        $items = array();
+        $items = array("totalItems" => 0);
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
         while ($row = $attachments->fetchAssoc()) {
             $row['attachment_url'] = "/system/object/{$row['object_uri']}";
             $items["items"][] = $row;
+            $items["totalItems"]++;
         }
-        $this->set("gallery", $items);
+        if ((int)$items["totalItems"] > 0)
+            $this->set("gallery", $items);
 
         $gallery = $this->output->layout("media/gallery");
         $this->output->addToPosition("dashboard", $gallery);
