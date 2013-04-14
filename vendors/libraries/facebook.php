@@ -59,8 +59,10 @@ class Facebook{
         $config = array();
         $config['appId'] = $sdkConfig->getParam("app-id", 'YOUR_APP_ID' , 'facebook');
         $config['secret'] = $sdkConfig->getParam("app-secret", 'YOUR_APP_SECRET' , 'facebook');
-        $config['cookie'] = flase; //BK handles cookies differently
-        $config['fileUpload'] = false; // optional
+        //$config['cookie'] = true; //BK handles cookies differently
+        //$config['fileUpload'] = false; // optional
+        //$config['sharedSession'] = true;
+        //$config['trustForwarded'] = true;
         
         static::$sdkInstance = new \Facebook( $config );
         

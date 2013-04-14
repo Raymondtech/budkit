@@ -33,74 +33,44 @@ final class Authenticate extends \Platform\Controller {
     public function access() {
 
         $facebook = \Library\Facebook::getSDKInstance(); //gets an instance of the facebook SDK
-        // Create our Application instance (replace this with your appId and secret).
-        //1. Get the UserID
         $user = $facebook->getUser();
 
-        if ($user) {
-            try {
-                // Proceed knowing you have a logged in user who's authenticated.
-                $profile = $facebook->api('/me');
-            } catch (FacebookApiException $e) {
-                //error_log($e);
-                //Generate facebook URL?
-                $args['scope'] = 'read_friendlists,email,offline_access';
-                $args['redirect_uri'] = "http://" . \Library\Config::getParam('host') . \Library\Uri::internal('/facebook/authenticate/validate');
-                $loginUrl = $facebook->getLoginUrl($args);
-
-                //We will try to get access permissions from this user;
-                $this->redirect($loginUrl);
-            }
-        } else {
+        if (!$user) {
             //Generate facebook URL?
             $args['scope'] = 'read_friendlists,email,offline_access';
-            $args['redirect_uri'] = "http://" . \Library\Config::getParam('host') . \Library\Uri::internal('/facebook/authenticate/validate');
+            $args['redirect_uri'] = "http://" . \Library\Config::getParam('host') . $this->output->link('/facebook/authenticate/validate');
             $loginUrl = $facebook->getLoginUrl($args);
 
             $this->redirect($loginUrl);
             //else, get handler and attest authentication;
         }
+        //if we have a user validate
+        return $this->validate();
     }
 
     /**
      * 
      */
     public function validate() {
-        
+
         $facebook = \Library\Facebook::getSDKInstance(); //gets an instance of the facebook SDK
-        $user = $facebook->getUser();
-        $token = $facebook->getAccessToken();
-        
-            print_R($_REQUEST);
-            echo "<br /><br />";
-            print_r($token);
-            echo "<br /><br />";
-            print_r($user);
-            
-            die;
+        $user     = $facebook->getUser();
+        $model    = $this->load->model("profile", "facebook");
         
         if ($user) {
             try {
                 // Proceed knowing you have a logged in user who's authenticated.
                 $profile = $facebook->api('/me');
-           
                 print_R($profile);
-                
-                // 
             } catch (FacebookApiException $e) {
-                //error_log($e);
-                //Generate facebook URL?
-                $args['scope'] = 'offline_access, email';
-                $args['redirect_uri'] = "http://" . \Library\Config::getParam('host') . \Library\Uri::internal('/facebook/authenticate/validate');
-                $loginUrl = $facebook->getLoginUrl($args);
-
-                //We will try to get access permissions from this user;
-                $this->redirect($loginUrl);
+                \Platform\Debugger::log($e); //set the error
+                $user = null;
             }
-        } else {
-            $this->alert("We were unable to sign you in using facebook, please try an alternative sign in method or try again", "", "error");
-            $this->redirect("/system/authenticate/login");
+            die;              
+            $this->redirect( $this->output->link("/system/media/timeline") );
         }
+        $this->alert("We were unable to sign you in using facebook, please try again or use an alternative login method", "", "error");
+        $this->redirect("/system/authenticate/login");
     }
 
     /**
