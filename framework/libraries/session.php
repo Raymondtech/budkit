@@ -190,7 +190,6 @@ class Session extends Object {
         session_cache_limiter('none');
 
         session_name(md5($self->cookie . $splash['agent'] . $splash['ip'] . $splash['domain']));
-
         session_start();
 
         //Create the default namespace; affix to splash;
@@ -364,8 +363,10 @@ class Session extends Object {
             //First get an instance of the registry, just to be sure its loaded  
             $registry = $input->unserialize($object->session_registry);
             $self->registry = $registry;
+            $_SESSION = $self->getNamespace("default")->getAllData();
         } else {
             //just re-create a default registry
+            $_SESSION = array(); //Session is array;
             //Because we can't restore
             $self->registry['default'] = $registry;
         }
@@ -414,7 +415,10 @@ class Session extends Object {
         //Read the session
         $_handler = ucfirst($self->store);
         $handler = "\Library\Session\Handler\\" . $_handler;
-
+        //Must be called before the sesion start to generate the Id
+        session_id( $sessId ); 
+        //session_start();
+        
         if (!$handler::update($update, $self, $self->id)) {
             return false;
         }

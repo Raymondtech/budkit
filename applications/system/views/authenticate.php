@@ -13,6 +13,7 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
+
 namespace Application\System\Views;
 
 /**
@@ -27,58 +28,68 @@ namespace Application\System\Views;
  * 
  */
 class Authenticate extends \Platform\View {
-    
+
     /**
      * The default member index view
      * @return void 
      */
-    final public function display(){
+    final public function display() {
         //The default method
     }
-    
-    
+
     /**
      * Displays the member login page
      * @return void
      */
-    public function userLoginForm(){
-        
+    public function userLoginForm() {
+
         $this->output->setPageTitle("Login to account");
+        //Here is how to add alternative login options to the login form
+        $alternatives = array(
+//            array(
+//                "link" => "/somelink/to/login",
+//                "title" => "login title something",
+//                "uid" => "unique id"
+//            )
+        );
+        $fields = array(); //Additional fields
         
-        //parse Layout Demo;
-        $sidebar    = $this->output->layout( "index_sidebar", "system");
-        $body       = $this->output->layout( "default_form_login" );
+        //@TODO Should we Allow onBeforeDispatch to modify $this->task?
+        \Library\Event::trigger('beforeLoginFormDisplay', $alternatives, $fields);
+
+        $this->output->set("alternatives", $alternatives);
+        $this->output->set("fields", $fields );
 
         //The default installation box;
         //$this->output->setFormat("raw");
         $this->output->setLayout("signin");
-        
+
         //$this->output->addToPosition("body",   $body);
     }
-    
+
     /**
      * Displays the new account form
      * @return void
      */
-    public function newUserAccountForm(){
-                //To set the pate title use
+    public function newUserAccountForm() {
+        //To set the pate title use
         $this->output->setPageTitle("Create a new Account");
-        
-        //parse Layout Demo;
-        $sidebar    = $this->output->layout( "index_sidebar", "system");
-        $body       = $this->output->layout( "default_form_create" );
 
-        
+        //parse Layout Demo;
+        $sidebar = $this->output->layout("index_sidebar", "system");
+        $body = $this->output->layout("default_form_create");
+
+
         //The default installation box;
         //$this->output->setFormat("raw");
         $this->output->setLayout("signup");
-        
     }
 
     /*
      * Returns an instance of the Index View
      * @return object Index
      */
+
     public static function getInstance() {
         static $instance;
 

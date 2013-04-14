@@ -39,42 +39,43 @@ namespace Library;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/i18n
  * @since      Class available since Release 1.0.0 Jan 15, 2012 3:09:41 AM
  */
-class Facebook{
-    
-    static $instance;
-    
-    static $sdkInstance;
-    
-    public static function getSDKInstance(){
-        
-        if(is_object(static::$sdkInstance) && is_a(static::$sdkInstance, '\Facebook'))
-                return static::$sdkInstance;
-        
-        //Probably use a configuratio but naa..
-        $sdkPath = pathinfo(__FILE__, PATHINFO_DIRNAME).DS."facebook".DS."facebook.php"; 
-        $sdkConfig = Config::getInstance();
-        
-        require_once( $sdkPath ); 
+class Facebook {
 
-        $config = array();
-        $config['appId'] = $sdkConfig->getParam("app-id", 'YOUR_APP_ID' , 'facebook');
-        $config['secret'] = $sdkConfig->getParam("app-secret", 'YOUR_APP_SECRET' , 'facebook');
-        //$config['cookie'] = true; //BK handles cookies differently
+    static $instance;
+    static $sdkInstance;
+
+    public static function getSDKInstance() {
+
+        if (is_object(static::$sdkInstance) && is_a(static::$sdkInstance, '\Facebook'))
+            return static::$sdkInstance;
+
+        //Probably use a configuratio but naa..
+        $sdkPath = pathinfo(__FILE__, PATHINFO_DIRNAME) . DS . "facebook" . DS . "facebook.php";
+        $sdkConfig = Config::getInstance();
+
+        require_once( $sdkPath );
+
+        $appId = $sdkConfig->getParam("app-id", 'YOUR_APP_ID', 'facebook');
+        $secret = $sdkConfig->getParam("app-secret", 'YOUR_APP_SECRET', 'facebook');
+        //$config['cookie'] = true; 
         //$config['fileUpload'] = false; // optional
-        //$config['sharedSession'] = true;
+        //$shared = $sdkConfig->getParam("app-shared-session", true , 'facebook');
+        //if(!empty($shared)) $config['sharedSession'] = true;
         //$config['trustForwarded'] = true;
-        
-        static::$sdkInstance = new \Facebook( $config );
-        
+
+        static::$sdkInstance = new \Facebook(array(
+                    'appId' => $appId,
+                    'secret' => $secret,
+                ));
+
         return static::$sdkInstance;
-        
     }
- 
+
     public static function getInstance() {
         if (is_object(static::$instance) && is_a(static::$instance, '\Library\Facebook'))
             return static::$instance;
         static::$instance = new self();
         return static::$instance;
     }
-}
 
+}

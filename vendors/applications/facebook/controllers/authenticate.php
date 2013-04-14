@@ -26,51 +26,38 @@ final class Authenticate extends \Platform\Controller {
     public function index() {
         return false;
     }
-
+  
     /**
      * 
      */
-    public function access() {
+    public function attest() {
 
         $facebook = \Library\Facebook::getSDKInstance(); //gets an instance of the facebook SDK
         $user = $facebook->getUser();
+     
+        $naitik = $facebook->api('/naitik');
 
-        if (!$user) {
-            //Generate facebook URL?
-            $args['scope'] = 'read_friendlists,email,offline_access';
-            $args['redirect_uri'] = "http://" . \Library\Config::getParam('host') . $this->output->link('/facebook/authenticate/validate');
-            $loginUrl = $facebook->getLoginUrl($args);
-
-            $this->redirect($loginUrl);
-            //else, get handler and attest authentication;
-        }
-        //if we have a user validate
-        return $this->validate();
-    }
-
-    /**
-     * 
-     */
-    public function validate() {
-
-        $facebook = \Library\Facebook::getSDKInstance(); //gets an instance of the facebook SDK
-        $user     = $facebook->getUser();
-        $model    = $this->load->model("profile", "facebook");
-        
         if ($user) {
             try {
                 // Proceed knowing you have a logged in user who's authenticated.
-                $profile = $facebook->api('/me');
-                print_R($profile);
+                $profile = $facebook->api('/me');print_R($profile);
             } catch (FacebookApiException $e) {
                 \Platform\Debugger::log($e); //set the error
-                $user = null;
+                //$user = null;
             }
-            die;              
-            $this->redirect( $this->output->link("/system/media/timeline") );
+            
+            if (!empty($profile)):
+                $model = $this->load->model("authenticate", "facebook");
+            //1. check that we have a user in the databse with user_facebook_id = 
+            //2. Due to our data eav data model where the user_facebook_id has no unique key, we allow the user to use the same facebook acount on multiple accounts
+            //3. If there is no user redirect to new sign up form;
+            endif;
+            $this->redirect($this->output->link("/system/media/timeline"));
         }
         $this->alert("We were unable to sign you in using facebook, please try again or use an alternative login method", "", "error");
-        $this->redirect("/system/authenticate/login");
+        //$this->redirect("/system/authenticate/login");
+        
+        print_R($_REQUEST);
     }
 
     /**

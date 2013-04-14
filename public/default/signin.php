@@ -66,10 +66,15 @@
                                                     <button type="submit" class="btn margin-top margin-bottom-zero input-xxxlarge" >Sign-in to Account</button>
                                                 </div>
                                             </form>
-                                            <div class="row-fluid margin-bottom">
-                                                <a href="/facebook/authenticate/access" class="btn btn-facebook btn-medium margin-bottom-half span6">facebook</a>
-                                                <a href="/twitter/authenticate/access" class="btn btn-twitter btn-medium span6">twitter</a>
-                                            </div>
+                                            <tpl:condition data="alternatives" test="isset" value="1">
+                                                <div class="row-fluid margin-bottom">
+                                                    <tpl:loop data="alternatives" id="login-alt">
+                                                        <tpl:condition data="link" test="isset" value="1">
+                                                            <a href="${link}" class="btn btn-${uid} btn-medium margin-bottom-half span6"><tpl:element type="text" data="title" /></a>
+                                                        </tpl:condition>
+                                                    </tpl:loop>
+                                                </div>
+                                            </tpl:condition>
                                         </div>
                                     </div>
                                 </div>

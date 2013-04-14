@@ -102,6 +102,15 @@ class Registry {
 
         return $this;
     }
+    
+    /**
+     * Returns all the data that is stored in the registry;
+     * 
+     * @return type
+     */
+    final public function getAllData(){
+        return $this->data;
+    }
 
     /**
      * Gets the value of an item in the registry

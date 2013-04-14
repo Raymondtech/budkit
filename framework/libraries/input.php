@@ -133,16 +133,19 @@ final class Input extends Object {
 
         //We need to store the size of files being uploaded for upload progress
         //Returns an instance of the validate object
-        $this->data = array_merge($this->data, $_REQUEST);
-        $this->request = $this->data;
+
         $this->get = array_merge($this->get, $_GET);
         $this->post = array_merge($this->post, $_POST);
         $this->cookie = array_merge($this->cookie, $_COOKIE);
         $this->env = array_merge($this->env, $_ENV);
         $this->server = array_merge($this->server, $_SERVER);
         $this->session = array_merge($this->session, isset($_SESSION)?$_SESSION:array());
-        $this->system = Session::getNamespace();
-
+        $this->data = array_merge($this->data, $_REQUEST);
+        $this->request = $this->data;
+               
+        
+        $this->system = Session::getNamespace(); 
+        
         $this->unRegisterGlobals();
         //Temp
         $this->files = array_merge($this->files, $_FILES);

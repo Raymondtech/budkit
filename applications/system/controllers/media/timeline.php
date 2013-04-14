@@ -47,6 +47,7 @@ class Timeline extends System\Media {
      * @return  \Platform\Controller::returnRequest()
      */
     public function create() {
+
         //Is the user authenticated?
         $this->requireAuthentication();
         //Is the input method submitted via POST;
@@ -62,7 +63,7 @@ class Timeline extends System\Media {
             } else {
                 $mediaURI = $model->getLastSavedObjectURI();
                 $mediaURL = \Library\Uri::internal("/system/media/timeline/view/$mediaURI");
-                $this->alert( sprintf( _("Your post has been saved and publised. <a href=\"%s\">View Post</a>"), $mediaURL), null, "success");
+                $this->alert(sprintf(_("Your post has been saved and publised. <a href=\"%s\">View Post</a>"), $mediaURL), null, "success");
             }
         }
         //Returns the request back tot the reffer;
@@ -82,23 +83,26 @@ class Timeline extends System\Media {
         $collection = $model->getMedia("media", $itemURI);
         //Set the photo display properties     
         
+        
+        //print_R($_SESSION);
+        
         $first = reset($collection['items']);
         $this->set("media", $collection);
-        
-        if(!isset($first['summary']) && !empty($first['summary'])):
+
+        if (!isset($first['summary']) && !empty($first['summary'])):
             $now = \Library\Date\Time::stamp();
             $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
             $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
         else:
             $title = $first['summary'];
         endif;
-        
+
         //If commentcount is greater than 1
         $comments = $model->setListLookUpConditions("media_target", $itemURI)->getAll();
-        
-        $this->set("activities", $comments );
+
+        $this->set("activities", $comments);
         $this->set("comment_target", $itemURI);
-        $this->output->setPageTitle( $title );
+        $this->output->setPageTitle($title);
 
         //Raw displays whatever is in the body block only; 
         $post = $this->output->layout("media/item");
@@ -112,12 +116,15 @@ class Timeline extends System\Media {
      * @return void; 
      */
     public function index() {
+        
+        //$_SESSION['somevalue'] = 'This is a value';
+        
         $this->output->setPageTitle(_("Timeline"));
         //Get the view;
         $view = $this->load->view('media');
         $user = \Platform\User::getInstance();
         $model = $this->load->model('media');
-        
+
         $activities = $model->setListLookUpConditions("media_target", "")->getAll();
         $model->setPagination(); //Set the pagination vars
 
