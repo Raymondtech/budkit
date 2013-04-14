@@ -72,6 +72,11 @@ $requirements = array(
             "installed" => true,
             "loaded" => true
         ),
+        "curl" => array(
+            "title" => _t('cURL'),
+            "installed" => true,
+            "loaded" => true
+        ),
         "libxml" => array(
             "title" => _t('XML Manipulation'),
             "installed" => true,
@@ -144,8 +149,8 @@ $requirements = array(
     "limits" => array(
         "upload_max_filesize" => array(
             "status" => "200M",
-            "compare"=> "greater",
-            "type"=>"bytesize",
+            "compare" => "greater",
+            "type" => "bytesize",
             "terminal" => true,
         )
     ),
@@ -179,7 +184,7 @@ $requirements = array(
         "users" => array(
             "title" => "Downloads folder",
             "writable" => true,
-            "path" => FSPATH . "public".DS."downloads",
+            "path" => FSPATH . "public" . DS . "downloads",
             "terminal" => true,
         )
     )

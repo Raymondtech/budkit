@@ -25,6 +25,7 @@
 namespace Library\Authenticate\Facebook;
 
 use Library;
+
 /**
  * What is the purpose of this class, in one sentence?
  *
@@ -46,87 +47,25 @@ class Connect extends \Library\Authenticate {
      * @return boolean true or false; 
      */
     public function attest($credentials) {
-        
+
         $facebook = Library\Facebook::getSDKInstance(); //gets an instance of the facebook SDK
+        // Create our Application instance (replace this with your appId and secret).
+        //1. Get the UserID
+        $user = $facebook->getUser();
+        echo "attest";
         
-        echo "This shows a test of how to overwrite libraries. The facebook connect auth handler is actually in the vendors/libraries/authenticate";
-        
+
         die;
 
-        //Pre-requisites;
-        $database = Library\Database::getInstance();
-        $encrypt = Library\Encrypt::getInstance();
-        $validate = Library\Validate::getInstance();
 
-        //If not credentials
-        if (empty($credentials) || !array_key_exists("usernameid", $credentials) || !array_key_exists("usernamepass", $credentials)) {
-            $this->setError(_t('Must specify a valid usernameid and password'));
-            return false;
-        }
-
-        //We don't want empty passwords or usernames;
-        if (empty($credentials['usernamepass']) || empty($credentials['usernamepass'])) {
-            $this->setError(_t('Must specify a valid usernameid and password'));
-            return false;
-        }
-
-        //If usernameid an email 
-        $usernameid = $credentials['usernameid'];
-        $objects   = \Platform\Entity::getInstance();
-        
-        $objects->defineValueGroup("user"); //Means we are getting the data from the users value proxy table;
-        
-        $object     = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password", "user_name_id", "user_email","user_first_name","user_last_name","user_middle_name"));
-        
-
-        if ($validate->email($credentials['usernameid'])) {
-            //treat as user_email, 
-            $statement = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password","user_name_id", "user_email","user_first_name","user_last_name","user_middle_name")); //Use EAV to get data;
-        } else {
-            //use as user_name_id
-            $statement = $objects->getObjectsByPropertyValueMatch( array("user_name_id"), array( $usernameid ) , array("user_password","user_name_id", "user_email","user_first_name","user_last_name","user_middle_name")); //Use EAV to get the data
-        }
-
-        $result = $statement->execute();
-        
-
-        //If we did not find any user with this id or password;
-        if ((int) $result->getAffectedRows() < 1) {
-            return false;
-        }
-
-        //Get the user object;
-        $userobject = $result->fetchObject();
-        $passparts = explode(":", $userobject->user_password);
-  
-        $passhash = $encrypt->hash( $credentials['usernamepass'], $passparts[1]);
-
-        //Are the passhashes similar?
-        if ($passhash !== $userobject->user_password) {
-            $this->setError(_t('Could not authenticate the user with the credentials supplied'));
-            return false;
-        }
-
-        //Gets an instance of the session object
-        $session = Library\Session::getInstance();
-        $authenticate = Library\Authenticate::getInstance();
-
-        //Destroy this session
-        //$session->gc($session->getId());
-
-        $authenticate->authenticated = true;
-        $authenticate->type = 'dbauth';
-        $authenticate->user_id = $userobject->object_id;
-        $authenticate->user_name_id = $userobject->user_name_id;
-        $authenticate->user_email = $userobject->user_email;
-        $authenticate->user_first_name = $userobject->user_first_name;
-        $authenticate->user_last_name = $userobject->user_last_name;
-        $authenticate->user_full_name    = implode(' ', array($userobject->user_first_name, $userobject->user_middle_name, $userobject->user_last_name) );
-
-        //Update
-        $session->set("handler", $authenticate, "auth");
-        $session->lock("auth");
-        $session->update($session->getId());
+        // If we have a $user id here, it means we know the user is logged into
+        // Facebook, but we don't know if the access token is valid. An access
+        // token is invalid if the user logged out of Facebook.
+        //2. Check we have a user with that ID
+        //3. If no user and credentials is empty redirect to a canvas page and asking for additional information;
+        //4. If more information submitted with $credentials, and credentials are valid? add user to database and store, 
+        //5. if not valid, redirect to signup page
+        // We may or may not have this data based on whether the user is logged in.
 
         return true;
     }
@@ -138,7 +77,7 @@ class Connect extends \Library\Authenticate {
      * @param type $id
      * @return self 
      */
-    public static function getInstance($id=null) {
+    public static function getInstance($id = null) {
 
         static $instance;
         //If the class was already instantiated, just return it

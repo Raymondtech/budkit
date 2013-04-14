@@ -186,7 +186,7 @@ class Session extends Object {
         $splash = $self->getSplash();
         $sessId = self::generateId($splash);
 
-        session_id($sessId); //Must be called before the sesion start to generate the Id
+        session_id( $sessId ); //Must be called before the sesion start to generate the Id
         session_cache_limiter('none');
 
         session_name(md5($self->cookie . $splash['agent'] . $splash['ip'] . $splash['domain']));

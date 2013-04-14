@@ -67,14 +67,8 @@
                                                 </div>
                                             </form>
                                             <div class="row-fluid margin-bottom">
-                                                <form id="form" name="login_form" method="post" action="/system/authenticate/login" class="span6"> 
-                                                    <input type="hidden" name="auth_handler" value="facebook\connect" />
-                                                    <button type="submit" class="btn btn-facebook input-xxxlarge">facebook</button>
-                                                </form>
-                                                <form id="form" name="login_form" method="post" action="/system/authenticate/login" class="span6"> 
-                                                    <input type="hidden" name="auth_handler" value="twitter\oauth" />
-                                                    <button type="submit" class="btn btn-twitter input-xxxlarge">twitter</button>
-                                                </form>
+                                                <a href="/facebook/authenticate/access" class="btn btn-facebook btn-medium margin-bottom-half span6">facebook</a>
+                                                <a href="/twitter/authenticate/access" class="btn btn-twitter btn-medium span6">twitter</a>
                                             </div>
                                         </div>
                                     </div>

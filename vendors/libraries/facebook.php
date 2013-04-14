@@ -46,13 +46,32 @@ class Facebook{
     static $sdkInstance;
     
     public static function getSDKInstance(){
-        echo 'getting the facebook SDK Instance';
+        
+        if(is_object(static::$sdkInstance) && is_a(static::$sdkInstance, '\Facebook'))
+                return static::$sdkInstance;
+        
+        //Probably use a configuratio but naa..
+        $sdkPath = pathinfo(__FILE__, PATHINFO_DIRNAME).DS."facebook".DS."facebook.php"; 
+        $sdkConfig = Config::getInstance();
+        
+        require_once( $sdkPath ); 
+
+        $config = array();
+        $config['appId'] = $sdkConfig->getParam("app-id", 'YOUR_APP_ID' , 'facebook');
+        $config['secret'] = $sdkConfig->getParam("app-secret", 'YOUR_APP_SECRET' , 'facebook');
+        $config['cookie'] = flase; //BK handles cookies differently
+        $config['fileUpload'] = false; // optional
+        
+        static::$sdkInstance = new \Facebook( $config );
+        
+        return static::$sdkInstance;
+        
     }
  
     public static function getInstance() {
-        if (is_object(static::$instance) && is_a(static::$instance, 'Facebook'))
+        if (is_object(static::$instance) && is_a(static::$instance, '\Library\Facebook'))
             return static::$instance;
-        static::$instance = new Facebook();
+        static::$instance = new self();
         return static::$instance;
     }
 }
