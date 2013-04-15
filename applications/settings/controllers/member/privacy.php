@@ -36,10 +36,29 @@ final class Privacy extends Settings\Member {
      * @return void
      */
     public function index() {
+        
         $view = $this->load->view('member');
+        
         return $view->form("member/privacy", "Privacy settings");
     }
 
+        /**
+     * Privacy Lists
+     */
+    public function groups() {
+        
+        $view = $this->load->view('member');
+        
+        //1. Load the model
+        $authority = $this->load->model("authority", "settings");
+        //3. Get the authorities list
+        $authorities = $authority->getAuthorities();
+        //4. Set Properties
+        $this->set("authorities", $authorities);
+        
+        return $view->form("member/groups", "Privacy Groups");
+    }
+    
     /**
      * Privacy Lists
      */

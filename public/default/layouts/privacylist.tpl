@@ -2,10 +2,9 @@
     <a class="add-on btn dropdown-toggle" data-toggle="dropdown"><i class="icon-unlock"></i></a>
     <ul class="dropdown-menu">
         <li><a href="#">Public</a></li>
-        <li><a href="#">Followers Only</a></li>
-        <li><a href="#">Following Only</a></li>
-        <li><a href="#">Private</a></li>
+        <li><a href="#">Private (Followers Only)</a></li>
+        <li><a href="#">Hidden (Only Me)</a></li>
         <li class="divider"></li>
-        <li><a href="#">Edit privacy</a></li>
+        <li><a href="/settings/member/privacy">Edit privacy</a></li>
     </ul>
 </tpl:layout>

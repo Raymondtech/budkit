@@ -13,10 +13,10 @@
                     </tpl:loop>
                 </select>
                 <input type="hidden" name="authority-description" />
-                <button type="submit" class="btn">Add New Group</button>
+                <button type="submit" class="btn">Add Privacy Group</button>
             </form>
             <ul class="nav nav-pills no-margin">
-                <li class="highlighted"><a href="/settings/system/permissions/add" >Add Permission Rule</a></li>
+                <li class="highlighted"><a href="/settings/system/permissions/add" >Edit Profile</a></li>
             </ul>
         </div>
         <hr />

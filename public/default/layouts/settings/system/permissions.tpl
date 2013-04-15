@@ -7,7 +7,7 @@
         </div>
         <hr />
         <div class="widget">
-            <div class="widget-head"><span class="widget-title">Groups</span></div>
+            <div class="widget-head"><span class="widget-title"><tpl:element type="text" data="page.title">Group Permissions</tpl:element></span></div>
             <div class="widget-body">
 
                 <div class="accordion" id="authority-group-collapse">
@@ -69,7 +69,6 @@
                                                     <td>
                                                         <button type="submit" class="btn">Add</button>
                                                     </td>
-
                                                 </form>
                                             </tr>
                                         </tfoot>
