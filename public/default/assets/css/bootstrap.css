@@ -6543,6 +6543,9 @@ a.badge:focus {
 .progress.mini-bar .bar {
   height: 5px;
 }
+.max-width {
+  max-width: 1180px;
+}
 .padding-top {
   padding-top: 20px !important;
 }
@@ -7495,7 +7498,7 @@ input.search-query {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  min-width: 170px;
+  min-width: 155px;
   *zoom: 1;
 }
 .platform-user img {

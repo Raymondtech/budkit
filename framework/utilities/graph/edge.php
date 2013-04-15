@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * graph.php
+ * edge.php
  *
  * Requires PHP version 5.3
  *
@@ -38,95 +38,59 @@ namespace Platform\Graph;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/graph
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Node {
+final class Edge {
 
     /**
-     * Identifies the current node
+     * Identifies the current edge
      * @var type 
      */
-    protected $nodeId = NULL;
-    
-    /**
-     * Holds any data associated to this node
-     * @var type 
-     */
-    protected static $nodeData = array();
-    
-    
-    
-    private static $nodeGraph = NULL;
-    
+    protected $edgeId = NULL;
 
     /**
-     * Returns the node's Id
+     * Holds any data associated to this edge
+     * @var type 
+     */
+    protected $edgeData = array();
+
+    /**
+     * Returns the edge's Id
      * 
      * @return type
      */
     public function getId() {
-        return $this->nodeId;
+        return $this->edgeId;
     }
 
     /**
-     * Sets the node Id
+     * Sets the edge Id
      * 
-     * @param type $nodeId
+     * @param type $edgeId
      * @return \Platform\Graph\Node
      */
-    public function setId($nodeId) {
-        $this->nodeId = strval($nodeId);
+    public function setId($edgeId) {
+        $this->edgeId = strval($edgeId);
         return $this;
     }
 
     /**
-     * Returns the node Data if any exists
+     * Returns the edge Data if any exists
+     * 
      * @return type
      */
     public function getData() {
-        return static::$nodeData;
+        return $this->data;
     }
 
     /**
-     * Sets node data
+     * Sets edge data
      * 
-     * @param type $nodeData
+     * @param type $edgeData
      * @return \Platform\Graph\Node
      */
-    public function setData( $nodeData = array()) {
-        static::$nodeData = $nodeData;
+    public function setData($edgeData = array()) {
+        $this->edgeData = $edgeData;
         return $this;
     }
-    
-    /**
-     * Returns the node neighbours
-     * If no arc Ids are defined, returns nodes at either ends of any edge 
-     * 
-     * @return array
-     */
-    public function getRelated($arcId=NULL){}
-    
-    
-    /**
-     * Determines if this node is related to another node
-     * 
-     * @param type $node
-     * @param type $arcId
-     */
-    public function isRelatedTo($node, $arcId=NULL){
-        //Check that we have a graph in nodegraph;
-    }
-    
-    /**
-     * 
-     * @param type $graph
-     */
-    public function setGraph(&$graph){
-        static::$nodeGraph =& $graph;
-    }
-    
-    public function &getGraph(){
-        return static::$nodeGraph;
-    }
-    
 
     /**
      * Returns and instantiated Instance of the graph class
@@ -135,8 +99,9 @@ final class Node {
      * especially if they are defined under a namespace. A method with the same
      * name as the class is no longer considered to be its constructor
      * 
-     * @param type $nodeId
-     * @param type $nodeData
+     * @param type $nodeA
+     * @param type $nodeB
+     * @param type $edgeData
      * 
      * @staticvar object $instance
      * @property-read object $instance To determine if class was previously instantiated
@@ -144,9 +109,14 @@ final class Node {
      * 
      * @return object graph
      */
-    public function __construct($nodeId, $nodeData=array()) {
-        $this->setId($nodeId);
-        $this->setData($nodeData);
+    public function __construct(&$head, &$tail, $edgeData = array()) {
+        if (!is_a($head, "\Platform\Graph\Node")||!is_a($tail, "\Platform\Graph\Node")){
+            throw new \Platform\Exception("Nodes used to create a new Edge must be instances of \Platform\Graph\Node", PLATFORM_ERROR);
+        }
+        $edgeId = "someId";
+        $this->setId($edgeId);
+        $this->setData($edgeData);
     }
+
 }
 

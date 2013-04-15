@@ -142,7 +142,7 @@ class Image extends \Library\Folder\Files {
            $this->setError("could not create a true color image");
             return false;
         }
-        if (!@imagejpeg($truecolor, $this->target, 70)) {
+        if (!@imagejpeg($truecolor, $this->target, 80)) {
             $this->setError("save the target jpg image");
             return false;
         }
@@ -201,7 +201,7 @@ class Image extends \Library\Folder\Files {
             $this->setError("a problem errored");
             return false;
         }
-        if (!imagejpeg($thumb2, $target, 70)) {
+        if (!imagejpeg($thumb2, $target, 80)) {
             $this->setError("a problem errored");
             return false;
         }

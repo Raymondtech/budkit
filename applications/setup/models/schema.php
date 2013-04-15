@@ -404,15 +404,36 @@ final class Schema extends Platform\Model {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
         );
     }
-    
+
+    private static function createObjectsEdgesTable() {
+        static::$database->query("DROP TABLE IF EXISTS `?objects_edges`;");
+        static::$database->query(
+           "CREATE TABLE `?objects_edges` (
+              `object_edge_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+              `edge_head_object` varchar(20) NOT NULL,
+              `edge_name` varchar(45) NOT NULL,
+              `edge_tail_object` varchar(20) NOT NULL,
+              `edge_created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+              `edge_description` varchar(100) DEFAULT NULL,
+              PRIMARY KEY (`object_edge_id`),
+              UNIQUE KEY `object_edge_id_UNIQUE` (`object_edge_id`),
+              UNIQUE KEY `object_edge_head_tail_UNIQUE` (`edge_head_object`,`edge_tail_object`,`edge_name`),
+              KEY `edge_head_uri` (`edge_head_object`),
+              KEY `edge_tail_uri` (`edge_tail_object`),
+              CONSTRAINT `edge_tail_uri` FOREIGN KEY (`edge_tail_object`) REFERENCES `?objects` (`object_uri`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+              CONSTRAINT `edge_head_uri` FOREIGN KEY (`edge_head_object`) REFERENCES `?objects` (`object_uri`) ON DELETE NO ACTION ON UPDATE NO ACTION
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+        );
+    }
+
     /**
      * Creates the object rating table
      * @return void;
      */
-    private static function createObjectsRatingTable(){
+    private static function createObjectsRatingTable() {
         static::$database->query("DROP TABLE IF EXISTS `?objects_rating`;");
         static::$database->query(
-            "CREATE TABLE IF NOT EXISTS `?objects_rating` (
+                "CREATE TABLE IF NOT EXISTS `?objects_rating` (
                 `rating_id` int(11) NOT NULL AUTO_INCREMENT ,
                 `object_id` int(11) NOT NULL ,
                 `rating_user` varchar(50) NOT NULL,
@@ -423,7 +444,7 @@ final class Schema extends Platform\Model {
                 KEY `object_id_idx` (`object_id`),
                 CONSTRAINT `objects_rating_ibfk_1` FOREIGN KEY (`object_id` ) REFERENCES `?objects` (`object_id` )
              ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
-       );
+        );
         //CONSTRAINT `objects_rating_ibfk_1` FOREIGN KEY (`object_id` ) REFERENCES `?objects` (`object_id` )
     }
 
@@ -671,7 +692,6 @@ final class Schema extends Platform\Model {
         );
     }
 
-
     /**
      * Runs the database installation transaction
      * @return boolean
@@ -690,7 +710,7 @@ final class Schema extends Platform\Model {
 
         static::createObjectsTable();
         static::createObjectsAuthorityTable();
-
+        static::createObjectsEdgesTable();
         static::createPropertiesTable();
         static::createPropertyDatatypeTable();
         static::createPropertyValuesTable();

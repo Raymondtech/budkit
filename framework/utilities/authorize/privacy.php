@@ -49,12 +49,19 @@ trait Privacy {
      * @param type $privacygroup
      * 
      */
-    protected static function canAccess($objectURI, $property ){       
+    protected static function canAccess($objectURI, $property = array() ){       
         //$object = static::getInstance();
         //print_R($object);
+        $graph = \Platform\Graph::getInstance();
+        
+        $graph->createNode("userA", array("hair"=>"brown"));
+        $graph->createNode("userB", array("hair"=>"blonde"));
+        
+        print_R($graph);
+        
     }
     
     
-    protected static function setAccess($objectURI, $property, $privacygroup , $access=FALSE ){}
+    protected static function setAccess($objectURI, $property =array(), $privacygroup = NULL , $access=FALSE ){}
    
 }
