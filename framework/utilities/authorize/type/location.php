@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * authority.php
+ * location.php
  *
  * Requires PHP version 5.3
  *
@@ -18,15 +18,15 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/age
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/location
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
 
-namespace Library\Authorize\Type;
+namespace Platform\Authorize\Type;
 
 use Library;
-use Library\Authorize;
+use Platform\Authorize;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -38,13 +38,13 @@ use Library\Authorize;
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/age
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/location
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Authority extends Library\Authorize\Permission {
+final class Location extends Platform\Authorize\Permission {
 
     /**
-     * Returns an instance of the Authority class
+     * Return an instance of the authorize class
      * 
      * @staticvar self $instance
      * @return self 

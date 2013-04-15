@@ -171,7 +171,7 @@ final class Dispatcher extends \Library\Object {
         if($this->task->config->getParam( "installed", NULL, "database" )):
             //Check Permissions only if we are not installing?
             //Attach the permission observer
-            $this->task->attach("\Library\Authorize\Permission");
+            $this->task->attach("\Platform\Authorize\Permission");
             $this->task->actionStateAs('view'); //View Permissions will always be checked! 
             
         endif; 

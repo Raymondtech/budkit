@@ -23,7 +23,7 @@
  * 
  */
 
-namespace Library;
+namespace Platform;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -95,7 +95,7 @@ class Authorize extends \Library\Object {
      */
     final public static function getAuthroityTree() {
 
-        $database = Database::getInstance();
+        $database = \Library\Database::getInstance();
 
         $statement = $database->select()->from('?authority')->between("lft", '1', '6')->prepare();
         $results = $statement->execute();

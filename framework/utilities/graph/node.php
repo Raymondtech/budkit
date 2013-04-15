@@ -23,14 +23,14 @@
  * 
  */
 
-namespace Library;
+namespace Platform\Graph;
 
 /**
  * What is the purpose of this class, in one sentence?
  *
  * How does this class achieve the desired purpose?
  *
- * @category   Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
@@ -38,31 +38,8 @@ namespace Library;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/graph
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Graph extends Object {
-    /*
-     * @var object 
-     */
+final class Node {
 
-    static $instance;
-
-    /**
-     * Defines the class constructor
-     * Used to preload pre-requisites for the graph class
-     * 
-     * @return object graph
-     */
-    public function __constructor() {
-        
-    }
-
-    /**
-     * Backward compatibility for class name constructors 
-     * 
-     * @return object graph
-     */
-    public static function Graph() {
-        return self::getInstance();
-    }
 
     /**
      * Returns and instantiated Instance of the graph class
@@ -77,15 +54,8 @@ final class Graph extends Object {
      * 
      * @return object graph
      */
-    public static function getInstance() {
+    public function __construct() {
 
-        if (is_object(static::$instance) && is_a(static::$instance, 'Graph'))
-            return static::$instance;
-
-        static::$instance = new self();
-
-        return static::$instance;
     }
-
 }
 

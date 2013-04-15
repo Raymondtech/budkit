@@ -218,16 +218,16 @@ class Session extends Object {
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
         $auth = $self->get("handler", "auth");
 
-        $authority = \Library\Authorize::getInstance();
+        //$authority = \Platform\Authorize::getInstance();
 
         if (is_a($auth, "Library\Authenticate")) {
             if (isset($auth->authenticated)) {
                 //Read Rights if we have a userId
-                $self->authority = $authority->getPermissions($auth);
+                //$self->authority = $authority->getPermissions($auth);
             }
         }
 
-        return $self->authority;
+        //return $self->authority;
     }
 
     /**

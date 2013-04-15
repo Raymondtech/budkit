@@ -201,7 +201,7 @@ class Menu extends Parse\Template {
         $params = array_merge(array("action" => "view", "user" => $user, "route" => $url));
 
         //Check that the user has permission to view this menu;
-        return Library\Authorize\Permission::execute("view", $params, $url, false);
+        return \Platform\Authorize\Permission::execute("view", $params, $url, false);
     }
 
     /**

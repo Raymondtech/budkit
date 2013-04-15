@@ -75,6 +75,11 @@ abstract class Controller extends Library\Action {
      * @var string 
      */
     public $redirect = NULL;
+    
+    /*
+     * The Privacy trait.
+     */
+    use Authorize\Privacy;
 
     /**
      * Constructor for the application controller

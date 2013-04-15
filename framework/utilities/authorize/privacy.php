@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * age.php
+ * privacy.php
  *
  * Requires PHP version 5.3
  *
@@ -13,54 +13,48 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  *
- * @category   Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/age
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
 
-namespace Library\Authorize\Type;
+namespace Platform\Authorize;
 
 use Library;
-use Library\Authorize;
-
 /**
  * What is the purpose of this class, in one sentence?
  *
  * How does this class achieve the desired purpose?
  *
- * @category   Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/age
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Age extends Library\Authorize\Permission {
-
+trait Privacy {
+    
+    private static function getObjectPrivacyTree($userid=NULL){}
+    
     /**
-     * Returns an instance of the Age class
      * 
-     * @staticvar self $instance
-     * @return self 
+     * Determines if the Platform user can access an objectURI, or object property
+     * @param type $objectURI
+     * @param type $property
+     * @param type $privacygroup
+     * 
      */
-    final public static function getInstance() {
-
-        static $instance;
-        //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
-
-        //@TODO. Look into the possibility of implied authorities
-        $instance = new self();
-
-        return $instance;
+    protected static function canAccess($objectURI, $property ){       
+        //$object = static::getInstance();
+        //print_R($object);
     }
-
+    
+    
+    protected static function setAccess($objectURI, $property, $privacygroup , $access=FALSE ){}
+   
 }
-

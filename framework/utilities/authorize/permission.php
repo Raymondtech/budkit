@@ -23,7 +23,7 @@
  * 
  */
 
-namespace Library\Authorize;
+namespace Platform\Authorize;
 
 use Library;
 
@@ -32,7 +32,7 @@ use Library;
  *
  * How does this class achieve the desired purpose?
  *
- * @category   Library
+ * @category   Utiltity
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
