@@ -405,6 +405,9 @@ final class Schema extends Platform\Model {
         );
     }
 
+    /**
+     * Many to many table describing edges between object (nodes)
+     */
     private static function createObjectsEdgesTable() {
         static::$database->query("DROP TABLE IF EXISTS `?objects_edges`;");
         static::$database->query(
@@ -413,6 +416,7 @@ final class Schema extends Platform\Model {
               `edge_head_object` varchar(20) NOT NULL,
               `edge_name` varchar(45) NOT NULL,
               `edge_tail_object` varchar(20) NOT NULL,
+              `edge_weight` INT(5) NOT NULL DEFAULT  '1',
               `edge_created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
               `edge_description` varchar(100) DEFAULT NULL,
               PRIMARY KEY (`object_edge_id`),

@@ -45,17 +45,13 @@ final class Node {
      * @var type 
      */
     protected $nodeId = NULL;
-    
+
     /**
      * Holds any data associated to this node
      * @var type 
      */
     protected static $nodeData = array();
-    
-    
-    
     private static $nodeGraph = NULL;
-    
 
     /**
      * Returns the node's Id
@@ -91,42 +87,102 @@ final class Node {
      * @param type $nodeData
      * @return \Platform\Graph\Node
      */
-    public function setData( $nodeData = array()) {
+    public function setData($nodeData = array()) {
         static::$nodeData = $nodeData;
         return $this;
     }
-    
+
     /**
-     * Returns the node neighbours
+     * Returns the node neighbours. 
      * If no arc Ids are defined, returns nodes at either ends of any edge 
      * 
      * @return array
      */
-    public function getRelated($arcId=NULL){}
-    
-    
+    public function getRelated($arcId = NULL) {
+        
+    }
+
+    /**
+     * Degree or valency is the number of edges incident to the vertex
+     * deg(v) where v = vertex or node
+     */
+    public function getDegree() {
+        
+    }
+
+    /**
+     * The number of head endpoints adjacent to the node is called the indegree.
+     * i.e Number of directed edges (arcs) to this node. Use getDegree to get
+     * the total number of edges (directed or undirected) to this node
+     * 
+     * @return interger
+     */
+    public function getInDegree() {
+        
+    }
+
+    /**
+     * The number of tail endpoints adjacent to the node is called the outdegree
+     * i.e Number of directed edges (arcs) from this node. Use getDegree to get 
+     * the total number of edges (directed or undirected) to this node
+     * 
+     * @return interger
+     */
+    public function getOutDegree() {
+        
+    }
+
     /**
      * Determines if this node is related to another node
      * 
      * @param type $node
      * @param type $arcId
      */
-    public function isRelatedTo($node, $arcId=NULL){
+    public function isRelatedTo($node, $arcId = NULL) {
         //Check that we have a graph in nodegraph;
     }
-    
+
     /**
+     * An isolated node has a degree of 0
+     * @rturn boolean
+     */
+    public function isIsolated() {
+        
+    }
+
+    /**
+     * Determines if the current node, can reach nodeB
+     * @return boolean
+     */
+    public function isReacheable(&$nodeB) {
+        
+    }
+
+    /**
+     * A leaf node/vertex has a degree of 1
+     * @return boolean
+     */
+    public function isLeaf() {
+        
+    }
+
+    /**
+     * Sets the Parent Graph
      * 
      * @param type $graph
      */
-    public function setGraph(&$graph){
-        static::$nodeGraph =& $graph;
+    public function setGraph(&$graph) {
+        static::$nodeGraph = & $graph;
     }
-    
-    public function &getGraph(){
+
+    /**
+     * Returns the parent graph
+     * 
+     * @return type
+     */
+    public function &getGraph() {
         return static::$nodeGraph;
     }
-    
 
     /**
      * Returns and instantiated Instance of the graph class
@@ -144,9 +200,10 @@ final class Node {
      * 
      * @return object graph
      */
-    public function __construct($nodeId, $nodeData=array()) {
+    public function __construct($nodeId, $nodeData = array()) {
         $this->setId($nodeId);
         $this->setData($nodeData);
     }
+
 }
 

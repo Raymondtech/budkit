@@ -75,12 +75,26 @@ final class Graph{
     protected static $subgraphs = array();
 
     /**
-     * Determines the shortest path between two nodes
+     * Determines the shortest distance between two nodes
      * d(u,v)
+     * 
+     * @param type $nodeA
+     * @param type $nodeB
+     * 
+     * @return array(); An ordered array sequence of nodes from u to v
+     */
+    public function getPath($nodeA, $nodeB) {
+        
+    }
+    
+    /**
+     * The Path length |d(u,v)| is the total number of edges in the path connecting
+     * nodeA to nodeB. 
+     * 
      * @param type $nodeA
      * @param type $nodeB
      */
-    public function getDistance($nodeA, $nodeB) {
+    public function getPathLength($nodeA, $nodeB){
         
     }
 
@@ -89,19 +103,41 @@ final class Graph{
      * 
      * @return interger
      */
-    public function getSize() {
-        
-    }
+    public function getSize() {}
 
     /**
      * The order of a graph is the number of its nodes/vertices |V(G)|
      * 
      * @return interger
      */
-    public function getOrder() {
-        
-    }
+    public function getOrder() {}
+    
+    /**
+     * Returns the maximum degree incident on graph nodes
+     * 
+     * @return interger
+     */
+    public function getMaxDegree(){}
+    
+    /**
+     * Returns the minimum degree. 
+     * Degrees are a represenation of the number of degrees
+     * incident to a node. 
+     */
+    public function getMinDegree(){}
  
+    /**
+     * Isolated nodes are nodes with a degree of zero
+     * @return array
+     */
+    public function getIsolated(){}
+    
+    /**
+     * Returns all nodes with a degree of 1;
+     * @return array;
+     */
+    public function getLeaves(){}
+    
     /**
      * Adds a directed edge (arc) to two nodes in graph. 
      * If no arcUid is provided will add an undirected edge
@@ -110,10 +146,15 @@ final class Graph{
      * @param type $nodeB
      * @param type $arcUid
      */
-    private function addArc(&$nodeA, &$nodeB, $arcUid = NULL) {
-        
-    }
+    private function addArc(&$nodeA, &$nodeB, $arcUid = NULL) {}
    
+    /**
+     * Returns a node object if exists in graph
+     * 
+     * @param type $nodeId
+     * @return object $node;
+     */
+    public function getNode( $nodeId ){}
 
     /**
      * Adds an edge between two node endpoints.
