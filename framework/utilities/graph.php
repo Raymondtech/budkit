@@ -38,7 +38,7 @@ namespace Platform;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/graph
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Graph{
+final class Graph {
     /*
      * @var object 
      */
@@ -51,28 +51,29 @@ final class Graph{
      * 
      * @var type 
      */
-    protected static $nodeSet = array();
+    protected $nodeSet = array();
 
     /**
      * Undirected edge between two endpoints in vertice set of undirected graph
      * 
      * @var type 
      */
-    protected static $edgeSet = array();
+    protected $edgeSet = array();
 
     /**
-     * Directed edge between two endpoints in vertex set
+     * Directed edge between two endpoints in vertex set, Holds
+     * Edge IDs that have been added as arcs.. 
      * 
      * @var type 
      */
-    protected static $arcSet = array();
+    protected $arcSet = array();
 
     /**
      * An array of sub graphs objects
      * 
      * @var type 
      */
-    protected static $subgraphs = array();
+    protected $subgraphs = array();
 
     /**
      * Determines the shortest distance between two nodes
@@ -86,15 +87,16 @@ final class Graph{
     public function getPath($nodeA, $nodeB) {
         
     }
-    
+
     /**
      * The Path length |d(u,v)| is the total number of edges in the path connecting
      * nodeA to nodeB. 
      * 
      * @param type $nodeA
      * @param type $nodeB
+     * @reurns interger a pathlength of zero implies infinity, i.e no path was found
      */
-    public function getPathLength($nodeA, $nodeB){
+    public function getPathLength($nodeA, $nodeB) {
         
     }
 
@@ -103,74 +105,156 @@ final class Graph{
      * 
      * @return interger
      */
-    public function getSize() {}
+    public function getSize() {
+
+        if (empty($this->edgeSet))
+            return 0;
+
+        //Count the number of nodes in this graph;
+        return count($this->nodeSet);
+    }
 
     /**
      * The order of a graph is the number of its nodes/vertices |V(G)|
      * 
      * @return interger
      */
-    public function getOrder() {}
+    public function getOrder() {
+
+        if (empty($this->nodeSet))
+            return 0;
+
+        //Count the number of nodes in this graph;
+        return count($this->nodeSet);
+    }
     
+    /**
+     * Returns an array of edgeIds for directed edges (arcs)
+     * 
+     * @return type
+     */
+    public function getArcSet(){
+        return $this->arcSet;
+    }
+    
+    /**
+     * Returns all edges describing this graph
+     * 
+     * @return type
+     */
+    public function getEdgeSet(){
+        return $this->edgeSet;
+    }
+
     /**
      * Returns the maximum degree incident on graph nodes
      * 
      * @return interger
      */
-    public function getMaxDegree(){}
-    
+    public function getMaxDegree() {
+        
+    }
+
     /**
      * Returns the minimum degree. 
      * Degrees are a represenation of the number of degrees
      * incident to a node. 
      */
-    public function getMinDegree(){}
- 
+    public function getMinDegree() {
+        
+    }
+
     /**
      * Isolated nodes are nodes with a degree of zero
      * @return array
      */
-    public function getIsolated(){}
-    
+    public function getIsolated() {
+        
+    }
+
     /**
      * Returns all nodes with a degree of 1;
      * @return array;
      */
-    public function getLeaves(){}
-    
+    public function getLeaves() {
+        
+    }
+
     /**
      * Adds a directed edge (arc) to two nodes in graph. 
      * If no arcUid is provided will add an undirected edge
      * 
+     * 
+     * @param type $name
      * @param type $nodeA
      * @param type $nodeB
-     * @param type $arcUid
+     * @param type $data
+     * @param type $directed
+     * @param type $weight
      */
-    private function addArc(&$nodeA, &$nodeB, $arcUid = NULL) {}
-   
+    private function edgeIsArc($edgeId) {
+        
+    }
+
     /**
      * Returns a node object if exists in graph
      * 
-     * @param type $nodeId
-     * @return object $node;
+     * @param type $nodeId case sensitive ID of the node requested
+     * @return object $node if found;
+     * 
      */
-    public function getNode( $nodeId ){}
+    public function getNode($nodeId) {
+        static $instance = array();
+        if (isset($instance[$nodeId]))
+            return $instance[$nodeId];
+        $nodes = $this->nodeSet;
+        if (empty($nodes))
+            return NULL;
+        foreach ($nodes as $node):
+            if ($node->getId() == $nodeId):
+                $instance[$nodeId] = & $node;
+                break;
+            endif;
+        endforeach;
+        return NULL;
+    }
 
     /**
      * Adds an edge between two node endpoints.
      * 
      * @param type $nodeA
      * @param type $nodeB
+     * @param type $name
+     * @param type $data
+     * @param type $directed
+     * @param type $weight
+     * @return boolean
      */
-    public function addEdge(&$nodeA, &$nodeB, $direction="", $data=array() ) {
+    public function addEdge(&$nodeA, &$nodeB, $name = NULL, $directed = TRUE, $data = array(), $weight = 0) {
 
-        $edge = new Graph\Edge( $nodeA, $nodeB , $data ); //Will need to decide whether to use nodeAId-nodeBId as edgeId       
-        $edge->setGraph( $this );
+        $edge = new Graph\Edge($nodeA, $name, $nodeB, $data, $directed, $weight); //Will need to decide whether to use nodeAId-nodeBId as edgeId       
         $edgeId = $edge->getId();
- 
-        
+
+        //Directed edges have their Id's referenced in arcSet
+        if ($directed && !in_array($edgeId, $this->arcSet))
+            $this->arcSet[] = $edgeId;
+
+        //@TODO This is not the ideal way to set parrallel edges, Parralel edges connect the same pair of nodes
+        //If edge already exists, increment the weight; 
+        if (isset($this->edgeSet[$edgeId])) {
+            $this->edgeSet[$edgeId]->weight++;
+            $edgeData = $this->edgeSet[$edgeId]->getData();
+            $data = array_merge($edgeData, $data);
+            //Makeing a directed array undirected
+            if (!$directed && in_array($edgeId, $this->arcSet))
+                $this->arcSet = array_diff($this->arcSet, array($edgeId));
+            return true;
+        }
+        //array_merge edge data
         if (!isset($this->edgeSet[$edgeId]))
             $this->edgeSet[$edgeId] = &$edge;
+
+        //If directed, use edgeIsArc to indicate;
         return true;
     }
 
@@ -219,36 +303,34 @@ final class Graph{
     /**
      * Removes an Edge from the graph. Use removeArc to remove directed edges
      * 
-     * @param type $nodeA
-     * @param type $nodeB
+     * @param type $head
+     * @param type $tail
+     * @param type $directed if false, will remove all incident edges of the kind head-tail or tail-head
+     * @return boolean
+     * @throws \Platform\Exception
      */
-    public function removeEdge(&$nodeA, &$nodeB) {
+    public function removeEdge(&$head, &$tail, $directed = TRUE) {
 
-        if (!$this->isNode($nodeA)) {
-            throw new \Platform\Exception("NodeA passed to removeEdge must be an instance of \Platform\Graph\Node", PLATFORM_ERROR);
+        if (!is_a($head, "\Platform\Graph\Node") || !is_a($tail, "\Platform\Graph\Node")) {
+            throw new \Platform\Exception("Nodes used to create a new Edge must be instances of \Platform\Graph\Node", PLATFORM_ERROR);
         }
-        if (!$this->isNode($nodeB)) {
-            throw new \Platform\Exception("NodeB passed to removeEdge must be an instance of \Platform\Graph\Node", PLATFORM_ERROR);
-        }
+        $_nodeIds = array($head->getId(), $tail->getId());
+        $edges = $this->edgeSet;
+        //find all edges with these two nodes incident
+        foreach ($edges as $edge):
+            echo $edge->getId() . "<br />";
+            if (in_array($edge->getHead()->getId(), $_nodeIds) && in_array($edge->getTail()->getId(), $_nodeIds)):
+                if (!$directed):
+                    unset($this->edgeSet[$edge->getId()]);
+                elseif ($edge->getHead()->getId() == reset($_nodeIds) && $edge->getTail()->getId() == end($_nodeIds)):
+                    //Remove the value from the arcSet array
+                    $this->arcSet = array_diff($this->arcSet, array($edge->getId()));
+                    unset($this->edgeSet[$edge->getId()]);
+                endif;
+            endif;
+        endforeach;
 
-        $edgeId = NULL; //Will need to decide whether to use nodeAId-nodeBId as edgeId
-
-        if (isset($this->edgeSet[$edgeId]))
-            unset($this->edgeSet[$edgeId]);
         return true;
-    }
-
-    /**
-     * Removes a directed Edge.
-     * 
-     * Note if uid is provided will delete any edge found.
-     * 
-     * @param type $nodeA
-     * @param type $nodeB
-     * @param type $arcUid
-     */
-    private function removeArc(&$nodeA, &$nodeB, $arcUid = NULL, $data = array()) {
-        
     }
 
     /**
@@ -257,6 +339,10 @@ final class Graph{
      * @return boolean true if directed and false if not;
      */
     public function isDirected() {
+        //if size of arcSet is greater than1 , then this graph is directed;
+        if (empty($this->arcSet))
+            return false;
+
         return true;
     }
 
@@ -279,11 +365,12 @@ final class Graph{
      * @param type $data
      */
     public function createNode($nodeId, $data = array()) {
-        
+
         $node = new Graph\Node($nodeId, $data);
-        $node->setGraph( $this );
-        $this->addNode( $node );
-        
+        $node->setGraph($this);
+        $this->addNode($node);
+
+        return $node;
     }
 
     /**
@@ -304,7 +391,7 @@ final class Graph{
             return static::$instance[$graphUID];
         $graph = new self($nodes, $edges, $directed, $graphUID);
         if (!empty($graphUID)) {
-            static::$instance[$graphUID] =& $graph;
+            static::$instance[$graphUID] = & $graph;
         }
         return $graph;
     }

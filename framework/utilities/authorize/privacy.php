@@ -49,13 +49,31 @@ trait Privacy {
      * @param type $privacygroup
      * 
      */
-    protected static function canAccess($objectURI, $property = array() ){       
+    protected static function canAccess($objectURI, $property = array() ){
+        
         //$object = static::getInstance();
         //print_R($object);
         $graph = \Platform\Graph::getInstance();
         
-        $graph->createNode("userA", array("hair"=>"brown"));
-        $graph->createNode("userB", array("hair"=>"blonde"));
+        $one = $graph->createNode("one");
+        $two = $graph->createNode("two");
+        $three=$graph->createNode("three");
+        $four =$graph->createNode("four");
+        $five =$graph->createNode("five");
+        
+        
+        $graph->addEdge($one, $two);
+        $graph->addEdge($two, $four);
+        $graph->addEdge($three, $one);
+        $graph->addEdge($three, $two);
+        $graph->addEdge($four, $three);
+        $graph->addEdge($four, $four);
+        
+        $fourInDegree = $four->getInDegree();
+        
+        print_R($fourInDegree);
+        
+        //$graph->removeEdge($three, $four, FALSE);
         
         print_R($graph);
         

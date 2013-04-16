@@ -45,9 +45,35 @@ final class Edge {
      * @var type 
      */
     protected $edgeId = NULL;
+    
+    /**
+     * Adds a name to describe the edge
+     * 
+     * @var type 
+     */
+    protected $edgeName = NULL;
+    
+    /**
+     * The edge Head Node
+     * @var type 
+     */
+    protected $edgeHead = NULL;
+    
+    /**
+     * The edge tail Node
+     * @var type 
+     */
+    protected $edgeTail = NULL;
+    
+    /**
+     * Sets an arbitrary number for edge weight
+     * @var type 
+     */
+    public $edgeWeight = 0;
 
     /**
      * Holds any data associated to this edge
+     * 
      * @var type 
      */
     protected $edgeData = array();
@@ -73,12 +99,32 @@ final class Edge {
     }
 
     /**
+     * Sets the edge Name
+     * 
+     * @param type $edgeName
+     * @return \Platform\Graph\Node
+     */
+    public function setName($edgeName) {
+        $this->edgeName = strval($edgeName);
+        return $this;
+    }
+
+    /**
+     * Returns the edge Name if any exists
+     * 
+     * @return type
+     */
+    public function getName() {
+        return $this->edgeName;
+    }
+
+    /**
      * Returns the edge Data if any exists
      * 
      * @return type
      */
     public function getData() {
-        return $this->data;
+        return $this->edgeData;
     }
 
     /**
@@ -91,6 +137,46 @@ final class Edge {
         $this->edgeData = $edgeData;
         return $this;
     }
+    
+    /**
+     * Returns the edge Data if any exists
+     * 
+     * @return type
+     */
+    public function &getHead() {
+        return $this->edgeHead;
+    }
+
+    /**
+     * Sets the edge Head;
+     * 
+     * @param type $edgeHead
+     * @return \Platform\Graph\Edge
+     */
+    public function setHead(&$edgeHead) {
+        $this->edgeHead = &$edgeHead;
+        return $this;
+    }
+    
+    /**
+     * Returns the tail endpoint
+     * 
+     * @return type
+     */
+    public function &getTail() {
+        return $this->edgeTail;
+    }
+
+   /**
+    * Sets the edge Tail
+    * 
+    * @param type $edgeTail
+    * @return \Platform\Graph\Edge
+    */
+    public function setTail(&$edgeTail) {
+        $this->edgeTail = &$edgeTail;
+        return $this;
+    }
 
     /**
      * Returns and instantiated Instance of the graph class
@@ -99,24 +185,29 @@ final class Edge {
      * especially if they are defined under a namespace. A method with the same
      * name as the class is no longer considered to be its constructor
      * 
-     * @param type $nodeA
-     * @param type $nodeB
+     * @param type $head
+     * @param type $name
+     * @param type $tail
      * @param type $edgeData
-     * 
-     * @staticvar object $instance
-     * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
-     * 
-     * @return object graph
+     * @param type $directed
+     * @param type $weight
+     * @throws \Platform\Exception
      */
-    public function __construct(&$head, &$tail, $edgeData = array()) {
-        if (!is_a($head, "\Platform\Graph\Node")||!is_a($tail, "\Platform\Graph\Node")){
+    public function __construct(&$head, $name="", &$tail, $edgeData = array(), $directed = FALSE, $weight = 0) {
+        if (!is_a($head, "\Platform\Graph\Node") || !is_a($tail, "\Platform\Graph\Node")) {
             throw new \Platform\Exception("Nodes used to create a new Edge must be instances of \Platform\Graph\Node", PLATFORM_ERROR);
         }
-        $edgeId = "someId";
+        $headId = $head->getId(); //If head is not node return false;
+        $tailId = $tail->getId();
+        $_edgeId= array($headId); !empty($name)? $_edgeId[]=$name : null; $_edgeId[]=$tailId;
+        
+        $edgeId = implode(":", $_edgeId);
+        
         $this->setId($edgeId);
         $this->setData($edgeData);
+        $this->setName($name);
+        $this->setHead($head);
+        $this->setTail($tail);
     }
-
 }
 

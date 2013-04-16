@@ -85,6 +85,28 @@ final class Schema extends Platform\Model {
     }
 
     /**
+     * Used mainly to contain user defined groups. A basis of privacy
+     * @Return false;
+     */
+    private static function createGroupsTable() {
+        static::$database->query("DROP TABLE IF EXISTS `?groups`;");
+        static::$database->query(
+                "CREATE TABLE IF NOT EXISTS `?groups` (
+                `group_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+                `group_name` VARCHAR(45) NOT NULL ,
+                `group_title` VARCHAR(45) NOT NULL ,
+                `group_description` VARCHAR(100) NULL ,
+                `group_owner` VARCHAR(20) NOT NULL ,
+                `group_parent_id` INT NOT NULL ,
+                `group_lft` INT NOT NULL DEFAULT 0 ,
+                `group_rght` INT NOT NULL DEFAULT 0 ,
+                PRIMARY KEY (`group_id`) ,
+                INDEX `group_owner_uri` (`group_owner` ASC) 
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;"
+        );
+    }
+
+    /**
      * Creates the authority permission table
      * @return void
      */
@@ -398,10 +420,27 @@ final class Schema extends Platform\Model {
                 "CREATE TABLE IF NOT EXISTS `?objects_authority` (
                 `object_authority_id` int(11) NOT NULL AUTO_INCREMENT,
                 `authority_id` bigint(20) NOT NULL,
-                `object_id` varchar(45) NOT NULL,
+                `object_id` bigint(20) NOT NULL,
                 PRIMARY KEY (`object_authority_id`),
                 UNIQUE KEY `object_authority` (`authority_id`,`object_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+        );
+    }
+
+    /**
+     * Creates the object authority table
+     * @return void
+     */
+    private static function createObjectsGroupTable() {
+        static::$database->query("DROP TABLE IF EXISTS `?objects_group`;");
+        static::$database->query(
+           "CREATE TABLE IF NOT EXISTS `?objects_group` (
+                `object_group_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+                `group_id` INT NOT NULL ,
+                `object_uri` VARCHAR(20) NOT NULL ,
+                PRIMARY KEY (`object_group_id`) ,
+                UNIQUE INDEX `object_group_id_UNIQUE` (`object_group_id` ASC) 
+            )ENGINE=InnoDB DEFAULT CHARSET=utf8;"
         );
     }
 
@@ -411,7 +450,7 @@ final class Schema extends Platform\Model {
     private static function createObjectsEdgesTable() {
         static::$database->query("DROP TABLE IF EXISTS `?objects_edges`;");
         static::$database->query(
-           "CREATE TABLE `?objects_edges` (
+                "CREATE TABLE IF NOT EXISTS `?objects_edges` (
               `object_edge_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
               `edge_head_object` varchar(20) NOT NULL,
               `edge_name` varchar(45) NOT NULL,
@@ -711,9 +750,11 @@ final class Schema extends Platform\Model {
         //static::createContentmetaTable();
         //static::createContentsTable();
         static::createSessionTable();
-
+        
         static::createObjectsTable();
+        static::createGroupsTable();
         static::createObjectsAuthorityTable();
+        static::createObjectsGroupTable();
         static::createObjectsEdgesTable();
         static::createPropertiesTable();
         static::createPropertyDatatypeTable();

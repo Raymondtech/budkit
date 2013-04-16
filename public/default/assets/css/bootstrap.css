@@ -8265,7 +8265,7 @@ input.search-query {
 .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer {
   margin: 20px -18px -18px -18px;
   padding: 5px 10px;
-  border-top: 1px dashed #ddd;
+  border-top: 1px dashed #fcfafa;
   position: relative;
   background: #fcfafa;
 }

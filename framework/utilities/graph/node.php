@@ -50,8 +50,13 @@ final class Node {
      * Holds any data associated to this node
      * @var type 
      */
-    protected static $nodeData = array();
-    private static $nodeGraph = NULL;
+    protected $nodeData = array();
+
+    /**
+     * A recursive reference to the parent graph
+     * @var type 
+     */
+    private $nodeGraph = NULL;
 
     /**
      * Returns the node's Id
@@ -78,7 +83,7 @@ final class Node {
      * @return type
      */
     public function getData() {
-        return static::$nodeData;
+        return $this->nodeData;
     }
 
     /**
@@ -88,7 +93,7 @@ final class Node {
      * @return \Platform\Graph\Node
      */
     public function setData($nodeData = array()) {
-        static::$nodeData = $nodeData;
+        $this->nodeData = $nodeData;
         return $this;
     }
 
@@ -107,7 +112,35 @@ final class Node {
      * deg(v) where v = vertex or node
      */
     public function getDegree() {
-        
+
+        if (!is_a($this->nodeGraph, "\Platform\Graph")):
+            throw new \Exception("Unkown node parent graph. Cannot calculate InDegree of NODE:" . $this->getId(), PLATFORM_ERROR); //Unkonwn graph type;
+        endif;
+
+        $incidence = 0;
+        $graph = $this->getGraph();
+        $edges = $graph->getEdgeSet();
+
+        //If this graph is undirected, then we can't calculate the  indegree to this node;
+        if (empty($edges))
+            return $incidence;
+
+        //search for all arcs with this node as tail
+        foreach ($edges as $edge):
+            if ($edge->getTail()->getId() == $this->getId()) {
+                $incidence++;
+                //if head is the same as self, as is the case in cycled edges then we have one more indegree,
+                //looped vertices have an indegree of two;
+                if ($edge->getHead()->getId() == $this->getId())
+                    $incidence++;
+            }elseif ($edge->getHead()->getId() == $this->getId()) {
+                //Cover for cycles
+                if ($edge->getHead()->getId() == $this->getId())
+                    $incidence++;
+            }
+        endforeach;
+
+        return $incidence;
     }
 
     /**
@@ -118,7 +151,34 @@ final class Node {
      * @return interger
      */
     public function getInDegree() {
-        
+
+        if (!is_a($this->nodeGraph, "\Platform\Graph")):
+            throw new \Exception("Unkown node parent graph. Cannot calculate InDegree of NODE:" . $this->getId(), PLATFORM_ERROR); //Unkonwn graph type;
+        endif;
+
+        $graph = $this->getGraph();
+        $arcIds = $graph->getArcSet();
+
+        //If this graph is undirected, then we can't calculate the  indegree to this node;
+        if (empty($arcIds))
+            return $this->getDegree();
+
+        $edges = $graph->getEdgeSet();
+        $incidence = 0;
+
+        //search for all arcs with this node as tail
+        foreach ($arcIds as $arc):
+            $edge = $edges[$arc];
+            if ($edge->getTail()->getId() == $this->getId()) {
+                $incidence++;
+                //if head is the same as self, as is the case in cycled edges then we have one more indegree,
+                //looped vertices have an indegree of two;
+                if ($edge->getHead()->getId() == $this->getId())
+                    $incidence++;
+            }
+        endforeach;
+
+        return $incidence;
     }
 
     /**
@@ -129,7 +189,34 @@ final class Node {
      * @return interger
      */
     public function getOutDegree() {
-        
+
+        if (!is_a($this->nodeGraph, "\Platform\Graph")):
+            throw new \Exception("Unkown node parent graph. Cannot calculate InDegree of NODE:" . $this->getId(), PLATFORM_ERROR); //Unkonwn graph type;
+        endif;
+
+        $graph = $this->getGraph();
+        $arcIds = $graph->getArcSet();
+
+        //If this graph is undirected, then we can't calculate the  indegree to this node;
+        if (empty($arcIds))
+            return $this->getDegree();
+
+        $edges = $graph->getEdgeSet();
+        $incidence = 0;
+
+        //search for all arcs with this node as tail
+        foreach ($arcIds as $arc):
+            $edge = $edges[$arc];
+            if ($edge->getHead()->getId() == $this->getId()) {
+                $incidence++;
+                //if head is the same as self, as is the case in cycled edges then we have one more indegree,
+                //looped vertices have an indegree of two;
+                if ($edge->getTail()->getId() == $this->getId())
+                    $incidence++;
+            }
+        endforeach;
+
+        return $incidence;
     }
 
     /**
@@ -172,7 +259,7 @@ final class Node {
      * @param type $graph
      */
     public function setGraph(&$graph) {
-        static::$nodeGraph = & $graph;
+        $this->nodeGraph = & $graph;
     }
 
     /**
@@ -181,7 +268,7 @@ final class Node {
      * @return type
      */
     public function &getGraph() {
-        return static::$nodeGraph;
+        return $this->nodeGraph;
     }
 
     /**

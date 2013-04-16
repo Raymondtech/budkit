@@ -39,7 +39,7 @@
                                     <a href="#"><tpl:element type="text" data="authority_title" /></a>
                                 </td>
                                 <td align="center">0 members</td>
-                                <td align="center"><a href="#">Edit</a></td>
+                                <td class="text-center"><a href="#">Edit</a></td>
                             </tr> 
                         </tpl:loop>
                     </tbody>
