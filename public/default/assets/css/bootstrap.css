@@ -7524,6 +7524,10 @@ input.search-query {
 .indenter {
   color: #eeeeee;
 }
+.placeholder-text {
+  color: #b3b3b3;
+  text-shadow: 0 2px 1px #ffffff;
+}
 /****IMPORTS****/
 .nav-mediagrid > li > a {
   padding-top: 8px;

@@ -45,16 +45,28 @@ final class Privacy extends Settings\Member {
         /**
      * Privacy Lists
      */
-    public function groups() {
+    public function groups($edit=null) {
         
-        $view = $this->load->view('member');
-        
+        $view = $this->load->view('member');       
+        $params = $this->getRequestArgs();
+
         //1. Load the model
-        $authority = $this->load->model("authority", "settings");
+        $group = $this->load->model("groups");
+
+        //2. If we are editing the authority, save
+        if ($this->input->methodIs("post")):
+            if (!$group->store($edit, $params)) {
+                $errors = $this->getErrorString();
+                $this->alert($errors, null, "error");
+            } $this->alert(_("Changes to your privacy groups have been saved successfully"), "", "success");
+            $this->redirect($this->output->link("/settings/member/privacy/groups"));
+        endif;
+
         //3. Get the authorities list
-        $authorities = $authority->getAuthorities();
-        //4. Set Properties
-        $this->set("authorities", $authorities);
+        $groups = $group->getGroups();
+        if(!empty($groups)): //If we have privacy groups
+            $this->set("groups", $groups);
+        endif;
         
         return $view->form("member/groups", "Privacy Groups");
     }

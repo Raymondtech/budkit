@@ -99,7 +99,7 @@ final class Schema extends Platform\Model {
                 `group_owner` VARCHAR(20) NOT NULL ,
                 `group_parent_id` INT NOT NULL ,
                 `group_lft` INT NOT NULL DEFAULT 0 ,
-                `group_rght` INT NOT NULL DEFAULT 0 ,
+                `group_rgt` INT NOT NULL DEFAULT 0 ,
                 PRIMARY KEY (`group_id`) ,
                 INDEX `group_owner_uri` (`group_owner` ASC) 
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;"
@@ -129,19 +129,19 @@ final class Schema extends Platform\Model {
         //Dumping default permission data to authority_permission tablegit
         static::$database->query(
                 "INSERT INTO `?authority_permissions` (`authority_permission_key`, `authority_id`, `permission_area_uri`, `permission`, `permission_type`, `permission_title`) VALUES
-            (1, 4, '/settings/system(/[a-z0-9-]*)*', 'allow', 'special', 'System Settings'),
-            (2, 1, '/system/authenticate(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Login'),
-            (5, 2, '/system/media([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'View Content'),
-            (6, 1, '/setup/install(/[a-z0-9-]*)*', 'allow', 'execute', 'Setup Installer'),
-            (7, 2, '/system/start(/[a-z0-9-]*)*', 'allow', 'view', 'Start Pages'),
-            (8, 2, '/system/upload([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Uploads'),
-            (9, 1, '/system/search(/[a-z0-9-]*)*', 'allow', 'execute', 'System Search'),
-            (10, 2, '/system/message([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Messages'),
-            (11, 2, '/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Execute Member actions'),
-            (12, 1, '/system/object([s]*/[a-z0-9-]*)*', 'allow', 'view', 'System Objects'),
-            (13, 2, '/settings/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Member Settings'),
-            (14, 2, '/system/event([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Events'),
-            (15, 2, '/system/notification([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Notifications'),
+            (1, 4, '^/settings/system(/[a-z0-9-]*)*', 'allow', 'special', 'System Settings'),
+            (2, 1, '^/system/authenticate(/[a-z0-9-]*)*', 'allow', 'execute', 'Site Login'),
+            (5, 2, '^/system/media([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'View Content'),
+            (6, 1, '^/setup/install(/[a-z0-9-]*)*', 'allow', 'execute', 'Setup Installer'),
+            (7, 2, '^/system/start(/[a-z0-9-]*)*', 'allow', 'view', 'Start Pages'),
+            (8, 2, '^/system/upload([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Uploads'),
+            (9, 1, '^/system/search(/[a-z0-9-]*)*', 'allow', 'execute', 'System Search'),
+            (10, 2, '^/system/message([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'System Messages'),
+            (11, 2, '^/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Execute Member actions'),
+            (12, 1, '^/system/object([s]*/[a-z0-9-]*)*', 'allow', 'view', 'System Objects'),
+            (13, 2, '^/settings/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Member Settings'),
+            (14, 2, '^/system/event([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Events'),
+            (15, 2, '^/system/notification([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Notifications'),
             (16, 2, '^/system/extension([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Extensions');"
         );
     }

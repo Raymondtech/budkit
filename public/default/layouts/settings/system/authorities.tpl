@@ -26,9 +26,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class="span10">Name</th>    
-                            <th class="span1" align="center">Members</th>
-                            <th class="span1" align="center">Actions</th>
+                            <th class="span8">Name</th>    
+                            <th class="span2" align="center">Members</th>
+                            <th class="span2" align="center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>

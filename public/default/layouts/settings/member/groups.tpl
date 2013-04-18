@@ -1,18 +1,20 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="padding">  
         <div class="clearfix">
-            <form class="pull-right no-margin form-horizontal" action="/settings/system/permissions/authorities/edit" method="POST">   
-                <input type="text" name="authority-title" class="span2" placeholder="Group Name" />
-                <select name="authority-parent" id="authority-parent">
-                    <option value="">Select Parent</option>
-                    <tpl:loop data="authorities" id="authorities">
-                        <option value="${authority_id}">
-                            <tpl:loop limit="indent"><span class="indenter">|--</span></tpl:loop>
-                            <span><tpl:element type="text" data="authority_title" /></span>
-                        </option>
-                    </tpl:loop>
-                </select>
-                <input type="hidden" name="authority-description" />
+            <form class="pull-right no-margin form-horizontal" action="/settings/member/privacy/groups/edit" method="POST">   
+                <input type="text" name="group-title" class="span2" placeholder="Group Title" />
+                <tpl:condition data="groups" test="isset" value="1">
+                    <select name="group-parent" id="authority-parent">
+                        <option value="">No Parent (Root)</option>
+                        <tpl:loop data="groups" id="authorities">
+                            <option value="${group_id}">
+                                <tpl:loop limit="indent"><span class="indenter">|--</span></tpl:loop>
+                                <span><tpl:element type="text" data="group_title" /></span>
+                            </option>
+                        </tpl:loop>
+                    </select>
+                </tpl:condition>
+                <input type="hidden" name="group-description" />
                 <button type="submit" class="btn">Add Privacy Group</button>
             </form>
             <ul class="nav nav-pills no-margin">
@@ -20,31 +22,37 @@
             </ul>
         </div>
         <hr />
-        <div class="widget">
-            <div class="widget-head"><span class="widget-title"><tpl:element type="text" data="page.title">Authority Groups</tpl:element></span></div>
-            <div class="widget-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="span10">Name</th>    
-                            <th class="span1" align="center">Members</th>
-                            <th class="span1" align="center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tpl:loop data="authorities" id="authority-groups">
+        <tpl:condition data="groups" test="isset" value="0">
+            <p class="placeholder-text">You have not created any privacy groups. Categorizing your followers into groups helps control the people with whom you share stuff.</p>
+        </tpl:condition>
+        <tpl:condition data="groups" test="isset" value="1">
+            <div class="widget">
+                <div class="widget-head"><span class="widget-title"><tpl:element type="text" data="page.title">Privacy Groups</tpl:element></span></div>
+                <div class="widget-body">
+
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td class="authority-name">
-                                    <tpl:loop limit="indent"><span class="indenter">|--</span></tpl:loop>
-                                    <a href="#"><tpl:element type="text" data="authority_title" /></a>
-                                </td>
-                                <td align="center">0 members</td>
-                                <td class="text-center"><a href="#">Edit</a></td>
-                            </tr> 
-                        </tpl:loop>
-                    </tbody>
-                </table>
-            </div>            
-        </div>
+                                <th class="span8">Name</th>    
+                                <th class="span2" align="center">Members</th>
+                                <th class="span2" align="center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tpl:loop data="groups" id="authority-groups">
+                                <tr>
+                                    <td class="authority-name">
+                                        <tpl:loop limit="indent"><span class="indenter">|--</span></tpl:loop>
+                                        <a href="#"><tpl:element type="text" data="group_title" /></a>
+                                    </td>
+                                    <td align="center">0 members</td>
+                                    <td class="text-center"><a href="#">Edit</a></td>
+                                </tr> 
+                            </tpl:loop>
+                        </tbody>
+                    </table>
+                </div>            
+            </div>
+        </tpl:condition>
     </div>
 </tpl:layout>
