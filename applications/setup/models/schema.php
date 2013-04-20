@@ -216,12 +216,13 @@ final class Schema extends Platform\Model {
                 (87, 84, 'Audio', '/system/media/audio/gallery', NULL, 0, 1, 'link', NULL, 4, 9, 1),
                 (88, 84, 'Videos', '/system/media/video/gallery', NULL, 0, 1, 'link', NULL, 5, 8, 1),
                 (89, 84, 'Articles', '/system/media/article/gallery', '', 23, 1, 'link', '', 6, 7, 1),
-                (90, 0, 'Relations', '', NULL, 0, 6, 'link', NULL, 1, 10, 1),
-                (91, 90, 'Suggestions', '/member/network/relation/suggestions', NULL, 0, 6, 'link', NULL, 2, 9, 1),
-                (92, 90, 'Following', '/member/network/relation/following', NULL, 0, 6, 'link', NULL, 3, 8, 1),
-                (93, 90, 'Followers', '/member/network/relation/followers', NULL, 0, 6, 'link', NULL, 4, 7, 1),
-                (94, 90, 'Invites', '/member/network/relation/requests', NULL, 0, 6, 'link', NULL, 5, 6, 1),
-                (95, 0, 'Groups', '', NULL, 0, 6, 'link', NULL, 1, 6, 1),
+                (90, 0, 'Network', '', NULL, 0, 6, 'link', NULL, 1, 12, 1),
+                (99, 90, 'Members', '/member/network/directory', NULL, 0, 6, 'link', NULL, 2, 11, 1),
+                (92, 90, 'Following', '/member/network/relation/following', NULL, 0, 6, 'link', NULL, 3, 10, 1),
+                (93, 90, 'Followers', '/member/network/relation/followers', NULL, 0, 6, 'link', NULL, 4, 9, 1),
+                (94, 90, 'Invites', '/member/network/relation/requests', NULL, 0, 6, 'link', NULL, 5, 8, 1),
+                (91, 90, 'Suggestions', '/member/network/relation/suggestions', NULL, 0, 6, 'link', NULL, 6, 7, 1)
+                (95, 0, 'Communities', '', NULL, 0, 6, 'link', NULL, 1, 6, 1),
                 (96, 95, 'Directory', '/member/network/group/index', NULL, 0, 6, 'link', NULL, 2, 5, 1),
                 (97, 95, 'Subscriptions', '/member/network/group/subscriptions', NULL, 0, 6, 'link', NULL, 3, 4, 1);"
         );

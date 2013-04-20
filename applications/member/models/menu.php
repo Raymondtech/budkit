@@ -48,6 +48,7 @@ class Menu extends \Platform\Model {
                 "menu_url" => "/member/profile/view"
             ));
         }
+
     }
 
     /**
