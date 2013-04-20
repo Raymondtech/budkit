@@ -36,10 +36,10 @@
                             <tr>
                                 <td class="authority-name">
                                     <tpl:loop limit="indent"><span class="indenter">|--</span></tpl:loop>
-                                    <a href="#"><tpl:element type="text" data="authority_title" /></a>
+                                    <a href="/settings/system/permissions/authority/${authority_id}"><tpl:element type="text" data="authority_title" /></a>
                                 </td>
                                 <td align="center">0 members</td>
-                                <td align="center"><a href="#">Edit</a></td>
+                                <td align="center"><a href="/settings/system/permissions/authority/edit/${authority_id}">Edit</a></td>
                             </tr> 
                         </tpl:loop>
                     </tbody>

@@ -43,10 +43,10 @@
                                 <tr>
                                     <td class="authority-name">
                                         <tpl:loop limit="indent"><span class="indenter">|--</span></tpl:loop>
-                                        <a href="#"><tpl:element type="text" data="group_title" /></a>
+                                        <a href="/settings/member/privacy/group/${group_id}"><tpl:element type="text" data="group_title" /></a>
                                     </td>
                                     <td align="center">0 members</td>
-                                    <td class="text-center"><a href="#">Edit</a></td>
+                                    <td class="text-center"><a href="/settings/member/privacy/edit/${group_id}">Edit</a></td>
                                 </tr> 
                             </tpl:loop>
                         </tbody>

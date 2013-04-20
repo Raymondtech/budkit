@@ -15,7 +15,7 @@
                         <li><a href="/system/start/dashboard">Dashboard</a></li>
                         <li><a href="/system/media/timeline">Timeline</a></li>   
                         <li><a href="/system/messages/all">Messages</a></li>                                                                              
-                        <li><a href="/member/network/relation">Network</a></li>     <!--Use  class="highlighted" on new notifications-->
+                        <li><a href="/member/network/directory">Network</a></li>     <!--Use  class="highlighted" on new notifications-->
                         <li><a href="/settings/member/account">Settings</a></li> 
                         <li><a href="/system/authenticate/logout">Signout</a></li>
                     </ul>
