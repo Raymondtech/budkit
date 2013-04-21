@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * group.php
+ * community.php
  *
  * Requires PHP version 5.4
  *
@@ -28,7 +28,7 @@ use Application\Member\Controllers as Member;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Group extends Member\Network{
+final class Community extends Member\Network{
 
     /**
      * The default group action

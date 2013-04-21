@@ -369,3 +369,27 @@ ul.media-item-actions{
         }
     }
 }
+
+#comments{
+    .timeline-item-index{
+        .timeline-item-li{
+            .timeline-item-container{
+                background: aliceBlue;
+                border: 1px solid #ddd;
+                &:before{
+
+                    border-width: 10px 10px 10px 0;
+                    border-color: transparent #ddd;
+                }
+                &:after{
+                    border-width: 8px 10px 8px 0;
+                    border-color: transparent aliceBlue;
+                }
+            }
+            .timeline-item-footer{
+                margin: 5px 0 -10px; padding: 0px; background-color: transparent;
+            }
+        }
+    }
+
+}

@@ -39,10 +39,10 @@ namespace Platform;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 final class Graph {
+    
     /*
      * @var object 
      */
-
     static $instance;
 
     /**

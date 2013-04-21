@@ -14,9 +14,11 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\Member\Controllers\Network;
 
 use Application\Member\Controllers as Member;
+
 /**
  * The Member Relationship action controller
  *
@@ -29,28 +31,67 @@ use Application\Member\Controllers as Member;
  */
 class Relation extends Member\Network {
 
-    
     public function index() {
         parent::index();
     }
-    
-    
-    public function suggestions(){
-        return $this->index();
-    }
-    
-    public function followers(){
-        return $this->index();
-    }
-    
-    public function following(){
-        return $this->index();
-    }
-    
-    public function request(){
-        return $this->index();
-    } //Invites etc
 
+    public function suggestions() {
+
+        return $this->index();
+    }
+
+    public function followers() {
+        return $this->index();
+    }
+
+    public function following() {
+        return $this->index();
+    }
+
+    public function request() {
+        //Invites etc
+        return $this->index();
+    }
+
+    /**
+     * Follows a member
+     * 
+     * @param type $memberURI
+     */
+    public function follow($memberURI = NULL) {
+
+        //Do we know who we are trying to follow?
+        if (empty($memberURI)):
+            $this->alert("Unable to determine the member to follow", "", "error");
+            return $this->returnRequest();
+        endif;
+
+        if ($this->input->methodIs("post")) {
+            $model = $this->load->model("relation");
+        }
+        //Returns the request back tot the reffer;
+        $this->alert(sprintf("You are now following @%s", $memberURI), "", "success");
+
+
+        return $this->returnRequest();
+    }
+
+    public function unfollow($memberURI = NULL) {
+        //Do we know who we are trying to follow?
+        if (empty($memberURI)):
+            $this->alert("Unable to determine the member to unfollow", "", "error");
+            return $this->returnRequest();
+        endif;
+
+        if ($this->input->methodIs("post")) {
+            $model = $this->load->model("relation");
+        }
+        //Returns the request back tot the reffer;
+        $this->alert(sprintf("You are no longer following @%s", $memberURI), "", "success");
+
+
+        return $this->returnRequest();
+    }
 
     /**
      * Returns an instance of the Settings class
@@ -65,4 +106,5 @@ class Relation extends Member\Network {
         $instance = new self;
         return $instance;
     }
+
 }

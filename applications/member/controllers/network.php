@@ -34,23 +34,32 @@ class Network extends \Platform\Controller {
      * @return boolean
      */
     public function index() {
-        return $this->gallery();
+               
+        return $this->directory();
     }
 
-    public function gallery() {
+    
+    /**
+     * Displays the member network
+     * 
+     * @return void;
+     */
+    public function directory() {
         
-        $this->output->setPageTitle(_("Network"));
+        $this->output->setPageTitle(_("Members"));
         
         $view  = $this->load->view("network");
         $model = $this->load->model("profile", "member");
 
-        $users = $model->getObjectsList("user");
-        $items = array("title"=>"Members");
+        $users = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("user");
+        $model->setPagination(); //Set the pagination vars
+        $items = array("totalItems" => 0);
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
         while ($row = $users->fetchAssoc()) {
             $row['user_url'] = "/system/object/{$row['object_uri']}";
             $items["items"][] = $row;
+            $items["totalItems"]++;
         }
         $this->set("gallery", $items);
 

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * object.php
+ * relations.php
  *
  * Requires PHP version 5.4
  *
@@ -15,49 +15,51 @@
  * 
  */
 
-namespace Application\System\Controllers;
+namespace Application\Member\Models;
+
+use Platform;
+use Library;
 
 /**
- * The Object controller
+ * Models relationships between network nodes (members)
+ *
+ * 
  *
  * @category  Application
- * @package   Action Controller
+ * @package   Data Model
  * @license   http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version   1.0.0
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * 
  */
-class Object extends \Platform\Controller {
-    
+class Relations extends Platform\Model {
+
     /**
-     * The default fallback method. 
-     * @return void
+     * Default display method for every model 
+     * @return boolean false
      */
-    public function index() {
-        
-        //The method is the object unique ID
-        $entity     = \Platform\Entity::getInstance();
-        $resourceId = $this->router->getMethod();
-        $params     = func_get_args();
-        
-        //$object     = $entity->loadObjectByURI( $resourceId ); //@todo Validate URI
-        //$objectType = $object->getPropertyValue("objectType");
-        //Loads all the system objects;
-        \Library\Event::trigger("beforeObjectLoad", $resourceId , $params);
-
+    public function display() {
+        return false;
     }
-    
-    public function route(){
-        
-        //the object route
-        
-    }
-
 
     /**
-     * Gets an instance of the search class
-     * @staticvar self $instance
-     * @return self 
+     * Saves options to the database, inserting if none exists or updating on duplicate key
+     * 
+     * @param array $options An array of options
+     * @param string $group A unique string representing the options group
+     * @return boolean
+     */
+    public function save($options, $group = null) {
+
+        
+        return true;
+    }
+
+    /**
+     * Get's an instance of the activity model
+     * @staticvar object $instance
+     * @return object \Application\System\Models\Options 
      */
     public static function getInstance() {
         static $instance;

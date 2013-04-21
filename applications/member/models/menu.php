@@ -41,14 +41,43 @@ class Menu extends \Platform\Model {
      */
     public static function hook(&$menuId, &$menuItems) {
 
-        if ($menuId === 'profilemenu') {
-            //Add items to the profile menu;
-            array_unshift($menuItems, Array(
-                "menu_title" => "Home",
-                "menu_url" => "/member/profile/view"
-            ));
-        }
 
+        $user = User::getInstance();
+        $username = $user->get("user_name_id");
+
+        //Add the default upload links
+        switch ($menuId):
+            case 'peoplemenu':
+                //Counts
+                $mycount = $user->getObjectsListCount("user");
+
+                if (empty($mycount))
+                    $mycount = NULL;
+                //Add items to the profile menu;
+                array_unshift($menuItems, array(
+                    "menu_title" => "Network",
+                    "children" => array(
+                        array("menu_title" => "Members", "menu_url" => "/member/network/directory","menu_count" => $mycount),
+                        array("menu_title" => "Following", "menu_url" => "/member/network/relation/following"),
+                        array("menu_title" => "Followers", "menu_url" => "/member/network/relation/followers"),
+                        array("menu_title" => "Requests", "menu_url" => "/member/network/relation/requests")
+                    )
+                        ), array(
+                    "menu_title" => "Communities",
+                    "children" => array(
+                        array("menu_title" => "Directory", "menu_url" => "/member/network/community/directory"),
+                        array("menu_title" => "Memberships", "menu_url" => "/member/network/community/membership")
+                    )
+                ));
+                break;
+            case 'profilemenu':
+                //Add items to the profile menu;
+                array_unshift($menuItems, Array(
+                    "menu_title" => "Home",
+                    "menu_url" => "/member/profile/view"
+                ));
+                break;
+        endswitch;
     }
 
     /**

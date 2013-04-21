@@ -7521,6 +7521,9 @@ input.search-query {
 .platform-user:after {
   clear: both;
 }
+.platform-user a {
+  color: #333333;
+}
 .indenter {
   color: #eeeeee;
 }
@@ -8361,6 +8364,23 @@ ul.media-item-actions li a:hover {
 }
 ul.media-item-actions li a:hover .rating {
   display: block;
+}
+#comments .timeline-item-index .timeline-item-li .timeline-item-container {
+  background: aliceBlue;
+  border: 1px solid #ddd;
+}
+#comments .timeline-item-index .timeline-item-li .timeline-item-container:before {
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #ddd;
+}
+#comments .timeline-item-index .timeline-item-li .timeline-item-container:after {
+  border-width: 8px 10px 8px 0;
+  border-color: transparent aliceBlue;
+}
+#comments .timeline-item-index .timeline-item-li .timeline-item-footer {
+  margin: 5px 0 -10px;
+  padding: 0px;
+  background-color: transparent;
 }
 .wizard {
   margin-bottom: 24px;
