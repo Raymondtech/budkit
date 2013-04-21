@@ -2,7 +2,7 @@
     <div class="account-settings padding-top">
         <form class="form-horizontal" action="/" method="POST">
             <fieldset>
-                
+
                 <div class="control-group">
                     <label class="control-label"  for="first-name">First Name</label>
                     <div class="controls">
@@ -193,7 +193,7 @@
                             <option value="1901">1901</option>
                             <option value="1900">1900</option>
                         </select>
-                        <p class="help-block">We will not show your date of birth on your profile, unless you <a href="#">tell us</a> to</p>
+                        <p class="help-block">We will not show your date of birth on your profile, unless you <a href="/settings/member/privacy">tell us</a> to</p>
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
@@ -204,32 +204,32 @@
                                 <?php echo $this->config->getParam('host','').$this->config->getParam('path',''); ?></span>
                             <input id="username" name="user_name_id" size="20" type="text" value="${user.user_name_id}" disabled="" />
                         </div>
-                        <span class="help-block">You cannot change your username. Its shown here only for your reference</span>
+                        <span class="help-block">You cannot change your username. </span>
                     </div>
                 </div><!-- /control-group -->
             </fieldset>
-<!--            <hr />
-            <fieldset>
-
-                <div class="control-group">
-                    <label class="control-label"  for="old_user_password">Old password</label>
-                    <div class="controls">
-                        <input class="input-xlarge" id="old-password" name="old_user_password" size="30" type="password" />
-                    </div>
-                </div> /control-group 
-                <div class="control-group">
-                    <label class="control-label"  for="new_user_password">New password</label>
-                    <div class="controls">
-                        <input class="input-xlarge" id="new-password" name="new_user_password" size="30" type="password" />
-                    </div>
-                </div> /control-group 
-                <div class="control-group">
-                    <label class="control-label"  for="new_user_password_repeat">Verify new password</label>
-                    <div class="controls">
-                        <input class="input-xlarge" id="new-password-repeat" name="new_user_password_repeat" size="30" type="password" />
-                    </div>
-                </div> /control-group 
-            </fieldset>-->
+            <!--            <hr />
+                        <fieldset>
+            
+                            <div class="control-group">
+                                <label class="control-label"  for="old_user_password">Old password</label>
+                                <div class="controls">
+                                    <input class="input-xlarge" id="old-password" name="old_user_password" size="30" type="password" />
+                                </div>
+                            </div> /control-group 
+                            <div class="control-group">
+                                <label class="control-label"  for="new_user_password">New password</label>
+                                <div class="controls">
+                                    <input class="input-xlarge" id="new-password" name="new_user_password" size="30" type="password" />
+                                </div>
+                            </div> /control-group 
+                            <div class="control-group">
+                                <label class="control-label"  for="new_user_password_repeat">Verify new password</label>
+                                <div class="controls">
+                                    <input class="input-xlarge" id="new-password-repeat" name="new_user_password_repeat" size="30" type="password" />
+                                </div>
+                            </div> /control-group 
+                        </fieldset>-->
             <hr />
             <fieldset>
                 <div class="control-group">
@@ -238,40 +238,39 @@
                         <select name="user_timezone" id="timezone" class="input-xxlarge span5 drop">
                             <option value="-12.0">(GMT -12:00) Eniwetok, Kwajalein</option><option value="-11.0">(GMT -11:00) Midway Island, Samoa</option><option value="-10.0">(GMT -10:00) Hawaii</option><option value="-9.0">(GMT -9:00) Alaska</option><option value="-8.0">(GMT -8:00) Pacific Time (US&amp;Canada)</option><option value="-7.0">(GMT -7:00) Mountain Time (US&amp;Canada)</option><option value="-6.0">(GMT -6:00) Central Time (US&amp;Canada), Mexico City</option><option value="-5.0">(GMT -5:00) Eastern Time (US&amp;Canada), Bogota, Lima</option><option value="-4.0">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option><option value="-3.5">(GMT -3:30) Newfoundland</option><option value="-3.0">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option><option value="-2.0">(GMT -2:00) Mid-Atlantic</option><option value="-1.0">(GMT -1:00 hour) Azores, Cape Verde Islands</option><option value="0.0" selected="selected">(GMT) Western Europe Time, London, Lisbon, Casablanca</option><option value="1.0">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</option><option value="2.0">(GMT +2:00) Kaliningrad, South Africa</option><option value="3.0">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option><option value="3.5">(GMT +3:30) Tehran</option><option value="4.0">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option><option value="4.5">(GMT +4:30) Kabul</option><option value="5.0">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option><option value="5.5">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option><option value="5.75">(GMT +5:45) Kathmandu</option><option value="6.0">(GMT +6:00) Almaty, Dhaka, Colombo</option><option value="7.0">(GMT +7:00) Bangkok, Hanoi, Jakarta</option><option value="8.0">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option><option value="9.0">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option><option value="9.5">(GMT +9:30) Adelaide, Darwin</option><option value="10.0">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option><option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option><option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
                         </select>
+                        <span class="help-block">Unless specified 'relative time' will be used.</span>
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
-                    <label class="control-label"  for="user_location">Default location</label>
+                    <label class="control-label" for="options[localization][locale]"> <?php echo _('Locale language'); ?></label>
                     <div class="controls">
-                        <div class="input-append">
-                            <input class="input-xlarge" id="location" name="user_location" size="100" type="text" />
-                            <span class="btn add-on"><i class="icon-map-marker"></i></span>
-                        </div>
-                        <span class="help-block">The place where you spend most of your time</span>
+                        <select name="options[localization][locale]" class="input-xlarge">
+                            <option value="en_GB"><?php echo _('English - United Kingdom (en_GB)'); ?></option>
+                            <option value="fr_FR"><?php echo _('French - France (fr_FR)'); ?></option>
+                            <option value="de_DE"><?php echo _('German - Germany (de_DE)'); ?></option>
+                        </select>
                     </div>
-                </div><!-- /control-group -->
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="options[localization][date-format]"> <?php echo _('Date format'); ?></label>
+                    <div class="controls">
+                        <select name="options[localization][date-format]" class="input-xlarge">
+                            <option value="default"><?php echo _('Time difference'); ?></option>
+                            <option value="locale"><?php echo _('Locale time format'); ?></option>
+                        </select>
+                    </div>
+                </div>
             </fieldset>
             <hr />
             <fieldset>
-
                 <div class="control-group">
-                    <label class="control-label" >Current Session Id</label>
+                    <label class="control-label" >API  Key</label>
                     <div class="controls">
                         <div class="input-append">
-                            <span class="uneditable-input input-xlarge">8ec8b1b1b87a8404ea1b75f5eaf4b077</span>
-                            <a href="/reset-api-key" class="add-on btn" title="Reset API Key"><i class="icon-refresh"></i></a>
+                            <span class="uneditable-input input-xlarge"></span>
+                            <a href="/reset-api-key" class="add-on btn" title="Reset API Key">Reset</a>
                         </div>
-                        <span class="help-block">This session will expire in 5 minutes if no activity is detected</span>
-                    </div>
-                </div><!-- /control-group -->
-                <div class="control-group">
-                    <label class="control-label" >API Secret Key</label>
-                    <div class="controls">
-                        <div class="input-append">
-                            <span class="uneditable-input input-xlarge">97j2j2g435jp5j1gj42983gg2GJ24j</span>
-                            <a href="/reset-api-key" class="add-on btn" title="Reset API Key"><i class="icon-refresh"></i></a>
-                        </div>
-                        <span class="help-block">A valuable possession. Keep it safe. Click the refresh button to regenerate if ever you feel unsafe</span>
+                        <span class="help-block">Keep it safe. </span>
                     </div>
                 </div><!-- /control-group -->
             </fieldset>

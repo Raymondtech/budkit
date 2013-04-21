@@ -221,7 +221,7 @@ final class Schema extends Platform\Model {
                 (92, 90, 'Following', '/member/network/relation/following', NULL, 0, 6, 'link', NULL, 3, 10, 1),
                 (93, 90, 'Followers', '/member/network/relation/followers', NULL, 0, 6, 'link', NULL, 4, 9, 1),
                 (94, 90, 'Invites', '/member/network/relation/requests', NULL, 0, 6, 'link', NULL, 5, 8, 1),
-                (91, 90, 'Suggestions', '/member/network/relation/suggestions', NULL, 0, 6, 'link', NULL, 6, 7, 1)
+                (91, 90, 'Suggestions', '/member/network/relation/suggestions', NULL, 0, 6, 'link', NULL, 6, 7, 1),
                 (95, 0, 'Communities', '', NULL, 0, 6, 'link', NULL, 1, 6, 1),
                 (96, 95, 'Directory', '/member/network/group/index', NULL, 0, 6, 'link', NULL, 2, 5, 1),
                 (97, 95, 'Subscriptions', '/member/network/group/subscriptions', NULL, 0, 6, 'link', NULL, 3, 4, 1);"
