@@ -22,7 +22,7 @@
                                     </tpl:condition>
                                     <div class="timeline-item-header">
                                         <div class="timeline-item-icon"><a href="#"><i class="icon-${verb}"></i></a></div>
-                                        <a class="publisher-profile" href="#">
+                                        <a class="publisher-profile" href="/member:${actor.uri}/profile/information">
                                             <img class="profile-avatar thumbnail" src="${actor.image.url}" alt="${actor.displayName}" width="${actor.image.width}" height="${actor.image.height}" />
                                             <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                              
                                         </a>

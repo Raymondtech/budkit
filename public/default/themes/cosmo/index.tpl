@@ -24,56 +24,42 @@
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/${config|general.template}/assets/ico/apple-touch-icon-72-precomposed.png" />
             <link rel="apple-touch-icon-precomposed" href="/${config|general.template}/assets/ico/apple-touch-icon-57-precomposed.png" />
             <link rel="shortcut icon" href="/${config|general.template}/assets/ico/favicon.png" />
-            
+
             <!-- jQuery here because if placed at bottom, in-line scripts (i.e script tags in .tpl files) won't work -->
             <script type="text/javaScript" src="/${config|general.template}/assets/js/jquery.js"></script>
             <script type="text/javaScript" src="/${config|general.template}/assets/js/budkit.js"></script>
         </head>
         <body>
-            <div class="navbar navbar-inverse">
-                <div class="navbar-inner">
-                    <div class="container" style="width: 940px;">
-                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>
-
-                        <div class="nav-collapse">
-                            <tpl:menu id="profilemenu" type="nav"></tpl:menu>
-
-                            <ul class="nav pull-right">
-                                <li><a href="/system/start/index">Dashboard</a></li>
-                            </ul>
-                        </div><!-- /.nav-collapse -->
+            <div id="wrap">
+                <div class="container-left">
+                    <tpl:menu id="profilemenu" type="nav-list" />
+                </div>
+                <div class="container-box has-left has-navbar">
+                    
+                    <div class="container">
+                        <tpl:block data="page.block.alerts" /> 
+                        <div class="jumbotron" align="center">
+                            <tpl:condition data="profile.user_photo" test="isset" value="1">
+                                <img class="thumbnail" src="/system/object/${profile.user_photo}/resize/100/100" style="margin: auto" />
+                            </tpl:condition>
+                            <h1 >Livingstone Fultang</h1>
+                            <p class="lead">PhD Student in the Medical Molecular Biosciences</p>  
+                            <a class="btn btn-success" href="#">Follow</a> 
+                            <a class="btn" href="#">Message</a>
+                            <a class="btn" href="#">1110 Posts</a>
+                            <a class="btn" href="#">116 Following</a>
+                            <a class="btn" href="#">380 Followers</a>
+                        </div>
+                        <hr />
+                        <tpl:block data="page.block.body">Content</tpl:block>
+                        <tpl:import layout="slider" />
+                        <div class="footer">
+                            <p>Company 2013</p>
+                        </div>
                     </div>
-                </div><!-- /navbar-inner -->
-            </div>
-            <div class="container">
-
-                <tpl:block data="page.block.alerts" /> 
-
-                <div class="jumbotron" align="center">
-                    <tpl:condition data="profile.user_photo" test="isset" value="1">
-                        <img class="thumbnail" src="/system/object/${profile.user_photo}/resize/100/100" style="margin: auto" />
-                    </tpl:condition>
-                    <h1 >Livingstone Fultang</h1>
-                    <p class="lead">PhD Student in the Medical Molecular Biosciences</p>  
-                    <a class="btn btn-success" href="#">Follow</a> 
-                    <a class="btn" href="#">Message</a>
-                    <a class="btn" href="#">1110 Posts</a>
-                    <a class="btn" href="#">116 Following</a>
-                    <a class="btn" href="#">380 Followers</a>
-                </div>
-                <hr />
-                <tpl:block data="page.block.body">Content</tpl:block>
-                <tpl:import layout="slider" />
-                <div class="footer">
-                    <p>Company 2013</p>
                 </div>
             </div>
-            
-                        <!-- Placed at the end of the document so the pages load faster -->
+            <!-- Placed at the end of the document so the pages load faster -->
             <script src="/${config|general.template}/assets/js/bootstrap-transition.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-alert.js"></script>
             <script src="/${config|general.template}/assets/js/bootstrap-modal.js"></script>
