@@ -34,27 +34,29 @@
                 <div class="container-left">
                     <tpl:menu id="profilemenu" type="nav-list" />
                 </div>
-                <div class="container-box has-left has-navbar">
-                    
-                    <div class="container">
-                        <tpl:block data="page.block.alerts" /> 
-                        <div class="jumbotron" align="center">
-                            <tpl:condition data="profile.user_photo" test="isset" value="1">
-                                <img class="thumbnail" src="/system/object/${profile.user_photo}/resize/100/100" style="margin: auto" />
-                            </tpl:condition>
-                            <h1 >Livingstone Fultang</h1>
-                            <p class="lead">PhD Student in the Medical Molecular Biosciences</p>  
-                            <a class="btn btn-success" href="#">Follow</a> 
-                            <a class="btn" href="#">Message</a>
-                            <a class="btn" href="#">1110 Posts</a>
-                            <a class="btn" href="#">116 Following</a>
-                            <a class="btn" href="#">380 Followers</a>
-                        </div>
-                        <hr />
-                        <tpl:block data="page.block.body">Content</tpl:block>
-                        <tpl:import layout="slider" />
-                        <div class="footer">
-                            <p>Company 2013</p>
+                <div class="container-box has-left">
+                    <div class="container-content">
+                        <div class="container-bucket">
+                            <div class="container">
+                                <tpl:block data="page.block.alerts" /> 
+                                <div class="jumbotron" align="center">
+                                    <tpl:condition data="profile.user_photo" test="isset" value="1">
+                                        <img class="thumbnail" src="/system/object/${profile.user_photo}/resize/100/100" style="margin: auto" />
+                                    </tpl:condition>
+                                    <h1 >Livingstone Fultang</h1>
+                                    <p class="lead">PhD Student in the Medical Molecular Biosciences</p>  
+                                    <a class="btn btn-success" href="#">Follow</a> 
+                                    <a class="btn" href="#">Message</a>
+                                    <a class="btn" href="#">1110 Posts</a>
+                                    <a class="btn" href="#">116 Following</a>
+                                    <a class="btn" href="#">380 Followers</a>
+                                </div>
+                                <tpl:block data="page.block.body">Content</tpl:block>
+                                <tpl:import layout="slider" />
+                                <div class="footer">
+                                    <p>Company 2013</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
