@@ -44,12 +44,9 @@ class Profile extends \Platform\View {
          //To set the pate title use
         
         $this->output->setLayout("profile");
-        $this->output->setPageTitle("Profile Page");
-            
-        $timelinebar    = $this->output->layout("timelinebar");
+  
         $profile        = $this->output->layout("profile" );
-        $widgetbox      = $this->output->layout("timeline", "post");
-       
+
         $this->output->addToPosition("body" , $profile);
 
     }

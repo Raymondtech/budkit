@@ -34,14 +34,21 @@
             cursor: pointer;
             &:hover{ color: @grayDark }
         }
+        .nav-pills{
+            margin: 0px; padding: 0px;
+            li{
+                 .active > a, .active > a:hover,  .active > a:focus{ background-color: @grayLighter !important; color: @grayLight;}
+                 a { padding: 4px; }
+            }
+        }
     }
     &.naked{
         background: none; border: none; .box-shadow(none);
         .widget-head{ background: none; border:none;}
         .widget-head,
         .widget-body,
-        .widget-footer{ padding: (@baseLineHeight * 0.25) 0;}
+        .widget-footer{ padding: (@gridGutterWidth * 0.25) 0;}
     }
-    .widget-body{ padding:(@baseLineHeight) }
+    .widget-body{ padding:(@gridGutterWidth) }
     .widget-footer{ font-size: 11px; border-top: 1px solid #eee; background: rgba(252, 252, 252, 0.18); }
 }

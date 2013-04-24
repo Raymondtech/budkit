@@ -43,8 +43,9 @@ class Menu extends \Platform\Model {
 
 
         $user = User::getInstance();
-        $username = $user->get("user_name_id");
-
+        $input = \Library\Input::getInstance();
+        $input->getRequestVars();
+        $member = $input->getVar("member", ""); //If member is not set, we are view platform user profile
         //Add the default upload links
         switch ($menuId):
             case 'peoplemenu':
@@ -57,7 +58,7 @@ class Menu extends \Platform\Model {
                 array_unshift($menuItems, array(
                     "menu_title" => "Network",
                     "children" => array(
-                        array("menu_title" => "Members", "menu_url" => "/member/network/directory","menu_count" => $mycount),
+                        array("menu_title" => "Members", "menu_url" => "/member/network/directory", "menu_count" => $mycount),
                         array("menu_title" => "Following", "menu_url" => "/member/network/relation/following"),
                         array("menu_title" => "Followers", "menu_url" => "/member/network/relation/followers"),
                         array("menu_title" => "Requests", "menu_url" => "/member/network/relation/requests")
@@ -72,10 +73,16 @@ class Menu extends \Platform\Model {
                 break;
             case 'profilemenu':
                 //Add items to the profile menu;
-                array_unshift($menuItems, Array(
-                    "menu_title" => "Home",
-                    "menu_url" => "/member:{$username}/profile/view"
-                ));
+                array_unshift($menuItems, array(
+                    "menu_title" => "Profile",
+                    "children" => array(
+                        array("menu_title" => "Information", "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/information"),
+                        array("menu_title" => "Timeline", "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/timeline"),
+                        array("menu_title" => "Following","menu_count" =>663353, "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/following"),
+                        array("menu_title" => "Followers", "menu_count" =>30444561, "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/followers"),
+                    )
+                        )
+                );
                 break;
         endswitch;
     }

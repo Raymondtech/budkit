@@ -117,8 +117,6 @@ abstract class Controller extends Library\Action {
         $this->authority = $this->getAuthority();
         $this->authhandler = "dbauth";
         
-        //@TODO remove the user password from $this->user;
-        $this->output->set("user", $this->user );
         
         if($this->user->isAuthenticated()){
             //Load the user profile
@@ -126,9 +124,15 @@ abstract class Controller extends Library\Action {
             $this->profile     = $this->profile->loadObjectByURI( $this->user->get("user_name_id"), array_keys($this->profile->getPropertyModel()));       
             //@TODO remove the user password from $this->profile;
             $profile           = $this->profile->getPropertyData();
+            
+            $this->user->set("user_photo", $profile['user_photo']);
+            
             unset($profile['user_password']);
             $this->set("profile", $profile );
         }
+        
+        //@TODO remove the user password from $this->user;
+        $this->output->set("user", $this->user );
         
         $installed      =  $this->config->getParam("installed", false ,"database");
         $application    =  $this->application;

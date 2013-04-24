@@ -4,9 +4,9 @@
             <div class="nav-collapse collapse">
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                     <div class="platform-user pull-right">
-                        <a href="/member:${profile.user_name_id}/profile/information" class="profile-link">
+                        <a href="/member:${user.user_name_id}/profile/information" class="profile-link">
                             <tpl:condition data="profile.user_photo" test="isset" value="1">
-                                <img src="/system/object/${profile.user_photo}/resize/30/30"  />
+                                <img src="/system/object/${user.user_photo}/resize/30/30"  />
                             </tpl:condition>
                             <span class="intro"><tpl:element type="text" formatting="sprintf" cdata="Hi %s" data="user.user_first_name"  /></span>
                         </a>

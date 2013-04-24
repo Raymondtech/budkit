@@ -1,0 +1,10 @@
+.timeline-item-index .timeline-item-li .timeline-item-container {
+    margin: 0px 0px 50px 0px; padding-top: 30px;
+}
+.timeline-item-index .timeline-item-li .timeline-item-container:after{ border: none; background: transparent}
+.timeline-item-index .timeline-item-li .timeline-item-container:before{ border: none; background: transparent}
+.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-title{ border-bottom: none; margin-bottom: 0px; padding-bottom: 0px; text-align: center; margin-top: 15px;}
+.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-title a{color: #333}
+.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-header {border-bottom: 1px solid rgb(247, 247, 247);padding-bottom: 15px;margin-bottom: 20px; text-align: center; margin-top: 10px}
+.timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-header .publisher-profile .profile-avatar {border-radius: 50%;top: -30px;right: 45%;left: auto;}
+.timeline-items .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions, .timeline-item-index .timeline-item-li .timeline-item-container .timeline-item-footer ul.actions {margin-left: 50%;  }

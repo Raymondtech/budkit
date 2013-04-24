@@ -36,17 +36,17 @@ final class Profile extends Settings\Member {
      * @return void
      */
     public function index() {
-        
+
         $user = \Platform\User::getInstance();
-        
+
         $view = $this->load->view('member');
         $profile = $this->load->model('profile', 'member');
         $profile = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
-        
-        $data   = $profile->getPropertyData();
-        
-        $this->set("profile", $data ); //Sets the profile data;
-        
+
+        $data = $profile->getPropertyData();
+
+        $this->set("profile", $data); //Sets the profile data;
+
         return $view->form("member/profile", "Profile settings");
     }
 
@@ -55,44 +55,66 @@ final class Profile extends Settings\Member {
      * @return type
      */
     public function update() {
-        
+
         //Get the platform user and ensure that they 
         //are who they say they are
         //$user = \Platform\User::getInstance();
-        
         //Check that form was submitted with the POST method
         if ($this->input->methodIs("post")) {
-            
-            $message     = "Your profile settings have now been updated";
+
+            $message = "Your profile settings have now been updated";
             $messageType = "success";
-            $attachment = $this->load->model("attachments", "system");
-            $attachment->setAllowedTypes(array("gif", "jpeg" , "jpg", "png"));
-            $attachment->setOwnerNameId( $this->user->get("user_name_id") );
+            
+            //If a file has been submitted for profile photo, save that first
             $attachmentfile = $this->input->data("files");
-            
-            $attachment->store( $attachmentfile['profilephoto']);
-            
-            //Now store the users photo to the database;
-            $attachmentURI = $attachment->getLastSavedObjectURI();
-            
+                if(!empty($attachmentfile['profilephoto']['size'])):
+
+                //Do we have a file?
+                $attachment = $this->load->model("attachments", "system");
+                $attachment->setAllowedTypes(array("gif", "jpeg", "jpg", "png"));
+                $attachment->setOwnerNameId($this->user->get("user_name_id"));
+
+                $attachment->store($attachmentfile['profilephoto']);
+
+                //Now store the users photo to the database;
+                $attachmentURI = $attachment->getLastSavedObjectURI();
+            endif;
+
             //unset($attachment);
-            $profile =  $this->load->model('profile', "member");
-     
-            if(!empty($attachmentURI)){
+            $profile = $this->load->model('profile', "member");
+
+            //If we can get profile data
+            //Get the data;
+            if (($data = $this->input->getArray("profile", array(), "post") ) == FALSE) {
+                $this->alert("No input data recieved", 'Something went wrong', 'error');
+                $this->redirect( $this->input->getReferer() );
+                return false; //useless
+            }
+            
+            //Set the data;
+            if(is_array($data)&&!empty($data)):
+                foreach($data as $key=>$value):
+                    //@TODO is this a save way to do this?
+                    //Where does the validation happen?
+                    $profile->setPropertyValue($key, $value);
+                endforeach;
+            endif;
+
+            //Save the attachment
+            if (!empty($attachmentURI)) {
                 //echo $attachmentURI;
-                
-                if(!$profile->update( $this->user->get("user_name_id"), array("user_photo"=>$attachmentURI)) ){
-                    $message = "Could not update your profile photo" ;
-                    $messageType = "error";
-                }
+                $profile->setPropertyValue("user_photo", $attachmentURI);
+            }
+            if (!$profile->update($this->user->get("user_name_id"))) {
+                $message = "Could not update your profile photo";
+                $messageType = "error";
             }
         }
-        
+
         //die;
         $this->alert($message, "", $messageType);
-        
-        //die;
 
+        //die;
         //Return the user back to the profile update form
         return $this->redirect("/settings/member/profile");
     }

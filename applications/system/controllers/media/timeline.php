@@ -130,7 +130,7 @@ class Timeline extends System\Media {
         $model->setPagination(); //Set the pagination vars
 
         $this->set("activities", $activities);
-        $this->set("user", $user);
+        //$this->set("user", $user);
 
         $timeline = $this->output->layout("timeline");
         //$timelineside = $this->output->layout("timelinenotes");

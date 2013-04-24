@@ -194,7 +194,7 @@ class Media extends Parse\Template {
             $collectionItems = $collection->getPropertyValue("collection_items");
             $collectionItemize = explode(",", $collectionItems);
             if (is_array($collectionItemize) && !empty($collectionItemize)):
-                $ul   = array("ELEMENT"=>"ul", "CLASS"=>"media-grid bottom-media clearfix") ;
+                $ul   = array("ELEMENT"=>"ul", "CLASS"=>"media-grid compensate-margins bottom-media clearfix") ;
                 $tag['WIDTH'] = \Library\Config::getParam('gallery-thumbnail-width', 170, 'content');
                 $tag['HEIGHT'] = \Library\Config::getParam('gallery-thumbnail-height', 170, 'content');
                 foreach ($collectionItemize as $item) {

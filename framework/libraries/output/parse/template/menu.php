@@ -141,8 +141,13 @@ class Menu extends Parse\Template {
             }
 
             //@TODO check if this is the current menu item and set it as active
-            $query = \Library\Uri::getInstance()->getQuery();
-            $active = ( \Library\Uri::internal($item['menu_url']) <> \Library\Uri::internal($query) ) ? false : true;
+            $query      = \Library\Uri::getInstance()->getQuery();
+            $path      = \Library\Uri::getInstance()->getPath();
+            
+            $request    = \Library\Uri::internal($query);
+            $url        = \Library\Uri::internal($item['menu_url']);      
+            $cpath      = \Library\Uri::internal( $path );
+            $active     = ( $url <> $request && $url <> $cpath ) ? false : true;
             static::$hasActive = ($active && !static::$hasActive) ? true : false;
 
             $class = str_replace(array(" ", "(", ")", "-", "&", "%", ",", "#"), '-', strtolower($item['menu_title']));
@@ -163,7 +168,7 @@ class Menu extends Parse\Template {
             if (isset($item['menu_count'])) {
                 //If we have a menu count
                 $important = (isset($item['menu_count_unimportant'])&&(bool)$item['menu_count_unimportant'])?null : "label-important";
-                $anchor['CHILDREN'][] = array("ELEMENT" => "span", "CLASS"=>"label pull-right {$important}", "CDATA" => $item['menu_count']);
+                $anchor['CHILDREN'][] = array("ELEMENT" => "span", "CLASS"=>"label pull-right {$important}", "CDATA" => number_format ($item['menu_count']) );
             }
             //Add the menu anchor
             $link["CHILDREN"][] = $anchor;

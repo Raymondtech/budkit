@@ -14,10 +14,21 @@
             <hr />
             <fieldset>
                 <div class="control-group">
-                    <label class="control-label"  for="middle-name">Biography</label>
+                    <label class="control-label"  for="profile[user_headline]">Profile Title</label>
                     <div class="controls">
                         <div class="input-append">
-                            <textarea class="input-xxlarge pull-left" id="middle-name" name="middle-name" rows="7" ></textarea>  
+                            <input class="input-xxlarge" id="user_headline" name="profile[user_headline]" size="30" type="text" placeholder="E.g PhD Student, or Chief Executive Officer at Company X" value="${profile.user_headline}" />
+                            <div class="btn-group">
+                                <tpl:import layout="privacylist" />
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /control-group -->
+                <div class="control-group">
+                    <label class="control-label"  for="profile[user_biography]">Biography</label>
+                    <div class="controls">
+                        <div class="input-append">
+                            <textarea class="input-xxlarge pull-left" id="user_biography" name="profile[user_biography]" rows="7" ><tpl:element type="text" data="profile.user_biography" /></textarea>  
                             <div class="btn-group">
                                 <tpl:import layout="privacylist" />
                             </div>
@@ -25,10 +36,10 @@
                     </div>
                 </div><!-- /control-group --> 
                 <div class="control-group">
-                    <label class="control-label"  for="middle-name">Website</label>
+                    <label class="control-label"  for="profile[user_website]">Website</label>
                     <div class="controls">
                         <div class="input-append">
-                            <input class="input-xlarge" id="middle-name" name="middle-name" size="30" type="text" placeholder="Where have you worked?" />
+                            <input class="input-xlarge" id="user_website" name="profile[user_website]" size="30" type="text" placeholder="http://yourwebsite.com" value="${profile.user_website}" />
                             <div class="btn-group">
                                 <tpl:import layout="privacylist" />
                             </div>

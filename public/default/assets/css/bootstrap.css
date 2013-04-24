@@ -7585,6 +7585,10 @@ input.search-query {
 .media-list li:after {
   clear: both;
 }
+.media-grid.compensate-margins {
+  margin-right: -20px;
+  margin-bottom: -20px;
+}
 .media-grid li {
   display: inline-block;
   float: left;
@@ -7898,7 +7902,7 @@ input.search-query {
   *margin-left: 8.404255319148938%;
 }
 .media-list li {
-  padding: 8px;
+  padding: 20px 2px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -8496,6 +8500,19 @@ ul.media-item-actions li a:hover .rating {
 .widget .widget-head .widget-close:hover {
   color: #333333;
 }
+.widget .widget-head .nav-pills {
+  margin: 0px;
+  padding: 0px;
+}
+.widget .widget-head .nav-pills li .active > a,
+.widget .widget-head .nav-pills li .active > a:hover,
+.widget .widget-head .nav-pills li .active > a:focus {
+  background-color: #eeeeee !important;
+  color: #999999;
+}
+.widget .widget-head .nav-pills li a {
+  padding: 4px;
+}
 .widget.naked {
   background: none;
   border: none;
@@ -8510,10 +8527,10 @@ ul.media-item-actions li a:hover .rating {
 .widget.naked .widget-head,
 .widget.naked .widget-body,
 .widget.naked .widget-footer {
-  padding: 6px 0;
+  padding: 5px 0;
 }
 .widget .widget-body {
-  padding: 24px;
+  padding: 20px;
 }
 .widget .widget-footer {
   font-size: 11px;

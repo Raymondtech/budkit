@@ -152,6 +152,7 @@ final class Input extends Object {
 
         $this->validate = Validate::getInstance();
         $this->router = Router::getInstance(); //Used to back trace the request
+        //
         //autosanitize;
         $this->sanitize();
     }

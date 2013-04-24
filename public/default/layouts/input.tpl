@@ -3,7 +3,7 @@
         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
             <div class="timeline-item-publisher-box">
                 <tpl:condition data="profile.user_photo" test="isset" value="1">
-                    <a href="/member:${profile.user_name_id}/profile/information" class="publisher-profile">
+                    <a href="/member:${profile.user_name_id}/profile/timeline" class="publisher-profile">
                         <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/50/50"  />
                     </a>
                 </tpl:condition>       

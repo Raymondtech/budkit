@@ -16,7 +16,7 @@
             <div class="widget">
                 <div class="widget-head"><span class="widget-title"><tpl:element type="text" data="page.title">Media Gallery</tpl:element></span></div>
                 <div class="widget-body">
-                    <ul class="media-grid media-gallery">
+                    <ul class="media-grid media-gallery compensate-margins">
                         <li class="mgrow-fluid grid-hide list-header">
                             <div class="feature grid-hide mgcol1">
 

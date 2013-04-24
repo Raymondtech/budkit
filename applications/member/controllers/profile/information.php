@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * blog.php
+ * information.php
  *
  * Requires PHP version 5.4
  *
@@ -28,11 +28,35 @@ use \Application\Member\Controllers as Member;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Blog extends Member\Profile{
+final class Information extends Member\Profile{
     
     public function index() {
-        echo 'The Blog';
-        parent::index();
+       
+        //Get the Member profile
+        $profile = $this->getMemberProfile();
+        
+        //Profile Information Title;
+        $this->output->setPageTitle( sprintf( _("%s | Information"), $profile['user_full_name'] ));
+        
+        //Profile Model
+        $model = $this->load->model("profile", "member");
+
+        $users = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("user");
+        $model->setPagination(); //Set the pagination vars
+        $items = array("totalItems" => 0);
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $users->fetchAssoc()) {
+            $row['user_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+            $items["totalItems"]++;
+        }
+        $this->set("followers", $items);
+
+        $media = $this->output->layout("/profile/information");
+        $this->output->addToPosition("body", $media);
+
+        return parent::index();
     }
     
     /**

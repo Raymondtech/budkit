@@ -39,9 +39,32 @@ class Profile extends User {
         parent::__construct();
         //Extend the User Object Model
         $this->extendPropertyModel(array(
-            "user_photo" => array("Profile Picture", "mediumtext", 10)
+            "user_photo" => array("Profile Photo", "mediumtext", 10),
+            "user_biography" => array("Background and Biography", "text", 500),
+            "user_headline" => array("Headline", "mediumtext", 100),
+            "user_website" => array("Website URL", "mediumtext", 100)
         ), "user");
-        $this->defineValueGroup("user"); 
+        $this->defineValueGroup("user");
+    }
+
+    /**
+     * Returns the full name of the loaded Profile
+     * 
+     * @param type $first The default First Name
+     * @param type $middle The default Middle Name
+     * @param type $last The default Last Name
+     * @return type
+     */
+    public function getFullName($first = NULL, $middle = NULL, $last = NULL) {
+
+        $user_first_name = $this->getPropertyValue("user_first_name");
+        $user_middle_name = $this->getPropertyValue("user_middle_name");
+        $user_last_name = $this->getPropertyValue("user_last_name");
+        $user_full_name = implode(' ', array(empty($user_first_name) ? $first : $user_first_name, empty($user_middle_name) ? $middle : $user_middle_name, empty($user_last_name)?$last:$user_last_name ));
+
+        if (!empty($user_full_name)) {
+            return $user_full_name;
+        }
     }
 
     /**
@@ -51,25 +74,28 @@ class Profile extends User {
      * @param type $data
      */
     public function update($usernameId, $data = array()) {
-        
+
         if (empty($usernameId))
             return false;
-
-        //Load the username; 
-        $profile = $this->loadObjectByURI( $usernameId, array_keys( $this->getPropertyModel() ) );
-        $this->setObjectId( $profile->getObjectId() );
-        $this->setObjectURI( $profile->getObjectURI() );
-               
-        $profileData    = $profile->getPropertyData();
         
-        $updatedProfile = array_merge($profileData, $data );
+        $existing   = (array)$this->getPropertyData();
+        $data       = empty($data)? $existing: array_merge($data, $existing);
+        
+        //Load the username; 
+        $profile = $this->loadObjectByURI($usernameId, array_keys($this->getPropertyModel()));
+        $this->setObjectId($profile->getObjectId());
+        $this->setObjectURI($profile->getObjectURI());
+
+        $profileData = $profile->getPropertyData();
+
+        $updatedProfile = array_merge($profileData, $data);
         foreach ($updatedProfile as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
-        $data = $this->getPropertyData(); 
+        $data = $this->getPropertyData();
         $this->defineValueGroup("user");
         //die;
-        if (!$this->saveObject( $this->getPropertyValue("user_name_id"), "user", $this->getObjectId())) { 
+        if (!$this->saveObject($this->getPropertyValue("user_name_id"), "user", $this->getObjectId())) {
             //Null because the system can autogenerate an ID for this attachment    
             $profile->setError("Could not save the profile data");
             return false;

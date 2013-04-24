@@ -177,8 +177,9 @@ class Entity extends Model {
     /**
      * Returns an entity property value by propery name if exists
      * 
+     * @todo Allow for default value setting;
      * @param string $propertyName
-     * @param interger $entityId
+     * @param interger $objectIdId
      * @return mixed
      */
     public function getPropertyValue($propertyName, $objectId = null) {

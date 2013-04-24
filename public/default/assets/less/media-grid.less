@@ -70,6 +70,10 @@
     }
 }
 .media-grid{
+    &.compensate-margins{
+        margin-right: -@gridGutterWidth;
+        margin-bottom: -@gridGutterWidth;
+    }
   li{ 
     display: inline-block; 
     float: left;
@@ -82,7 +86,7 @@
 .media-list{
   .mgridfluid(@fluidGridColumnWidth, @fluidGridGutterWidth);
   li{ 
-    padding: 8px;
+    padding: @gridGutterWidth @gridGutterWidth*0.1;
     .box-sizing(border-box);
     line-height: @baseLineHeight;
     text-align: left;

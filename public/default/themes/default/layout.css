@@ -1,0 +1,28 @@
+.container-left .nav-list>li>a { border: none;}
+.container-left .profile-avatar{}
+.container-left .nav-list>li>a, .nav-list .nav-header {text-shadow: none}
+.footer {
+    margin-bottom: 100px;
+}
+.container-left {bottom: auto}
+/* Main marketing message and sign up button */
+.profile-cover {
+    text-align: center;
+/*    border-bottom: 5px solid #2971a6;*/
+    padding: 0px;
+    margin:30px 0px 20px;
+/*    background: #2f2f2f;*/
+    clear: both;
+}
+.profile-cover .profile-title{margin-top: 50px;}
+.profile-cover h1 {
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+.container{ width: 1006px;}
+.container-box, .container-left{top: 40px; }
+.widget{margin-bottom: 40px}
+
+

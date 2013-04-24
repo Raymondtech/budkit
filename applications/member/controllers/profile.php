@@ -14,6 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\Member\Controllers;
 
 /**
@@ -28,66 +29,90 @@ namespace Application\Member\Controllers;
  */
 class Profile extends \Platform\Controller {
 
+    public function __construct() {
+        parent::__construct();
+        $profile = $this->getMemberProfile();
+        
+        $this->set("profile", $profile);
+    }
+
     /**
      * Displays the member profile
      * @todo Profile display
      * @return false;
      */
-    public function index(){     
-        $view     = $this->load->view('profile');
-        $view->profilePage();    
+    public function index() {
+        $view = $this->load->view('profile');
+        $view->profilePage();
     }
-    
-        /**
+
+    /**
      * Displays the profile timeline
      * @return @return false
      */
-    public function timeline(){
-        
-        $this->output->setPageTitle( _("Media Timeline") );       
+    public function timeline() {
+
+        $this->output->setPageTitle(_("Timeline"));
         //Get the view;
-        $model      = $this->load->model('media' , 'system');
-        $activities = $model->getAll();   
-   
-        $this->set("activities", $activities);   
-        $this->set("dashboard", array("title"=>"Activity stream" ) );
-        
-        $media   = $this->output->layout("system/media/timeline");
+        $model = $this->load->model('media', 'system');
+        $activities = $model->getAll();
+
+        $this->set("activities", $activities);
+        //$this->set("dashboard", array("title" => "Activity stream"));
+
+        $media = $this->output->layout("profile/timeline");
         $this->output->addToPosition("body", $media);
-        
+
         return $this->index();
     }
-    
+
+
     /**
-     * Displays the basic profile inforation
-     * @todo Profile Information
-     * @return void
+     * Gets the Requested Profile 
+     * 
+     * @return object
      */
-    public function information(){
-        return $this->index();
+    protected function getMemberProfile() {
+
+        $user = $this->get('user')->get("user_name_id"); //Get Platform user nameId
+        $member = $this->input->getVar("member", "", $member);
+
+        $model = $this->load->model("profile");
+        $profile = $model->loadObjectByURI($member);
+        $data = $profile->getPropertyData();
+
+        //Determine the profile user's fullname
+        $data['user_full_name'] = $model->getFullName(
+                $profile->getPropertyValue("user_first_name"), 
+                $profile->getPropertyValue("user_middle_name"), 
+                $profile->getPropertyValue("user_last_name")
+        );
+
+        //Remove the userpassword;
+        unset($data['user_password']);
+        unset($data['user_api_key']);
+
+        return (array) $data;
     }
-    
-    
+
     /**
      * Displays the profile's achievement
      * @return void
-     */    
-    public function achievements(){       
+     */
+    public function achievements() {
         echo "achievements";
         return $this->index();
     }
-    
-    
+
     /**
      * Displays the profile network graph
      * @return void
-     */   
-    public function network(){
+     */
+    public function network() {
         echo "network";
         return $this->index();
     }
-    
-    
+
     /**
      * Returns an instance of the Profile action controller
      * @staticvar object $instance

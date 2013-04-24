@@ -267,7 +267,7 @@ final class Uri extends Object {
      * @return string 
      */
     public function getQuery() {
-        return $this->path;
+        return self::buildQueryString();
     }
     
     /**

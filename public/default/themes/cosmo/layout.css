@@ -1,4 +1,0 @@
-.container-left .nav-list>li>a { border: none;}
-.container-left {background: rgb(228, 228, 228);}
-.container-left .nav-list>li>a, .nav-list .nav-header {text-shadow: none}
-.container-left .nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>.active>a:focus {background-color: rgb(189, 189, 189);}
