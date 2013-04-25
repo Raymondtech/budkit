@@ -36,7 +36,7 @@
                 <div class="control-group">
                     <label class="control-label" >Date of Birth</label>
                     <div class="controls inline-inputs">
-                        <select name="profile[user_dob_day]" id="dob-day" class="drop">
+                        <tpl:select name="profile[user_dob_day]" id="dob-day" value="account.user_dob_day">
                             <option>Day</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -69,8 +69,8 @@
                             <option value="29">29</option>
                             <option value="30">30</option>
                             <option value="31">31</option>
-                        </select>
-                        <select name="profile[user_dob_month]" id="dob-month" class="inline drop">
+                        </tpl:select>
+                        <tpl:select name="profile[user_dob_month]" id="dob-month" value="account.user_dob_month">
                             <option>- Month -</option>
                             <option value="01">January</option>
                             <option value="02">February</option>
@@ -84,8 +84,8 @@
                             <option value="10">October</option>
                             <option value="11">November</option>
                             <option value="12">December</option>
-                        </select>
-                        <select name="profile[user_dob_year]" id="dob-year" class="inline drop">
+                        </tpl:select>
+                        <tpl:select name="profile[user_dob_year]" id="dob-year" class="inline drop" value="account.user_dob_year">
                             <option>- Year -</option>
                             <option value="2011">2011</option>
                             <option value="2010">2010</option>
@@ -199,7 +199,7 @@
                             <option value="1902">1902</option>
                             <option value="1901">1901</option>
                             <option value="1900">1900</option>
-                        </select>
+                        </tpl:select>
                         <p class="help-block">We will not show your date of birth on your profile, unless you <a href="/settings/member/privacy">tell us</a> to</p>
                     </div>
                 </div><!-- /control-group -->
@@ -242,20 +242,20 @@
                 <div class="control-group">
                     <label class="control-label"  for="profile[user_timezone]">Time Zone</label>
                     <div class="controls">
-                        <select name="profile[user_timezone]" id="timezone" class="input-xxlarge span5 drop">
+                        <tpl:select name="profile[user_timezone]" id="timezone" class="input-xxlarge span5 drop" value="account.user_timezone">
                             <option value="-12.0">(GMT -12:00) Eniwetok, Kwajalein</option><option value="-11.0">(GMT -11:00) Midway Island, Samoa</option><option value="-10.0">(GMT -10:00) Hawaii</option><option value="-9.0">(GMT -9:00) Alaska</option><option value="-8.0">(GMT -8:00) Pacific Time (US&amp;Canada)</option><option value="-7.0">(GMT -7:00) Mountain Time (US&amp;Canada)</option><option value="-6.0">(GMT -6:00) Central Time (US&amp;Canada), Mexico City</option><option value="-5.0">(GMT -5:00) Eastern Time (US&amp;Canada), Bogota, Lima</option><option value="-4.0">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option><option value="-3.5">(GMT -3:30) Newfoundland</option><option value="-3.0">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option><option value="-2.0">(GMT -2:00) Mid-Atlantic</option><option value="-1.0">(GMT -1:00 hour) Azores, Cape Verde Islands</option><option value="0.0" selected="selected">(GMT) Western Europe Time, London, Lisbon, Casablanca</option><option value="1.0">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</option><option value="2.0">(GMT +2:00) Kaliningrad, South Africa</option><option value="3.0">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option><option value="3.5">(GMT +3:30) Tehran</option><option value="4.0">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option><option value="4.5">(GMT +4:30) Kabul</option><option value="5.0">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option><option value="5.5">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option><option value="5.75">(GMT +5:45) Kathmandu</option><option value="6.0">(GMT +6:00) Almaty, Dhaka, Colombo</option><option value="7.0">(GMT +7:00) Bangkok, Hanoi, Jakarta</option><option value="8.0">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option><option value="9.0">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option><option value="9.5">(GMT +9:30) Adelaide, Darwin</option><option value="10.0">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option><option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option><option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
-                        </select>
+                        </tpl:select>
                         <span class="help-block">Unless specified 'relative time' will be used.</span>
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
                     <label class="control-label" for="profile[user_locale]"> <?php echo _('Locale language'); ?></label>
                     <div class="controls">
-                        <select name="profile[user_locale]" class="input-xlarge">
+                        <tpl:select name="profile[user_locale]" class="input-xlarge" value="account.user_locale">
                             <option value="en_GB"><?php echo _('English - United Kingdom (en_GB)'); ?></option>
                             <option value="fr_FR"><?php echo _('French - France (fr_FR)'); ?></option>
                             <option value="de_DE"><?php echo _('German - Germany (de_DE)'); ?></option>
-                        </select>
+                        </tpl:select>
                     </div>
                 </div>
             </fieldset>
