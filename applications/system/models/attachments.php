@@ -145,7 +145,7 @@ class Attachments extends Platform\Entity {
     public function store($file) {
 
         $fileHandler = \Library\Folder\Files::getInstance();
-        $uploadsFolder = $this->config->getParam('site-users-folder', '');
+        $uploadsFolder = $this->config->getParam('site-users-folder', '/users');
         $allowedTypes = $this->config->getParam("allowed-types", $this->allowed, "attachments");
         //Check User Upload Limit;
         //Check File upload limit;

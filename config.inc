@@ -124,7 +124,7 @@ $config = array(
         'site-robots'=>'index-follow',
         'site-url-suffix'=>false,
         'site-unicode-aliases'=>false,
-        
+        'site-users-folder'=>'/users'
         
     ),
  /*
