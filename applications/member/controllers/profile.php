@@ -32,8 +32,8 @@ class Profile extends \Platform\Controller {
     public function __construct() {
         parent::__construct();
         $profile = $this->getMemberProfile();
-        
         $this->set("profile", $profile);
+        
     }
 
     /**

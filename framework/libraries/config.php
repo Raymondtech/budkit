@@ -44,6 +44,11 @@ class Config extends Object {
      * @var mixed 
      */
     private static $params;
+    
+        /**
+     * @var mixed 
+     */
+    private static $preferences;
 
     /**
      * The Config Database Adaptor
@@ -73,7 +78,6 @@ class Config extends Object {
         static::$database = static::getDatabase();
         static::$xml = static::getXML();
         static::$ini = static::getIni();
-        
     }
 
     /**
@@ -98,7 +102,7 @@ class Config extends Object {
      * @return Return false if the section does not exists. 
      */
     public static function setParam($name, $value = NULL, $section = "system") {
-        
+
         //Instantiate
         //$config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 
@@ -106,13 +110,12 @@ class Config extends Object {
             return false;
             //we already have it;
         }
-        
+
         //Set the param;
         static::$params[$section][$name] = $value;
-        
+
         //Return $this
         return static::getInstance();
-        
     }
 
     /**
@@ -165,7 +168,6 @@ class Config extends Object {
 
         //Instantiate
         //$config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
-
         //We
         static::$params[$section] = $params;
 
@@ -196,6 +198,51 @@ class Config extends Object {
         }
 
         return $cfgSection;
+    }
+
+    /**
+     * Preferences are user configs stored in site-users-folders
+     *  
+     * @param type $user_name_id
+     * @return array
+     */
+    public static function getUserPreferences($user_name_id = NULL) {
+
+        $preferences = array();
+        $dirname = static::getParam("site-users-folder", "/users");
+        $user = Platform\User::getInstance();
+        $username = $user->get('user_name_id');
+
+        //if no platform user
+        if (empty($username) && empty($user_name_id))
+            return $preferences;
+
+        //Determine the preferences folder
+        $prefdir = str_replace(array('/', '\\'), DS, FSPATH.$dirname . DS . (empty($user_name_id) ? $username : $user_name_id) . DS . 'preferences');
+        
+        //Get parsable configurations
+        $_inis = Folder::itemize($prefdir.DS);
+        $file = Folder::getFile();
+
+        foreach ($_inis as $ini):
+            if ($file->setFile($ini)) {
+                if (strtolower($file->getExtension()) === "ini") {
+                    $_ini = static::getIni();
+                    if ($_ini->readParams($ini) !== FALSE) {
+                        $params = $_ini->getParams($ini);
+                        $preferences = static::mergeParams($preferences, $params);
+                    }
+                }
+            }
+        //continue;
+        endforeach;
+
+        //Store or return?
+        if (!empty($user_name_id) && ($user_name_id <> $username))
+            return $preferences;
+
+        //if usernameid is same as platform user, then merge params
+        static::$params = static::mergeParams(static::$params, $preferences);
     }
 
     /**
@@ -238,7 +285,7 @@ class Config extends Object {
                 }
             //continue;
             endforeach;
-            
+
 
             //Find all the config files in apps
             $configs = \Library\Folder::itemizeFind("config.inc", APPPATH, 0, TRUE, 1);
@@ -260,17 +307,17 @@ class Config extends Object {
         }
         return $configarray;
     }
-    
+
     /**
      * 
      * @param type $section
      * @param type $autoload
      */
-    public static function getDBParams($section = null, $autoload = null){
-   
-        if((bool)static::getParam("installed",false,"database")):
+    public static function getDBParams() {
 
-            $_DB    = static::getDatabase();
+        if ((bool) static::getParam("installed", false, "database")):
+
+            $_DB = static::getDatabase();
             //print_R(Config::getParams());
 
             $_DB->readParams();
@@ -278,25 +325,24 @@ class Config extends Object {
             static::$params = static::mergeParams(static::$params, $params);
 
         endif;
-            
     }
-    
+
     /**
      * Recursively Merges two params arrays, overwriting values in params1 with those in params2
      * 
      * @param type $params1
      * @param type $params2
      */
-    public static function mergeParams($params1, $params2){
-        
-        foreach($params2 as $key=>$value){
-            if(array_key_exists($key, $params1)&& is_array($value)):
+    public static function mergeParams($params1, $params2) {
+
+        foreach ($params2 as $key => $value) {
+            if (array_key_exists($key, $params1) && is_array($value)):
                 $params1[$key] = static::mergeParams($params1[$key], $params2[$key]);
             else:
                 $params1[$key] = $value;
             endif;
         }
-        
+
         return $params1;
     }
 
@@ -351,7 +397,6 @@ class Config extends Object {
         return Config\Xml::getInstance();
     }
 
-
     /**
      * Gets an instance of the config element
      * @property-read object $instance 
@@ -370,7 +415,7 @@ class Config extends Object {
 
         $instance = new self();
         static::$params = $params; //Store Params form config files;
-        
+
         static::getDBParams();
 
         return $instance;

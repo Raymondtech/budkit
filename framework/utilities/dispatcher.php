@@ -106,10 +106,12 @@ final class Dispatcher extends \Library\Object {
      * @param <type> $route
      */
     public function execute($route) {
-        
-      
+            
         // get the base controller
         require_once FSPATH . 'framework' . DS . 'utilities' . DS . 'controller' . EXT;
+        
+        //Get user preferences
+        Library\Config::getUserPreferences();
 
         $application = $route->getApplication();
         $controller = $route->getController();

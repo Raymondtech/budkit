@@ -13,6 +13,7 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
+
 namespace Application\Member\Views;
 
 /**
@@ -27,28 +28,37 @@ namespace Application\Member\Views;
  * 
  */
 class Profile extends \Platform\View {
-    
+
     /**
      * The default view display
      * @return void
      */
-    final public function display(){
+    final public function display() {
         //The default method
     }
-    
+
     /**
      * Displays the member profile page
      * @return void
      */
-    public function profilePage(){
-         //To set the pate title use
-        
+    public function profilePage() {
+
+        $config = \Library\Config::getInstance();
+        //To set the pate title use
+        $profile = $this->get('profile');
+        $preferences = $config->getUserPreferences($profile['user_name_id']);
+
+        //Set the profile theme
+        if (isset($preferences['profile']['theme'])) :
+            $theme = $preferences['profile']['theme'];
+            $config->setParam("theme", $theme, "profile");
+        endif;
+
         $this->output->setLayout("profile");
-  
-        $profile        = $this->output->layout("profile" );
 
-        $this->output->addToPosition("body" , $profile);
+        $profile = $this->output->layout("profile");
 
+        $this->output->addToPosition("body", $profile);
     }
 
     /**
@@ -57,7 +67,7 @@ class Profile extends \Platform\View {
      * @return object Profile
      */
     public static function getInstance() {
-        
+
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
