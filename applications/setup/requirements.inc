@@ -181,7 +181,7 @@ $requirements = array(
             "path" => FSPATH . "users",
             "terminal" => true,
         ),
-        "users" => array(
+        "downloads  " => array(
             "title" => "Downloads folder",
             "writable" => true,
             "path" => FSPATH . "public" . DS . "downloads",

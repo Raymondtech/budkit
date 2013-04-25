@@ -35,16 +35,21 @@ class User extends \Platform\Entity {
         parent::__construct();        
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->extendPropertyModel( 
-                array(
-                    "user_first_name"    =>array("First Name", "mediumtext", 50),
-                    "user_middle_name"   =>array("Middle Name", "mediumtext", 50),
-                    "user_last_name"     =>array("Last Name", "mediumtext", 50),
-                    "user_name_id"       =>array("User (Nick) Name", "mediumtext", 50),
-                    "user_password"      =>array("Password", "varchar", 2000),
-                    "user_api_key"       =>array("API Key", "varchar", 100),
-                    "user_email"         =>array("email", "varchar", 100),
-                ),
-                "user"
+            array(
+                "user_first_name"    =>array("First Name", "mediumtext", 50),
+                "user_middle_name"   =>array("Middle Name", "mediumtext", 50),
+                "user_last_name"     =>array("Last Name", "mediumtext", 50),
+                "user_name_id"       =>array("Username", "mediumtext", 50),
+                "user_password"      =>array("Password", "varchar", 2000),
+                "user_api_key"       =>array("API Key", "varchar", 100),
+                "user_email"         =>array("Email", "varchar", 100),
+                "user_dob_day"       =>array("Day of Birth", "varchar", 10),
+                "user_dob_month"     =>array("Month of Birth", "varchar", 10),
+                "user_dob_year"      =>array("Year of Birth", "varchar", 10),
+                "user_timezone"      =>array("Timezone", "varchar", 10),
+                "user_locale"        =>array("Locale", "varchar", 10)
+            ),
+            "user"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models
          $this->defineValueGroup("user"); //Tell the system we are using a proxy table

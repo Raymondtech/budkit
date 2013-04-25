@@ -35,7 +35,19 @@ final class Account extends Settings\Member {
      * @return void
      */
     public function index(){      
-        $view   = $this->load->view( 'member' ); 
+ 
+        $user = \Platform\User::getInstance();
+
+        $view = $this->load->view('member');
+        $profile = $this->load->model('profile', 'member');
+        $profile = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
+
+        $data = $profile->getPropertyData();
+
+        //overload user var with profile data
+        $this->set("account", $data); //Sets the profile data;
+
+        
         return $view->form();    
     }
         /**

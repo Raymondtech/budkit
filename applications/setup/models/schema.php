@@ -188,7 +188,7 @@ final class Schema extends Platform\Model {
                 (74, 72, 'Profile', '/settings/member/profile', NULL, 0, 2, 'link', NULL, 3, 10, 1),
                 (75, 72, 'Notifications', '/settings/member/notifications', NULL, 0, 2, 'link', NULL, 9, 7, 1),
                 (76, 72, 'Privacy', '/settings/member/privacy', NULL, 0, 2, 'link', NULL, 5, 8, 1),
-                (98, 72, 'Extensions', '/settings/member/extensions', NULL, 0, 2, 'link', NULL, 6, 7, 1),
+                (98, 72, 'Appearance', '/settings/member/appearance', NULL, 0, 2, 'link', NULL, 6, 7, 1),
                 (77, 0, 'Network Access', '', NULL, 0, 2, 'link', NULL, 1, 10, 1),
                 (78, 77, 'Permissions', '/settings/system/permissions', '', 9, 2, 'link', '', 2, 9, 1),
                 (37, 77, 'Authorities', '/settings/system/permissions/authorities', '', 9, 2, 'link', '', 3, 8, 1),

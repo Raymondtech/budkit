@@ -44,8 +44,8 @@ class Config extends Object {
      * @var mixed 
      */
     private static $params;
-    
-        /**
+
+    /**
      * @var mixed 
      */
     private static $preferences;
@@ -206,7 +206,7 @@ class Config extends Object {
      * @param type $user_name_id
      * @return array
      */
-    public static function getUserPreferences($user_name_id = NULL) {
+    public static function getUserPreferences($user_name_id = NULL, $refresh = FALSE) {
 
         $preferences = array();
         $dirname = static::getParam("site-users-folder", "/users");
@@ -218,24 +218,30 @@ class Config extends Object {
             return $preferences;
 
         //Determine the preferences folder
-        $prefdir = str_replace(array('/', '\\'), DS, FSPATH.$dirname . DS . (empty($user_name_id) ? $username : $user_name_id) . DS . 'preferences');
-        
-        //Get parsable configurations
-        $_inis = Folder::itemize($prefdir.DS);
-        $file = Folder::getFile();
+        $prefuser = empty($user_name_id) ? $username : $user_name_id;
+        $prefdir = str_replace(array('/', '\\'), DS, FSPATH . $dirname . DS . $prefuser . DS . 'preferences');
 
-        foreach ($_inis as $ini):
-            if ($file->setFile($ini)) {
-                if (strtolower($file->getExtension()) === "ini") {
-                    $_ini = static::getIni();
-                    if ($_ini->readParams($ini) !== FALSE) {
-                        $params = $_ini->getParams($ini);
-                        $preferences = static::mergeParams($preferences, $params);
+        if (!$refresh && isset(static::$preferences[$prefuser])) {
+            $preferences = static::$preferences[$prefuser];
+        } else {
+            //Get parsable configurations
+            $_inis = Folder::itemize($prefdir . DS);
+            $file = Folder::getFile();
+            //Loop through all the preferences files
+            foreach ($_inis as $ini):
+                if ($file->setFile($ini)) {
+                    if (strtolower($file->getExtension()) === "ini") {
+                        $_ini = static::getIni();
+                        if ($_ini->readParams($ini) !== FALSE) {
+                            $params = $_ini->getParams($ini);
+                            $preferences = static::mergeParams($preferences, $params);
+                        }
                     }
                 }
-            }
-        //continue;
-        endforeach;
+            //continue;
+            endforeach;
+            static::$preferences[$prefuser] = $preferences;
+        }
 
         //Store or return?
         if (!empty($user_name_id) && ($user_name_id <> $username))

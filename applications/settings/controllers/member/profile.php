@@ -116,7 +116,7 @@ final class Profile extends Settings\Member {
 
         //die;
         //Return the user back to the profile update form
-        return $this->redirect("/settings/member/profile");
+        return $this->returnRequest();
     }
 
     /**

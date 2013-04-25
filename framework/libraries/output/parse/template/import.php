@@ -77,7 +77,7 @@ class Import extends Parse\Template {
             
             if(!empty($directory)) {
                 //Getting the subtheme value
-                $directory = FSPATH . 'public' . DS . Library\Config::getParam('template') .DS.'themes'.DS.$directory;
+                $directory = FSPATH . 'public' . DS . Library\Config::getParam('template','default','appearance') .DS.'themes'.DS.$directory;
             }
         }
         //Now load the layout

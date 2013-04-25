@@ -132,8 +132,8 @@ class Output extends Object {
         $this->variables = array();
         $this->config = Config::getInstance();
         $this->router = Router::getInstance();
-        $this->template = $this->config->getParam('template', 'default');
-        $this->theme = $this->config->getParam('theme', '', 'resume');
+        $this->template = $this->config->getParam('template', 'default' ,'appearance');
+        $this->theme = $this->config->getParam('theme', 'default', 'appearance');
 
         //$this->pageTitle = $this->config->getParam('');
         //$this->user     = \Platform\User::getInstance(); //Cannot use this here, because the output class is loaded way before auth and session
@@ -700,7 +700,7 @@ class Output extends Object {
         }
 
         //
-        return $this->template = $this->config->getParam('template');
+        return $this->template = $this->config->getParam('template','default','appearance');
     }
 
     /**

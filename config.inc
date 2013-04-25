@@ -99,7 +99,7 @@ $config = array(
 */
 'environment' => 
     array(
-        'mode' => 1//0 = DEVELOPER, 1 = TEST, 2 = PRODUCTION 
+        'mode' => 3//0 = DEVELOPER, 1 = TEST, 2 = PRODUCTION 
     ),
 /*
 |---------------------------------------------------------------
@@ -113,7 +113,6 @@ $config = array(
     array(
         'host' => 'mb.local',
         'path' => '/~livingstonefultang/',
-        'template' => 'default',
         'site-name' => 'BudKit Campus',
         'site-meta-description'=>'The collaborative, distributed, social network',
         'site-meta-keywords'=>'social, network, professional',
