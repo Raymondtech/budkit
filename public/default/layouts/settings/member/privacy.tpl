@@ -1,4 +1,12 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
+    <div class="padding">
+        <div class="clearfix">        
+            <ul class="nav nav-pills  no-margin">
+                <li class="highlighted"><a href="/settings/member/privacy/groups" >Edit Privacy groups</a></li>
+            </ul>
+        </div>
+        <hr />
+    </div>
     <form method="POST" action="/system/admin/settings/save" class="form-horizontal margin-top">
 
         <div class="control-group">
@@ -27,9 +35,7 @@
                     <li>Your profile and content is viewable by your <a href="#">followers</a> only</li>
                     <li>Everything you share is Private by default</li>
                 </ul>
-                <ul class="nav nav-pills margin-bottom-half">
-                    <li class="highlighted"><a href="/settings/member/privacy/groups" >Privacy groups</a></li>
-                </ul>
+
             </div>
         </div><!-- /control-group --> 
         <div class="control-group">

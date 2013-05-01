@@ -66,5 +66,4 @@ final class Application extends Library\Object {
 
         return $instance;
     }
-
 }

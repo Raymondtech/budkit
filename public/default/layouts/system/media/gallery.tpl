@@ -69,7 +69,7 @@
             <tpl:import layout="pagination" />
         </tpl:condition>
         <tpl:condition data="gallery" test="isset" value="0">
-            There are no items to display in this gallery.
+            <p class="placeholder-text">There are no items to display in this gallery.</p>
         </tpl:condition>
     </div>
 
