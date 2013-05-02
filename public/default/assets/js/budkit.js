@@ -340,7 +340,7 @@
 
 /* ===================================================
  * budkit-uploader.js v0.0.1
- * http://budkit.org/docs/editor
+ * http://budkit.org/docs/uploader
  * ===================================================
  * Copyright 2012 The BudKit Team
  *
@@ -596,7 +596,7 @@
 !function($) {
     "use strict"
     var BKTimeline = function(object, options) {
-        this.options = $.extend({}, $.fn.bkuploader.defaults, options);
+        this.options = $.extend({}, $.fn.bktimeline.defaults, options);
         this.timeline = $(object);
         this.items = this.timeline.children('li'); //Pull up only the immediate children
         

@@ -12,7 +12,6 @@
             <!-- Le styles -->
             <link href="/${config|appearance.template}/themes/${config|appearance.template}/style.css" rel="stylesheet" />
 <!--            <link href="/${config|appearance.template}/assets/css/bootstrap-responsive.css" rel="stylesheet" />-->
-
             <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
             <!--[if lt IE 9]>
               <script src="/${config|appearance.template}/assets/js/html5shiv.js"></script>

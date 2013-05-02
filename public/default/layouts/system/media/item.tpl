@@ -13,6 +13,7 @@
         <div class="stream-view">
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
+<!--                    <div class="widget"><div data-graph="livingstone.fultang" id="xsUabo-graph"></div></div>-->
                     <ol class="timeline-item-index timeline-stream single-item" data-timeline="true">
                         <tpl:loop data="media.items" id="timeline-items">
                             <li class="timeline-item-li timeline-item">
@@ -27,7 +28,6 @@
                                             <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                              
                                         </a>
                                         <span title="${published}" class="published-time"><tpl:element type="time" data="published" /></span>
-
                                     </div>
                                     <div class="timeline-item-content"><tpl:element type="text" data="content" medialinks="true" /></div>
                                     <tpl:condition data="object" test="isset" value="1">
@@ -37,7 +37,6 @@
                                     </tpl:condition>
                                     <div class="timeline-item-footer">
                                         <ul class="actions">
-
                                             <li class="action-like">
                                                 <span class="rating">
                                                     <span class="star"><input type="radio" name="rating" value="5" /></span>
@@ -67,4 +66,6 @@
             </div>
         </div>
     </div>
+    <script type="text/javaScript" src="/${config|appearance.template}/assets/js/d3.v3.min.js"></script>
+    <script type="text/javaScript" src="/${config|appearance.template}/assets/js/budkit-graph.js"></script>
 </tpl:layout>
