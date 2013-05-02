@@ -39,6 +39,7 @@ use Library;
  */
 trait Privacy {
     
+    
     private static function getObjectPrivacyTree($userid=NULL){}
     
     /**

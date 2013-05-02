@@ -83,7 +83,7 @@ class Timeline extends System\Media {
         $collection = $model->getMedia("media", $itemURI);
         //Set the photo display properties     
         
-        static::canAccess($itemURI);
+        static::canAccess( $itemURI );
         
         //print_R($_SESSION);
         

@@ -66,6 +66,12 @@ abstract class Model extends \Library\Object {
      * @var static pagination
      */
     protected $pagination;
+    
+    
+    /*
+     * The Privacy trait.
+     */
+    use Authorize\Privacy;
 
     /**
      * Class constructor,
