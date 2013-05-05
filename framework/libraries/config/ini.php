@@ -106,7 +106,8 @@ final class Ini extends \Library\Object {
         foreach ($params as $param => $value) {
             if (!is_array($value)) {
                 $value = static::normalizeValue($value);
-                $_globals .= $_tab . $param . ' = ' . $value . $_br;
+                //BUG: Non alphanumeric value need to be stored in double quotes
+                $_globals .= $_tab . $param . ' = ' .( \Library\Validate::alphaNumeric($value) ? $value : '"'.$value.'"') . $_br;
             }
         }
         return $_globals;
@@ -118,15 +119,15 @@ final class Ini extends \Library\Object {
      * @param type $file
      * @param type $sections 
      */
-    public static function saveParams($filename, $sections = array()) {
+    public static function saveParams($filename, $sections = array(), $folder=null) {
 
         $config = \Library\Config::getInstance();
         $configfile = \Library\Folder::getFile();
-        $configdir = FSPATH . 'config' . DS;
+        $configdir = (empty($folder))? FSPATH . 'config' . DS: $folder;
 
         $permission = $configfile::getPermission($configdir);
 
-        $_globals = '; the setup configuration file';
+        $_globals = '; system generated configuration file';
         $_br = "\n";
         $_tab = NULL; //Use "\t" to indent;
         //We can only deal with arrays

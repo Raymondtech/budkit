@@ -10,18 +10,18 @@
             <meta name="keywords" content="${page.author}" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <!-- Le styles -->
-            <link href="/${config|appearance.template}/assets/css/bootstrap.css" rel="stylesheet" />
-            <link href="/${config|appearance.template}/assets/css/bootstrap-responsive.css" rel="stylesheet" />
+            <link href="/${config|design.template}/assets/css/bootstrap.css" rel="stylesheet" />
+            <link href="/${config|design.template}/assets/css/bootstrap-responsive.css" rel="stylesheet" />
             <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
             <!--[if lt IE 9]>
-              <script src="/${config|appearance.template}/assets/js/html5shiv.js"></script>
+              <script src="/${config|design.template}/assets/js/html5shiv.js"></script>
             <![endif]-->
             <!-- Fav and touch icons -->
-            <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/${config|appearance.template}/assets/ico/apple-touch-icon-144-precomposed.png" />
-            <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/${config|appearance.template}/assets/ico/apple-touch-icon-114-precomposed.png" />
-            <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/${config|appearance.template}/assets/ico/apple-touch-icon-72-precomposed.png" />
-            <link rel="apple-touch-icon-precomposed" href="/${config|appearance.template}/assets/ico/apple-touch-icon-57-precomposed.png" />
-            <link rel="shortcut icon" href="/${config|appearance.template}/assets/ico/favicon.png" />
+            <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/${config|design.template}/assets/ico/apple-touch-icon-144-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/${config|design.template}/assets/ico/apple-touch-icon-114-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/${config|design.template}/assets/ico/apple-touch-icon-72-precomposed.png" />
+            <link rel="apple-touch-icon-precomposed" href="/${config|design.template}/assets/ico/apple-touch-icon-57-precomposed.png" />
+            <link rel="shortcut icon" href="/${config|design.template}/assets/ico/favicon.png" />
         </head>
         <body>
             <div id="wrap">                
@@ -103,20 +103,20 @@
             <!-- Le javascript
             ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->
-            <script src="/${config|appearance.template}/assets/js/jquery.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-transition.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-alert.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-modal.js"></script>
-            <script src="/${config|appearance.template}/assets/js/budkit-container.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-dropdown.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-scrollspy.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-tab.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-tooltip.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-popover.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-button.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-collapse.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-carousel.js"></script>
-            <script src="/${config|appearance.template}/assets/js/bootstrap-typeahead.js"></script>
+            <script src="/${config|design.template}/assets/js/jquery.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-transition.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-alert.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-modal.js"></script>
+            <script src="/${config|design.template}/assets/js/budkit-container.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-dropdown.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-scrollspy.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-tab.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-tooltip.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-popover.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-button.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-collapse.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-carousel.js"></script>
+            <script src="/${config|design.template}/assets/js/bootstrap-typeahead.js"></script>
         </body>
     </html>
 </tpl:layout>

@@ -2,7 +2,6 @@
     <div class="account-settings padding-top">
         <form class="form-horizontal" action="/settings/member/profile/update"  method="post" enctype="multipart/form-data" >
             <fieldset>
-
                 <div class="control-group">
                     <label class="control-label"  for="profile[user_first_name]">First Name</label>
                     <div class="controls">

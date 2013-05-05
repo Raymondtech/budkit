@@ -45,6 +45,7 @@ class Member extends \Platform\Controller {
         $view   = $this->load->view( 'member' ); 
         return $view->form('member/account');
     }
+    
 
     /**
      * Returns an instance of the Settings class

@@ -14,9 +14,11 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\Settings\Controllers\Member;
 
 use \Application\Settings\Controllers as Settings;
+
 /**
  * The sub actions controller for notification settings
  *
@@ -33,9 +35,45 @@ final class Notifications extends Settings\Member {
      * Displays the notification settings
      * @return void
      */
-    public function index() {           
-        $view   = $this->load->view( 'member' );
+    public function index() {
+        $view = $this->load->view('member');
         return $view->form("member/notifications", "Notificaiton settings");
+    }
+
+    public function update() {
+        
+        if ($this->input->methodIs("post")) {
+
+            $message = "Your notifications preferences have now been updated";
+            $messageType = "success";
+
+            //If we can get profile data
+            //Get the data;
+            if (($data = $this->input->getArray("notifications", array(), "post") ) == FALSE) {
+                $this->alert("No input data recieved", 'Something went wrong', 'error');
+                $this->redirect($this->input->getReferer());
+                return false; //useless
+            }
+            
+            //Set the data;
+            if (is_array($data) && !empty($data)):
+                foreach ($data as $key => $value):
+                    //@TODO is this a save way to do this?
+                    //Where does the validation happen?
+                    $this->config->setParam($key, $value, "notifications");
+                endforeach;
+            endif;
+
+            //preference model
+            $preferences = $this->load->model("preferences","settings");
+            if(!$preferences->save("notifications")){
+                $message = "Could not update your notification settings";
+                $messageType = "error";
+            }
+        }
+        //die;
+        $this->alert($message, "", $messageType);
+        return $this->returnRequest();
     }
 
     /**

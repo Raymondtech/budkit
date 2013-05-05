@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * input.php
+ * field.php
  *
  * Requires PHP version 5.3
  *
@@ -27,8 +27,8 @@
 namespace Library\Output\Parse\Template;
 
 use Library;
-use Library\Output;
 use Library\Output\Parse;
+
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -42,11 +42,11 @@ use Library\Output\Parse;
  * @version    Release: 1.0.0
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  */
-class Input extends Form {
+class Input extends Parse\Template {
+
+    static
+    $instance;
     
-        static
-            $instance ;
-        
             /**
      * Defines the class constructor
      * Used to preload pre-requisites for the element class
@@ -56,15 +56,30 @@ class Input extends Form {
     public function __constructor() {
         
     }
-        
-    public static function execute($parser, $tag, $writer){
-        
-        //print_R($tag);
-        //die;
-        
+    
+    public static function execute($parser, $tag, $writer) {
+
+        //print_r($tag); //die;
+        //Calculate and set the default value;
+        if (isset($tag['DATA'])):
+            $default = static::getData($tag['DATA'], $tag['DATA']);
+            $tag['VALUE'] = !isset($tag['VALUE'])  
+                ?(isset($tag['DATA-VALUE']) ? static::getData($tag['DATA-VALUE'], NULL) : NULL)
+                : $tag['VALUE'];
+            unset($tag['DATA']);
+            unset($tag['DATA-VALUE']);
+            if ($tag['VALUE'] !== $default):
+                unset($tag['CHECKED']);
+            elseif ($tag['VALUE'] == $default):
+                $tag['CHECKED'] = 'checked';
+            endif;
+        endif;
+
+        $tag['ELEMENT'] = 'input';
+
         return $tag;
     }
-    
+
     /**
      * Returns and instantiated Instance of the element class
      *
@@ -81,9 +96,8 @@ class Input extends Form {
 
         if (is_object(static::$instance) && is_a(static::$instance, 'input'))
             return static::$instance;
-
         static::$instance = new self();
-
         return static::$instance;
     }
+
 }

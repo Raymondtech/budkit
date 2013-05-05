@@ -36,18 +36,18 @@ final class Privacy extends Settings\Member {
      * @return void
      */
     public function index() {
-        
+
         $view = $this->load->view('member');
-        
+
         return $view->form("member/privacy", "Privacy settings");
     }
 
-        /**
+    /**
      * Privacy Lists
      */
-    public function groups($edit=null) {
-        
-        $view = $this->load->view('member');       
+    public function groups($edit = null) {
+
+        $view = $this->load->view('member');
         $params = $this->getRequestArgs();
 
         //1. Load the model
@@ -64,19 +64,55 @@ final class Privacy extends Settings\Member {
 
         //3. Get the authorities list
         $groups = $group->getGroups();
-        if(!empty($groups)): //If we have privacy groups
+        if (!empty($groups)): //If we have privacy groups
             $this->set("groups", $groups);
         endif;
-        
+
         return $view->form("member/groups", "Privacy Groups");
     }
-    
+
     /**
      * Privacy Lists
      */
     public function group() {
         $view = $this->load->view('member');
         return $view->form("member/privacy", "Privacy lists");
+    }
+
+    public function update() {
+
+        if ($this->input->methodIs("post")) {
+
+            $message = "Your privacy preferences have now been updated";
+            $messageType = "success";
+
+            //If we can get profile data
+            //Get the data;
+            if (($data = $this->input->getArray("privacy", array(), "post") ) == FALSE) {
+                $this->alert("No input data recieved", 'Something went wrong', 'error');
+                $this->redirect($this->input->getReferer());
+                return false; //useless
+            }
+
+            //Set the data;
+            if (is_array($data) && !empty($data)):
+                foreach ($data as $key => $value):
+                    //@TODO is this a save way to do this?
+                    //Where does the validation happen?
+                    $this->config->setParam($key, $value, "privacy");
+                endforeach;
+            endif;
+
+            //preference model
+            $preferences = $this->load->model("preferences", "settings");
+            if (!$preferences->save("privacy")) {
+                $message = "Could not update your privacy settings";
+                $messageType = "error";
+            }
+        }
+        //die;
+        $this->alert($message, "", $messageType);
+        return $this->returnRequest();
     }
 
     /**

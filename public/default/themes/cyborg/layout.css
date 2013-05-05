@@ -1,0 +1,41 @@
+.container-left .nav-list>li>a { border: none;}
+.profile-cover .profile-avatar{border-radius: 50%;}
+.container-left .nav-list>li>a, .nav-list .nav-header {text-shadow: none}
+.footer {
+    margin-bottom: 100px;
+}
+.container-left {bottom: auto}
+/* Main marketing message and sign up button */
+.profile-cover {
+    text-align: center;
+    padding: 80px 0 0;
+    margin: 0 0px 20px;
+    clear: both;
+    color: #fff;
+text-rendering: optimizelegibility;
+text-shadow: 0 0 3px rgba(0,0,0,0.8);
+}
+.profile-cover .profile-title{margin-top: 50px;}
+.profile-cover h1 {
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+.container{ width: 1006px;}
+.container-box, .container-left{top: 0px; }
+.widget{margin-bottom: 40px}
+.nav-bar > li > a span.label{ float: none !important;}
+.nav-bar > li.nav-header{ display: none }
+.navcenter {
+    float:right;
+    position:relative;
+    left:-50%;
+    text-align:left;
+}
+.nav-bar{ list-style:none; 
+position:relative;
+left:50% !important; float: none;}
+.nav-bar > li{position:relative;}
+
+

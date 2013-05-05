@@ -19,7 +19,7 @@
                         <li><a href="/settings/member/account">Settings</a></li> 
                         <li><a href="/system/authenticate/logout">Signout</a></li>
                     </ul>
-                    <form class="navbar-search input-append">   
+                    <form class="navbar-search input-append" method="get">   
                         <i class="icon-search add-on"></i>
                         <input type="text" class="search-query span4" placeholder="Search for people, files or discussions" />
                     </form>                

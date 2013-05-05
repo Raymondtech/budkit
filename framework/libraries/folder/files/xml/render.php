@@ -108,7 +108,7 @@ final class Render {
         //If an only if there is an open tag;
         if (!empty($tag)):
             //CLOSE THE TAG
-            $selfclosing = array("area", "base", "basefont", "br", "col", "frame", "hr", "img", "input", "link", "meta", "param");
+            $selfclosing = array("area", "base", "basefont", "br", "col", "frame", "hr", "img", "tpl:input", "input", "link", "meta", "param");
             //empty tags e.g script etc
             if (!in_array($tag, $selfclosing)) {
                 $xml->fullEndElement();

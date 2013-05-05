@@ -61,8 +61,6 @@ class Select extends Parse\Template {
     public static function execute($parser, $tag, $writer) {
         
         //Calculate and set the default value;
-        
-        
         if (isset($tag['VALUE'])):  
             
            $default = static::getData($tag['VALUE'], $tag['VALUE']);

@@ -132,7 +132,7 @@ class Output extends Object {
         $this->variables = array();
         $this->config = Config::getInstance();
         $this->router = Router::getInstance();
-        $this->template = $this->config->getParam('template', 'default' ,'appearance');
+        $this->template = $this->config->getParam('template', 'default' ,'design');
         $this->theme = $this->config->getParam('theme', 'default', 'appearance');
 
         //$this->pageTitle = $this->config->getParam('');
@@ -700,7 +700,7 @@ class Output extends Object {
         }
 
         //
-        return $this->template = $this->config->getParam('template','default','appearance');
+        return $this->template = $this->config->getParam('template','default','design');
     }
 
     /**

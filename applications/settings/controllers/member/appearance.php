@@ -14,9 +14,11 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\Settings\Controllers\Member;
 
 use \Application\Settings\Controllers as Settings;
+
 /**
  * The sub actions controller for notification settings
  *
@@ -33,23 +35,67 @@ final class Appearance extends Settings\Member {
      * Displays the notification settings
      * @return void
      */
-    public function index() {           
-        $view   = $this->load->view( 'member' );
-        $model = $this->load->model("attachments", "system");
-        $attachments = $model->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
-        $model->setPagination(); //Set the pagination vars
+    public function index() {
+        $view = $this->load->view('member');
+
+        $tpldir = $this->config->getParam('template', 'default', 'design');
+
+        $themedir = FSPATH . 'public' . DS . $tpldir . DS . 'themes';
+        //Get parsable configurations
+        $themes = \Library\Folder::itemize($themedir . DS);
+        $file = \Library\Folder::getFile();
+
         $items = array("totalItems" => 0);
-        //Loop through fetched attachments;
-        //@TODO might be a better way of doing this, but just trying
-        while ($row = $attachments->fetchAssoc()) {
-            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+
+        foreach ($themes as $i => $theme):
+            $row["name"] = $file->getName($theme);
+            $row["thumbnail"] = "/public/{$tpldir}/themes/{$row["name"]}/thumbnail.png";
+
             $items["items"][] = $row;
             $items["totalItems"]++;
-        }
-        if ((int)$items["totalItems"] > 0)
-            $this->set("gallery", $items);
+        endforeach;
+
+        if ((int) $items["totalItems"] > 0)
+            $this->set("themes", $items);
 
         return $view->form("member/appearance", "Appearance settings");
+    }
+
+    public function update() {
+
+        if ($this->input->methodIs("post")) {
+            $href = $this->uri->internal("/member:{$this->user->get('user_name_id')}/profile/timeline");
+            $link = sprintf('<a href="%s">View profile</a>', $href);
+            $message = "Your profile design has now been updated. {$link}";
+            $messageType = "success";
+
+            //If we can get profile data
+            //Get the data;
+            if (($data = $this->input->getArray("appearance", array(), "post") ) == FALSE) {
+                $this->alert("No input data recieved", 'Something went wrong', 'error');
+                $this->redirect($this->input->getReferer());
+                return false; //useless
+            }
+
+            //Set the data;
+            if (is_array($data) && !empty($data)):
+                foreach ($data as $key => $value):
+                    //@TODO is this a save way to do this?
+                    //Where does the validation happen?
+                    $this->config->setParam($key, $value, "appearance");
+                endforeach;
+            endif;
+
+            //preference model
+            $preferences = $this->load->model("preferences", "settings");
+            if (!$preferences->save("appearance")) {
+                $message = "Could not update your notification settings";
+                $messageType = "error";
+            }
+        }
+        //die;
+        $this->alert($message, "", $messageType);
+        return $this->returnRequest();
     }
 
     /**

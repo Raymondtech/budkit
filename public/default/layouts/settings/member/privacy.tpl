@@ -1,19 +1,21 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="padding">
-        <div class="clearfix">        
-            <ul class="nav nav-pills  no-margin">
-                <li class="highlighted"><a href="/settings/member/privacy/groups" >Edit Privacy groups</a></li>
-            </ul>
-        </div>
+    <form method="post" enctype="multipart/form-data" action="/settings/member/privacy/update" class="form-horizontal margin-top">
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <div class="clearfix">        
+                    <ul class="nav nav-pills  no-margin">
+                        <li class="highlighted"><a href="/settings/member/privacy/groups" >Edit Privacy groups</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /control-group -->
         <hr />
-    </div>
-    <form method="POST" action="/system/admin/settings/save" class="form-horizontal margin-top">
-
         <div class="control-group">
             <label class="control-label">Public</label>
             <div class="controls">
                 <label class="radio">
-                    <input type="radio" name="options[notifications][notify-mobile]" value="0" />
+                    <tpl:input type="radio" name="privacy[privacy-level]"  data="config|privacy.privacy-level" value="public" />
                     <strong>Less Private</strong>
                 </label>
                 <ul>
@@ -27,7 +29,7 @@
             <label class="control-label">Private</label>
             <div class="controls">
                 <label class="radio">
-                    <input type="radio" name="options[notifications][notify-mobile]" value="1" checked="checked" />
+                    <tpl:input type="radio" name="privacy[privacy-level]" value="private" data="config|privacy.privacy-level" checked="checked" />
                     <strong>Seriously Private</strong>
                 </label>
                 <ul>
@@ -35,14 +37,13 @@
                     <li>Your profile and content is viewable by your <a href="#">followers</a> only</li>
                     <li>Everything you share is Private by default</li>
                 </ul>
-
             </div>
         </div><!-- /control-group --> 
         <div class="control-group">
             <label class="control-label">Hidden</label>
             <div class="controls">
                 <label class="radio">
-                    <input type="radio" name="options[notifications][notify-mobile]" value="3" />
+                    <tpl:input type="radio" name="privacy[privacy-level]" data="config|privacy.privacy-level" value="hidden" />
                     <strong>Only Me</strong>
                 </label>
                 <ul>
