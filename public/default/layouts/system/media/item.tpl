@@ -13,7 +13,6 @@
         <div class="stream-view">
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
-<!--                    <div class="widget"><div data-graph="livingstone.fultang" id="xsUabo-graph"></div></div>-->
                     <ol class="timeline-item-index timeline-stream single-item" data-timeline="true">
                         <tpl:loop data="media.items" id="timeline-items">
                             <li class="timeline-item-li timeline-item">
@@ -57,15 +56,21 @@
                                 </div>
                             </li>
                         </tpl:loop> 
-                    </ol>
+                    </ol>     
+<!--                    <div class="stream-alerts"></div>-->
+                    <div class="stream-widgets">
+                        <div class="widget">
+                            <div class="widget-head"><span class="widget-title">References and Relationship Network</span></div>
+                            <div data-graph="livingstone.fultang" id="xsUabo-graph"></div>
+                        </div>
+                    </div>
                     <tpl:import layout="media/form/comment" /> 
-                    <div class="stream-alerts margin-bottom-half"></div>
-                    <div id="comments"><tpl:import layout="media/timeline" /></div>
+                    <div class="stream-comments margin-top" id="comments"><tpl:import layout="media/timeline" /></div>
                     <div class="stream-more"><tpl:import layout="pagination" /></div>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javaScript" src="/${config|appearance.template}/assets/js/d3.v3.min.js"></script>
-    <script type="text/javaScript" src="/${config|appearance.template}/assets/js/budkit-graph.js"></script>
+    <script type="text/javaScript" src="/${config|design.template}/assets/js/d3.v3.min.js"></script>
+    <script type="text/javaScript" src="/${config|design.template}/assets/js/budkit-graph.js"></script>
 </tpl:layout>

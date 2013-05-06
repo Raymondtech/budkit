@@ -53,9 +53,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <tpl:block data="page.block.alerts" /> 
                                 </div>
 
-                                <tpl:block data="page.block.alerts" /> 
+
                                 <tpl:block data="page.block.body">Content</tpl:block>
                                 <tpl:import layout="slider" />
                                 <div class="footer padding">

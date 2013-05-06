@@ -115,7 +115,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
             input{ margin: 3px auto}
         }
     }
-    .stream-alerts,.stream-more{ margin-left: 115px; display: block; min-height: 10px }
+    .stream-alerts,.stream-more, .stream-widgets{ margin-left: 115px; display: block; }
     .stream-view{
         margin-right: @gridGutterWidth + 150;
     }
@@ -495,6 +495,24 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 }
 .indenter{ color: @grayLighter}
 .placeholder-text{color: lighten(@grayLight,10%); text-shadow: 0 2px 1px #ffffff}
+
+path.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+circle {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+text {
+  fill: #000;
+  font: 10px sans-serif;
+  pointer-events: none;
+}
 
 /****IMPORTS****/
 @import "media-grid.less";

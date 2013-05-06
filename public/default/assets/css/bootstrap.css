@@ -6905,10 +6905,10 @@ input.search-query {
   margin: 3px auto;
 }
 .stream-box .stream-alerts,
-.stream-box .stream-more {
+.stream-box .stream-more,
+.stream-box .stream-widgets {
   margin-left: 115px;
   display: block;
-  min-height: 10px;
 }
 .stream-box .stream-view {
   margin-right: 170px;
@@ -7531,6 +7531,21 @@ input.search-query {
   color: #b3b3b3;
   text-shadow: 0 2px 1px #ffffff;
 }
+path.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+circle {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+text {
+  fill: #000;
+  font: 10px sans-serif;
+  pointer-events: none;
+}
 /****IMPORTS****/
 .nav-mediagrid > li > a {
   padding-top: 8px;
@@ -7927,6 +7942,9 @@ input.search-query {
 }
 .media-list li .feature .media-file .media-type {
   margin: 0 auto;
+}
+.media-list li:last-child {
+  border-bottom: none;
 }
 /****RATINGS****/
 .rating {
@@ -8458,9 +8476,6 @@ ul.media-item-actions li a:hover .rating {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;

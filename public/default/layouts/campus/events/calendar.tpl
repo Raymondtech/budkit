@@ -7,7 +7,7 @@
             </div>
         </div>
     </div> 
-    <script type="text/javaScript" src="<?php echo $this->getTemplatePath() ?>/assets/js/plugins/fullcalendar/fullcalendar.js"></script>
+    <script type="text/javaScript" src="${config|design.template}/assets/js/plugins/fullcalendar/fullcalendar.js"></script>
     <script type="text/javaScript">
             <![CDATA[
                     !function($){
