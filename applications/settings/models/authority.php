@@ -94,7 +94,7 @@ class Authority extends \Platform\Model {
 
         //@TODO: Check that we are not denying permission to an authority whose parent is granted the permission!!!
         //Check the Permission Area URI, make sure its not a route id,
-        //We need exact URI paths, Throw an error is it does not make sense
+        //We need exact URI paths, Throw an error if it does not make sense
         if ($table->isNewRow()) {
             
         }

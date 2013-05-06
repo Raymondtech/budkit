@@ -33,7 +33,7 @@ use Library;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-class Relations extends Platform\Model {
+class Relations extends Platform\Entity {
 
     /**
      * Default display method for every model 
@@ -42,7 +42,50 @@ class Relations extends Platform\Model {
     public function display() {
         return false;
     }
-
+    
+    public function addFollow($follower, $followee){
+         //3. Synchronize and bind to table object
+        $table    = $this->load->table("?objects_edges");
+        $follower = $this->loadObjectByURI( $follower );
+        $followee = $this->loadObjectByURI( $followee );
+        
+        $head = $follower->getObjectId();
+        $tail = $followee->getObjectId();
+        
+        if(empty($head)||empty($tail)){
+            //@We don't know who/what these objects are
+            $this->setError("Unable to determine edge vertices");
+            return false;
+        }
+        $relation = array(
+            "edge_head_object"=>$follower->getObjectURI(),
+            "edge_tail_object"=>$followee->getObjectURI(),
+            "edge_name" => "follows"
+        );
+        //Prepare to store the relationship data
+        if (!$table->bindData($relation)) {
+            throw new \Platform\Exception($table->getError());
+            return false;
+        }  
+        //5. Save the table modifications
+        if (!$table->save()) {
+            return false;
+        }
+        return true;
+    }
+    
+    public function removeFollow($follower, $followee){}
+    
+    public function getFollowers($followee){}
+    
+    public function getFollowersGraph(){}
+    
+    public function getFollowingGraph(){}
+    
+    public function getFollowing($follower){}
+    
+    public function getGraph(){}
+   
     /**
      * Saves options to the database, inserting if none exists or updating on duplicate key
      * 
@@ -51,8 +94,6 @@ class Relations extends Platform\Model {
      * @return boolean
      */
     public function save($options, $group = null) {
-
-        
         return true;
     }
 

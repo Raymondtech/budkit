@@ -61,14 +61,18 @@ class Relation extends Member\Network {
     public function follow($memberURI = NULL) {
 
         //Do we know who we are trying to follow?
-        if (empty($memberURI)):
+        if (empty($memberURI) || $memberURI == $this->user->get('user_name_id')):
             $this->alert("Unable to determine the member to follow", "", "error");
             return $this->returnRequest();
         endif;
 
-        if ($this->input->methodIs("post")) {
-            $model = $this->load->model("relation");
+        $model = $this->load->model("relations");
+
+        if(!$model->addFollow($this->user->get('user_name_id'), $memberURI)){
+            $this->alert("An error has occured and we were unable to follow @$memberURI", "", "error");
+            return $this->returnRequest();
         }
+        
         //Returns the request back tot the reffer;
         $this->alert(sprintf("You are now following @%s", $memberURI), "", "success");
 
@@ -84,7 +88,7 @@ class Relation extends Member\Network {
         endif;
 
         if ($this->input->methodIs("post")) {
-            $model = $this->load->model("relation");
+            $model = $this->load->model("relations");
         }
         //Returns the request back tot the reffer;
         $this->alert(sprintf("You are no longer following @%s", $memberURI), "", "success");
