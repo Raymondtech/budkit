@@ -248,7 +248,7 @@ class Config extends Object {
             return $preferences;
 
         //if usernameid is same as platform user, then merge params
-        $userpref = ($merge)?static::mergeParams(static::$params, $preferences):$preferences;
+        $userpref = ($merge)? static::$params = static::mergeParams(static::$params, $preferences) : $preferences;
         
         return $userpref;
         
