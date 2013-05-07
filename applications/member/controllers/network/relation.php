@@ -41,11 +41,44 @@ class Relation extends Member\Network {
     }
 
     public function followers() {
-        return $this->index();
+
+        $view = $this->load->view("network");
+        //Profile Information Title;
+        $this->output->setPageTitle(sprintf(_("%s | Followers"), $this->user->get('user_full_name')));
+
+        //Profile Model
+        $relations = $this->load->model("relations", "member");
+        $followers = $relations->getFollowers($this->user->get('user_name_id'));
+
+        //print_r($following);  
+        $followers['title'] = "Followers";
+        if ($followers['totalItems'] > 0)
+            $this->set("gallery", $followers);
+
+        $members = $this->output->layout("members");
+        $this->output->addToPosition("body", $members);
+
+        $view->display();
     }
 
     public function following() {
-        return $this->index();
+
+        $view = $this->load->view("network");
+        //Profile Information Title;
+        $this->output->setPageTitle(sprintf(_("%s | Following"), $this->user->get('user_full_name')));
+
+        //Profile Model
+        $relations = $this->load->model("relations", "member");
+        $followees = $relations->getFollowing($this->user->get('user_name_id'));
+        //print_r($following); 
+        $followees['title'] = "Following";
+        if ($followees['totalItems'] > 0)
+            $this->set("gallery", $followees);
+
+        $members = $this->output->layout("members");
+        $this->output->addToPosition("body", $members);
+
+        $view->display();
     }
 
     public function request() {
@@ -68,11 +101,11 @@ class Relation extends Member\Network {
 
         $model = $this->load->model("relations");
 
-        if(!$model->addFollow($this->user->get('user_name_id'), $memberURI)){
+        if (!$model->addFollow($this->user->get('user_name_id'), $memberURI)) {
             $this->alert("An error has occured and we were unable to follow @$memberURI", "", "error");
             return $this->returnRequest();
         }
-        
+
         //Returns the request back tot the reffer;
         $this->alert(sprintf("You are now following @%s", $memberURI), "", "success");
 

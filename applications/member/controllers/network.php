@@ -53,17 +53,17 @@ class Network extends \Platform\Controller {
 
         $users = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("user");
         $model->setPagination(); //Set the pagination vars
-        $items = array("totalItems" => 0);
+        $items = array("totalItems" => 0,"title"=>"Members");
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
         while ($row = $users->fetchAssoc()) {
             $row['user_url'] = "/system/object/{$row['object_uri']}";
-            $items["items"][] = $row;
+            $items["members"][] = $row;
             $items["totalItems"]++;
         }
-        $this->set("gallery", $items);
+        if($items['totalItems']>0)  $this->set("gallery", $items);
 
-        $gallery = $this->output->layout("gallery");
+        $gallery = $this->output->layout("members");
         $this->output->addToPosition("body", $gallery);
 
         $view->display();
