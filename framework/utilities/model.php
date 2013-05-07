@@ -257,7 +257,7 @@ abstract class Model extends \Library\Object {
 
         if (!empty($limit)):
             $this->setListLimit($limit);
-            $this->setListLimit($offset);
+            $this->setListOffset($offset);
             $query = "\nLIMIT {$offset}, {$limit}\t";
         endif;
         

@@ -447,7 +447,7 @@ abstract class ActiveRecord extends \Library\Object {
      * @param string $table
      * @return interger
      */
-    final public function count($table='') {
+    final public function count($table='', $resetselect = true) {
 
         if (!empty($table)) {
             $this->traceTableAlias($table);
@@ -456,13 +456,14 @@ abstract class ActiveRecord extends \Library\Object {
         $sql = $this->compile($this->_countString . $this->identifiers('totalcount'));
 
         $result = $this->run($sql);
-        $this->resetSelect();
+        if($resetselect) $this->resetSelect();
 
         if ($result->rowCount() == 0) {
             return '0';
         }
 
         $row = $result->row();
+        
 
         return $row->totalcount;
     }
@@ -980,7 +981,7 @@ abstract class ActiveRecord extends \Library\Object {
      *
      * @return string
      */
-    final public function compile($query ='') {
+    final public function compile($sql ='') {
         $query = '';
 
         if (!empty($sql)) {
