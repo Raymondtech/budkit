@@ -44,8 +44,7 @@ final class Information extends Member\Profile{
         $followers = $relations->getFollowers( $profile['user_name_id'] );
         $following = $relations->getFollowing( $profile['user_name_id'] );
         
-        print_r($following);
-        
+        //print_r($following);    
         if($followers['totalItems']>0) $this->set("followers", $followers);
         if($following['totalItems']>0) $this->set("following", $following);
 

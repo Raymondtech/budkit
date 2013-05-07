@@ -36,6 +36,7 @@
                             <div class="left-contain container">
                                 <div class="padding">
                                     <div class="clearfix profile-cover" align="center" style="background-image: url(${config|appearance.cover-photo}); background-repeat: no-repeat">
+                                        <a href="/" class="return-link">Return to dashboard</a>
                                         <tpl:condition data="profile.user_photo" test="isset" value="1">
                                             <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/195/195" style="margin: auto" />
                                         </tpl:condition>

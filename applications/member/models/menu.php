@@ -49,19 +49,14 @@ class Menu extends \Platform\Model {
         //Add the default upload links
         switch ($menuId):
             case 'peoplemenu':
-                //Counts
-                $mycount = $user->getObjectsListCount("user");
-
-                if (empty($mycount))
-                    $mycount = NULL;
                 //Add items to the profile menu;
                 array_unshift($menuItems, array(
                     "menu_title" => "Network",
                     "children" => array(
-                        array("menu_title" => "Members", "menu_url" => "/member/network/directory", "menu_count" => $mycount),
+                        array("menu_title" => "Members", "menu_url" => "/member/network/directory"),
                         array("menu_title" => "Following", "menu_url" => "/member/network/relation/following"),
                         array("menu_title" => "Followers", "menu_url" => "/member/network/relation/followers"),
-                        array("menu_title" => "Requests", "menu_url" => "/member/network/relation/requests")
+                        array("menu_title" => "Blacklisted", "menu_url" => "/member/network/relation/blocked")
                     )
                         ), array(
                     "menu_title" => "Communities",

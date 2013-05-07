@@ -28,12 +28,15 @@ namespace Application\Member\Controllers;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
 class Profile extends \Platform\Controller {
+    
+    public $profile = array();
 
     public function __construct() {
         
         parent::__construct();
-        $profile = $this->getMemberProfile();
-        $this->set("profile", $profile);
+        
+        $this->profile    = $this->getMemberProfile();
+        $this->set("profile", $this->profile);
         
     }
 
@@ -43,7 +46,22 @@ class Profile extends \Platform\Controller {
      * @return false;
      */
     public function index() {
+        
         $view = $this->load->view('profile');
+        $profile = $this->profile;
+
+        //print_R($profile); die;
+        //Load this user's profile design
+        $preferences = $this->config->getUserPreferences( $profile['user_name_id'], false, false );
+        $appearance = $preferences['appearance'];
+        
+        if(!empty($appearance)&&is_array($appearance)):
+            foreach ($appearance as $key=>$value):
+                $this->config->setParam($key, $value, "appearance");
+            endforeach;    
+        endif;
+
+        //Load the profile page
         $view->profilePage();
     }
 

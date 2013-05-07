@@ -206,7 +206,7 @@ class Config extends Object {
      * @param type $user_name_id
      * @return array
      */
-    public static function getUserPreferences($user_name_id = NULL, $refresh = FALSE) {
+    public static function getUserPreferences($user_name_id = NULL, $refresh = FALSE, $merge=true) {
 
         $preferences = array();
         $dirname = static::getParam("site-users-folder", "/users");
@@ -248,7 +248,10 @@ class Config extends Object {
             return $preferences;
 
         //if usernameid is same as platform user, then merge params
-        static::$params = static::mergeParams(static::$params, $preferences);
+        $userpref = ($merge)?static::mergeParams(static::$params, $preferences):$preferences;
+        
+        return $userpref;
+        
     }
 
     /**

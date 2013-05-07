@@ -14,7 +14,9 @@
     color: #fff;
 text-rendering: optimizelegibility;
 text-shadow: 0 0 3px rgba(0,0,0,0.8);
+position:relative;
 }
+.profile-cover .return-link{ position: absolute; top: 5px; left: 10px; color: white;}
 .profile-cover .profile-title{margin-top: 50px;}
 .profile-cover h1 {
     font-size: 42px;
