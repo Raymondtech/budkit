@@ -61,7 +61,9 @@
                                 <tpl:import layout="slider" />
                                 <div class="footer padding">
                                     <p><tpl:element type="text" formatting="sprintf" cdata="&copy; %s" data="profile.user_full_name"  /></p>
+                                    
                                 </div>
+<!--                                <tpl:import layout="footer" />-->
                             </div>
                         </div>
 

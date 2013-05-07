@@ -30,6 +30,7 @@ namespace Application\Member\Controllers;
 class Profile extends \Platform\Controller {
 
     public function __construct() {
+        
         parent::__construct();
         $profile = $this->getMemberProfile();
         $this->set("profile", $profile);
@@ -74,7 +75,7 @@ class Profile extends \Platform\Controller {
      */
     protected function getMemberProfile() {
 
-        $user = $this->get('user')->get("user_name_id"); //Get Platform user nameId
+        $member = $this->get('user')->get("user_name_id"); //Get Platform user nameId
         $member = $this->input->getVar("member", "", $member);
 
         $model = $this->load->model("profile");
@@ -95,23 +96,6 @@ class Profile extends \Platform\Controller {
         return (array) $data;
     }
 
-    /**
-     * Displays the profile's achievement
-     * @return void
-     */
-    public function achievements() {
-        echo "achievements";
-        return $this->index();
-    }
-
-    /**
-     * Displays the profile network graph
-     * @return void
-     */
-    public function network() {
-        echo "network";
-        return $this->index();
-    }
 
     /**
      * Returns an instance of the Profile action controller

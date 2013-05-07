@@ -39,19 +39,15 @@ final class Information extends Member\Profile{
         $this->output->setPageTitle( sprintf( _("%s | Information"), $profile['user_full_name'] ));
         
         //Profile Model
-        $model = $this->load->model("profile", "member");
-
-        $users = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("user");
-        $model->setPagination(); //Set the pagination vars
-        $items = array("totalItems" => 0);
-        //Loop through fetched attachments;
-        //@TODO might be a better way of doing this, but just trying
-        while ($row = $users->fetchAssoc()) {
-            $row['user_url'] = "/system/object/{$row['object_uri']}";
-            $items["items"][] = $row;
-            $items["totalItems"]++;
-        }
-        $this->set("followers", $items);
+        $relations = $this->load->model("relations", "member");
+        
+        $followers = $relations->getFollowers( $profile['user_name_id'] );
+        $following = $relations->getFollowing( $profile['user_name_id'] );
+        
+        print_r($following);
+        
+        if($followers['totalItems']>0) $this->set("followers", $followers);
+        if($following['totalItems']>0) $this->set("following", $following);
 
         $media = $this->output->layout("/profile/information");
         $this->output->addToPosition("body", $media);
