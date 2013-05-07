@@ -44,10 +44,8 @@ final class Calendar extends \Platform\View{
         //TODO only set if not already set To set the pate title use
         //$this->output->setPageTitle("Welcome to diddat");
         //to add some js file
-        $this->output->addScript("some.js");
-
-        //to add some js file
-        $this->output->addStyle("some.css");
+        $this->output->addScript("/default/assets/js/plugins/fullcalendar/fullcalendar.js");
+        $this->output->addStyle("/default/assets/js/plugins/fullcalendar/fullcalendar.css");
 
         //to output just the layout use
         //$this->output->raw();

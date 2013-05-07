@@ -61,10 +61,10 @@ final class Process extends Platform\View {
         //To get a previously set property;
         //echo $this->get("user2");
         //to add some js file
-        $this->output->addScript("some.js");
+        //$this->output->addScript("some.js");
 
         //to add some js file
-        $this->output->addStyle("some.css");
+        //$this->output->addStyle("some.css");
 
         //to output just the layout use
         //$this->output->raw();

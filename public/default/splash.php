@@ -23,6 +23,8 @@
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/${config|design.template}/assets/ico/apple-touch-icon-72-precomposed.png" />
             <link rel="apple-touch-icon-precomposed" href="/${config|design.template}/assets/ico/apple-touch-icon-57-precomposed.png" />
             <link rel="shortcut icon" href="/${config|design.template}/assets/ico/favicon.png" />
+            
+            <tpl:output type="head" />
         </head>
         <body onload="prettyPrint()">
             <div id="wrap">            

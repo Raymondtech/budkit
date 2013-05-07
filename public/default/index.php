@@ -9,7 +9,6 @@
             <meta name="author" content="${page.author}" />
             <meta name="keywords" content="${page.author}" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
             <!-- Le styles -->
             <link href="/${config|design.template}/assets/css/bootstrap.css" rel="stylesheet" />
             <link href="/${config|design.template}/assets/css/bootstrap-responsive.css" rel="stylesheet" />
@@ -28,9 +27,11 @@
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/${config|design.template}/assets/ico/apple-touch-icon-72-precomposed.png" />
             <link rel="apple-touch-icon-precomposed" href="/${config|design.template}/assets/ico/apple-touch-icon-57-precomposed.png" />
             <link rel="shortcut icon" href="/${config|design.template}/assets/ico/favicon.png" />
+            
             <!-- jQuery here because if placed at bottom, in-line scripts (i.e script tags in .tpl files) won't work -->
             <script src="/${config|design.template}/assets/js/jquery.js"></script>
             <script src="/${config|design.template}/assets/js/budkit.js"></script>
+            <tpl:output type="head" />
         </head>
         <body>
             <div id="wrap">

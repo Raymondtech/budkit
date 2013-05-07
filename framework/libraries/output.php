@@ -95,6 +95,14 @@ class Output extends Object {
      * @var array
      */
     protected $scripts = array();
+    
+        
+    /**
+     * Contains a list of page meta
+     *
+     * @var array
+     */
+    protected $meta = array();
 
     /**
      * An array of Stylesheet references to be included on page
@@ -132,7 +140,7 @@ class Output extends Object {
         $this->variables = array();
         $this->config = Config::getInstance();
         $this->router = Router::getInstance();
-        $this->template = $this->config->getParam('template', 'default' ,'design');
+        $this->template = $this->config->getParam('template', 'default', 'design');
         $this->theme = $this->config->getParam('theme', 'default', 'appearance');
 
         //$this->pageTitle = $this->config->getParam('');
@@ -548,22 +556,74 @@ class Output extends Object {
      *
      * @param string $file
      */
-    final public function addScript($file) {
+    final public function addScript($src, $type = "text/javaScript", $defer=NULL, $charset=NULL, $async=NULL) {
 
-        $this->script = $file;
+        $script = array(
+            "src" => Uri::internal($src),
+            "type" => $type
+        );
+        if (!empty($defer))
+            $script['defer'] = $defer;
+        if (!empty($charset))
+            $script['charset'] = $charset;
+        if (!empty($async))
+            $script['async'] = $async;
+        
+        $this->scripts[] = $script;
 
         return $this;
     }
+    
+    /**
+     * Returns an array of dynamically added page scripts
+     * @return type
+     */
+    final public function getScripts(){
+        return $this->scripts;
+    }
+    
+    /**
+     * Returns an array of dynamically added page styles
+     * @return type
+     */
+    final public function getStyles(){
+        return $this->styles;
+    }
+    
+    /**
+     * Returns an arry of dymaically added page meta
+     * @return type
+     */
+    final public function getMeta(){
+        return $this->meta;
+    }
 
     /**
-     * Add Style
-     *
-     * Adds a reference to a stylesheet resource to include on the
-     * page
-     *
-     * @param string $style
+     * Adds a reference to a stylesheet resource to include on the page
+     * 
+     * @param string $href
+     * @param string $rel
+     * @param string $type
+     * @param string $media
+     * @param string $sizes
+     * @param string $hreflang
+     * @return \Library\Output
      */
-    final public function addStyle($style) {
+    final public function addStyle($href, $rel = "stylesheet", $type = "text/css", $media = NULL, $sizes = NULL, $hreflang = NULL) {
+
+        $style = array(
+            "href" => Uri::internal($href),
+            "rel" => $rel,
+            "type" => $type
+        );
+        if (!empty($media))
+            $style['media'] = $media;
+        if (!empty($sizes))
+            $style['sizes'] = $sizes;
+        if (!empty($hreflang))
+            $style['hreflang'] = $hreflang;
+        
+        $this->styles[] = $style;
 
         return $this;
     }
@@ -571,21 +631,29 @@ class Output extends Object {
     /**
      * Add Meta
      *
-     * Adds a page Meta
+     * @param string $name
+     * @param string $content
+     * @param string $charset
+     * @param string $httpequiv
+     * @return \Library\Output
      */
-    final public function addMeta() {
+    final public function addMeta($name, $content="", $charset=NULL, $httpequiv=NULL) {
+  
+        $meta = array(
+            "name" => $name,
+            "content" => $content
+        );
+        
+        if (!empty($charset))
+            $meta['charset'] = $charset;
+        if (!empty($httpequiv))
+            $meta['http-equiv'] = $httpequiv;
+        
+        $this->meta[] = $meta;
 
         return $this;
     }
 
-    /**
-     * Add Head Tag
-     *
-     * Adds a custom header tag to the page
-     */
-    final public function addHeaderTag() {
-        return $this;
-    }
 
     /**
      * Add Message
@@ -626,7 +694,6 @@ class Output extends Object {
         return $this;
     }
 
-
     /**
      * Adds a custom link to a menugroup. 
      * 
@@ -636,15 +703,15 @@ class Output extends Object {
     final public function addLinkToMenuGroup($menuNameId, $link = array()) {
         
     }
-    
+
     /**
      * Returns all the defined menugroups
      * @return type
      */
-    final public function getMenuGroups(){
+    final public function getMenuGroups() {
         return $this->menugroups;
     }
-    
+
     /**
      * Returns the menu group
      * 
@@ -654,8 +721,7 @@ class Output extends Object {
      */
     final public function getMenuGroup($groupName, $default = array()) {
         //IF the group nae exists return it, else return default
-        return isset($this->menugroups[$groupName])? $this->menugroups[$groupName] :  $default;
-        
+        return isset($this->menugroups[$groupName]) ? $this->menugroups[$groupName] : $default;
     }
 
     /**
@@ -666,9 +732,8 @@ class Output extends Object {
      * @param type $menuItems
      */
     final public function addMenuGroupToPosition($blockName, $menuNameId, $menuType = "nav-list", $menuItems = array(), $overwrite = false) {
-        
+
         //The menu layout
-        
         //menuItems
         if (!empty($menuItems)):
             //Check if the param already exists
@@ -681,10 +746,10 @@ class Output extends Object {
             }
             $this->menugroups = array_merge($this->menugroups, $group);
         endif;
-        
+
         //Add the menu name to the page menus
-        $this->variables["page"]['block'][$blockName]["menus"][] = array("ELEMENT"=>"ul", "ID"=>$menuNameId,"TYPE"=>$menuType);
-                
+        $this->variables["page"]['block'][$blockName]["menus"][] = array("ELEMENT" => "ul", "ID" => $menuNameId, "TYPE" => $menuType);
+
         return $this;
     }
 
@@ -700,7 +765,7 @@ class Output extends Object {
         }
 
         //
-        return $this->template = $this->config->getParam('template','default','design');
+        return $this->template = $this->config->getParam('template', 'default', 'design');
     }
 
     /**
@@ -1006,7 +1071,6 @@ class Output extends Object {
                 "content" => $content,
                 "title" => $title,
                 "params" => $params
-              
             ));
         } else {
             array_push($this->variables["page"]["block"][$blockName]["data"], array(
