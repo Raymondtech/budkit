@@ -42,10 +42,14 @@ class Menu extends \Platform\Model {
     public static function hook(&$menuId, &$menuItems) {
 
 
-        $user = User::getInstance();
+        $user = \Platform\User::getInstance();
         $input = \Library\Input::getInstance();
         $input->getRequestVars();
-        $member = $input->getVar("member", ""); //If member is not set, we are view platform user profile
+        $member = $input->getVar("member",''); //If member is not set, we are view platform user profile
+        $relations = Relations::getInstance();
+        
+        $followers = $relations->getFollowersCount(!empty($member)?$member:$user->get('user_name_id'));
+        $following = $relations->getFollowingCount(!empty($member)?$member:$user->get('user_name_id'));
         //Add the default upload links
         switch ($menuId):
             case 'peoplemenu':
@@ -54,8 +58,8 @@ class Menu extends \Platform\Model {
                     "menu_title" => "Network",
                     "children" => array(
                         array("menu_title" => "Members", "menu_url" => "/member/network/directory"),
-                        array("menu_title" => "Following", "menu_url" => "/member/network/relation/following"),
-                        array("menu_title" => "Followers", "menu_url" => "/member/network/relation/followers"),
+                        array("menu_title" => "Following","menu_count" =>$following, "menu_url" => "/member/network/relation/following"),
+                        array("menu_title" => "Followers",  "menu_count" =>$followers,"menu_url" => "/member/network/relation/followers"),
                         array("menu_title" => "Blacklisted", "menu_url" => "/member/network/relation/blocked")
                     )
                         ), array(
@@ -73,8 +77,8 @@ class Menu extends \Platform\Model {
                     "children" => array(
                         array("menu_title" => "Information", "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/information"),
                         array("menu_title" => "Timeline", "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/timeline"),
-                        array("menu_title" => "Following","menu_count" =>663353, "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/following"),
-                        array("menu_title" => "Followers", "menu_count" =>30444561, "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/followers"),
+                        array("menu_title" => "Following","menu_count" =>$following, "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/following"),
+                        array("menu_title" => "Followers", "menu_count" =>$followers, "menu_url" => "/member" . (!empty($member) ? ":{$member}" : NULL) . "/profile/followers"),
                     )
                         )
                 );

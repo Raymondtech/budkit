@@ -78,15 +78,45 @@ class Relations extends Platform\Entity {
         
     }
 
-    /**
-     * Returns all the followers of the defined $followee;
-     * 
-     * @param string $followee
-     * @return array
-     */
-    public function getFollowers($followee) {
-        
-        $profile    = $this->load->model("profile", "member");
+    private function getFollowingQuery($follower) {
+        $profile = $this->load->model("profile", "member");
+        $limit = $this->getLimitClause();
+        $listlimit = $this->getListLimit();
+        $offset = $this->getListOffset();
+        $_properties = $profile->getPropertyModel();
+        $properties = !empty($_properties) ? array_keys($_properties) : array();
+        $select = null;
+        if (!empty($properties)):
+            //Loop through the attributes you need
+            $i = 0;
+            $count = \sizeof($properties);
+            //echo $count;
+            foreach ($properties as $alias => $attribute):
+                if ($i < $count):
+                    $select .= ",";
+                    $i++;
+                endif;
+                $alias = (is_int($alias)) ? $attribute : $alias;
+                $select .= "\nMAX(IF(p.property_name = '{$attribute}', v.value_data, null)) AS {$alias}";
+            endforeach;
+        endif;
+        //Get All authorities from the database
+        $statement = $this->database
+                ->select("m.edge_created_on AS followed_on, o.object_id, o.object_uri, o.object_type, o.object_created_on, o.object_updated_on, o.object_status $select")
+                ->from("?objects_edges m")
+                ->join("?objects o", "o.object_uri=m.edge_tail_object", "LEFT")
+                ->join("?user_property_values v", "o.object_id=v.object_id", "LEFT")
+                ->join("?properties p", "p.property_id=v.property_id", "LEFT")
+                ->where("m.edge_head_object", $this->database->quote($follower))
+                ->where("m.edge_name", $this->database->quote("follows"))
+                ->groupBy("o.object_id");
+
+        return $statement;
+    }
+
+    private function getFollowersQuery($followee) {
+
+        $profile = $this->load->model("profile", "member");
         $_properties = $profile->getPropertyModel();
         $properties = !empty($_properties) ? array_keys($_properties) : array();
         $select = null;
@@ -114,15 +144,25 @@ class Relations extends Platform\Entity {
                 ->where("m.edge_tail_object", $this->database->quote($followee))
                 ->where("m.edge_name", $this->database->quote("follows"))
                 ->groupBy("o.object_id");
-        
-        //lets count!
+
+        return $_statement;
+    }
+
+    /**
+     * Returns all the followers of the defined $followee;
+     * 
+     * @param string $followee
+     * @return array
+     */
+    public function getFollowers($followee) {
+
         //$count = $_statement->count('', false);
-        
-        $limit      = $this->getLimitClause();
-        $listlimit  = $this->getListLimit();
-        $offset     = $this->getListOffset();
+        $_statement = $this->getFollowersQuery($followee);
+        $limit = $this->getLimitClause();
+        $listlimit = $this->getListLimit();
+        $offset = $this->getListOffset();
         //Really should be used only if counting;
-        $statement = $_statement        
+        $statement = $_statement
                 ->limit($listlimit, $offset)
                 ->prepare();
 
@@ -134,6 +174,8 @@ class Relations extends Platform\Entity {
             $followers["members"][] = $member;
             $followers["totalItems"]++;
         }
+        $total = $this->getFollowersCount($followee);  
+        $this->setListTotal( $total );
         
         return $followers;
     }
@@ -142,6 +184,16 @@ class Relations extends Platform\Entity {
         
     }
 
+    /**
+     * Returns the number of users following this user
+     * @param type $followee
+     * @return type
+     */
+    public function getFollowersCount($followee){
+        $count = $this->getFollowersQuery($followee)->count();
+        return $count;
+    }
+    
     public function getFollowingGraph() {
         
     }
@@ -152,39 +204,13 @@ class Relations extends Platform\Entity {
      * @param type $follower
      * @return type
      */
-    public function getFollowing( $follower ) {
-
-        $profile    = $this->load->model("profile", "member");
-        $limit      = $this->getLimitClause();
-        $listlimit  = $this->getListLimit();
-        $offset     = $this->getListOffset();
-        $_properties = $profile->getPropertyModel();
-        $properties = !empty($_properties) ? array_keys($_properties) : array();
-        $select = null;
-        if (!empty($properties)):
-            //Loop through the attributes you need
-            $i = 0;
-            $count = \sizeof($properties);
-            //echo $count;
-            foreach ($properties as $alias => $attribute):
-                if ($i < $count):
-                    $select .= ",";
-                    $i++;
-                endif;
-                $alias = (is_int($alias)) ? $attribute : $alias;
-                $select .= "\nMAX(IF(p.property_name = '{$attribute}', v.value_data, null)) AS {$alias}";
-            endforeach;
-        endif;
-        //Get All authorities from the database
-        $statement = $this->database
-                ->select("m.edge_created_on AS followed_on, o.object_id, o.object_uri, o.object_type, o.object_created_on, o.object_updated_on, o.object_status $select")
-                ->from("?objects_edges m")
-                ->join("?objects o", "o.object_uri=m.edge_tail_object", "LEFT")
-                ->join("?user_property_values v", "o.object_id=v.object_id", "LEFT")
-                ->join("?properties p", "p.property_id=v.property_id", "LEFT")
-                ->where("m.edge_head_object", $this->database->quote($follower))
-                ->where("m.edge_name", $this->database->quote("follows"))
-                ->groupBy("o.object_id")
+    public function getFollowing($follower) {
+        
+        $limit = $this->getLimitClause();
+        $listlimit = $this->getListLimit();
+        $offset = $this->getListOffset();
+        
+        $statement = $this->getFollowingQuery($follower)
                 ->limit($listlimit, $offset)
                 ->prepare();
 
@@ -196,7 +222,22 @@ class Relations extends Platform\Entity {
             $followees["members"][] = $member;
             $followees["totalItems"]++;
         }
+        $total = $this->getFollowingCount($follower);  
+        $this->setListTotal( $total );
+        //count and set totals?
         return $followees;
+    }
+    
+    /**
+     * Returns the number of users followed by this user
+     * @param type $follower
+     * @return type
+     */
+    public function getFollowingCount($follower){
+        
+        $count = $this->getFollowingQuery($follower)->count();
+        return $count;
+        
     }
 
     public function getGraph() {

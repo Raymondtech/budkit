@@ -453,18 +453,16 @@ abstract class ActiveRecord extends \Library\Object {
             $this->traceTableAlias($table);
             $this->fromTable($table);
         }
-        $sql = $this->compile($this->_countString . $this->identifiers('totalcount'));
+        $sql = $this->compile($this->_countString . $this->identifiers('totalcount'), true);
+        $statement = $this->DBO->prepare( $sql);
 
-        $result = $this->run($sql);
-        if($resetselect) $this->resetSelect();
-
-        if ($result->rowCount() == 0) {
-            return '0';
-        }
-
-        $row = $result->row();
+        $results = $statement->execute();
         
+        if($resetselect) $this->resetSelect();
+        if ($results->rowCount() == 0) return '0';
 
+        $row = $results->fetchObject();
+        
         return $row->totalcount;
     }
 
@@ -981,7 +979,7 @@ abstract class ActiveRecord extends \Library\Object {
      *
      * @return string
      */
-    final public function compile($sql ='') {
+    final public function compile($sql ='', $counting=false) {
         $query = '';
 
         if (!empty($sql)) {
@@ -1009,7 +1007,7 @@ abstract class ActiveRecord extends \Library\Object {
         }
 
         //joins;
-        if (!empty($this->arrayJoin)) {
+        if (!empty($this->arrayJoin)&&!$counting) {
             $query .= "\n";
             $query .= implode("\n", $this->arrayJoin);
         }
@@ -1032,7 +1030,7 @@ abstract class ActiveRecord extends \Library\Object {
 
         //[group by column {, column}]
 
-        if (count($this->arrayGroupBy) > 0) {
+        if (count($this->arrayGroupBy) > 0 && !$counting) {
 
             $query .= "\nGROUP BY\t";
             $query .= implode(', ', $this->arrayGroupBy);
