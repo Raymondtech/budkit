@@ -31,7 +31,7 @@
             <!-- jQuery here because if placed at bottom, in-line scripts (i.e script tags in .tpl files) won't work -->
             <script src="/${config|design.template}/assets/js/jquery.js"></script>
             <script src="/${config|design.template}/assets/js/budkit.js"></script>
-            <tpl:output type="head" />
+            <tpl:utility type="head" />
         </head>
         <body>
             <div id="wrap">

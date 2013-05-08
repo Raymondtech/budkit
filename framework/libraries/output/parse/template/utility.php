@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * output.php
+ * utility.php
  *
  * Requires PHP version 5.3
  *
@@ -40,7 +40,7 @@ use Library\Output\Parse;
  * @version    Release: 1.0.0
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  */
-class Output extends Parse\Template {
+class Utility extends Parse\Template {
     /*
      * @var object
      */
@@ -67,7 +67,7 @@ class Output extends Parse\Template {
         $scripts = $output->getScripts();
         $styles = $output->getStyles();
         $meta = $output->getMeta();
-
+        
         //Write Meta
         foreach ($meta as $_meta):
             //$link = array( "element" => "link");
@@ -98,12 +98,12 @@ class Output extends Parse\Template {
             $writer->fullEndElement();
         endforeach;
         
-        unset($tag);
-        unset($scripts);
-        unset($styles);
-        unset($meta);
+        //unset($tag);
+        //unset($scripts);
+        //unset($styles);
+       // unset($meta);
 
-        return null; //Removes the element from the tree but returns the text;
+        return $tag; //Removes the element from the tree but returns the text;
     }
 
     /**
@@ -115,7 +115,7 @@ class Output extends Parse\Template {
      * @return type 
      */
     public static function execute($parser, $tag, $writer) {
-
+        
         static::$writer = $writer;
 
         //If no type is defined return null. !We need a type
@@ -125,11 +125,11 @@ class Output extends Parse\Template {
             $submethods = array("head");
             //To spare some more memory
             if (method_exists(self::getInstance(), $tag['TYPE']) && in_array(strtolower($tag['TYPE']), $submethods)) :
-                return $tag = static::$tag['TYPE']($tag, $writer, $parser);
+               $tag = static::$tag['TYPE']($tag, $writer, $parser);
             endif;
         endif;
-
-        //return $tag;
+     
+        return null;
     }
 
     /**
@@ -145,7 +145,7 @@ class Output extends Parse\Template {
      * @return object Output
      */
     public static function getInstance() {
-        if (is_object(static::$instance) && is_a(static::$instance, 'output'))
+        if (is_object(static::$instance) && is_a(static::$instance, 'utility'))
             return static::$instance;
         static::$instance = new self();
         return static::$instance;
