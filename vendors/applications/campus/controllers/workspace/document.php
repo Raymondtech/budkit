@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * course.php
+ * document.php
  *
  * Requires PHP version 5.4
  *
@@ -20,10 +20,7 @@ use Application\Campus\Controllers as Campus;
 
 
 /**
- * Course CRUD action controller. 
- *
- * This class implements the action controller that manages the creation, 
- * view and edit of courses.
+ * document CRUD action controller. 
  *
  * @category  Application
  * @package   Action Controller
@@ -32,7 +29,7 @@ use Application\Campus\Controllers as Campus;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Course extends Campus\Workspace {
+final class Document extends Campus\Workspace {
 
     /**
      * The default fallback method. 
@@ -40,7 +37,7 @@ final class Course extends Campus\Workspace {
      */
     public function index() {
         
-        $this->output->setPageTitle( _("Courses") );
+        $this->output->setPageTitle( _("Documents") );
 
         $model   = $this->load->model("attachments", "system"); //This will change of course but for now
   

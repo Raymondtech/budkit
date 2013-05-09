@@ -40,19 +40,19 @@ final class Task extends Campus\Workspace {
      */
     public function index() {
         
-        $this->output->setPageTitle( _("Tasks") );
+        $this->output->setPageTitle( _("Tasks Summary") );
 
         $model   = $this->load->model("attachments", "system"); //This will change of task but for now
         $attachments = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
         $model->setPagination(); //Set the pagination vars
-        $items     = array();
+        $items     = array("showfilters"=>true);
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
         while ($row = $attachments->fetchAssoc()){
             $row['attachment_url'] = "/system/object/{$row['object_uri']}";
             $items["items"][] = $row;
         }
-        $this->set("gallery", $items );
+        $this->set("tasks", $items );
         
         $gallery = $this->output->layout("tasks/lists");
         $this->output->addToPosition("dashboard", $gallery);

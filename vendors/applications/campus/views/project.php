@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * workspace.php
+ * project.php
  *
  * Requires PHP version 5.4
  *
@@ -27,7 +27,7 @@ namespace Application\Campus\Views;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * ˙
  */
-final class Workspace extends \Platform\View{
+final class Project extends \Platform\View{
     
 
     
@@ -58,9 +58,11 @@ final class Workspace extends \Platform\View{
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
         $dashboard = $this->output->layout("dashboard", "system");
-        //$rightaside     = $this->output->layout( "cpanel"  );
         
+        //$rightaside     = $this->output->layout( "cpanel"  );
+        $this->output->addMenuGroupToPosition("aside", "projectmenu");
         $this->output->addMenuGroupToPosition("side", "campusmenu");
+        
         $this->output->addToPosition("body", $dashboard);
         
     }

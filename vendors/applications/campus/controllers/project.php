@@ -14,10 +14,10 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Campus\Controllers\Workspace;
 
-use Application\Campus\Controllers as Campus;
+namespace Application\Campus\Controllers;
 
+use Platform;
 
 /**
  * Project CRUD action controller. 
@@ -32,32 +32,63 @@ use Application\Campus\Controllers as Campus;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Project extends Campus\Workspace {
+final class Project extends Platform\Controller {
 
     /**
      * The default fallback method. 
      * @return  void
      */
     public function index() {
-        
-        $this->output->setPageTitle( _("Projects") );
 
-        $model   = $this->load->model("attachments", "system"); //This will change of project but for now
-  
+        $this->output->setPageTitle(_("Projects"));
+
+        $model = $this->load->model("attachments", "system"); //This will change of project but for now
+
         $attachments = $model->getObjectsList("attachment");
-        $items     = array();
+        $items = array();
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
-        while ($row = $attachments->fetchAssoc()){
+        while ($row = $attachments->fetchAssoc()) {
             $row['attachment_url'] = "/system/object/{$row['object_uri']}";
             $items["items"][] = $row;
         }
-        $this->set("projects", $items );
-        
+        $this->set("gallery", $items);
+
         $gallery = $this->output->layout("projects");
         $this->output->addToPosition("dashboard", $gallery);
-        
-        $this->load->view('workspace')->display();
+
+        $this->load->view('project')->display();
+    }
+
+    
+    public function assignments() {
+
+        $this->output->setPageTitle(_("Tasks"));
+
+        $tasks = $this->output->layout("tasks/lists");
+        $this->output->addToPosition("dashboard", $tasks);
+
+        $this->load->view('project')->display();
+    }
+    
+   public function timeline() {
+
+        $this->output->setPageTitle(_("Project Story-board"));
+        $model = $this->load->model('media', 'system');
+
+        $activities = $model->setListLookUpConditions("media_target", "")->getAll();
+        $model->setPagination(); //Set the pagination vars
+
+        $this->set("activities", $activities);
+        //$this->set("user", $user);
+
+        $timeline = $this->output->layout("project/timeline");
+        //$timelineside = $this->output->layout("timelinenotes");
+
+        $this->output->addToPosition("dashboard", $timeline);
+        //$this->output->addToPosition("aside", $timelineside );
+
+        $this->load->view('project')->display();
     }
 
     /**
