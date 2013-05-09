@@ -27,7 +27,7 @@
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/${config|design.template}/assets/ico/apple-touch-icon-72-precomposed.png" />
             <link rel="apple-touch-icon-precomposed" href="/${config|design.template}/assets/ico/apple-touch-icon-57-precomposed.png" />
             <link rel="shortcut icon" href="/${config|design.template}/assets/ico/favicon.png" />
-            
+
             <!-- jQuery here because if placed at bottom, in-line scripts (i.e script tags in .tpl files) won't work -->
             <script src="/${config|design.template}/assets/js/jquery.js"></script>
             <script src="/${config|design.template}/assets/js/budkit.js"></script>
@@ -39,19 +39,22 @@
                     <tpl:import layout="sidebar" />
                 </div>
                 <div class="container-box has-left has-navbar">       
-                    <tpl:import layout="navbar" />
+                    
                     <div class="container-right">
-                        <div class="container-aside">
-                            <tpl:import layout="asidebar" />
-                        </div>
+                        <tpl:condition data="page.block.aside" test="isset" value="1">
+                            <div class="container-aside">
+                                <tpl:block data="page.block.aside" />
+                            </div>
+                        </tpl:condition>
                         <div class="container-content">
                             <div class="container-bucket">
+                                <tpl:import layout="navbar" />
                                 <tpl:block data="page.block.alerts" /> 
                                 <tpl:block data="page.block.body" />
                                 <tpl:import layout="footer" />
                             </div>
-<!--                            <a href="#" class="container-left-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>-->
-                            <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-left"></i></a>
+<!--                            <a href="#" class="container-left-toggle toggler" data-toggle="container-left"><i class="icon-chevron-left"></i></a>
+                            <a href="#" class="container-right-toggle toggler" data-toggle="container-aside"><i class="icon-chevron-left"></i></a>-->
                         </div>
                     </div>
                 </div><!--/.fluid-container-->

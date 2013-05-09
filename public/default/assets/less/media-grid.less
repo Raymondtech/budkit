@@ -78,9 +78,10 @@
     display: inline-block; 
     float: left;
     margin: 0 @gridGutterWidth*0.9 @gridGutterWidth*0.9 0;
-    .grid-hide{ display:none}
+    .grid-hide{ display:none !important}
     &.list-header{display:none}
     .clearfix();
+    .mgitem{ max-width: 350px; }
   }
 }
 .media-list{
@@ -92,7 +93,7 @@
     text-align: left;
     vertical-align: top;
     border-bottom: 1px solid @tableBorder;
-    .list-hide{ display:none}
+    .list-hide{ display:none !important}
     &.list-header{ padding: 5px; [class*="mgcol"] { min-height: @baseLineHeight}  }
     .feature{
         .media-file{ border: none; width: auto; height: auto; .media-type{margin: 0 auto;}}

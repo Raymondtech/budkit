@@ -31,7 +31,6 @@
         </head>
         <body>
             <div id="wrap">
-                <tpl:import layout="navbar" />
                 <div class="container-left">
                     <tpl:condition data="profile.user_photo" test="isset" value="1">
                         <img class="profile-avatar" src="/system/object/${profile.user_photo}/resize/195" style="margin: auto" />
@@ -41,6 +40,7 @@
                 <div class="container-box has-left">
                     <div class="container-content">
                         <div class="container-bucket">
+                            <tpl:import layout="navbar" />
                             <div class="left-contain container">
                                 <div class="clearfix profile-cover" align="center">
                                     <h1><tpl:element type="text" data="profile.user_full_name" /></h1>
