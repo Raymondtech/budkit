@@ -1,5 +1,5 @@
 <tpl:layout  name="start" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="padding gridrowwidth">
+    <div class="padding">
         <div class="row-fluid">
             <div class="span8">
                 

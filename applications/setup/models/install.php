@@ -90,7 +90,7 @@ final class Install extends Platform\Model {
         }
         //Add this user to the superadministrators group!
         //$adminObject    = $account->getObjectByURI( $usernameid );
-        $adminAuthority = $this->config->getParam( "superadmin-authority", NULL, "profile" );
+        $adminAuthority = $this->config->getParam( "site-superadmin-authority", NULL);
         //Default Permission Group?
         if(!empty($adminAuthority)){
             $query = "INSERT INTO ?objects_authority( authority_id, object_id ) SELECT {$this->database->quote((int)$adminAuthority)}, object_id FROM ?objects WHERE object_uri={$this->database->quote($usernameid)}";

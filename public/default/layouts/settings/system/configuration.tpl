@@ -41,51 +41,56 @@
             </div>
             <hr />
             <div class="control-group">
-                <label class="control-label" for="options[profile][default-authority]"> <?php echo _('Default Authority group'); ?></label>
+                <label class="control-label" for="options[general][site-default-authority]">Default Authority</label>
                 <div class="controls">
-                    <select name="options[profile][default-authority]"  class="input-xxlarge">
-                        <?php foreach ($this->get("authorities") as $e): ?>
-                        <option value="<?php echo $e['authority']['authority_id'] ?>">
-                            <?php echo str_repeat('|--', (int) $e['authority']['indent']) . ' ' . $e['authority']['authority_title'] ?>
-                        </option>
-                        <?php endforeach; ?>
-                    </select>
-                    <span class="help-block"><?php echo _('The default authority group members will be automatically added to at sign-up'); ?></span>
+                    <tpl:select name="options[general][site-default-authority]"  class="input-xxlarge" value="config|general.site-default-authority">
+                        <tpl:loop data="authorities" id="authority-items">
+                            <option data="authority_id">
+                                <tpl:loop limit="indent" id="authority-indent">
+                                    <tpl:element type="text">|--</tpl:element>
+                                </tpl:loop>
+                                <tpl:element type="text" data="authority_title"  />
+                            </option>
+                        </tpl:loop>
+                    </tpl:select>
+                    <span class="help-block">The default authority group members will be automatically added to at sign-up</span>
                 </div>
             </div>
             <hr />
             <div class="control-group">
-                <label class="control-label" for="options[general][site-page-title]"> <?php echo _('Website page titles'); ?></label>
+                <label class="control-label" for="options[general][site-page-title]">Page titles</label>
                 <div class="controls">
-                    <select name="options[general][site-page-title]" class="input-xxlarge">
-                        <option value="as-is"><?php echo _('Leave as is'); ?></option>
-                        <option value="name-last"><?php echo _('Prepend website name'); ?></option>
-                        <option value="name-first"><?php echo _('Append website name'); ?></option>
-                    </select>
+                    <tpl:select name="options[general][site-page-title]" class="input-xxlarge" value="config|general.site-page-title">
+                        <option value="as-is">Leave as is</option>
+                        <option value="name-last">Prepend website name</option>
+                        <option value="name-first">Append website name</option>
+                    </tpl:select>
                     <span class="help-block">By default the page title is the website name.</span>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[general][site-robots]"> <?php echo _('Robot Instructions'); ?></label>
+                <label class="control-label" for="options[general][site-robots]">Robot Instructions</label>
                 <div class="controls">
-                    <select name="options[general][site-robots]" class="input-xxlarge">
-                        <option value="index-follow"><?php echo _('Index, Follow'); ?></option>
-                        <option value="no-index-follow"><?php echo _('No Index, Follow'); ?></option>
-                        <option value="index-no-follow"><?php echo _('Index, No Follow'); ?></option>
-                        <option value="no-index-no-follow"><?php echo _('No Index, No Follow'); ?></option>
-                    </select>
+                    <tpl:select name="options[general][site-robots]"  class="input-xxlarge" value="config|general.site-robots">
+                        <option value="index-follow">Index, Follow</option>
+                        <option value="no-index-follow">No Index, Follow</option>
+                        <option value="index-no-follow">Index, No Follow</option>
+                        <option value="no-index-no-follow">No Index, No Follow</option>
+                    </tpl:select>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="options[general][site-seo]">SEO</label>
                 <div class="controls">
                     <label class="checkbox">
-                        <input type="checkbox" name="options[general][site-url-suffix]" value="1" />
-                        Add output format suffix to URLs?
+                        <input type="hidden" name="options[general][site-url-suffix]" value="0" />
+                        <tpl:input type="checkbox" name="options[general][site-url-suffix]" data="config|general.site-url-suffix" value="1" />
+                        <span>Add output format suffix to URLs?</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="options[general][site-unicode-aliases]" value="1" />
-                        Use Unicode Aliasis.
+                        <input type="hidden" name="options[general][site-unicode-aliases]" value="0" />
+                        <tpl:input type="checkbox" name="options[general][site-unicode-aliases]" data="config|general.site-unicode-aliases" value="1" />
+                        <span>Use Unicode Aliasis.</span>
                     </label>
                 </div>
             </div>

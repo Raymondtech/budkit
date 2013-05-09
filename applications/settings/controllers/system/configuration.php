@@ -33,12 +33,18 @@ use \Application\Settings\Controllers as Settings;
  * @todo      System manage action methods
  */
 class Configuration extends Settings\System {
-    
+
     /**
      * Displays the default setting form
      * @return void
      */
     public function index() {
+
+        $authority = $this->load->model("authority");
+        $authorities = $authority->getAuthorities();
+
+        $this->set("authorities", $authorities);
+
         return $this->form();
     }
 

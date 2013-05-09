@@ -7,7 +7,7 @@
                     <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
                 </ul>
                 <ul class="nav nav-pills no-margin">
-                    <li class="highlighted"><a href="/system/media/create/drop" >Add New</a></li>
+                    <li class="highlighted"><a href="/system/media/timeline/add" >Add New</a></li>
                 </ul>
             </div>
             <hr />

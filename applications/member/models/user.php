@@ -64,7 +64,7 @@ class User extends \Platform\Entity {
     public function store( $data ){
         
         $encrypt    = \Library\Encrypt::getInstance();
-        $authority  = $this->config->getParam( "default-authority", NULL, "profile" );
+        $authority  = $this->config->getParam( "site-default-authority", NULL );
         
         $data['user_password']   = $encrypt->hash( $data['user_password'] ); 
         

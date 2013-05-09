@@ -76,19 +76,19 @@ abstract class Template extends Output\Parse {
      * @var type 
      */
     static $pvariables = array();
-    
+
     /**
      * Useful data modifiers for altering attribute data values
      * 
      * @var type 
      */
     static $allowedDataModifiers = array(
-        "query"=>"getQueryData",
-        "i18n"=>"getI18nString",
-        "array"=> "getArrayFromString",
-        "config"=> "getConfigParam"
+        "query" => "getQueryData",
+        "i18n" => "getI18nString",
+        "array" => "getArrayFromString",
+        "config" => "getConfigParam"
     );
-    
+
     /**
      * Returns data by executing a database query. 
      * e.g ${query|SELECT * FROM ?users WHERE user_name_id="joshua"}
@@ -96,12 +96,12 @@ abstract class Template extends Output\Parse {
      * @param type $path
      * @param type $default
      */
-    final public static function getQueryData($path, $default=""){
+    final public static function getQueryData($path, $default = "") {
         //echo $path;
-        
-        return $rows = [1=>"Rudolf",2,3,4,5];
+
+        return $rows = [1 => "Rudolf", 2, 3, 4, 5];
     }
-    
+
     /**
      * Returns a defined config param value
      * 
@@ -109,17 +109,17 @@ abstract class Template extends Output\Parse {
      * @param type $default
      * @todo  Default values from config data attribute call
      */
-    final public static function getConfigParam($path, $default=""){
-        
-        $parts      = explode('.', $path , 2);
-        $section    = reset($parts);
-        $key        = end( $parts );
-        
-        $data = Library\Config::getParam($key, $default, $section );
-        
+    final public static function getConfigParam($path, $default = "") {
+
+        $parts = explode('.', $path, 2);
+        $section = reset($parts);
+        $key = end($parts);
+
+        $data = Library\Config::getParam($key, $default, $section);
+
         return $data;
     }
-    
+
     /**
      * Converts a data string to an array
      * 
@@ -127,32 +127,30 @@ abstract class Template extends Output\Parse {
      * @param type $default
      * @return type
      */
-    final public static function getArrayFromString($path, $default=""){
+    final public static function getArrayFromString($path, $default = "") {
         //echo $path;
-        echo $path; 
-        
-        
-        
+        echo $path;
+
+
+
         return $data;
-        
     }
-    
+
     /**
      * Translates the resulting string that follows the modifier
      * 
      * @param type $path
      * @param type $default
      */
-    final public static function getI18nString($path, $default=""){
+    final public static function getI18nString($path, $default = "") {
         return $path;
     }
-    
-    
-    final public static function getDataAttributeContent($attribute, $content){
-        
+
+    final public static function getDataAttributeContent($attribute, $content) {
+
         $parsed = array();
         $matches = array();
-         
+
         //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
         if (preg_match_all('/(?:(?<=\$\{)).*?(?=\})/i', $content, $matches)) {
 
@@ -162,25 +160,25 @@ abstract class Template extends Output\Parse {
 
             foreach ($placemarkers as $placemarker):
                 //search for modifiers
-                $parts    = explode("|", $placemarker, 2);
-                $modifier = (is_array($parts) && count($parts)>1) ? reset($parts) : null;
+                $parts = explode("|", $placemarker, 2);
+                $modifier = (is_array($parts) && count($parts) > 1) ? reset($parts) : null;
                 if (!empty($modifier)):
-                    if(array_key_exists($modifier, static::$allowedDataModifiers)):
+                    if (array_key_exists($modifier, static::$allowedDataModifiers)):
                         $method = static::$allowedDataModifiers[$modifier];
-                        $path   = end( $parts );
-                        $replace[] = self::$method( $path );                   
+                        $path = end($parts);
+                        $replace[] = self::$method($path);
                     endif;
                 else:
                     //if no modifier found e.g ${modifier|dataid} is found use the default method getData;
                     $replace[] = self::getData(strval($placemarker)); //default is null                  
                 endif;
-                $searches[] = '${'.$placemarker.'}';
+                $searches[] = '${' . $placemarker . '}';
             endforeach;
             //Replace with data;
             $parsed['searches'] = $searches;
             $parsed['replace'] = $replace;
             //$parsed['']    = $content;
-        }     
+        }
         return $parsed;
     }
 
@@ -191,12 +189,12 @@ abstract class Template extends Output\Parse {
      * @param type $default
      * @return type 
      */
-    final public static function getPersistentData($path ) {
+    final public static function getPersistentData($path) {
 
-        
+
         $id = explode('.', $path);
         $value = isset(static::$currentloopid) ? static::$pvariables[static::$currentloopid] : array();
-        
+
         //From string representation to array;	 
         foreach ($id as $i => $index) {
             if (!isset($value[$index])) {
@@ -208,8 +206,7 @@ abstract class Template extends Output\Parse {
 
         return $value;
     }
-    
-    
+
     /**
      * Adds menuItems to Blocks at runtime
      * 
@@ -217,17 +214,47 @@ abstract class Template extends Output\Parse {
      * @param type $default
      * @return type
      */
-    final public static function getBlockMenuGroup($menuNameId, $default=array()){
-        
+    final public static function getBlockMenuGroup($menuNameId, $default = array()) {
+
         //Get an instance of the Output Document class. 
         //We will need this for templates?
         static::$output = Library\Output::getInstance();
         static::$menugroups = static::$output->getMenuGroups();
 
-        $menu = isset( static::$menugroups[$menuNameId] )? static::$menugroups[$menuNameId] : $default;
-    
+        $menu = isset(static::$menugroups[$menuNameId]) ? static::$menugroups[$menuNameId] : $default;
+
 
         return (!empty($menu) ) ? $menu : $default;
+    }
+
+    /**
+     * Execute other template parsers on an element
+     * 
+     * @param type $element
+     * @param type $writter
+     * @param type $parser
+     * @return type
+     */
+    final public static function callback($element, $writter, $parser) {
+        $methods = array(
+            "tpl" => "\Library\Output\Parse\Template\\"
+        );
+        if (isset($element['NAMESPACE'])) {
+            reset($element['NAMESPACE']);
+            $prefix = current($element['NAMESPACE']);
+            //Empty namespace, return element as is;
+            if (empty($prefix)) {
+                return $element;
+            }
+            $method = $element['ELEMENT'];
+            if (array_key_exists($prefix, $methods)) {
+                $class = $methods[$prefix] . ucfirst($method);
+                if (!method_exists($class, "execute"))
+                    return $element;
+                return call_user_func("$class::execute", $parser, $element, $writter);
+            }
+        }
+        return $element;
     }
 
     /**
@@ -243,53 +270,55 @@ abstract class Template extends Output\Parse {
         //We will need this for templates?
         static::$output = Library\Output::getInstance();
         static::$variables = static::$output->getVariables();
-     
+
         //Modified data variables
-        $parts = explode("|", $path, 2);     
-        if(isset($parts[1])){
+        $parts = explode("|", $path, 2);
+        if (isset($parts[1])) {
             $modifier = $parts[0];
-            if(array_key_exists($modifier, static::$allowedDataModifiers)):
+            if (array_key_exists($modifier, static::$allowedDataModifiers)):
                 $method = static::$allowedDataModifiers[$modifier];
-                $path   = end( $parts );
-                return self::$method( $path );                   
+                $path = end($parts);
+                return self::$method($path);
             endif;
         }
-        
+
         $id = explode('.', $path);
         $value = static::$variables;
-        
+
         //if trying to access parent data from within a loop element, the first element 
         //in the path should be _ e.g _.blah.blah.
         $first = reset($id);
-        $loop  = static::$currentloopid ;
-        if (isset(static::$looping[$loop])&&static::$looping[$loop] && $first<>"_"){ 
+        $loop = static::$currentloopid;
+        if (isset(static::$looping[$loop]) && static::$looping[$loop] && $first <> "_") {
             $return = self::getPersistentData($path, $default);
-            if(!empty($return) ) return $return;
-            if(empty($return) && !static::$importing ) return $default;
+            if (!empty($return))
+                return $return;
+            if (empty($return) && !static::$importing)
+                return $default;
             //if(empty($value) && static::$importing) $value = static::$variables;
         }
-           
+
         //From string representation to array;	 
         foreach ($id as $i => $index) {
-            
-            if(is_object($value)){
-                if(!isset($value->$index)){
+
+            if (is_object($value)) {
+                if (!isset($value->$index)) {
                     return $default;
                     break;
                 }
                 $value = $value->$index;
                 continue;
             }
-            
+
             if (!isset($value[$index])) {
-                
+
                 //If we can't find the element, return the default value;
                 return $default;
                 break;
             };
             $value = $value[$index];
         }
-        
+
         //Parse  here?
         //$value = Template::_( $value );
 
@@ -308,7 +337,7 @@ abstract class Template extends Output\Parse {
      * @property-write object $instance
      * @return object template
      */
-    public static function getInstance( $buffer = NULL) {
+    public static function getInstance($buffer = NULL) {
 
         if (is_object(static::$instance) && is_a(static::$instance, 'template'))
             return static::$instance;

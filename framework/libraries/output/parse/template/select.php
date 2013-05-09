@@ -43,10 +43,11 @@ use Library\Output\Parse;
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  */
 class Select extends Parse\Template {
-        static
-            $instance ;
-        
-            /**
+
+    static
+    $instance;
+
+    /**
      * Defines the class constructor
      * Used to preload pre-requisites for the element class
      *
@@ -55,37 +56,48 @@ class Select extends Parse\Template {
     public function __constructor() {
         
     }
-    
 
-    
     public static function execute($parser, $tag, $writer) {
-        
+
         //Calculate and set the default value;
-        if (isset($tag['VALUE'])):  
-            
-           $default = static::getData($tag['VALUE'], $tag['VALUE']);
+        if (isset($tag['VALUE'])):
 
+            $default = static::getData($tag['VALUE'], $tag['VALUE']);
+        
+            //If tag children is not option execute;
+            foreach($tag['CHIDLREN'] AS $i => $notoption):
+                if($notoption['ELEMENT']=='option') continue; //If the child of a select is not an option, try executing it first;
+                $tag['CHILDREN'][$i] = static::callback($notoption, $writer, $parser);
+            endforeach;
+        
             foreach ($tag['CHILDREN'] AS $k => $option):
-
-                if ($option['VALUE'] !== $default):
-                    unset($tag['CHILDREN'][$k]['SELECTED']);
-                elseif ($option['VALUE'] == $default):
-                    //@TODO @BUG Due to the fact that you have to set all attributes
-                    //between the element and cdata keys in the element array
-                    //We have to unset the cdata, set the selected and then reset the cdata
-                    //Very nasty indeed
-                    $cdata = $option['CDATA'];
-                    unset($option['CDATA']);
-                    $option['SELECTED'] = 'selected';
-                    $option['CDATA'] = $cdata;
-                    $tag['CHILDREN'][$k] = $option;
+                //@TODO 
+                if($option['ELEMENT']!=='option') continue; //We can only do this on option tags;
+                //@BUG 
+                //Due to the fact that you have to set all attributes
+                //between the element and cdata keys in the element array
+                //We have to unset the cdata, set the selected and then reset the cdata
+                //Very nasty indeed
+                $cdata = $option['CDATA'];
+                unset($option['CDATA']);
+                if (isset($option['DATA'])&&!isset($option['VALUE'])):
+                    print_R($option); die;
+                    $option['VALUE'] = static::getData($option['DATA'], $option['VALUE']);
                 endif;
+                if ($option['VALUE'] !== $default):
+                    unset($option['SELECTED']);
+                elseif ($option['VALUE'] == $default):
+                    $option['SELECTED'] = 'selected';
+                endif;
+                //unset($option['DATA']);
+                $option['CDATA'] = $cdata;
+                $tag['CHILDREN'][$k] = $option;
             endforeach;
 
             unset($tag['VALUE']);
         endif;
 
-        
+
         return $tag;
     }
 
