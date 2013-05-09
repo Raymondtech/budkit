@@ -34,7 +34,7 @@ class Member extends \Platform\View {
      */
     final public function display() {
         //The default method
-        $this->output->addToPosition("aside", "Sidebar");
+        //$this->output->addToPosition("aside", "Sidebar");
     }
 
     /**
@@ -48,12 +48,12 @@ class Member extends \Platform\View {
 
         $this->output->setPageTitle($title);
 
-        $sidebar = null; //$this->output->layout("settings/sidebar");
+        //$sidebar = null; //$this->output->layout("settings/sidebar");
         $body = $this->output->layout($form, $app);
         
         $this->output->addMenuGroupToPosition("side", "settingsmenu");
         $this->output->addToPosition("body", $body);
-        $this->output->addToPosition("side", $sidebar);
+        //$this->output->addToPosition("side", $sidebar);
         
         $this->display();
     }
