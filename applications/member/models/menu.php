@@ -57,7 +57,7 @@ class Menu extends \Platform\Model {
                 array_unshift($menuItems, array(
                     "menu_title" => "Network",
                     "children" => array(
-                        array("menu_title" => "Members", "menu_url" => "/member/network/directory"),
+                        array("menu_title" => "People", "menu_url" => "/member/network/directory"),
                         array("menu_title" => "Following","menu_count" =>$following, "menu_url" => "/member/network/relation/following"),
                         array("menu_title" => "Followers",  "menu_count" =>$followers,"menu_url" => "/member/network/relation/followers"),
                         array("menu_title" => "Blacklisted", "menu_url" => "/member/network/relation/blocked")
