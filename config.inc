@@ -99,7 +99,7 @@ $config = array(
 */
 'environment' => 
     array(
-        'mode' => 3//0 = DEVELOPER, 1 = TEST, 2 = PRODUCTION 
+        'mode' => 0//0 = DEVELOPER, 1 = TEST, 2 = PRODUCTION 
     ),
 /*
 |---------------------------------------------------------------
@@ -120,11 +120,13 @@ $config = array(
         'site-inviteonly'=>false,
         'site-verify-email'=>true,
         'site-page-title'=>'name-first',
-        'site-robots'=>'index-follow',
+        'site-robots'=>'index-no-follow',
         'site-url-suffix'=>false,
         'site-unicode-aliases'=>false,
-        'site-users-folder'=>'/users'
-        
+        'site-users-folder'=>'/users',
+        'site-public-authority' => 1,
+        'site-default-authority' => 2, //@TODO Should we set this after DB install?
+        'site-superadmin-authority'=> 4 //This settings can only be set on file, as could affect existing users
     ),
  /*
 |---------------------------------------------------------------
