@@ -53,19 +53,20 @@ class Menu extends \Platform\Model {
                     "menu_title" => "Content",
                     "children" => array(
                         array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"),
-                        array("menu_title" => "My Files", "menu_url" => "/system/media/attachments/gallery", "menu_count"=>$mycount),
+                        array("menu_title" => "My Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count"=>$mycount),
                         array("menu_title" => "Shared with me", "menu_url" => "/system/media/attachments/shared"),
                     // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
                     )
-                        ), array(
-                    "menu_title" => "Add New",
-                    "children" => array(
-                        array("menu_title" => "Drag and Drop", "menu_url" => "/system/media/create"),
-                        array("menu_title" => "Text Editor", "menu_url" => "/system/media/create/editor"),
-                        array("menu_title" => "External Drive", "menu_url" => "/system/media/create/import"),
-                    // array("menu_title" => "Snap", "menu_url" => "/system/media/create/snap")
-                    )
-                ));
+                        ));
+//                , array(
+//                    "menu_title" => "Add New",
+//                    "children" => array(
+//                        array("menu_title" => "Drag and Drop", "menu_url" => "/system/media/create"),
+//                        array("menu_title" => "Text Editor", "menu_url" => "/system/media/create/editor"),
+//                        array("menu_title" => "External Drive", "menu_url" => "/system/media/create/import"),
+//                    // array("menu_title" => "Snap", "menu_url" => "/system/media/create/snap")
+//                    )
+//                )
                 break;
         endswitch;
     }
@@ -91,6 +92,5 @@ class Menu extends \Platform\Model {
         $instance = new self();
         return $instance;
     }
-
 }
 
