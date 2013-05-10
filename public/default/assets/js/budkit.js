@@ -310,7 +310,11 @@
         return this.each(function() {
             var $this = $(this)
             , data = $this.data('bkeditor')
-            , options = typeof option == 'object' && option;
+            , options = typeof option == 'object' && option
+            , stylesheet = $this.attr('data-stylesheet');
+            ;
+            if(stylesheet)
+                options = $.extend({}, options, {'stylesheet':stylesheet});
             if (!data)
                 $this.data('bkeditor', (data = new BKEditor(this, options)));
         });
@@ -326,8 +330,7 @@
         ["link","unlink","image"],
         ["redo","undo"],
         //["fullscreen"]
-        ],
-        stylesheet: "/../../default/assets/css/editor.css" //../..
+        ]
     };
     $.fn.bkeditor.Constructor = BKEditor;
     /* EDITOR DATA-API

@@ -16,11 +16,11 @@
 }
 // Give the tabs something to sit on
 .nav-tabs-launcher {
-  margin-bottom: 0;
+  margin-bottom: 0 ;
 }
 // Make the list-items overlay the bottom border
 .nav-tabs-launcher > li {
-  margin-bottom: -1px;
+  //margin-bottom: -1px;
 }
 // Actual tabs (as links)
 .nav-tabs-launcher > li > a {
@@ -31,6 +31,7 @@
   //.border-radius(4px 4px 0 0);
   &:hover,
   &:focus {
+    background-color: @white;
     //border-color: @grayLighter @grayLighter #ddd;
   }
 }
@@ -39,14 +40,15 @@
 .nav-tabs-launcher > .active > a:hover,
 .nav-tabs-launcher > .active > a:focus {
   color: @gray;
-  background-color: @bodyBackground;
+  background-color: @white;
   //border: 1px solid #ddd;
-  //border-bottom-color: transparent;
+    //border-bottom-color: transparent;
+    //font-weight: bold;
   cursor: default;
 }
 
 .tabs-launcher{ 
     .tab-pane{
-        &.active{border-top: 1px solid @grayLighter; padding-top: @gridGutterWidth*0.5 } 
+        &.active{border-top: 1px dashed @grayLighter; padding-top: @gridGutterWidth*0.5 } 
     }
 }

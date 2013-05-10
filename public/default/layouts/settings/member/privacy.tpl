@@ -1,16 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="post" enctype="multipart/form-data" action="/settings/member/privacy/update" class="form-horizontal margin-top">
-        <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-                <div class="clearfix">        
-                    <ul class="nav nav-pills  no-margin">
-                        <li class="highlighted"><a href="/settings/member/privacy/groups" >Edit Privacy groups</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div><!-- /control-group -->
-        <hr />
+    <form method="post" enctype="multipart/form-data" action="/settings/member/privacy/update" class="form-horizontal margin-top-double">
         <div class="control-group">
             <label class="control-label">Public</label>
             <div class="controls">
@@ -34,7 +23,7 @@
                 </label>
                 <ul>
                     <li>Your name and profile photo are visible in public searches, so people can still follow you</li>
-                    <li>Your profile and content is viewable by your <a href="#">followers</a> only</li>
+                    <li>Your profile and content is viewable by your follower or <a href="/settings/member/privacy/groups">privacy groups</a> only</li>
                     <li>Everything you share is Private by default</li>
                 </ul>
             </div>
@@ -53,6 +42,16 @@
                 </ul>
             </div>
         </div><!-- /control-group --> 
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <div class="clearfix">        
+                    <ul class="nav nav-pills  no-margin">
+                        <li class="highlighted"><a href="/settings/member/privacy/groups" >Edit Privacy groups</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /control-group -->
         <div class="form-actions">
             <input type="submit" class="btn" value="Save changes" />
         </div>

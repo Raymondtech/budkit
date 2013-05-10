@@ -291,9 +291,9 @@ class Parser extends Files\Xml {
         $xml = !empty($xml) ? $xml : self::$xml;
 
         if (empty($literal2NumericEntity)) {
-            $transTbl = get_html_translation_table( HTML_ENTITIES, ENT_QUOTES | ENT_HTML5 );
+            $transTbl = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES | ENT_HTML5);
             //print_r($transTbl); die;
-            
+
             foreach ($transTbl as $char => $entity) {
                 if (strpos('&"<>', $char) !== FALSE)
                     continue;
@@ -509,6 +509,19 @@ class Parser extends Files\Xml {
         return self::$document;
     }
 
+    public static function getRootElement() {
+        //Use a user supplied root, or try using our root
+        $ROOT = (isset(self::$tree['CHILDREN'][0])) ? self::$tree['CHILDREN'][0] : null ;
+
+        //For now just arrays! will look to handle objects later
+        if (!isset($ROOT) || !is_array($ROOT)) {
+            //print_R($ROOT);
+            //$this->setError(_t("The document root is invalid"));
+            return array();
+        }
+        return $ROOT;
+    }
+
     /**
      * Character Data Handler #CDATA
      *
@@ -565,7 +578,7 @@ class Parser extends Files\Xml {
                 }
             }
             //cocatenate
-            $last['CDATA'] = $old.$data; //Dealing with Whitespace
+            $last['CDATA'] = $old . $data; //Dealing with Whitespace
             //$section++;
         }
     }

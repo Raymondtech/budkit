@@ -5,8 +5,10 @@
                 <input type="text" name="media_summary" placeholder="Title (Optional) " class="publisher-title input-100pct" value="${media_summary}" />
             </div>
             <div class="controls">
-                <textarea class="input-100pct focused" data-target="budkit-editor" toolbar="1"  rows="20" name="media_content" placeholder="Say something...">
-                                            <tpl:element type="html" data="content" medialinks="true" />
+                <textarea class="input-100pct focused"
+                          data-stylesheet="http://${config|general.host}${config|general.path}public/default/assets/css/editor.css"
+                          data-target="budkit-editor" toolbar="1"  rows="20" name="media_content" placeholder="Say something...">
+                         <tpl:element type="html" data="content" medialinks="true" />
                 </textarea>
             </div> 
             <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/"></div>

@@ -1,10 +1,10 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top">
+    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top-double">
         <fieldset class="no-margin">
             <div class="control-group">
-                <label class="control-label" for="options[localization][timezone]"> <?php echo _('Locale timezone'); ?></label>
+                <label class="control-label" for="options[localization][timezone]">Locale timezone</label>
                 <div class="controls">
-                    <select name="options[localization][timezone]" class="input-xxlarge">
+                    <tpl:select name="options[localization][timezone]" class="input-xxlarge" value="config|localization.timezone">
                         <option value="-12.0">(GMT -12:00) Eniwetok, Kwajalein</option>
                         <option value="-11.0">(GMT -11:00) Midway Island, Samoa</option>
                         <option value="-10.0">(GMT -10:00) Hawaii</option>
@@ -36,26 +36,26 @@
                         <option value="10.0">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
                         <option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
                         <option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
-                    </select>
+                    </tpl:select>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[localization][locale]"> <?php echo _('Locale language'); ?></label>
+                <label class="control-label" for="options[localization][locale]">Locale language</label>
                 <div class="controls">
-                    <select name="options[localization][locale]" class="input-xlarge">
-                        <option value="en_GB"><?php echo _('English - United Kingdom (en_GB)'); ?></option>
-                        <option value="fr_FR"><?php echo _('French - France (fr_FR)'); ?></option>
-                        <option value="de_DE"><?php echo _('German - Germany (de_DE)'); ?></option>
-                    </select>
+                    <tpl:select name="options[localization][locale]" class="input-xlarge" data="config|localization.locale">
+                        <option value="en_GB">English - United Kingdom (en_GB)</option>
+                        <option value="fr_FR">French - France (fr_FR)</option>
+                        <option value="de_DE">German - Germany (de_DE)</option>
+                    </tpl:select>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[localization][date-format]"> <?php echo _('Date format'); ?></label>
+                <label class="control-label" for="options[localization][date-format]">Date format</label>
                 <div class="controls">
-                    <select name="options[localization][date-format]" class="input-xlarge">
-                        <option value="default"><?php echo _('Time difference'); ?></option>
-                        <option value="locale"><?php echo _('Locale time format'); ?></option>
-                    </select>
+                    <tpl:select name="options[localization][date-format]" class="input-xlarge" data="config|localization.date-format">
+                        <option value="default">Time difference</option>
+                        <option value="locale">Locale time format</option>
+                    </tpl:select>
                 </div>
             </div>
         </fieldset>

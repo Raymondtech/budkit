@@ -1,81 +1,81 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top">
+    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top-double">
         <fieldset class="no-margin">
             <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-handler]"> <?php echo _('Mail Handler'); ?></label>
+                <label class="control-label" for="options[server][outgoing-mail-handler]">Mail Handler</label>
                 <div class="controls">
-                    <select name="options[server][mail-handler]" class="input-xlarge">
-                        <option value="phpmail"><?php echo _('PHP Mail'); ?></option>
-                        <option value="sendmail"><?php echo _('Send Mail'); ?></option>
-                        <option value="smtp"><?php echo _('SMTP'); ?></option>
-                    </select>
-                    <span class="help-block">The Outgoing mail handler. Leave as is if not sure or ask your host provider.</span>
+                    <tpl:select name="options[server][mail-handler]" class="input-xlarge" value="config|server.mail-handler">
+                        <option value="phpmail">PHP Mail</option>
+                        <option value="sendmail">Send Mail</option>
+                        <option value="smtp">SMTP</option>
+                    </tpl:select>
+                    <span class="help-block">Leave as is if not sure or ask your host provider.</span>
                 </div>
             </div>
             <hr />
             <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-address]"> <?php echo _('Outgoing E-Mail'); ?></label>
+                <label class="control-label" for="options[server][outgoing-mail-address]">From e-Mail</label>
                 <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-address]" class="input-xxlarge" placeholder="e.g info@mydomain.com" value="<?php echo $this->config->getParam('outgoing-mail-address','','server'); ?>" />
+                    <input type="text" name="options[server][outgoing-mail-address]" class="input-xxlarge" placeholder="e.g info@mydomain.com" value="${config|server.outgoing-mail-address}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server]"> <?php echo _('Outgoing Mail Server'); ?></label>
+                <label class="control-label" for="options[server][outgoing-mail-server]">Mail Server </label>
                 <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-server]" class="input-xxlarge" placeholder="e.g http://webmail.mydomain.com" value="<?php echo $this->config->getParam('outgoing-mail-server','','server'); ?>" />
+                    <input type="text" name="options[server][outgoing-mail-server]" class="input-xxlarge" placeholder="e.g http://webmail.mydomain.com" value="${config|server.outgoing-mail-server}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server-port]"> <?php echo _('Outgoing Mail Server Port'); ?></label>
+                <label class="control-label" for="options[server][outgoing-mail-server-port]">Mail  Port</label>
                 <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-server-port]" class="input-xxlarge" value="<?php echo $this->config->getParam('outgoing-mail-server-port','25','server'); ?>" />
+                    <input type="text" name="options[server][outgoing-mail-server-port]" value="${config|server.outgoing-mail-server-port}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server-security]"> <?php echo _('Server Security'); ?></label>
+                <label class="control-label" for="options[server][outgoing-mail-server-security]">Mail Security</label>
                 <div class="controls">
-                    <select name="options[server][outgoing-mail-server-security]" class="input-xlarge">
-                        <option value="none"><?php echo _('None'); ?></option>
-                        <option value="ssl"><?php echo _('SSL'); ?></option>
-                        <option value="tsl"><?php echo _('TSL'); ?></option>
+                    <select name="options[server][outgoing-mail-server-security]"  value="config|server.outgoing-mail-server-security">
+                        <option value="none">None</option>
+                        <option value="ssl">SSL</option>
+                        <option value="tsl">TSL</option>
                     </select>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server-username]"> <?php echo _('Outgoing Mail Server Username'); ?></label>
+                <label class="control-label" for="options[server][outgoing-mail-server-username]">Mail Username</label>
                 <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-server-username]" class="input-xxlarge" value="<?php echo $this->config->getParam('outgoing-mail-server-username','','server'); ?>" />
+                    <input type="text" name="options[server][outgoing-mail-server-username]"  value="${config|server.outgoing-mail-server-username}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server-password]"> <?php echo _('Outgoing Mail Server Password'); ?></label>
+                <label class="control-label" for="options[server][outgoing-mail-server-password]"> Mail Password</label>
                 <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-server-password]" class="input-xxlarge" value="<?php echo $this->config->getParam('outgoing-mail-server-password','','server'); ?>" />
+                    <input type="password" name="options[server][outgoing-mail-server-password]"  value="${config|server.outgoing-mail-server-password}" />
                 </div>
             </div>
             <hr />
             <div class="control-group">
-                <label class="control-label" for="options[server][proxy-server]"> <?php echo _('Proxy Server'); ?></label>
+                <label class="control-label" for="options[server][proxy-server]">Proxy Server</label>
                 <div class="controls">
-                    <input type="text" name="options[server][proxy-server]" class="input-xxlarge" placeholder="e.g http://proxy.mydomain.com" value="<?php echo $this->config->getParam('proxy-server','','server'); ?>" />
+                    <input type="text" name="options[server][proxy-server]" class="input-xxlarge" placeholder="e.g http://proxy.mydomain.com" value="${config|server.proxy-server}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][proxy-server-port]"> <?php echo _('Proxy Server Port'); ?></label>
+                <label class="control-label" for="options[server][proxy-server-port]">Proxy Port</label>
                 <div class="controls">
-                    <input type="text" name="options[server][proxy-server-port]" class="input-xxlarge" value="<?php echo $this->config->getParam('proxy-server-port','','server'); ?>" />
+                    <input type="text" name="options[server][proxy-server-port]" value="${config|server.proxy-server-port}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][proxy-server-username]"> <?php echo _('Proxy Server Username'); ?></label>
+                <label class="control-label" for="options[server][proxy-server-username]">Proxy Username</label>
                 <div class="controls">
-                    <input type="text" name="options[server][proxy-server-username]" class="input-xxlarge" value="<?php echo $this->config->getParam('proxy-server-username','','server'); ?>" />
+                    <input type="text" name="options[server][proxy-server-username]" value="${config|server.proxy-server-username}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][proxy-server-password]"> <?php echo _('Proxy Server Password'); ?></label>
+                <label class="control-label" for="options[server][proxy-server-password]">Proxy Password</label>
                 <div class="controls">
-                    <input type="text" name="options[server][proxy-server-password]" class="input-xxlarge" value="<?php echo $this->config->getParam('proxy-server-password','','server'); ?>" />
+                    <input type="password" name="options[server][proxy-server-password]"  value="${config|server.proxy-server-password}" />
                 </div>
             </div>
             <hr />
@@ -83,42 +83,47 @@
                 <label class="control-label" for="options[server][protocols]">Protocols</label>
                 <div class="controls">
                     <label class="checkbox">
-                        <input type="checkbox" name="options[server][enable-xmlrpc]" value="1" />
-                        Enable XML-RPC Protocol?
+                        <input type="hidden" name="options[server][enable-xmlrpc]" value="0" />
+                        <tpl:input type="checkbox" name="options[server][enable-xmlrpc]" value="1" data="config|server.enable-xmlrpc" />
+                        <span>Enable XML-RPC Protocol?</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="options[server][enable-restful]" value="1" />
-                        Enable RESTful Protocol.
+                        <input type="hidden" name="options[server][enable-restful]" value="0" />
+                        <tpl:input type="checkbox" name="options[server][enable-restful]" value="1" data="config|server.enable-restful" />
+                        <span>Enable RESTful Protocol.</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="options[server][protocol-auth]" value="1" />
-                        Require Authentication to use protocol
+                        <input type="hidden" name="options[server][protocol-auth]" value="0" />
+                        <tpl:input type="checkbox" name="options[server][protocol-auth]" value="1"  data="config|server.protocol-auth" />
+                        <span>Require Authentication to use protocol</span>
                     </label>
                 </div>
             </div>
             <hr />
             <div class="control-group">
-                <label class="control-label" for="options[server][error-log]"> <?php echo _('System ErrorLog'); ?></label>
+                <label class="control-label" for="options[server][error-log]">System ErrorLog</label>
                 <div class="controls">
-                    <input type="text" name="options[server][error-log]" class="input-xxlarge" value="<?php echo $this->config->getParam('error-log','','server'); ?>" />
+                    <input type="text" name="options[server][error-log]" class="input-xxlarge" value="${config|server.error-log}" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[server][help-server-address]"> <?php echo _('Help Server'); ?></label>
+                <label class="control-label" for="options[server][help-server-address]">Help Server</label>
                 <div class="controls">
-                    <input type="text" name="options[server][help-server-address]" class="input-xxlarge" placeholder="e.g http://api.helpserver.com" value="<?php echo $this->config->getParam('help-server-address','','server'); ?>" />
+                    <input type="text" name="options[server][help-server-address]" class="input-xxlarge" placeholder="e.g http://api.helpserver.com" value="${config|server.help-server-address}" />
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="options[server][error-reporting]">Error Reporting</label>
                 <div class="controls">
                     <label class="checkbox">
-                        <input type="checkbox" name="options[server][error-console]" value="1" />
-                        Display debug console
+                        <input type="hidden" name="options[server][error-console]" value="0" />
+                        <tpl:input type="checkbox" name="options[server][error-console]" value="1" data="config|server.error-console" />
+                        <span>Display debug console</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="options[server][error-send]" value="1" />
-                        Send Errors to Developers to help improve platform
+                        <input type="hidden" name="options[server][error-send]" value="0" />
+                        <tpl:input type="checkbox" name="options[server][error-send]" value="1" data="config|server.error-send" />
+                        <span>Send Errors to developers to help improve platform</span>
                     </label>
                 </div>
             </div>

@@ -29,6 +29,7 @@ namespace Library\Output\Parse;
 
 use Library;
 use Library\Output;
+use Library\Folder\Files\Xml as Xml;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -235,25 +236,20 @@ abstract class Template extends Output\Parse {
      * @param type $parser
      * @return type
      */
-    final public static function callback($element, $writter, $parser) {
-        $methods = array(
-            "tpl" => "\Library\Output\Parse\Template\\"
-        );
-        if (isset($element['NAMESPACE'])) {
-            reset($element['NAMESPACE']);
-            $prefix = current($element['NAMESPACE']);
-            //Empty namespace, return element as is;
-            if (empty($prefix)) {
-                return $element;
-            }
-            $method = $element['ELEMENT'];
-            if (array_key_exists($prefix, $methods)) {
-                $class = $methods[$prefix] . ucfirst($method);
-                if (!method_exists($class, "execute"))
-                    return $element;
-                return call_user_func("$class::execute", $parser, $element, $writter);
-            }
-        }
+    final public static function callback($element, $writer) {
+    
+        //print_r($element);
+        //generate xml;
+        $xmlParser = new Xml\Parser("", true, true, static::$methods);
+        $xmlDocument = $xmlParser::getDocument();
+        $xmlString  = $xmlDocument->toXML($element, "1.0", "UTF-8");
+        
+        //now get the tree
+        $xmlParsed = new Xml\Parser($xmlString, true, true, static::$methods);
+        $xmlPDocument = $xmlParsed::getRootElement();
+        
+        //print_r($xmlPDocument); die;
+        
         return $element;
     }
 

@@ -10,6 +10,15 @@
                         </div>
                     </div>
                 </div><!-- /control-group -->
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input type="hidden" name="appearance[show-dashboard-photo]" value="0" />
+                            <tpl:input type="checkbox" name="appearance[show-dashboard-photo]" data="config|appearance.show-dashboard-photo" value="1" checked="checked" />
+                            <span>Show profile photo on dashboard</span>
+                        </label>
+                    </div>
+                </div><!-- /control-group --> 
                 <hr />
                 <div class="control-group">
                     <div class="controls">

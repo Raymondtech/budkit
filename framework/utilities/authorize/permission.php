@@ -197,7 +197,7 @@ final class Permission extends Library\Observer {
         endif;
         
         //What about the public?
-        $public_authority = \Library\Config::getParam( "public-authority", NULL, "profile" );
+        $public_authority = \Library\Config::getParam( "site-public-authority", NULL );
         //@TODO Replace the exception list with actual route map paths!
         if(array_key_exists($public_authority, $permissionTree) || in_array( $actionRoute , array("/sign-out", "/sign-in" )) ) $allowed = true; //We need the sign-in sign-up page to be public
         

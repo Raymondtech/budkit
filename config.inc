@@ -116,13 +116,13 @@ $config = array(
         'site-name' => 'BudKit Campus',
         'site-meta-description'=>'The collaborative, distributed, social network',
         'site-meta-keywords'=>'social, network, professional',
-        'site-allow-registration'=>true,
-        'site-inviteonly'=>false,
-        'site-verify-email'=>true,
+        'site-allow-registration'=>1,
+        'site-inviteonly'=>0,
+        'site-verify-email'=>1,
         'site-page-title'=>'name-first',
         'site-robots'=>'index-no-follow',
-        'site-url-suffix'=>false,
-        'site-unicode-aliases'=>false,
+        'site-url-suffix'=>1,
+        'site-unicode-aliases'=>0,
         'site-users-folder'=>'/users',
         'site-public-authority' => 1,
         'site-default-authority' => 2, //@TODO Should we set this after DB install?
@@ -150,8 +150,7 @@ $config = array(
         "collate" => "",
         "charset" => "utf-8",
         "select" => true
-    ),
-    
+    ),   
  'server' => 
     array(
         'outgoing-mail-handler'=>'smtp',
@@ -165,12 +164,12 @@ $config = array(
         'proxy-server-port'=>'',
         'proxy-server-username'=>'',
         'proxy-server-password'=>'',
-        'enable-restful' => true,
-        'enable-xmlrpc' => true,
-        'protocol-auth' => true,
+        'enable-restful' => 1,
+        'enable-xmlrpc' => 1,
+        'protocol-auth' => 1,
         'error-log'=>'error_log.log',
-        'error-console'=> true,
-        'error-send' => true,
+        'error-console'=> 1,
+        'error-send' => 1,
         'help-server-address' => 'http://help.budkit.org'
     )
 );

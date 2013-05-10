@@ -1,5 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="padding-top">
+    <div class="margin-top-double">
         <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/settings/member/profile/update">
 
             <div class="control-group">

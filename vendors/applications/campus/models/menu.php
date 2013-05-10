@@ -73,7 +73,7 @@ class Menu extends \Platform\Model {
                     array("menu_title" => "Documents", "menu_url" => "/campus/project/documents"),
                     array("menu_title" => "People", "menu_url" => "/campus/project/people", "menu_count" => 10), //add  menu_count_unimportant=true to remove highlight
                     array("menu_title" => "Time", "menu_url" => "/campus/project/time"),
-                // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
+                    array("menu_title" => "Surveys", "menu_url" => "/campus/project/survey")
                 )
                     )
             );

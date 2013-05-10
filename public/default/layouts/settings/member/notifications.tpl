@@ -1,5 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="post" enctype="multipart/form-data" action="/settings/member/notifications/update" class="form-horizontal margin-top">
+    <form method="post" enctype="multipart/form-data" action="/settings/member/notifications/update" class="form-horizontal margin-top-double">
         
         <fieldset>
             <div class="control-group">

@@ -1,5 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form class="form-horizontal padding-top">
+    <form class="form-horizontal margin-top-double">
         <div class="control-group">
             <label class="control-label" ><i class="icon-user-md icon-2x"></i></label>
             <div class="controls">

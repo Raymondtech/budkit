@@ -36,6 +36,7 @@
                         <div class="container-bucket">
                             <div class="left-contain container">
                                 <div class="padding">
+                                    <tpl:block data="page.block.alerts" /> 
                                     <div class="clearfix profile-cover" align="center" style="background-image: url(${config|appearance.cover-photo}); background-repeat: no-repeat">
                                         <a href="/" class="return-link">Return to dashboard</a>
                                         <tpl:condition data="profile.user_photo" test="isset" value="1">
@@ -55,7 +56,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <tpl:block data="page.block.alerts" /> 
+                                   
                                 </div>
 
 

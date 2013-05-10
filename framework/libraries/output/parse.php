@@ -48,9 +48,7 @@ class Parse extends Library\Object {
      * @var object
      */
 
-    static $instance;
-    protected static $document;
-    protected static $methods = array(
+    protected static $instance, $document, $methods = array(
         "tpl" => "\Library\Output\Parse\Template\\"
     );
 

@@ -1,24 +1,28 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top">
+    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top-double">
         <fieldset class="no-margin">
             <div class="control-group">
-                <label class="control-label" for="options[general][site-name]"> <?php echo _('Website Name'); ?></label>
+                <label class="control-label" for="options[general][site-name]">Website Name</label>
                 <div class="controls">
-                    <input type="text" name="options[general][site-name]"  class="input-xxlarge" placeholder="e.g MySocialNetwork" value="<?php echo $this->config->getParam('site-name',''); ?>" />
+                    <input type="text" name="options[general][site-name]"  class="input-xxlarge" placeholder="e.g MySocialNetwork" value="${config|general.site-name}" />
                     <span class="help-block">A unique catchy name to identify your website. This will show as the default page titles</span>
                 </div>
             </div>                   
             <div class="control-group">
-                <label class="control-label" for="options[general][site-meta-description]"> <?php echo _('Website description'); ?></label>
+                <label class="control-label" for="options[general][site-meta-description]">Website description</label>
                 <div class="controls">
-                    <textarea name="options[general][site-meta-description]" class="wysiwyg input-xxlarge" rows="8" ><?php echo $this->config->getParam('site-meta-description',''); ?></textarea>
+                    <textarea name="options[general][site-meta-description]" class="wysiwyg input-xxlarge" rows="8" >
+                        <tpl:element type="text" data="config|general.site-meta-description" />
+                    </textarea>
                     <span class="help-block">Describe your community, its interest and purpose. </span>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="options[general][site-meta-keywords]"> <?php echo _('Website Keywords'); ?></label>
+                <label class="control-label" for="options[general][site-meta-keywords]">Website Keywords</label>
                 <div class="controls">
-                    <textarea name="options[general][site-meta-keywords]" class="wysiwyg input-xxlarge" ><?php echo $this->config->getParam('site-meta-keywords',''); ?></textarea>
+                    <textarea name="options[general][site-meta-keywords]" class="wysiwyg input-xxlarge" >
+                        <tpl:element type="text" data="config|general.site-meta-keywords" />
+                    </textarea>
                     <span class="help-block">Lists as many keywords that may promote your listing in some search engines</span>
                 </div>
             </div>
@@ -26,16 +30,19 @@
                 <label class="control-label" for="options[general][site-allow-registration]">Registration</label>
                 <div class="controls">
                     <label class="checkbox">
-                        <input type="checkbox" name="options[general][site-allow-registration]" value="1" />
-                        Allow new user registration?
+                        <input type="hidden" name="options[general][site-allow-registration]" value="0" />
+                        <tpl:input type="checkbox" name="options[general][site-allow-registration]" value="1" data="config|general.site-allow-registration" />
+                        <span>Allow new user registration?</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="options[general][site-inviteonly]" value="1" />
-                        New user registration by invite only.
+                        <input type="hidden" name="options[general][site-inviteonly]" value="0" />
+                        <tpl:input type="checkbox" name="options[general][site-inviteonly]" value="1" data="config|general.site-inviteonly" />
+                        <span>New user registration by invite only.</span>
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="options[general][site-verify-email]" value="1" />
-                        Verify newly registered user by email
+                        <input type="hidden" name="options[general][site-verify-email]" value="0" />
+                        <tpl:input type="checkbox" name="options[general][site-verify-email]" value="1" data="config|general.site-verify-email" />
+                        <span>Verify newly registered user by email</span>
                     </label>
                 </div>
             </div>
@@ -45,7 +52,7 @@
                 <div class="controls">
                     <tpl:select name="options[general][site-default-authority]"  class="input-xxlarge" value="config|general.site-default-authority">
                         <tpl:loop data="authorities" id="authority-items">
-                            <option data="authority_id">
+                            <option value="${authority_id}">
                                 <tpl:loop limit="indent" id="authority-indent">
                                     <tpl:element type="text">|--</tpl:element>
                                 </tpl:loop>
@@ -56,6 +63,7 @@
                     <span class="help-block">The default authority group members will be automatically added to at sign-up</span>
                 </div>
             </div>
+                                
             <hr />
             <div class="control-group">
                 <label class="control-label" for="options[general][site-page-title]">Page titles</label>

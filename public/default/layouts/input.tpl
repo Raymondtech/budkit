@@ -16,7 +16,10 @@
                         <form action="/system/media/timeline/create" class="no-margin" method="POST" enctype="multipart/form-data">
                             <fieldset class="no-bottom-margin">
                                 <div class="controls">
-                                    <textarea class="input-100pct focused" data-target="budkit-editor" rows="4" name="media_content" placeholder="Say something...">
+                                    <textarea class="input-100pct focused" 
+                                              data-target="budkit-editor" 
+                                              data-stylesheet="http://${config|general.host}${config|general.path}public/default/assets/css/editor.css"
+                                              rows="4" name="media_content" placeholder="Say something...">
                                             <tpl:element type="html" data="content" medialinks="true" />
                                     </textarea>
                                 </div> 
