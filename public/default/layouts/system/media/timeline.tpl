@@ -9,7 +9,7 @@
                                 <div class="timeline-item-title"><a href="/system/media/timeline/view/${uri}"><tpl:element type="text" data="summary" medialinks="true" /></a></div>
                             </tpl:condition>
                             <div class="timeline-item-header">
-                                <div class="timeline-item-icon"><a href="#"><i class="icon-${verb}"></i></a></div>
+                                <div class="timeline-item-icon"><a><i class="icon-${verb}"></i></a></div>
                                 <a class="publisher-profile" href="/member:${actor.uri}/profile/timeline">
                                     <img class="profile-avatar thumbnail" src="${actor.image.url}" alt="${actor.displayName}" width="${actor.image.width}" height="${actor.image.height}" />
                                     <strong class="profile-name"><tpl:element type="text" data="actor.displayName" /></strong>                              
