@@ -1,6 +1,20 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="padding">  
-        <div class="clearfix">        
+        <div class="clearfix">   
+            <form class="pull-right no-margin form-horizontal" action="/settings/system/permissions/authorities/edit" method="POST">   
+                <input type="text" name="authority-title" class="span2" placeholder="Group Name" />
+                <select name="authority-parent" id="authority-parent">
+                    <option value="">Select Parent</option>
+                    <tpl:loop data="authorities" id="authorities">
+                        <option value="${authority_id}">
+                            <tpl:loop limit="indent"><span class="indenter">|--</span></tpl:loop>
+                            <span><tpl:element type="text" data="authority_title" /></span>
+                        </option>
+                    </tpl:loop>
+                </select>
+                <input type="hidden" name="authority-description" />
+                <button type="submit" class="btn">Add New Group</button>
+            </form>
             <ul class="nav nav-pills no-margin">
                 <li class="highlighted"><a href="/settings/system/permissions/add" >Add Authority Group</a></li>
             </ul>
@@ -14,10 +28,12 @@
                     <tpl:loop data="authorities" id="authority-groups">
                         <div class="accordion-group" id="authority-group-collapse">
                             <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#authority-group-collapse" href="#group${authority_id}">
+                                <div class="accordion-toggle" data-toggle="collapse" data-parent="#authority-group-collapse" href="#group${authority_id}">
                                     <tpl:loop limit="indent"><span class="indenter">|--</span></tpl:loop>
-                                    <span><tpl:element type="text" data="authority_title" /></span>
-                                </a>
+                                    <a href="/settings/system/permissions/authority/${authority_id}"><span><tpl:element type="text" data="authority_title" /></span></a>
+                                    <a href="/settings/system/permissions/authority/edit/${authority_id}"><span class="pull-right">Edit</span></a>
+                                    <span class="pull-right margin-right">0 members</span>
+                                </div>
                             </div>
                             <div id="group${authority_id}" class="accordion-body collapse">
                                 <div class="accordion-inner" style="padding-left: ${indent}5px">

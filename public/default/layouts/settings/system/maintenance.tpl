@@ -23,8 +23,9 @@
                 <ol class="help-block margin-top-half">
                     <li>Delete all enteries in the sessions table</li>
                     <li>Force all user's to sign in again</li>
+                    <li>You will be logged out</li>
                 </ol> 
-                <a href="/settings/system/maintenance/check" class="btn btn-danger margin-top-half" >End All Sessions</a>
+                <a href="/settings/system/maintenance/purge" class="btn btn-danger margin-top-half" >End All Sessions</a>
             </div>
         </div>
         <hr />
@@ -38,8 +39,8 @@
                     <li>Delete the contents of the <em>/users</em> folder.</li>
                 </ol>
                 <p class="margin-top-half"><strong>Are you sure you want to do this?</strong></p>
-                 <p class="help-block">If you are then click the button below. We will ask you for your password to confirm this</p>
-                <a href="/settings/system/maintenance/check" class="btn btn-danger margin-top-half" >Factory Reset</a>
+                 <p class="help-block">If you are then click the button below. There will be no undo button</p>
+                <a href="/settings/system/maintenance/reset" class="btn btn-danger margin-top-half" >Factory Reset</a>
             </div>
         </div>
     </form>
