@@ -53,8 +53,8 @@ class Menu extends \Platform\Model {
                     "menu_title" => "Content",
                     "children" => array(
                         array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"),
-                        array("menu_title" => "My Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count"=>$mycount),
-                        array("menu_title" => "Shared with me", "menu_url" => "/system/media/attachments/shared"),
+                        array("menu_title" => "Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count"=>$mycount),
+                //        array("menu_title" => "Shared with me", "menu_url" => "/system/media/attachments/shared"),
                     // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
                     )
                         ));
