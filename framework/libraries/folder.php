@@ -110,10 +110,16 @@ class Folder extends \Library\Object {
      * @param type $replace 
      * @todo Will always replace for now.
      */
-    public static function move($path, $toPath, $replace = TRUE) {
+    public static function move($path, $toPath, $deleteOriginal = TRUE) {
         if(copy($path, $toPath)){
-            //@todo Delete the original;
+            if($deleteOriginal){
+                if(!$this->remove($path)){
+                    //@todo say you could not delete the original
+                }
+            }
+            return true;
         }
+        return false;
     }
     
      /**
@@ -135,8 +141,8 @@ class Folder extends \Library\Object {
      * @param type $path
      * @param type $backup 
      */
-    public static function remove($path, $backup = FALSE) {
-        
+    public static function remove($path) {    
+        return $this->delete($path);
     }
 
     /**
@@ -375,9 +381,8 @@ class Folder extends \Library\Object {
         
         //1. Search $name as a folder or as a file 
         if (!self::is($folderpath)) { //if in path is a directory
-            return array();
+            return false;
         }
-        
 
         $dirh = @opendir($folderpath); //directory handler
 
@@ -395,20 +400,11 @@ class Folder extends \Library\Object {
                         if(in_array($extension, $filterByExtension))
                             continue;
                     }
-                }else{
-                    if ($file == '.' || $file == '..' || !in_array($file, $filterByName))
-                        continue;
-                    //Excluding extension
-                    if(!empty($filterByExtension)){
-                        $fhandler  = static::getFile();
-                        $extension = $fhandler::getExtension( $file );
-                        if(!in_array($extension, $filterByExtension))
-                            continue;
-                    }
                 }
                 
                 //The new path
                 $newPath = $folderpath.DS.$file;
+                //echo $newPath; 
                 
                 //If newpath is a folder and we are deleting recursively
                 if (self::is($newPath) && $recursive) {
