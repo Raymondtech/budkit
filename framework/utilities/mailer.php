@@ -211,7 +211,7 @@ final class Mailer extends Library\Object {
      *
      * @var	bool
      */
-    public $bcc_batch_mode = FALSE;
+    public $bccBatchMode = FALSE;
 
     /**
      * BCC Batch max number size.
@@ -219,129 +219,112 @@ final class Mailer extends Library\Object {
      * @see	CI_Email::$bcc_batch_mode
      * @var	int
      */
-    public $bcc_batch_size = 200;
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Whether PHP is running in safe mode. Initialized by the class constructor.
-     *
-     * @var	bool
-     */
-    protected $_safe_mode = FALSE;
+    public $bccBatchSize = 200;
 
     /**
      * Subject header
      *
      * @var	string
      */
-    protected $_subject = '';
+    protected $subject = '';
 
     /**
      * Message body
      *
      * @var	string
      */
-    protected $_body = '';
+    protected $body = '';
 
     /**
      * Final message body to be sent.
      *
      * @var	string
      */
-    protected $_finalbody = '';
+    protected $finalbody = '';
 
     /**
      * multipart/alternative boundary
      *
      * @var	string
      */
-    protected $_alt_boundary = '';
+    protected $altBoundary = '';
 
     /**
      * Attachment boundary
      *
      * @var	string
      */
-    protected $_atc_boundary = '';
+    protected $atcBoundary = '';
 
     /**
      * Final headers to send
      *
      * @var	string
      */
-    protected $_header_str = '';
+    protected $headerStr = '';
 
     /**
      * SMTP Connection socket placeholder
      *
      * @var	resource
      */
-    protected $_smtp_connect = '';
+    protected $smtpConnect = '';
 
     /**
      * Mail encoding
      *
      * @var	string	'8bit' or '7bit'
      */
-    protected $_encoding = '8bit';
+    protected $encoding = '8bit';
 
     /**
      * Whether to perform SMTP authentication
      *
      * @var	bool
      */
-    protected $_smtp_auth = FALSE;
+    protected $smtpAuth = FALSE;
 
     /**
      * Whether to send a Reply-To header
      *
      * @var	bool
      */
-    protected $_replyto_flag = FALSE;
-
-    /**
-     * Debug messages
-     *
-     * @see	CI_Email::print_debugger()
-     * @var	string
-     */
-    protected $_debug_msg = array();
+    protected $replytoFlag = FALSE;
 
     /**
      * Recipients
      *
      * @var	string[]
      */
-    protected $_recipients = array();
+    protected $recipients = array();
 
     /**
      * CC Recipients
      *
      * @var	string[]
      */
-    protected $_cc_array = array();
+    protected $ccArray = array();
 
     /**
      * BCC Recipients
      *
      * @var	string[]
      */
-    protected $_bcc_array = array();
+    protected $bccArray = array();
 
     /**
      * Message headers
      *
      * @var	string[]
      */
-    protected $_headers = array();
+    protected $headers = array();
 
     /**
      * Attachment data
      *
      * @var	array
      */
-    protected $_attachments = array();
+    protected $attachments = array();
 
     /**
      * Valid $protocol values
@@ -349,7 +332,7 @@ final class Mailer extends Library\Object {
      * @see	CI_Email::$protocol
      * @var	string[]
      */
-    protected $_protocols = array('mail', 'sendmail', 'smtp');
+    protected $protocols = array('mail', 'sendmail', 'smtp');
 
     /**
      * Base charsets
@@ -359,7 +342,7 @@ final class Mailer extends Library\Object {
      *
      * @var	string[]
      */
-    protected $_base_charsets = array('us-ascii', 'iso-2022-');
+    protected $baseCharsets = array('us-ascii', 'iso-2022-');
 
     /**
      * Bit depths
@@ -369,7 +352,7 @@ final class Mailer extends Library\Object {
      * @see	CI_Email::$_encoding
      * @var	string[]
      */
-    protected $_bit_depths = array('7bit', '8bit');
+    protected $bitDepths = array('7bit', '8bit');
 
     /**
      * $priority translations
@@ -378,7 +361,8 @@ final class Mailer extends Library\Object {
      *
      * @var	string[]
      */
-    protected $_priorities = array('1 (Highest)', '2 (High)', '3 (Normal)', '4 (Low)', '5 (Lowest)');
+    protected $priorities = array('1 (Highest)', '2 (High)', '3 (Normal)', '4 (Low)', '5 (Lowest)');
+    protected $config;
 
     // --------------------------------------------------------------------
 
@@ -391,59 +375,11 @@ final class Mailer extends Library\Object {
      * @return	void
      */
     public function __construct($config = array()) {
-        $this->charset = config_item('charset');
 
-        if (count($config) > 0) {
-            $this->initialize($config);
-        } else {
-            $this->_smtp_auth = !($this->smtp_user === '' && $this->smtp_pass === '');
-            $this->_safe_mode = (bool) @ini_get('safe_mode');
-        }
-
+        $this->config = \Library\Config::getInstance();
+        //Set the default settings;
         $this->charset = strtoupper($this->charset);
-
-        log_message('debug', 'Email Class Initialized');
-    }
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Destructor - Releases Resources
-     *
-     * @return	void
-     */
-    public function __destruct() {
-        if (is_resource($this->_smtp_connect)) {
-            $this->_send_command('quit');
-        }
-    }
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Initialize preferences
-     *
-     * @param	array
-     * @return	CI_Email
-     */
-    public function initialize($config = array()) {
-        foreach ($config as $key => $val) {
-            if (isset($this->$key)) {
-                $method = 'set_' . $key;
-
-                if (method_exists($this, $method)) {
-                    $this->$method($val);
-                } else {
-                    $this->$key = $val;
-                }
-            }
-        }
-        $this->clear();
-
-        $this->_smtp_auth = !($this->smtp_user === '' && $this->smtp_pass === '');
-        $this->_safe_mode = (bool) @ini_get('safe_mode');
-
-        return $this;
+        
     }
 
     // --------------------------------------------------------------------
@@ -454,23 +390,24 @@ final class Mailer extends Library\Object {
      * @param	bool
      * @return	CI_Email
      */
-    public function clear($clear_attachments = FALSE) {
-        $this->_subject = '';
-        $this->_body = '';
-        $this->_finalbody = '';
-        $this->_header_str = '';
-        $this->_replyto_flag = FALSE;
-        $this->_recipients = array();
-        $this->_cc_array = array();
-        $this->_bcc_array = array();
-        $this->_headers = array();
-        $this->_debug_msg = array();
+    public function clear($clearAttachments = FALSE) {
 
-        $this->set_header('User-Agent', $this->useragent);
-        $this->set_header('Date', $this->_set_date());
+        $this->subject = '';
+        $this->body = '';
+        $this->finalbody = '';
+        $this->headerStr = '';
+        $this->replytoFlag = FALSE;
+        $this->recipients = array();
+        $this->ccArray = array();
+        $this->bccArray = array();
+        $this->headers = array();
+        $this->debugMsg = array();
 
-        if ($clear_attachments !== FALSE) {
-            $this->_attachments = array();
+        $this->setHeader('User-Agent', $this->useragent);
+        $this->setHeader('Date', $this->setDate());
+
+        if ($clearAttachments !== FALSE) {
+            $this->attachments = array();
         }
 
         return $this;
@@ -486,18 +423,16 @@ final class Mailer extends Library\Object {
      * @param	string	$return_path = NULL	Return-Path
      * @return	CI_Email
      */
-    public function from($from, $name = '', $return_path = NULL) {
+    public function from($from, $name = '', $returnPath = NULL) {
         if (preg_match('/\<(.*)\>/', $from, $match)) {
             $from = $match[1];
         }
-
         if ($this->validate) {
-            $this->validate_email($this->_str_to_array($from));
-            if ($return_path) {
-                $this->validate_email($this->_str_to_array($return_path));
+            $this->validateEmail($this->strToArray($from));
+            if ($returnPath) {
+                $this->validateEmail($this->strToArray($returnPath));
             }
         }
-
         // prepare the display name
         if ($name !== '') {
             // only use Q encoding if there are characters that would require it
@@ -505,14 +440,13 @@ final class Mailer extends Library\Object {
                 // add slashes for non-printing characters, slashes, and double quotes, and surround it in double quotes
                 $name = '"' . addcslashes($name, "\0..\37\177'\"\\") . '"';
             } else {
-                $name = $this->_prep_q_encoding($name);
+                $name = $this->prepQEncoding($name);
             }
         }
+        $this->setHeader('From', $name . ' <' . $from . '>');
 
-        $this->set_header('From', $name . ' <' . $from . '>');
-
-        isset($return_path) OR $return_path = $from;
-        $this->set_header('Return-Path', '<' . $return_path . '>');
+        isset($returnPath) OR $returnPath = $from;
+        $this->setHeader('Return-Path', '<' . $returnPath . '>');
 
         return $this;
     }
@@ -526,25 +460,22 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	CI_Email
      */
-    public function reply_to($replyto, $name = '') {
+    public function replyTo($replyto, $name = '') {
+
         if (preg_match('/\<(.*)\>/', $replyto, $match)) {
             $replyto = $match[1];
         }
-
         if ($this->validate) {
-            $this->validate_email($this->_str_to_array($replyto));
+            $this->validateEmail($this->strToArray($replyto));
         }
-
         if ($name === '') {
             $name = $replyto;
         }
-
         if (strpos($name, '"') !== 0) {
             $name = '"' . $name . '"';
         }
-
-        $this->set_header('Reply-To', $name . ' <' . $replyto . '>');
-        $this->_replyto_flag = TRUE;
+        $this->setHeader('Reply-To', $name . ' <' . $replyto . '>');
+        $this->replytoFlag = TRUE;
 
         return $this;
     }
@@ -558,19 +489,16 @@ final class Mailer extends Library\Object {
      * @return	CI_Email
      */
     public function to($to) {
-        $to = $this->_str_to_array($to);
-        $to = $this->clean_email($to);
+        $to = $this->strToArray($to);
+        $to = $this->cleanEmail($to);
 
         if ($this->validate) {
-            $this->validate_email($to);
+            $this->validateEmail($to);
         }
-
-        if ($this->_get_protocol() !== 'mail') {
-            $this->set_header('To', implode(', ', $to));
+        if ($this->getProtocol() !== 'mail') {
+            $this->setHeader('To', implode(', ', $to));
         }
-
-        $this->_recipients = $to;
-
+        $this->recipients = $to;
         return $this;
     }
 
@@ -583,16 +511,17 @@ final class Mailer extends Library\Object {
      * @return	CI_Email
      */
     public function cc($cc) {
-        $cc = $this->clean_email($this->_str_to_array($cc));
+
+        $cc = $this->cleanEmail($this->strToArray($cc));
 
         if ($this->validate) {
-            $this->validate_email($cc);
+            $this->validateEmail($cc);
         }
 
-        $this->set_header('Cc', implode(', ', $cc));
+        $this->setHeader('Cc', implode(', ', $cc));
 
-        if ($this->_get_protocol() === 'smtp') {
-            $this->_cc_array = $cc;
+        if ($this->getProtocol() === 'smtp') {
+            $this->ccArray = $cc;
         }
 
         return $this;
@@ -609,20 +538,20 @@ final class Mailer extends Library\Object {
      */
     public function bcc($bcc, $limit = '') {
         if ($limit !== '' && is_numeric($limit)) {
-            $this->bcc_batch_mode = TRUE;
-            $this->bcc_batch_size = $limit;
+            $this->bccBatchMode = TRUE;
+            $this->bccBatchSize = $limit;
         }
 
-        $bcc = $this->clean_email($this->_str_to_array($bcc));
+        $bcc = $this->cleanEmail($this->strToArray($bcc));
 
         if ($this->validate) {
-            $this->validate_email($bcc);
+            $this->validateEmail($bcc);
         }
 
-        if ($this->_get_protocol() === 'smtp' OR ($this->bcc_batch_mode && count($bcc) > $this->bcc_batch_size)) {
-            $this->_bcc_array = $bcc;
+        if ($this->getProtocol() === 'smtp' OR ($this->bccBatchMode && count($bcc) > $this->bccBatchSize)) {
+            $this->bccArray = $bcc;
         } else {
-            $this->set_header('Bcc', implode(', ', $bcc));
+            $this->setHeader('Bcc', implode(', ', $bcc));
         }
 
         return $this;
@@ -637,8 +566,8 @@ final class Mailer extends Library\Object {
      * @return	CI_Email
      */
     public function subject($subject) {
-        $subject = $this->_prep_q_encoding($subject);
-        $this->set_header('Subject', $subject);
+        $subject = $this->prepQEncoding($subject);
+        $this->setHeader('Subject', $subject);
         return $this;
     }
 
@@ -651,17 +580,7 @@ final class Mailer extends Library\Object {
      * @return	CI_Email
      */
     public function message($body) {
-        $this->_body = rtrim(str_replace("\r", '', $body));
-
-        /* strip slashes only if magic quotes is ON
-          if we do it with magic quotes OFF, it strips real, user-inputted chars.
-
-          NOTE: In PHP 5.4 get_magic_quotes_gpc() will always return 0 and
-          it will probably not exist in future versions at all.
-         */
-        if (!is_php('5.4') && get_magic_quotes_gpc()) {
-            $this->_body = stripslashes($this->_body);
-        }
+        $this->body = rtrim(str_replace("\r", '', $body));
 
         return $this;
     }
@@ -678,7 +597,7 @@ final class Mailer extends Library\Object {
      * @return	CI_Email
      */
     public function attach($filename, $disposition = '', $newname = NULL, $mime = '') {
-        $this->_attachments[] = array(
+        $this->attachments[] = array(
             'name' => array($filename, $newname),
             'disposition' => empty($disposition) ? 'attachment' : $disposition, // Can also be 'inline'  Not sure if it matters
             'type' => $mime
@@ -696,8 +615,8 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	void
      */
-    public function set_header($header, $value) {
-        $this->_headers[$header] = $value;
+    public function setHeader($header, $value) {
+        $this->headers[$header] = $value;
     }
 
     // --------------------------------------------------------------------
@@ -708,7 +627,7 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	array
      */
-    protected function _str_to_array($email) {
+    protected function strToArray($email) {
         if (!is_array($email)) {
             return (strpos($email, ',') !== FALSE) ? preg_split('/[\s,]/', $email, -1, PREG_SPLIT_NO_EMPTY) : (array) trim($email);
         }
@@ -724,8 +643,8 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	CI_Email
      */
-    public function set_alt_message($str = '') {
-        $this->alt_message = (string) $str;
+    public function setAltMessage($str = '') {
+        $this->altMessage = (string) $str;
         return $this;
     }
 
@@ -737,7 +656,7 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	CI_Email
      */
-    public function set_mailtype($type = 'text') {
+    public function setMailType($type = 'text') {
         $this->mailtype = ($type === 'html') ? 'html' : 'text';
         return $this;
     }
@@ -750,7 +669,7 @@ final class Mailer extends Library\Object {
      * @param	bool
      * @return	CI_Email
      */
-    public function set_wordwrap($wordwrap = TRUE) {
+    public function setWordwrap($wordwrap = TRUE) {
         $this->wordwrap = (bool) $wordwrap;
         return $this;
     }
@@ -763,8 +682,8 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	CI_Email
      */
-    public function set_protocol($protocol = 'mail') {
-        $this->protocol = in_array($protocol, $this->_protocols, TRUE) ? strtolower($protocol) : 'mail';
+    public function setProtocol($protocol = 'mail') {
+        $this->protocol = in_array($protocol, $this->protocols, TRUE) ? strtolower($protocol) : 'mail';
         return $this;
     }
 
@@ -776,7 +695,7 @@ final class Mailer extends Library\Object {
      * @param	int
      * @return	CI_Email
      */
-    public function set_priority($n = 3) {
+    public function setPriority($n = 3) {
         $this->priority = preg_match('/^[1-5]$/', $n) ? (int) $n : 3;
         return $this;
     }
@@ -789,7 +708,7 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	CI_Email
      */
-    public function set_newline($newline = "\n") {
+    public function setNewline($newline = "\n") {
         $this->newline = in_array($newline, array("\n", "\r\n", "\r")) ? $newline : "\n";
         return $this;
     }
@@ -802,7 +721,7 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	CI_Email
      */
-    public function set_crlf($crlf = "\n") {
+    public function setCRLF($crlf = "\n") {
         $this->crlf = ($crlf !== "\n" && $crlf !== "\r\n" && $crlf !== "\r") ? "\n" : $crlf;
         return $this;
     }
@@ -814,9 +733,9 @@ final class Mailer extends Library\Object {
      *
      * @return	void
      */
-    protected function _set_boundaries() {
-        $this->_alt_boundary = 'B_ALT_' . uniqid(''); // multipart/alternative
-        $this->_atc_boundary = 'B_ATC_' . uniqid(''); // attachment boundary
+    protected function setBoundaries() {
+        $this->altBoundary = 'B_ALT_' . uniqid(''); // multipart/alternative
+        $this->atcBoundary = 'B_ATC_' . uniqid(''); // attachment boundary
     }
 
     // --------------------------------------------------------------------
@@ -826,8 +745,8 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _get_message_id() {
-        $from = str_replace(array('>', '<'), '', $this->_headers['Return-Path']);
+    protected function getMessageId() {
+        $from = str_replace(array('>', '<'), '', $this->headers['Return-Path']);
         return '<' . uniqid('') . strstr($from, '@') . '>';
     }
 
@@ -839,9 +758,9 @@ final class Mailer extends Library\Object {
      * @param	bool
      * @return	mixed
      */
-    protected function _get_protocol($return = TRUE) {
+    protected function getProtocol($return = TRUE) {
         $this->protocol = strtolower($this->protocol);
-        in_array($this->protocol, $this->_protocols, TRUE) OR $this->protocol = 'mail';
+        in_array($this->protocol, $this->protocols, TRUE) OR $this->protocol = 'mail';
 
         if ($return === TRUE) {
             return $this->protocol;
@@ -856,17 +775,16 @@ final class Mailer extends Library\Object {
      * @param	bool
      * @return	string
      */
-    protected function _get_encoding($return = TRUE) {
-        in_array($this->_encoding, $this->_bit_depths) OR $this->_encoding = '8bit';
+    protected function getEncoding($return = TRUE) {
+        in_array($this->encoding, $this->bitDepths) OR $this->encoding = '8bit';
 
-        foreach ($this->_base_charsets as $charset) {
+        foreach ($this->baseCharsets as $charset) {
             if (strpos($charset, $this->charset) === 0) {
-                $this->_encoding = '7bit';
+                $this->encoding = '7bit';
             }
         }
-
         if ($return === TRUE) {
-            return $this->_encoding;
+            return $this->encoding;
         }
     }
 
@@ -877,10 +795,10 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _get_content_type() {
+    protected function getContentType() {
         if ($this->mailtype === 'html') {
-            return (count($this->_attachments) === 0) ? 'html' : 'html-attach';
-        } elseif ($this->mailtype === 'text' && count($this->_attachments) > 0) {
+            return (count($this->attachments) === 0) ? 'html' : 'html-attach';
+        } elseif ($this->mailtype === 'text' && count($this->attachments) > 0) {
             return 'plain-attach';
         } else {
             return 'plain';
@@ -894,7 +812,7 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _set_date() {
+    protected function setDate() {
         $timezone = date('Z');
         $operator = ($timezone[0] === '-') ? '-' : '+';
         $timezone = abs($timezone);
@@ -910,7 +828,7 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _get_mime_message() {
+    protected function getMimeMessage() {
         return 'This is a multi-part message in MIME format.' . $this->newline . 'Your email application may not support this format.';
     }
 
@@ -922,15 +840,15 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	bool
      */
-    public function validate_email($email) {
+    public function validateEmail($email) {
         if (!is_array($email)) {
-            $this->_set_error_message('lang:email_must_be_array');
+            $this->setError('Email must be an array');
             return FALSE;
         }
 
         foreach ($email as $val) {
-            if (!$this->valid_email($val)) {
-                $this->_set_error_message('lang:email_invalid_address', $val);
+            if (!$this->validEmail($val)) {
+                $this->setError('Invlid Email address');
                 return FALSE;
             }
         }
@@ -946,7 +864,7 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	bool
      */
-    public function valid_email($email) {
+    public function validEmail($email) {
         return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
@@ -958,18 +876,18 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	string
      */
-    public function clean_email($email) {
+    public function cleanEmail($email) {
         if (!is_array($email)) {
             return preg_match('/\<(.*)\>/', $email, $match) ? $match[1] : $email;
         }
 
-        $clean_email = array();
+        $cleanEmail = array();
 
         foreach ($email as $addy) {
-            $clean_email[] = preg_match('/\<(.*)\>/', $addy, $match) ? $match[1] : $addy;
+            $cleanEmail[] = preg_match('/\<(.*)\>/', $addy, $match) ? $match[1] : $addy;
         }
 
-        return $clean_email;
+        return $cleanEmail;
     }
 
     // --------------------------------------------------------------------
@@ -984,12 +902,12 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _get_alt_message() {
-        if (!empty($this->alt_message)) {
-            return ($this->wordwrap) ? $this->word_wrap($this->alt_message, 76) : $this->alt_message;
+    protected function getAltMessage() {
+        if (!empty($this->altMessage)) {
+            return ($this->wordwrap) ? $this->word_wrap($this->altMessage, 76) : $this->altMessage;
         }
 
-        $body = preg_match('/\<body.*?\>(.*)\<\/body\>/si', $this->_body, $match) ? $match[1] : $this->_body;
+        $body = preg_match('/\<body.*?\>(.*)\<\/body\>/si', $this->body, $match) ? $match[1] : $this->body;
         $body = str_replace("\t", '', preg_replace('#<!--(.*)--\>#', '', trim(strip_tags($body))));
 
         for ($i = 20; $i >= 3; $i--) {
@@ -999,7 +917,7 @@ final class Mailer extends Library\Object {
         // Reduce multiple spaces
         $body = preg_replace('| +|', ' ', $body);
 
-        return ($this->wordwrap) ? $this->word_wrap($body, 76) : $body;
+        return ($this->wordwrap) ? $this->wordWrap($body, 76) : $body;
     }
 
     // --------------------------------------------------------------------
@@ -1011,7 +929,7 @@ final class Mailer extends Library\Object {
      * @param	int	line-length limit
      * @return	string
      */
-    public function word_wrap($str, $charlim = NULL) {
+    public function wordWrap($str, $charlim = NULL) {
         // Set the character limit, if not already present
         if (empty($charlim)) {
             $charlim = empty($this->wrapchars) ? 76 : $this->wrapchars;
@@ -1077,7 +995,6 @@ final class Mailer extends Library\Object {
                 $output = str_replace('{{unwrapped' . $key . '}}', $val, $output);
             }
         }
-
         return $output;
     }
 
@@ -1088,12 +1005,12 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _build_headers() {
-        $this->set_header('X-Sender', $this->clean_email($this->_headers['From']));
-        $this->set_header('X-Mailer', $this->useragent);
-        $this->set_header('X-Priority', $this->_priorities[$this->priority - 1]);
-        $this->set_header('Message-ID', $this->_get_message_id());
-        $this->set_header('Mime-Version', '1.0');
+    protected function buildHeaders() {
+        $this->setHeader('X-Sender', $this->cleanEmail($this->headers['From']));
+        $this->setHeader('X-Mailer', $this->useragent);
+        $this->setHeader('X-Priority', $this->priorities[$this->priority - 1]);
+        $this->setHeader('Message-ID', $this->getMessageId());
+        $this->setHeader('Mime-Version', '1.0');
     }
 
     // --------------------------------------------------------------------
@@ -1103,27 +1020,27 @@ final class Mailer extends Library\Object {
      *
      * @return	void
      */
-    protected function _write_headers() {
+    protected function writeHeaders() {
         if ($this->protocol === 'mail') {
-            if (isset($this->_headers['Subject'])) {
-                $this->_subject = $this->_headers['Subject'];
-                unset($this->_headers['Subject']);
+            if (isset($this->headers['Subject'])) {
+                $this->subject = $this->headers['Subject'];
+                unset($this->headers['Subject']);
             }
         }
 
-        reset($this->_headers);
-        $this->_header_str = '';
+        reset($this->headers);
+        $this->headerStr = '';
 
-        foreach ($this->_headers as $key => $val) {
+        foreach ($this->headers as $key => $val) {
             $val = trim($val);
 
             if ($val !== '') {
-                $this->_header_str .= $key . ': ' . $val . $this->newline;
+                $this->headerStr .= $key . ': ' . $val . $this->newline;
             }
         }
 
-        if ($this->_get_protocol() === 'mail') {
-            $this->_header_str = rtrim($this->_header_str);
+        if ($this->getProtocol() === 'mail') {
+            $this->headerStr = rtrim($this->headerStr);
         }
     }
 
@@ -1134,139 +1051,139 @@ final class Mailer extends Library\Object {
      *
      * @return	bool
      */
-    protected function _build_message() {
+    protected function buildMessage() {
         if ($this->wordwrap === TRUE && $this->mailtype !== 'html') {
-            $this->_body = $this->word_wrap($this->_body);
+            $this->body = $this->wordWrap($this->body);
         }
 
-        $this->_set_boundaries();
-        $this->_write_headers();
+        $this->setBoundaries();
+        $this->writeHeaders();
 
-        $hdr = ($this->_get_protocol() === 'mail') ? $this->newline : '';
+        $hdr = ($this->getProtocol() === 'mail') ? $this->newline : '';
         $body = '';
 
-        switch ($this->_get_content_type()) {
+        switch ($this->getContentType()) {
             case 'plain' :
 
                 $hdr .= 'Content-Type: text/plain; charset=' . $this->charset . $this->newline
-                        . 'Content-Transfer-Encoding: ' . $this->_get_encoding();
+                        . 'Content-Transfer-Encoding: ' . $this->getEncoding();
 
-                if ($this->_get_protocol() === 'mail') {
-                    $this->_header_str .= $hdr;
-                    $this->_finalbody = $this->_body;
+                if ($this->getProtocol() === 'mail') {
+                    $this->headerStr .= $hdr;
+                    $this->finalbody = $this->body;
                 } else {
-                    $this->_finalbody = $hdr . $this->newline . $this->newline . $this->_body;
+                    $this->finalbody = $hdr . $this->newline . $this->newline . $this->body;
                 }
 
                 return;
 
             case 'html' :
 
-                if ($this->send_multipart === FALSE) {
+                if ($this->sendMultipart === FALSE) {
                     $hdr .= 'Content-Type: text/html; charset=' . $this->charset . $this->newline
                             . 'Content-Transfer-Encoding: quoted-printable';
                 } else {
-                    $hdr .= 'Content-Type: multipart/alternative; boundary="' . $this->_alt_boundary . '"' . $this->newline . $this->newline;
+                    $hdr .= 'Content-Type: multipart/alternative; boundary="' . $this->altBoundary . '"' . $this->newline . $this->newline;
 
-                    $body .= $this->_get_mime_message() . $this->newline . $this->newline
-                            . '--' . $this->_alt_boundary . $this->newline
+                    $body .= $this->getMimeMessage() . $this->newline . $this->newline
+                            . '--' . $this->altBoundary . $this->newline
                             . 'Content-Type: text/plain; charset=' . $this->charset . $this->newline
-                            . 'Content-Transfer-Encoding: ' . $this->_get_encoding() . $this->newline . $this->newline
-                            . $this->_get_alt_message() . $this->newline . $this->newline . '--' . $this->_alt_boundary . $this->newline
+                            . 'Content-Transfer-Encoding: ' . $this->getEncoding() . $this->newline . $this->newline
+                            . $this->getAltMessage() . $this->newline . $this->newline . '--' . $this->altBoundary . $this->newline
                             . 'Content-Type: text/html; charset=' . $this->charset . $this->newline
                             . 'Content-Transfer-Encoding: quoted-printable' . $this->newline . $this->newline;
                 }
 
-                $this->_finalbody = $body . $this->_prep_quoted_printable($this->_body) . $this->newline . $this->newline;
+                $this->finalbody = $body . $this->prepQuotedPrintable($this->body) . $this->newline . $this->newline;
 
-                if ($this->_get_protocol() === 'mail') {
-                    $this->_header_str .= $hdr;
+                if ($this->getProtocol() === 'mail') {
+                    $this->headerStr .= $hdr;
                 } else {
-                    $this->_finalbody = $hdr . $this->_finalbody;
+                    $this->finalbody = $hdr . $this->finalbody;
                 }
 
-                if ($this->send_multipart !== FALSE) {
-                    $this->_finalbody .= '--' . $this->_alt_boundary . '--';
+                if ($this->sendMultipart !== FALSE) {
+                    $this->finalbody .= '--' . $this->altBoundary . '--';
                 }
 
                 return;
 
             case 'plain-attach' :
 
-                $hdr .= 'Content-Type: multipart/' . $this->multipart . '; boundary="' . $this->_atc_boundary . '"' . $this->newline . $this->newline;
+                $hdr .= 'Content-Type: multipart/' . $this->multipart . '; boundary="' . $this->atcBoundary . '"' . $this->newline . $this->newline;
 
-                if ($this->_get_protocol() === 'mail') {
-                    $this->_header_str .= $hdr;
+                if ($this->getProtocol() === 'mail') {
+                    $this->headerStr .= $hdr;
                 }
 
-                $body .= $this->_get_mime_message() . $this->newline . $this->newline
-                        . '--' . $this->_atc_boundary . $this->newline
+                $body .= $this->getMimeMessage() . $this->newline . $this->newline
+                        . '--' . $this->atcBoundary . $this->newline
                         . 'Content-Type: text/plain; charset=' . $this->charset . $this->newline
-                        . 'Content-Transfer-Encoding: ' . $this->_get_encoding() . $this->newline . $this->newline
-                        . $this->_body . $this->newline . $this->newline;
+                        . 'Content-Transfer-Encoding: ' . $this->getEncoding() . $this->newline . $this->newline
+                        . $this->body . $this->newline . $this->newline;
 
                 break;
             case 'html-attach' :
 
-                $hdr .= 'Content-Type: multipart/' . $this->multipart . '; boundary="' . $this->_atc_boundary . '"' . $this->newline . $this->newline;
+                $hdr .= 'Content-Type: multipart/' . $this->multipart . '; boundary="' . $this->atcBoundary . '"' . $this->newline . $this->newline;
 
-                if ($this->_get_protocol() === 'mail') {
-                    $this->_header_str .= $hdr;
+                if ($this->getProtocol() === 'mail') {
+                    $this->headerStr .= $hdr;
                 }
 
-                $body .= $this->_get_mime_message() . $this->newline . $this->newline
-                        . '--' . $this->_atc_boundary . $this->newline
-                        . 'Content-Type: multipart/alternative; boundary="' . $this->_alt_boundary . '"' . $this->newline . $this->newline
-                        . '--' . $this->_alt_boundary . $this->newline
+                $body .= $this->getMimeMessage() . $this->newline . $this->newline
+                        . '--' . $this->atcBoundary . $this->newline
+                        . 'Content-Type: multipart/alternative; boundary="' . $this->altBoundary . '"' . $this->newline . $this->newline
+                        . '--' . $this->altBoundary . $this->newline
                         . 'Content-Type: text/plain; charset=' . $this->charset . $this->newline
-                        . 'Content-Transfer-Encoding: ' . $this->_get_encoding() . $this->newline . $this->newline
-                        . $this->_get_alt_message() . $this->newline . $this->newline . '--' . $this->_alt_boundary . $this->newline
+                        . 'Content-Transfer-Encoding: ' . $this->getEncoding() . $this->newline . $this->newline
+                        . $this->getAltMessage() . $this->newline . $this->newline . '--' . $this->altBoundary . $this->newline
                         . 'Content-Type: text/html; charset=' . $this->charset . $this->newline
                         . 'Content-Transfer-Encoding: quoted-printable' . $this->newline . $this->newline
-                        . $this->_prep_quoted_printable($this->_body) . $this->newline . $this->newline
-                        . '--' . $this->_alt_boundary . '--' . $this->newline . $this->newline;
+                        . $this->prepQuotedPrintable($this->body) . $this->newline . $this->newline
+                        . '--' . $this->altBoundary . '--' . $this->newline . $this->newline;
 
                 break;
         }
 
         $attachment = array();
-        for ($i = 0, $c = count($this->_attachments), $z = 0; $i < $c; $i++) {
-            $filename = $this->_attachments[$i]['name'][0];
-            $basename = ($this->_attachments[$i]['name'][1] === NULL) ? basename($filename) : $this->_attachments[$i]['name'][1];
-            $ctype = $this->_attachments[$i]['type'];
-            $file_content = '';
+        for ($i = 0, $c = count($this->attachments), $z = 0; $i < $c; $i++) {
+            $filename = $this->attachments[$i]['name'][0];
+            $basename = ($this->attachments[$i]['name'][1] === NULL) ? basename($filename) : $this->attachments[$i]['name'][1];
+            $ctype = $this->attachments[$i]['type'];
+            $fileContent = '';
 
             if ($ctype === '') {
                 if (!file_exists($filename)) {
-                    $this->_set_error_message('lang:email_attachment_missing', $filename);
+                    $this->setError('Email attachment missing', $filename);
                     return FALSE;
                 }
 
                 $file = filesize($filename) + 1;
 
                 if (!$fp = fopen($filename, FOPEN_READ)) {
-                    $this->_set_error_message('lang:email_attachment_unreadable', $filename);
+                    $this->setError('Email attachment unreadable', $filename);
                     return FALSE;
                 }
 
-                $ctype = $this->_mime_types(pathinfo($filename, PATHINFO_EXTENSION));
-                $file_content = fread($fp, $file);
+                $ctype = $this->mimeTypes(pathinfo($filename, PATHINFO_EXTENSION));
+                $fileContent = fread($fp, $file);
                 fclose($fp);
             } else {
-                $file_content = & $this->_attachments[$i]['name'][0];
+                $fileContent = & $this->attachments[$i]['name'][0];
             }
 
-            $attachment[$z++] = '--' . $this->_atc_boundary . $this->newline
+            $attachment[$z++] = '--' . $this->atcBoundary . $this->newline
                     . 'Content-type: ' . $ctype . '; '
                     . 'name="' . $basename . '"' . $this->newline
-                    . 'Content-Disposition: ' . $this->_attachments[$i]['disposition'] . ';' . $this->newline
+                    . 'Content-Disposition: ' . $this->attachments[$i]['disposition'] . ';' . $this->newline
                     . 'Content-Transfer-Encoding: base64' . $this->newline;
 
-            $attachment[$z++] = chunk_split(base64_encode($file_content));
+            $attachment[$z++] = chunk_split(base64_encode($fileContent));
         }
 
-        $body .= implode($this->newline, $attachment) . $this->newline . '--' . $this->_atc_boundary . '--';
-        $this->_finalbody = ($this->_get_protocol() === 'mail') ? $body : $hdr . $body;
+        $body .= implode($this->newline, $attachment) . $this->newline . '--' . $this->atcBoundary . '--';
+        $this->finalbody = ($this->getProtocol() === 'mail') ? $body : $hdr . $body;
         return TRUE;
     }
 
@@ -1281,7 +1198,7 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	string
      */
-    protected function _prep_quoted_printable($str) {
+    protected function prepQuotedPrintable($str) {
         // We are intentionally wrapping so mail servers will encode characters
         // properly and MUAs will behave, so {unwrap} must go!
         $str = str_replace(array('{unwrap}', '{/unwrap}'), '', $str);
@@ -1359,11 +1276,11 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	string
      */
-    protected function _prep_q_encoding($str) {
+    protected function prepQEncoding($str) {
         $str = str_replace(array("\r", "\n"), '', $str);
 
         if ($this->charset === 'UTF-8') {
-            if (MB_ENABLED === TRUE) {
+            if (extension_loaded('mbstring')) {
                 return mb_encode_mimeheader($str, $this->charset, 'Q', $this->crlf);
             } elseif (extension_loaded('iconv')) {
                 $output = @iconv_mime_encode('', $str, array(
@@ -1418,37 +1335,37 @@ final class Mailer extends Library\Object {
      * @param	bool	$auto_clear = TRUE
      * @return	bool
      */
-    public function send($auto_clear = TRUE) {
-        if ($this->_replyto_flag === FALSE) {
-            $this->reply_to($this->_headers['From']);
+    public function send($autoClear = TRUE) {
+        if ($this->replytoFlag === FALSE) {
+            $this->replyTo($this->headers['From']);
         }
 
-        if (!isset($this->_recipients) && !isset($this->_headers['To'])
-                && !isset($this->_bcc_array) && !isset($this->_headers['Bcc'])
-                && !isset($this->_headers['Cc'])) {
-            $this->_set_error_message('lang:email_no_recipients');
+        if (!isset($this->recipients) && !isset($this->headers['To'])
+                && !isset($this->bccArray) && !isset($this->headers['Bcc'])
+                && !isset($this->headers['Cc'])) {
+            $this->setError('No recipients specified');
             return FALSE;
         }
 
-        $this->_build_headers();
+        $this->buildHeaders();
 
-        if ($this->bcc_batch_mode && count($this->_bcc_array) > $this->bcc_batch_size) {
-            $result = $this->batch_bcc_send();
+        if ($this->bccBatchMode && count($this->bccArray) > $this->bccBatchSize) {
+            $result = $this->batchBccSend();
 
-            if ($result && $auto_clear) {
+            if ($result && $autoClear) {
                 $this->clear();
             }
 
             return $result;
         }
 
-        if ($this->_build_message() === FALSE) {
+        if ($this->buildMessage() === FALSE) {
             return FALSE;
         }
 
-        $result = $this->_spool_email();
+        $result = $this->spoolEmail();
 
-        if ($result && $auto_clear) {
+        if ($result && $autoClear) {
             $this->clear();
         }
 
@@ -1462,19 +1379,19 @@ final class Mailer extends Library\Object {
      *
      * @return	void
      */
-    public function batch_bcc_send() {
-        $float = $this->bcc_batch_size - 1;
+    public function batchBccSend() {
+        $float = $this->bccBatchSize - 1;
         $set = '';
         $chunk = array();
 
-        for ($i = 0, $c = count($this->_bcc_array); $i < $c; $i++) {
-            if (isset($this->_bcc_array[$i])) {
-                $set .= ', ' . $this->_bcc_array[$i];
+        for ($i = 0, $c = count($this->bccArray); $i < $c; $i++) {
+            if (isset($this->bccArray[$i])) {
+                $set .= ', ' . $this->bccArray[$i];
             }
 
             if ($i === $float) {
                 $chunk[] = substr($set, 1);
-                $float += $this->bcc_batch_size;
+                $float += $this->bccBatchSize;
                 $set = '';
             }
 
@@ -1484,21 +1401,21 @@ final class Mailer extends Library\Object {
         }
 
         for ($i = 0, $c = count($chunk); $i < $c; $i++) {
-            unset($this->_headers['Bcc']);
 
-            $bcc = $this->clean_email($this->_str_to_array($chunk[$i]));
+            unset($this->headers['Bcc']);
+            $bcc = $this->cleanEmail($this->strToArray($chunk[$i]));
 
             if ($this->protocol !== 'smtp') {
-                $this->set_header('Bcc', implode(', ', $bcc));
+                $this->setHeader('Bcc', implode(', ', $bcc));
             } else {
-                $this->_bcc_array = $bcc;
+                $this->bccArray = $bcc;
             }
 
-            if ($this->_build_message() === FALSE) {
+            if ($this->buildEessage() === FALSE) {
                 return FALSE;
             }
 
-            $this->_spool_email();
+            $this->spoolEmail();
         }
     }
 
@@ -1509,8 +1426,8 @@ final class Mailer extends Library\Object {
      *
      * @return	void
      */
-    protected function _unwrap_specials() {
-        $this->_finalbody = preg_replace_callback('/\{unwrap\}(.*?)\{\/unwrap\}/si', array($this, '_remove_nl_callback'), $this->_finalbody);
+    protected function unwrapSpecials() {
+        $this->finalbody = preg_replace_callback('/\{unwrap\}(.*?)\{\/unwrap\}/si', array($this, 'removeNlCallback'), $this->finalbody);
     }
 
     // --------------------------------------------------------------------
@@ -1521,7 +1438,7 @@ final class Mailer extends Library\Object {
      * @param	string	$matches
      * @return	string
      */
-    protected function _remove_nl_callback($matches) {
+    protected function removeNlCallback($matches) {
         if (strpos($matches[1], "\r") !== FALSE OR strpos($matches[1], "\n") !== FALSE) {
             $matches[1] = str_replace(array("\r\n", "\r", "\n"), '', $matches[1]);
         }
@@ -1536,16 +1453,15 @@ final class Mailer extends Library\Object {
      *
      * @return	bool
      */
-    protected function _spool_email() {
-        $this->_unwrap_specials();
-
-        $method = '_send_with_' . $this->_get_protocol();
+    protected function spoolEmail() {
+        $this->unwrapSpecials();
+        $protocol   = $this->getProtocol();
+        $method     = 'sendWith' . ucfirst( $protocol );
         if (!$this->$method()) {
-            $this->_set_error_message('lang:email_send_failure_' . ($this->_get_protocol() === 'mail' ? 'phpmail' : $this->_get_protocol()));
+            $this->setError('Could not send the message with ' . ($this->getProtocol() === 'mail' ? 'phpmail' : $this->getProtocol()));
             return FALSE;
         }
 
-        $this->_set_error_message('lang:email_sent', $this->_get_protocol());
         return TRUE;
     }
 
@@ -1556,18 +1472,14 @@ final class Mailer extends Library\Object {
      *
      * @return	bool
      */
-    protected function _send_with_mail() {
-        if (is_array($this->_recipients)) {
-            $this->_recipients = implode(', ', $this->_recipients);
+    protected function sendWithMail() {
+        if (is_array($this->recipients)) {
+            $this->recipients = implode(', ', $this->recipients);
         }
 
-        if ($this->_safe_mode === TRUE) {
-            return mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str);
-        } else {
-            // most documentation of sendmail using the "-f" flag lacks a space after it, however
-            // we've encountered servers that seem to require it to be in place.
-            return mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str, '-f ' . $this->clean_email($this->_headers['Return-Path']));
-        }
+        // most documentation of sendmail using the "-f" flag lacks a space after it, however
+        // we've encountered servers that seem to require it to be in place.
+        return mail($this->recipients, $this->subject, $this->finalbody, $this->headerStr, '-f ' . $this->cleanEmail($this->headers['Return-Path']));
     }
 
     // --------------------------------------------------------------------
@@ -1577,25 +1489,25 @@ final class Mailer extends Library\Object {
      *
      * @return	bool
      */
-    protected function _send_with_sendmail() {
+    protected function sendWithSendmail() {
         // is popen() enabled?
-        if (!function_usable('popen')
+        if (!function_exists('popen')
                 OR FALSE === ($fp = @popen(
-                        $this->mailpath . ' -oi -f ' . $this->clean_email($this->_headers['From'])
-                        . ' -t -r ' . $this->clean_email($this->_headers['Return-Path'])
+                        $this->mailpath . ' -oi -f ' . $this->cleanEmail($this->headers['From'])
+                        . ' -t -r ' . $this->cleanEmail($this->headers['Return-Path'])
                         , 'w'))
         ) { // server probably has popen disabled, so nothing we can do to get a verbose error.
             return FALSE;
         }
 
-        fputs($fp, $this->_header_str);
-        fputs($fp, $this->_finalbody);
+        fputs($fp, $this->headerStr);
+        fputs($fp, $this->finalbody);
 
         $status = pclose($fp);
 
         if ($status !== 0) {
-            $this->_set_error_message('lang:email_exit_status', $status);
-            $this->_set_error_message('lang:email_no_socket');
+            $this->setError('lang:email_exit_status', $status);
+            $this->setError('lang:email_no_socket');
             return FALSE;
         }
 
@@ -1609,58 +1521,56 @@ final class Mailer extends Library\Object {
      *
      * @return	bool
      */
-    protected function _send_with_smtp() {
-        if ($this->smtp_host === '') {
-            $this->_set_error_message('lang:email_no_hostname');
+    protected function sendWithSmtp() {
+        if ($this->smtpHost === '') {
+            $this->setError('lang:email_no_hostname');
             return FALSE;
         }
 
-        if (!$this->_smtp_connect() OR !$this->_smtp_authenticate()) {
+        if (!$this->smtpConnect() OR !$this->smtpAuthenticate()) {
             return FALSE;
         }
 
-        $this->_send_command('from', $this->clean_email($this->_headers['From']));
+        $this->sendCommand('from', $this->cleanEmail($this->headers['From']));
 
-        foreach ($this->_recipients as $val) {
-            $this->_send_command('to', $val);
+        foreach ($this->recipients as $val) {
+            $this->sendCommand('to', $val);
         }
 
-        if (count($this->_cc_array) > 0) {
-            foreach ($this->_cc_array as $val) {
+        if (count($this->ccArray) > 0) {
+            foreach ($this->ccArray as $val) {
                 if ($val !== '') {
-                    $this->_send_command('to', $val);
+                    $this->sendCommand('to', $val);
                 }
             }
         }
 
-        if (count($this->_bcc_array) > 0) {
-            foreach ($this->_bcc_array as $val) {
+        if (count($this->bccArray) > 0) {
+            foreach ($this->bccArray as $val) {
                 if ($val !== '') {
-                    $this->_send_command('to', $val);
+                    $this->sendCommand('to', $val);
                 }
             }
         }
 
-        $this->_send_command('data');
-
+        $this->sendCommand('data');
         // perform dot transformation on any lines that begin with a dot
-        $this->_send_data($this->_header_str . preg_replace('/^\./m', '..$1', $this->_finalbody));
+        $this->sendData($this->headerStr . preg_replace('/^\./m', '..$1', $this->finalbody));
+        $this->sendData('.');
 
-        $this->_send_data('.');
+        $reply = $this->getSmtpData();
 
-        $reply = $this->_get_smtp_data();
-
-        $this->_set_error_message($reply);
+        //$this->setError($reply);
 
         if (strpos($reply, '250') !== 0) {
-            $this->_set_error_message('lang:email_smtp_error', $reply);
+            $this->setError('lang:email_smtp_error', $reply);
             return FALSE;
         }
 
-        if ($this->smtp_keepalive) {
-            $this->_send_command('reset');
+        if ($this->smtpKeepalive) {
+            $this->sendCommand('reset');
         } else {
-            $this->_send_command('quit');
+            $this->sendCommand('quit');
         }
 
         return TRUE;
@@ -1673,36 +1583,36 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _smtp_connect() {
-        if (is_resource($this->_smtp_connect)) {
+    protected function smtpConnect() {
+        if (is_resource($this->smtpConnect)) {
             return TRUE;
         }
 
-        $ssl = ($this->smtp_crypto === 'ssl') ? 'ssl://' : '';
+        $ssl = ($this->smtpCrypto === 'ssl') ? 'ssl://' : '';
 
-        $this->_smtp_connect = fsockopen($ssl . $this->smtp_host, $this->smtp_port, $errno, $errstr, $this->smtp_timeout);
+        $this->smtpConnect = fsockopen($ssl . $this->smtpHost, $this->smtpPort, $errno, $errstr, $this->smtpTimeout);
 
-        if (!is_resource($this->_smtp_connect)) {
-            $this->_set_error_message('lang:email_smtp_error', $errno . ' ' . $errstr);
+        if (!is_resource($this->smtpConnect)) {
+            $this->setError('lang:email_smtp_error', $errno . ' ' . $errstr);
             return FALSE;
         }
 
-        stream_set_timeout($this->_smtp_connect, $this->smtp_timeout);
-        $this->_set_error_message($this->_get_smtp_data());
+        stream_set_timeout($this->smtpConnect, $this->smtpTimeout);
 
-        if ($this->smtp_crypto === 'tls') {
-            $this->_send_command('hello');
-            $this->_send_command('starttls');
 
-            $crypto = stream_socket_enable_crypto($this->_smtp_connect, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+        if ($this->smtpCrypto === 'tls') {
+            $this->sendCommand('hello');
+            $this->sendCommand('starttls');
+
+            $crypto = stream_socket_enable_crypto($this->smtpConnect, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT);
 
             if ($crypto !== TRUE) {
-                $this->_set_error_message('lang:email_smtp_error', $this->_get_smtp_data());
+                $this->setError('lang:email_smtp_error', $this->getSmtpData());
                 return FALSE;
             }
         }
 
-        return $this->_send_command('hello');
+        return $this->sendCommand('hello');
     }
 
     // --------------------------------------------------------------------
@@ -1714,66 +1624,65 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	string
      */
-    protected function _send_command($cmd, $data = '') {
+    protected function sendCommand($cmd, $data = '') {
         switch ($cmd) {
             case 'hello' :
 
-                if ($this->_smtp_auth OR $this->_get_encoding() === '8bit') {
-                    $this->_send_data('EHLO ' . $this->_get_hostname());
+                if ($this->smtpAuth OR $this->getEncoding() === '8bit') {
+                    $this->sendData('EHLO ' . $this->getHostname());
                 } else {
-                    $this->_send_data('HELO ' . $this->_get_hostname());
+                    $this->sendData('HELO ' . $this->getHostname());
                 }
 
                 $resp = 250;
                 break;
             case 'starttls' :
 
-                $this->_send_data('STARTTLS');
+                $this->sendData('STARTTLS');
                 $resp = 220;
                 break;
             case 'from' :
 
-                $this->_send_data('MAIL FROM:<' . $data . '>');
+                $this->sendData('MAIL FROM:<' . $data . '>');
                 $resp = 250;
                 break;
             case 'to' :
 
                 if ($this->dsn) {
-                    $this->_send_data('RCPT TO:<' . $data . '> NOTIFY=SUCCESS,DELAY,FAILURE ORCPT=rfc822;' . $data);
+                    $this->sendData('RCPT TO:<' . $data . '> NOTIFY=SUCCESS,DELAY,FAILURE ORCPT=rfc822;' . $data);
                 } else {
-                    $this->_send_data('RCPT TO:<' . $data . '>');
+                    $this->sendData('RCPT TO:<' . $data . '>');
                 }
 
                 $resp = 250;
                 break;
             case 'data' :
 
-                $this->_send_data('DATA');
+                $this->sendData('DATA');
                 $resp = 354;
                 break;
             case 'reset':
 
-                $this->_send_data('RSET');
+                $this->sendData('RSET');
                 $resp = 250;
                 break;
             case 'quit' :
 
-                $this->_send_data('QUIT');
+                $this->sendData('QUIT');
                 $resp = 221;
                 break;
         }
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->getSmtpData();
 
-        $this->_debug_msg[] = '<pre>' . $cmd . ': ' . $reply . '</pre>';
 
         if ((int) substr($reply, 0, 3) !== $resp) {
-            $this->_set_error_message('lang:email_smtp_error', $reply);
+            $this->setError('lang:email_smtp_error', $reply);
             return FALSE;
         }
 
         if ($cmd === 'quit') {
-            fclose($this->_smtp_connect);
+            fclose($this->smtpConnect);
         }
 
         return TRUE;
@@ -1786,42 +1695,42 @@ final class Mailer extends Library\Object {
      *
      * @return	bool
      */
-    protected function _smtp_authenticate() {
-        if (!$this->_smtp_auth) {
+    protected function smtpAuthenticate() {
+        if (!$this->smtpAuth) {
             return TRUE;
         }
 
-        if ($this->smtp_user === '' && $this->smtp_pass === '') {
-            $this->_set_error_message('lang:email_no_smtp_unpw');
+        if ($this->smtpUser === '' && $this->smtpPass === '') {
+            $this->setError('lang:email_no_smtp_unpw');
             return FALSE;
         }
 
-        $this->_send_data('AUTH LOGIN');
+        $this->sendData('AUTH LOGIN');
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->getSmtpData();
 
         if (strpos($reply, '503') === 0) { // Already authenticated
             return TRUE;
         } elseif (strpos($reply, '334') !== 0) {
-            $this->_set_error_message('lang:email_failed_smtp_login', $reply);
+            $this->setError('lang:email_failed_smtp_login', $reply);
             return FALSE;
         }
 
-        $this->_send_data(base64_encode($this->smtp_user));
+        $this->sendData(base64_encode($this->smtpUser));
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->getSmtpData();
 
         if (strpos($reply, '334') !== 0) {
-            $this->_set_error_message('lang:email_smtp_auth_un', $reply);
+            $this->setError('lang:email_smtp_auth_un', $reply);
             return FALSE;
         }
 
-        $this->_send_data(base64_encode($this->smtp_pass));
+        $this->sendData(base64_encode($this->smtpPass));
 
-        $reply = $this->_get_smtp_data();
+        $reply = $this->getSmtpData();
 
         if (strpos($reply, '235') !== 0) {
-            $this->_set_error_message('lang:email_smtp_auth_pw', $reply);
+            $this->setError('lang:email_smtp_auth_pw', $reply);
             return FALSE;
         }
 
@@ -1836,9 +1745,9 @@ final class Mailer extends Library\Object {
      * @param	string	$data
      * @return	bool
      */
-    protected function _send_data($data) {
-        if (!fwrite($this->_smtp_connect, $data . $this->newline)) {
-            $this->_set_error_message('lang:email_smtp_data_failure', $data);
+    protected function sendData($data) {
+        if (!fwrite($this->smtpConnect, $data . $this->newline)) {
+            $this->setError('lang:email_smtp_data_failure', $data);
             return FALSE;
         }
 
@@ -1852,10 +1761,10 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _get_smtp_data() {
+    protected function getSmtpData() {
         $data = '';
 
-        while ($str = fgets($this->_smtp_connect, 512)) {
+        while ($str = fgets($this->smtpConnect, 512)) {
             $data .= $str;
 
             if ($str[3] === ' ') {
@@ -1873,68 +1782,10 @@ final class Mailer extends Library\Object {
      *
      * @return	string
      */
-    protected function _get_hostname() {
+    protected function getHostname() {
         return isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost.localdomain';
     }
 
-    // --------------------------------------------------------------------
-
-    /**
-     * Get Debug Message
-     *
-     * @param	array	$include	List of raw data chunks to include in the output
-     * 					Valid options are: 'headers', 'subject', 'body'
-     * @return	string
-     */
-    public function print_debugger($include = array('headers', 'subject', 'body')) {
-        $msg = '';
-
-        if (count($this->_debug_msg) > 0) {
-            foreach ($this->_debug_msg as $val) {
-                $msg .= $val;
-            }
-        }
-
-        // Determine which parts of our raw data needs to be printed
-        $raw_data = '';
-        is_array($include) OR $include = array($include);
-
-        if (in_array('headers', $include, TRUE)) {
-            $raw_data = $this->_header_str . "\n";
-        }
-
-        if (in_array('subject', $include, TRUE)) {
-            $raw_data .= htmlspecialchars($this->_subject) . "\n";
-        }
-
-        if (in_array('body', $include, TRUE)) {
-            $raw_data .= htmlspecialchars($this->_finalbody);
-        }
-
-        return $msg . ($raw_data === '' ? '' : '<pre>' . $raw_data . '</pre>');
-    }
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Set Message
-     *
-     * @param	string	$msg
-     * @param	string	$val = ''
-     * @return	void
-     */
-    protected function _set_error_message($msg, $val = '') {
-        $CI = & get_instance();
-        $CI->lang->load('email');
-
-        if (sscanf($msg, 'lang:%s', $line) !== 1 OR FALSE === ($line = $CI->lang->line($line))) {
-            $this->_debug_msg[] = str_replace('%s', $val, $msg) . '<br />';
-        } else {
-            $this->_debug_msg[] = str_replace('%s', $val, $line) . '<br />';
-        }
-    }
-
-    // --------------------------------------------------------------------
 
     /**
      * Mime Types
@@ -1942,18 +1793,13 @@ final class Mailer extends Library\Object {
      * @param	string
      * @return	string
      */
-    protected function _mime_types($ext = '') {
+    protected function mimeTypes($ext = '') {
+       
         static $mimes;
 
-        $ext = strtolower($ext);
-
-        if (!is_array($mimes)) {
-            $mimes = & get_mimes();
-        }
-
-        if (isset($mimes[$ext])) {
-            return is_array($mimes[$ext]) ? current($mimes[$ext]) : $mimes[$ext];
-        }
+        /**
+         * needs to rework this app based on attachments.ini mime types;
+         */
 
         return 'application/x-unknown-content-type';
     }
