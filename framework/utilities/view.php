@@ -40,11 +40,26 @@ abstract class View extends \Library\Object {
         $this->output = \Library\Output::getInstance();              
         $authenticated  = \Platform\User::getAuthenticated();
         
-        
-        
         $this->output->set("authenticated", $authenticated );
         
         //Navigator::menu();
+    }
+    
+    /**
+     * Generates html output for the email
+     * @param type $subject
+     * @param type $body
+     * @param type $vars
+     */
+    final public function email($subject, $body, $vars = array()){
+        
+        $email = array_merge( array(
+            "subject" => $subject,
+            "body"  =>$body
+        ), $vars );
+        
+        $template = $this->output->layout('email');
+              
     }
 
     /**
