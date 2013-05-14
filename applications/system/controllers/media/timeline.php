@@ -109,20 +109,20 @@ class Timeline extends System\Media {
         $post = $this->output->layout("media/item");
         $this->output->addToPosition("body", $post);
 
-        $this->load->view("media")->display();
+        $this->load->view("index")->display();
     }
 
     /**
      * Lists all published activities within this timeline;
      * @return void; 
      */
-    public function index() {
+    public function index( $display = true) {
         
         //$_SESSION['somevalue'] = 'This is a value';
         
         $this->output->setPageTitle(_("Timeline"));
         //Get the view;
-        $view = $this->load->view('media');
+        $view = $this->load->view('index');
         $user = \Platform\User::getInstance();
         $model = $this->load->model('media');
 
@@ -138,7 +138,7 @@ class Timeline extends System\Media {
         $this->output->addToPosition("dashboard", $timeline);
         //$this->output->addToPosition("aside", $timelineside );
 
-        $view->display(); //sample call;        
+        if($display) $view->display(); //sample call;        
         //$this->output();
     }
 

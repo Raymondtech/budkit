@@ -46,7 +46,7 @@ final class Mailer extends Library\Object {
      *
      * @var	string
      */
-    public $useragent = 'CodeIgniter';
+    public $useragent = 'BudKit';
 
     /**
      * Path to the Sendmail binary.
@@ -95,7 +95,7 @@ final class Mailer extends Library\Object {
      *
      * @var	int
      */
-    public $smtpTimeout = 5;
+    public $smtpTimeout = 30;
 
     /**
      * SMTP persistent connection
@@ -377,9 +377,43 @@ final class Mailer extends Library\Object {
     public function __construct($config = array()) {
 
         $this->config = \Library\Config::getInstance();
-        //Set the default settings;
-        $this->charset = strtoupper($this->charset);
+        $params = array(
+            "protocol" => $this->config->getParam('outgoing-mail-handler','sendmail','server'),
+            "smtpHost" => $this->config->getParam('outgoing-mail-server','','server'),
+            "smtpUser" => $this->config->getParam('outgoing-mail-server-username','','server'),
+            "smtpPass" => $this->config->getParam('outgoing-mail-server-password','','server'),
+            "smtpPort" => $this->config->getParam('outgoing-mail-server-port',25,'server'),
+            "smtpCrypto" => $this->config->getParam('outgoing-mail-server-security','','server'),
+        );
         
+        $siteEmail = $this->config->getParam('outgoing-mail-address','','server');
+        $siteName = $this->config->getParam('site-name', $this->useragent);
+        //Set the defaut from field
+        $this->from($siteEmail, $siteName);
+        
+        $config = array_merge($params, $config);
+        $this->initialize( $config );
+        $this->charset = strtoupper($this->charset);
+    }
+
+    public function initialize($config) {
+        //Set the default settings;
+        foreach ($config as $key => $val) {
+            if (isset($this->$key)) {
+                $method = 'set' . ucfirst($key);
+                if (method_exists($this, $method)) {
+                    $this->$method($val);
+                } else {
+                    $this->$key = $val;
+                }
+            }
+        }
+        $this->clear();
+
+        $this->smtpAuth = !($this->smtpUser === '' && $this->smtpPass === '');
+   
+        
+        return $this;
     }
 
     // --------------------------------------------------------------------
@@ -1455,8 +1489,8 @@ final class Mailer extends Library\Object {
      */
     protected function spoolEmail() {
         $this->unwrapSpecials();
-        $protocol   = $this->getProtocol();
-        $method     = 'sendWith' . ucfirst( $protocol );
+        $protocol = $this->getProtocol();
+        $method = 'sendWith' . ucfirst($protocol);
         if (!$this->$method()) {
             $this->setError('Could not send the message with ' . ($this->getProtocol() === 'mail' ? 'phpmail' : $this->getProtocol()));
             return FALSE;
@@ -1587,31 +1621,34 @@ final class Mailer extends Library\Object {
         if (is_resource($this->smtpConnect)) {
             return TRUE;
         }
-
-        $ssl = ($this->smtpCrypto === 'ssl') ? 'ssl://' : '';
-
-        $this->smtpConnect = fsockopen($ssl . $this->smtpHost, $this->smtpPort, $errno, $errstr, $this->smtpTimeout);
-
+        $scheme = ($this->smtpCrypto === 'ssl') ? 'ssl://' : (($this->smtpCrypto === 'tls') ? 'tsl://' : null);
+        $port   = ($this->smtpPort > 0)? ":{$this->smtpPort}" : '';
+        $errNo  = PLATFORM_ERROR;
+        $errStr = "Could not connect to {$this->smtpHost}"; 
+        $socket = $scheme . $this->smtpHost.$port;
+        
+        $this->smtpConnect = stream_socket_client ($socket, $errNo, $errStr, $this->smtpTimeout);
+        
+        
         if (!is_resource($this->smtpConnect)) {
-            $this->setError('lang:email_smtp_error', $errno . ' ' . $errstr);
+            $this->setError('lang:email_smtp_error');
             return FALSE;
         }
-
+                
         stream_set_timeout($this->smtpConnect, $this->smtpTimeout);
-
-
+        
         if ($this->smtpCrypto === 'tls') {
             $this->sendCommand('hello');
             $this->sendCommand('starttls');
 
             $crypto = stream_socket_enable_crypto($this->smtpConnect, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT);
-
+        
             if ($crypto !== TRUE) {
                 $this->setError('lang:email_smtp_error', $this->getSmtpData());
                 return FALSE;
             }
         }
-
+        
         return $this->sendCommand('hello');
     }
 
@@ -1629,7 +1666,7 @@ final class Mailer extends Library\Object {
             case 'hello' :
 
                 if ($this->smtpAuth OR $this->getEncoding() === '8bit') {
-                    $this->sendData('EHLO ' . $this->getHostname());
+                    $this->sendData('HELO ' . $this->getHostname());
                 } else {
                     $this->sendData('HELO ' . $this->getHostname());
                 }
@@ -1674,8 +1711,7 @@ final class Mailer extends Library\Object {
         }
 
         $reply = $this->getSmtpData();
-
-
+       
         if ((int) substr($reply, 0, 3) !== $resp) {
             $this->setError('lang:email_smtp_error', $reply);
             return FALSE;
@@ -1684,7 +1720,7 @@ final class Mailer extends Library\Object {
         if ($cmd === 'quit') {
             fclose($this->smtpConnect);
         }
-
+        
         return TRUE;
     }
 
@@ -1786,7 +1822,6 @@ final class Mailer extends Library\Object {
         return isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost.localdomain';
     }
 
-
     /**
      * Mime Types
      *
@@ -1794,13 +1829,12 @@ final class Mailer extends Library\Object {
      * @return	string
      */
     protected function mimeTypes($ext = '') {
-       
+
         static $mimes;
 
         /**
          * needs to rework this app based on attachments.ini mime types;
          */
-
         return 'application/x-unknown-content-type';
     }
 

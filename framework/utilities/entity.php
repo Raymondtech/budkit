@@ -504,7 +504,7 @@ class Entity extends Model {
     /**
      * Return an Unique Object with or without attributes attributes
      * 
-     * @param type $objectId
+     * @param type $objectURI
      * @param type $attributes
      */
     public function loadObjectByURI($objectURI, $properties = array()) {

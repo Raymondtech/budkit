@@ -68,43 +68,6 @@ class Profile extends User {
     }
 
     /**
-     * Updates the user profile data
-     * 
-     * @param type $username
-     * @param type $data
-     */
-    public function update($usernameId, $data = array()) {
-
-        if (empty($usernameId))
-            return false;
-        
-        $existing   = (array)$this->getPropertyData();
-        $data       = empty($data)? $existing: array_merge($data, $existing);
-        
-        //Load the username; 
-        $profile = $this->loadObjectByURI($usernameId, array_keys($this->getPropertyModel()));
-        $this->setObjectId($profile->getObjectId());
-        $this->setObjectURI($profile->getObjectURI());
-
-        $profileData = $profile->getPropertyData();
-
-        $updatedProfile = array_merge($profileData, $data);
-        foreach ($updatedProfile as $property => $value):
-            $this->setPropertyValue($property, $value);
-        endforeach;
-        $data = $this->getPropertyData();
-        $this->defineValueGroup("user");
-        //die;
-        if (!$this->saveObject($this->getPropertyValue("user_name_id"), "user", $this->getObjectId())) {
-            //Null because the system can autogenerate an ID for this attachment    
-            $profile->setError("Could not save the profile data");
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Returns an instance of the profile object model
      * 
      * @staticvar object $instance

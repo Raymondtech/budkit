@@ -30,6 +30,11 @@ use \Application\Settings\Controllers as Settings;
 final class Account extends Settings\Member {
 
     
+    public function __construct() {
+        parent::__construct();
+        $this->email = \Platform\Mailer::getInstance();
+    }
+    
     /**
      * Displays the account settings form
      * @return void
@@ -39,14 +44,24 @@ final class Account extends Settings\Member {
         $user = \Platform\User::getInstance();
 
         $view = $this->load->view('member');
-        $profile = $this->load->model('profile', 'member');
-        $profile = $profile->loadObjectByURI( $user->get("user_name_id"), array_keys($profile->getPropertyModel()));
+        $_profile = $this->load->model('profile', 'member');
+        $profile  = $_profile->loadObjectByURI( $user->get("user_name_id"), array_keys($_profile->getPropertyModel()));
 
         $data = $profile->getPropertyData();
 
         //overload user var with profile data
         $this->set("account", $data); //Sets the profile data;
+        
+        $this->email->from('budkit@budkit.org', 'Budkit Social');
+        $this->email->to('livingstonefultang@gmail.com'); 
+        //$this->email->cc('another@another-example.com'); 
+        //$this->email->bcc('them@their-example.com'); 
+        $this->email->setProtocol('sendmail');
+        $this->email->subject('Email Test');
+        $this->email->message('Testing the email class.');	
 
+        $this->email->send();
+        
         
         return $view->form();    
     }
@@ -103,6 +118,20 @@ final class Account extends Settings\Member {
         //7. Browser Messages
         //Return to index
         //return $this->view();
+    }
+    
+    public function resetkey(){
+        
+        $random     = \Platform\Framework::getRandomString(32);
+        $user       = $this->load->model("user", "member");
+ 
+        if(!$user->update($this->user->get('user_name_id') , array("user_api_key"=>$random))){
+            $this->alert($user->getError(),"An Error Occured","error");
+            $this->returnRequest();
+        }   
+        
+        $this->alert("Your API Key has now been changed to {$random}. Keep it Safe","API Key changed","success");  
+        $this->returnRequest();
     }
 
 

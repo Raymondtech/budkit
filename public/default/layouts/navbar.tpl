@@ -4,8 +4,8 @@
             <div class="nav-collapse collapse">
                 <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                     <ul class="nav" id="menubartabs">
-                        <li><a href="/system/start/dashboard">Dashboard</a></li>
-                        <li><a href="/system/media/timeline">Timeline</a></li>   
+                        <li><a href="/system/media/timeline">Timeline</a></li>
+                        <li><a href="/system/media/attachments/gallery">Documents</a></li>   
                         <li><a href="/system/messages/all">Messages</a></li>                                                                              
                         <li><a href="/member/network/directory">People</a></li>     <!--Use  class="highlighted" on new notifications-->
                         <li><a href="/settings/member/account">Settings</a></li> 

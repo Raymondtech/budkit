@@ -264,8 +264,10 @@
                     <label class="control-label" >API  Key</label>
                     <div class="controls">
                         <div class="input-append">
-                            <span class="uneditable-input input-xlarge"></span>
-                            <a href="/reset-api-key" class="add-on btn" title="Reset API Key">Reset</a>
+                            <span class="uneditable-input input-xlarge">
+                                <tpl:element type="text" data="account.user_api_key" />
+                            </span>
+                            <a href="/settings/member/account/resetkey" class="add-on btn" title="Reset API Key">Reset</a>
                         </div>
                         <span class="help-block">Keep it safe. </span>
                     </div>

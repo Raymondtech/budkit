@@ -41,7 +41,15 @@ class Start extends \Platform\Controller {
         $view = $this->load->view('index') ;        
         $this->output->setPageTitle(_("Dashboard"));
 
-        $today = $this->output->layout("start");
+        $user = \Platform\User::getInstance();
+        $model = $this->load->model('media');
+
+        $activities = $model->setListLookUpConditions("media_target", "")->getAll();
+        $model->setPagination(); //Set the pagination vars
+
+        $this->set("activities", $activities);
+        //$this->set("user", $user);
+        $today = $this->output->layout("timeline");
         
         $this->output->addToPosition("dashboard", $today);
         $this->load->view("index")->display();      

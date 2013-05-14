@@ -175,7 +175,7 @@ class Element extends Parse\Template {
                 preg_match_all('/(?<!"|a>)((http|https|ftp|ftps)\:\/\/)([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-zA-Z0-9\-\.]+)\.([a-zA-Z]{2,3})(\:[0-9]{2,5})?(\/([a-zA-Z0-9+\$_-]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/', $data, $openLinks);
                 $searches = array_merge($mentions[0], $hashTags[0], $openLinks[0]);
                 $fMentions = array_map(function($uri, $title){
-                    $profile = Library\Uri::internal("/member/profile/{$uri}");
+                    $profile = Library\Uri::internal("/member:{$uri}/profile/timeline");
                     return "<a class=\"mention\" href=\"{$profile}\">{$title}</a>";
                 }, $mentions[1], $mentions[0]);
                 $fHashTags = array_map(function($uri, $title){

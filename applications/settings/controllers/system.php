@@ -84,8 +84,8 @@ class System extends \Platform\Controller {
             return false;
         }
         //Report on state saved
-        $this->alert("Your configuration settings have now been saved", "Everthing worked", "success");
-        $this->redirect($referer); //Redirect back to the page sending in the data;
+        $this->alert("Your configuration settings have now been saved", "All systems go", "success");
+        $this->returnRequest(); //Redirect back to the page sending in the data;
 
         return true;
     }

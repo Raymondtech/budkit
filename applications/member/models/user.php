@@ -29,31 +29,68 @@ namespace Application\Member\Models;
  * 
  */
 class User extends \Platform\Entity {
-  
-          
-    public function __construct() {       
-        parent::__construct();        
+
+    public function __construct() {
+        parent::__construct();
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
-        $this->extendPropertyModel( 
-            array(
-                "user_first_name"    =>array("First Name", "mediumtext", 50),
-                "user_middle_name"   =>array("Middle Name", "mediumtext", 50),
-                "user_last_name"     =>array("Last Name", "mediumtext", 50),
-                "user_name_id"       =>array("Username", "mediumtext", 50),
-                "user_password"      =>array("Password", "varchar", 2000),
-                "user_api_key"       =>array("API Key", "varchar", 100),
-                "user_email"         =>array("Email", "varchar", 100),
-                "user_dob_day"       =>array("Day of Birth", "varchar", 10),
-                "user_dob_month"     =>array("Month of Birth", "varchar", 10),
-                "user_dob_year"      =>array("Year of Birth", "varchar", 10),
-                "user_timezone"      =>array("Timezone", "varchar", 10),
-                "user_locale"        =>array("Locale", "varchar", 10)
-            ),
-            "user"
+        $this->extendPropertyModel(
+                array(
+            "user_first_name" => array("First Name", "mediumtext", 50),
+            "user_middle_name" => array("Middle Name", "mediumtext", 50),
+            "user_last_name" => array("Last Name", "mediumtext", 50),
+            "user_name_id" => array("Username", "mediumtext", 50),
+            "user_password" => array("Password", "varchar", 2000),
+            "user_api_key" => array("API Key", "varchar", 100),
+            "user_email" => array("Email", "varchar", 100),
+            "user_dob_day" => array("Day of Birth", "varchar", 10),
+            "user_dob_month" => array("Month of Birth", "varchar", 10),
+            "user_dob_year" => array("Year of Birth", "varchar", 10),
+            "user_timezone" => array("Timezone", "varchar", 10),
+            "user_locale" => array("Locale", "varchar", 10),
+                    "user_verification"=> array("Verification Code", "varchar", 50)
+                ), "user"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models
-         $this->defineValueGroup("user"); //Tell the system we are using a proxy table
+        $this->defineValueGroup("user"); //Tell the system we are using a proxy table
     }
+
+    /**
+     * Updates the user profile data
+     * 
+     * @param type $username
+     * @param type $data
+     */
+    public function update($usernameId, $data = array()) {
+
+        if (empty($usernameId))
+            return false;
+
+        $existing = (array) $this->getPropertyData();
+        $data = empty($data) ? $existing : array_merge($data, $existing);
+
+        //Load the username; 
+        $profile = $this->loadObjectByURI($usernameId, array_keys($this->getPropertyModel()));
+        $this->setObjectId($profile->getObjectId());
+        $this->setObjectURI($profile->getObjectURI());
+
+        $profileData = $profile->getPropertyData();
+
+        $updatedProfile = array_merge($profileData, $data);
+        foreach ($updatedProfile as $property => $value):
+            $this->setPropertyValue($property, $value);
+        endforeach;
+        $data = $this->getPropertyData();
+        $this->defineValueGroup("user");
+        //die;
+        if (!$this->saveObject($this->getPropertyValue("user_name_id"), "user", $this->getObjectId())) {
+            //Null because the system can autogenerate an ID for this attachment    
+            $profile->setError("Could not save the profile data");
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Store the user data in the database
      * 
@@ -61,65 +98,71 @@ class User extends \Platform\Entity {
      * @return boolean
      * @throws \Platform\Exception 
      */
-    public function store( $data ){
-        
-        $encrypt    = \Library\Encrypt::getInstance();
-        $authority  = $this->config->getParam( "site-default-authority", NULL );
-        
-        $data['user_password']   = $encrypt->hash( $data['user_password'] ); 
-        
-        foreach($data as $property=>$value):
+    public function store($data) {
+
+        $encrypt = \Library\Encrypt::getInstance();
+        $authority = $this->config->getParam("site-default-authority", NULL);
+
+        $data['user_password'] = $encrypt->hash($data['user_password']);
+
+        foreach ($data as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
-        
-        if(!$this->saveObject($this->getPropertyValue("user_name_id"), "user")){
+
+        if (!$this->saveObject($this->getPropertyValue("user_name_id"), "user")) {
             //There is a problem!
             return false;
-        }     
+        }
         //Default Permission Group?
-        if(!empty($authority)){
-            $query = "INSERT INTO ?objects_authority( authority_id, object_id ) SELECT {$this->database->quote((int)$authority)}, object_id FROM ?objects WHERE object_uri={$this->database->quote($this->getPropertyValue("user_name_id"))}";
+        if (!empty($authority)) {
+            $query = "INSERT INTO ?objects_authority( authority_id, object_id ) SELECT {$this->database->quote((int) $authority)}, object_id FROM ?objects WHERE object_uri={$this->database->quote($this->getPropertyValue("user_name_id"))}";
             $this->database->exec($query);
         }
-        
-        
+
+
         return true;
     }
-    
+
     /**
      * Returns a user datastore row
      * @todo User EAV model load
      * @return void
      */
-    public function load(){}
-    
+    public function load() {
+        
+    }
+
     /**
      * Deletes a user record from the datastore
      * @todo User delete
      * @return void
      */
-    public function delete(){}
-    
+    public function delete() {
+        
+    }
+
     /**
      * Validates user data before store
      * @todo User data validate
      * @return void
      */
-    public function validate(){}
-    
+    public function validate() {
+        
+    }
+
     /**
      * Returns an instance of the user EAV model
      * @staticvar object $instance
      * @return object User
      */
-    public static function getInstance(){     
-        static $instance;      
+    public static function getInstance() {
+        static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
-        $instance =  new self();
+        if (isset($instance))
+            return $instance;
+        $instance = new self();
         return $instance;
     }
-    
-}
 
+}
 

@@ -36,9 +36,9 @@ class Menu extends \Platform\Model {
      * @param type $menuItems
      */
     public static function media(&$menuId, &$menuItems) {
-        
-        $user       = \Platform\User::getInstance();
-        $username   = $user->get("user_name_id");
+
+        $user = \Platform\User::getInstance();
+        $username = $user->get("user_name_id");
 
         //Add the default upload links
         switch ($menuId):
@@ -46,18 +46,18 @@ class Menu extends \Platform\Model {
                 //Counts
                 $attachments = Attachments::getInstance();
                 $mycount = $attachments->setListLookUpConditions("attachment_owner", $username)->getObjectsListCount("attachment");
-                
-                if(empty($mycount)) $mycount = NULL;
+
+                if (empty($mycount))
+                    $mycount = NULL;
                 //Add items to the profile menu;
                 array_unshift($menuItems, array(
                     "menu_title" => "Content",
                     "children" => array(
-                        array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"),
-                        array("menu_title" => "Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count"=>$mycount),
-                //        array("menu_title" => "Shared with me", "menu_url" => "/system/media/attachments/shared"),
+                        array("menu_title" => "Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount),
+                    //        array("menu_title" => "Shared with me", "menu_url" => "/system/media/attachments/shared"),
                     // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
                     )
-                        ));
+                ));
 //                , array(
 //                    "menu_title" => "Add New",
 //                    "children" => array(
@@ -67,6 +67,13 @@ class Menu extends \Platform\Model {
 //                    // array("menu_title" => "Snap", "menu_url" => "/system/media/create/snap")
 //                    )
 //                )
+                break;
+            case "dashboardmenu":
+                $startHere =& reset($menuItems);
+                //Add Timeline;
+                array_unshift($startHere['children'], array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"));
+                array_shift($menuItems);
+                array_unshift($menuItems, $startHere);
                 break;
         endswitch;
     }
@@ -92,5 +99,6 @@ class Menu extends \Platform\Model {
         $instance = new self();
         return $instance;
     }
+
 }
 

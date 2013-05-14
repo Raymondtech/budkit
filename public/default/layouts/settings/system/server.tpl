@@ -4,7 +4,7 @@
             <div class="control-group">
                 <label class="control-label" for="options[server][outgoing-mail-handler]">Mail Handler</label>
                 <div class="controls">
-                    <tpl:select name="options[server][mail-handler]" class="input-xlarge" value="config|server.mail-handler">
+                    <tpl:select name="options[server][outgoing-mail-handler]" class="input-xlarge" value="config|server.outgoing-mail-handler">
                         <option value="phpmail">PHP Mail</option>
                         <option value="sendmail">Send Mail</option>
                         <option value="smtp">SMTP</option>
@@ -35,9 +35,9 @@
                 <label class="control-label" for="options[server][outgoing-mail-server-security]">Mail Security</label>
                 <div class="controls">
                     <select name="options[server][outgoing-mail-server-security]"  value="config|server.outgoing-mail-server-security">
-                        <option value="none">None</option>
+                        <option value="">None</option>
                         <option value="ssl">SSL</option>
-                        <option value="tsl">TSL</option>
+                        <option value="tls">TLS</option>
                     </select>
                 </div>
             </div>

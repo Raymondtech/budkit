@@ -49,7 +49,7 @@ final class Notifications extends Settings\Member {
         $this->email->subject('Budkit test notification mail');
         $this->email->message('This is a test notification email, Just to make sure we can send out emails too');	
 
-        //$this->email->send();
+        $this->email->send();
         
         return $view->form("member/notifications", "Notificaiton settings");
     }

@@ -52,7 +52,7 @@ class Menu extends \Platform\Model {
             array_push($menuItems, array(
                 "menu_title" => "Workspace",
                 "children" => array(
-                    array("menu_title" => "Timeline", "menu_url" => "/campus/workspace/timeline"),
+                //    array("menu_title" => "Timeline", "menu_url" => "/campus/workspace/timeline"),
                     array("menu_title" => "Projects", "menu_url" => "/campus/workspace/project", "menu_count" => 7),
                     array("menu_title" => "Calendar", "menu_url" => "/campus/workspace/calendar"),
                     array("menu_title" => "Documents", "menu_url" => "/campus/workspace/documents"),

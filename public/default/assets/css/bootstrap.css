@@ -657,6 +657,7 @@ a:focus {
   *width: 195px;
   float: left;
   overflow-y: auto;
+  overflow-x: hidden;
   background: #2f2f2f;
   position: absolute;
   bottom: 0px ;
@@ -6567,6 +6568,9 @@ a.badge:focus {
 .padding-quarter {
   padding: 5px;
 }
+.padding-left {
+  padding-left: 20px;
+}
 .padding-left-half {
   padding-left: 10px;
 }
@@ -6590,6 +6594,9 @@ a.badge:focus {
 }
 .padding-right {
   padding-right: 20px;
+}
+.padding-bottom {
+  padding-bottom: 20px;
 }
 .padding-top-zero {
   padding-top: 0 !important;

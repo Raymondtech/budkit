@@ -34,12 +34,13 @@
                             <div class="container-fluid">
                                 <div class="container">
                                     <div class="container-startup signin">
-                                        <div class="startup-alternatives">
-
-                                            <ul class="unstyled no-margin no-bottom-margin">
-                                                <li><a href="/system/authenticate/create">Don't have an account?</a></li>
-                                            </ul>
-                                        </div>
+                                        <tpl:condition test="boolean" data="config|general.site-allow-registration" value="1">
+                                            <div class="startup-alternatives">
+                                                <ul class="unstyled no-margin no-bottom-margin">
+                                                    <li><a href="/system/authenticate/create">Don't have an account?</a></li>
+                                                </ul>
+                                            </div>
+                                        </tpl:condition>
                                         <div class="startup-body"> 
                                             <form id="form" name="login_form" method="post" action="/system/authenticate/login">  
                                                 <div class="control-group">
