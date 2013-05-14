@@ -198,11 +198,12 @@ final class Schema extends Platform\Model {
                 (32, 79, 'Localization', '/settings/system/localization', '', 20, 2, 'link', '', 5,12, 1),
                 (30, 79, 'Emails', '/settings/system/emails', '', 20, 2, 'link', '', 7, 10, 1),
                 (25, 79, 'Maintenance', '/settings/system/maintenance', '', 20, 2, 'link', '', 8, 9, 1),
-                (84, 0, 'Published', '', '', 19, 1, 'link', '', 1, 12, 1),
-                (86, 84, 'Photos', '/system/media/photo/gallery', NULL, 0, 1, 'link', NULL, 3, 10, 1),
-                (87, 84, 'Audio', '/system/media/audio/gallery', NULL, 0, 1, 'link', NULL, 4, 9, 1),
-                (88, 84, 'Videos', '/system/media/video/gallery', NULL, 0, 1, 'link', NULL, 5, 8, 1),
-                (89, 84, 'Articles', '/system/media/article/gallery', '', 23, 1, 'link', '', 6, 7, 1),
+                (84, 0, 'Content Types', '', '', 19, 1, 'link', '', 1, 13, 1),
+                (85, 84, 'Photos', '/system/media/photo/gallery', NULL, 0, 1, 'link', NULL, 3, 12, 1),
+                (86, 84, 'Audio', '/system/media/audio/gallery', NULL, 0, 1, 'link', NULL, 4, 11, 1),
+                (87, 84, 'Videos', '/system/media/video/gallery', NULL, 0, 1, 'link', NULL, 5, 10, 1),
+                (88, 84, 'Text', '/system/media/text/gallery', '', 23, 1, 'link', '', 6, 9, 1),
+                (89, 84, 'Other', '/system/media/rich/gallery', '', 24, 1, 'link', '', 6, 8, 1),
                 (90, 0, 'Network', '', NULL, 0, 6, 'link', NULL, 1, 12, 1);"
         );
     }

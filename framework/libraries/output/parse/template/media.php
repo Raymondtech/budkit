@@ -56,15 +56,23 @@ class Media extends Parse\Template {
 
     private static function tag($media, $tag = NULL) {
 
+        $config = \Library\Config::getInstance();
+
+        static::$images = $config->getParam("image", static::$images, "attachments");
+        static::$videos = $config->getParam("video", static::$videos, "attachments");
+        static::$audio = $config->getParam("audio", static::$audio, "attachments");
+        //static::$rich  = $config->getParam( "application", static::$rich, "attachments");
+
+
         $tag = empty($tag) ? array() : $tag;
         //Media must be a platform entity object
         //if(!is_a($media, '\Platform\Entity')) return null;
         //$attachmentTypes = \Library\Config::getParam("allowed-types", array(), "attachments");
         $name = $media->getPropertyValue("attachment_name");
         $type = $media->getPropertyValue("attachment_type");
-        $uri    = $media->getObjectURI();
-        $url    = "/system/object/" . $uri;
-        
+        $uri = $media->getObjectURI();
+        $url = "/system/object/" . $uri;
+
         $mode = isset($tag['MODE']) ? $tag['MODE'] : "thumbnail"; //thumbnail, icon etc...
         $link = isset($tag['LINK']) ? TRUE : FALSE;
 
@@ -133,14 +141,14 @@ class Media extends Parse\Template {
                     $videoLink = \Library\Uri::internal("/system/object/" . $uri);
                     $video = array(
                         "ELEMENT" => "video",
+                        "WIDTH" => !empty($width) ? $width : 100,
+                        "HEIGHT" => !empty($height) ? $height : 100,
                         "CONTROLS" => "true",
-                        "WIDTH" => !empty($width) ? $width : null,
-                        "HEIGHT" => !empty($height) ? $height : null,
                         "CHILDREN" => array(
                             array(
                                 "ELEMENT" => "SOURCE",
                                 "SRC" => $videoLink,
-                                "TYPE" => $mime,
+                                "TYPE" => $mime
                             )
                         )
                     );
@@ -150,6 +158,24 @@ class Media extends Parse\Template {
                         unset($video['HEIGHT']);
                     $tag = $video;
                 endif;
+
+                if (in_array($mime, static::$audio) && !empty($uri)):
+
+                    $audioLink = \Library\Uri::internal("/system/object/" . $uri);
+                    $audio = array(
+                        "ELEMENT" => "audio",
+                        "CONTROLS" => "true",
+                        "CHILDREN" => array(
+                            array(
+                                "ELEMENT" => "SOURCE",
+                                "SRC" => $audioLink,
+                                "TYPE" => $mime
+                            )
+                        )
+                    );
+                    $tag = $audio;
+                endif;
+
             endif;
             unset($tag['WIDTH']);
             unset($tag['HEIGHT']);
@@ -180,25 +206,25 @@ class Media extends Parse\Template {
         $collectionModel = \Application\System\Models\Collection::getInstance();
 
         //@TODO media thumbnail mode
-        if (!isset($tag['URI'])&&empty($tag['URI']))
+        if (!isset($tag['URI']) && empty($tag['URI']))
             return null;
         $uri = static::getData($tag['URI'], $tag['URI']);
 
-        $mediaObject = $attachmentModel->loadObjectByURI( $uri );
+        $mediaObject = $attachmentModel->loadObjectByURI($uri);
         $type = $mediaObject->getObjectType();
-        
+
         if ($type !== "attachment"):
             //1.Load the collection!
-            $collection = $collectionModel->loadObjectByURI( $uri );
+            $collection = $collectionModel->loadObjectByURI($uri);
             //Now lets populate our collection with Items
             $collectionItems = $collection->getPropertyValue("collection_items");
             $collectionItemize = explode(",", $collectionItems);
             if (is_array($collectionItemize) && !empty($collectionItemize)):
-                $ul   = array("ELEMENT"=>"ul", "CLASS"=>"media-grid compensate-margins bottom-media clearfix") ;
+                $ul = array("ELEMENT" => "ul", "CLASS" => "media-grid compensate-margins bottom-media clearfix");
                 $tag['WIDTH'] = \Library\Config::getParam('gallery-thumbnail-width', 170, 'content');
                 $tag['HEIGHT'] = \Library\Config::getParam('gallery-thumbnail-height', 170, 'content');
                 foreach ($collectionItemize as $item) {
-                    $li = array("ELEMENT"=>"li","CHILDREN"=>static::tag( $attachmentModel->loadObjectByURI($item) , $tag));
+                    $li = array("ELEMENT" => "li", "CHILDREN" => static::tag($attachmentModel->loadObjectByURI($item), $tag));
                     $ul["CHILDREN"][] = $li;
                 }
                 //Lots of child elements;

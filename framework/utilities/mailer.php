@@ -386,14 +386,16 @@ final class Mailer extends Library\Object {
             "smtpCrypto" => $this->config->getParam('outgoing-mail-server-security','','server'),
         );
         
-        $siteEmail = $this->config->getParam('outgoing-mail-address','','server');
-        $siteName = $this->config->getParam('site-name', $this->useragent);
-        //Set the defaut from field
-        $this->from($siteEmail, $siteName);
-        
         $config = array_merge($params, $config);
         $this->initialize( $config );
         $this->charset = strtoupper($this->charset);
+        
+                
+        $siteEmail = $this->config->getParam('outgoing-mail-address','','server');
+        $siteName = $this->config->getParam('site-name', $this->useragent);
+        
+        //Set the defaut from field
+        $this->from($siteEmail, $siteName);
     }
 
     public function initialize($config) {

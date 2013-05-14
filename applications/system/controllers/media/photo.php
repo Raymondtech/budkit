@@ -35,34 +35,6 @@ use Application\System\Controllers as System;
 final class Photo extends System\Media {
 
     /**
-     * Displays the form required to creates a new photo. 
-     * @todo    Implement the create photo action method
-     * @return  \Application\System\Views\Media\Photo::createForm()
-     */
-    public function create() {
-        $view = $this->load->view('photo');
-        return $view->createform();
-    }
-
-    /**
-     * Updates an existing photo.
-     * @todo    Implement the photo update action method
-     * @return  void
-     */
-    public function update() {
-        
-    }
-
-    /**
-     * Edits an existing photo.
-     * @todo    Implement the photo edit action method
-     * @return  void
-     */
-    public function edit() {
-        
-    }
-
-    /**
      * Displays a gallery of media items. 
      * @return void
      */
@@ -70,20 +42,32 @@ final class Photo extends System\Media {
 
         $this->output->setPageTitle(_("Photos"));
 
-        $today = $this->output->layout("media/gallery");
-        $this->output->addToPosition("dashboard", $today);
+        $model = $this->load->model("attachments", "system");
+        $images = $this->config->getParam( "image", array(), "attachments");
+        
+        $attachments = $model
+                ->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListLookUpConditions("attachment_type", $images) //Limits the lookup to attachments with image types
+                ->setListOrderBy("o.object_created_on", "DESC")
+                ->getObjectsList("attachment");
+        $model->setPagination(); //Set the pagination vars
+        
+        $items = array("totalItems" => 0);
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $attachments->fetchAssoc()) {
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+            $items["totalItems"]++;
+        }
+        if ((int)$items["totalItems"] > 0)
+            $this->set("gallery", $items);
+
+        $gallery = $this->output->layout("media/gallery");
+        $this->output->addToPosition("dashboard", $gallery);
 
 
         $this->load->view("media")->display();
-    }
-
-    /**
-     * Deletes an existing photo.
-     * @todo    Implement the photo delete action method
-     * @return  void
-     */
-    public function delete() {
-        
     }
 
     /**

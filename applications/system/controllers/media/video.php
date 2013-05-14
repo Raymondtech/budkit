@@ -14,7 +14,9 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\System\Controllers\Media;
+
 use Application\System\Controllers as System;
 
 /**
@@ -31,71 +33,43 @@ use Application\System\Controllers as System;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
 final class Video extends System\Media {
-    /**
-     * The default fallback method. 
-     * @return Video::read()
-     */
-    public function index() {
-        return $this->read();
-    }   
-    /**
-     * Displays the form required to creates a new video. 
-     * @todo    Implement the create action method
-     * @return  \Application\System\Views\Media\Video::createForm()
-     */
-    public function create() {            
-        $view = $this->load->view('media\video');        
-        //get passparams
-        $params     = func_get_args();
-        $fullscreen = false;
-        return $view->createForm( $fullscreen );  
-    }  
-    
-    
+
     /**
      * Displays a gallery of media items. 
      * @return void
      */
     public function gallery() {
-        
-        $this->output->setPageTitle(_("Videos"));
 
-        $today = $this->output->layout("media/gallery");
-        $this->output->addToPosition("dashboard", $today);
-        
-        
-        $this->load->view("media")->display();   
+        $this->output->setPageTitle(_("Video Documents"));
+
+        $model = $this->load->model("attachments", "system");
+        $video = $this->config->getParam("video", array(), "attachments");
+
+        $attachments = $model
+                ->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListLookUpConditions("attachment_type", $video) //Limits the lookup to attachments with image types
+                ->setListOrderBy("o.object_created_on", "DESC")
+                ->getObjectsList("attachment");
+        $model->setPagination(); //Set the pagination vars
+
+        $items = array("totalItems" => 0);
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $attachments->fetchAssoc()) {
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+            $items["totalItems"]++;
+        }
+        if ((int) $items["totalItems"] > 0)
+            $this->set("gallery", $items);
+
+        $gallery = $this->output->layout("media/gallery");
+        $this->output->addToPosition("dashboard", $gallery);
+
+
+        $this->load->view("media")->display();
     }
-    
-    
-    /**
-     * Updates an existing video.
-     * @todo    Implement the video update action method
-     * @return  void
-     */
-    public function update() {}  
-    /**
-     * Edits an existing video.
-     * @todo    Implement the video edit action method
-     * @return  void
-     */
-    public function edit(){   
-        echo "editing Applications";       
-    }
-    /**
-     * Displays an video.
-     * @todo    Implement the video read action method
-     * @return  void
-     */
-    public function read() {
-         $view = $this->load->view('media\video');
-    }
-    /**
-     * Deletes an existing video.
-     * @todo    Implement the video delete action method
-     * @return  void
-     */
-    public function delete(){}   
+
     /**
      * Returns an instance of the video controller, only creating one if does not
      * exists
@@ -110,4 +84,5 @@ final class Video extends System\Media {
         $instance = new self;
         return $instance;
     }
+
 }

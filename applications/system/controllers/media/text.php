@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * article.php
+ * text.php
  *
  * Requires PHP version 5.4
  *
@@ -30,24 +30,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Article extends System\Media {
-    /**
-     * The default fallback method. 
-     * @return Article::read()
-     */
-    public function index() {
-        return $this->read();
-    }   
-    /**
-     * Displays the form required to creates a new article. 
-     * @todo    Implement the create action method
-     * @return  \Application\System\Views\Media\Article::createForm()
-     */
-    public function create() {     
-         
- 
-    }  
-    
+final class Text extends System\Media {
         
     
     /**
@@ -55,45 +38,36 @@ final class Article extends System\Media {
      * @return void
      */
     public function gallery() {
-        
-        $view       = $this->load->view('media');
-        $gallery    = $this->output->layout("media/gallery");
 
-        $this->output->setPageTitle( _("Articles") );
-        $this->output->addToPosition("dashboard", $gallery);
+        $this->output->setPageTitle(_("Text Documents"));
+
+        $model = $this->load->model("attachments", "system");
+        $text = $this->config->getParam( "text", array(), "attachments");
         
-        $view->display(); //sample call;   
-        //$this->output->addToPosition("right", $right );
+        $attachments = $model
+                ->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListLookUpConditions("attachment_type", $text) //Limits the lookup to attachments with image types
+                ->setListOrderBy("o.object_created_on", "DESC")
+                ->getObjectsList("attachment");
+        $model->setPagination(); //Set the pagination vars
+        
+        $items = array("totalItems" => 0);
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $attachments->fetchAssoc()) {
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+            $items["totalItems"]++;
+        }
+        if ((int)$items["totalItems"] > 0)
+            $this->set("gallery", $items);
+
+        $gallery = $this->output->layout("media/gallery");
+        $this->output->addToPosition("dashboard", $gallery);
+
+
+        $this->load->view("media")->display();
     }
-    
-    /**
-     * Updates an existing article.
-     * @todo    Implement the article update action method
-     * @return  void
-     */
-    public function update() {}  
-    /**
-     * Edits an existing article.
-     * @todo    Implement the article edit action method
-     * @return  void
-     */
-    public function edit(){   
-        echo "editing Applications";       
-    }
-    /**
-     * Displays an article.
-     * @todo    Implement the article read action method
-     * @return  void
-     */
-    public function read() {
-         $view = $this->load->view('media\article');
-    }
-    /**
-     * Deletes an existing article.
-     * @todo    Implement the article delete action method
-     * @return  void
-     */
-    public function delete(){}   
     /**
      * Returns an instance of the article controller, only creating one if does not
      * exists

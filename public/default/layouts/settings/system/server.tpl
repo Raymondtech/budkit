@@ -5,11 +5,11 @@
                 <label class="control-label" for="options[server][outgoing-mail-handler]">Mail Handler</label>
                 <div class="controls">
                     <tpl:select name="options[server][outgoing-mail-handler]" class="input-xlarge" value="config|server.outgoing-mail-handler">
-                        <option value="phpmail">PHP Mail</option>
+                        <option value="mail">PHP Mail</option>
                         <option value="sendmail">Send Mail</option>
                         <option value="smtp">SMTP</option>
                     </tpl:select>
-                    <span class="help-block">Leave as is if not sure or ask your host provider.</span>
+                    <span class="help-block">Leave as is, if not sure or ask your host provider.</span>
                 </div>
             </div>
             <hr />

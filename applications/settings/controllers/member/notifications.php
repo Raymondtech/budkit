@@ -41,10 +41,10 @@ final class Notifications extends Settings\Member {
         
         $this->email = \Platform\Mailer::getInstance();
         
-        $this->email->from('social@budkit.org', 'Budkit Social');
+        //$this->email->from('social@budkit.org', 'Budkit Social');
         $this->email->to('livingstonefultang@gmail.com'); 
-        $this->email->cc('livingstonefultang@outlook.com'); 
-        $this->email->bcc('l.k.f.fultang@ncl.ac.uk'); 
+        //$this->email->cc('livingstonefultang@outlook.com'); 
+        //$this->email->bcc('l.k.f.fultang@ncl.ac.uk'); 
 
         $this->email->subject('Budkit test notification mail');
         $this->email->message('This is a test notification email, Just to make sure we can send out emails too');	

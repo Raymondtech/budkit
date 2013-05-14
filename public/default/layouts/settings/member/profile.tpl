@@ -9,6 +9,7 @@
                         <img class="add-on thumbnail pull-left margin-right" src="/system/object/${profile.user_photo}/resize/200/200" />
                     </tpl:condition>
                     <input type="file" name="profilephoto" data-label="Select Photo..." data-target="budkit-uploader" /> 
+                    <span class="help-block">.gif, .jpg, .jpeg or .png only</span>
                 </div>
             </div>
             <hr />

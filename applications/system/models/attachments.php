@@ -76,7 +76,7 @@ class Attachments extends Platform\Entity {
      * 
      * @static array
      */
-    public $allowed = array("mp3" => "", "jpg" => "", "gif" => "", "png" => "", "jpeg" => "", "zip" => "", "pdf" => "", "doc" => "", "txt" => "");
+    public $allowed = array();
 
     /**
      * Defines the attachment properties
@@ -146,7 +146,13 @@ class Attachments extends Platform\Entity {
 
         $fileHandler = \Library\Folder\Files::getInstance();
         $uploadsFolder = $this->config->getParam('site-users-folder', '/users');
-        $allowedTypes = $this->config->getParam("allowed-types", $this->allowed, "attachments");
+        $allowedTypes = $this->allowed;
+        if (empty($allowedTypes)):
+            $attachmentTypes = $this->config->getParamSection("attachments");
+            foreach ($attachmentTypes as $group => $types):
+                $allowedTypes = array_merge($allowedTypes, $types);
+            endforeach;
+        endif;
         //Check User Upload Limit;
         //Check File upload limit;
         //Validate the file
@@ -158,6 +164,7 @@ class Attachments extends Platform\Entity {
         }
         //Check that the file has a valid extension
         $fileExtension = $fileHandler->getExtension($fileName);
+        
         if (!array_key_exists(strtolower($fileExtension), $allowedTypes)) {
             $this->setError(_("Attempting to upload an invalid file type"));
             throw new \Platform\Exception($this->getError());
@@ -192,14 +199,14 @@ class Attachments extends Platform\Entity {
 
 
         foreach (array(
-            "attachment_name" => $fileName,
-            "attachment_title" => basename($file['name']), //@todo Wil need to check $file[title],
-            "attachment_size" => $file['size'],
-            "attachment_description" => "", //@todo Wil need to check $file[description],
-            "attachment_src" => str_replace(FSPATH, '', $uploadFileName),
-            "attachment_ext" => $fileExtension,
-            "attachment_owner" => $this->_owner,
-            "attachment_type" => $this->_fileType
+    "attachment_name" => $fileName,
+    "attachment_title" => basename($file['name']), //@todo Wil need to check $file[title],
+    "attachment_size" => $file['size'],
+    "attachment_description" => "", //@todo Wil need to check $file[description],
+    "attachment_src" => str_replace(FSPATH, '', $uploadFileName),
+    "attachment_ext" => $fileExtension,
+    "attachment_owner" => $this->_owner,
+    "attachment_type" => $this->_fileType
         ) as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
@@ -294,7 +301,7 @@ class Attachments extends Platform\Entity {
         $query .= $this->setListOrderBy(array("o.object_updated_on"), "DESC")->getListOrderByStatement();
 
         $result = $this->database->prepare($query)->execute();
-        
+
         return $result;
     }
 
@@ -306,13 +313,13 @@ class Attachments extends Platform\Entity {
      * 
      * @return collection;
      */
-    final public function getMedia($objectType="attachment", $objectURI = NULL, $objectId = NULL) {
-        
-        $media   = $this->load->model('media', 'system'); //get the media model;
+    final public function getMedia($objectType = "attachment", $objectURI = NULL, $objectId = NULL) {
+
+        $media = $this->load->model('media', 'system'); //get the media model;
         //Get the object list
         $objects = $this->getAttachmentObjectsList($objectType, $objectURI, $objectId)->fetchAll();
         $items = array();
-        
+
         //Parse the mediacollections;
         foreach ($objects as $object) {
             $object = $media->getActor($object, $object['attachment_owner']);
@@ -347,16 +354,17 @@ class Attachments extends Platform\Entity {
     final public static function load(&$object, &$params) {
         //Relaod the object
         $attachments = static::getInstance();
-        $attachment =& $object;
+        $attachment = & $object;
         //if is object $object
-        if (!is_a($attachment, "\Platform\Entity") ) {
+        if (!is_a($attachment, "\Platform\Entity")) {
             //Attempt to determine what type of object this is or throw an error
-            $attachment = $attachments->loadObjectByURI( $attachment );
+            $attachment = $attachments->loadObjectByURI($attachment);
             //Make sure its an object;
         }
-        
-        if($attachment->getObjectType() !== "attachment" ) return false; //we only deal with attachments, let others deal withit
-        
+
+        if ($attachment->getObjectType() !== "attachment")
+            return false; //we only deal with attachments, let others deal withit
+
         $browsable = array("image/jpg", "image/jpeg", "image/png", "image/gif");
 
         $fullPath = FSPATH . DS . $attachment->getPropertyValue("attachment_src");
@@ -459,6 +467,7 @@ class Attachments extends Platform\Entity {
         //If we can't resize this type of file
         if (!in_array(strtolower($fileExtension), $resizable))
             return $file; //If we can't resize it just return the file
+
             
 //We need at least the width or height to resize;
         if (empty($params))
@@ -499,8 +508,9 @@ class Attachments extends Platform\Entity {
         if (!in_array($mediaObjectType, $objectTypeshaystack))
             return; //Nothing to do here if we can't deal with it!
 
+
             
-        //1.Load the collection!
+//1.Load the collection!
         $attachment = $thisModel->loadObjectByURI($mediaObjectURI);
         $attachmentObject = Media\Medialink::getNew();
         //2.Get all the elements in the collection, limit 5 if more than 5

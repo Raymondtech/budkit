@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * audio.php
+ * rich.php
  *
  * Requires PHP version 5.4
  *
@@ -15,13 +15,13 @@
  * 
  */
 namespace Application\System\Controllers\Media;
-
 use Application\System\Controllers as System;
+
 /**
- * Audio files management CRUD action controller for system media 
+ * Article CRUD action controller for system media 
  *
  * This class implements the action controller that manages the creation, 
- * view and edit of audio files within various posts/media types.
+ * view and edit of articles.
  *
  * @category  Application
  * @package   Action Controller
@@ -30,8 +30,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Audio extends System\Media {
-    
+final class Rich extends System\Media {
     
     /**
      * Displays a gallery of media items. 
@@ -39,14 +38,14 @@ final class Audio extends System\Media {
      */
     public function gallery() {
         
-        $this->output->setPageTitle(_("Audios"));
+        $this->output->setPageTitle(_("Rich Documents"));
 
         $model = $this->load->model("attachments", "system");
-        $audio = $this->config->getParam( "audio", array(), "attachments");
+        $rich = $this->config->getParam( "application", array(), "attachments");
         
         $attachments = $model
                 ->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
-                ->setListLookUpConditions("attachment_type", $audio) //Limits the lookup to attachments with image types
+                ->setListLookUpConditions("attachment_type", $rich) //Limits the lookup to attachments with image types
                 ->setListOrderBy("o.object_created_on", "DESC")
                 ->getObjectsList("attachment");
         $model->setPagination(); //Set the pagination vars
@@ -69,12 +68,12 @@ final class Audio extends System\Media {
         $this->load->view("media")->display();
     }
     
+ 
     /**
-     * Get's an instance of the audio controller, only creating one if does not
+     * Returns an instance of the article controller, only creating one if does not
      * exists
      * @staticvar self $instance
-     * @return an instance of {@link Audio}
-     * 
+     * @return an instance of {@link Article}
      */
     public static function getInstance() {
         static $instance;
@@ -84,5 +83,4 @@ final class Audio extends System\Media {
         $instance = new self;
         return $instance;
     }
-
 }

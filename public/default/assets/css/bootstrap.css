@@ -7587,6 +7587,9 @@ text {
   font: 10px sans-serif;
   pointer-events: none;
 }
+video {
+  max-width: 100%;
+}
 /****IMPORTS****/
 .nav-mediagrid > li > a {
   padding-top: 8px;

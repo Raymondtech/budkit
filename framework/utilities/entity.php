@@ -395,7 +395,15 @@ class Entity extends Model {
                 // IFNULL(xxx, '')
                 $v = " IS NULL";
             } else {
-                $v = " LIKE '%{$v}%'";
+                if(is_array($v)):
+                    
+                    $_values = array_map(array($this->database, "quote"), $v);
+                    $values = implode(',', $_values);
+                    
+                    $v = " IN ($values)";
+                    else:
+                    $v = " LIKE '%{$v}%'";
+                endif; 
             }
             $this->listLookUpConditions[] = $prefix . $k . $v;
         }

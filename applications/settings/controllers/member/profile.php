@@ -71,7 +71,7 @@ final class Profile extends Settings\Member {
 
                 //Do we have a file?
                 $attachment = $this->load->model("attachments", "system");
-                $attachment->setAllowedTypes(array("gif", "jpeg", "jpg", "png"));
+                $attachment->setAllowedTypes(array("gif"=>'', "jpeg"=>'', "jpg"=>'', "png"=>''));
                 $attachment->setOwnerNameId($this->user->get("user_name_id"));
 
                 $attachment->store($attachmentfile['profilephoto']);

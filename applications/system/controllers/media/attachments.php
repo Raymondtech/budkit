@@ -104,7 +104,9 @@ class Attachments extends System\Media {
         $this->output->setPageTitle(_("Attachments"));
 
         $model = $this->load->model("attachments", "system");
-        $attachments = $model->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
+        $attachments = $model->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListOrderBy("o.object_created_on", "DESC")
+                ->getObjectsList("attachment");
         $model->setPagination(); //Set the pagination vars
         $items = array("totalItems" => 0);
         //Loop through fetched attachments;
@@ -137,9 +139,6 @@ class Attachments extends System\Media {
         if ($this->input->methodIs("get") && isset($params[0])) {
             $progress["recieved"] = \Library\Session::getUploadProgress($params[0]);
             $progress["prefix"] = ini_get("session.upload_progress.prefix") . $params[0];
-
-
-
 
             $progress["session"] = $_SESSION;
             $this->set("progress", $progress);
