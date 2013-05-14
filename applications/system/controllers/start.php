@@ -41,15 +41,33 @@ class Start extends \Platform\Controller {
         $view = $this->load->view('index') ;        
         $this->output->setPageTitle(_("Dashboard"));
 
-        $user = \Platform\User::getInstance();
-        $model = $this->load->model('media');
-
-        $activities = $model->setListLookUpConditions("media_target", "")->getAll();
-        $model->setPagination(); //Set the pagination vars
-
-        $this->set("activities", $activities);
-        //$this->set("user", $user);
-        $today = $this->output->layout("timeline");
+        $model = $this->load->model("attachments", "system");
+        $attachments = $model->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListOrderBy("o.object_created_on", "DESC")
+                ->setListLimit(10)
+                ->getObjectsList("attachment");
+        $items = array("totalItems" => 0);
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $attachments->fetchAssoc()) {
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+            $items["totalItems"]++;
+        }
+        if ((int)$items["totalItems"] > 0) $this->set("gallery", $items);
+        $gallery = $this->output->layout("media/gallery/widget");
+        
+        $this->output->set("widget", array(
+            "title"=>"Latest Documents",
+            "body" =>$gallery,
+            "footer"=>'<a href="/system/media/attachments/gallery">View Documents</a>'
+        ));
+        $widget = $this->output->layout("widget");
+        
+        \Library\Event::trigger('beforeDashboardDisplay', $this);
+        
+        $this->output->addToPosition("dashwidgets", $widget);
+        $today = $this->output->layout("start");
         
         $this->output->addToPosition("dashboard", $today);
         $this->load->view("index")->display();      

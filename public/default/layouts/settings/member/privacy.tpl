@@ -42,16 +42,6 @@
                 </ul>
             </div>
         </div><!-- /control-group --> 
-        <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-                <div class="clearfix">        
-                    <ul class="nav nav-pills  no-margin">
-                        <li class="highlighted"><a href="/settings/member/privacy/groups" >Edit Privacy groups</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div><!-- /control-group -->
         <div class="form-actions">
             <input type="submit" class="btn" value="Save changes" />
         </div>

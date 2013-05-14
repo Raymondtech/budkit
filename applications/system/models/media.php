@@ -68,11 +68,12 @@ class Media extends Platform\Entity {
             "media_verb" => array("Verb", "mediumtext", 20, "post"),
             "media_geotags" => array("Geotags", "varchar", 1000), //*
             "media_object" => array("Object", "varchar", 1000),
-            "media_target" => array("Target", "varchar", 1000),
-            "media_permissions" => array("Permissions", "mediumtext", 50), //* //allo:{},deny:{}
-                ), "media");
+            "media_target" => array("Target", "varchar", 1000), //the object id of the timeline stream;
+            "media_permissions" => array("Permissions", "mediumtext", 50), //* //allow:{},deny:{}
+        ), "media");
 
         $this->defineValueGroup("media");
+        $this->setListOrderBy(array("o.object_updated_on"), "DESC");
     }
 
     /**
@@ -215,7 +216,7 @@ class Media extends Platform\Entity {
 
         $query .="\nGROUP BY o.object_id";
         $query .= $this->getListLookUpConditionsClause();
-        $query .= $this->setListOrderBy(array("o.object_updated_on"), "DESC")->getListOrderByStatement();
+        $query .= $this->getListOrderByStatement();
         $query .= $this->getLimitClause();
 
         $total = $this->getObjectsListCount($objectType, $properties, $objectURI, $objectId); //Count first

@@ -36,7 +36,7 @@
             <div class="stream-thread">              
                 <div class="stream-body" id="timeline">
 
-                    <div class="padding">
+                    <div class="padding-left padding-right padding-bottom">
                         <ol class="timeline-item-index timeline-stream single-item" data-timeline="true">
                             <li class="timeline-item-li timeline-item">
                                 <div class="timeline-item-container">

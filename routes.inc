@@ -45,7 +45,7 @@ $route["action"] = array(
 $route["index"] = array(
     "path" => '/',
     "application" => 'system',
-    "controller" => 'media',
-    "method" => 'timeline'
+    "controller" => 'start',
+    "method" => 'dashboard'
 );
 

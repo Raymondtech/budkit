@@ -69,9 +69,16 @@ class Menu extends \Platform\Model {
 //                )
                 break;
             case "dashboardmenu":
-                $startHere =& reset($menuItems);
+                $startHere = & reset($menuItems);
                 //Add Timeline;
                 array_unshift($startHere['children'], array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"));
+                array_shift($menuItems);
+                array_unshift($menuItems, $startHere);
+                break;
+            case "messagesmenu":
+                $startHere = & reset($menuItems);
+                //Add Timeline;
+                array_unshift($startHere['children'], array("menu_title" => "Compose", "menu_url" => "/system/message/create"));
                 array_shift($menuItems);
                 array_unshift($menuItems, $startHere);
                 break;

@@ -1,13 +1,18 @@
 <tpl:layout name="inputsettings" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-        <div class="timeline-item-publisher-box">    
+        <div class="timeline-item-publisher-box">  
+            <tpl:condition data="profile.user_photo" test="isset" value="1">
+                <a href="/member:${profile.user_name_id}/profile/timeline" class="publisher-profile">
+                    <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/50/50"  />
+                </a>
+            </tpl:condition>
             <div class="timeline-item-icon toolset"><a><i class="icon-plus"></i></a></div>
             <div class="timeline-item-publisher margin-bottom-half">
                 <ul class="nav nav-tabs-launcher" id="status-tabs">
                     <li><strong>Share:</strong></li>
                     <li><a href="#status-form" data-toggle="tab"><i class="icon-quote-left"></i> Status</a></li>
                     <li><a href="#article-form" data-toggle="tab"><i class="icon-file-alt"></i> Article</a></li>
-                    <li><a href="#uploads-form" data-toggle="tab"><i class="icon-file"></i> Uploads</a></li>
+                    <li><a href="#uploads-form" data-toggle="tab"><i class="icon-upload-alt"></i> Uploads</a></li>
                     <li><a href="#events-form" data-toggle="tab"><i class="icon-calendar"></i> Event</a></li>
                     <li><a href="#task-form" data-toggle="tab"><i class="icon-check"></i> Task(s)</a></li>
                 </ul>
@@ -20,7 +25,7 @@
                                               data-target="budkit-editor" 
                                               data-stylesheet="http://${config|general.host}${config|general.path}public/default/assets/css/editor.css"
                                               rows="4" name="media_content" placeholder="Say something...">
-                                            <tpl:element type="html" data="content" medialinks="true" />
+                                        <tpl:element type="html" data="content" medialinks="true" />
                                     </textarea>
                                 </div> 
                                 <div class="status-bucket margin-top-half" data-src="${config|general.path}system/media/attachments/"></div>

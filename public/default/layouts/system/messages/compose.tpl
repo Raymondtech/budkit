@@ -1,289 +1,58 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <tpl:import layout="input" />
-    <hr>
-    <ol class="timeline-items" id="main-timeline">
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>                      
-                    </a>
-                    <a class="timeline-item-source" href="#"><small class="label label-info">twitter</small></a>
-                    <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12" class="published-time"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-media">
-                    <div class="timeline-item-gallery carousel slide" id="item-slider-id">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="http://placehold.it/550x300" />
-                                <div class="carousel-caption">This is an interesint picture caption, of what this is all about</div>
-                            </div>
-                        </div>
-                        <a class="left carousel-control" href="#item-slider-id" data-slide="prev">‹</a>
-                        <a class="right carousel-control" href="#item-slider-id" data-slide="next">›</a>
-                    </div>
-                </div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
-            </div>
-        </li>
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>
-                    </a>
-                    <small class="published-time">
-                        <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                    </small>
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
-            </div>
-        </li>
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>
-                    </a>
-                    <small class="published-time">
-                        <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                    </small>
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-media"></div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
-
-            </div>
-            <div class="timeline-item-interaction">
-                <ul class="timeline-items">
-                    <li class="timeline-item-li">
-                        <div class="timeline-item-container">
-                            <div class="timeline-item-header">
-                                <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-                                    <strong class="profile-name">Livingstone Fultang</strong>
-                                    <span class="profile-nameid">@drstonyhills</span>
-                                </a>
-                                <small class="published-time">
-                                    <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                                </small>
-                                <ul class="actions">
-                                    <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                                    <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                                    <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-
-                                </ul>
-                            </div>
-                            <div class="timeline-item-body">This is just a comments</div>
-                            <div class="timeline-item-footer">
-                                <div class="context"></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-item-li">
-                        <div class="timeline-item-container">
-                            <div class="timeline-item-header">
-                                <a class="publisher-profile" href="#">
-                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-                                    <strong class="profile-name">Livingstone Fultang</strong>
-                                    <span class="profile-nameid">@drstonyhills</span>
-                                </a>
-                                <small class="published-time">
-                                    <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                                </small>
-                                <ul class="actions">
-                                    <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                                    <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                                    <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-
-                                </ul>
-                            </div>
-                            <div class="timeline-item-body">This is just a comments</div>
-                            <div class="timeline-item-footer">
-                                <div class="context"></div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>
-                    </a>
-                    <small class="published-time">
-                        <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                    </small>
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-media">
-                    <hr />
-                    <div class="row-fluid">  
-                        <div class="span3"><img src="http://placehold.it/120x120" /></div> 
-                        <div class="span9">
-                            <blockquote>
-                                <h4><a href="#">Redknapp admits Modric may leave</a></h4>
-                                <div>Tottenham manager Harry Redknapp says Luka Modric may leave White Hart Lane when the transfer window opens.</div>
-                                <small class="author">Some Author</small>
-                            </blockquote>
+    <div class="stream-box row-fluid media-box">
+        <div class="stream-view">
+            <div class="stream-thread">              
+                <div class="stream-body padding" id="timeline">
+                    <div class="timeline-item-publisher-box">  
+                        <tpl:condition data="profile.user_photo" test="isset" value="1">
+                            <a href="/member:${profile.user_name_id}/profile/timeline" class="publisher-profile">
+                                <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/50/50"  />
+                            </a>
+                        </tpl:condition>
+                        <div class="timeline-item-icon toolset"><a><i class="icon-plus"></i></a></div>
+                        <div class="timeline-item-publisher margin-bottom-half" id="article-form">
+                            <form action="/system/message/create" class="no-margin" method="POST" enctype="multipart/form-data">
+                                <fieldset class="no-bottom-margin">
+                                    <div class="control-group">
+                                        <div class="controls row-fluid">           
+                                            <input type="text" name="message_participants" placeholder="Participants"  class="span12 margin-bottom-zero" value="${media_summary}" />
+                                        </div>
+                                    </div>  
+                                    <div class="control-group">
+                                        <div class="controls row-fluid">           
+                                            <input type="text" name="message_subject" placeholder="Subject (optional)"  class="span12 margin-bottom-zero" value="${media_summary}" />
+                                        </div>
+                                    </div>  
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <textarea class="input-100pct focused"
+                                                      data-stylesheet="http://${config|general.host}${config|general.path}public/default/assets/css/editor.css"
+                                                      data-target="budkit-editor" toolbar="1"  rows="20" name="message_body" placeholder="Say something...">
+                                                <tpl:element type="html" data="content" medialinks="true" />
+                                            </textarea>
+                                        </div> 
+                                    </div>
+                                    <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/"></div>
+                                    <div class="btn-toolbar margin-bottom-zero"> 
+                                        <div class="btn-group pull-right">
+                                            <button type="submit" class="btn" href="#">Send</button>  
+               
+                                        </div>   
+                                        <div class="btn-group no-margin">
+                                            <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Upload Files" autoload="" />
+                                            <!--                            <a class="btn">Chose from existing</a>-->
+                                        </div>
+                                    </div>              
+                                </fieldset>
+                                <input type="hidden" name="${uploadprogress}" value="timelineupload" />
+                                <input type="hidden" name="media_author_id" value="" />
+                                <input type="hidden" name="media_verb" value="post" />
+                                <input type="hidden" name="media_provider" value="budkit" />
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
             </div>
-        </li>
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>
-                    </a>
-                    <small class="published-time">
-                        <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                    </small>
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
-            </div>
-        </li>
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>
-                    </a>
-                    <small class="published-time">
-                        <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                    </small>
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
-            </div>
-        </li>
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>
-                    </a>
-                    <small class="published-time">
-                        <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                    </small>
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
-            </div>
-        </li>
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang" />
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>
-                    </a>
-                    <small class="published-time">
-                        <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                    </small>
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-
-                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
-            </div>
-        </li>
-    </ol>
-    <div class="row-fluid">
-        <button class="btn span12">Load more</button>
+        </div>
     </div>
 </tpl:layout>

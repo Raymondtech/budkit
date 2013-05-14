@@ -102,7 +102,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     left: 0;
     right: 0;
     bottom: 0; min-height: 100%;
-    max-width: 1195px;
+    max-width: 1290px;
     .stream-list{
         position: absolute;
         //border: 1px solid #ddd;
@@ -119,7 +119,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
         }
         ~ .stream-view{ margin-right: @gridGutterWidth + 150; }
     }
-    .stream-view{ max-width: 1025px;}
+    .stream-view{ max-width: 1120px;}
     .stream-alerts,.stream-more, .stream-widgets{ margin-left: 115px; display: block; }
     
 }
@@ -128,28 +128,41 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     margin: 0; padding:0; list-style: none;
     li{
         border-bottom: 1px solid #dedede;
-        padding: @gridGutterWidth*0.5 ;
-        position: relative;
+        position: relative;        
+        .link{ 
+            text-decoration: none; padding: @gridGutterWidth ;
+            &.unread{ background: #d9edf7}
+            &.open{ background: #dff0d8}
+        }
         &.has-thumbnail{ padding: @gridGutterWidth*0.5  @gridGutterWidth*0.5  @gridGutterWidth*0.5  80px; min-height: 50px+@gridGutterWidth*0.5;}
         .thumbnail{
             max-height: 50px;
             max-width: 50px;
             position: absolute; left:@gridGutterWidth*0.5; top:@gridGutterWidth*0.5;
         }
+        .select{ position:absolute; top:@gridGutterWidth; left:@gridGutterWidth;  &~.link{ display: block; padding-left: @gridGutterWidth*2.5} &:checked{  &~.link {background: #fcf8e3 } } }
         .title{
-            .subject{ font-weight: bold; color: @grayDark }
-            .time{ position: absolute; right: @gridGutterWidth*0.55; top: @gridGutterWidth*0.55; }
+             color: @grayDark;
+            //.author{ float:left }
+            .time{ float: right }
         }
+        .subject{ font-weight: 700; }
         .content{
+            clear: both;
             color: @grayLight;
         }
-        .link{ text-decoration: none;}
         &:last-child{ border-bottom: none}
     }
 }
 
 .stream-object{
     margin-left: 115px;
+}
+
+.messages-box{
+    position:absolute; left:0; right:0; bottom:0; top:@navbarHeight;
+    .message-list{ position:absolute; left:0; width: 500px; top:0; bottom:0; overflow-y: auto; overflow-x: hidden; border-right: 1px solid #d9d9d9; background: @white; }
+    .message-view{ position:absolute; left: 501px; border-left: 1px solid @white; top:0; bottom:0; right:0; overflow-y: auto; overflow-x: hidden;}
 }
 
 //***** ACCORDION MENUS ***/

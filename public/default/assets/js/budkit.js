@@ -235,7 +235,7 @@
                     $this.ec("createLink", false, prompt("URL:", "http://"));
                 }
             }],
-            unlink: ['unlink', 'unlink', function($this) {
+            unlink: ['unlink', '', function($this) {
                 $this.ec("unlink", false, []);
             }],
             image: ['picture', '', function($this){

@@ -223,6 +223,7 @@ class Media extends Parse\Template {
                 $ul = array("ELEMENT" => "ul", "CLASS" => "media-grid compensate-margins bottom-media clearfix");
                 $tag['WIDTH'] = \Library\Config::getParam('gallery-thumbnail-width', 170, 'content');
                 $tag['HEIGHT'] = \Library\Config::getParam('gallery-thumbnail-height', 170, 'content');
+                $tag['MODE'] = 'icon';
                 foreach ($collectionItemize as $item) {
                     $li = array("ELEMENT" => "li", "CHILDREN" => static::tag($attachmentModel->loadObjectByURI($item), $tag));
                     $ul["CHILDREN"][] = $li;

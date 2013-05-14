@@ -43,15 +43,13 @@ final class Message extends \Platform\Controller {
     public function inbox() {
         
         $this->output->setPageTitle(_("Private Messages"));
-                //$this->output->addToPosition("side", $sidebar);
-        $user = \Platform\User::getInstance();
-        $model      = $this->load->model('media');
-        $activities = $model->getAll();   
+        
+        $model      = $this->load->model('media','system');
+        $activities = $model->setListOrderBy(array("o.object_updated_on"), "ASC")->getAll();   
         
         $this->set("activities", $activities);   
-        $this->set("user", $user);
         
-        $layout = $this->output->layout('timeline');
+        $layout = $this->output->layout('messages/inbox');
         $this->output->addToPosition("dashboard", $layout);
         
         $this->load->view("message")->display(); 
@@ -99,8 +97,27 @@ final class Message extends \Platform\Controller {
      */
     public function create() {
 
-        $view = $this->load->view("index");
-        $view->newUserAccountForm();
+        $this->output->setPageTitle(_("New Message"));
+        
+        //If we are submitting a form
+        if ($this->input->methodIs("post")) {
+            //1. Check that the each participant exists;
+            //2. Check that we have a subject;
+            //3. Create a message object;
+            //3b. Deal with attachments
+            //5. Create a media object;
+            //6. Notifications and alerts
+            $post = $this->input->data('post'); 
+            
+            print_r($post);
+            
+            die;
+        }
+        
+        $layout = $this->output->layout('messages/compose');
+        $this->output->addToPosition("dashboard", $layout);
+        
+        $this->load->view("message")->display(); 
     }
 
 

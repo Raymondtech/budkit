@@ -18,7 +18,7 @@
                 <button type="submit" class="btn">Add Privacy Group</button>
             </form>
             <ul class="nav nav-pills no-margin">
-                <li class="highlighted"><a href="/settings/member/privacy" >Change Privacy Setting</a></li>
+                <li class="highlighted"><a href="/settings/member/privacy" >Privacy Setting</a></li>
             </ul>
         </div>
         <hr />
