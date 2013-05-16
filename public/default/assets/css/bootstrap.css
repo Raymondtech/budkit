@@ -7175,6 +7175,8 @@ input.search-query {
 .stream li .link {
   text-decoration: none;
   padding: 20px;
+  display: block;
+  font-size: 14px;
 }
 .stream li .link.unread {
   background: #d9edf7;
@@ -7234,7 +7236,7 @@ input.search-query {
 .messages-box .message-list {
   position: absolute;
   left: 0;
-  width: 500px;
+  width: 424px;
   top: 0;
   bottom: 0;
   overflow-y: auto;
@@ -7244,7 +7246,7 @@ input.search-query {
 }
 .messages-box .message-view {
   position: absolute;
-  left: 501px;
+  left: 425px;
   border-left: 1px solid #ffffff;
   top: 0;
   bottom: 0;
@@ -7877,6 +7879,7 @@ video {
   display: none;
   border-bottom: 1px solid #ddd;
   padding: 20px;
+  overflow-y: auto;
 }
 .search-results:hover {
   display: block;

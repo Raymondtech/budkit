@@ -130,7 +130,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
         border-bottom: 1px solid #dedede;
         position: relative;        
         .link{ 
-            text-decoration: none; padding: @gridGutterWidth ;
+            text-decoration: none; padding: @gridGutterWidth ; display: block; font-size: @baseFontSize;
             &.unread{ background: #d9edf7}
             &.open{ background: #dff0d8}
         }
@@ -161,8 +161,8 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 
 .messages-box{
     position:absolute; left:0; right:0; bottom:0; top:@navbarHeight;
-    .message-list{ position:absolute; left:0; width: 500px; top:0; bottom:0; overflow-y: auto; overflow-x: hidden; border-right: 1px solid #d9d9d9; background: @white; }
-    .message-view{ position:absolute; left: 501px; border-left: 1px solid @white; top:0; bottom:0; right:0; overflow-y: auto; overflow-x: hidden;}
+    .message-list{ position:absolute; left:0; width: 424px; top:0; bottom:0; overflow-y: auto; overflow-x: hidden; border-right: 1px solid #d9d9d9; background: @white; }
+    .message-view{ position:absolute; left: 425px; border-left: 1px solid @white; top:0; bottom:0; right:0; overflow-y: auto; overflow-x: hidden;}
 }
 
 //***** ACCORDION MENUS ***/
@@ -564,6 +564,7 @@ video{max-width: 100%}
     display: none;
     border-bottom: 1px solid #ddd;
     padding: @gridGutterWidth;
+    overflow-y: auto;
     &:hover{ display: block; }
     .results-stream{
        max-width: 1250px; 

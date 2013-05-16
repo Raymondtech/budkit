@@ -738,16 +738,7 @@ class Entity extends Model {
         //Ensure we have all the properties
         if (empty($this->propertyModel) || empty($this->propertyData))
             return false; //We have nothing to save
-
-
-
-
-
-
-
-
-
-            
+     
 //Use a transaction;
         $this->database->startTransaction();
         $pquery = "INSERT IGNORE INTO ?properties (property_name, property_label, property_datatype, property_charsize, property_default, property_indexed) VALUES\n";

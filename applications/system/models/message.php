@@ -40,14 +40,14 @@ class Message extends Platform\Entity {
         parent::__construct();
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->definePropertyModel(
-            array(
-                "message_subject"   => array("Message Subject", "mediumtext", 100),
-                "message_summary"   => array("Message Summary", "longtext", 600),
-                "message_participants" => array("Message Participants", "mediumtext", 600),
-                "message_author"    => array("Message Author", "mediumtext", 200),
-                "message_updated"   => array("Message Updated", "datetime", 200),
-                "message_read"   => array("Message Read", "mediumtext", 600),
-            ), "message"
+                array(
+            "message_subject" => array("Message Subject", "mediumtext", 100),
+            "message_body" => array("Message Text", "longtext", 2000),
+            "message_participants" => array("Message Participants", "mediumtext", 600),
+            "message_author" => array("Message Author", "mediumtext", 200),
+            "message_updated" => array("Message Updated", "datetime", 200),
+            "message_read" => array("Message Read", "mediumtext", 600),
+                ), "message"
         );
     }
 
@@ -59,6 +59,27 @@ class Message extends Platform\Entity {
         return false;
     }
 
+    public function getMessages() {
+        
+        $messages = $this->setListLookUpConditions("message_participants", $this->user->get("user_name_id"))
+                ->getObjectsList("message");
+
+        $items = array("totalItems" => 0);
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $messages->fetchAssoc()) {
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+            $items["totalItems"]++;
+        }
+ 
+        return $items;
+        
+    }
+
+    public function getMessageStream() {
+        
+    }
 
     /**
      * Get's an instance of the media model
@@ -73,5 +94,6 @@ class Message extends Platform\Entity {
         $instance = new self;
         return $instance;
     }
+
 }
 

@@ -165,8 +165,8 @@ abstract class Controller extends Library\Action {
      * 
      * @return boolean (changes state?)
      */
-    final public function returnRequest(){
-                
+    final public function returnRequest($message="", $type=NULL){
+        if(!empty($message)) $this->alert($message, NULL, $type);
         return $this->redirect( \Library\Session::get("lastRequestURL") );
         //return true;
     }

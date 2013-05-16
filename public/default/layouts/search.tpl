@@ -11,10 +11,6 @@
                                 <div class="subject">
                                     [Reply] More information required to complete your grant
                                 </div>
-                                <div class="title clearfix">
-                                    <span class="auhor">Livingstone Fultang</span>
-                                    <span class="time">10 hrs ago</span>    
-                                </div>
                                 <div class="content">
                                     And here are the contents of this message. Maximum of two lines allowed. But we sill have plenty of space to add more
                                 </div>

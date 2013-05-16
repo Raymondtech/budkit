@@ -14,6 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\System\Controllers;
 
 /**
@@ -33,26 +34,26 @@ final class Message extends \Platform\Controller {
      * @return void
      */
     public function index() {
-         return $this->inbox();
+        return $this->inbox();
     }
 
     /**
      * Gets private messages and displays the members inbox
      * @return void
      */
-    public function inbox() {
-        
+    public function inbox($messageURI = null) {
+
         $this->output->setPageTitle(_("Private Messages"));
-        
-        $model      = $this->load->model('media','system');
-        $activities = $model->setListOrderBy(array("o.object_updated_on"), "ASC")->getAll();   
-        
-        $this->set("activities", $activities);   
-        
+
+        $model = $this->load->model('message', 'system');
+        $messages = $model->setListOrderBy( array("o.object_updated_on"), "DESC")->getMessages();
+
+        $this->set("messages", $messages);
+
         $layout = $this->output->layout('messages/inbox');
         $this->output->addToPosition("dashboard", $layout);
-        
-        $this->load->view("message")->display(); 
+
+        $this->load->view("message")->display();
     }
 
     /**
@@ -98,28 +99,92 @@ final class Message extends \Platform\Controller {
     public function create() {
 
         $this->output->setPageTitle(_("New Message"));
-        
+
         //If we are submitting a form
         if ($this->input->methodIs("post")) {
+
             //1. Check that the each participant exists;
-            //2. Check that we have a subject;
-            //3. Create a message object;
-            //3b. Deal with attachments
-            //5. Create a media object;
-            //6. Notifications and alerts
-            $post = $this->input->data('post'); 
+            $participants = $this->input->getString('message_participants');
+            $subject = $this->input->getString('message_subject');
+            $text = $this->input->getFormattedString("message_body", "", "post", true);
+
+            //Do we have participants
+            if (empty($participants))
+                return $this->returnRequest("No recipients defined", "error");
+
+            //Throw an error if we don't have the message
+            if (empty($text))
+                return $this->returnRequest("Your message has no content", "error");
+
+            $message = $this->load->model('message');
+
+            //Check that each participant is an active member
+            //$_to = array();
+            $_noto = array();
+            $_participants = explode(',', $participants);
+            $_users = $this->load->model("user", "member");
+
+            foreach ($_participants as $k => $member):
+                $_member = $_users->loadObjectByURI($member);
+                $_participants[$k] = trim($member);
+                if ($_member->getObjectType() !== 'user') {
+                    $_noto[] = $member;
+                    continue;
+                }
+                //$_to[$_member->getObjectUri()] = $_member;
+            endforeach;
+
+            //Throw an error if we don't have the message
+            if (empty($_participants))
+                return $this->returnRequest("No valid recipients", "error");
             
-            print_r($post);
+            //Add the messsage author to the participant list;
+            $_participants[] = $this->user->get("user_name_id");
+
+            //Create the new message;
+            $message->setPropertyValue("message_body", $text);
+            $message->setPropertyValue("message_participants", implode(",", $_participants));
+            $message->setPropertyValue("message_author", $this->user->get("user_name_id"));
+            $message->setPropertyValue("message_updated", \Library\Date\Time::stamp());
             
-            die;
+            if (empty($subject))
+                $message->setPropertyValue("message_subject", $subject);
+            //Save the message
+            if(!$message->saveObject(null,"message")){
+                return $this->returnRequest("The message could not be sent", "error");  
+            }
+            $messageURI = $message->getLastSavedObjectURI();
+            
+            //Prepare media content;
+            $this->input->setVar("media_content", $text, "post");
+            //$this->input->setVar("media_summary", $subject, "post");
+            $this->input->setVar("media_target", $messageURI, "post");
+            
+            //Save the media;
+            $media = $this->load->model("media", "system");
+            if(!$media->addMedia()):
+                //@todo, delete, the messagetarget;
+                return $this->returnRequest("The message could not be sent", "error"); 
+            endif;
+            
+            //All done
+            $this->alert("Your private message stream has now been created and sent to all reciepients");
+            if (!empty($_noto)):
+                $noto = implode(',', $_noto);
+                $warning = sprintf("The message has not been sent to %s", $noto);
+                $this->alert($warning, "Invalid Members", "warning");
+            //unset($_participants[$k]);
+            endif;
+
+            return $this->inbox( $messageURI ); //pass the new message id here;
+            //die;
         }
-        
+
         $layout = $this->output->layout('messages/compose');
         $this->output->addToPosition("dashboard", $layout);
-        
-        $this->load->view("message")->display(); 
-    }
 
+        $this->load->view("message")->display();
+    }
 
     /**
      * Returns an instsance of the message action controller

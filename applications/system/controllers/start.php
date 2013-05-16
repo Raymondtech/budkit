@@ -58,7 +58,7 @@ class Start extends \Platform\Controller {
         $gallery = $this->output->layout("media/gallery/widget");
         
         $this->output->set("widget", array(
-            "title"=>"Latest Documents",
+            "title"=>"Recent Documents",
             "body" =>$gallery,
             "footer"=>'<a href="/system/media/attachments/gallery">View Documents</a>'
         ));

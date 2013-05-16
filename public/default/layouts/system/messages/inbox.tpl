@@ -19,7 +19,10 @@
             <div class="widget naked">
                 <div class="widget-body padding-zero">
                     <ul class="stream">
-                        <tpl:loop limit="10">
+                        <tpl:condition test="boolean" data="messages.totalItems" value="0">
+                            <li class="stream-item padding">Your inbox is empty :)</li>
+                        </tpl:condition>
+                        <tpl:loop data="messages.items">
                             <li class="stream-item">
                                 <input type="checkbox" class="select" />
                                 <a href="#" class="link">
@@ -43,9 +46,8 @@
         <div class="message-view">
             <div class="stream-thread">              
                 <div class="stream-body">
-                    <div class="clearfix  padding">
-                        <h2 class="message-title pull-left margin-bottom-zero margin-top-half">[Reply] More information required to complete your grant</h2>
-                        <ul class="nav pull-right nav-pills no-margin">
+                    <div class="clearfix  padding"> 
+                        <ul class="nav nav-pills no-margin">
                             <li>
                                 <div class="btn-group">
                                     <a href="/settings/member/privacy" class="btn">

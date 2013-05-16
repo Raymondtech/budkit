@@ -10,7 +10,7 @@
             <div class="timeline-item-publisher margin-bottom-half">
                 <ul class="nav nav-tabs-launcher" id="status-tabs">
                     <li><strong>Share:</strong></li>
-                    <li><a href="#status-form" data-toggle="tab"><i class="icon-quote-left"></i> Status</a></li>
+                    <li><a href="#status-form" data-toggle="tab"><i class="icon-lightbulb"></i> Idea</a></li>
                     <li><a href="#article-form" data-toggle="tab"><i class="icon-file-alt"></i> Article</a></li>
                     <li><a href="#uploads-form" data-toggle="tab"><i class="icon-upload-alt"></i> Uploads</a></li>
                     <li><a href="#events-form" data-toggle="tab"><i class="icon-calendar"></i> Event</a></li>
@@ -24,7 +24,7 @@
                                     <textarea class="input-100pct focused" 
                                               data-target="budkit-editor" 
                                               data-stylesheet="http://${config|general.host}${config|general.path}public/default/assets/css/editor.css"
-                                              rows="4" name="media_content" placeholder="Say something...">
+                                              rows="4" name="media_content" placeholder="">
                                         <tpl:element type="html" data="content" medialinks="true" />
                                     </textarea>
                                 </div> 
