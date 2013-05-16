@@ -7865,6 +7865,31 @@ text {
 video {
   max-width: 100%;
 }
+/*** SEARCh ****/
+.search-results {
+  position: fixed;
+  background: #ffffff;
+  z-index: 1000;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+}
+.search-results:hover {
+  display: block;
+}
+.search-results .results-stream {
+  max-width: 1250px;
+}
+.search-results .results-stream .stream > li > a {
+  color: #333333 !important;
+}
+.search-query:focus ~ .search-results {
+  display: block;
+}
 /****IMPORTS****/
 .nav-mediagrid > li > a {
   padding-top: 8px;

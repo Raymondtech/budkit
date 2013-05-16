@@ -550,3 +550,28 @@ text {
 }
 
 video{max-width: 100%}
+
+
+/*** SEARCh ****/
+.search-results{
+    position: fixed;
+    background: @white;
+    z-index: 1000;
+    top: @navbarHeight;
+    left: 0;
+    right: 0;
+    bottom:0;
+    display: none;
+    border-bottom: 1px solid #ddd;
+    padding: @gridGutterWidth;
+    &:hover{ display: block; }
+    .results-stream{
+       max-width: 1250px; 
+       .stream > li > a{ color: @grayDark !important;}
+    }
+}
+.search-query{
+    &:focus~.search-results{
+        display: block;
+    }
+}

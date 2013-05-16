@@ -1,10 +1,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="navbar" id="navbar">
         <div class="navbar-inner">
-            <form class="navbar-search input-append pull-left" method="get">   
-                <i class="icon-search add-on"></i>
-                <input type="text" class="search-query" placeholder="Search" />
-            </form>                
+            <tpl:import layout="search" />               
         </div>
     </div>
     <tpl:condition data="config|appearance.show-dashboard-photo" test="boolean" value="1">
