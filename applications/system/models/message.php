@@ -70,12 +70,19 @@ class Message extends Platform\Entity {
         foreach ($rows as $row) {
  
             $_member = $_users->loadObjectByURI($row['message_author']);
-            $row['message_body'] = html_entity_decode(trim($row['message_body']));
+                        //Has this user read this message?
+            $readby = explode( $row['message_read']);
+            if(!in_array($this->user->get("user_name_id"), $readby) && $row['message_author']<>$this->user->get("user_name_id")):
+                $row['message_status'] = 'unread';
+            endif;
+            
+            $row['message_body'] = strip_tags( html_entity_decode(trim($row['message_body'])) );
             $row['message_author'] = $_member->getPropertyData();
             $row['message_author']['user_full_name'] = $_users->getFullName($_member->getPropertyValue('user_first_name'), NULL, $_member->getPropertyValue("user_last_name"));
-            
+                
             $messages["items"][] = $row;
             $messages["totalItems"]++;
+            
         }
  
         return $messages;

@@ -25,7 +25,7 @@
                         <tpl:loop data="messages.items" id="message-list">
                             <li class="stream-item">
                                 <input type="checkbox" class="select" />
-                                <a href="#" class="link">
+                                <a href="#" class="link ${message_status}">
                                     <tpl:condition test="isset" data="message_subject" value="1">
                                         <div class="subject">
                                             <tpl:element type="text" data="message_subject" />
