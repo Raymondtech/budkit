@@ -63,11 +63,11 @@ class Message extends Platform\Entity {
         $_users = $this->load->model("user", "member");
         $_messages = $this->setListLookUpConditions("message_participants", $this->user->get("user_name_id"))
                 ->getObjectsList("message");
-
+        $rows     = $_messages->fetchAll();
         $messages = array("totalItems" => 0);
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
-        while ($row = $_messages->fetchAssoc()) {
+        foreach ($rows as $row) {
  
             $_member = $_users->loadObjectByURI($row['message_author']);
             $row['message_body'] = html_entity_decode(trim($row['message_body']));

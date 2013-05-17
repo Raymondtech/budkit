@@ -22,7 +22,7 @@
                         <tpl:condition test="boolean" data="messages.totalItems" value="0">
                             <li class="stream-item padding">Your inbox is empty :)</li>
                         </tpl:condition>
-                        <tpl:loop data="messages.items">
+                        <tpl:loop data="messages.items" id="message-list">
                             <li class="stream-item">
                                 <input type="checkbox" class="select" />
                                 <a href="#" class="link">
