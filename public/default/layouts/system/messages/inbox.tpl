@@ -36,7 +36,7 @@
                                         <span class="time"><tpl:element type="time" data="object_updated_on" /></span>    
                                     </div>
                                     <div class="content">
-                                        <tpl:element type="text" data ="message_subject" />
+                                        <tpl:element type="text" data ="message_body" />
                                     </div>
                                 </a>
                             </li>
