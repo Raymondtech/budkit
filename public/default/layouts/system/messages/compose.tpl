@@ -15,12 +15,12 @@
                                 <fieldset class="no-bottom-margin">
                                     <div class="control-group">
                                         <div class="controls row-fluid">           
-                                            <input type="text" name="message_participants" placeholder="Participants"  class="span12 margin-bottom-zero" value="${media_summary}" />
+                                            <input type="text" name="message_participants" placeholder="Participants"  class="span12 margin-bottom-zero" />
                                         </div>
                                     </div>  
                                     <div class="control-group">
                                         <div class="controls row-fluid">           
-                                            <input type="text" name="message_subject" placeholder="Subject (optional)"  class="span12 margin-bottom-zero" value="${media_summary}" />
+                                            <input type="text" name="message_subject" placeholder="Subject (optional)"  class="span12 margin-bottom-zero"  />
                                         </div>
                                     </div>  
                                     <div class="control-group">
@@ -28,7 +28,6 @@
                                             <textarea class="input-100pct focused"
                                                       data-stylesheet="http://${config|general.host}${config|general.path}public/default/assets/css/editor.css"
                                                       data-target="budkit-editor" toolbar="1"  rows="20" name="message_body" placeholder="Say something...">
-                                                <tpl:element type="html" data="content" medialinks="true" />
                                             </textarea>
                                         </div> 
                                     </div>

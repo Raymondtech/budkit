@@ -147,7 +147,7 @@ final class Message extends \Platform\Controller {
             $message->setPropertyValue("message_author", $this->user->get("user_name_id"));
             $message->setPropertyValue("message_updated", \Library\Date\Time::stamp());
             
-            if (empty($subject))
+            if (!empty($subject))
                 $message->setPropertyValue("message_subject", $subject);
             //Save the message
             if(!$message->saveObject(null,"message")){

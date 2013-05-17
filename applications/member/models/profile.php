@@ -47,25 +47,6 @@ class Profile extends User {
         $this->defineValueGroup("user");
     }
 
-    /**
-     * Returns the full name of the loaded Profile
-     * 
-     * @param type $first The default First Name
-     * @param type $middle The default Middle Name
-     * @param type $last The default Last Name
-     * @return type
-     */
-    public function getFullName($first = NULL, $middle = NULL, $last = NULL) {
-
-        $user_first_name = $this->getPropertyValue("user_first_name");
-        $user_middle_name = $this->getPropertyValue("user_middle_name");
-        $user_last_name = $this->getPropertyValue("user_last_name");
-        $user_full_name = implode(' ', array(empty($user_first_name) ? $first : $user_first_name, empty($user_middle_name) ? $middle : $user_middle_name, empty($user_last_name)?$last:$user_last_name ));
-
-        if (!empty($user_full_name)) {
-            return $user_full_name;
-        }
-    }
 
     /**
      * Returns an instance of the profile object model

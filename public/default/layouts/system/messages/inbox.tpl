@@ -26,15 +26,17 @@
                             <li class="stream-item">
                                 <input type="checkbox" class="select" />
                                 <a href="#" class="link">
-                                    <div class="subject">
-                                        [Reply] More information required to complete your grant
-                                    </div>
+                                    <tpl:condition test="isset" data="message_subject" value="1">
+                                        <div class="subject">
+                                            <tpl:element type="text" data ="message_subject" />
+                                        </div>
+                                    </tpl:condition>
                                     <div class="title clearfix">
-                                        <span class="auhor">Livingstone Fultang</span>
-                                        <span class="time">10 hrs ago</span>    
+                                        <span class="auhor"><tpl:element type="text" data="message_author.user_full_name" /></span>
+                                        <span class="time"><tpl:element type="time" data="object_updated_on" /></span>    
                                     </div>
                                     <div class="content">
-                                        And here are the contents of this message. Maximum of two lines allowed. But we sill have plenty of space to add more
+                                        <tpl:element type="text" data ="message_subject" />
                                     </div>
                                 </a>
                             </li>

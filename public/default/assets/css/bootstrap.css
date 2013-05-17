@@ -7197,7 +7197,7 @@ input.search-query {
 }
 .stream li .select {
   position: absolute;
-  top: 20px;
+  top: 22px;
   left: 20px;
 }
 .stream li .select ~ .link {

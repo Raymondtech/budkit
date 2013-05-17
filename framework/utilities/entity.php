@@ -822,7 +822,7 @@ class Entity extends Model {
      * 
      * @return type
      */
-    final public function getPropertyData() {
+    public function getPropertyData() {
         return $this->propertyData;
     }
 

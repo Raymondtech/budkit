@@ -41,7 +41,7 @@ class Message extends Platform\Entity {
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->definePropertyModel(
                 array(
-            "message_subject" => array("Message Subject", "mediumtext", 100),
+            "message_subject" => array("Message Subject", "mediumtext", 200),
             "message_body" => array("Message Text", "longtext", 2000),
             "message_participants" => array("Message Participants", "mediumtext", 600),
             "message_author" => array("Message Author", "mediumtext", 200),
@@ -60,20 +60,25 @@ class Message extends Platform\Entity {
     }
 
     public function getMessages() {
-        
-        $messages = $this->setListLookUpConditions("message_participants", $this->user->get("user_name_id"))
+        $_users = $this->load->model("user", "member");
+        $_messages = $this->setListLookUpConditions("message_participants", $this->user->get("user_name_id"))
                 ->getObjectsList("message");
 
-        $items = array("totalItems" => 0);
+        $messages = array("totalItems" => 0);
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
-        while ($row = $messages->fetchAssoc()) {
-            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
-            $items["items"][] = $row;
-            $items["totalItems"]++;
+        while ($row = $_messages->fetchAssoc()) {
+ 
+            $_member = $_users->loadObjectByURI($row['message_author']);
+            $row['message_body'] = strip_tags(trim($row['message_body']));
+            $row['message_author'] = $_member->getPropertyData();
+            $row['message_author']['user_full_name'] = $_users->getFullName($_member->getPropertyValue('user_first_name'), NULL, $_member->getPropertyValue("user_last_name"));
+            
+            $messages["items"][] = $row;
+            $messages["totalItems"]++;
         }
  
-        return $items;
+        return $messages;
         
     }
 
