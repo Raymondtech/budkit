@@ -176,7 +176,8 @@ final class Message extends \Platform\Controller {
             //unset($_participants[$k]);
             endif;
 
-            return $this->inbox( $messageURI ); //pass the new message id here;
+            $inbox = \Library\Uri::internal('/system/messages/inbox/'.$messageURI);
+            return $this->redirect( $inbox ); //pass the new message id here;
             //die;
         }
 
