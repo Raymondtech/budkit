@@ -28,7 +28,7 @@
                                 <a href="#" class="link">
                                     <tpl:condition test="isset" data="message_subject" value="1">
                                         <div class="subject">
-                                            <tpl:element type="text" data ="message_subject" />
+                                            <tpl:element type="text" data="message_subject" />
                                         </div>
                                     </tpl:condition>
                                     <div class="title clearfix">
