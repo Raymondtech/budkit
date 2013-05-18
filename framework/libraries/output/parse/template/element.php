@@ -95,6 +95,17 @@ class Element extends Parse\Template {
     public static function content($text, $writer) {
         $writer->writeRaw(trim($text));
     }
+    
+    
+    protected static function wordLimit($string, $limit){
+        
+        //@TODO maybe strip html tags before counting?
+        
+        $words      = explode(" ", $string);
+        $continum   = (sizeof($words)>(int)$limit)? " [...]" : NULL;
+        
+        return (empty($continum))? $string: implode(" ",array_splice($words,0,$limit)).$continum;
+    }
 
     /**
      * Alias for html, but does not allows tags
@@ -195,8 +206,9 @@ class Element extends Parse\Template {
                 //print_R($data); 
                 //$data = nl2br( $data );
             endif;
-                                 
-            $tag['CDATA'] = $data;
+            
+            //@TODO The behavior of the word limit function wtih html formated string is unknown;
+            $tag['CDATA'] = isset($tag['WORDLIMIT'])? static::wordLimit($data, $tag['WORDLIMIT']): $data;
             //If we do not have a default empty it
             if (is_null($tag['_DEFAULT']))
                 unset($tag['_DEFAULT']);

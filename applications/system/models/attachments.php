@@ -185,7 +185,9 @@ class Attachments extends Platform\Entity {
                 throw new \Platform\Exception($this->getError());
             }
         }
-        $uploadFileName = $uploadsFolder . DS . $fileName;
+        
+        $_uploadFileName = str_replace(array(" "), "_", $fileName );
+        $uploadFileName  = $uploadsFolder.DS.$_uploadFileName;
         if (!move_uploaded_file($file['tmp_name'], $uploadFileName)) {
             $this->setError(_("Could not move the uploaded folder to the target directory"));
             throw new \Platform\Exception($this->getError());
@@ -199,14 +201,14 @@ class Attachments extends Platform\Entity {
 
 
         foreach (array(
-    "attachment_name" => $fileName,
-    "attachment_title" => basename($file['name']), //@todo Wil need to check $file[title],
-    "attachment_size" => $file['size'],
-    "attachment_description" => "", //@todo Wil need to check $file[description],
-    "attachment_src" => str_replace(FSPATH, '', $uploadFileName),
-    "attachment_ext" => $fileExtension,
-    "attachment_owner" => $this->_owner,
-    "attachment_type" => $this->_fileType
+            "attachment_name" => $fileName,
+            "attachment_title" => basename($file['name']), //@todo Wil need to check $file[title],
+            "attachment_size" => $file['size'],
+            "attachment_description" => "", //@todo Wil need to check $file[description],
+            "attachment_src" => str_replace(FSPATH, '', $uploadFileName),
+            "attachment_ext" => $fileExtension,
+            "attachment_owner" => $this->_owner,
+            "attachment_type" => $this->_fileType
         ) as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;

@@ -46,9 +46,19 @@ final class Message extends \Platform\Controller {
         $this->output->setPageTitle(_("Private Messages"));
 
         $model = $this->load->model('message', 'system');
-        $messages = $model->setListOrderBy( array("o.object_updated_on"), "DESC")->getMessages();
+        $messages = $model->setListOrderBy(array("o.object_updated_on"), "DESC")->getMessages( $messageURI );
 
+        //Get inbox lists
         $this->set("messages", $messages);
+
+        if(!empty($messageURI)):
+            $activity = $this->load->model('media', 'system');
+            $activities = $activity->setListLookUpConditions("media_target", $messageURI)->getAll();
+            $activity->setPagination(); //Set the pagination vars
+
+            if ((int) $activities["totalItems"] > 0)
+                $this->set("activities", $activities);
+        endif;
 
         $layout = $this->output->layout('messages/inbox');
         $this->output->addToPosition("dashboard", $layout);
@@ -131,13 +141,13 @@ final class Message extends \Platform\Controller {
                     $_noto[] = $member;
                     continue;
                 }
-                //$_to[$_member->getObjectUri()] = $_member;
+            //$_to[$_member->getObjectUri()] = $_member;
             endforeach;
 
             //Throw an error if we don't have the message
             if (empty($_participants))
                 return $this->returnRequest("No valid recipients", "error");
-            
+
             //Add the messsage author to the participant list;
             $_participants[] = $this->user->get("user_name_id");
 
@@ -146,27 +156,27 @@ final class Message extends \Platform\Controller {
             $message->setPropertyValue("message_participants", implode(",", $_participants));
             $message->setPropertyValue("message_author", $this->user->get("user_name_id"));
             $message->setPropertyValue("message_updated", \Library\Date\Time::stamp());
-            
+
             if (!empty($subject))
                 $message->setPropertyValue("message_subject", $subject);
             //Save the message
-            if(!$message->saveObject(null,"message")){
-                return $this->returnRequest("The message could not be sent", "error");  
+            if (!$message->saveObject(null, "message")) {
+                return $this->returnRequest("The message could not be sent", "error");
             }
             $messageURI = $message->getLastSavedObjectURI();
-            
+
             //Prepare media content;
-            $this->input->setVar("media_content", $text, "post");
-            //$this->input->setVar("media_summary", $subject, "post");
+            $this->input->setVar("media_content", html_entity_decode($text), "post"); //get formatted string crunches html tags to entities
+            $this->input->setVar("media_verb", "post", "post"); //maybe need something different here!
             $this->input->setVar("media_target", $messageURI, "post");
-            
+
             //Save the media;
             $media = $this->load->model("media", "system");
-            if(!$media->addMedia()):
+            if (!$media->addMedia()):
                 //@todo, delete, the messagetarget;
-                return $this->returnRequest("The message could not be sent", "error"); 
+                return $this->returnRequest("The message could not be sent", "error");
             endif;
-            
+
             //All done
             $this->alert("Your private message stream has now been created and sent to all reciepients");
             if (!empty($_noto)):
@@ -176,8 +186,8 @@ final class Message extends \Platform\Controller {
             //unset($_participants[$k]);
             endif;
 
-            $inbox = \Library\Uri::internal('/system/messages/inbox/'.$messageURI);
-            return $this->redirect( $inbox ); //pass the new message id here;
+            $inbox = \Library\Uri::internal('/system/messages/inbox/' . $messageURI);
+            return $this->redirect($inbox); //pass the new message id here;
             //die;
         }
 

@@ -59,7 +59,8 @@ class Message extends Platform\Entity {
         return false;
     }
 
-    public function getMessages() {
+    public function getMessages( $active = NULL) {
+        
         $_users = $this->load->model("user", "member");
         $_messages = $this->setListLookUpConditions("message_participants", $this->user->get("user_name_id"))
                 ->getObjectsList("message");
@@ -74,6 +75,10 @@ class Message extends Platform\Entity {
             $readby = explode( $row['message_read']);
             if(!in_array($this->user->get("user_name_id"), $readby) && $row['message_author']<>$this->user->get("user_name_id")):
                 $row['message_status'] = 'unread';
+            endif;
+            
+            if($active == $row['object_uri']):
+                $row['message_status'] = 'open';
             endif;
             
             $row['message_body'] = strip_tags( html_entity_decode(trim($row['message_body'])) );
