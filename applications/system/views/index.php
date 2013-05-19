@@ -67,7 +67,7 @@ class Index extends Platform\View {
         $this->output->addMenuGroupToPosition("side", "dashboardmenu");
         //$this->output->addToPosition("aside",   $rightaside );
                 //$this->output->addToPosition("side", $sidebar);
-         $dashboard = $this->output->layout("dashboard");
+        $dashboard = $this->output->layout("dashboard");
         $this->output->addToPosition("body", $dashboard);
     }
 

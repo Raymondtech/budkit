@@ -113,6 +113,63 @@ class Attachments extends Platform\Entity {
     }
 
     /**
+     * Searches the database for attachments
+     * 
+     * @param type $query
+     * @param type $results
+     */
+    public static function search($query, &$results = array()) {
+
+        $users = static::getInstance();
+
+        if (!empty($query)):
+            $words = explode(' ', $query);
+            foreach ($words as $word) {
+                $_results =
+                        $users->setListLookUpConditions("attachment_name", $word, 'OR')
+                        ->setListLookUpConditions("attachment_title", $word, 'OR')
+                        ->setListLookUpConditions("attachment_description", $word, 'OR')
+                        ->setListLookUpConditions("attachment_tags", $word, 'OR');
+            }
+
+            $_results = $users->getObjectsList("attachment");
+            $rows = $_results->fetchAll();
+            $browsable = array("image/jpg", "image/jpeg", "image/png", "image/gif");
+            //Include the members section
+            $documents = array(
+                "filterid" => "attachments",
+                "title" => "Documents",
+                "results" => array()
+            );
+            //Loop through fetched attachments;
+            //@TODO might be a better way of doing this, but just trying
+            foreach ($rows as $attachment) {
+                $document = array(
+                    "title" => $attachment['attachment_title'], //required
+                    "description" => "", //required
+                    "type" => $attachment['object_type'],
+                    "object_uri" => $attachment['object_uri']
+                );
+                if (in_array($attachment['attachment_type'], $browsable)):
+                     $document['icon']  = "/system/object/{$attachment['object_uri']}/resize/170/170";
+                     $document['link']  = "/system/media/photo/view/{$attachment['object_uri']}";
+                        else:
+                     $document['media_uri'] = $attachment['object_uri'];
+                     $document['link']  = "/system/object/{$attachment['object_uri']}";
+                endif;
+
+                $documents["results"][] = $document;
+            }
+            //Add the members section to the result array, only if they have items;
+            if (!empty($documents["results"]))
+                $results[] = $documents;
+
+        endif;
+
+        return true;
+    }
+
+    /**
      * Defines allowed attachment types before save
      * Any not explicitly defined here will be skipped
      * 
@@ -164,7 +221,7 @@ class Attachments extends Platform\Entity {
         }
         //Check that the file has a valid extension
         $fileExtension = $fileHandler->getExtension($fileName);
-        
+
         if (!array_key_exists(strtolower($fileExtension), $allowedTypes)) {
             $this->setError(_("Attempting to upload an invalid file type"));
             throw new \Platform\Exception($this->getError());
@@ -185,9 +242,9 @@ class Attachments extends Platform\Entity {
                 throw new \Platform\Exception($this->getError());
             }
         }
-        
-        $_uploadFileName = str_replace(array(" "), "_", $fileName );
-        $uploadFileName  = $uploadsFolder.DS.$_uploadFileName;
+
+        $_uploadFileName = str_replace(array(" "), "_", $fileName);
+        $uploadFileName = $uploadsFolder . DS . $_uploadFileName;
         if (!move_uploaded_file($file['tmp_name'], $uploadFileName)) {
             $this->setError(_("Could not move the uploaded folder to the target directory"));
             throw new \Platform\Exception($this->getError());
@@ -470,6 +527,8 @@ class Attachments extends Platform\Entity {
         if (!in_array(strtolower($fileExtension), $resizable))
             return $file; //If we can't resize it just return the file
 
+
+
             
 //We need at least the width or height to resize;
         if (empty($params))
@@ -509,6 +568,8 @@ class Attachments extends Platform\Entity {
         $thisModel = new self;
         if (!in_array($mediaObjectType, $objectTypeshaystack))
             return; //Nothing to do here if we can't deal with it!
+
+
 
 
             

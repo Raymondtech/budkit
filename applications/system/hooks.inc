@@ -15,6 +15,8 @@
  */
 \Library\Event::register('onMediaSubjectModel', '\Application\System\Models\Attachments::mediaObject');
 \Library\Event::register('onMediaSubjectModel', '\Application\System\Models\Collection::mediaObject');
+\Library\Event::register('onSearch', '\Application\System\Models\Attachments::search');
+\Library\Event::register('onSearch', '\Application\System\Models\Message::search');
 
 
 /**

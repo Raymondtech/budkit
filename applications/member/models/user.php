@@ -47,7 +47,8 @@ class User extends \Platform\Entity {
             "user_dob_year" => array("Year of Birth", "varchar", 10),
             "user_timezone" => array("Timezone", "varchar", 10),
             "user_locale" => array("Locale", "varchar", 10),
-                    "user_verification"=> array("Verification Code", "varchar", 50)
+            "user_verification" => array("Verification Code", "varchar", 50),
+            "user_photo" => array("Profile Photo", "mediumtext", 10)
                 ), "user"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models
@@ -67,13 +68,13 @@ class User extends \Platform\Entity {
         $user_first_name = $this->getPropertyValue("user_first_name");
         $user_middle_name = $this->getPropertyValue("user_middle_name");
         $user_last_name = $this->getPropertyValue("user_last_name");
-        $user_full_name = implode(' ', array(empty($user_first_name) ? $first : $user_first_name, empty($user_middle_name) ? $middle : $user_middle_name, empty($user_last_name)?$last:$user_last_name ));
+        $user_full_name = implode(' ', array(empty($user_first_name) ? $first : $user_first_name, empty($user_middle_name) ? $middle : $user_middle_name, empty($user_last_name) ? $last : $user_last_name));
 
         if (!empty($user_full_name)) {
             return $user_full_name;
         }
     }
-    
+
     /**
      * Updates the user profile data
      * 
@@ -99,7 +100,7 @@ class User extends \Platform\Entity {
         foreach ($updatedProfile as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
-        $data = $this->getPropertyData();
+        //$data = $this->getPropertyData();
         $this->defineValueGroup("user");
         //die;
         if (!$this->saveObject($this->getPropertyValue("user_name_id"), "user", $this->getObjectId())) {
@@ -107,6 +108,58 @@ class User extends \Platform\Entity {
             $profile->setError("Could not save the profile data");
             return false;
         }
+
+        return true;
+    }
+
+    /**
+     * Searches the database for users
+     * 
+     * @param type $query
+     * @param type $results
+     */
+    public static function search($query, &$results = array()) {
+
+        $users = static::getInstance();
+
+        if (!empty($query)):
+            $words = explode(' ', $query);
+            foreach ($words as $word) {
+                $_results =
+                    $users->setListLookUpConditions("user_first_name", $word, 'OR')
+                    ->setListLookUpConditions("user_last_name", $word, 'OR')
+                    ->setListLookUpConditions("user_middle_name", $word, 'OR')
+                    ->setListLookUpConditions("user_name_id", $word, 'OR');
+            }
+
+            $_results = $users->getObjectsList("user");
+            $rows = $_results->fetchAll();
+
+            //Include the members section
+            $members = array(
+                "filterid" => "users",
+                "title" => "People",
+                "results" => array()
+            );
+            //Loop through fetched attachments;
+            //@TODO might be a better way of doing this, but just trying
+            foreach ($rows as $member) {
+                $photo = empty($member['user_photo']) ? "" : "/system/object/{$member['user_photo']}/resize/170/170";
+                $members["results"][] = array(
+                    "icon" => $photo, //optional
+                    "link" => "/member:{$member['user_name_id']}/profile/timeline",
+                    "title" => $users->getFullName($member['user_first_name'], $member['user_middle_name'], $member['user_last_name']), //required
+                    "description" => "", //required
+                    "type" => $member['object_type'],
+                    "user_name_id" => $member['user_name_id']
+                );
+            }
+
+            //Add the members section to the result array, only if they have items;
+            if (!empty($members["results"]))
+                $results[] = $members;
+
+        endif;
 
         return true;
     }

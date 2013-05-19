@@ -39,7 +39,6 @@ class Profile extends User {
         parent::__construct();
         //Extend the User Object Model
         $this->extendPropertyModel(array(
-            "user_photo" => array("Profile Photo", "mediumtext", 10),
             "user_biography" => array("Background and Biography", "text", 500),
             "user_headline" => array("Headline", "mediumtext", 100),
             "user_website" => array("Website URL", "mediumtext", 100)

@@ -62,7 +62,7 @@ class Media extends Platform\Entity {
             "media_comment_status" => array("Allow Comments", "tinyint", 1, 0), //*
             "media_parent" => array("Parent", "smallint", 10, 0), //*
             "media_generator" => array("Generator", "mediumtext", 100),
-            "media_provider" => array("Provider", "mediumtext", 100),
+            "media_provider" => array("Provider", "mediumtext", 100, "budkit"),
             "media_mentions" => array("Mentions", "varchar", 1000), //*
             "media_actor" => array("Actor", "varchar", 1000),
             "media_verb" => array("Verb", "mediumtext", 20, "post"),
@@ -315,9 +315,7 @@ class Media extends Platform\Entity {
 
         foreach ($inputModel as $property => $definition):
             $value = $this->input->getVar($property);
-            if (!empty($value)):
-                $this->setPropertyValue($property, $value);
-            endif;
+            $this->setPropertyValue($property, $value);
         endforeach;
 
         //Allow some HTML in media content;
@@ -329,6 +327,9 @@ class Media extends Platform\Entity {
         $this->setPropertyValue("media_actor", $this->user->get("user_id"));
         $this->setPropertyValue("media_published", \Library\Date\Time::stamp());
 
+        
+        $data = $this->getPropertyData();
+        
         //@TODO
         //Search for media link
         $targetObject = Media\Object::getInstance();

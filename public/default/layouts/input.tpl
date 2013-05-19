@@ -41,9 +41,10 @@
                                 </div>              
                             </fieldset>
                             <input type="hidden" name="${uploadprogress}" value="timelineupload" />
-                            <input type="hidden" name="media_author_id" value="" />
-                            <input type="hidden" name="media_verb" value="post" />
-                            <input type="hidden" name="media_provider" value="budkit" />
+                            <input type="hidden" name="media_target" value="${mediatarget}" />
+                            <input type="hidden" name="media_author_id" value="${mediaauthorid}" />
+                            <input type="hidden" name="media_verb" value="${mediaverb}" />
+                            <input type="hidden" name="media_provider" value="${mediaprovider}" />
                         </form>
                     </div>
                     <div class="tab-pane" id="article-form">

@@ -1,7 +1,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="navbar" id="navbar">
         <div class="navbar-inner">
-            <tpl:import layout="search" />               
+            <tpl:import layout="system/search" />               
         </div>
     </div>
     <tpl:condition data="config|appearance.show-dashboard-photo" test="boolean" value="1">

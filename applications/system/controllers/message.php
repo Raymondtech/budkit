@@ -44,20 +44,58 @@ final class Message extends \Platform\Controller {
     public function inbox($messageURI = null) {
 
         $this->output->setPageTitle(_("Private Messages"));
-
         $model = $this->load->model('message', 'system');
-        $messages = $model->setListOrderBy(array("o.object_updated_on"), "DESC")->getMessages( $messageURI );
-
+        $messages = $model->setListOrderBy(array("o.object_updated_on"), "DESC")->getMessages($messageURI);
+        $me = $this->user->get('user_name_id');
         //Get inbox lists
         $this->set("messages", $messages);
 
-        if(!empty($messageURI)):
-            $activity = $this->load->model('media', 'system');
-            $activities = $activity->setListLookUpConditions("media_target", $messageURI)->getAll();
-            $activity->setPagination(); //Set the pagination vars
+        if (!empty($messageURI)):
 
-            if ((int) $activities["totalItems"] > 0)
-                $this->set("activities", $activities);
+            //Check that the message exists
+            $object = $model->loadObjectByURI($messageURI);
+            if ($messageURI == $object->getObjectUri()):
+
+                //Check can view message, i.e either author or participant
+                $_participants = $object->getPropertyValue("message_participants");
+                $participants = explode(",", $_participants);
+                $participants[] = $object->getPropertyValue("message_author");
+                if (in_array($me, $participants)):
+                    $activity = $this->load->model('media', 'system');
+                    $activities = $activity->setListLookUpConditions("media_target", $messageURI)->getAll();
+                    $activity->setPagination(); //Set the pagination vars
+                    $this->set("mediatarget", $object->getObjectUri());
+                    $this->set("mediaverb", "message");
+                    if ((int) $activities["totalItems"] > 0):
+                        $this->set("activities", $activities);
+                    endif;
+                    //Mark Message read;
+                    $_read = $object->getPropertyValue("message_read");
+                    $_who = explode(",", trim($_read));
+                    $who = array_filter($_who);
+                               
+                    if (!in_array($me, $who)):                 
+                        $who[] = $me;
+                        $read = implode(",", $who);
+                        
+                        $model->setObjectId($object->getObjectId());
+                        $model->setObjectURI($object->getObjectURI());
+                        $objectData = $object->getPropertyData();
+                        $updatedObject = array_merge($objectData, array("message_read" => $read));
+
+                        foreach ($updatedObject as $property => $value):
+                            $model->setPropertyValue($property, $value);
+                        endforeach;
+                        if (!$model->saveObject()):
+                            $this->alert('The Message read status could not be changed', "", "error");
+                        endif;
+                    endif;
+                else:
+                    $this->alert('Permission to view the requested object has been denied', "", "warning");
+                endif;
+            else:
+                $this->alert('The message thread you requested was not found', "", "error");
+            endif;
         endif;
 
         $layout = $this->output->layout('messages/inbox');
@@ -109,6 +147,7 @@ final class Message extends \Platform\Controller {
     public function create() {
 
         $this->output->setPageTitle(_("New Message"));
+        $me = $this->user->get("user_name_id");
 
         //If we are submitting a form
         if ($this->input->methodIs("post")) {
@@ -149,7 +188,8 @@ final class Message extends \Platform\Controller {
                 return $this->returnRequest("No valid recipients", "error");
 
             //Add the messsage author to the participant list;
-            $_participants[] = $this->user->get("user_name_id");
+            if(!in_array($me, $_participants))
+                $_participants[] = $me;
 
             //Create the new message;
             $message->setPropertyValue("message_body", $text);
@@ -167,7 +207,7 @@ final class Message extends \Platform\Controller {
 
             //Prepare media content;
             $this->input->setVar("media_content", html_entity_decode($text), "post"); //get formatted string crunches html tags to entities
-            $this->input->setVar("media_verb", "post", "post"); //maybe need something different here!
+            $this->input->setVar("media_verb", "message", "post"); //maybe need something different here!
             $this->input->setVar("media_target", $messageURI, "post");
 
             //Save the media;

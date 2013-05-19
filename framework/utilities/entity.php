@@ -70,6 +70,11 @@ class Entity extends Model {
         if (!array_key_exists($property, $this->propertyModel))
             return false; //@TODO Raise error? specified column not found
         //2. Validate the Value?
+        if (empty($value)):
+            //Attempt to get the default value;
+            if(isset($this->propertyModel[$property][3])) //the third item in the array should be the default value;
+                $value = $this->propertyModel[$property][3];
+        endif;
         //3. Store the value with the property name in $propertyData;
         if (empty($objectId) || (int) $objectId == $this->objectId):
             $this->propertyData[$property] = $value;

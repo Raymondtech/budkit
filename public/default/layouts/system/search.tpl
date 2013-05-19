@@ -1,7 +1,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form class="navbar-search input-append pull-left" method="get">   
+    <form class="navbar-search input-append pull-left" action="/system/search/graph" method="post">   
         <i class="icon-search add-on"></i>
-        <input type="text" class="search-query" placeholder="Search" />
+        <input type="text" class="search-query" name="query" placeholder="Search" />
         <div class="search-results">
             <div class="results-stream">
                 <ul class="stream">

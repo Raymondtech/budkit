@@ -8674,7 +8674,8 @@ video {
 .timeline-item-icon.toolset a {
   padding: 3px 7px;
 }
-.icon-post:before {
+.icon-post:before,
+.icon-message:before {
   content: "\f040";
 }
 #timeline {
