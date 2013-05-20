@@ -369,7 +369,7 @@ class Entity extends Model {
      * @param type $escape
      * @return \Platform\Entity
      */
-    final public function setListLookUpConditions($key, $value = NULL, $type = 'AND', $escape = TRUE) {
+    final public function setListLookUpConditions($key, $value = NULL, $type = 'AND', $exact=FALSE, $escape = TRUE) {
 
         if (empty($key)) {
             return $this;

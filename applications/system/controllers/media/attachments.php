@@ -104,7 +104,7 @@ class Attachments extends System\Media {
         $this->output->setPageTitle(_("Attachments"));
 
         $model = $this->load->model("attachments", "system");
-        $attachments = $model->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+        $attachments = $model->setListLookUpConditions("attachment_owner", array($this->user->get("user_name_id")))
                 ->setListOrderBy("o.object_created_on", "DESC")
                 ->getObjectsList("attachment");
         $model->setPagination(); //Set the pagination vars

@@ -105,7 +105,7 @@ class Message extends Platform\Entity {
                           ->setListLookUpConditions("message_body", $word, 'OR');
             }
 
-            $_results = $pms->setListLookUpConditions("message_participants", $pms->user->get("user_name_id"))->getObjectsList("message");
+            $_results = $pms->setListLookUpConditions("message_participants", array($pms->user->get("user_name_id")), "AND")->getObjectsList("message");
             $rows = $_results->fetchAll();
 
             $messages = array(
