@@ -120,19 +120,22 @@ class Attachments extends Platform\Entity {
      */
     public static function search($query, &$results = array()) {
 
-        $users = static::getInstance();
+        $attachments = static::getInstance();
 
         if (!empty($query)):
             $words = explode(' ', $query);
             foreach ($words as $word) {
                 $_results =
-                        $users->setListLookUpConditions("attachment_name", $word, 'OR')
+                        $attachments->setListLookUpConditions("attachment_name", $word, 'OR')
                         ->setListLookUpConditions("attachment_title", $word, 'OR')
                         ->setListLookUpConditions("attachment_description", $word, 'OR')
                         ->setListLookUpConditions("attachment_tags", $word, 'OR');
             }
 
-            $_results = $users->getObjectsList("attachment");
+            $_results = $attachments
+                    ->setListLookUpConditions("attachment_owner", $attachments->user->get("user_name_id"))
+                    ->setListOrderBy("o.object_created_on", "DESC")
+                    ->getObjectsList("attachment");
             $rows = $_results->fetchAll();
             $browsable = array("image/jpg", "image/jpeg", "image/png", "image/gif");
             //Include the members section
@@ -151,11 +154,11 @@ class Attachments extends Platform\Entity {
                     "object_uri" => $attachment['object_uri']
                 );
                 if (in_array($attachment['attachment_type'], $browsable)):
-                     $document['icon']  = "/system/object/{$attachment['object_uri']}/resize/170/170";
-                     $document['link']  = "/system/media/photo/view/{$attachment['object_uri']}";
-                        else:
-                     $document['media_uri'] = $attachment['object_uri'];
-                     $document['link']  = "/system/object/{$attachment['object_uri']}";
+                    $document['icon'] = "/system/object/{$attachment['object_uri']}/resize/170/170";
+                    $document['link'] = "/system/media/photo/view/{$attachment['object_uri']}";
+                else:
+                    $document['media_uri'] = $attachment['object_uri'];
+                    $document['link'] = "/system/object/{$attachment['object_uri']}";
                 endif;
 
                 $documents["results"][] = $document;
@@ -258,14 +261,14 @@ class Attachments extends Platform\Entity {
 
 
         foreach (array(
-            "attachment_name" => $fileName,
-            "attachment_title" => basename($file['name']), //@todo Wil need to check $file[title],
-            "attachment_size" => $file['size'],
-            "attachment_description" => "", //@todo Wil need to check $file[description],
-            "attachment_src" => str_replace(FSPATH, '', $uploadFileName),
-            "attachment_ext" => $fileExtension,
-            "attachment_owner" => $this->_owner,
-            "attachment_type" => $this->_fileType
+    "attachment_name" => $fileName,
+    "attachment_title" => basename($file['name']), //@todo Wil need to check $file[title],
+    "attachment_size" => $file['size'],
+    "attachment_description" => "", //@todo Wil need to check $file[description],
+    "attachment_src" => str_replace(FSPATH, '', $uploadFileName),
+    "attachment_ext" => $fileExtension,
+    "attachment_owner" => $this->_owner,
+    "attachment_type" => $this->_fileType
         ) as $property => $value):
             $this->setPropertyValue($property, $value);
         endforeach;
@@ -529,6 +532,7 @@ class Attachments extends Platform\Entity {
 
 
 
+
             
 //We need at least the width or height to resize;
         if (empty($params))
@@ -568,6 +572,7 @@ class Attachments extends Platform\Entity {
         $thisModel = new self;
         if (!in_array($mediaObjectType, $objectTypeshaystack))
             return; //Nothing to do here if we can't deal with it!
+
 
 
 

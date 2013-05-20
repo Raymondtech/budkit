@@ -95,17 +95,17 @@ class Message extends Platform\Entity {
 
     public static function search($query, &$results = array()) {
 
-        $users = static::getInstance();
+        $pms = static::getInstance();
 
         if (!empty($query)):
             $words = explode(' ', $query);
             foreach ($words as $word) {
                 $_results =
-                    $users->setListLookUpConditions("message_subject", $word, 'OR')
+                    $pms->setListLookUpConditions("message_subject", $word, 'OR')
                           ->setListLookUpConditions("message_body", $word, 'OR');
             }
 
-            $_results = $users->getObjectsList("message");
+            $_results = $pms->setListLookUpConditions("message_participants", $pms->user->get("user_name_id"))->getObjectsList("message");
             $rows = $_results->fetchAll();
 
             $messages = array(
