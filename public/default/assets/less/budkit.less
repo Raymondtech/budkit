@@ -556,13 +556,14 @@ video{max-width: 100%}
 .search-results{
     position: fixed;
     background: @white;
-    z-index: 1000;
-    top: @navbarHeight;
-    left: 0;
+    z-index: 100000;
+    top: 0;
+    left: 195px;
     right: 0;
     bottom:0;
     display: none;
     border-bottom: 1px solid #ddd;
+    border-top: @navbarHeight solid @navbarBackground;
     padding: @gridGutterWidth;
     overflow-y: auto;
     &:hover{ display: block; }
@@ -572,7 +573,5 @@ video{max-width: 100%}
     }
 }
 .search-query{
-    &:focus~.search-results{
-        display: block;
-    }
+    &:focus~.search-results{ display: block; z-index: 100000; }
 }

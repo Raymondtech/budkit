@@ -60,7 +60,7 @@ class Start extends \Platform\Controller {
         $this->output->set("widget", array(
             "title"=>"Recent Documents",
             "body" =>$gallery,
-            "footer"=>'<a href="/system/media/attachments/gallery">View Documents</a>'
+            "footer"=>'<a href="'.\Library\Uri::internal("/system/media/attachments/gallery").'">View Documents</a>'
         ));
         $widget = $this->output->layout("widget");
         

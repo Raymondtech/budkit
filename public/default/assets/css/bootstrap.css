@@ -7871,13 +7871,14 @@ video {
 .search-results {
   position: fixed;
   background: #ffffff;
-  z-index: 1000;
-  top: 40px;
-  left: 0;
+  z-index: 100000;
+  top: 0;
+  left: 195px;
   right: 0;
   bottom: 0;
   display: none;
   border-bottom: 1px solid #ddd;
+  border-top: 40px solid #363636;
   padding: 20px;
   overflow-y: auto;
 }
@@ -7892,6 +7893,7 @@ video {
 }
 .search-query:focus ~ .search-results {
   display: block;
+  z-index: 100000;
 }
 /****IMPORTS****/
 .nav-mediagrid > li > a {
