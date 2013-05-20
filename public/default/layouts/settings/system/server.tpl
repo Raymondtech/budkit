@@ -13,47 +13,49 @@
                 </div>
             </div>
             <hr />
-            <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-address]">From e-Mail</label>
-                <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-address]" class="input-xxlarge" placeholder="e.g info@mydomain.com" value="${config|server.outgoing-mail-address}" />
+            <tpl:condition data="config|server.outgoing-mail-handler" test="equals" value="smtp">
+                <div class="control-group">
+                    <label class="control-label" for="options[server][outgoing-mail-address]">From e-Mail</label>
+                    <div class="controls">
+                        <input type="text" name="options[server][outgoing-mail-address]" class="input-xxlarge" placeholder="e.g info@mydomain.com" value="${config|server.outgoing-mail-address}" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server]">Mail Server </label>
-                <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-server]" class="input-xxlarge" placeholder="e.g http://webmail.mydomain.com" value="${config|server.outgoing-mail-server}" />
+                <div class="control-group">
+                    <label class="control-label" for="options[server][outgoing-mail-server]">Mail Server </label>
+                    <div class="controls">
+                        <input type="text" name="options[server][outgoing-mail-server]" class="input-xxlarge" placeholder="e.g http://webmail.mydomain.com" value="${config|server.outgoing-mail-server}" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server-port]">Mail  Port</label>
-                <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-server-port]" value="${config|server.outgoing-mail-server-port}" />
+                <div class="control-group">
+                    <label class="control-label" for="options[server][outgoing-mail-server-port]">Mail  Port</label>
+                    <div class="controls">
+                        <input type="text" name="options[server][outgoing-mail-server-port]" value="${config|server.outgoing-mail-server-port}" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server-security]">Mail Security</label>
-                <div class="controls">
-                    <select name="options[server][outgoing-mail-server-security]"  value="config|server.outgoing-mail-server-security">
-                        <option value="">None</option>
-                        <option value="ssl">SSL</option>
-                        <option value="tls">TLS</option>
-                    </select>
+                <div class="control-group">
+                    <label class="control-label" for="options[server][outgoing-mail-server-security]">Mail Security</label>
+                    <div class="controls">
+                        <select name="options[server][outgoing-mail-server-security]"  value="config|server.outgoing-mail-server-security">
+                            <option value="">None</option>
+                            <option value="ssl">SSL</option>
+                            <option value="tls">TLS</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server-username]">Mail Username</label>
-                <div class="controls">
-                    <input type="text" name="options[server][outgoing-mail-server-username]"  value="${config|server.outgoing-mail-server-username}" />
+                <div class="control-group">
+                    <label class="control-label" for="options[server][outgoing-mail-server-username]">Mail Username</label>
+                    <div class="controls">
+                        <input type="text" name="options[server][outgoing-mail-server-username]"  value="${config|server.outgoing-mail-server-username}" />
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="options[server][outgoing-mail-server-password]"> Mail Password</label>
-                <div class="controls">
-                    <input type="password" name="options[server][outgoing-mail-server-password]"  value="${config|server.outgoing-mail-server-password}" />
+                <div class="control-group">
+                    <label class="control-label" for="options[server][outgoing-mail-server-password]"> Mail Password</label>
+                    <div class="controls">
+                        <input type="password" name="options[server][outgoing-mail-server-password]"  value="${config|server.outgoing-mail-server-password}" />
+                    </div>
                 </div>
-            </div>
-            <hr />
+                <hr />
+            </tpl:condition>
             <div class="control-group">
                 <label class="control-label" for="options[server][proxy-server]">Proxy Server</label>
                 <div class="controls">
