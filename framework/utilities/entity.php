@@ -46,7 +46,7 @@ class Entity extends Model {
     protected $objectType = NULL;
     protected $objectURI = NULL;
     protected $valueGroup = NULL; //property value groups can be sub categorised;
-    protected $listOderByStatement = NULL;
+    protected $listOrderByStatement = NULL;
     protected $listLookUpConditions = array();
     protected $listLookUpConditionProperties = array();
     protected static $withConditions = false;
@@ -366,6 +366,7 @@ class Entity extends Model {
      * @param type $key
      * @param type $value
      * @param type $type
+     * @param type $exact
      * @param type $escape
      * @return \Platform\Entity
      */
@@ -403,13 +404,17 @@ class Entity extends Model {
                 if(is_array($v)):
                     
                     $_values = array_map(array($this->database, "quote"), $v);
-                    $values = implode(',', $_values);
-                    
+                    $values = implode(',', $_values);    
                     $v = " IN ($values)";
                     else:
                     $v = " LIKE '%{$v}%'";
                 endif; 
             }
+            if($exact && is_array($this->listLookUpConditions) && !empty($this->listLookUpConditions)):
+                $conditions = implode("\t", $this->listLookUpConditions);
+                $this->listLookUpConditions = array();
+                $this->listLookUpConditions[] = "(".$conditions.")";
+            endif;
             $this->listLookUpConditions[] = $prefix . $k . $v;
         }
 

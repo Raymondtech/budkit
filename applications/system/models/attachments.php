@@ -133,7 +133,7 @@ class Attachments extends Platform\Entity {
             }
 
             $_results = $attachments
-                    ->setListLookUpConditions("attachment_owner", array($attachments->user->get("user_name_id")))
+                    ->setListLookUpConditions("attachment_owner", array($attachments->user->get("user_name_id")),"AND",true)
                     ->setListOrderBy("o.object_created_on", "DESC")
                     ->getObjectsList("attachment");
             $rows = $_results->fetchAll();

@@ -65,7 +65,7 @@ class Search extends \Platform\Controller {
      */
     final public function graph() {
 
-        $query = $this->input->getVar("query", "", $member);
+        $query = $this->input->getVar("query", "");
         $results = array();
         
         //RULES

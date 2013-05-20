@@ -62,7 +62,7 @@ class Message extends Platform\Entity {
     public function getMessages($active = NULL) {
 
         $_users = $this->load->model("user", "member");
-        $_messages = $this->setListLookUpConditions("message_participants", $this->user->get("user_name_id"))
+        $_messages = $this->setListLookUpConditions("message_participants", array( $this->user->get("user_name_id") ) )
                 ->getObjectsList("message");
         $rows = $_messages->fetchAll();
         $messages = array("totalItems" => 0);
@@ -105,7 +105,7 @@ class Message extends Platform\Entity {
                           ->setListLookUpConditions("message_body", $word, 'OR');
             }
 
-            $_results = $pms->setListLookUpConditions("message_participants", array($pms->user->get("user_name_id")), "AND")->getObjectsList("message");
+            $_results = $pms->setListLookUpConditions("message_participants", array($pms->user->get("user_name_id")), "AND", true)->getObjectsList("message");
             $rows = $_results->fetchAll();
 
             $messages = array(
