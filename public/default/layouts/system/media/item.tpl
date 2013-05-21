@@ -64,7 +64,7 @@
                             <div data-graph="livingstone.fultang" id="xsUabo-graph"></div>
                         </div>
                     </div>
-                    <tpl:import layout="media/form/comment" /> 
+                    <tpl:import layout="forms/comment" /> 
                     <div class="stream-comments margin-top" id="comments"><tpl:import layout="media/timeline" /></div>
                     <div class="stream-more"><tpl:import layout="pagination" /></div>
                 </div>

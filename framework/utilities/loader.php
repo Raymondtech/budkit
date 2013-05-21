@@ -204,7 +204,7 @@ final class Loader{
      * Gets a layout
      * 
      * @param type $layout
-     * @param type $vars
+     * @param type $app
      * @param type $return if false returns the url
      */
     public function layout($layout,  $app='', $ext='.tpl', $include= FALSE, $directory = null){

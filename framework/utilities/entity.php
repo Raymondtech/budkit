@@ -370,7 +370,7 @@ class Entity extends Model {
      * @param type $escape
      * @return \Platform\Entity
      */
-    final public function setListLookUpConditions($key, $value = NULL, $type = 'AND', $exact=FALSE, $escape = TRUE) {
+    final public function setListLookUpConditions($key, $value = NULL, $type = 'AND', $exact=FALSE, $escape = TRUE, $comparison="LIKE") {
 
         if (empty($key)) {
             return $this;
@@ -402,12 +402,11 @@ class Entity extends Model {
                 $v = " IS NULL";
             } else {
                 if(is_array($v)):
-                    
                     $_values = array_map(array($this->database, "quote"), $v);
                     $values = implode(',', $_values);    
                     $v = " IN ($values)";
                     else:
-                    $v = " LIKE '%{$v}%'";
+                    $v = (strtoupper($comparison)=="LIKE")?" LIKE '%{$v}%'":" {$comparison} '{$v}'";
                 endif; 
             }
             if($exact && is_array($this->listLookUpConditions) && !empty($this->listLookUpConditions)):

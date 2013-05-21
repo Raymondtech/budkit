@@ -1,4 +1,4 @@
-<tpl:layout name="input" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
+<tpl:layout  xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <form action="/system/content/create" method="POST" class="form-vertical margin-bottom-zero"  enctype="multipart/form-data">
         <fieldset>
             <div id="upload-dropbox">

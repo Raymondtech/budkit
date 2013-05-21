@@ -61,27 +61,42 @@ class Condition extends Parse\Template {
         
     }
 
-    private static function _count($tag) {
-        
+    private static function _compare($tag) {
+
         $data = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
         $value = $tag['VALUE'];
-        $operator = $tag['OPERATOR'];
+        $operator = strtolower($tag['OPERATOR']);
+       
         $element = null;
-
+        $test = false;
+        switch ($operator):
+            case "equals":
+                if( ( isset($tag['COUNT']) && (bool)$tag['COUNT'] ) && sizeof($data) == intval($value) ) $test = true;
+                else if ($value == $data) $test = true;
+                break;
+            case "greaterthan":
+                if (( isset($tag['COUNT']) && (bool)$tag['COUNT'] ) && sizeof($data) > intval($value))
+                    $test = true;
+                break;
+            case "lessthan":
+                if (( isset($tag['COUNT']) && (bool)$tag['COUNT'] ) && sizeof($data) < intval($value))
+                    $test = true;
+                break;
+        endswitch;
+                
         //If the boolean value of value is equal to data then condition is met
-        if ((bool) $data == (bool) $value) {
+        if ($test) {
             //Get the layout name; and save it!
             if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
                 static::$writer->writeRaw($tag['CDATA']);
             endif;
-
             //Get the layout name; and save it!
             if (isset($tag['CHILDREN'])):
                 $element = $tag['CHILDREN'];
             endif;
         }
         //Else remove the tag from the tree;
-        return $element; 
+        return $element;
     }
 
     private static function _boolean($tag) {
@@ -104,10 +119,6 @@ class Condition extends Parse\Template {
         }
         //Else remove the tag from the tree;
         return $element;
-    }
-
-    private static function _compare($tag) {
-        
     }
 
     private static function _isset($tag) {
@@ -191,12 +202,11 @@ class Condition extends Parse\Template {
         return $element;
     }
 
-    
     private static function _empty($tag) {
-        
+
         $data = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
         $value = $tag['VALUE'];
-        $datatest = (empty($data) !== (bool)$value) ? true : false;
+        $datatest = (empty($data) !== (bool) $value) ? true : false;
         $element = null;
 
         //If the boolean value of value is equal to data then condition is met
@@ -227,7 +237,7 @@ class Condition extends Parse\Template {
         static::$writer = $writer;
 
         $method = isset($tag['TEST']) ? $tag['TEST'] : 'compare';
-        $submethods = array("count", "boolean", "compare", "isset", "empty", "equals", "isnot");
+        $submethods = array("boolean", "compare", "isset", "empty", "equals", "isnot");
         $_method = "_" . $method;
 
         //Check that the method exists!

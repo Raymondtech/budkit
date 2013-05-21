@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * project.php
+ * task.php
  *
  * Requires PHP version 5.4
  *
@@ -14,16 +14,16 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+namespace Application\Campus\Controllers\Project;
 
-namespace Application\Campus\Controllers;
+use Application\Campus\Controllers as Campus;
 
-use Platform;
 
 /**
- * Project CRUD action controller. 
+ * Task CRUD action controller. 
  *
  * This class implements the action controller that manages the creation, 
- * view and edit of projects.
+ * view and edit of tasks.
  *
  * @category  Application
  * @package   Action Controller
@@ -32,26 +32,38 @@ use Platform;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Project extends Platform\Controller {
+final class Timeline extends Campus\Project {
 
     /**
      * The default fallback method. 
      * @return  void
      */
     public function index() {
+        
+        $this->output->setPageTitle(_("Project Story-board"));
+        $model = $this->load->model('media', 'system');
 
+        $activities = $model->setListLookUpConditions("media_target", "")->getAll();
+        $model->setPagination(); //Set the pagination vars
 
+        $this->set("activities", $activities);
+        //$this->set("user", $user);
+
+        $timeline = $this->output->layout("project/timeline");
+        //$timelineside = $this->output->layout("timelinenotes");
+
+        $this->output->addToPosition("dashboard", $timeline);
+        //$this->output->addToPosition("aside", $timelineside );
 
         $this->load->view('project')->display();
+        
     }
 
-    
-
     /**
-     * Get's an instance of the Project controller only creating one if does not
+     * Get's an instance of the Task controller only creating one if does not
      * exists
      * @staticvar self $instance
-     * @return an instance of {@link Project}
+     * @return an instance of {@link Task}
      * 
      */
     public static function getInstance() {

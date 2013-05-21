@@ -61,7 +61,7 @@ final class Project extends \Platform\View{
         
         //$rightaside     = $this->output->layout( "cpanel"  );
         $this->output->addMenuGroupToPosition("aside", "projectmenu");
-        $this->output->addMenuGroupToPosition("side", "campusmenu");
+        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
         
         $this->output->addToPosition("body", $dashboard);
         

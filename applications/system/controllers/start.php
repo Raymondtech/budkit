@@ -66,11 +66,12 @@ class Start extends \Platform\Controller {
         
         \Library\Event::trigger('beforeDashboardDisplay', $this);
         
+        $view->editor();//Generate the forms;
+        
         $this->output->addToPosition("dashwidgets", $widget);
         $today = $this->output->layout("start");
-        
         $this->output->addToPosition("dashboard", $today);
-        $this->load->view("index")->display();      
+        $view->display();      
         //$this->output();
     }
    

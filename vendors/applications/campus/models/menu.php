@@ -42,38 +42,23 @@ class Menu extends \Platform\Model {
     public static function hook(&$menuId, &$menuItems) {
         if ($menuId === 'dashboardmenu') {
             array_push($menuItems, array(
-                "menu_title" => "Projects",
-                "menu_url" => "/campus/workspace/project"
+                "menu_title" => "Workspaces",
+                "menu_url" => "/campus/workspace/gallery"
                     )
             );
-        } elseif ($menuId === 'campusmenu') {
-            //Add items to the profile menu;
-            //print_r($menuItems);
-            array_push($menuItems, array(
-                "menu_title" => "Workspace",
-                "children" => array(
-                //    array("menu_title" => "Timeline", "menu_url" => "/campus/workspace/timeline"),
-                    array("menu_title" => "Projects", "menu_url" => "/campus/workspace/project", "menu_count" => 7),
-                    array("menu_title" => "Calendar", "menu_url" => "/campus/workspace/calendar"),
-                    array("menu_title" => "Documents", "menu_url" => "/campus/workspace/documents"),
-                    array("menu_title" => "Tasks", "menu_url" => "/campus/workspace/task", "menu_count" => 10), //add  menu_count_unimportant=true to remove highlight
-                    array("menu_title" => "Portfolio", "menu_url" => "/campus/workspace/portfolio"),
-                // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
-                )
-                    )
-            );
-        } elseif ($menuId === 'projectmenu') {
+        }elseif ($menuId === 'projectmenu') {
             array_push($menuItems, array(
                 "menu_title" => "Project Menu",
                 "children" => array(
                     array("menu_title" => "Overview", "menu_url" => "/campus/project/overview"),
-                    array("menu_title" => "To-do", "menu_url" => "/campus/project/assignments"),
+                    array("menu_title" => "To-do", "menu_url" => "/campus/project/tasks"),
                     array("menu_title" => "Story Board", "menu_url" => "/campus/project/timeline"),
-                    array("menu_title" => "Road Map", "menu_url" => "/campus/project/roadmap"),
+                    array("menu_title" => "Calendar", "menu_url" => "/campus/project/calendar"),
                     array("menu_title" => "Documents", "menu_url" => "/campus/project/documents"),
                     array("menu_title" => "People", "menu_url" => "/campus/project/people", "menu_count" => 10), //add  menu_count_unimportant=true to remove highlight
                     array("menu_title" => "Time", "menu_url" => "/campus/project/time"),
-                    array("menu_title" => "Surveys", "menu_url" => "/campus/project/survey")
+                    array("menu_title" => "Surveys", "menu_url" => "/campus/project/survey"),
+                    array("menu_title" => "Portfolio", "menu_url" => "/campus/project/portfolio")
                 )
                     )
             );

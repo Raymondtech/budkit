@@ -28,7 +28,7 @@
 namespace Library\Output\Parse\Template;
 
 use Library;
-use Library\Output; 
+use Library\Output;
 use Library\Output\Parse;
 
 /**
@@ -59,55 +59,74 @@ class Import extends Parse\Template {
      * @return type
      */
     public static function execute($parser, $tag, $writer) {
-        
+
         //print_R(static::$layouts);
         //If there is a name we will save this layout to static::$layouts
-        $loader     = \Platform\Loader::getInstance();
+        $loader = \Platform\Loader::getInstance();
 
-        $document   = static::$document;
-        $path       = isset($tag['LAYOUT']) ? $tag['LAYOUT'] : null;
-        $directory  = isset($tag['SUBTHEME']) ? $tag['SUBTHEME'] : null;
-        
+        $document = static::$document;
+        //@TODO this will cause issues, with naming layouts after set variables
+        $path = isset($tag['LAYOUT']) ? $tag['LAYOUT'] : null;
+        $directory = isset($tag['SUBTHEME']) ? $tag['SUBTHEME'] : null;
+        $app = isset($tag['APP']) ? $tag['APP'] : null;
+
+        //Parse attributes;
+        //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
+        $_path = static::getDataAttributeContent(mull, $path);
+        $_directory = static::getDataAttributeContent(mull, $directory);
+        $_app = static::getDataAttributeContent(mull, $app);
+
+        if (!empty($_path)):
+            $path = str_ireplace($_path['searches'], $_path['replace'], $path);
+        endif;
+        if (!empty($_directory)):
+            $directory = str_ireplace($_directory['searches'], $_directory['replace'], $directory);
+        endif;
+        if (!empty($_app)):
+            $app = str_ireplace($_app['searches'], $_app['replace'], $app);
+        endif;
+
+
         //Get the directory if specified
-        if(!empty($directory)){
-            $parsed = static::getDataAttributeContent("SUBTHEME", $directory);       
-            if(!empty($parsed['replace'])):
-                 $directory = str_ireplace($parsed['searches'], $parsed['replace'], $directory);
+        if (!empty($directory)) {
+            $parsed = static::getDataAttributeContent("SUBTHEME", $directory);
+            if (!empty($parsed['replace'])):
+                $directory = str_ireplace($parsed['searches'], $parsed['replace'], $directory);
             endif;
-            
-            if(!empty($directory)) {
+
+            if (!empty($directory)) {
                 //Getting the subtheme value
-                $directory = FSPATH . 'public' . DS . Library\Config::getParam('template','default','design') .DS.'themes'.DS.$directory;
+                $directory = FSPATH . 'public' . DS . Library\Config::getParam('template', 'default', 'design') . DS . 'themes' . DS . $directory;
             }
         }
         //Now load the layout
-        $layout     = $loader->layout($path, null,".tpl", FALSE , $directory );
-        
-        
+        $layout = $loader->layout($path, (!empty($app) ? $app : null), ".tpl", false, $directory);
+
+
         //Save the layout
         if (!empty($layout) && !isset(static::$imports[$layout])): //Unique layout names
             //static::$imports[$href] = $tag;
             //$path = str_replace(array('/','\\'), DS , $path);
             //$layout = FSPATH . 'public' . DS . $document->template . DS . $path;
-                    
-            if(file_exists($layout)):            
+
+            if (file_exists($layout)):
                 //TODO@ file get contents might not be the best method here 
                 //to import and parse the file
-                $contents =  file_get_contents( $layout );
-                    
+                $contents = file_get_contents($layout);
+
                 static::$importing = true;
-                    $layout   = static::_($contents, $document ); //read only  //Parse the layout;
-                static::$importing = false; 
+                $layout = static::_($contents, $document); //read only  //Parse the layout;
+                static::$importing = false;
                 //@TODO for lack of a better way to remove the XML declaration 
-                static::$imports[$path] = $layout = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "" , $layout);              
+                static::$imports[$path] = $layout = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "", $layout);
                 //print_R($layout);
-                $writer->writeRaw( $layout );
-                //print_R(static::$document );
+                $writer->writeRaw($layout);
+            //print_R(static::$document );
             endif;
-            
+
         //So we import only ounce
-        elseif(isset(static::$imports[$path])):
-            $writer->writeRaw( static::$imports[$path] );
+        elseif (isset(static::$imports[$path])):
+            $writer->writeRaw(static::$imports[$path]);
         endif;
 
         //Always return the modified element

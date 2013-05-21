@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * project.php
+ * portfolio.php
  *
  * Requires PHP version 5.4
  *
@@ -14,16 +14,16 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+namespace Application\Campus\Controllers\Project;
 
-namespace Application\Campus\Controllers;
+use Application\Campus\Controllers as Campus;
 
-use Platform;
 
 /**
- * Project CRUD action controller. 
+ * Portfolio CRUD action controller. 
  *
  * This class implements the action controller that manages the creation, 
- * view and edit of projects.
+ * view and edit of portfolios.
  *
  * @category  Application
  * @package   Action Controller
@@ -32,26 +32,40 @@ use Platform;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Project extends Platform\Controller {
+final class Portfolio extends Campus\Project {
 
     /**
      * The default fallback method. 
      * @return  void
      */
     public function index() {
+        
+        $this->output->setPageTitle( _("Portfolio") );
 
-
-
+        $model   = $this->load->model("attachments", "system"); //This will change of portfolio but for now
+        $attachments = $model->setListOrderBy("o.object_created_on", "DESC")->getObjectsList("attachment");
+        $model->setPagination(); //Set the pagination vars
+        $items     = array();
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $attachments->fetchAssoc()){
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+        }
+        $this->set("gallery", $items );
+        
+        $gallery = $this->output->layout("media/gallery", "system");
+        $this->output->addToPosition("dashboard", $gallery);
+        
         $this->load->view('project')->display();
+        
     }
 
-    
-
     /**
-     * Get's an instance of the Project controller only creating one if does not
+     * Get's an instance of the Portfolio controller only creating one if does not
      * exists
      * @staticvar self $instance
-     * @return an instance of {@link Project}
+     * @return an instance of {@link Portfolio}
      * 
      */
     public static function getInstance() {

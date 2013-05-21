@@ -14,6 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+
 namespace Application\Campus\Controllers;
 
 use Platform;
@@ -38,9 +39,44 @@ class Workspace extends Platform\Controller {
      * @return  void
      */
     public function index() {
-        return $this->load->view('workspace')->display();
+        $this->output->setPageTitle(_("Workspaces"));
+
+        $model = $this->load->model("attachments", "system"); //This will change of project but for now
+
+        $attachments = $model->getObjectsList("attachment");
+        $items = array();
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $attachments->fetchAssoc()) {
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+        }
+        $this->set("projects", $items);
+
+        $gallery = $this->output->layout("workspaces");
+        $this->output->addToPosition("dashboard", $gallery);
+
+        $this->load->view('workspace')->display();
     }
 
+    /**
+     * Creates a new workspace
+     * @return void
+     */
+    public function create() {
+
+        $this->view = $this->load->view("workspace");
+
+        $this->output->setPageTitle(_("New Workspace"));
+
+        $this->view->editor(
+            array("id" => "workspace", "title" => "Status", "layout" => "forms/workspace", "icon-class" => "icon-lightbulb")
+        );
+        $layout = $this->output->layout('forms/form', 'system');
+        $this->output->addToPosition("dashboard", $layout);
+
+        $this->view->display();
+    }
 
     /**
      * Get's an instance of the Workspace controller only creating one if does not

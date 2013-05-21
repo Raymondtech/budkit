@@ -49,7 +49,7 @@ final class Message extends \Platform\Controller {
         $me = $this->user->get('user_name_id');
         //Get inbox lists
         $this->set("messages", $messages);
-
+        
         if (!empty($messageURI)):
 
             //Check that the message exists
@@ -86,7 +86,7 @@ final class Message extends \Platform\Controller {
                         foreach ($updatedObject as $property => $value):
                             $model->setPropertyValue($property, $value);
                         endforeach;
-                        if (!$model->saveObject()):
+                        if (!$model->saveObject($object->getObjectURI(), "message", $object->getObjectId())):
                             $this->alert('The Message read status could not be changed', "", "error");
                         endif;
                     endif;

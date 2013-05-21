@@ -45,7 +45,7 @@ class Menu extends \Platform\Model {
             case 'mediamenu':
                 //Counts
                 $attachments = Attachments::getInstance();
-                $mycount = $attachments->setListLookUpConditions("attachment_owner", $username)->getObjectsListCount("attachment");
+                $mycount = $attachments->setListLookUpConditions("attachment_owner", array($username) )->getObjectsListCount("attachment");
 
                 if (empty($mycount))
                     $mycount = NULL;
@@ -74,6 +74,14 @@ class Menu extends \Platform\Model {
                 array_unshift($startHere['children'], array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"));
                 array_shift($menuItems);
                 array_unshift($menuItems, $startHere);
+                //Display bookmarks
+                $bookmarks = array(
+                    "menu_title"   => "Bookmarks",
+                    "children"  => array(
+                        array("menu_title" => "View Profile", "menu_url" => "/member" . (!empty($username) ? ":{$username}" : NULL) . "/profile/information)")
+                    )
+                );
+                $menuItems[] = $bookmarks;
                 break;
             case "messagesmenu":
                 $startHere = & reset($menuItems);

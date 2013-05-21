@@ -1,4 +1,4 @@
-<tpl:layout name="inputsettings" xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
+<tpl:layout  xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <form action="/system/media/timeline/create" class="no-margin" method="POST" enctype="multipart/form-data">
         <div class="timeline-item-publisher-box">
             <div class="timeline-item-icon toolset"><a href="#"><i class="icon-quote-left"></i></a></div>

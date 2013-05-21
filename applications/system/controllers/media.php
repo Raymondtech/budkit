@@ -45,16 +45,20 @@ Class Media extends \Platform\Controller {
 
         //create action types
         $actions = array(
-            "drop", "snap", "editor", "import"
+            "drop", "snap", "editor", "import", "status"
         );
         //form
         $_form = !in_array($action, $actions) ? "editor" : $action;
-        $form = $this->output->layout("media/form/{$_form}");
+        $this->view = $this->load->view('media');
+        $this->view->editor(
+            array("layout" => "forms/{$_form}", "app"=>"system")
+        );
+        $layout = $this->output->layout('forms/form', 'system');
 
-        $this->output->addToPosition("dashboard", $form);
+        $this->output->addToPosition("dashboard", $layout);
         $this->output->setPageTitle(_("Add New Media"));
 
-        $this->load->view('media')->display(); //sample call;   
+        $this->view->display(); //sample call;   
         //$this->output->addToPosition("right", $right );
     }
 

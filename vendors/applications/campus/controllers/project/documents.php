@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * project.php
+ * document.php
  *
  * Requires PHP version 5.4
  *
@@ -14,16 +14,13 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
+namespace Application\Campus\Controllers\Project;
 
-namespace Application\Campus\Controllers;
+use Application\Campus\Controllers as Campus;
 
-use Platform;
 
 /**
- * Project CRUD action controller. 
- *
- * This class implements the action controller that manages the creation, 
- * view and edit of projects.
+ * document CRUD action controller. 
  *
  * @category  Application
  * @package   Action Controller
@@ -32,26 +29,39 @@ use Platform;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-class Project extends Platform\Controller {
+final class Documents extends Campus\Project {
 
     /**
      * The default fallback method. 
      * @return  void
      */
     public function index() {
+        
+        $this->output->setPageTitle( _("Documents") );
 
-
-
+        $model   = $this->load->model("attachments", "system"); //This will change of course but for now
+  
+        $attachments = $model->getObjectsList("attachment");
+        $items     = array();
+        //Loop through fetched attachments;
+        //@TODO might be a better way of doing this, but just trying
+        while ($row = $attachments->fetchAssoc()){
+            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+            $items["items"][] = $row;
+        }
+        $this->set("gallery", $items );
+        
+        $gallery = $this->output->layout("media/gallery", "system");
+        $this->output->addToPosition("dashboard", $gallery);
+        
         $this->load->view('project')->display();
     }
 
-    
-
     /**
-     * Get's an instance of the Project controller only creating one if does not
+     * Get's an instance of the Course controller only creating one if does not
      * exists
      * @staticvar self $instance
-     * @return an instance of {@link Project}
+     * @return an instance of {@link Course}
      * 
      */
     public static function getInstance() {

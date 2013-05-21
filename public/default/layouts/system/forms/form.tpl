@@ -2,11 +2,9 @@
     <div class="stream-box row-fluid media-box">
         <div class="stream-view">
             <div class="stream-thread">              
-                <div class="stream-body padding" id="timeline" style="min-height: 1000px">
-                    <div class="stream-alerts"></div> 
-                    <tpl:import layout="input" />  
-                    <div class="stream-widgets margin-top">
-                        <tpl:block data="page.block.dashwidgets" />
+                <div class="stream-body padding" id="timeline">
+                    <div class="margin-bottom"> 
+                        <tpl:import layout="input" /> 
                     </div>
                 </div>
             </div>
