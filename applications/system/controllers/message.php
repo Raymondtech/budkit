@@ -42,8 +42,9 @@ final class Message extends \Platform\Controller {
      * @return void
      */
     public function inbox($messageURI = null) {
-
+        
         $this->output->setPageTitle(_("Private Messages"));
+        $this->view = $this->load->view("message");
         $model = $this->load->model('message', 'system');
         $messages = $model->setListOrderBy(array("o.object_updated_on"), "DESC")->getMessages($messageURI);
         $me = $this->user->get('user_name_id');
@@ -97,11 +98,12 @@ final class Message extends \Platform\Controller {
                 $this->alert('The message thread you requested was not found', "", "error");
             endif;
         endif;
-
+        $this->view->editor(array("id"=>"status","title"=>"Status","layout"=>"forms/status","app"=>"system","icon-class"=>"icon-lightbulb","mediaverb"=>"message", "mediatarget"=>$this->output->get("mediatarget")));
+        
         $layout = $this->output->layout('messages/inbox');
         $this->output->addToPosition("dashboard", $layout);
 
-        $this->load->view("message")->display();
+        $this->view->display();
     }
 
     /**
