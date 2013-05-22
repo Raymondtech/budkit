@@ -66,11 +66,19 @@ class Workspace extends Platform\Controller {
     public function create() {
 
         $this->view = $this->load->view("workspace");
+        $this->model = $this->load->model("workspace");
 
         $this->output->setPageTitle(_("New Workspace"));
 
+        //Save New workspace;
+        if ($this->input->methodIs("post")) {
+            $data = $this->input->data("file");
+            
+            print_R($data); die;
+        }
+
         $this->view->editor(
-            array("id" => "workspace", "title" => "Status", "layout" => "forms/workspace", "icon-class" => "icon-lightbulb")
+                array("id" => "workspace", "title" => "Status", "layout" => "forms/workspace", "icon-class" => "icon-lightbulb")
         );
         $layout = $this->output->layout('forms/form', 'system');
         $this->output->addToPosition("dashboard", $layout);

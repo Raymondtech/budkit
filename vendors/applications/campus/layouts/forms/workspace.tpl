@@ -48,16 +48,15 @@
                     </textarea>
                 </div> 
             </div>
-            <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/"></div>
             <div class="btn-toolbar margin-bottom-zero"> 
                 <div class="btn-group">
                     <button type="submit" class="btn" href="#">Create Workspace</button>  
                 </div>   
+                <div class="btn-group">
+                    <input type="file" name="coverphoto" data-label="Select Cover Photo..." data-target="budkit-uploader" /> 
+                </div>
             </div>              
         </fieldset>
         <input type="hidden" name="${uploadprogress}" value="timelineupload" />
-        <input type="hidden" name="media_author_id" value="" />
-        <input type="hidden" name="media_verb" value="message" />
-        <input type="hidden" name="media_provider" value="budkit" />
     </form>
 </tpl:layout>
