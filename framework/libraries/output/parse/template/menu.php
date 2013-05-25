@@ -66,8 +66,9 @@ class Menu extends Parse\Template {
             return null;
         $menuId = $tag['ID'];
         $menuType = (isset($tag['TYPE'])) ? trim($tag['TYPE']) : null;
-        $menuLtr = (isset($tag['POSITION'])) ? trim($tag['POSITION']) : "";
+        $menuPosition = (isset($tag['POSITION'])) ? trim($tag['POSITION']) : "";
         $menuDepth = (isset($tag['LEVEL'])) ? trim($tag['LEVEL']) : 2;
+        $menuIcons = (isset($tag['ICONS'])) ? true : false;
 
         //$database = Library\Database::getInstance();
         $uniqueId = $tag['ID'];
@@ -84,7 +85,7 @@ class Menu extends Parse\Template {
         unset($tag['POSITION']);
 
         $tag['ELEMENT'] = 'ul';
-        $tag['CLASS'] = "nav $menuType $menuLtr {$tag['CLASS']}"; //Add any developer defined classes to the element;
+        $tag['CLASS'] = "nav $menuType $menuPosition $uniqueId {$tag['CLASS']}"; //Add any developer defined classes to the element;
         //print_R( \Library\Event::$hooks );
 
         \Library\Event::trigger("beforeRenderMenu", $menuId, $menuItems);
@@ -92,7 +93,7 @@ class Menu extends Parse\Template {
         if (empty($menuItems))
             return null;
 
-        $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuLtr);
+        $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuPosition, true, $menuIcons);
 
         //print_R($tag);
         //Always return the modified element
@@ -105,7 +106,7 @@ class Menu extends Parse\Template {
      * @param type $menuItems
      * @return type 
      */
-    public static function element($menuItems, $menuType = "nav", $menuDepth = 2, $menuPosition = '', $menuLevelParent = true) {
+    public static function element($menuItems, $menuType = "nav", $menuDepth = 2, $menuPosition = '', $menuLevelParent = true, $menuIcons = true) {
 
         $li = array();
         $parent = 0;
@@ -141,13 +142,13 @@ class Menu extends Parse\Template {
             }
 
             //@TODO check if this is the current menu item and set it as active
-            $query      = \Library\Uri::getInstance()->getQuery();
-            $path      = \Library\Uri::getInstance()->getPath();
-            
-            $request    = \Library\Uri::internal($query);
-            $url        = \Library\Uri::internal($item['menu_url']);      
-            $cpath      = \Library\Uri::internal( $path );
-            $active     = ( $url <> $request && $url <> $cpath ) ? false : true;
+            $query = \Library\Uri::getInstance()->getQuery();
+            $path = \Library\Uri::getInstance()->getPath();
+
+            $request = \Library\Uri::internal($query);
+            $url = \Library\Uri::internal($item['menu_url']);
+            $cpath = \Library\Uri::internal($path);
+            $active = ( $url <> $request && $url <> $cpath ) ? false : true;
             static::$hasActive = ($active && !static::$hasActive) ? true : false;
 
             $class = str_replace(array(" ", "(", ")", "-", "&", "%", ",", "#"), '-', strtolower($item['menu_title']));
@@ -159,16 +160,23 @@ class Menu extends Parse\Template {
             $anchor = array(
                 "ELEMENT" => "a",
                 "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
+                "DATA-TOGGLE"=>"tooltip",
+                "data-placement"=>"right",
+                "TITLE"=> $item['menu_title'],
                 "CHILDREN" => array(
-                    // array("ELEMENT" => "i", "CLASS" => "icon-{$class}"), @todo menu icons
                     array("ELEMENT" => "span", "CDATA" => $item['menu_title'])
                 )
             );
+            if ($menuIcons) {
+                //If we have a menu count
+                $icons =  array("ELEMENT" => "i", "CLASS" => "nav-icon icon-{$class}");
+                array_unshift($anchor['CHILDREN'], $icons);
+            }
             //Item count
             if (isset($item['menu_count'])) {
                 //If we have a menu count
-                $important = (isset($item['menu_count_unimportant'])&&(bool)$item['menu_count_unimportant'])?null : "label-important";
-                $anchor['CHILDREN'][] = array("ELEMENT" => "span", "CLASS"=>"label pull-right {$important}", "CDATA" => number_format ($item['menu_count']) );
+                $important = (isset($item['menu_count_unimportant']) && (bool) $item['menu_count_unimportant'] || (int) $item['menu_count'] < 1) ? null : "label-important";
+                $anchor['CHILDREN'][] = array("ELEMENT" => "span", "CLASS" => "label ".((!$menuIcons)?"pull-right":"nav-icon-label")." {$important}", "CDATA" => number_format($item['menu_count']));
             }
             //Add the menu anchor
             $link["CHILDREN"][] = $anchor;
@@ -178,7 +186,7 @@ class Menu extends Parse\Template {
                 $link['CLASS'] .= ' nav-header';
                 $link['CDATA'] = $item['menu_title'];
                 unset($link['CHILDREN']);
-                $children = static::element((array) $item['children'], $menuType, $menuDepth, $menuPosition, false);
+                $children = static::element((array) $item['children'], $menuType, $menuDepth, $menuPosition, false, $menuIcons);
                 //if this menu has no children, remove it
                 if (!empty($children)):
                     $li[] = $link;

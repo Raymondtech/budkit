@@ -727,11 +727,16 @@ class Output extends Object {
     /**
      * Add a menu to a block position
      * 
-     * @param string $name the block name position 
+     * 
+     * @param type $blockName
      * @param type $menuNameId
+     * @param type $menuType
      * @param type $menuItems
+     * @param type $overwrite
+     * @param type $icons
+     * @return \Library\Output
      */
-    final public function addMenuGroupToPosition($blockName, $menuNameId, $menuType = "nav-list", $menuItems = array(), $overwrite = false) {
+    final public function addMenuGroupToPosition($blockName, $menuNameId, $menuType = "nav-list", $menuItems = array(), $overwrite = false, $icons = true) {
 
         //The menu layout
         //menuItems
@@ -748,7 +753,9 @@ class Output extends Object {
         endif;
 
         //Add the menu name to the page menus
-        $this->variables["page"]['block'][$blockName]["menus"][] = array("ELEMENT" => "ul", "ID" => $menuNameId, "TYPE" => $menuType);
+        $definition = array("ELEMENT" => "ul", "ID" => $menuNameId, "TYPE" => $menuType);
+        if($icons) $definition["ICONS"] = $icons;
+        $this->variables["page"]['block'][$blockName]["menus"][] = $definition;
 
         return $this;
     }
