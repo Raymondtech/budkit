@@ -86,9 +86,10 @@
         return false;
     };
     
-
         
     $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+           
         var activeTabs = {};
         if($.cookie("activeTabs")){
             activeTabs = JSON.parse($.cookie("activeTabs"));

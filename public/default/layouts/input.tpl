@@ -6,7 +6,7 @@
                     <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/50/50"  />
                 </a>
             </tpl:condition>
-            <div class="timeline-item-icon toolset"><a><i class="icon-plus"></i></a></div>
+<!--            <div class="timeline-item-icon toolset"><a><i class="icon-plus"></i></a></div>-->
             <div class="timeline-item-publisher margin-bottom-half">
                 <tpl:condition test="compare" count="1" operator="greaterthan" value="1" data="editor_forms">
                     <ul class="nav nav-tabs-launcher" id="status-tabs">

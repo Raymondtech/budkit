@@ -8,32 +8,45 @@
   @_containerAsideWidth : @containerAsideWidth ;
   //Specifically for nav-lists
   .container-left{
-     width: @containerLeftWidth;
-    *width: @containerLeftWidth;
+     width: @leftBarWidth;
+    *width: @leftBarWidth;
       float: left;
       overflow-y: auto;
-      overflow-x: hidden;
+      //overflow-x: hidden;
       background: #2f2f2f;
       position: absolute;
       bottom: 0px ;
       top: 0;
-      .nav-list > li.nav-header{ margin-bottom: 0px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1),0 0 30px rgba(255,255,255,0.125); color: rgb(26, 26, 26); background: #363636; border-top: 1px solid #414040 }
+      .navbar+.nav-list{margin-top: -1px}
+      .nav-list > li{
+            .tooltip{z-index:10000000000; position: fixed}
+        }
+      .nav-list > li.nav-header{ &:first-child{display: none} margin-bottom: 0px;margin-top: 0px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1),0 0 30px rgba(255,255,255,0.125); color: rgb(26, 26, 26); background: #363636; border-top: 1px solid #414040; text-indent: -9999em; height: 4px; }
       .nav-list > li > a {
-          padding: 8px 15px;
+          padding: 10px 0;
           border-bottom: 1px solid rgb(44, 44, 44);
           border-top: 1px solid rgb(56, 54, 54);
           //color: lighten(@gray, 10%);
+          text-align: center;
+          &:hover{
+            background: darken(#e9e9e9, 50%);
+            }
       }
      .nav-list > li:first-child > a{
           border-top: 1px solid transparent;
       }
+    .nav-list > .active > a, 
+    .nav-list > .active > a:hover, 
+    .nav-list > .active > a:focus {
+             background: #f2f2f2;
+     }
+        
   }
 .gridrowwidth{ max-width: @gridRowWidth*1.2 };
 .container-menu-box{ float: left; position: absolute; top:@navbarHeight; bottom:0px; width: 75px; left: 0; background: #2f2f2f }
 .container-box{
     background: #f2f2f2;
     position: absolute; top:0; left:0px; right:0; bottom:0;
-    &.has-menu-box{ left: 75px }
     .container-right{
         //min-height: 100%;
         .container-aside{
@@ -84,20 +97,21 @@
 
             }
         }
-        .container-aside{ display: block }
+        .container-aside{ display: block;     padding-top: @navbarHeight*0.99;}
         .container-aside + .container-content{
             margin-right: @containerAsideWidth;
             *margin-right: @_containerAsideWidth;
+            
             //.container-bucket{ border-right: 1px solid #ccc;}
         }
     }
     &.has-left{
-        .container-left{ display: block; width: @containerLeftWidth; *width: @_containerLeftWidth; }
+        .container-left{ display: block; width: @containerLeftWidth; *width: @_containerLeftWidth; padding-top: @navbarHeight; }
         .container-right{ 
-            margin-left: @containerLeftWidth;
-            *margin-left: @_containerLeftWidth;
+            margin-left: @leftBarWidth;
+            *margin-left: @leftBarWidth;
         }
-        left: @containerLeftWidth;   
+        left:@leftBarWidth;   
     }
 
 }
@@ -105,13 +119,24 @@
 .container-left, .container-aside{
     .nav-list > li {
        &.nav-header{ 
-            border-bottom: 1px solid #2b2b2b; 
+            border-bottom: 1px solid #2b2b2b;
+            padding: 6px 10px; 
             &:first-child{ margin-top: 0px;}
         }
      }        
     .nav-list > li > a {
         //font-size: 12px;
         color: @grayLight;
+        position: relative;
+        .nav-icon{
+            &+span{ display: none;} 
+        }
+        .nav-icon-label{
+            position: absolute;
+            font-size: 8px;
+            padding: 0px 2px;
+            top: 5px; right: 5px;
+        }
     }
     .nav-list > .active > a,
     .nav-list > .active > a:hover,
@@ -119,6 +144,7 @@
       color: @white;
     }
 }
+
 .container-bucket{
     .clearfix();
     overflow-y: auto;

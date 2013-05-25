@@ -29,6 +29,38 @@
 @pink:                  #c3325f;
 @purple:                #7a43b6;
 
+//
+// Color Swatches
+// --------------------------------------------------
+@turquoise:     #1abc9c;
+@green-sea:     #16a085;
+
+@emerland:      #2ecc71;
+@nephritis:     #27ae60;
+
+@peter-river:   #3498db;
+@belize-hole:   #2980b9;
+
+@amethyst:      #9b59b6;
+@wisteria:      #8e44ad;
+
+@wet-asphalt:   #34495e;
+@midnight-blue: #2c3e50;
+
+@sun-flower:    #f1c40f;
+@orange:        #f39c12;
+
+@carrot:        #e67e22;
+@pumpkin:       #d35400;
+
+@alizarin:      #e74c3c;
+@pomegranate:   #c0392b;
+
+@clouds:        #ecf0f1;
+@silver:        #bdc3c7;
+
+@concrete:      #95a5a6;
+@asbestos:      #7f8c8d;
 
 // Scaffolding
 // -------------------------
@@ -85,27 +117,34 @@
 
 // Buttons
 // -------------------------
-@btnBackground:                     @white;
-@btnBackgroundHighlight:            darken(@white, 10%);
-@btnBorder:                         #ccc;
+@btnBackground:                     #ebebeb;
+@btnBackgroundHighlight:            darken(#ebebeb, 10%);
+@btnBorder:                         mix(#ebebeb, black, 85%);
+@btnText:                           @grayDark;   
 
 @btnPrimaryBackground:              @linkColor;
 @btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 20%);
+@btnPrimaryText:                    @white;   
 
 @btnInfoBackground:                 #5bc0de;
 @btnInfoBackgroundHighlight:        #2f96b4;
+@btnInfoText:                       @white;  
 
 @btnSuccessBackground:              #62c462;
 @btnSuccessBackgroundHighlight:     #51a351;
+@btnSuccessText:                    @white; 
 
 @btnWarningBackground:              lighten(@orange, 15%);
 @btnWarningBackgroundHighlight:     @orange;
+@btnWarningText:                    @white; 
 
 @btnDangerBackground:               #ee5f5b;
 @btnDangerBackgroundHighlight:      #bd362f;
+@btnDangerText:                    @white; 
 
 @btnInverseBackground:              #444;
 @btnInverseBackgroundHighlight:     @grayDarker;
+@btnInverseText:                    @white; 
 
 
 // Forms
@@ -181,7 +220,7 @@
 @navbarCollapseWidth:             979px;
 @navbarCollapseDesktopWidth:      @navbarCollapseWidth + 1;
 
-@navbarHeight:                    40px;
+@navbarHeight:                    53px;
 @navbarBackground:                #363636; //#2F2F2F;
 @navbarBackgroundHighlight:       #363636; //#2F2F2F;
 @navbarBorder:                    #222222;
@@ -305,3 +344,7 @@
 // 768px-979px
 @fluidGridColumnWidth768:      percentage(@gridColumnWidth768/@gridRowWidth768);
 @fluidGridGutterWidth768:      percentage(@gridGutterWidth768/@gridRowWidth768);
+
+//config
+@leftBarWidth:  @navbarHeight;
+

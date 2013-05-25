@@ -1,8 +1,9 @@
 <tpl:layout name="navbar" xmlns:tpl="http://budkit.org/tpl">
     <div class="navbar" id="navbar">
         <div class="navbar-inner">
-            <div class="nav-collapse collapse">
-                <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
+            <div class="nav-collapse collapse" >  
+                <tpl:import layout="search" app="system" /> 
+                <tpl:condition  data="user.isauthenticated" test="boolean" value="1">
                     <ul class="nav" id="menubartabs">
                         <li><a href="/system/start/dashboard">Dashboard</a></li>
                         <li><a href="/system/media/attachments/gallery">Documents</a></li>   
@@ -13,7 +14,6 @@
                     </ul>               
                 </tpl:condition>
             </div><!--/.nav-collapse -->
-
         </div>
     </div>
 </tpl:layout>

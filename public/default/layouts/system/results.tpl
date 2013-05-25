@@ -20,15 +20,15 @@
                             <ul class="media-grid media-gallery compensate-margins">
                                 <tpl:loop data="results" id="search-results">
                                     <li class="mgrow-fluid">
-                                        <div class="featured mgcol2 ">
+                                        <div class="feature mgcol1">
                                             <tpl:condition test="isset" data="icon" value="1">
                                                 <a href="${link}" class="link"><img src="${icon}" /></a>
                                             </tpl:condition>
                                             <tpl:condition test="isset" data="media_uri" value="1">
-                                                <tpl:media uri="media_uri" link="true" mode="icon"  class="media-item" width="170" height="170" /> 
+                                                <tpl:media uri="media_uri" mode="icon"  class="media-item" width="170" height="170" /> 
                                             </tpl:condition>
                                         </div>
-                                        <div class="grid-hide mgcol10">
+                                        <div class="grid-hide mgcol11">
                                             <div class="subject">
                                                 <a href="${link}" class="link"><strong><tpl:element type="text" data="title" /></strong></a>
                                             </div>

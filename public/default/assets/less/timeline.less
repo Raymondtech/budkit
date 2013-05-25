@@ -3,13 +3,13 @@
 .long-stream{
     min-height: 1000px;
 }
-.timeline-more-items{ margin-left: 115px}
+.timeline-more-items{ margin-left: 79px}
 
 .timeline-item-publisher-box{
     position:relative; 
     .publisher-profile{
         position: absolute;
-        left:0px; top:5px;
+        left:0px; top:0px;
     }
 }
 .timeline-item-publisher{
@@ -96,31 +96,7 @@
             border: 1px solid #ddd;
             padding: @gridGutterWidth;
             margin: 10px 60px;
-            &:before{
-                content: "";
-                position: absolute;           
-                border-style: solid;
-                display: block;
-                width: 0;
-                top: 28px;
-                bottom: auto;
-                left: 106px;
-                border-width: 10px 10px 10px 0;
-                border-color: transparent #ddd;
-            }
-            &:after{
-                content: "";
-                position: absolute;
-                border-width: 13px 13px 0;
-                border-style: solid;
-                display: block;
-                width: 0;
-                top: 30px;
-                bottom: auto;
-                left: 107px;
-                border-width: 8px 10px 8px 0;
-                border-color: transparent #fff;
-            }
+   
             .mention, .hashtag, openlink{ font-weight: 600; } 
             .timeline-item-header{
                 cursor: pointer;
@@ -243,7 +219,7 @@
         }
         &:last-child{ .timeline-item-container{ border-bottom: 1px solid #ddd;} }
         .timeline-item-container{
-            margin: 0px 0px 10px 115px;
+            margin: 0px 0px 20px 79px;
             border: none;
             border-style:solid;
             border-width:1px;
@@ -262,7 +238,7 @@
                         //float: left;
                         margin-right: 10px;
                         position:absolute;
-                        top: 10px;
+                        top: 0px;
                         left: 0px;
                     }
                 }
@@ -326,33 +302,8 @@
     background: transparent url(../img/timeline-bg.png) 0 0 repeat-y; 
     .timeline-item-icon{ display: block}
     .timeline-item-publisher{ 
-        margin-left: 115px; 
-        &:before{
-            content: "";
-            position: absolute;
+        margin-left: 79px; 
 
-            border-style: solid;
-            display: block;
-            width: 0;
-            top: 20px;
-            bottom: auto;
-            left: 106px;
-            border-width: 10px 10px 10px 0;
-            border-color: transparent #ddd;
-        }
-        &:after{
-            content: "";
-            position: absolute;
-            border-width: 13px 13px 0;
-            border-style: solid;
-            display: block;
-            width: 0;
-            top: 22px;
-            bottom: auto;
-            left: 107px;
-            border-width: 8px 10px 8px 0;
-            border-color: transparent #f5f5f5;
-        }
     }
  }
 .comment-form{margin: 5px auto 5px;}

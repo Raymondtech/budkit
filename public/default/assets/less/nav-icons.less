@@ -1,0 +1,79 @@
+.nav-icon{
+    font-size: @baseFontSize*1.2; 
+
+    width: 32px !important;
+    height: 32px !important;
+    display: inline-block !important;
+    padding-top: 6px;
+    border-radius: 3px;
+    color: @white;    
+    background: @belize-hole;
+    border-bottom: 4px solid mix(@belize-hole, black, 85%);
+    .box-sizing(border-box);
+    &:before{ content: "\f0c8"; } 
+}
+
+.nav > li.active > a .nav-icon{ }
+.icon-timeline{
+    background: @emerland;
+    border-color:  mix(@emerland, black, 85%);
+    &:before{ content: "\f017"}
+}
+
+.icon-videos{
+    &:before{ content: "\f008"}
+}
+.icon-audio{
+    &:before{ content: "\f001"}
+}
+.icon-other{
+            background: @sun-flower;
+    border-color:  mix(@sun-flower, black, 85%);
+    &:before{ content: "\f0f6"}
+}
+.icon-photos{
+            background: @nephritis;
+    border-color:  mix(@nephritis, black, 85%);
+    &:before{ content: "\f03e"}
+}
+.icon-my-documents{
+    &:before{ content: "\f07b"}
+}
+
+.icon-compose,
+.icon-text-editor{
+    background: @alizarin;
+    border-color:  mix(@alizarin, black, 85%);
+    &:before{ content: "\f14b"}
+}
+.icon-drag-and-drop{
+    background: @emerland;
+    border-color: mix(@emerland, black, 85%);
+    &:before{ content: "\f0ee"}
+}
+.icon-external-drive{
+    background: @amethyst;
+    border-color: mix(@amethyst, black, 85%);
+    &:before{ content: "\f0ed"}
+}
+
+.icon-notifications{
+    &:before{ content: "\f069"}
+}
+
+.icon-workspaces{
+    &:before{ content: "\f0c0"}
+}
+.icon-privacy{
+    &:before{ content: "\f09c"}
+}
+
+.icon-appearance{
+
+    &:before{ content: "\f043"}
+}
+
+.icon-view-profile,
+.icon-account{
+    &:before{ content: "\f007"}
+}

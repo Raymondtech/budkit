@@ -9,7 +9,6 @@
                                 <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/50/50"  />
                             </a>
                         </tpl:condition>
-                        <div class="timeline-item-icon toolset"><a><i class="icon-plus"></i></a></div>
                         <div class="timeline-item-publisher margin-bottom-half" id="article-form">
                             <form action="/system/message/create" class="no-margin form-vectical" method="POST" enctype="multipart/form-data">
                                 <fieldset class="no-bottom-margin">
