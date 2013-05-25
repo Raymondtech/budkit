@@ -27,17 +27,24 @@ namespace Application\Campus\Views;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * ˙
  */
-final class Project extends \Platform\View{
-    
+final class Workspace extends \Platform\View {
 
-    
+    public function directory() {
+        
+        $dashboard = $this->output->layout("dashboard", "system");
+        //$rightaside     = $this->output->layout( "cpanel"  );
+
+        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
+        $this->output->addToPosition("body", $dashboard);
+    }
+
     /**
      * Workspace view display
      * @return void
      */
-    public function display(){
-        
-             //To specify a layout, else default will be used
+    public function display() {
+
+        //To specify a layout, else default will be used
         //$this->setLayout("page");
         //To get a previously set property;
         //echo $this->get("user2");
@@ -45,10 +52,8 @@ final class Project extends \Platform\View{
         //$this->output->setPageTitle("Welcome to diddat");
         //to add some js file
         //$this->output->addScript("some.js");
-
         //to add some js file
         //$this->output->addStyle("some.css");
-
         //to output just the layout use
         //$this->output->raw();
         //to output just the xml use
@@ -58,31 +63,28 @@ final class Project extends \Platform\View{
         //parse Layout Demo;
         //$sidebar      = $this->output->layout( "index_sidebar" );
         $dashboard = $this->output->layout("dashboard", "system");
-        
+
         //$rightaside     = $this->output->layout( "cpanel"  );
-        $this->output->addMenuGroupToPosition("aside", "projectmenu");
+        $this->output->addMenuGroupToPosition("aside", "workspacemenu", "nav-list", array(), false, false);
         $this->output->addMenuGroupToPosition("side", "dashboardmenu");
-        
+
         $this->output->addToPosition("body", $dashboard);
-        
     }
-    
-    
-    
-    
+
     /**
      * Gets an instance of the workspace class
      * @staticvar object $instance
      * @return object Workspace
      */
-    public static function getInstance(){
-        
-        static $instance;     
+    public static function getInstance() {
+
+        static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
-        $instance =  new self();
+        if (isset($instance))
+            return $instance;
+        $instance = new self();
         return $instance;
     }
-}
 
+}
 

@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Campus\Controllers\Project;
+namespace Application\Campus\Controllers\Workspace;
 
 use Application\Campus\Controllers as Campus;
 
@@ -32,7 +32,7 @@ use Application\Campus\Controllers as Campus;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Timeline extends Campus\Project {
+final class Timeline extends Campus\Workspace {
 
     /**
      * The default fallback method. 
@@ -49,13 +49,13 @@ final class Timeline extends Campus\Project {
         $this->set("activities", $activities);
         //$this->set("user", $user);
 
-        $timeline = $this->output->layout("project/timeline");
+        $timeline = $this->output->layout("workspace/timeline");
         //$timelineside = $this->output->layout("timelinenotes");
 
         $this->output->addToPosition("dashboard", $timeline);
         //$this->output->addToPosition("aside", $timelineside );
 
-        $this->load->view('project')->display();
+        $this->load->view('workspace')->display();
         
     }
 

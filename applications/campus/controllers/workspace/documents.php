@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Campus\Controllers\Project;
+namespace Application\Campus\Controllers\Workspace;
 
 use Application\Campus\Controllers as Campus;
 
@@ -29,7 +29,7 @@ use Application\Campus\Controllers as Campus;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Documents extends Campus\Project {
+final class Documents extends Campus\Workspace {
 
     /**
      * The default fallback method. 
@@ -54,7 +54,7 @@ final class Documents extends Campus\Project {
         $gallery = $this->output->layout("media/gallery", "system");
         $this->output->addToPosition("dashboard", $gallery);
         
-        $this->load->view('project')->display();
+        $this->load->view('workspace')->display();
     }
 
     /**

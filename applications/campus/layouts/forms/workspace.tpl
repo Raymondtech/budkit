@@ -2,9 +2,9 @@
     <form action="/campus/workspace/create" class="no-margin form-vectical" method="POST" enctype="multipart/form-data">
         <fieldset class="no-bottom-margin">
             <div class="control-group">
-                <label class="control-label">Title <em class="mandatory">*</em></label>
+                <label class="control-label">Workspace Name <em class="mandatory">*</em></label>
                 <div class="controls row-fluid">           
-                    <input type="text" name="message_participants" class="span12 margin-bottom-zero" />
+                    <input type="text" name="workspace_name" class="span12 margin-bottom-zero" />
                 </div>
             </div>  
             <div class="control-group">
@@ -36,7 +36,7 @@
             <div class="control-group">
                 <label class="control-label">Short description <em class="mandatory">*</em></label>
                 <div class="controls row-fluid">           
-                    <textarea class="span12" rows="5"></textarea>
+                    <textarea class="span12" rows="5" name="workspace_short_descr"></textarea>
                 </div>
             </div>
             <div class="control-group">
@@ -44,7 +44,7 @@
                 <div class="controls">
                     <textarea class="input-100pct focused"
                               data-stylesheet="http://${config|general.host}${config|general.path}public/default/assets/css/editor.css"
-                              data-target="budkit-editor"  rows="10" name="message_body">
+                              data-target="budkit-editor"  rows="10" name="workspace_long_descr">
                     </textarea>
                 </div> 
             </div>
@@ -53,7 +53,7 @@
                     <button type="submit" class="btn" href="#">Create Workspace</button>  
                 </div>   
                 <div class="btn-group">
-                    <input type="file" name="coverphoto" data-label="Select Cover Photo..." data-target="budkit-uploader" /> 
+                    <input type="file" name="workspace_coverphoto" data-label="Select Cover Photo..." data-target="budkit-uploader" /> 
                 </div>
             </div>              
         </fieldset>

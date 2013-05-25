@@ -40,12 +40,12 @@ class Workspace extends Platform\Entity {
         //"label"=>"","datatype"=>"","charsize"=>"" , "default"=>"", "index"=>TRUE, "allowempty"=>FALSE
         $this->definePropertyModel(
                 array(
-                    "message_subject" => array("Message Subject", "mediumtext", 200),
-                    "message_body" => array("Message Text", "longtext", 2000),
-                    "message_participants" => array("Message Participants", "mediumtext", 600),
-                    "message_author" => array("Message Author", "mediumtext", 200),
-                    "message_updated" => array("Message Updated", "datetime", 200),
-                    "message_read" => array("Message Read", "mediumtext", 600),
+                    "workspace_name" => array("Workspace Name", "mediumtext", 200),
+                    "workspace_short_descr" => array("Workspace Short Description", "longtext", 2000),
+                    "workspace_long_descr" => array("Workspace Long Description", "mediumtext", 600),
+                    "workspace_creator" => array("Workspace Creator", "mediumtext", 200),
+                    "workspace_privacy" => array("Workspace Privacy", "mediumtext", 20),
+                    "workspace_cover_photo" => array("Workspace Cover Photo", "mediumtext", 20),
                 ), "message"
         );
     }

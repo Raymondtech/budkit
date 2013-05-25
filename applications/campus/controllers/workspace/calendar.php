@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Campus\Controllers\Project;
+namespace Application\Campus\Controllers\Workspace;
 
 use Application\Campus\Controllers as Campus;
 
@@ -32,7 +32,7 @@ use Application\Campus\Controllers as Campus;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Calendar extends Campus\Project {
+final class Calendar extends Campus\Workspace {
     
     /**
      * Displays the form required to creates a new calendar. 

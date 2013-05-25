@@ -40,25 +40,34 @@ class Menu extends \Platform\Model {
      * @param type $menuItems
      */
     public static function hook(&$menuId, &$menuItems) {
+
+        $user = \Platform\User::getInstance();
+        $input = \Library\Input::getInstance();
+        $input->getRequestVars();
+        $workspace = $input->getVar("workspace", '');
+
         if ($menuId === 'dashboardmenu') {
-            array_push($menuItems, array(
+            $startHere = & reset($menuItems);
+            array_push($startHere['children'], array(
                 "menu_title" => "Workspaces",
-                "menu_url" => "/campus/workspace/gallery"
+                "menu_url" => "/campus/workspaces/directory"
                     )
             );
-        }elseif ($menuId === 'projectmenu') {
+            array_shift($menuItems);
+            array_unshift($menuItems, $startHere);
+        } elseif ($menuId === 'workspacemenu') {
             array_push($menuItems, array(
-                "menu_title" => "Project Menu",
+                "menu_title" => "Workspace Menu",
                 "children" => array(
-                    array("menu_title" => "Overview", "menu_url" => "/campus/project/overview"),
-                    array("menu_title" => "To-do", "menu_url" => "/campus/project/tasks"),
-                    array("menu_title" => "Story Board", "menu_url" => "/campus/project/timeline"),
-                    array("menu_title" => "Calendar", "menu_url" => "/campus/project/calendar"),
-                    array("menu_title" => "Documents", "menu_url" => "/campus/project/documents"),
-                    array("menu_title" => "People", "menu_url" => "/campus/project/people", "menu_count" => 10), //add  menu_count_unimportant=true to remove highlight
-                    array("menu_title" => "Time", "menu_url" => "/campus/project/time"),
-                    array("menu_title" => "Surveys", "menu_url" => "/campus/project/survey"),
-                    array("menu_title" => "Portfolio", "menu_url" => "/campus/project/portfolio")
+                    array("menu_title" => "Overview", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "overview"),
+                    array("menu_title" => "To-do", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "tasks"),
+                    array("menu_title" => "Story Board", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "timeline"),
+                    array("menu_title" => "Calendar", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "calendar"),
+                    array("menu_title" => "Documents", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "documents"),
+                    array("menu_title" => "People", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "people", "menu_count" => 10), //add  menu_count_unimportant=true to remove highlight
+                    array("menu_title" => "Time", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "time"),
+                    array("menu_title" => "Surveys", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "survey"),
+                    array("menu_title" => "Portfolio", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "portfolio")
                 )
                     )
             );

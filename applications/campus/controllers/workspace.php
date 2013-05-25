@@ -34,29 +34,50 @@ use Platform;
  */
 class Workspace extends Platform\Controller {
 
+    public function index() {
+        return $this->gallery();
+    }
+
+    public function overview() {
+        return $this->load->view('workspace')->display();
+    }
+
+    public function people() {
+        return $this->load->view('workspace')->display();
+    }
+
+    public function time() {
+        return $this->load->view('workspace')->display();
+    }
+
+    public function survey() {
+        return $this->load->view('workspace')->display();
+    }
+
     /**
      * The default fallback method. 
      * @return  void
      */
-    public function index() {
+    public function directory() {
         $this->output->setPageTitle(_("Workspaces"));
-
-        $model = $this->load->model("attachments", "system"); //This will change of project but for now
-
-        $attachments = $model->getObjectsList("attachment");
+        $model = $this->load->model("workspace", "campus"); //This will change of project but for now
+        $workspaces = $model->getObjectsList("workspace");
         $items = array();
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
-        while ($row = $attachments->fetchAssoc()) {
-            $row['attachment_url'] = "/system/object/{$row['object_uri']}";
+        while ($row = $workspaces->fetchAssoc()) {
+            $row['workspace_cover_photo'] = "/system/object/{$row['workspace_cover_photo']}";
             $items["items"][] = $row;
         }
-        $this->set("projects", $items);
+        
+        //print_R($items);
+        
+        $this->set("workspaces", $items);
 
-        $gallery = $this->output->layout("workspaces");
-        $this->output->addToPosition("dashboard", $gallery);
+        $directory = $this->output->layout("workspaces");
+        $this->output->addToPosition("dashboard", $directory);
 
-        $this->load->view('workspace')->display();
+        $this->load->view('workspace')->directory();
     }
 
     /**
@@ -72,9 +93,56 @@ class Workspace extends Platform\Controller {
 
         //Save New workspace;
         if ($this->input->methodIs("post")) {
-            $data = $this->input->data("file");
-            
-            print_R($data); die;
+
+            //If a file has been submitted for profile photo, save that first
+            $attachmentfile = $this->input->data("files");
+            if (!empty($attachmentfile['workspace_coverphoto']['size'])):
+                //Do we have a file?
+                $attachment = $this->load->model("attachments", "system");
+                $attachment->setAllowedTypes(array("gif" => '', "jpeg" => '', "jpg" => '', "png" => ''));
+                $attachment->setOwnerNameId($this->user->get("user_name_id"));
+
+                $attachment->store($attachmentfile['workspace_coverphoto']);
+                //Now store the worrkspace photo to the database;
+                $attachmentUri = $attachment->getLastSavedObjectURI();
+            endif;
+
+            //validate workspace info;
+            $name = $this->input->getString('workspace_name');
+            $privacy = $this->input->getString('workspace_privacy');
+            $shortDescr = $this->input->getString('workspace_short_descr');
+            $longDescr = $this->input->getFormattedString("workspace_long_descr", "", "post", true);
+
+            if (empty($name) || empty($privacy) || empty($shortDescr)):
+                $this->alert("Incomplete workspace data recieved, Please complete the required fields(*)", '', 'error');
+                $this->redirect($this->input->getReferer());
+                return false; //useless
+            endif;
+
+            $this->model->setPropertyValue("workspace_creator", $this->user->get('user_name_id'));
+            $this->model->setPropertyValue("workspace_name", $name);
+            $this->model->setPropertyValue("workspace_privacy", $privacy);
+            $this->model->setPropertyValue("workspace_short_descr", $shortDescr);
+
+            if (!empty($attachmentUri))
+                $this->model->setPropertyValue("workspace_cover_photo", $attachmentUri);
+
+            //set the data;
+            if (!empty($longDescr))
+                $this->model->setPropertyValue("workspace_long_descr", $longDescr);
+
+            //Save the message
+            if (!$this->model->saveObject(null, "workspace")) {
+                return $this->returnRequest("The workspace could not be created, an error occured", "error");
+            }
+            //Now store the worrkspace photo to the database;
+            $workspaceUri = $this->model->getLastSavedObjectURI();
+            if (!empty($workspaceUri)) {
+                $this->alert("Welcome to your new workspace", '', 'success');
+                $workspaceUrl = "/campus/workspace:{$workspaceUri}/workspace/overview/";
+                $this->redirect($workspaceUrl);
+                return true; //useless
+            }
         }
 
         $this->view->editor(
@@ -83,7 +151,7 @@ class Workspace extends Platform\Controller {
         $layout = $this->output->layout('forms/form', 'system');
         $this->output->addToPosition("dashboard", $layout);
 
-        $this->view->display();
+        $this->view->directory();
     }
 
     /**

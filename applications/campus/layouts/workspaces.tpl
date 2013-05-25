@@ -6,7 +6,7 @@
                 <li><a data-target=".project-media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
             </ul>
             <ul class="nav nav-pills no-margin">
-                <li class="highlighted"><a href="/campus/workspace/create" >Add New Workspace</a></li>
+                <li class="highlighted"><a href="/campus/workspace/create" >Create New Workspace</a></li>
             </ul>
         </div>
         <hr />
@@ -34,15 +34,15 @@
 
                         </div>
                     </li>
-                    <tpl:loop data="projects.items" id="project-lists">
+                    <tpl:loop data="workspaces.items" id="project-lists">
                         <li class="mgrow-fluid">   
                             <div class="mgitem project-description mgcol5">
-                                <a href="/campus/project/overview/pid:14345/"><img class="list-hide margin-bottom-zero" src="http://placehold.it/350x100/f2f2f2" /></a>
+                                <a href="/campus/workspaces/workspace:${object_uri}/overview"><img class="list-hide margin-bottom-zero" src="${workspace_cover_photo}" /></a>
                                 <div class="progress progress-danger  mini-bar list-hide">
                                     <div class="bar" style="width: 10%;"></div>
                                 </div>
                                 <div class="description margin-top-half">
-                                    <a><strong>A Short Project Title</strong></a>
+                                    <a href="/campus/workspaces/workspace:${object_uri}/overview"><strong><tpl:element type="text" data="workspace_name" /></strong></a>
                                     <span class="help-block">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
                                 </div>
                             </div>

@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Campus\Controllers\Project;
+namespace Application\Campus\Controllers\Workspace;
 
 use Application\Campus\Controllers as Campus;
 
@@ -32,7 +32,7 @@ use Application\Campus\Controllers as Campus;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Tasks extends Campus\Project {
+final class Tasks extends Campus\Workspace {
 
     /**
      * The default fallback method. 
@@ -42,10 +42,10 @@ final class Tasks extends Campus\Project {
         
         $this->output->setPageTitle(_("Tasks"));
 
-        $tasks = $this->output->layout("project/tasks");
+        $tasks = $this->output->layout("workspace/tasks");
         $this->output->addToPosition("dashboard", $tasks);
 
-            $this->load->view('project')->display();
+            $this->load->view('workspace')->display();
     }
 
     /**
