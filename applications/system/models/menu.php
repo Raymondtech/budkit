@@ -45,17 +45,21 @@ class Menu extends \Platform\Model {
             case 'mediamenu':
                 //Counts
                 $attachments = Attachments::getInstance();
-                $mycount = $attachments->setListLookUpConditions("attachment_owner", array($username) )->getObjectsListCount("attachment");
+                $mycount = $attachments->setListLookUpConditions("attachment_owner", array($username))->getObjectsListCount("attachment");
 
                 if (empty($mycount))
                     $mycount = NULL;
                 //Add items to the profile menu;
-                array_unshift($menuItems, array(
-                    "menu_title" => "Content",
+                array_push($menuItems, array(
+                    "menu_title" => "Add Content",
                     "children" => array(
-                        array("menu_title" => "Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount),
+                        array("menu_title" => "My Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount),
                     //        array("menu_title" => "Shared with me", "menu_url" => "/system/media/attachments/shared"),
                     // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
+                        array("menu_title" => "Drag and Drop", "menu_url" => "/system/media/create/drop"),
+                        array("menu_title" => "Text Editor", "menu_url" => "/system/media/create/editor"),
+                        array("menu_title" => "External Drive", "menu_url" => "/system/media/create/import"),
+//                    // array("menu_title" => "Snap", "menu_url" => "/system/media/create/snap")
                     )
                 ));
 //                , array(
@@ -76,8 +80,8 @@ class Menu extends \Platform\Model {
                 array_unshift($menuItems, $startHere);
                 //Display bookmarks
                 $bookmarks = array(
-                    "menu_title"   => "Bookmarks",
-                    "children"  => array(
+                    "menu_title" => "Bookmarks",
+                    "children" => array(
                         array("menu_title" => "View Profile", "menu_url" => "/member" . (!empty($username) ? ":{$username}" : NULL) . "/profile/information)")
                     )
                 );
