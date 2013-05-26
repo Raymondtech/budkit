@@ -45,7 +45,7 @@ final class Audio extends System\Media {
         $audio = $this->config->getParam( "audio", array(), "attachments");
         
         $attachments = $model
-                ->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListLookUpConditions("attachment_owner", array($this->user->get("user_name_id")))
                 ->setListLookUpConditions("attachment_type", $audio) //Limits the lookup to attachments with image types
                 ->setListOrderBy("o.object_created_on", "DESC")
                 ->getObjectsList("attachment");

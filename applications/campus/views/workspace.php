@@ -34,7 +34,7 @@ final class Workspace extends \Platform\View {
         $dashboard = $this->output->layout("dashboard", "system");
         //$rightaside     = $this->output->layout( "cpanel"  );
 
-        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
+       // $this->output->addMenuGroupToPosition("side", "dashboardmenu");
         $this->output->addToPosition("body", $dashboard);
     }
 
@@ -66,7 +66,7 @@ final class Workspace extends \Platform\View {
 
         //$rightaside     = $this->output->layout( "cpanel"  );
         $this->output->addMenuGroupToPosition("aside", "workspacemenu", "nav-list", array(), false, false);
-        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
+        //$this->output->addMenuGroupToPosition("side", "dashboardmenu");
 
         $this->output->addToPosition("body", $dashboard);
     }

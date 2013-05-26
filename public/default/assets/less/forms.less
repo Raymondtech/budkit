@@ -118,8 +118,8 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   background-color: @inputBackground;
-  border: 1px solid @inputBorder;
-  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  border: 2px solid @inputBorder;
+  //.box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
   .transition(~"border linear .2s, box-shadow linear .2s");
 
   // Focus state
@@ -127,7 +127,7 @@ input[type="color"],
     border-color: rgba(82,168,236,.8);
     outline: 0;
     outline: thin dotted \9; /* IE6-9 */
-    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)");
+    //.box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)");
   }
 }
 
@@ -162,7 +162,7 @@ input[type="file"] {
 // Make select elements obey height by applying a border
 select {
   //width: 220px; // default input width + 10px of padding that doesn't get applied
-  border: 1px solid @inputBorder;
+  border: 2px solid @inputBorder;
   background-color: @inputBackground; // Chrome on Linux and Mobile Safari need background-color
 }
 
@@ -190,7 +190,7 @@ input[type="checkbox"]:focus {
   color: @grayLight;
   background-color: darken(@inputBackground, 1%);
   border-color: @inputBorder;
-  .box-shadow(inset 0 1px 2px rgba(0,0,0,.025));
+  //.box-shadow(inset 0 1px 2px rgba(0,0,0,.025));
   cursor: not-allowed;
 }
 
@@ -374,7 +374,7 @@ select:focus:invalid {
   &:focus {
     border-color: darken(#ee5f5b, 10%);
     @shadow: 0 0 6px lighten(#ee5f5b, 20%);
-    .box-shadow(@shadow);
+    //.box-shadow(@shadow);
   }
 }
 
@@ -462,7 +462,7 @@ select:focus:invalid {
     text-align: center;
     text-shadow: 0 1px 0 @white;
     background-color: @grayLighter;
-    border: 1px solid #ccc;
+    border: 2px solid @inputBorder;
   }
   .add-on,
   .btn,
@@ -479,7 +479,7 @@ select:focus:invalid {
 .input-prepend {
   .add-on,
   .btn {
-    margin-right: -1px;
+    margin-right: -2px;
   }
   .add-on:first-child,
   .btn:first-child {
@@ -500,7 +500,7 @@ select:focus:invalid {
   .add-on,
   .btn,
   .btn-group {
-    margin-left: -1px;
+    margin-left: -2px;
   }
   .add-on:last-child,
   .btn:last-child,
@@ -521,12 +521,12 @@ select:focus:invalid {
   }
   .add-on:first-child,
   .btn:first-child {
-    margin-right: -1px;
+    margin-right: -2px;
     .border-radius(@inputBorderRadius 0 0 @inputBorderRadius);
   }
   .add-on:last-child,
   .btn:last-child {
-    margin-left: -1px;
+    margin-left: -2px;
     .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
   }
   .btn-group:first-child {

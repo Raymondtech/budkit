@@ -48,7 +48,7 @@
                         </tpl:condition>
                         <div class="container-content">
                             <div class="container-bucket">
-                                <tpl:import layout="navbar" />
+<!--                                <tpl:import layout="navbar" />-->
                                 <tpl:block data="page.block.alerts" /> 
                                 <tpl:block data="page.block.body" />
                                 <tpl:import layout="footer" />

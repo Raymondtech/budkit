@@ -22,7 +22,8 @@
   min-height: @navbarHeight;
   padding-left:  10px;
   padding-right: 10px;
-  #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+  background: @navbarBackground;
+  //#gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
   //border-bottom: 1px solid @navbarBorder;
   //.border-radius(@baseBorderRadius);
   //.box-shadow(0 1px 4px rgba(0,0,0,.065));
@@ -57,7 +58,7 @@
   font-size: 20px;
   font-weight: 200;
   color: @navbarBrandColor;
-  text-shadow: 0 1px 0 @navbarBackgroundHighlight;
+  //text-shadow: 0 1px 0 @navbarBackgroundHighlight;
   &:hover,
   &:focus {
     text-decoration: none;
@@ -165,6 +166,7 @@
       color: @white;
       background-color: @navbarSearchBackground;
       border-color: transparent;
+        border: 0;
       //border-bottom: 1px dotted @navbarSearchBorder;
       .box-shadow(none);
       .transition(none);
@@ -175,12 +177,12 @@
       &.focused {
         //width: 390px;
         .transition(width 0.3s ease);
-        padding: 5px 1px 4px;
+        //padding: 5px 1px 4px;
         color: @white;
         //text-shadow: 0 1px 0 @white;
         background-color: @navbarSearchBackgroundFocus;
         border: 0;
-        border-bottom: 1px dotted @navbarSearchBorder;
+        //border-bottom: 1px dotted @navbarSearchBorder;
         .box-shadow(none);
         outline: 0;
       }
@@ -282,7 +284,7 @@
   //padding: ((@navbarHeight - @baseLineHeight) / 2) 14px ((@navbarHeight - @baseLineHeight) / 2);
   color: @navbarLinkColor;
   text-decoration: none;
-  text-shadow: 0 1px 0 @navbarBackgroundHighlight;
+  //text-shadow: 0 1px 0 @navbarBackgroundHighlight;
   cursor: pointer;
       padding: ((@navbarHeight - @baseLineHeight) / 4) 14px;
   margin: ((@navbarHeight - @baseLineHeight) / 4) 0;

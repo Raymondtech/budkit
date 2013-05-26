@@ -42,7 +42,7 @@ class Start extends \Platform\Controller {
         $this->output->setPageTitle(_("Dashboard"));
 
         $model = $this->load->model("attachments", "system");
-        $attachments = $model->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+        $attachments = $model->setListLookUpConditions("attachment_owner", array($this->user->get("user_name_id")) )
                 ->setListOrderBy("o.object_created_on", "DESC")
                 ->setListLimit(10)
                 ->getObjectsList("attachment");

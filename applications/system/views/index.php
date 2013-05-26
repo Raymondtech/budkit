@@ -64,7 +64,7 @@ class Index extends Platform\View {
 
         //to add some js file
         //$this->output->addStyle("some.css");
-        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
+        //$this->output->addMenuGroupToPosition("side", "dashboardmenu");
         //$this->output->addToPosition("aside",   $rightaside );
                 //$this->output->addToPosition("side", $sidebar);
         $dashboard = $this->output->layout("dashboard");

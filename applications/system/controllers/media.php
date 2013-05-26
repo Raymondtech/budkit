@@ -112,7 +112,7 @@ Class Media extends \Platform\Controller {
                 break;
         endswitch;
 
-        $this->load->view("media")->display();
+        $this->load->view("index")->display();
     }
 
     /**

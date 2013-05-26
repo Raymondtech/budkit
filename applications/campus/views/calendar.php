@@ -62,7 +62,7 @@ final class Calendar extends \Platform\View{
         $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
         
-        $this->output->addMenuGroupToPosition("side", "dashboardmenu");
+        //$this->output->addMenuGroupToPosition("side", "dashboardmenu");
         $this->output->addToPosition("side", $sidebar);
         $this->output->addMenuGroupToPosition("aside", "workspacemenu","nav-list", array(), false, false);
         $this->output->addToPosition("body", $dashboard);

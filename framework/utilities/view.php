@@ -67,8 +67,8 @@ abstract class View extends \Library\Object {
         //1, get a list of forms defined in beforeDisplayEditor
         $forms = !empty($form)? array( $form ) : array( //The default forms
             array("id"=>"status","title"=>"Status","layout"=>"forms/status","app"=>"system","icon-class"=>"icon-lightbulb"),
-            array("id"=>"text","title"=>"Text","layout"=>"forms/editor","app"=>"system","icon-class"=>"icon-file-alt"),
-            array("id"=>"upload","title"=>"Upload","layout"=>"forms/drop","app"=>"system","icon-class"=>"icon-upload-alt")
+            //array("id"=>"text","title"=>"Text","layout"=>"forms/editor","app"=>"system","icon-class"=>"icon-file-alt"),
+            //array("id"=>"upload","title"=>"Upload","layout"=>"forms/drop","app"=>"system","icon-class"=>"icon-upload-alt")
         );
         \Library\Event::trigger("beforeEditorDisplay", $forms);
         //Set the editor forms

@@ -21,7 +21,7 @@
       .nav-list > li{
             .tooltip{z-index:10000000000; position: fixed}
         }
-      .nav-list > li.nav-header{ &:first-child{display: none} margin-bottom: 0px;margin-top: 0px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1),0 0 30px rgba(255,255,255,0.125); color: rgb(26, 26, 26); background: #363636; border-top: 1px solid #414040; text-indent: -9999em; height: 4px; }
+      .nav-list > li.nav-header{ border-bottom: 1px solid #2b2b2b;margin-bottom: 0px;margin-top: 0px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1),0 0 30px rgba(255,255,255,0.125); color: rgb(26, 26, 26); background: #363636; border-top: 1px solid #414040; text-indent: -9999em; height: 4px; }
       .nav-list > li > a {
           padding: 10px 0;
           border-bottom: 1px solid rgb(44, 44, 44);
@@ -55,7 +55,7 @@
             display: none;
             //float: right;
             overflow-y: auto;
-            background: #2f2f2f;
+            background: #e6e6e6;
             position: absolute;
             bottom: 0px;
             top: 0;
@@ -63,14 +63,14 @@
            
             .nav-list > li > a {
                 padding: 8px 15px;
-                border-bottom: 1px solid rgb(44, 44, 44);
-                border-top: 1px solid rgb(56, 54, 54);
+                //border-bottom: 1px solid rgb(44, 44, 44);
+                //border-top: 1px solid rgb(56, 54, 54);
                 //color: lighten(@gray, 10%);
             }
            .nav-list > li:first-child > a{
                 border-top: 1px solid transparent;
             }
-             .nav-list > li.nav-header{ margin-bottom: 0px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1),0 0 30px rgba(255,255,255,0.125); color: rgb(26, 26, 26); background: #363636; border-top: 1px solid #414040; padding: 6px 15px; }
+             .nav-list > li.nav-header{ margin-bottom: 0px;  padding: 6px 15px; }
         }
         .container-content{ 
             .clearfix();
@@ -97,7 +97,7 @@
 
             }
         }
-        .container-aside{ display: block;     padding-top: @navbarHeight*0.99;}
+        .container-aside{ display: block;}
         .container-aside + .container-content{
             margin-right: @containerAsideWidth;
             *margin-right: @_containerAsideWidth;
@@ -119,7 +119,6 @@
 .container-left, .container-aside{
     .nav-list > li {
        &.nav-header{ 
-            border-bottom: 1px solid #2b2b2b;
             padding: 6px 10px; 
             &:first-child{ margin-top: 0px;}
         }

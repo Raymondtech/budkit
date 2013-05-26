@@ -1,9 +1,5 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar" id="navbar">
-        <div class="navbar-inner">
-            <a href="/" class="brand logo">B</a>
-        </div>
-    </div>
+
     <tpl:condition data="config|appearance.show-dashboard-photo" test="boolean" value="1">
         <div class="platform-user clearfix">
             <a href="/member:${user.user_name_id}/profile/information" class="profile-link">
@@ -15,7 +11,9 @@
         </div>
     </tpl:condition>
     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
+        <tpl:menu id="dashboardmenu" type="nav-list" icons="true" />
         <tpl:block data="page.block.side" />
+        
     </tpl:condition>
 </tpl:layout>
 

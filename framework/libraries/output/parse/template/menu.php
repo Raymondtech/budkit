@@ -161,7 +161,7 @@ class Menu extends Parse\Template {
                 "ELEMENT" => "a",
                 "HREF" => !empty($item['menu_url']) ? \Library\Uri::internal($item['menu_url']) : '#',
                 "DATA-TOGGLE"=>"tooltip",
-                "data-placement"=>"right",
+                "DATA-PLACEMENT"=>"right",
                 "TITLE"=> $item['menu_title'],
                 "CHILDREN" => array(
                     array("ELEMENT" => "span", "CDATA" => $item['menu_title'])
@@ -171,6 +171,9 @@ class Menu extends Parse\Template {
                 //If we have a menu count
                 $icons =  array("ELEMENT" => "i", "CLASS" => "nav-icon icon-{$class}");
                 array_unshift($anchor['CHILDREN'], $icons);
+            }else{
+                unset($anchor['DATA-TOGGLE']);
+                unset($anchor['DATA-PLACEMENT']);
             }
             //Item count
             if (isset($item['menu_count'])) {

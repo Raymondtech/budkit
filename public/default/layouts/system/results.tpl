@@ -1,14 +1,17 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl"> 
     <div class="padding"> 
-        <form class="no-margin pull-left form-horizontal" action="/system/search/graph" method="post">   
-            <input type="text" class="span5" name="query" placeholder="Search" value="${query}" />
-            <button type="submit" class="btn">Search</button>
-        </form>
-        <div class="clearfix">
-            <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="resultstoggler">
-                <li class="active"><a data-target=".media-gallery "  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
-                <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
-            </ul>
+
+        <div class="clearfix">      
+            <form class="no-margin pull-left form-horizontal" action="/system/search/graph" method="post"> 
+                <input type="text" class="span5" name="query" placeholder="Search" value="${query}" />
+                <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+            </form>
+            <tpl:condition data="result" test="isset" value="1">
+                <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="resultstoggler">
+                    <li class="active"><a data-target=".media-gallery "  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
+                    <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
+                </ul>
+            </tpl:condition>
         </div>
         <hr />  
         <tpl:condition data="result" test="isset" value="1">
@@ -61,9 +64,6 @@
             </tpl:loop>
         </tpl:condition>
 
-        <tpl:condition data="result" test="isset" value="0">
-            <p class="placeholder-text">Nothing found</p>
-        </tpl:condition>
     </div>
 </tpl:layout>
 

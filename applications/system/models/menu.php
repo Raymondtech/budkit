@@ -42,47 +42,27 @@ class Menu extends \Platform\Model {
 
         //Add the default upload links
         switch ($menuId):
-            case 'mediamenu':
+
+            case "dashboardmenu":
                 //Counts
                 $attachments = Attachments::getInstance();
                 $mycount = $attachments->setListLookUpConditions("attachment_owner", array($username))->getObjectsListCount("attachment");
 
                 if (empty($mycount))
                     $mycount = NULL;
-                //Add items to the profile menu;
-                array_push($menuItems, array(
-                    "menu_title" => "Add Content",
-                    "children" => array(
-                        array("menu_title" => "My Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount),
-                    //        array("menu_title" => "Shared with me", "menu_url" => "/system/media/attachments/shared"),
-                    // array("menu_title" => "Collections", "menu_url" => "/system/media/collection/gallery")
-                        array("menu_title" => "Drag and Drop", "menu_url" => "/system/media/create/drop"),
-                        array("menu_title" => "Text Editor", "menu_url" => "/system/media/create/editor"),
-                        array("menu_title" => "External Drive", "menu_url" => "/system/media/create/import"),
-//                    // array("menu_title" => "Snap", "menu_url" => "/system/media/create/snap")
-                    )
-                ));
-//                , array(
-//                    "menu_title" => "Add New",
-//                    "children" => array(
-//                        array("menu_title" => "Drag and Drop", "menu_url" => "/system/media/create"),
-//                        array("menu_title" => "Text Editor", "menu_url" => "/system/media/create/editor"),
-//                        array("menu_title" => "External Drive", "menu_url" => "/system/media/create/import"),
-//                    // array("menu_title" => "Snap", "menu_url" => "/system/media/create/snap")
-//                    )
-//                )
-                break;
-            case "dashboardmenu":
-                $startHere = & reset($menuItems);
-                //Add Timeline;
-                array_unshift($startHere['children'], array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"));
-                array_shift($menuItems);
-                array_unshift($menuItems, $startHere);
+
                 //Display bookmarks
                 $bookmarks = array(
                     "menu_title" => "Bookmarks",
                     "children" => array(
-                        array("menu_title" => "View Profile", "menu_url" => "/member" . (!empty($username) ? ":{$username}" : NULL) . "/profile/information)")
+                        array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"),
+                        array("menu_title" => "Search", "menu_url" => "/system/search/graph"),
+                        array("menu_title" => "My Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount),
+
+                        array("menu_title" => "Inbox", "menu_url" => "/system/messages/inbox"),
+                        array("menu_title" => "People", "menu_url" => "/member/network/directory"),
+                        array("menu_title" => "Settings", "menu_url" => "/settings/member/account"),
+                        array("menu_title" => "Sign-out", "menu_url" => "/system/authenticate/logout")
                     )
                 );
                 $menuItems[] = $bookmarks;

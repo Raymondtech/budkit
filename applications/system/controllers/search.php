@@ -76,7 +76,7 @@ class Search extends \Platform\Controller {
 
         $title = sprintf( _("Results matching '%s'"), $query );
         //Return json results;
-        if (empty($results)):
+        if (!empty($query) && empty($results)):
             $this->alert(sprintf(_("Your search for '%s' did not return any results"), $query) );
         endif;
         

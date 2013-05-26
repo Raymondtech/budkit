@@ -176,7 +176,7 @@ final class Schema extends Platform\Model {
         static::$database->query(
                 "INSERT INTO `?menu` (`menu_id`, `menu_parent_id`, `menu_title`, `menu_url`, `menu_classes`, `menu_order`, `menu_group_id`, `menu_type`, `menu_callback`, `lft`, `rgt`, `menu_iscore`) VALUES
                 (48, 0, 'Messages', '', NULL, 0, 4, 'link', NULL, 1, 4, 1),
-                (49, 48, 'Inbox', '/system/messages/inbox', NULL, 0, 4, 'link', NULL, 2, 3, 1),
+                (49, 48, 'Chat', '/system/messages/chat', NULL, 0, 4, 'link', NULL, 2, 3, 1),
                 (55, 0, 'Start Here', '', NULL, 0, 3, 'link', NULL, 1, 6, 1),
                 (56, 55, 'Dashboard', '/system/start/dashboard', NULL, 0, 3, 'link', NULL, 2, 5, 1),
                 (58, 55, 'Notifications', '/system/notifications/list', NULL, 0, 3, 'link', NULL, 3, 4, 1),

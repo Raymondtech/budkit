@@ -8,7 +8,7 @@
                             <a href="/system/message/refresh" class="btn">
                                 <i class="icon-rotate-left"/> 
                             </a>
-                            <a href="/system/message/create" class="btn">
+                             <a href="/system/message/create" class="btn">
                                 Compose
                             </a>
                         </div>

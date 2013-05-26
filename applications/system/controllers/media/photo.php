@@ -46,7 +46,7 @@ final class Photo extends System\Media {
         $images = $this->config->getParam( "image", array(), "attachments");
         
         $attachments = $model
-                ->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListLookUpConditions("attachment_owner", array($this->user->get("user_name_id")))
                 ->setListLookUpConditions("attachment_type", $images) //Limits the lookup to attachments with image types
                 ->setListOrderBy("o.object_created_on", "DESC")
                 ->getObjectsList("attachment");

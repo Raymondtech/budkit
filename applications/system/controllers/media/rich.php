@@ -44,7 +44,7 @@ final class Rich extends System\Media {
         $rich = $this->config->getParam( "application", array(), "attachments");
         
         $attachments = $model
-                ->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListLookUpConditions("attachment_owner", array($this->user->get("user_name_id")))
                 ->setListLookUpConditions("attachment_type", $rich) //Limits the lookup to attachments with image types
                 ->setListOrderBy("o.object_created_on", "DESC")
                 ->getObjectsList("attachment");

@@ -51,7 +51,7 @@ class Member extends \Platform\View {
         //$sidebar = null; //$this->output->layout("settings/sidebar");
         $body = $this->output->layout($form, $app);
         
-        $this->output->addMenuGroupToPosition("side", "settingsmenu");
+        $this->output->addMenuGroupToPosition("aside", "settingsmenu","nav-list", array(), false, false);
         $this->output->addToPosition("body", $body);
         //$this->output->addToPosition("side", $sidebar);
         

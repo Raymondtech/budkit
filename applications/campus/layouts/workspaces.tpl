@@ -5,9 +5,10 @@
                 <li class="active"><a data-target=".project-media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
                 <li><a data-target=".project-media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
             </ul>
-            <ul class="nav nav-pills no-margin">
-                <li class="highlighted"><a href="/campus/workspace/create" >Create New Workspace</a></li>
-            </ul>
+
+            <div class="btn-group pull-left no-margin">
+                <a class="btn-important btn" href="/campus/workspace/create" >Create Workspace</a>
+            </div>
         </div>
         <hr />
         <div class="widget">

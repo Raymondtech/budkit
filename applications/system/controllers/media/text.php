@@ -45,7 +45,7 @@ final class Text extends System\Media {
         $text = $this->config->getParam( "text", array(), "attachments");
         
         $attachments = $model
-                ->setListLookUpConditions("attachment_owner", $this->user->get("user_name_id"))
+                ->setListLookUpConditions("attachment_owner", array($this->user->get("user_name_id")))
                 ->setListLookUpConditions("attachment_type", $text) //Limits the lookup to attachments with image types
                 ->setListOrderBy("o.object_created_on", "DESC")
                 ->getObjectsList("attachment");
