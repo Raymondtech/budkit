@@ -4,7 +4,9 @@
 <!--            <div class="timeline-item-icon toolset"><a href="#"><i class="icon-quote-left"></i></a></div>-->
             <fieldset class="timeline-item-publisher no-bottom-margin">
                 <div class="controls">
-                    <textarea class="input-100pct focused" data-target="budkit-editor" rows="4" name="media_content" placeholder="Add Comment"></textarea>
+                    <textarea class="input-100pct focused"
+                              data-stylesheet="http://${config|general.host}${config|general.path}public/default/assets/css/editor.css"
+                              data-target="budkit-editor" rows="4" name="media_content" placeholder="Add Comment"></textarea>
                 </div> 
                 <div class="bucket margin-top-half" data-src="${config|general.path}system/media/attachments/" data-progress="${uploadprogress}"></div>
                 <div class="btn-toolbar margin-bottom-zero"> 

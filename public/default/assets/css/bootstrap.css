@@ -30,6 +30,7 @@
   display: block;
   width: 100%;
   min-height: 34px;
+  *min-height: 24px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -355,6 +356,7 @@ a:focus {
   display: block;
   width: 100%;
   min-height: 34px;
+  *min-height: 24px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -5429,10 +5431,10 @@ a.badge:focus {
   padding: 0 !important;
 }
 .padding-right-zero {
-  padding-right: 0;
+  padding-right: 0 !important;
 }
 .padding-bottom-zero {
-  padding-bottom: 0;
+  padding-bottom: 0 !important;
 }
 .padding-left-zero {
   padding-left: 0;
@@ -5702,11 +5704,12 @@ input.search-query {
   margin-right: 170px;
 }
 .stream-box .stream-view {
-  max-width: 1172px;
+  max-width: 1270px;
 }
 .stream-box .stream-alerts,
 .stream-box .stream-more,
-.stream-box .stream-widgets {
+.stream-box .stream-widgets,
+.stream-box .stream-cpanel {
   margin-left: 79px;
   display: block;
 }
@@ -6520,6 +6523,7 @@ video {
   display: block;
   width: 100%;
   min-height: 34px;
+  *min-height: 24px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -7276,7 +7280,7 @@ ul.media-item-actions li a:hover .rating {
 .widget {
   background: #ffffff;
   line-height: 24px;
-  border: 1px solid #eee;
+  border: 1px solid #e6e6e6;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
@@ -7355,6 +7359,74 @@ ul.media-item-actions li a:hover .rating {
   border-top: 1px dashed #fcfafa;
   position: relative;
   background: #fcfafa;
+}
+.widgeticons {
+  list-style: none;
+  margin: 0;
+  *zoom: 1;
+}
+.widgeticons:before,
+.widgeticons:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.widgeticons:after {
+  clear: both;
+}
+.widgeticon {
+  display: inline-block;
+  float: left;
+}
+.widgeticon a {
+  background: #ffffff;
+  display: inline-block;
+  line-height: 24px;
+  border: 1px solid #eee;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 20px;
+  margin-right: 18px;
+  text-align: center;
+  text-decoration: none;
+  width: 170px;
+  height: 200px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.widgeticon a span {
+  display: block;
+}
+.widgeticon a span.icon {
+  font-size: 48px;
+  padding: 30px 0 50px;
+  border-bottom: 1px solid #eeeeee;
+  margin: 4px;
+  background: #ffffff;
+  color: #333333;
+}
+.widgeticon a span.title {
+  margin-top: -40px;
+  color: #333333;
+  text-transform: uppercase;
+}
+.widgeticon a span.metric {
+  font-size: 28px;
+  margin-top: 24px;
+  color: #333333;
+}
+.widgeticon a span.hint {
+  color: #999999;
+  margin-bottom: 5px;
+}
+.widgeticon a:hover {
+  background: #ecf4f8;
 }
 .dials {
   text-align: center;

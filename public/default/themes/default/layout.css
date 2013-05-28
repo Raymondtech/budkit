@@ -4,7 +4,7 @@
 .footer {
     margin-bottom: 100px;
 }
-.container-left {bottom: auto}
+.container-left {bottom: 0}
 /* Main marketing message and sign up button */
 .profile-cover {
     text-align: center;

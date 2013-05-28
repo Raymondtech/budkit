@@ -310,7 +310,8 @@ abstract class Model extends \Library\Object {
 
 
         //Sets the pagination output;
-        $this->output->set("pagination", $pages);
+        if(sizeof($pages['pages'])>1)
+            $this->output->set("pagination", $pages);
  
     }
 
