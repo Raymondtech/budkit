@@ -4,6 +4,7 @@
             <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
             <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
         </ul>
+        <tpl:menu id="mediamenu" type="nav-pills" class="pull-right margin-bottom-zero margin-top-zero margin-right-half" />
         <div class="btn-toolbar pull-left no-margin">
             <a class="btn-important btn" href="/system/media/create/editor" >Add New</a>
         </div>

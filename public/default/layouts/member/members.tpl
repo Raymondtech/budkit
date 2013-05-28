@@ -1,10 +1,13 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="padding">  
         <div class="clearfix">
-            <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="memberstoggler">
-                <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
-                <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
-            </ul>
+            <tpl:condition data="gallery" test="isset" value="1">
+                <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="memberstoggler">
+                    <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
+                    <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
+                </ul>
+            </tpl:condition>
+            <tpl:menu id="peoplemenu" type="nav-pills" class="pull-right margin-bottom-zero margin-top-zero margin-right-half" />
             <div class="btn-group pull-left no-margin">
                 <a class="btn-important btn" href="/settings/member/privacy/groups" >Edit Privacy Groups</a>
             </div>

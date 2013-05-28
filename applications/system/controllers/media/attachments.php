@@ -101,7 +101,7 @@ class Attachments extends System\Media {
 
     public function gallery() {
 
-        $this->output->setPageTitle(_("Attachments"));
+        $this->output->setPageTitle(_("Documents"));
 
         $model = $this->load->model("attachments", "system");
         $attachments = $model->setListLookUpConditions("attachment_owner", array($this->user->get("user_name_id")))

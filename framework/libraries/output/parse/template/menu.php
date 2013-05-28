@@ -177,9 +177,10 @@ class Menu extends Parse\Template {
             }
             //Item count
             if (isset($item['menu_count'])) {
+                
                 //If we have a menu count
                 $important = (isset($item['menu_count_unimportant']) && (bool) $item['menu_count_unimportant'] || (int) $item['menu_count'] < 1) ? null : "label-important";
-                $anchor['CHILDREN'][] = array("ELEMENT" => "span", "CLASS" => "label ".((!$menuIcons)?"pull-right":"nav-icon-label")." {$important}", "CDATA" => number_format($item['menu_count']));
+                $anchor['CHILDREN'][] = array("ELEMENT" => "span", "CLASS" => "label ".((!$menuIcons)?" absolute-right":"nav-icon-label")." {$important}", "CDATA" => number_format($item['menu_count']));
             }
             //Add the menu anchor
             $link["CHILDREN"][] = $anchor;

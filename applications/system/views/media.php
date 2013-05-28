@@ -62,7 +62,7 @@ class Media extends Platform\View {
         $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
         
-        $this->output->addMenuGroupToPosition("side", "mediamenu");
+        $this->output->addMenuGroupToPosition("galleryhead", "mediamenu", "nav-pills", array(), false, false);
         $this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );
