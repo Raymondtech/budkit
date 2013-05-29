@@ -399,7 +399,7 @@ select:focus:invalid {
 
 .help-block,
 .help-inline {
-  color: lighten(@textColor, 15%); // lighten the text some for contrast
+  color: lighten(@textColor, 50%); font-style: italic; // lighten the text some for contrast
 }
 
 .help-block {
@@ -453,7 +453,7 @@ select:focus:invalid {
   .add-on {
     display: inline-block;
     width: auto;
-    height: @baseLineHeight;
+    min-height: @baseLineHeight;
     min-width: 16px;
     padding: 4px 5px;
     font-size: @baseFontSize;

@@ -1,6 +1,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="padding">  
-        <div class="clearfix">   
+        <div class="clearfix">
+            <h1 class="margin-bottom-zero pull-left"><tpl:element type="text" data="page.title" /></h1>
             <form class="pull-right no-margin form-horizontal" action="/settings/system/permissions/authorities/edit" method="POST">   
                 <input type="text" name="authority-title" class="span2" placeholder="Group Name" />
                 <select name="authority-parent" id="authority-parent">
@@ -15,9 +16,6 @@
                 <input type="hidden" name="authority-description" />
                 <button type="submit" class="btn">Add New Group</button>
             </form>
-            <ul class="nav nav-pills no-margin">
-                <li class="highlighted"><a href="/settings/system/permissions/add" >Add Authority Group</a></li>
-            </ul>
         </div>
         <hr />
         <div class="widget">

@@ -1,22 +1,23 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="padding">  
-        <div class="clearfix">
-            <tpl:condition data="gallery" test="isset" value="1">
-                <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="memberstoggler">
-                    <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
-                    <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
-                </ul>
-            </tpl:condition>
-            <tpl:menu id="peoplemenu" type="nav-pills" class="pull-right margin-bottom-zero margin-top-zero margin-right-half" />
-            <div class="btn-group pull-left no-margin">
-                <a class="btn-important btn" href="/settings/member/privacy/groups" >Edit Privacy Groups</a>
+        <div class="clearfix margin-bottom">
+            <h1 class="margin-zero pull-left"><tpl:element type="text" data="page.title" /></h1>
+            <div class="btn-group pull-right margin-right">
+                <a class="btn-important btn" href="/settings/member/privacy/groups" >Privacy Groups</a>
             </div>
+            <tpl:menu id="peoplemenu" type="nav-pills" class="pull-right margin-bottom-zero margin-top-zero margin-right-half" />
         </div>
-
-        <hr />
         <tpl:condition data="gallery" test="isset" value="1">
             <div class="widget">
-                <div class="widget-head"><span class="widget-title"><tpl:element type="text" data="gallery.title">Media Gallery</tpl:element></span></div>
+                <div class="widget-head">
+                    <span class="widget-title"><tpl:element type="text" data="gallery.title">Media Gallery</tpl:element></span>
+                    <tpl:condition data="gallery" test="isset" value="1">
+                        <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="memberstoggler">
+                            <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
+                            <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
+                        </ul>
+                    </tpl:condition>
+                </div>
                 <div class="widget-body">
                     <ul class="media-grid media-gallery compensate-margins">
                         <li class="mgrow-fluid grid-hide list-header">
@@ -67,6 +68,7 @@
             <tpl:import layout="pagination" />
         </tpl:condition>
         <tpl:condition data="gallery" test="isset" value="0">
+                    <hr />
             <p class="placeholder-text">There are no members to display in this list.</p>
         </tpl:condition>
     </div>

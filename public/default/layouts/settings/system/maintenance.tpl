@@ -1,9 +1,10 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form class="form-horizontal margin-top-double">
+    <tpl:import layout="title" app="settings" />
+    <form class="form-vertical margin-top-zero padding">
         <div class="control-group">
             <label class="control-label" ><i class="icon-user-md icon-2x"></i></label>
             <div class="controls">
-               
+
                 <span class="help-block">It is important that you keep your site healthy.</span>
                 <p class="margin-top-half"><strong>Performing a system check will..</strong></p>
                 <ol class="help-block margin-top-half">
@@ -15,7 +16,7 @@
             </div>
         </div>
         <hr />
-       <div class="control-group">
+        <div class="control-group">
             <label class="control-label"><i class="icon-cogs icon-2x"></i></label>
             <div class="controls">
                 <span class="help-block">Use this if for some reasons you want to clear all sessions on the system...</span>
@@ -39,7 +40,7 @@
                     <li>Delete the contents of the <em>/users</em> folder.</li>
                 </ol>
                 <p class="margin-top-half"><strong>Are you sure you want to do this?</strong></p>
-                 <p class="help-block">If you are then click the button below. There will be no undo button</p>
+                <p class="help-block">If you are then click the button below. There will be no undo button</p>
                 <a href="/settings/system/maintenance/reset" class="btn btn-danger margin-top-half" >Factory Reset</a>
             </div>
         </div>

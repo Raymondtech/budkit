@@ -1,9 +1,9 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="post" enctype="multipart/form-data" action="/settings/member/notifications/update" class="form-horizontal margin-top-double">
-        
+        <tpl:import layout="title" app="settings" />
+    <form method="post" enctype="multipart/form-data" action="/settings/member/notifications/update" class="form-vertical margin-top-zero padding"> 
         <fieldset>
             <div class="control-group">
-                <label class="control-label">Notification mode</label>
+                <label class="control-label"><strong>Notification mode</strong></label>
                 <div class="controls">
                     <label class="checkbox">
                         <input type="hidden" name="notifications[notify-email]" value="0" />
@@ -19,7 +19,7 @@
             </div><!-- /control-group -->  
             <hr />
             <div class="control-group">
-                <label class="control-label">Digests</label>
+                <label class="control-label"><strong>Digests</strong></label>
                 <div class="controls">
                     <label class="checkbox">
                         <input type="hidden" name="notifications[enable-digests]" value="0" />
@@ -38,7 +38,7 @@
             </div><!-- /control-group -->
             <hr />
             <div class="control-group">
-                <label class="control-label">Frequency Mode</label>
+                <label class="control-label"><strong>Frequency Mode</strong></label>
                 <div class="controls">
                     <label class="radio">
                         <tpl:input type="radio" name="notifications[frequency-mode]" data="config|notifications.frequency-mode" value="live" checked="checked" />
@@ -52,7 +52,7 @@
             </div><!-- /control-group -->
             <hr />
             <div class="control-group">
-                <label class="control-label">Notify me when..</label>
+                <label class="control-label"><strong>Notify me when..</strong></label>
                 <div class="controls">
                     <label class="checkbox">
                         <input type="hidden" name="notifications[content-mention]" value="0" />
@@ -101,8 +101,9 @@
                     </label>
                 </div>
             </div><!-- /control-group -->
+            <hr />
             <div class="control-group">
-                <label class="control-label">Vendors</label>
+                <label class="control-label"><strong>Vendors</strong></label>
                 <div class="controls">
                     <label class="checkbox">
                         <input type="hidden" name="notifications[enable-vendor]" value="0" />

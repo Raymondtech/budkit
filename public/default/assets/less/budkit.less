@@ -163,6 +163,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     position:absolute; left:0; right:0; bottom:0; top:@navbarHeight;
     .message-list{ position:absolute; left:0; width: 424px; top:0; bottom:0; overflow-y: auto; overflow-x: hidden; border-right: 1px solid #d9d9d9; background: @white; }
     .message-view{ position:absolute; left: 425px; border-left: 1px solid @white; top:0; bottom:0; right:0; overflow-y: auto; overflow-x: hidden;}
+    .message-header{margin-left: 79px}
 }
 
 //***** ACCORDION MENUS ***/
@@ -577,3 +578,5 @@ video{max-width: 100%}
 .search-query{
     &:focus~.search-results{ display: block; z-index: 100000; }
 }
+
+.search-form{ background: lighten(@grayLight,32%); padding: 5px; display: inline-block}

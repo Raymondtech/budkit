@@ -14,9 +14,9 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  * 
  */
-namespace Application\Campus\Controllers\Workspace;
+namespace Application\System\Controllers\Appointments;
 
-use Application\Campus\Controllers as Campus;
+use Application\System\Controllers as System;
 
 
 /**
@@ -32,7 +32,7 @@ use Application\Campus\Controllers as Campus;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Calendar extends Campus\Workspace {
+final class Calendar extends System\Appointments {
     
     /**
      * Displays the form required to creates a new calendar. 
@@ -40,7 +40,7 @@ final class Calendar extends Campus\Workspace {
      * @return  \Application\System\Views\Content\Calendar::createForm()
      */
     public function create() {
-        $view = $this->load->view('calendar');
+        $view = $this->load->view('appointments');
         return $view->createForm();
     }
     /**
@@ -62,7 +62,7 @@ final class Calendar extends Campus\Workspace {
      */
     public function index() {
         
-        $view = $this->load->view('calendar');
+        $view = $this->load->view('appointments');
         
         $user = \Platform\User::getInstance();
         

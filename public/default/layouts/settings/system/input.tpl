@@ -1,5 +1,6 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top-double">
+    <tpl:import layout="title" app="settings" />
+    <form method="POST" action="/settings/system/save" class="form-vertical margin-top-zero padding">
         <fieldset class="no-margin">
             <div class="control-group">
                 <label class="control-label" for="options[content][content-editor]">Content Editor</label>

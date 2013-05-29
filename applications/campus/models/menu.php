@@ -44,30 +44,33 @@ class Menu extends \Platform\Model {
         $user = \Platform\User::getInstance();
         $input = \Library\Input::getInstance();
         $input->getRequestVars();
-        $workspace = $input->getVar("workspace", '');
 
-        if ($menuId === 'dashboardmenu') {
-            $startHere = & reset($menuItems);
-            array_push($startHere['children'], array(
-                "menu_title" => "Workspaces",
-                "menu_url" => "/campus/workspaces/directory"
-                    )
-            );
-            array_shift($menuItems);
-            array_unshift($menuItems, $startHere);
-        } elseif ($menuId === 'workspacemenu') {
+
+        if ($menuId === 'workspacemenu') {
+            $workspace = $input->getVar("workspace", '');
             array_push($menuItems, array(
-                "menu_title" => "Workspace Menu",
+                "menu_title" => "Workspace",
                 "children" => array(
                     array("menu_title" => "Overview", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "overview"),
-                    array("menu_title" => "To-do", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "tasks"),
-                    array("menu_title" => "Story Board", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "timeline"),
+                    array("menu_title" => "Tasks", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "tasks"),
+                    array("menu_title" => "Discussions", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "timeline"),
                     array("menu_title" => "Calendar", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "calendar"),
                     array("menu_title" => "Documents", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "documents"),
                     array("menu_title" => "People", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "people", "menu_count" => 10), //add  menu_count_unimportant=true to remove highlight
-                    array("menu_title" => "Time", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "time"),
-                    array("menu_title" => "Surveys", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "survey"),
-                    array("menu_title" => "Portfolio", "menu_url" => "/campus/workspaces/" . (!empty($workspace) ? "workspace:{$workspace}/" : NULL) . "portfolio")
+                )
+                    )
+            );
+        } elseif ($menuId === 'coursemenu') {
+            $course = $input->getVar("course", '');
+            array_push($menuItems, array(
+                "menu_title" => "Course",
+                "children" => array(
+                    array("menu_title" => "Overview", "menu_url" => "/campus/courses/" . (!empty($course) ? "course:{$course}/" : NULL) . "overview"),
+                    array("menu_title" => "Activities", "menu_url" => "/campus/courses/" . (!empty($course) ? "course:{$course}/" : NULL) . "tasks"),
+                    array("menu_title" => "Discussions", "menu_url" => "/campus/courses/" . (!empty($course) ? "course:{$course}/" : NULL) . "timeline"),
+                    array("menu_title" => "Documents", "menu_url" => "/campus/courses/" . (!empty($course) ? "course:{$course}/" : NULL) . "documents"),
+                    array("menu_title" => "Participants", "menu_url" => "/campus/courses/" . (!empty($course) ? "course:{$course}/" : NULL) . "people", "menu_count" => 10), //add  menu_count_unimportant=true to remove highlight
+                    array("menu_title" => "Achievements", "menu_url" => "/campus/courses/" . (!empty($course) ? "course:{$course}/" : NULL) . "portfolio")
                 )
                     )
             );

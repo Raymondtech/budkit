@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * calendar.php
+ * appointments.php
  *
  * Requires PHP version 5.4
  *
@@ -14,7 +14,7 @@
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
 
-namespace Application\Campus\Views;
+namespace Application\System\Views;
 
 /**
  * Calendar Sub View class
@@ -27,7 +27,7 @@ namespace Application\Campus\Views;
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * 
  */
-final class Calendar extends \Platform\View{
+final class Appointments extends \Platform\View{
     
 
     
@@ -64,7 +64,6 @@ final class Calendar extends \Platform\View{
         
         //$this->output->addMenuGroupToPosition("side", "dashboardmenu");
         $this->output->addToPosition("side", $sidebar);
-        $this->output->addMenuGroupToPosition("aside", "workspacemenu","nav-list", array(), false, false);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );
         
@@ -77,7 +76,7 @@ final class Calendar extends \Platform\View{
     public function drawCalendar(){
         
         $this->output->setPageTitle( _("Workspace Calendar"));            
-        $calendar = $this->output->layout( "workspace/events/calendar" );       
+        $calendar = $this->output->layout( "appointments/calendar" );       
         $this->output->addToPosition("dashboard", $calendar); 
         
         return $this->display();
@@ -93,7 +92,7 @@ final class Calendar extends \Platform\View{
          $this->output->setPageTitle("Calendars | Create new Calendar");
                 
         //form
-        $form  = $this->output->layout( "workspace/events" );  
+        $form  = $this->output->layout( "appointments/events" );  
         $this->output->addToPosition("dashboard",   $form);
      
         return $this->display();

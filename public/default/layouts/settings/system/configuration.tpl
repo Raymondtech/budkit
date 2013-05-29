@@ -1,5 +1,6 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <form method="POST" action="/settings/system/save" class="form-horizontal margin-top-double">
+    <tpl:import layout="title" app="settings" />
+    <form method="POST" action="/settings/system/save" class="form-vertical margin-top-zero padding">
         <fieldset class="no-margin">
             <div class="control-group">
                 <label class="control-label" for="options[general][site-name]">Website Name</label>
@@ -63,7 +64,7 @@
                     <span class="help-block">The default authority group members will be automatically added to at sign-up</span>
                 </div>
             </div>
-                                
+
             <hr />
             <div class="control-group">
                 <label class="control-label" for="options[general][site-page-title]">Page titles</label>

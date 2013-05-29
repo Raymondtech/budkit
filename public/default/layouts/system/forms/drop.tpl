@@ -4,7 +4,8 @@
             <div id="upload-dropbox">
                 <div class="upload-drop clearfix">
                     <div class="upload-prompt" align="center">Drop files here to upload</div>
-                    <div class="upload-select" align="center"><input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Select files" autoload="" /></div>
+                    <small style="font-size: 10px; margin-top: 20px; display: block">- OR -</small>
+                    <div class="upload-select" align="center"><input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".bucket" data-label="Choose files to upload" autoload="" /></div>
                 </div>            
             </div>
         </fieldset>

@@ -56,19 +56,24 @@ class Start extends \Platform\Controller {
         }
         if ((int)$items["totalItems"] > 0) $this->set("gallery", $items);
         $gallery = $this->output->layout("media/gallery/widget");
-        
-        $this->output->set("widget", array(
+        $documents = array(
             "title"=>"Recent Documents",
             "body" =>$gallery,
             "footer"=>'<a href="'.\Library\Uri::internal("/system/media/attachments/gallery").'">View Documents</a>'
-        ));
-        $widget = $this->output->layout("widget");
+        );
+        if($items['totalItems'] > 0 ): 
+            $this->output->set("widget", $documents);
+            $widget = $this->output->layout("widget");             
+            $this->output->addToPosition("dashwidgets", $widget);
+        else:
+            $drop = $this->output->layout("forms/drop");
+            $this->output->addToPosition("dashwidgets", $drop);
+        endif;
         
         \Library\Event::trigger('beforeDashboardDisplay', $this);
         
         $view->editor();//Generate the forms;
-        
-        $this->output->addToPosition("dashwidgets", $widget);
+
         $today = $this->output->layout("start");
         $this->output->addToPosition("dashboard", $today);
         $view->display();      

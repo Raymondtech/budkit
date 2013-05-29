@@ -2,6 +2,7 @@
     <div class="messages-box">
         <div class="message-list">
             <div class="clearfix padding">
+                
                 <ul class="nav nav-pills no-margin">
                     <li>
                         <div class="btn-group">
@@ -49,21 +50,10 @@
             <div class="stream-thread">              
                 <div class="stream-body">
                     <tpl:condition test="isset" data="activities.items" value="1">
-                    <div class="clearfix  padding"> 
-                        <ul class="nav nav-pills no-margin">
-                            <li>
-                                <div class="btn-group">
-                                    <a href="/settings/member/privacy" class="btn">
-                                        <i class="icon-trash"/> 
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <hr class="margin-zero"  />
                     <div class="stream-view">
                         <div class="stream-thread">              
                             <div class="stream-body padding" id="timeline">
+                                <div class="message-header"><div class="page-header"><h1 class="margin-top-zero"><tpl:element type="text" data="page.title" /></h1></div></div> 
                                 <tpl:import layout="input" /> 
                                 <tpl:import layout="media/timeline" />  
                             </div>

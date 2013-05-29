@@ -1,10 +1,10 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="margin-top-double">
-        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/settings/member/profile/update">
-
+    <tpl:import layout="title" app="settings" />
+    <div class="margin-top-zero">
+        <form class="form-vertical padding" method="post" enctype="multipart/form-data" action="/settings/member/profile/update">
             <div class="control-group">
                 <label class="control-label"  for="middle-name">Profile photo</label>
-                <div class="controls">
+                <div class="controls clearfix">
                     <tpl:condition data="profile.user_photo" test="isset" value="1">
                         <img class="add-on thumbnail pull-left margin-right" src="/system/object/${profile.user_photo}/resize/200/200" />
                     </tpl:condition>

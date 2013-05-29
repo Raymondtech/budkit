@@ -17,9 +17,9 @@
                 <input type="hidden" name="group-description" />
                 <button type="submit" class="btn">Add Privacy Group</button>
             </form>
-            <ul class="nav nav-pills no-margin">
-                <li class="highlighted"><a href="/settings/member/privacy" >Privacy Setting</a></li>
-            </ul>
+            <div class="btn-toolbar pull-left no-margin">
+                <a class="btn-important btn" href="/settings/member/privacy" >Privacy Setting</a>
+            </div>
         </div>
         <hr />
         <tpl:condition data="groups" test="isset" value="0">

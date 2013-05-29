@@ -5,7 +5,13 @@
         </tpl:condition>
         <tpl:condition data="gallery" test="isset" value="1">
             <div class="widget">
-                <div class="widget-head"><span class="widget-title"><tpl:element type="text" data="page.title">Media Gallery</tpl:element></span></div>
+                <div class="widget-head">
+                    <span class="widget-title"><tpl:element type="text" data="page.title">Media Gallery</tpl:element></span>
+                    <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="photogridtoggler">
+                        <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
+                        <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
+                    </ul>
+                </div>
                 <div class="widget-body">
                     <tpl:import layout="media/gallery/widget" />
                 </div>

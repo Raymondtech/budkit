@@ -1,35 +1,32 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="account-settings margin-top-double">
-        <form class="form-horizontal" action="/settings/member/profile/update"  method="post" enctype="multipart/form-data" >
+    <tpl:import layout="title" app="settings" />
+    <div class="account-settings">
+        <form class="form-vertical padding" action="/settings/member/profile/update"  method="post" enctype="multipart/form-data" >
             <fieldset>
                 <div class="control-group">
                     <label class="control-label"  for="profile[user_first_name]">First Name</label>
                     <div class="controls">
-                        <input class="input-xlarge" id="first-name" name="profile[user_first_name]" size="30" type="text" value="${account.user_first_name}" />
-                        <span class="help-block">Common, or given names</span>
+                        <input class="input-xxlarge" id="first-name" name="profile[user_first_name]" size="30" type="text" value="${account.user_first_name}" />
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
                     <label class="control-label"  for="profile[user_middle_name]">Middle Name</label>
                     <div class="controls">
-                        <input class="input-xlarge" id="first-name" name="profile[user_middle_name]" size="30" type="text" value="${account.user_middle_name}" />
-                        <span class="help-block">Middle Name(s)</span>
+                        <input class="input-xxlarge" id="first-name" name="profile[user_middle_name]" size="30" type="text" value="${account.user_middle_name}" />
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
                     <label class="control-label"  for="profile[user_last_name]">Last Name</label>
                     <div class="controls">
-                        <input class="input-xlarge" id="first-name" name="profile[user_last_name]" size="30" type="text" value="${account.user_last_name}" />
-                        <span class="help-block">Surname, or Family name</span>
+                        <input class="input-xxlarge" id="first-name" name="profile[user_last_name]" size="30" type="text" value="${account.user_last_name}" />
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
                     <label class="control-label"  for="profile[user_email]">Email address</label>
                     <div class="controls">
                         <div class="input-prepend">
-                            <input class="input-xlarge" id="email" name="profile[user_email]" size="100" type="text" value="${account.user_email}" />
+                            <input class="input-xxlarge" id="email" name="profile[user_email]" size="100" type="text" value="${account.user_email}" />
                         </div>
-                        <span class="help-block">Its important that this be valid</span>
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
@@ -199,43 +196,10 @@
                             <option value="1901">1901</option>
                             <option value="1900">1900</option>
                         </tpl:select>
-                        <p class="help-block">We will not show your date of birth on your profile, unless you <a href="/settings/member/privacy">tell us</a> to</p>
                     </div>
-                </div><!-- /control-group -->
-                <div class="control-group">
-                    <label class="control-label"  for="username">Username</label>
-                    <div class="controls">
-                        <div class="input-prepend">
-                            <span class="add-on">
-                                <?php echo $this->config->getParam('host','').$this->config->getParam('path',''); ?></span>
-                            <input id="username" name="user_name_id" size="20" type="text" value="${account.user_name_id}" disabled="" />
-                        </div>
-                        <span class="help-block">You cannot change your username. </span>
-                    </div>
-                </div><!-- /control-group -->
+                </div>
+                <input id="username" name="user_name_id" size="20" type="hidden" value="${account.user_name_id}" disabled="" />
             </fieldset>
-            <!--            <hr />
-                        <fieldset>
-            
-                            <div class="control-group">
-                                <label class="control-label"  for="old_user_password">Old password</label>
-                                <div class="controls">
-                                    <input class="input-xlarge" id="old-password" name="old_user_password" size="30" type="password" />
-                                </div>
-                            </div> /control-group 
-                            <div class="control-group">
-                                <label class="control-label"  for="new_user_password">New password</label>
-                                <div class="controls">
-                                    <input class="input-xlarge" id="new-password" name="new_user_password" size="30" type="password" />
-                                </div>
-                            </div> /control-group 
-                            <div class="control-group">
-                                <label class="control-label"  for="new_user_password_repeat">Verify new password</label>
-                                <div class="controls">
-                                    <input class="input-xlarge" id="new-password-repeat" name="new_user_password_repeat" size="30" type="password" />
-                                </div>
-                            </div> /control-group 
-                        </fieldset>-->
             <hr />
             <fieldset>
                 <div class="control-group">
@@ -244,7 +208,6 @@
                         <tpl:select name="profile[user_timezone]" id="timezone" class="input-xxlarge span5 drop" value="account.user_timezone">
                             <option value="-12.0">(GMT -12:00) Eniwetok, Kwajalein</option><option value="-11.0">(GMT -11:00) Midway Island, Samoa</option><option value="-10.0">(GMT -10:00) Hawaii</option><option value="-9.0">(GMT -9:00) Alaska</option><option value="-8.0">(GMT -8:00) Pacific Time (US&amp;Canada)</option><option value="-7.0">(GMT -7:00) Mountain Time (US&amp;Canada)</option><option value="-6.0">(GMT -6:00) Central Time (US&amp;Canada), Mexico City</option><option value="-5.0">(GMT -5:00) Eastern Time (US&amp;Canada), Bogota, Lima</option><option value="-4.0">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option><option value="-3.5">(GMT -3:30) Newfoundland</option><option value="-3.0">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option><option value="-2.0">(GMT -2:00) Mid-Atlantic</option><option value="-1.0">(GMT -1:00 hour) Azores, Cape Verde Islands</option><option value="0.0" selected="selected">(GMT) Western Europe Time, London, Lisbon, Casablanca</option><option value="1.0">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</option><option value="2.0">(GMT +2:00) Kaliningrad, South Africa</option><option value="3.0">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option><option value="3.5">(GMT +3:30) Tehran</option><option value="4.0">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option><option value="4.5">(GMT +4:30) Kabul</option><option value="5.0">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option><option value="5.5">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option><option value="5.75">(GMT +5:45) Kathmandu</option><option value="6.0">(GMT +6:00) Almaty, Dhaka, Colombo</option><option value="7.0">(GMT +7:00) Bangkok, Hanoi, Jakarta</option><option value="8.0">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option><option value="9.0">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option><option value="9.5">(GMT +9:30) Adelaide, Darwin</option><option value="10.0">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option><option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option><option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
                         </tpl:select>
-                        <span class="help-block">Unless specified 'relative time' will be used.</span>
                     </div>
                 </div><!-- /control-group -->
                 <div class="control-group">
@@ -264,7 +227,7 @@
                     <label class="control-label" >API  Key</label>
                     <div class="controls">
                         <div class="input-append">
-                            <span class="uneditable-input input-xlarge">
+                            <span class="uneditable-input input-xxlarge">
                                 <tpl:element type="text" data="account.user_api_key" />
                             </span>
                             <a href="/settings/member/account/resetkey" class="add-on btn" title="Reset API Key">Reset</a>

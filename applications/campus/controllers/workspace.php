@@ -34,12 +34,39 @@ use Platform;
  */
 class Workspace extends Platform\Controller {
 
+    public function __construct() {
+        parent::__construct();
+
+        $this->model = $this->load->model('workspace');
+        $this->view = $this->load->view('workspace');
+
+        $_workspace = $this->input->getVar("workspace", '');
+        
+        if (!empty($_workspace)):
+            $workspace = $this->model->loadObjectByURI($_workspace);
+            $this->output->setPageTitle($workspace->getPropertyValue('workspace_name'));
+
+            $workspace_ = $workspace->getPropertyData();
+            $this->output->set('workspace', $workspace_);
+        endif;
+    }
+
     public function index() {
-        return $this->gallery();
+        return $this->directory();
     }
 
     public function overview() {
-        return $this->load->view('workspace')->display();
+
+
+        \Library\Event::trigger('beforeWorkspaceOverviewDisplay', $this);
+
+        $today = $this->output->layout("workspace/overview");
+        $this->output->addToPosition("dashboard", $today);
+
+        //$view->display();      
+        //$this->output();
+
+        return $this->view->display();
     }
 
     public function people() {
@@ -69,9 +96,9 @@ class Workspace extends Platform\Controller {
             $row['workspace_cover_photo'] = "/system/object/{$row['workspace_cover_photo']}";
             $items["items"][] = $row;
         }
-        
+
         //print_R($items);
-        
+
         $this->set("workspaces", $items);
 
         $directory = $this->output->layout("workspaces");

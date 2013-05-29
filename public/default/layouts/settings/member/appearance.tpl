@@ -1,5 +1,6 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="padding">
+    <tpl:import layout="title" app="settings" />
+    <div class="padding padding-top-zero">
         <form class="form-vertical" method="post" enctype="multipart/form-data" action="/settings/member/appearance/update">
             <fieldset>
                 <div class="control-group">

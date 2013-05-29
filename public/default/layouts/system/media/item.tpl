@@ -1,25 +1,14 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="stream-box row-fluid media-box">
-        <div class="stream-list">
-            <div class="widget naked">
-                <div class="widget-body">
-                    <ul class="nav nav-list margin-zero padding-quarter media-item-actions">
-                        <li><a href="#">Share</a></li>
-                        <li><a href="#">Download</a></li> 
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div class="stream-view">
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
+                    <div class="stream-widgets"><div class="page-header"><h1 class="margin-top-zero"><tpl:element type="text" data="page.title" /></h1></div></div> 
                     <ol class="timeline-item-index timeline-stream single-item" data-timeline="true">
                         <tpl:loop data="media.items" id="timeline-items">
                             <li class="timeline-item-li timeline-item">
                                 <div class="timeline-item-container">
-                                    <tpl:condition data="summary" test="isset" value="1">
-                                        <div class="timeline-item-title"><tpl:element type="text" data="summary" medialinks="true" /></div>
-                                    </tpl:condition>
+                                    
                                     <div class="timeline-item-header">
 <!--                                        <div class="timeline-item-icon"><a><i class="icon-${verb}"></i></a></div>-->
                                         <a class="publisher-profile" href="/member:${actor.uri}/profile/timeline">

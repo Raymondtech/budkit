@@ -65,31 +65,34 @@ class Search extends \Platform\Controller {
      */
     final public function graph() {
 
+        $this->output->setPageTitle(_("Search"));
+
         $query = $this->input->getVar("query", "");
         $results = array();
-        
+
         //RULES
         //1. All results sections should be included in an array &$results = array( array("title"=>"People","results"=>array(your, results, here,)), array(), ... );
         //2. Only add an array to &$results if you actually have results, so check if empty before &$results[] = array("title"=>"People","results"=>array(your, results, here,) )
         //3. Every result item arrays must have at least a title, thumbnail, link, and description key! so array("title"=>"Some Result","link"=>"/link/to/result","icon"=>/link/to/icon/)
         \Library\Event::trigger("onSearch", $query, $results);
 
-        $title = sprintf( _("Results matching '%s'"), $query );
+
         //Return json results;
-        if (!empty($query) && empty($results)):
-            $this->alert(sprintf(_("Your search for '%s' did not return any results"), $query) );
+        if (!empty($query)):
+            $title = sprintf(_("Results matching '%s'"), $query);
+            $this->output->set('query', $query);
+            $this->output->setPageTitle($title);
+            if (empty($results)):
+                $this->alert(sprintf(_("Your search for '%s' did not return any results"), $query));
+            endif;
         endif;
-        
-        $this->set('query', $query);
-        if(!empty($results)) $this->set('result', array("title"=>$title, "objects"=>$results));
-        
-        $search = $this->output->layout("results");
-        
-        $this->output->setPageTitle( $title );
+
+        if (!empty($results))
+            $this->set('result', array("title" => $title, "objects" => $results));
+
+        $search = $this->output->layout("search");
         $this->output->addToPosition("dashboard", $search);
-        
         $this->load->view("index")->display();
-        
     }
 
     /**

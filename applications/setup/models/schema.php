@@ -140,7 +140,7 @@ final class Schema extends Platform\Model {
             (11, 2, '^/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Execute Member actions'),
             (12, 1, '^/system/object([s]*/[a-z0-9-]*)*', 'allow', 'view', 'System Objects'),
             (13, 2, '^/settings/member(/[a-z0-9-]*)*', 'allow', 'execute', 'Member Settings'),
-            (14, 2, '^/system/event([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Events'),
+            (14, 2, '^/system/appointment([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Appointments'),
             (15, 2, '^/system/notification([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Notifications'),
             (16, 2, '^/system/extension([s]*/[a-z0-9-]*)*', 'allow', 'execute', 'Extensions');"
         );

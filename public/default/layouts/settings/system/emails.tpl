@@ -1,8 +1,9 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="padding">  
-        <div class="clearfix">        
-            <ul class="nav nav-pills no-margin">
-                <li class="highlighted"><a href="/settings/system/server" >Mail Server Settings</a></li>
+        <div class="clearfix">   
+            <h1 class="margin-bottom-zero pull-left"><tpl:element type="text" data="page.title" /></h1>
+            <ul class="nav nav-pills pull-right no-margin">
+                <li><a href="/settings/system/server" class="btn-important" >Mail Server Settings</a></li>
             </ul>
         </div>
         <hr />
@@ -35,7 +36,7 @@
                                                 <span class="help-block"><strong>Available variables:</strong> @{link}</span>
                                             </div>
                                         </div>
-                   
+
                                     </fieldset>
                                     <div class="form-actions">                 
                                         <button type="submit" class="btn">Save Template</button>
