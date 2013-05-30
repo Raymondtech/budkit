@@ -66,11 +66,11 @@ abstract class View extends \Library\Object {
         
         //Displays the editor;
         $formlist =  array(
+            array("id"=>"status","title"=>"Idea","layout"=>"forms/status","app"=>"system","icon-class"=>"icon-lightbulb"),
             array("id"=>"drop","title"=>"Upload","layout"=>"forms/drop","app"=>"system","icon-class"=>"icon-cloud-upload"), 
             array("id"=>"snap","title"=>"Snap","layout"=>"forms/snap","app"=>"system","icon-class"=>"icon-camera"), 
             array("id"=>"editor","title"=>"Article","layout"=>"forms/editor","app"=>"system","icon-class"=>"icon-align-justify"), 
-            array("id"=>"import","title"=>"Import","layout"=>"forms/import","app"=>"system","icon-class"=>"icon-upload-alt"), 
-            array("id"=>"status","title"=>"Idea","layout"=>"forms/status","app"=>"system","icon-class"=>"icon-lightbulb")
+            array("id"=>"import","title"=>"Import","layout"=>"forms/import","app"=>"system","icon-class"=>"icon-upload-alt")
         );
         \Library\Event::trigger("beforeEditorDisplay", $formlist);
         
