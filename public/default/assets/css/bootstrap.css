@@ -719,6 +719,8 @@ a:focus {
 .container-left .nav-list > li > a {
   padding: 10px 0;
   text-align: center;
+  border-bottom: none;
+  border-top: none;
 }
 .container-left .nav-list > li.nav-header {
   display: none;
@@ -3430,10 +3432,8 @@ input[type="submit"].btn.btn-mini {
   cursor: default;
 }
 .nav-pills > li > a {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  padding-top: 11px;
+  padding-bottom: 11px;
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
@@ -7551,7 +7551,6 @@ ul.media-item-actions li a:hover .rating {
   height: 32px !important;
   display: inline-block !important;
   padding-top: 6px;
-  border-radius: 3px;
   color: #ffffff;
   background: #2980b9;
   -webkit-box-sizing: border-box;
@@ -7581,7 +7580,7 @@ ul.media-item-actions li a:hover .rating {
   content: "\f03e";
 }
 .icon-my-documents:before {
-  content: "\f07b";
+  content: "\f0f6";
 }
 .icon-compose,
 .icon-text-editor {
