@@ -7,13 +7,12 @@
     padding-top: 6px;
     //border-radius: 3px;
     color: @white;    
-    background: @belize-hole;
+    //background: @belize-hole;
     //border-bottom: 4px solid mix(@belize-hole, black, 85%);
     .box-sizing(border-box);
     &:before{ content: "\f0c8"; } 
 }
 
-.nav > li.active > a .nav-icon{ }
 .icon-timeline{
     background: @emerland;
     border-color:  mix(@emerland, black, 85%);
@@ -40,6 +39,7 @@
 .icon-text-editor{
     background: @alizarin;
     border-color:  mix(@alizarin, black, 85%);
+    color: @white;
     &:before{ content: "\f14b"}
 }
 .icon-drag-and-drop{
@@ -83,3 +83,4 @@
 .icon-sign-out{
     &:before{ content: "\f08b"; }
 }
+.nav > li.active > a .nav-icon{ color: @textColor; background: transparent }

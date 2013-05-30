@@ -762,6 +762,10 @@ a:focus {
   border-bottom: transparent;
   border-top: #ebebeb;
 }
+.container-aside ~ .container-left .nav-list > li > a .nav-icon {
+  color: #333333;
+  background: transparent;
+}
 .container-aside ~ .container-left .nav-list > li.nav-header {
   border-bottom: transparent;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
@@ -7552,7 +7556,6 @@ ul.media-item-actions li a:hover .rating {
   display: inline-block !important;
   padding-top: 6px;
   color: #ffffff;
-  background: #2980b9;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -7586,6 +7589,7 @@ ul.media-item-actions li a:hover .rating {
 .icon-text-editor {
   background: #e74c3c;
   border-color: #c44133;
+  color: #ffffff;
 }
 .icon-compose:before,
 .icon-text-editor:before {
@@ -7627,6 +7631,10 @@ ul.media-item-actions li a:hover .rating {
 }
 .icon-sign-out:before {
   content: "\f08b";
+}
+.nav > li.active > a .nav-icon {
+  color: #333333;
+  background: transparent;
 }
 /*!
  *  Font Awesome 3.1.0
