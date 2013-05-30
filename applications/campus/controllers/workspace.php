@@ -172,7 +172,7 @@ class Workspace extends Platform\Controller {
         }
 
         $this->view->editor(
-                array("id" => "workspace", "title" => "Status", "layout" => "forms/workspace", "icon-class" => "icon-lightbulb")
+            array("id" => "workspace", "title" => "Status", "layout" => "forms/workspace", "icon-class" => "icon-lightbulb")
         );
         $layout = $this->output->layout('forms/form', 'system');
         $this->output->addToPosition("dashboard", $layout);

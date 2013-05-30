@@ -37,26 +37,27 @@ Class Media extends \Platform\Controller {
         return false;
     }
 
-    public function create($action = "editor") {
+    public function create($action = NULL) {
         return $this->edit($action);
     }
 
-    public function edit($action = "editor") {
-
-        //create action types
-        $actions = array(
-            "drop", "snap", "editor", "import", "status"
-        );
-        //form
-        $_form = !in_array($action, $actions) ? "editor" : $action;
+    public function edit($form = NULL) {
+        
+        $this->output->setPageTitle(_("Add New Media"));        
         $this->view = $this->load->view('media');
-        $this->view->editor(
-            array("layout" => "forms/{$_form}", "app"=>"system")
-        );
+        
+
+
+         //Adds the default forms to the view forms list unless one is specified   
+//        \Library\Event::register("beforeEditorDisplay", function(&$formlist = array()) use($forms){
+//            $formlist =  array_merge( $formlist, $forms);
+//        });
+        
+        //form
+        $this->view->editor( $form );
         $layout = $this->output->layout('forms/form', 'system');
 
         $this->output->addToPosition("dashboard", $layout);
-        $this->output->setPageTitle(_("Add New Media"));
 
         $this->view->display(); //sample call;   
         //$this->output->addToPosition("right", $right );

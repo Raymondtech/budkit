@@ -7,7 +7,7 @@
                         <div class="page-header clearfix">
                             <div class="btn-toolbar pull-right no-margin">                              
                                 <a class="btn" href="/system/search/graph"><i class="icon-search"></i> Search</a>
-                                <a class="btn-important btn" href="/system/media/create/editor">Share Something</a>
+                                <a class="btn-important btn" href="/system/media/create">Add New Content</a>
                             </div>
                             <h1 class="margin-top-zero"><tpl:element type="text" data="page.title" /></h1>
                         </div>

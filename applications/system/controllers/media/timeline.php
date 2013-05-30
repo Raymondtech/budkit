@@ -132,7 +132,7 @@ class Timeline extends System\Media {
         $this->set("activities", $activities);
         //$this->set("user", $user);
 
-        $view->editor();//Generate the forms;
+        $view->editor('status');//Generate the forms;
         $timeline = $this->output->layout("timeline");
         //$timelineside = $this->output->layout("timelinenotes");
 

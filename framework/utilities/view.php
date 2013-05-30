@@ -63,14 +63,29 @@ abstract class View extends \Library\Object {
     }
     
     final public function editor( $form = array() ){
+        
         //Displays the editor;
-        //1, get a list of forms defined in beforeDisplayEditor
-        $forms = !empty($form)? array( $form ) : array( //The default forms
-            array("id"=>"status","title"=>"Status","layout"=>"forms/status","app"=>"system","icon-class"=>"icon-lightbulb"),
-            //array("id"=>"text","title"=>"Text","layout"=>"forms/editor","app"=>"system","icon-class"=>"icon-file-alt"),
-            //array("id"=>"upload","title"=>"Upload","layout"=>"forms/drop","app"=>"system","icon-class"=>"icon-upload-alt")
+        $formlist =  array(
+            array("id"=>"drop","title"=>"Upload","layout"=>"forms/drop","app"=>"system","icon-class"=>"icon-cloud-upload"), 
+            array("id"=>"snap","title"=>"Snap","layout"=>"forms/snap","app"=>"system","icon-class"=>"icon-camera"), 
+            array("id"=>"editor","title"=>"Article","layout"=>"forms/editor","app"=>"system","icon-class"=>"icon-align-justify"), 
+            array("id"=>"import","title"=>"Import","layout"=>"forms/import","app"=>"system","icon-class"=>"icon-upload-alt"), 
+            array("id"=>"status","title"=>"Idea","layout"=>"forms/status","app"=>"system","icon-class"=>"icon-lightbulb")
         );
-        \Library\Event::trigger("beforeEditorDisplay", $forms);
+        \Library\Event::trigger("beforeEditorDisplay", $formlist);
+        
+        if(!is_array($form)):
+            $active = \strtolower($form);
+            $form = array();
+            foreach($formlist as $_form):
+                if(array_key_exists('id', $_form) && \strtolower($_form['id'])==$active):
+                    $form = $_form; break;
+                endif;
+            endforeach;
+        endif;
+        
+        $forms = !empty($form)? array( $form ) : $formlist;
+        
         //Set the editor forms
         if(!empty($forms)):
             $this->output->set("editor_forms", $forms);
