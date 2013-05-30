@@ -35,17 +35,19 @@
         </head>
         <body>
             <div id="wrap">
+                
+                <tpl:condition data="page.block.aside" test="isset" value="1">
+                    <div class="container-aside">
+                        <tpl:block data="page.block.aside" />
+                    </div>
+                </tpl:condition>
                 <div class="container-left">                 
                     <tpl:import layout="sidebar" />
                 </div>
                 <div class="container-box has-left has-navbar">       
-                    
+
                     <div class="container-right">
-                        <tpl:condition data="page.block.aside" test="isset" value="1">
-                            <div class="container-aside">
-                                <tpl:block data="page.block.aside" />
-                            </div>
-                        </tpl:condition>
+
                         <div class="container-content">
                             <div class="container-bucket">
 <!--                                <tpl:import layout="navbar" />-->

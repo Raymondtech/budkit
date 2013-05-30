@@ -406,6 +406,100 @@ class Attachments extends Platform\Entity {
 
         return $collection;
     }
+    
+    /**
+     * Placeholder images
+     * 
+     * @param type $fileId
+     * @param type $filePath
+     * @param type $contentType
+     * @param type $params
+     */
+    final public static function place($fileId="", $filePath="", $contentType="image/png", $params=array()){
+        
+        $attachments    = static::getInstance();
+        $fullPath       = empty($filePath) ? FSPATH.$attachments->config->getParam("placeholder", "" , "content") : $filePath;
+        
+        $browsable = array("image/jpg", "image/jpeg", "image/png", "image/gif");
+
+        //Commands
+        if (is_array($params)):
+            $modifiers  = $params;
+            $modifier   = array_shift($modifiers);
+            $allowed    = array("resize"); //a list of allowed modifies
+            if (in_array($modifier, $allowed) && method_exists($attachments, $modifier)) { //make 
+                $fullPath = $attachments::$modifier($fullPath, $modifiers);
+                $fd = fopen($fullPath, "rb");
+            }
+        endif;
+        
+        //Attempt to determine the files mimetype
+        $ftype = !empty($contentType) ? $contentType : \Library\Folder\Files::getMimeType($fullPath);
+
+        //Get the file stream
+        if (!$fd) {
+            $fd = fopen($fullPath, "rb");
+        }
+
+        if ($fd) {
+            $fsize = filesize($fullPath);
+            $fname = basename($fullPath);
+            $headers = array(
+                "Pragma" => null,
+                "Cache-Control" => "",
+                "Content-Type" => $ftype,
+            );
+            foreach ($headers as $name => $value) {
+                $attachments->output->unsetHeader($name);
+                $attachments->output->setHeader($name, $value);
+            }
+            if (in_array($ftype, $browsable)):
+                fpassthru($fd);
+                fclose($fd);
+                $attachments->output->setFormat('raw', array()); //Headers must be set before output 
+                $attachments->output->display();
+            else: //If the file is not browsable, force the browser to download the original file;
+                //Move the file to the temp public download directory
+                $downloadPath = FSPATH . "public" . DS . "downloads" . DS . $fileId;
+                //For personalized link we will need to randomize the filename.
+                $downloadPath.= Platform\Framework::getRandomString(5); //So people won't be guessing!;;
+                $downloadPath.= "." . \Library\Folder\Files::getExtension($fname);
+                if (\Library\Folder\Files::copy($fullPath, $downloadPath)) {
+                    if (file_exists($downloadPath)):
+
+                        //We still want to delete the file even after the user
+                        //is gone
+                        ignore_user_abort(true);
+                        //$attachment->output->setHeader("Expires", "0");
+                        //Content-Disposition is not part of HTTP/1.1
+                        $downloadName = basename($downloadPath);
+                        $attachments->output->setHeader("Content-Disposition", "inline; filename={$downloadName}");
+                        //Will need to restart the outputbuffer with no gziphandler
+                        $noGzip = $attachments->output->restartBuffer(null); //use null rather than "" for no gzip handler;
+                        ob_end_clean(); //ob level 0; output buffering and binary transfer is a nightmare
+
+                        $attachments->output->setHeader("Cache-Control", "must-revalidate");
+                        $attachments->output->setHeader("Content-Length", $fsize);
+                        readfile($downloadPath);
+
+                        //Delete after download.
+                        unlink($downloadPath);
+                        //$attachment->output->abort();
+                        $attachments->output->setFormat('raw', array()); //Headers must be set before output 
+                        $attachments->output->display();
+                    endif;
+                }
+                fclose($fd);
+                $attachments->output->setFormat('raw', array()); //Headers must be set before output 
+                $attachments->output->display();
+            endif;
+            //$attachment->output->setHeader("Content-Disposition", "attachment; filename=\"" . $fname . "\"");
+            //$attachment->output->setHeader("Content-length", $fsize);
+        }
+
+        //Here is the attachment source, relative to the FSPATH;
+        //print_r($attachment->getPropertyValue("attachment_src"));
+    }
 
     /**
      * Displays an attachment
@@ -427,87 +521,11 @@ class Attachments extends Platform\Entity {
         if ($attachment->getObjectType() !== "attachment")
             return false; //we only deal with attachments, let others deal withit
 
-        $browsable = array("image/jpg", "image/jpeg", "image/png", "image/gif");
-
-        $fullPath = FSPATH . DS . $attachment->getPropertyValue("attachment_src");
+        $fileId   = $attachment->getObjectType();
+        $filePath = FSPATH . DS . $attachment->getPropertyValue("attachment_src");
         $contentType = $attachment->getPropertyValue("attachment_type");
 
-        //Commands
-        if (is_array($params)):
-            $modifiers = $params;
-            $modifier = array_shift($modifiers);
-            if (method_exists($attachments, $modifier)) {
-                $fullPath = $attachments::$modifier($fullPath, $modifiers);
-                $fd = fopen($fullPath, "rb");
-            }
-        endif;
-        //Attempt to determine the files mimetype
-        $ftype = !empty($contentType) ? $contentType : \Library\Folder\Files::getMimeType($fullPath);
-
-
-        //Get the file stream
-        if (!$fd) {
-            $fd = fopen($fullPath, "rb");
-        }
-
-        if ($fd) {
-            $fsize = filesize($fullPath);
-            $fname = basename($fullPath);
-            $headers = array(
-                "Pragma" => null,
-                "Cache-Control" => "",
-                "Content-Type" => $ftype,
-            );
-            foreach ($headers as $name => $value) {
-                $attachment->output->unsetHeader($name);
-                $attachment->output->setHeader($name, $value);
-            }
-            if (in_array($ftype, $browsable)):
-                fpassthru($fd);
-                fclose($fd);
-                $attachment->output->setFormat('raw', array()); //Headers must be set before output 
-                $attachment->output->display();
-            else: //If the file is not browsable, force the browser to download the original file;
-                //Move the file to the temp public download directory
-                $downloadPath = FSPATH . "public" . DS . "downloads" . DS . $object->getObjectURI();
-                //For personalized link we will need to randomize the filename.
-                $downloadPath.= Platform\Framework::getRandomString(5); //So people won't be guessing!;;
-                $downloadPath.= "." . \Library\Folder\Files::getExtension($fname);
-                if (\Library\Folder\Files::copy($fullPath, $downloadPath)) {
-                    if (file_exists($downloadPath)):
-
-                        //We still want to delete the file even after the user
-                        //is gone
-                        ignore_user_abort(true);
-                        //$attachment->output->setHeader("Expires", "0");
-                        //Content-Disposition is not part of HTTP/1.1
-                        $downloadName = basename($downloadPath);
-                        $attachment->output->setHeader("Content-Disposition", "inline; filename={$downloadName}");
-                        //Will need to restart the outputbuffer with no gziphandler
-                        $noGzip = $attachment->output->restartBuffer(null); //use null rather than "" for no gzip handler;
-                        ob_end_clean(); //ob level 0; output buffering and binary transfer is a nightmare
-
-                        $attachment->output->setHeader("Cache-Control", "must-revalidate");
-                        $attachment->output->setHeader("Content-Length", $fsize);
-                        readfile($downloadPath);
-
-                        //Delete after download.
-                        unlink($downloadPath);
-                        //$attachment->output->abort();
-                        $attachment->output->setFormat('raw', array()); //Headers must be set before output 
-                        $attachment->output->display();
-                    endif;
-                }
-                fclose($fd);
-                $attachment->output->setFormat('raw', array()); //Headers must be set before output 
-                $attachment->output->display();
-            endif;
-            //$attachment->output->setHeader("Content-Disposition", "attachment; filename=\"" . $fname . "\"");
-            //$attachment->output->setHeader("Content-length", $fsize);
-        }
-
-        //Here is the attachment source, relative to the FSPATH;
-        //print_r($attachment->getPropertyValue("attachment_src"));
+        static::place($fileId, $filePath, $contentType, $params);
     }
 
     /**

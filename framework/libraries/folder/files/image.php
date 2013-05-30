@@ -92,6 +92,15 @@ class Image extends \Library\Folder\Files {
 
         return $i;
     }
+    
+    public function addImageWaterMark(){
+        //Water marks an image;
+        //imagecopymerge($dest, $src, 10, 10, 0, 0, 100, 47, 75);
+    }
+    
+    public function addImageText(){
+        //Adds text to an image;
+    }
 
     /**
      * Resizes an image
@@ -109,19 +118,19 @@ class Image extends \Library\Folder\Files {
             return true;
         }
         
-        $this->dimensionX = (!empty($width)) ? (int) $width : $this->dimensionX;
+        $this->dimensionX = (!empty($width)) ? (int) $width : "";
         $this->dimensionY = (!empty($height) && !$square) ? (int) $height : "";
         $this->target = $target;
 
-        if (!$square && $height <> $width )
-            $this->dimensionY = "auto";
+        //if (!$square && $height <> $width )
+            //$this->dimensionY = "auto";
 
         $ext = $this->getExtension(basename($image));
         $ourimage = $this->createImage($image, $ext);
         $currX = @imagesx($ourimage);
         $currY = @imagesy($ourimage);
-        $newX = $this->dimensionX;
-        $newY = $this->dimensionY;
+        $newX = !empty($this->dimensionX)? $this->dimensionX: $currX;
+        $newY = !empty($this->dimensionY)? $this->dimensionY: $currY;
 
         //Destroy the image
         @imagedestroy($image);
@@ -130,10 +139,11 @@ class Image extends \Library\Folder\Files {
             return $this->createSquare($image, $this->target, $newX);
 
         $_x = $newX;
-        $_y = ($newX / $currX) * $currY;
+        $_y = $newY;
 
         //Get True Color
         $truecolor = @imagecreatetruecolor($_x, $_y);
+        
         if (!$truecolor) {
             $this->setError("could not create a true color image");
             return false;

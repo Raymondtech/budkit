@@ -216,11 +216,11 @@ body {
   overflow-y: auto;
 }
 a {
-  color: #2971a6;
+  color: #2980b9;
   text-decoration: none;
 }
 a:hover {
-  color: #1a4769;
+  color: #1b557a;
   text-decoration: underline;
 }
 p {

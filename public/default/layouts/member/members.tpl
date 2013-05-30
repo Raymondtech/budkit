@@ -41,7 +41,7 @@
                                 <div class="feature mgcol2">
                                     <tpl:condition data="user_photo" test="isset" value="1">
                                         <a href="/member:${user_name_id}/profile/information" class="profile-link">
-                                            <img src="/system/object/${user_photo}/resize/170/170"  />
+                                            <tpl:media uri="user_photo"  mode="icon" width="170" height="170" />
                                         </a>
                                     </tpl:condition>
                                 </div>   

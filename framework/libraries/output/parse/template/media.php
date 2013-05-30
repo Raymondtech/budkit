@@ -76,6 +76,13 @@ class Media extends Parse\Template {
         $mode = isset($tag['MODE']) ? $tag['MODE'] : "thumbnail"; //thumbnail, icon etc...
         $link = isset($tag['LINK']) ? TRUE : FALSE;
 
+        //if the file does not exists
+        if (empty($name) || empty($type) || empty($uri)):
+            $uri = 'placeholder';
+            $name = 'Placeholder';
+            $type = 'image/jpeg';
+            $link = false;
+        endif;
 
         $class = isset($tag['CLASS']) ? static::getData($tag['CLASS'], $tag['CLASS']) : null;
         $height = isset($tag['HEIGHT']) ? static::getData($tag['HEIGHT'], $tag['HEIGHT']) : null;
@@ -219,7 +226,8 @@ class Media extends Parse\Template {
             //Now lets populate our collection with Items
             $collectionItems = $collection->getPropertyValue("collection_items");
             $collectionItemize = explode(",", $collectionItems);
-            if (is_array($collectionItemize) && !empty($collectionItemize)):
+            if (!empty($collectionItems) && is_array($collectionItemize) && !empty($collectionItemize)):
+
                 $ul = array("ELEMENT" => "ul", "CLASS" => "media-grid compensate-margins bottom-media clearfix");
                 $tag['WIDTH'] = \Library\Config::getParam('gallery-thumbnail-width', 170, 'content');
                 $tag['HEIGHT'] = \Library\Config::getParam('gallery-thumbnail-height', 170, 'content');
@@ -230,6 +238,8 @@ class Media extends Parse\Template {
                 }
                 //Lots of child elements;
                 $tag = $ul;
+            else:
+                $tag = static::tag($mediaObject, $tag);
             endif;
         else:
             $tag = static::tag($mediaObject, $tag);

@@ -46,7 +46,9 @@
                         <tpl:loop data="workspaces.items" id="project-lists">
                             <li class="mgrow-fluid">   
                                 <div class="mgitem project-description mgcol5">
-                                    <a href="/campus/courses/course:${object_uri}/overview"><img class="list-hide margin-bottom-zero" src="${workspace_cover_photo}" /></a>
+                                    <a href="/campus/courses/course:${object_uri}/overview">
+                                        <tpl:media uri="workspace_cover_photo"  mode="icon" width="350" height="100" class="list-hide margin-bottom-zero clearfix" />
+                                    </a>
                                     <div class="progress progress-danger  mini-bar list-hide">
                                         <div class="bar" style="width: 10%;"></div>
                                     </div>

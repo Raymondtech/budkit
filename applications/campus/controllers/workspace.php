@@ -93,7 +93,6 @@ class Workspace extends Platform\Controller {
         //Loop through fetched attachments;
         //@TODO might be a better way of doing this, but just trying
         while ($row = $workspaces->fetchAssoc()) {
-            $row['workspace_cover_photo'] = "/system/object/{$row['workspace_cover_photo']}";
             $items["items"][] = $row;
         }
 

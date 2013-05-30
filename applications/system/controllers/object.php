@@ -36,7 +36,6 @@ class Object extends \Platform\Controller {
     public function index() {
         
         //The method is the object unique ID
-        $entity     = \Platform\Entity::getInstance();
         $resourceId = $this->router->getMethod();
         $params     = func_get_args();
         
@@ -47,10 +46,20 @@ class Object extends \Platform\Controller {
 
     }
     
-    public function route(){
+    /**
+     * Generates a placeholder Image
+     */
+    public function placeholder(){
         
-        //the object route
+        //The method is the object unique ID
+        $attachment = $this->load->model('attachments', 'system');
+        $resourceId = $this->router->getMethod();
+        $params     = func_get_args();
         
+        //$object     = $entity->loadObjectByURI( $resourceId ); //@todo Validate URI
+        //$objectType = $object->getPropertyValue("objectType");
+        //Loads all the system objects;
+        return $attachment->place(NULL, NULL, "image/png", $params);     
     }
 
 

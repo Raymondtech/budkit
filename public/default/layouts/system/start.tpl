@@ -14,8 +14,8 @@
                     </div> 
                     <div class="timeline-item-publisher-box">  
                         <tpl:condition data="profile.user_photo" test="isset" value="1">
-                            <a href="/member:${profile.user_name_id}/profile/timeline" class="publisher-profile">
-                                <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/50/50"  />
+                            <a href="/member:${profile.user_name_id}/profile/timeline" class="publisher-profile">          
+                                <tpl:media uri="profile.user_photo"  mode="icon" width="50" height="50"  class="profile-avatar thumbnail inline-block" />
                             </a>
                         </tpl:condition>
                         <div class="widget stream-cpanel">

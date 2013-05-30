@@ -39,8 +39,8 @@
                                     <tpl:block data="page.block.alerts" /> 
                                     <div class="clearfix profile-cover" align="center" style="background-image: url(${config|appearance.cover-photo}); background-repeat: no-repeat">
                                         <a href="/" class="return-link">Return to dashboard</a>
-                                        <tpl:condition data="profile.user_photo" test="isset" value="1">
-                                            <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/195/195" style="margin: auto" />
+                                        <tpl:condition data="profile.user_photo" test="isset" value="1">      
+                                            <tpl:media uri="profile.user_photo"  mode="icon" width="170" height="170"  class="profile-avatar thumbnail inline-block" />
                                         </tpl:condition>
                                         <div class="profile-title">
                                             <h1><tpl:element type="text" data="profile.user_full_name" /></h1>

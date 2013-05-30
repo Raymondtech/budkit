@@ -48,7 +48,7 @@ class User extends \Platform\Entity {
             "user_timezone" => array("Timezone", "varchar", 10),
             "user_locale" => array("Locale", "varchar", 10),
             "user_verification" => array("Verification Code", "varchar", 50),
-            "user_photo" => array("Profile Photo", "mediumtext", 10)
+            "user_photo" => array("Profile Photo", "mediumtext", 10, 'placeholder')
                 ), "user"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models
