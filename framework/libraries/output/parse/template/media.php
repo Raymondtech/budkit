@@ -165,7 +165,6 @@ class Media extends Parse\Template {
                     );
                     $tag = $audio;
                 endif;
-
             endif;
             unset($tag['WIDTH']);
             unset($tag['HEIGHT']);
@@ -213,16 +212,22 @@ class Media extends Parse\Template {
             "HEIGHT" => !empty($height) ? $height : 100,
             "CHILDREN" => array($video,
                 array(
-                    "ELEMENT" => "div", 
+                    "ELEMENT" => "div",
                     "ClASS" => "controls",
                     "CHILDREN" => array(
-                        array(array("ELEMENT" => "span", "CLASS" => "seek")),
+                        array(array("ELEMENT" => "div", "CLASS" => "seek", "CHILDREN" => array(
+                                    array("ELEMENT" => "span", "CLASS" => "buffer"),
+                                    array("ELEMENT" => "span", "CLASS" => "progress"),
+                                    array("ELEMENT" => "span", "CLASS" => "timer-knob"),
+                                    array("ELEMENT" => "span", "CLASS" => "timer", "CDATA"=>"00:00"),
+                                )
+                            )
+                        ),
                         array("ELEMENT" => "div", "CLASS" => "tools", "CHILDREN" => array(
                                 array("ELEMENT" => "a", "CLASS" => "icon-play play pull-left", "TITLE" => "Play/Pause"),
                                 array("ELEMENT" => "a", "CLASS" => "icon-volume volume pull-left", "TITLE" => "Volume"),
                                 array("ELEMENT" => "span", "CLASS" => "volume-seek"),
-                                array("ELEMENT" => "span", "CLASS" => "timer"),
-                                array("ELEMENT" => "a", "CLASS" => "icon fullscreen pull-right", "TITLE" => "Full Screen")
+                                array("ELEMENT" => "a", "CLASS" => "icon-fullscreen fullscreen pull-right", "TITLE" => "Full Screen")
                             )
                         )
                     )
