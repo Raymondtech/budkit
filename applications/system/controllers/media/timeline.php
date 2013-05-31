@@ -90,10 +90,8 @@ class Timeline extends System\Media {
         $first = reset($collection['items']);
         $this->set("media", $collection);
 
-        if (!isset($first['summary']) && !empty($first['summary'])):
-            $now = \Library\Date\Time::stamp();
-            $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
-            $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
+        if (!isset($first['summary']) || empty($first['summary'])):
+            $title = "#";
         else:
             $title = $first['summary'];
         endif;
@@ -104,7 +102,7 @@ class Timeline extends System\Media {
         $this->set("activities", $comments);
         $this->set("comment_target", $itemURI);
         $this->output->setPageTitle($title);
-
+        
         //Raw displays whatever is in the body block only; 
         $post = $this->output->layout("media/item");
         $this->output->addToPosition("body", $post);

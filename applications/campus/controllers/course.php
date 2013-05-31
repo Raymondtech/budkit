@@ -61,12 +61,15 @@ class Course extends Platform\Controller {
         \Library\Event::trigger('beforeCourseOverviewDisplay', $this);
 
         $today = $this->output->layout("course/overview");
+        
         $this->output->addToPosition("dashboard", $today);
 
         //$view->display();      
         //$this->output();
+        //If not enrolled, do not show aside menu
+        //return $this->load->view('index', 'system')->dashboard();
 
-        return $this->view->display();
+        return $this->view->display(false); //if not registered, show false;
     }
 
     public function people() {

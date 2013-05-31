@@ -85,6 +85,9 @@ sup {
 sub {
   bottom: -0.25em;
 }
+figure {
+  margin: 0;
+}
 img {
   /* Responsive images (ensure images don't scale beyond their parents) */
 
@@ -5350,6 +5353,65 @@ a.badge:focus {
 .hero-unit li {
   line-height: 36px;
 }
+figure {
+  display: inline-block;
+  position: relative;
+}
+figure .controls {
+  display: block;
+  background: #2f2f2f;
+  position: absolute;
+  z-index: 1;
+  bottom: 5px;
+  left: 0;
+  right: 0px;
+  padding: 0px;
+}
+figure .controls .seek {
+  background: #c0392b;
+  height: 5px;
+  display: block;
+}
+figure .controls .tools {
+  display: none;
+  padding: 5px 10px;
+  line-height: 18px;
+  border-top: none;
+  position: relative;
+  *zoom: 1;
+}
+figure .controls .tools:before,
+figure .controls .tools:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+figure .controls .tools:after {
+  clear: both;
+}
+figure .controls .tools a {
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #bdc3c7;
+  min-width: 24px;
+}
+figure .controls .tools a.play:before {
+  content: "\f144";
+}
+figure .controls .tools a.volume:before {
+  content: "\f028";
+}
+figure .controls .tools a.volume:hover ~ .volume-seek {
+  height: 5px;
+  margin-bottom: 3px;
+  display: inline-block;
+  background: #ecf0f1;
+  width: 100px;
+}
+figure:hover .controls .tools {
+  display: block;
+}
 .pull-right {
   float: right;
 }
@@ -7417,18 +7479,21 @@ ul.media-item-actions li a:hover .rating {
   margin-top: -40px;
   color: #333333;
   text-transform: uppercase;
+  padding: 0 5px;
 }
 .widgeticon a span.metric {
   font-size: 28px;
   margin-top: 24px;
   color: #333333;
+  padding: 0 5px;
 }
 .widgeticon a span.hint {
   color: #999999;
   margin-bottom: 5px;
+  padding: 0 5px;
 }
 .widgeticon a:hover {
-  background: #ecf4f8;
+  background: #f8f8f8;
 }
 .dials {
   text-align: center;

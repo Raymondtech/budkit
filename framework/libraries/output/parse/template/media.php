@@ -98,7 +98,7 @@ class Media extends Parse\Template {
             $tag['ELEMENT'] = 'a';
             $tag['HREF'] = \Library\Uri::internal($url);
         else:
-            $tag['ELEMENT'] = 'div';
+            $tag['ELEMENT'] = 'figure';
             $tag['CLASS'] = "medialink\n" . !empty($class) ? $class : null;
         endif;
 
@@ -146,24 +146,7 @@ class Media extends Parse\Template {
                 if (in_array($mime, static::$videos) && !empty($uri)):
 
                     $videoLink = \Library\Uri::internal("/system/object/" . $uri);
-                    $video = array(
-                        "ELEMENT" => "video",
-                        "WIDTH" => !empty($width) ? $width : 100,
-                        "HEIGHT" => !empty($height) ? $height : 100,
-                        "CONTROLS" => "true",
-                        "CHILDREN" => array(
-                            array(
-                                "ELEMENT" => "SOURCE",
-                                "SRC" => $videoLink,
-                                "TYPE" => $mime
-                            )
-                        )
-                    );
-                    if (empty($video['WIDTH']))
-                        unset($video['WIDTH']);
-                    if (empty($video['HEIGHT']))
-                        unset($video['HEIGHT']);
-                    $tag = $video;
+                    $tag = static::videoTag($videoLink, $mime, $height, $width, $tag);
                 endif;
 
                 if (in_array($mime, static::$audio) && !empty($uri)):
@@ -198,6 +181,55 @@ class Media extends Parse\Template {
         unset($tag['CDATA']);
 
         return $tag;
+    }
+
+    /**
+     * Generates a video tag
+     * 
+     * @param type $src
+     * @param type $type
+     * @param type $height
+     * @param type $width
+     * @param type $dataTag
+     * @return type
+     */
+    final private static function videoTag($src, $type, $height, $width, $dataTag = array()) {
+
+        $video = array(
+            "ELEMENT" => "video",
+            //"CONTROLS" => "true",
+            "CHILDREN" => array(
+                array(
+                    "ELEMENT" => "SOURCE",
+                    "SRC" => $src,
+                    "TYPE" => $type
+                )
+            )
+        );
+        $figure = array(
+            "ELEMENT" => "figure",
+            "CLASS" => "video",
+            "WIDTH" => !empty($width) ? $width : 100,
+            "HEIGHT" => !empty($height) ? $height : 100,
+            "CHILDREN" => array($video,
+                array(
+                    "ELEMENT" => "div", 
+                    "ClASS" => "controls",
+                    "CHILDREN" => array(
+                        array(array("ELEMENT" => "span", "CLASS" => "seek")),
+                        array("ELEMENT" => "div", "CLASS" => "tools", "CHILDREN" => array(
+                                array("ELEMENT" => "a", "CLASS" => "icon-play play pull-left", "TITLE" => "Play/Pause"),
+                                array("ELEMENT" => "a", "CLASS" => "icon-volume volume pull-left", "TITLE" => "Volume"),
+                                array("ELEMENT" => "span", "CLASS" => "volume-seek"),
+                                array("ELEMENT" => "span", "CLASS" => "timer"),
+                                array("ELEMENT" => "a", "CLASS" => "icon fullscreen pull-right", "TITLE" => "Full Screen")
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        return $figure;
     }
 
     /**

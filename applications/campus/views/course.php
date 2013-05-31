@@ -41,7 +41,7 @@ final class Course extends \Platform\View {
      * Workspace view display
      * @return void
      */
-    public function display() {
+    public function display($menu = true) {
 
         //To specify a layout, else default will be used
         //$this->setLayout("page");
@@ -63,10 +63,11 @@ final class Course extends \Platform\View {
         //$sidebar      = $this->output->layout( "index_sidebar" );
         $dashboard = $this->output->layout("dashboard", "system");
 
-        //$rightaside     = $this->output->layout( "cpanel"  );
-        $this->output->addMenuGroupToPosition("aside", "coursemenu", "nav-list", array(), false, false);
+        if ($menu):
+            //$rightaside     = $this->output->layout( "cpanel"  );
+            $this->output->addMenuGroupToPosition("aside", "coursemenu", "nav-list", array(), false, false);
         //$this->output->addMenuGroupToPosition("side", "dashboardmenu");
-
+        endif;
         $this->output->addToPosition("body", $dashboard);
     }
 

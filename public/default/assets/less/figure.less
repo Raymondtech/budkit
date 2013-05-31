@@ -1,0 +1,46 @@
+figure{
+    display: inline-block;
+    position: relative;
+    &.video{}
+    &.audio{}
+    .controls{
+        display: block;
+        background: #2f2f2f;
+        position: absolute;
+        z-index: 1;
+        bottom: 5px; left:0; right: 0px;
+        padding: 0px;
+        .seek{ background: @pomegranate; height: 5px; display: block; }
+        .tools{
+             display: none;
+             padding: 5px 10px;
+             line-height: 18px;
+             //border: 1px solid #F8F8F8;
+             border-top: none;
+             position: relative;
+             .clearfix();
+             a{ 
+               font-size: 18px; cursor: pointer;
+               text-decoration: none;
+               color: @silver;
+               min-width: 24px;
+               &.play{
+                 &:before{ content: "\f144" } 
+               }
+               &.volume{
+                 &:before{ content: "\f028" }
+                 &:hover{
+                    &~.volume-seek{ height: 5px; margin-bottom: 3px; display: inline-block; background: @clouds; width: 100px;}
+                 }
+               }
+            }
+        }
+    }
+    &:hover{
+        .controls{ 
+            .tools{ 
+                display: block;
+            }
+        }
+    }
+}
