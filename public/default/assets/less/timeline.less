@@ -94,7 +94,7 @@
             min-height: 50px;
             background: #fff;
             border: 1px solid #eee;
-            padding: @gridGutterWidth;
+            padding: @gridGutterWidth @gridGutterWidth @gridGutterWidth*0.5;
             margin: 10px 60px;
    
             .mention, .hashtag, openlink{ font-weight: 600; } 
@@ -124,7 +124,7 @@
             }
             .timeline-item-body{}
             .timeline-item-footer{          
-                margin-top: @gridGutterWidth;
+                //margin-top: @gridGutterWidth;
                 ul.actions{
                         margin: 0px;
                         list-style:none;
@@ -245,6 +245,7 @@
             }
             .timeline-item-title{ 
                 font-size: @baseFontSize * 1.50;
+                //margin-top: @gridGutterWidth*0.5;
                 margin-bottom: @gridGutterWidth*0.5;
                 //border-bottom: 1px dashed lighten(@grayLight,15%);
                 padding-bottom: @gridGutterWidth*0.5;
@@ -256,14 +257,15 @@
      
             }
             .timeline-item-media{ 
-                &.top-media{margin-bottom: 15px; margin-top: 0px; } &.bottom-media{margin-top: 15px } 
+                &.top-media{margin-bottom: 15px; margin-top: 0px; } 
+                &.bottom-media{margin-top: 15px } 
             }
             .timeline-item-footer{
-                margin: @gridGutterWidth -@gridGutterWidth*0.9 -@gridGutterWidth*0.9 -@gridGutterWidth*0.9;
-                padding: 5px 10px;
-                border-top: 1px dashed #fcfafa;
+                //margin: @gridGutterWidth -@gridGutterWidth*0.9 -@gridGutterWidth*0.9 -@gridGutterWidth*0.9;
+                //padding: 5px 10px;
+                //border-top: 1px dashed #fcfafa;
                 position: relative; 
-                background: #fcfafa;
+                //background: #fcfafa;
                 .label{
                     line-height: 18px;
                     padding: 4px 8px 1px;
