@@ -107,7 +107,7 @@ class Media extends Parse\Template {
         $renderable = array_merge(static::$images, static::$videos, static::$audio, static::$rich);
 
         //Videos, audio rich
-        if ((in_array($mime, array_merge(static::$videos, static::$audio, static::$rich)) && $mode == "icon") || !in_array($mime, $renderable)) {
+        if ((in_array($mime, array_merge(static::$videos, static::$rich)) && $mode == "icon") || !in_array($mime, $renderable)) {
 
             $linkable = array("ELEMENT" => "a", "HREF" => \Library\Uri::internal($url), "CLASS" => "media-{$fileExtension} media-file",);
             $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-type media-{$fileExtension}", "CDATA" => "<i class='icon-file'></i>" . $fileExtension);
@@ -147,23 +147,14 @@ class Media extends Parse\Template {
 
                     $videoLink = \Library\Uri::internal("/system/object/" . $uri);
                     $tag = static::videoTag($videoLink, $mime, $height, $width, $tag);
+
                 endif;
 
                 if (in_array($mime, static::$audio) && !empty($uri)):
 
                     $audioLink = \Library\Uri::internal("/system/object/" . $uri);
-                    $audio = array(
-                        "ELEMENT" => "audio",
-                        "CONTROLS" => "true",
-                        "CHILDREN" => array(
-                            array(
-                                "ELEMENT" => "SOURCE",
-                                "SRC" => $audioLink,
-                                "TYPE" => $mime
-                            )
-                        )
-                    );
-                    $tag = $audio;
+                    $tag = static::audioTag($audioLink, $mime, $height, $width, $tag);
+
                 endif;
             endif;
             unset($tag['WIDTH']);
@@ -194,9 +185,9 @@ class Media extends Parse\Template {
      */
     final private static function videoTag($src, $type, $height, $width, $dataTag = array()) {
 
+        $controls = static::mediaControls();
         $video = array(
             "ELEMENT" => "video",
-            //"CONTROLS" => "true",
             "CHILDREN" => array(
                 array(
                     "ELEMENT" => "SOURCE",
@@ -208,33 +199,80 @@ class Media extends Parse\Template {
         $figure = array(
             "ELEMENT" => "figure",
             "CLASS" => "video",
+            "DATA-TARGET" => "budkit-player",
             "WIDTH" => !empty($width) ? $width : 100,
             "HEIGHT" => !empty($height) ? $height : 100,
-            "CHILDREN" => array($video,
+            "CHILDREN" => array($controls, $video)
+        );
+        return $figure;
+    }
+
+    /**
+     * Displays and audio media tag
+     * @param type $src
+     * @param type $type
+     * @param type $height
+     * @param type $width
+     * @param type $dataTag
+     * @return string
+     */
+    final private static function audioTag($src, $type, $height, $width, $dataTag = array()) {
+
+        $width = !empty($width) ? $width : \Library\Config::getParam('gallery-thumbnail-width', 170, 'content');
+        $height = !empty($height) ? $height : \Library\Config::getParam('gallery-thumbnail-height', 170, 'content');
+        $controls = static::mediaControls();
+        $audio = array(
+            "ELEMENT" => "audio",
+            "WIDTH" => $width,
+            "HEIGHT" => $height,
+            "CHILDREN" => array(
                 array(
-                    "ELEMENT" => "div",
-                    "ClASS" => "controls",
-                    "CHILDREN" => array(
-                        array(array("ELEMENT" => "div", "CLASS" => "seek", "CHILDREN" => array(
-                                    array("ELEMENT" => "span", "CLASS" => "buffer"),
-                                    array("ELEMENT" => "span", "CLASS" => "progress"),
-                                    array("ELEMENT" => "span", "CLASS" => "timer-knob"),
-                                    array("ELEMENT" => "span", "CLASS" => "timer", "CDATA"=>"00:00"),
-                                )
-                            )
-                        ),
-                        array("ELEMENT" => "div", "CLASS" => "tools", "CHILDREN" => array(
-                                array("ELEMENT" => "a", "CLASS" => "icon-play play pull-left", "TITLE" => "Play/Pause"),
-                                array("ELEMENT" => "a", "CLASS" => "icon-volume volume pull-left", "TITLE" => "Volume"),
-                                array("ELEMENT" => "span", "CLASS" => "volume-seek"),
-                                array("ELEMENT" => "a", "CLASS" => "icon-fullscreen fullscreen pull-right", "TITLE" => "Full Screen")
-                            )
+                    "ELEMENT" => "SOURCE",
+                    "SRC" => $src,
+                    "TYPE" => $type
+                )
+            )
+        );
+        $poster = array(
+          "ELEMENT"=>"img",
+          "SRC"=> \Library\Uri::internal("/system/object/placeholder/resize/170/170"),
+        );
+        $figure = array(
+            "ELEMENT" => "figure",
+            "CLASS" => "audio",
+            "DATA-TARGET" => "budkit-player",
+            "CHILDREN" => array($poster, $audio, $controls)
+        );
+        return $figure;
+    }
+
+    /**
+     * Media Controls for both audio and video
+     * @return type
+     */
+    final private static function mediaControls() {
+        return array(
+            "ELEMENT" => "div",
+            "ClASS" => "controls",
+            "CHILDREN" => array(
+                array(array("ELEMENT" => "div", "CLASS" => "seek", "CHILDREN" => array(
+                            array("ELEMENT" => "span", "CLASS" => "buffer"),
+                            array("ELEMENT" => "span", "CLASS" => "progress"),
+                            array("ELEMENT" => "span", "CLASS" => "timer-knob"),
+                            array("ELEMENT" => "span", "CLASS" => "timer", "CDATA" => "0:00"),
                         )
+                    )
+                ),
+                array("ELEMENT" => "div", "CLASS" => "tools", "CHILDREN" => array(
+                        array("ELEMENT" => "a", "CLASS" => "icon-play play pull-left", "TITLE" => "Play/Pause"),
+                        array("ELEMENT" => "a", "CLASS" => "icon-volume volume pull-left", "TITLE" => "Volume"),
+                        array("ELEMENT" => "span", "CLASS" => "volume-seek"),
+                        array("ELEMENT" => "span", "CLASS" => "timelog", "CDATA" => "0:00/0:00"),
+                        array("ELEMENT" => "a", "CLASS" => "icon-fullscreen fullscreen pull-right", "TITLE" => "Full Screen")
                     )
                 )
             )
         );
-        return $figure;
     }
 
     /**

@@ -247,7 +247,7 @@ class Attachments extends Platform\Entity {
         }
 
         $_uploadFileName = str_replace(array(" "), "_", $fileName);
-        $uploadFileName = $uploadsFolder . DS . $_uploadFileName;
+        $uploadFileName = $uploadsFolder . DS . time().$_uploadFileName; //adding a timestamp to avoid name collisions
         if (!move_uploaded_file($file['tmp_name'], $uploadFileName)) {
             $this->setError(_("Could not move the uploaded folder to the target directory"));
             throw new \Platform\Exception($this->getError());
