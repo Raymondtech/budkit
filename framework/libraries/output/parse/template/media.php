@@ -200,6 +200,7 @@ class Media extends Parse\Template {
             "ELEMENT" => "figure",
             "CLASS" => "video",
             "DATA-TARGET" => "budkit-player",
+            "ALLOWFULLSCREEN"=>"true",
             "WIDTH" => !empty($width) ? $width : 100,
             "HEIGHT" => !empty($height) ? $height : 100,
             "CHILDREN" => array($controls, $video)
@@ -237,11 +238,18 @@ class Media extends Parse\Template {
           "ELEMENT"=>"img",
           "SRC"=> \Library\Uri::internal("/system/object/placeholder/resize/170/170"),
         );
+        $floating = array(
+           "ELEMENT"=>"span", "CLASS"=>"floating-controls",
+           "CHILDREN"=>array(
+               array("ELEMENT"=>"i","CLASS"=>"icon-play-circle"),
+           )
+        );
         $figure = array(
             "ELEMENT" => "figure",
             "CLASS" => "audio",
             "DATA-TARGET" => "budkit-player",
-            "CHILDREN" => array($poster, $audio, $controls)
+            "ALLOWFULLSCREEN"=>"true",
+            "CHILDREN" => array($poster, $floating, $audio, $controls)
         );
         return $figure;
     }
@@ -265,10 +273,16 @@ class Media extends Parse\Template {
                 ),
                 array("ELEMENT" => "div", "CLASS" => "tools", "CHILDREN" => array(
                         array("ELEMENT" => "a", "CLASS" => "icon-play play pull-left", "TITLE" => "Play/Pause"),
-                        array("ELEMENT" => "a", "CLASS" => "icon-volume volume pull-left", "TITLE" => "Volume"),
-                        array("ELEMENT" => "span", "CLASS" => "volume-seek"),
                         array("ELEMENT" => "span", "CLASS" => "timelog", "CDATA" => "0:00/0:00"),
-                        array("ELEMENT" => "a", "CLASS" => "icon-fullscreen fullscreen pull-right", "TITLE" => "Full Screen")
+                        array("ELEMENT" => "a", "CLASS" => "icon-resize-full resizefull pull-right", "TITLE" => "Full Screen"),                      
+                        array("ELEMENT" => "span", "CLASS" => "volume pull-right","CHILDREN"=>array(
+                            array("ELEMENT" => "a", "CLASS" => "icon-volume-up volume-toggle pull-left", "TITLE" => "Volume"),
+                            array("ELEMENT" => "span","CLASS" => "volume-seek", "CHILDREN"=>array( 
+                                array("ELEMENT"=>"span","CLASS"=>"volume-seek-bar", "CHILDREN"=>array(
+                                    array("ELEMENT" => "span","CLASS" => "volume-seek-level")
+                                ))                                 
+                            ))
+                        ))
                     )
                 )
             )

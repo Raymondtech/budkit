@@ -169,9 +169,9 @@ class Error extends \Library\Log {
             9032 => "error", //Stop
             9033 => "error", //Stop
         );
-
-        $log = "<span class='error-message'>$errMsg</span> On line <b><a href=\"#\">$line</a></b> of file <span class='error-file'>$file</span><br />";
-
+        $file = str_replace( strtolower(FSPATH), '/', strtolower($file) );
+        $log = "<span class='error-message'>$errMsg</span> On line <b><a href=\"#\">$line</a></b> of file <span class='error-file'>{$file}</span><br />";
+        
         //echo $log;
         $debugTitle = trim("[$errNo] " . $errType[$errNo]);
         Debugger::log($log, $debugTitle, $label[$errNo]);

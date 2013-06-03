@@ -5443,28 +5443,6 @@ figure .controls .tools:after {
 figure .controls .tools:after {
   clear: both;
 }
-figure .controls .tools span {
-  display: inline-block;
-}
-figure .controls .tools span.volume-seek {
-  height: 5px;
-  margin-bottom: 3px;
-  display: none;
-  background: #ecf0f1;
-  width: 100px;
-  float: left;
-}
-figure .controls .tools span.volume-seek:hover {
-  display: inline-block;
-}
-figure .controls .tools span.timelog {
-  color: #ffffff;
-  text-rendering: optimizelegibility;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-  font-size: 10px;
-  line-height: 38px;
-  padding: 0 10px;
-}
 figure .controls .tools a {
   font-size: 18px;
   cursor: pointer;
@@ -5480,12 +5458,70 @@ figure .controls .tools a {
 figure .controls .tools a.pull-left {
   margin-right: 1px;
 }
-figure .controls .tools a.volume:before {
-  content: "\f028";
+figure .controls .tools a.pull-right {
+  margin-right: 0px;
+  margin-left: 1px;
 }
 figure .controls .tools a:hover {
   background-color: #3190d0;
   color: #eeeeee;
+}
+figure .controls .tools span {
+  display: inline-block;
+}
+figure .controls .tools span.volume {
+  position: relative;
+}
+figure .controls .tools span.volume .volume-toggle {
+  margin-right: 0px;
+}
+figure .controls .tools span.volume .volume-toggle:hover ~ .volume-seek {
+  display: block;
+}
+figure .controls .tools span.volume .volume-seek {
+  height: 80px;
+  margin-top: 16px;
+  background: #bdc3c7;
+  width: 38px;
+  float: left;
+  position: relative;
+  display: none;
+  position: absolute;
+  background: #2f2f2f;
+  top: -95px;
+  left: 0;
+  right: 0px;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
+}
+figure .controls .tools span.volume .volume-seek .volume-seek-bar {
+  display: inline-block;
+  background: #ecf0f1;
+  height: 100%;
+  width: 5px;
+  position: relative;
+}
+figure .controls .tools span.volume .volume-seek .volume-seek-bar .volume-seek-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  height: 30%;
+  background: #3498db;
+}
+figure .controls .tools span.volume .volume-seek:hover {
+  display: inline-block;
+}
+figure .controls .tools span.timelog {
+  color: #ffffff;
+  text-rendering: optimizelegibility;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  font-size: 10px;
+  line-height: 38px;
+  padding: 0 10px;
 }
 figure .controls:hover {
   background: #2f2f2f;
@@ -5504,6 +5540,34 @@ figure.audio {
   min-height: 40px;
   min-width: 170px;
   min-height: 50px;
+}
+figure.audio .floating-controls {
+  position: absolute;
+  width: 64px;
+  left: 50%;
+  margin-left: -32px;
+  top: 50%;
+  margin-top: -32px;
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+  font-size: 64px;
+  color: rgba(255, 255, 255, 0.85);
+  text-rendering: optimizelegibility;
+  cursor: pointer;
+}
+figure.fullscreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000000;
+}
+figure.fullscreen video,
+figure.fullscreen audio {
+  width: 100%;
+  height: 100%;
 }
 .pull-right {
   float: right;

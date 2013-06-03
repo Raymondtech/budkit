@@ -25,14 +25,6 @@ figure{
              border-top: none;
              position: relative;
              .clearfix();
-             span{
-                display:inline-block;
-                &.volume-seek{
-                    height: 5px; margin-bottom: 3px; display: none; background: @clouds; width: 100px; float:left;
-                    &:hover{ display: inline-block; }
-                }
-                &.timelog{color: @white; text-rendering: optimizelegibility; text-shadow: 0 0 3px rgba(0,0,0,0.8); font-size: 10px; line-height: 38px; padding: 0 10px;}
-             }
              a{ 
                font-size: 18px; cursor: pointer;
                text-decoration: none;
@@ -42,15 +34,27 @@ figure{
                .box-sizing(border-box);
                padding: 10px 10px;
                &.pull-left{ margin-right: 1px; }
+               &.pull-right{ margin-right: 0px; margin-left: 1px; }
                &.play{}
-               &.volume{
-                 &:before{ content: "\f028" }
-                 &:hover{
-                    //&~.volume-seek{ display: inline-block; }
-                 }
-               }
                &:hover{ background-color:  mix(@peter-river, black, 95%); color: @grayLighter }
             }
+             span{
+                display:inline-block;
+                 &.volume{
+                    position: relative;
+                    .volume-toggle{ margin-right: 0px; &:hover{ &~.volume-seek{display: block; } } }
+                    .volume-seek{
+                         height: 80px;  margin-top: 16px;  background: @silver; width: 38px; float:left; position:relative; display: none;
+                         position: absolute; background: #2f2f2f; top: -95px; left:0; right: 0px; padding: 10px; .box-sizing(border-box); text-align: center;
+                        .volume-seek-bar{ 
+                            display: inline-block; background: @clouds; height: 100%; width: 5px; position: relative; 
+                            .volume-seek-level{ position: absolute; bottom: 0; left:0; width: 5px; height: 30%; background:@peter-river}
+                        }
+                        &:hover{ display: inline-block; }
+                    }   
+               }
+                &.timelog{color: @white; text-rendering: optimizelegibility; text-shadow: 0 0 3px rgba(0,0,0,0.8); font-size: 10px; line-height: 38px; padding: 0 10px;}
+             }
         }
         &:hover{ background: fade(#2f2f2f,100%);}
     }
@@ -65,5 +69,26 @@ figure{
         }
     }
     &.video{  }
-    &.audio{  display: inline-block; min-height: 40px; min-width: 170px; min-height: 50px; }
+    &.audio{  
+        display: inline-block; min-height: 40px; min-width: 170px; min-height: 50px; 
+        .floating-controls{
+            position: absolute;
+            width:64px;
+            left: 50%;
+            margin-left: -32px;
+            top: 50%;
+            margin-top: -32px;
+            height: 64px;
+            line-height: 64px;
+            text-align: center;
+            font-size: 64px;
+            color: fade(@white,85%); text-rendering: optimizelegibility;
+            cursor: pointer;
+        }
+    }
+    &.fullscreen{
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom:0; background: @black;
+        video, audio{ width: 100%; height: 100%; }
+    }
 }
