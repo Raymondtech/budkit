@@ -2705,7 +2705,6 @@ button.close {
   background-color: #ebebeb;
   *background-color: #dedede;
   border: 0;
-  border-bottom: 4px solid #c8c8c8;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #333333;
   -webkit-border-radius: 1px;
@@ -2827,7 +2826,6 @@ input[type="button"].btn-block {
   background-color: #2980b9;
   *background-color: #2472a4;
   border: 0;
-  border-bottom: 4px solid #236d9d;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -2849,7 +2847,6 @@ input[type="button"].btn-block {
   background-color: #f7ba5b;
   *background-color: #f5b043;
   border: 0;
-  border-bottom: 4px solid #d29e4d;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -2871,7 +2868,6 @@ input[type="button"].btn-block {
   background-color: #ee5f5b;
   *background-color: #ec4844;
   border: 0;
-  border-bottom: 4px solid #ca514d;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -2893,7 +2889,6 @@ input[type="button"].btn-block {
   background-color: #e74c3c;
   *background-color: #e43725;
   border: 0;
-  border-bottom: 4px solid #c44133;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -2915,7 +2910,6 @@ input[type="button"].btn-block {
   background-color: #62c462;
   *background-color: #4fbd4f;
   border: 0;
-  border-bottom: 4px solid #53a753;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -2937,7 +2931,6 @@ input[type="button"].btn-block {
   background-color: #5bc0de;
   *background-color: #46b8da;
   border: 0;
-  border-bottom: 4px solid #4da3bd;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -2959,7 +2952,6 @@ input[type="button"].btn-block {
   background-color: #444444;
   *background-color: #373737;
   border: 0;
-  border-bottom: 4px solid #3a3a3a;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -3937,7 +3929,6 @@ input[type="submit"].btn.btn-mini {
   background-color: #292929;
   *background-color: #1c1c1c;
   border: 0;
-  border-bottom: 4px solid #232323;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
   -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.075);
@@ -4158,7 +4149,6 @@ input[type="submit"].btn.btn-mini {
   background-color: #246392;
   *background-color: #1f557d;
   border: 0;
-  border-bottom: 4px solid #1f547c;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -4335,7 +4325,6 @@ input[type="submit"].btn.btn-mini {
   background-color: #e1e1e1;
   *background-color: #d4d4d4;
   border: 0;
-  border-bottom: 4px solid #bfbfbf;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -5712,7 +5701,6 @@ figure.fullscreen audio {
   background-color: #99cc00;
   *background-color: #86b300;
   border: 0;
-  border-bottom: 4px solid #82ad00;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -5734,7 +5722,6 @@ figure.fullscreen audio {
   background-color: #ee5f5b;
   *background-color: #ec4844;
   border: 0;
-  border-bottom: 4px solid #ca514d;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -5756,7 +5743,6 @@ figure.fullscreen audio {
   background-color: #62c462;
   *background-color: #4fbd4f;
   border: 0;
-  border-bottom: 4px solid #53a753;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -5778,7 +5764,6 @@ figure.fullscreen audio {
   background-color: #5bc0de;
   *background-color: #46b8da;
   border: 0;
-  border-bottom: 4px solid #4da3bd;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -5800,7 +5785,6 @@ figure.fullscreen audio {
   background-color: #1ab9f0;
   *background-color: #0face2;
   border: 0;
-  border-bottom: 4px solid #169dcc;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -5822,7 +5806,6 @@ figure.fullscreen audio {
   background-color: #5771a7;
   *background-color: #4e6696;
   border: 0;
-  border-bottom: 4px solid #4a608e;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -5844,7 +5827,6 @@ figure.fullscreen audio {
   background-color: #444444;
   *background-color: #373737;
   border: 0;
-  border-bottom: 4px solid #3a3a3a;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
@@ -6522,7 +6504,6 @@ input.search-query {
   background-color: #fafafa;
   *background-color: #ededed;
   border: 0;
-  border-bottom: 4px solid #d5d5d5;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #333333;
   text-align: center;
