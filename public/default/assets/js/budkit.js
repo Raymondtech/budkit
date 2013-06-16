@@ -695,15 +695,15 @@
             this.progressbar = this.controls.find('.seek > .progress');
             this.bufferbar = this.controls.find('.seek > .buffer')
             //Video Events
-            this.player.bind('durationchange timeupdate', $.proxy(this.progress, this)); 
+            this.player.bind('durationchange timeupdate', $.proxy(this.progress, this));
             //this.player.bind('contextmenu', function() {return false; })//never show the default controls;
 
             //If audio remove full screen;
             this.fullscreenbtn = this.controls.find('.tools > .resizefull').bind('click', $.proxy(this.fullscreen, this));
-            
+
             if (this.player.prop('nodeName') === 'AUDIO') {
                 this.fullscreenbtn.remove();
-                this.floatingcontrols = this.element.find('.floating-controls').bind('click', $.proxy(function(e){
+                this.floatingcontrols = this.element.find('.floating-controls').bind('click', $.proxy(function(e) {
                     e.preventDefault();
                     this.playpause.trigger('click');
                     this.floatingcontrols.find('i').toggleClass('icon-play-circle').toggleClass('icon-pause');
@@ -748,15 +748,15 @@
         },
         fullscreen: function(e) {
             console.log(this.element);
-        
+
             var fullScreenApi = {
                 supportsFullScreen: false,
                 fullScreenEventName: '',
                 prefix: ''
             },
             fullscreenBtn = this.fullscreenbtn,
-            fullscreenFig = this.element,
-            browserPrefixes = 'webkit moz o ms khtml'.split(' ');
+                    fullscreenFig = this.element,
+                    browserPrefixes = 'webkit moz o ms khtml'.split(' ');
             if (typeof document.cancelFullScreen !== 'undefined') {
                 fullScreenApi.supportsFullScreen = true;
             } else {
@@ -768,7 +768,7 @@
                     }
                 }
             }
-            if(fullScreenApi.supportsFullScreen) {
+            if (fullScreenApi.supportsFullScreen) {
                 fullScreenApi.fullScreenEventName = fullScreenApi.prefix + 'fullscreenchange';
                 fullScreenApi.isFullScreen = function() {
                     switch (this.prefix) {
@@ -785,20 +785,20 @@
                 };
                 fullScreenApi.cancelFullScreen = function() {
                     return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
-                };     
-                this.element.bind(fullScreenApi.fullScreenEventName, function(){
+                };
+                this.element.bind(fullScreenApi.fullScreenEventName, function() {
                     $(this).toggleClass('fullscreen');
                     fullscreenBtn.toggleClass('icon-resize-full');
                     fullscreenBtn.toggleClass('icon-resize-small');
                 });
                 //Toggle Fullscreen;
-                if(!fullScreenApi.isFullScreen()){
-                    fullScreenApi.requestFullScreen( fullscreenFig.get(0) );
+                if (!fullScreenApi.isFullScreen()) {
+                    fullScreenApi.requestFullScreen(fullscreenFig.get(0));
                     fullscreenBtn.removeClass('icon-resize-full');
                     fullscreenBtn.addClass('icon-resize-small');
                     //fullscreenFig.addClass('fullscreen');
-                }else{
-                    fullScreenApi.cancelFullScreen( fullscreenFig.get(0) );
+                } else {
+                    fullScreenApi.cancelFullScreen(fullscreenFig.get(0));
                     fullscreenBtn.removeClass('icon-resize-small');
                     fullscreenBtn.addClass('icon-resize-full');
                     fullscreenFig.removeClass('fullscreen');
@@ -822,4 +822,64 @@
     $(function() {
         $('[data-target="budkit-player"]').bkplayer();
     })
+}(window.jQuery);
+
+/* ===================================================
+ * budkit-clock.js v0.0.1
+ * http://budkit.org/docs/editor
+ * ===================================================
+ * Copyright 2012 The BudKit Team
+ *
+ * This source file is subject to version 3.01 of the GNU/GPL License 
+ * that is available through the world-wide-web at the following URI:
+ * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
+ * the GPL License and are unable to obtain it through the web, please
+ * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ========================================================== */
+!function($) {
+    "use strict"
+    var BKClock = function(object, options) {
+        this.options = $.extend({}, $.fn.bkclock.defaults, options);
+        this.clock = $(object);
+        this.init();
+    };
+    BKClock.prototype = {
+        init: function() {
+            var today = new Date(),
+                hour = today.getHours(),
+                minute = today.getMinutes(),
+                second = today.getSeconds(),
+                text    = hour+":"+this.formatNumber(minute)+":"+this.formatNumber(second);
+             this.clock.text(text);
+             //console.log(text);
+             this.ticker = setTimeout($.proxy(this.init, this), 1000);
+        },
+        formatNumber: function(n) {
+            if (n < 10)
+                n = "0" + n;
+            return n;
+        }
+    };
+    //Plugin Defintion
+    $.fn.bkclock = function(option) {
+        return this.each(function() {
+            var $this = $(this)
+                    , options = typeof option === 'object' && option;
+            //I probably should not be doing this but hey?
+            $this.data('bkclock', (new BKClock(this, options)))
+        });
+    };
+    $.fn.bkclock.defaults = {};
+    $.fn.bkclock.Constructor = BKClock;
+
+    //Plugin data api
+    $(function() {
+        $('[data-clock="timer"]').bkclock();
+    });
 }(window.jQuery);

@@ -33,6 +33,11 @@ use Application\System\Controllers as System;
  */
 class Timeline extends System\Media {
 
+    
+    public function __construct() {
+        parent::__construct();       
+        $this->output->setPageTitle(_("Timeline"));
+    }
     /**
      * The timeline stream
      * 
@@ -76,38 +81,56 @@ class Timeline extends System\Media {
      * @todo    Implement the collection read action method
      * @return  void
      */
-    public function view($itemURI = null) {
+    public function view($itemURI = null, $type="media") {
         //Throws an error if no collectionId is passed
+        $_model = ($type=="attachment")? "attachments" : $type;
         //Loads the collectionItem from the databse
-        $model = $this->load->model("media");
-        $collection = $model->getMedia("media", $itemURI);
+        $model = $this->load->model($_model);
+        $collection = $model->getMedia($type, $itemURI);
         //Set the photo display properties     
         
-        static::canAccess( $itemURI );
+        //static::canAccess( $itemURI );
         
         //print_R($_SESSION);
         
         $first = reset($collection['items']);
-        $this->set("media", $collection);
+        $this->set("activities", $collection);
 
         if (!isset($first['summary']) || empty($first['summary'])):
-            $title = "#";
+            $now = \Library\Date\Time::stamp();
+            $time = \Library\Date\Time::difference(strtotime($first['published']), strtotime($now));
+            $title = sprintf("%s by %s", $time, $first['actor']['displayName']);
         else:
             $title = $first['summary'];
         endif;
-
-        //If commentcount is greater than 1
-        $comments = $model->setListLookUpConditions("media_target", $itemURI)->getAll();
-
-        $this->set("activities", $comments);
-        $this->set("comment_target", $itemURI);
+        
         $this->output->setPageTitle($title);
         
-        //Raw displays whatever is in the body block only; 
-        $post = $this->output->layout("media/item");
-        $this->output->addToPosition("body", $post);
+        //If commentcount is greater than 1
+        $mediaModel = $this->load->model("media", 'system');
+        $comments = $mediaModel->setListLookUpConditions("media_target", $itemURI)->getAll();
 
-        $this->load->view("index")->display();
+        $this->set("comments", $comments);
+        $this->set("comment_target", $itemURI);
+        $format = $this->router->getFormat();
+        if($type==="attachment"):
+            switch ($format):
+                case "raw":
+                    $mediaObject = $this->output->layout("media/photos/photo");
+                    //Add the collection to the placeholder image;
+                    $this->output->addToPosition("placeholder", $mediaObject); //Add the collection to the placeholder
+                    //Raw displays whatever is in the body block only; 
+                    $slide = $this->output->layout("media/slider");
+                    $this->output->addToPosition("body", $slide);
+                    break;
+                default:
+                    $attachments = $this->load->controller("media\\attachments", "system");
+                    return $attachments->gallery();
+                    break;
+            endswitch;
+        endif;
+        
+        return $this->index();
     }
 
     /**
@@ -117,8 +140,6 @@ class Timeline extends System\Media {
     public function index( $display = true) {
         
         //$_SESSION['somevalue'] = 'This is a value';
-        
-        $this->output->setPageTitle(_("Timeline"));
         //Get the view;
         $view = $this->load->view('index');
         $user = \Platform\User::getInstance();
@@ -127,10 +148,10 @@ class Timeline extends System\Media {
         $activities = $model->setListLookUpConditions("media_target", "")->getAll();
         $model->setPagination(); //Set the pagination vars
 
-        $this->set("activities", $activities);
+        $this->set("timeline", $activities);
         //$this->set("user", $user);
 
-        $view->editor('status');//Generate the forms;
+        $view->editor();//Generate the forms;
         $timeline = $this->output->layout("timeline");
         //$timelineside = $this->output->layout("timelinenotes");
 

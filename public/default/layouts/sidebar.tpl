@@ -11,9 +11,14 @@
         </div>
     </tpl:condition>
     <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
-        <tpl:menu id="dashboardmenu" type="nav-list" icons="true" />
+        <div class="section-timer margin-top" align="center">
+            <time data-clock="timer">00:00:00</time>
+        </div>
+        <div class="btn-toolbar padding margin-zero">                              
+            <a class="btn btn-highlight input-100pct" href="/system/media/create">Participate</a>
+        </div>
+        <tpl:menu id="dashboardmenu" type="nav-list" />
         <tpl:block data="page.block.side" />
-        
     </tpl:condition>
 </tpl:layout>
 

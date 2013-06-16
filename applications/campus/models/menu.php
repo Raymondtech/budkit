@@ -60,6 +60,12 @@ class Menu extends \Platform\Model {
                 )
                     )
             );
+        } elseif ($menuId === 'dashboardmenu') {
+            array_push($menuItems, array(
+                "menu_title" => "Groups",
+                "menu_url" => "/campus/workspace/gallery"
+                    )
+            );
         } elseif ($menuId === 'coursemenu') {
             $course = $input->getVar("course", '');
             array_push($menuItems, array(

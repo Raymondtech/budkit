@@ -72,9 +72,9 @@ class Import extends Parse\Template {
 
         //Parse attributes;
         //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
-        $_path = static::getDataAttributeContent(mull, $path);
-        $_directory = static::getDataAttributeContent(mull, $directory);
-        $_app = static::getDataAttributeContent(mull, $app);
+        $_path = static::getDataAttributeContent(null, $path);
+        $_directory = static::getDataAttributeContent(null, $directory);
+        $_app = static::getDataAttributeContent(null, $app);
 
         if (!empty($_path)):
             $path = str_ireplace($_path['searches'], $_path['replace'], $path);

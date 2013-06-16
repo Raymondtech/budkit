@@ -71,9 +71,9 @@ class Element extends Parse\Template {
 
         //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
         $parsed = static::getDataAttributeContent($attribute, $content);
-        
-        if(!empty($parsed)):
-             $content = str_ireplace($parsed['searches'], $parsed['replace'], $content);
+
+        if (!empty($parsed)):
+            $content = str_ireplace($parsed['searches'], $parsed['replace'], $content);
         endif;
 
         //Automatically internalize HREFs! 
@@ -95,16 +95,15 @@ class Element extends Parse\Template {
     public static function content($text, $writer) {
         $writer->writeRaw(trim($text));
     }
-    
-    
-    protected static function wordLimit($string, $limit){
-        
+
+    protected static function wordLimit($string, $limit) {
+
         //@TODO maybe strip html tags before counting?
-        
-        $words      = explode(" ", $string);
-        $continum   = (sizeof($words)>(int)$limit)? " [...]" : NULL;
-        
-        return (empty($continum))? $string: implode(" ",array_splice($words,0,$limit)).$continum;
+
+        $words = explode(" ", $string);
+        $continum = (sizeof($words) > (int) $limit) ? " [...]" : NULL;
+
+        return (empty($continum)) ? $string : implode(" ", array_splice($words, 0, $limit)) . $continum;
     }
 
     /**
@@ -114,7 +113,7 @@ class Element extends Parse\Template {
      * @return type 
      */
     public static function text($tag) {
-        return static::html($tag);
+        return static::html($tag, true);
     }
 
     /**
@@ -162,12 +161,14 @@ class Element extends Parse\Template {
      * @param type $tag
      * @return null 
      */
-    private static function html($tag) {
+    private static function html($tag, $strip = false) {
 
         //Get the data;
         if (isset($tag['DATA'])):
             $tag['_DEFAULT'] = isset($tag['CDATA']) ? $tag['CDATA'] : null;
             $data = self::getData($tag['DATA'], $tag['_DEFAULT']); //echo $data;
+                 //Replace the CDATA;
+            $data = ($strip) ? strip_tags(html_entity_decode(trim($data))) : $data;
             //if formatting
             if (isset($tag['FORMATTING']) && in_array($tag['FORMATTING'], array("sprintf", "vsprintf"))):
                 $text = call_user_func($tag['FORMATTING'], $tag['_DEFAULT'], $data);
@@ -177,42 +178,42 @@ class Element extends Parse\Template {
             endif;
             
             //Parse medialinks
-            if(isset($tag['MEDIALINKS'])):
+            if (isset($tag['MEDIALINKS'])):
                 //need to convert data back to its entities cahracter
-                $data = html_entity_decode( $data );
+                $data = html_entity_decode($data);
                 //Match mentions, urls, and hastags
                 preg_match_all('/^|\s?[^a-zA-Z0-9+!*(),;?&=\$_.-]@([\\d\\w]+)/', $data, $mentions); //[^a-zA-Z0-9+!*(),;?&=\$_.-] added to prevent it picking up emails;
-                preg_match_all('/^|\s?[^\&]#([\\d\\w]+)/', $data, $hashTags);//There must be a space between two hastags;
+                preg_match_all('/^|\s?[^\&]#([\\d\\w]+)/', $data, $hashTags); //There must be a space between two hastags;
                 preg_match_all('/(?<!"|a>)((http|https|ftp|ftps)\:\/\/)([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-zA-Z0-9\-\.]+)\.([a-zA-Z]{2,3})(\:[0-9]{2,5})?(\/([a-zA-Z0-9+\$_-]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/', $data, $openLinks);
                 $searches = array_merge($mentions[0], $hashTags[0], $openLinks[0]);
-                $fMentions = array_map(function($uri, $title){
-                    $profile = Library\Uri::internal("/member:{$uri}/profile/timeline");
-                    return "<a class=\"mention\" href=\"{$profile}\">{$title}</a>";
-                }, $mentions[1], $mentions[0]);
-                $fHashTags = array_map(function($uri, $title){
-                    $search = Library\Uri::internal("/system/search/term/{$uri}");
-                    return "<a class=\"hashtag\" href=\"{$search}\">{$title}</a>";
-                }, $hashTags[1], $hashTags[0]);
-                $fOpenLinks= array_map(function($uri){
-                    return "<a class=\"openlink\" href=\"{$uri}\">{$uri}</a>";
-                }, $openLinks[0]);
+                $fMentions = array_map(function($uri, $title) {
+                            $profile = Library\Uri::internal("/member:{$uri}/profile/timeline");
+                            return "<a class=\"mention\" href=\"{$profile}\">{$title}</a>";
+                        }, $mentions[1], $mentions[0]);
+                $fHashTags = array_map(function($uri, $title) {
+                            $search = Library\Uri::internal("/system/search/term/{$uri}");
+                            return "<a class=\"hashtag\" href=\"{$search}\">{$title}</a>";
+                        }, $hashTags[1], $hashTags[0]);
+                $fOpenLinks = array_map(function($uri) {
+                            return "<a class=\"openlink\" href=\"{$uri}\">{$uri}</a>";
+                        }, $openLinks[0]);
                 $replaces = array_merge($fMentions, $fHashTags, $fOpenLinks);
                 $data = str_replace($searches, $replaces, (string) $data);
 
             endif;
-            
+
             //HTML;
-            if(strtolower($tag['TYPE']) == "html" ):
-                //print_R($data); 
-                //$data = nl2br( $data );
+            if (strtolower($tag['TYPE']) == "html"):
+            //print_R($data); 
+            //$data = nl2br( $data );
             endif;
-            
+
             //@TODO The behavior of the word limit function wtih html formated string is unknown;
-            $tag['CDATA'] = isset($tag['WORDLIMIT'])? static::wordLimit($data, $tag['WORDLIMIT']): $data;
+            $tag['CDATA'] = isset($tag['WORDLIMIT']) ? static::wordLimit($data, $tag['WORDLIMIT']) : $data;
             //If we do not have a default empty it
             if (is_null($tag['_DEFAULT']))
                 unset($tag['_DEFAULT']);
-                   
+
         //die;
         endif;
 

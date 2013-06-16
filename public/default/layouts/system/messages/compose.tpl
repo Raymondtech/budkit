@@ -3,12 +3,8 @@
         <div class="stream-view">
             <div class="stream-thread">              
                 <div class="stream-body padding" id="timeline">
+                    <div class="message-header"><div class="page-header"><h1 class="margin-top-zero"><tpl:element type="text" data="page.title" /></h1></div></div> 
                     <div class="timeline-item-publisher-box">  
-                        <tpl:condition data="profile.user_photo" test="isset" value="1">
-                            <a href="/member:${profile.user_name_id}/profile/timeline" class="publisher-profile">
-                                <img class="profile-avatar thumbnail" src="/system/object/${profile.user_photo}/resize/50/50"  />
-                            </a>
-                        </tpl:condition>
                         <div class="timeline-item-publisher margin-bottom-half" id="article-form">
                             <form action="/system/message/create" class="no-margin form-vectical" method="POST" enctype="multipart/form-data">
                                 <fieldset class="no-bottom-margin">

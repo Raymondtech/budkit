@@ -56,13 +56,9 @@ class Menu extends \Platform\Model {
                     "menu_title" => "Bookmarks",
                     "children" => array(
                         array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"),
-                        array("menu_title" => "Search", "menu_url" => "/system/search/graph"),
-                        array("menu_title" => "My Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount),
-
-                        array("menu_title" => "Inbox", "menu_url" => "/system/messages/inbox"),
+                        array("menu_title" => "Messages", "menu_url" => "/system/messages/inbox"),
+                        array("menu_title" => "Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount),    
                         array("menu_title" => "People", "menu_url" => "/member/network/directory"),
-                        array("menu_title" => "Settings", "menu_url" => "/settings/member/account"),
-                        array("menu_title" => "Sign-out", "menu_url" => "/system/authenticate/logout")
                     )
                 );
                 $menuItems[] = $bookmarks;

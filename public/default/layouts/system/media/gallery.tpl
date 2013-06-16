@@ -1,26 +1,39 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="padding">  
-        <tpl:condition data="gallery.hideheader" test="boolean" value="0">
-            <tpl:import layout="media/gallery/title" />
-        </tpl:condition>
-        <tpl:condition data="gallery" test="isset" value="1">
-            <div class="widget">
-                <div class="widget-head">
-                    <span class="widget-title"><tpl:element type="text" data="page.title">Media Gallery</tpl:element></span>
-                    <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="photogridtoggler">
-                        <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
-                        <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
-                    </ul>
-                </div>
-                <div class="widget-body">
-                    <tpl:import layout="media/gallery/widget" />
-                </div>
+    <div class="messages-box">
+        <div class="message-list">
+            <tpl:condition data="gallery.hideheader" test="boolean" value="0">
+                <tpl:import layout="media/gallery/title" />
+            </tpl:condition>
+            <div class="section-footer">
+                <tpl:menu id="mediamenu" type="nav-pills" />
             </div>
-            <tpl:import layout="pagination" />
-        </tpl:condition>
-        <tpl:condition data="gallery" test="isset" value="0">
-            <p class="placeholder-text">There are no items to display in this gallery.</p>
-        </tpl:condition>
+            <div class="section-body">
+                <tpl:condition data="gallery" test="isset" value="1">
+                    <tpl:import layout="media/gallery/widget" />
+                </tpl:condition>
+                <tpl:condition data="gallery" test="isset" value="0">
+                    <p class="placeholder-text padding">There are no items to display in this gallery.</p>
+                </tpl:condition>
+            </div>
+        </div>
+        <div class="message-view">
+            <div class="stream-thread">              
+                <tpl:condition test="isset" data="activities.items" value="0">
+                    <tpl:import layout="forms/form" app="system" /> 
+                </tpl:condition>
+                <tpl:condition test="isset" data="activities.items" value="1">
+                    <div class="stream-body padding" id="timeline"> 
+                        <tpl:import layout="media/timeline" />                             
+                        <div class="stream-more margin-top">
+                            <tpl:import layout="media/comments" /> 
+                            <tpl:import layout="forms/comment" /> 
+                            <div class="row-fluid margin-top">
+                                <button class="btn">Load more</button>
+                            </div>
+                        </div> 
+                    </div>
+                </tpl:condition>
+            </div>
+        </div>
     </div>
-
 </tpl:layout>

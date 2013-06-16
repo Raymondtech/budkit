@@ -7,7 +7,6 @@
   @containerAsideWidth : (@containerColumnWidth * 1) + (@containerGutterWidth * (1 - 1));
   @_containerAsideWidth : @containerAsideWidth ;
 .container-left, .container-aside{
-    float: left;
     overflow-y: auto;
     //overflow-x: hidden;
     background: #2f2f2f;
@@ -37,10 +36,8 @@
         color: @grayLight;
         position: relative;
         border-bottom: 1px solid rgb(44, 44, 44);
+        .box-sizing(border-box);
         border-top: 1px solid rgb(56, 54, 54);
-        &:hover{
-          background: darken(#e9e9e9, 50%);
-        }
         .nav-icon{
             &+span{ display: none;} 
         }
@@ -58,19 +55,29 @@
 }
 //Specifically for nav-lists
 .container-left{
+    float: left;
     width: @leftBarWidth;
     *width: @leftBarWidth;
        .nav-list > li {
             & > a {
-              padding: 10px 0;
-              text-align: center;
+              padding: @gridGutterWidth*0.5 @gridGutterWidth;
+              text-align: left;
               border-bottom: none;
               border-top: none;
+              position: relative;
+              .box-sizing(border-box);
+              border-right: 3px solid transparent;
+              .absolute-right{ position: absolute; right: @gridGutterWidth*0.25; top: @gridGutterWidth*0.75}
+                  &:hover{
+                    background: #363636;
+                    border-right: 3px solid @peter-river;
+                  }
             }
             &.nav-header{ display: none }
             &.active{
                & > a, & > a:hover, & > a:focus{
-                   background: #f2f2f2;
+                   background: #363636;
+                   border-right: 3px solid @belize-hole;
                 }   
             }
         }
@@ -81,7 +88,9 @@
 .container-aside{
     width: @containerAsideWidth;
    *width: @_containerAsideWidth;
-    left:@leftBarWidth;
+    right:0;
+    left: auto;
+    float: right;
     .nav-list > li {
         & > a {
             padding: 8px 15px;
@@ -94,27 +103,8 @@
         }
     } 
     &~.container-box{
-        left: @leftBarWidth+195;
+        right: @containerColumnWidth;
     } 
-    &~.container-left{
-        background: #ddd; 
-        .nav-list > li {
-            & > a {
-                color: @grayLight;
-                position: relative;
-                border-bottom: transparent;
-                border-top: #ebebeb;
-                .nav-icon{ color: @textColor; background: transparent; }
-            }
-            &.nav-header{ 
-                 border-bottom: transparent;
-                 text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1),0 0 30px rgba(255,255,255,0.125); 
-                 color: rgb(26, 26, 26); 
-                 background: #d5d5d5; 
-                 border-top: 1px solid transparent; 
-            }
-        }
-    }
   }
 .gridrowwidth{ max-width: @gridRowWidth*1.2 };
 .container-menu-box{ float: left; position: absolute; top:@navbarHeight; bottom:0px; width: 75px; left: 0; background: #2f2f2f }
@@ -209,9 +199,10 @@
         margin-bottom: 0;
         text-align: center; // right align buttons
         background-color: #fdfdfd;
-        border-bottom: 1px solid #eee;
+        &.bottom{ border-top: 1px solid #eee; }
+        &.top{ border-bottom: 1px solid #eee; }
         //.border-radius(0 0 6px 6px);
-        .box-shadow(inset 0 -1px 0 @white);
+        //.box-shadow(inset 0 -1px 0 @white);
         .clearfix(); // clear it in case folks use .pull-* classes on buttons
 
         // Properly space out buttons

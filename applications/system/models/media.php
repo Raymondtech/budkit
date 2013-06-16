@@ -249,6 +249,9 @@ class Media extends Platform\Entity {
         $actorImage->set("url", $actorImageURL);
         $actorImage->set("height", 50);
         $actorImage->set("width", 50);
+        if(!empty($object['user_photo'])):
+            $actorImage->set("uri", $object['user_photo']);
+        endif;
         $actorObject->set("image", $actorImage::getArray());
 
         $object['media_actor'] = $actorObject::getArray();

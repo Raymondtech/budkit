@@ -34,18 +34,16 @@
             <tpl:utility type="head" />
         </head>
         <body>
-            <div id="wrap">
-                
+            <div id="wrap">            
+                <div class="container-left">                 
+                    <tpl:import layout="sidebar" />
+                </div>
                 <tpl:condition data="page.block.aside" test="isset" value="1">
                     <div class="container-aside">
                         <tpl:block data="page.block.aside" />
                     </div>
                 </tpl:condition>
-                <div class="container-left">                 
-                    <tpl:import layout="sidebar" />
-                </div>
-                <div class="container-box has-left has-navbar">       
-
+                <div class="container-box">       
                     <div class="container-right">
 
                         <div class="container-content">
@@ -60,6 +58,7 @@
                         </div>
                     </div>
                 </div><!--/.fluid-container-->
+
             </div>
             <!--/.content-slider-->
             <tpl:import layout="slider" />

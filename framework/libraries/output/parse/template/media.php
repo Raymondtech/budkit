@@ -48,7 +48,7 @@ class Media extends Parse\Template {
      */
 
     static $instance;
-    protected static $modes = array("icon", "thumbnail");
+    protected static $modes = array("icon", "thumbnail", "detailed");
     protected static $images = array("image/bmp", "image/gif", "image/jpeg", "image/jpeg", "image/jpg");
     protected static $videos = array("video/mp4");
     protected static $audio = array();
@@ -107,19 +107,27 @@ class Media extends Parse\Template {
         $renderable = array_merge(static::$images, static::$videos, static::$audio, static::$rich);
 
         //Videos, audio rich
-        if ((in_array($mime, array_merge(static::$videos, static::$rich)) && $mode == "icon") || !in_array($mime, $renderable)) {
+        if ((in_array($mime, array_merge(static::$videos, static::$audio, static::$rich)) && in_array($mode, array("detailed", "icon")) ) || !in_array($mime, $renderable)) {
 
-            $linkable = array("ELEMENT" => "a", "HREF" => \Library\Uri::internal($url), "CLASS" => "media-{$fileExtension} media-file",);
+            $linkable = array("ELEMENT" => "div", "HREF"=>"",  "CLASS" => "media-{$fileExtension} {$mode} media-file {$class}");
             $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-type media-{$fileExtension}", "CDATA" => "<i class='icon-file'></i>" . $fileExtension);
-            $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-filename list-hide", "CDATA" => $name);
-            $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-help list-hide help-block", "CDATA" => $mime);
+
+            if ($mode === "detailed" || !in_array($mime, $renderable) ):
+                $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-filename list-hide", "CDATA" => $name);
+                $linkable["CHILDREN"][] = array("ELEMENT" => "span", "CLASS" => "media-help list-hide help-block", "CDATA" => $mime);
+            endif;
+
+            if ($link && !empty($url)):
+                 $linkable['ELEMENT'] = 'a'; 
+                 $linkable['HREF'] = \Library\Uri::internal($url);
+                 else:
+                     unset($linkable['HREF'] );
+            endif;
             //We cannot have two a > a
             return $linkable;
         } else {
-
             //Type specific
             if (!empty($type)):
-
                 //@TODO will need to determine browser support for the various
                 //mime types shown here, for instance only safari browsers support image/tiff;
                 if (in_array($mime, static::$images)):
@@ -200,7 +208,7 @@ class Media extends Parse\Template {
             "ELEMENT" => "figure",
             "CLASS" => "video",
             "DATA-TARGET" => "budkit-player",
-            "ALLOWFULLSCREEN"=>"true",
+            "ALLOWFULLSCREEN" => "true",
             "WIDTH" => !empty($width) ? $width : 100,
             "HEIGHT" => !empty($height) ? $height : 100,
             "CHILDREN" => array($controls, $video)
@@ -235,20 +243,20 @@ class Media extends Parse\Template {
             )
         );
         $poster = array(
-          "ELEMENT"=>"img",
-          "SRC"=> \Library\Uri::internal("/system/object/placeholder/resize/170/170"),
+            "ELEMENT" => "img",
+            "SRC" => \Library\Uri::internal("/system/object/placeholder/resize/170/170"),
         );
         $floating = array(
-           "ELEMENT"=>"span", "CLASS"=>"floating-controls",
-           "CHILDREN"=>array(
-               array("ELEMENT"=>"i","CLASS"=>"icon-play-circle"),
-           )
+            "ELEMENT" => "span", "CLASS" => "floating-controls",
+            "CHILDREN" => array(
+                array("ELEMENT" => "i", "CLASS" => "icon-play-circle"),
+            )
         );
         $figure = array(
             "ELEMENT" => "figure",
             "CLASS" => "audio",
             "DATA-TARGET" => "budkit-player",
-            "ALLOWFULLSCREEN"=>"true",
+            "ALLOWFULLSCREEN" => "true",
             "CHILDREN" => array($poster, $floating, $audio, $controls)
         );
         return $figure;
@@ -274,15 +282,15 @@ class Media extends Parse\Template {
                 array("ELEMENT" => "div", "CLASS" => "tools", "CHILDREN" => array(
                         array("ELEMENT" => "a", "CLASS" => "icon-play play pull-left", "TITLE" => "Play/Pause"),
                         array("ELEMENT" => "span", "CLASS" => "timelog", "CDATA" => "0:00/0:00"),
-                        array("ELEMENT" => "a", "CLASS" => "icon-resize-full resizefull pull-right", "TITLE" => "Full Screen"),                      
-                        array("ELEMENT" => "span", "CLASS" => "volume pull-right","CHILDREN"=>array(
-                            array("ELEMENT" => "a", "CLASS" => "icon-volume-up volume-toggle pull-left", "TITLE" => "Volume"),
-                            array("ELEMENT" => "span","CLASS" => "volume-seek", "CHILDREN"=>array( 
-                                array("ELEMENT"=>"span","CLASS"=>"volume-seek-bar", "CHILDREN"=>array(
-                                    array("ELEMENT" => "span","CLASS" => "volume-seek-level")
-                                ))                                 
+                        array("ELEMENT" => "a", "CLASS" => "icon-resize-full resizefull pull-right", "TITLE" => "Full Screen"),
+                        array("ELEMENT" => "span", "CLASS" => "volume pull-right", "CHILDREN" => array(
+                                array("ELEMENT" => "a", "CLASS" => "icon-volume-up volume-toggle pull-left", "TITLE" => "Volume"),
+                                array("ELEMENT" => "span", "CLASS" => "volume-seek", "CHILDREN" => array(
+                                        array("ELEMENT" => "span", "CLASS" => "volume-seek-bar", "CHILDREN" => array(
+                                                array("ELEMENT" => "span", "CLASS" => "volume-seek-level")
+                                            ))
+                                    ))
                             ))
-                        ))
                     )
                 )
             )
@@ -320,7 +328,7 @@ class Media extends Parse\Template {
                 $ul = array("ELEMENT" => "ul", "CLASS" => "media-grid compensate-margins bottom-media clearfix");
                 $tag['WIDTH'] = \Library\Config::getParam('gallery-thumbnail-width', 170, 'content');
                 $tag['HEIGHT'] = \Library\Config::getParam('gallery-thumbnail-height', 170, 'content');
-                $tag['MODE'] = 'icon';
+                $tag['MODE'] = 'detailed';
                 foreach ($collectionItemize as $item) {
                     $li = array("ELEMENT" => "li", "CHILDREN" => static::tag($attachmentModel->loadObjectByURI($item), $tag));
                     $ul["CHILDREN"][] = $li;

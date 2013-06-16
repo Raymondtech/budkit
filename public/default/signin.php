@@ -34,15 +34,9 @@
                             <div class="container-fluid">
                                 <div class="container">
                                     <div class="container-startup signin">
-                                        <tpl:condition test="boolean" data="config|general.site-allow-registration" value="1">
-                                            <div class="startup-alternatives">
-                                                <ul class="unstyled no-margin no-bottom-margin">
-                                                    <li><a href="/system/authenticate/create">Don't have an account?</a></li>
-                                                </ul>
-                                            </div>
-                                        </tpl:condition>
+
                                         <div class="startup-body"> 
-                                            <form id="form" name="login_form" method="post" action="/system/authenticate/login">  
+                                            <form id="form" name="login_form" method="post" class="margin-bottom-zero" action="/system/authenticate/login">  
                                                 <div class="control-group">
                                                     <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
                                                     <div class="controls row-fluid">
@@ -55,14 +49,18 @@
                                                         <input class="input-xxxlarge focused span12" id="user_password" name="user_password" type="password" />
                                                     </div>
                                                 </div>
-                                                <ul class="unstyled">
-                                                    <li><a href="/index.php">Forgot your password?</a></li>
+                                                <ul class="unstyled margin-top margin-bottom-zero nav nav-pills">
+                                                    
+                                                    <li class="pull-right"><a href="/index.php">Forgot your password?</a></li>
+                                                    <li>
+                                                        <button type="submit" class="btn btn-primary margin-bottom-zero" ><i class="icon-lock"></i> Log In</button>
+                                                    </li>
                                                 </ul>
                                                 <input type="hidden" name="auth_handler" value="dbauth" />
                                                 <input type="hidden" name="redirect" value="${lasturl}" />
 
                                                 <div class="clearfix">                                                  
-                                                    <button type="submit" class="btn margin-top margin-bottom-zero input-xxxlarge" >Sign-in to Account</button>
+
                                                 </div>
                                             </form>
                                             <tpl:condition data="alternatives" test="isset" value="1">
@@ -75,6 +73,13 @@
                                                 </div>
                                             </tpl:condition>
                                         </div>
+                                        <tpl:condition test="boolean" data="config|general.site-allow-registration" value="1">
+                                            <div class="startup-alternatives bottom">
+                                                <ul class="unstyled no-margin">
+                                                    <li><a href="/system/authenticate/create">Don't have an account?</a></li>
+                                                </ul>
+                                            </div>
+                                        </tpl:condition>
                                     </div>
                                 </div>
                             </div>

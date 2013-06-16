@@ -34,6 +34,11 @@ use Application\System\Controllers as System;
  */
 class Attachments extends System\Media {
 
+    public function __construct() {
+        parent::__construct();
+        $this->load->view('index')->editor('drop');
+        $this->output->setPageTitle(_("Documents"));
+    }
     /**
      * Displays the global system attachment uploader form 
      * @todo    Complete the implementation of the global file upload action
@@ -100,8 +105,6 @@ class Attachments extends System\Media {
      */
 
     public function gallery() {
-
-        $this->output->setPageTitle(_("Documents"));
 
         $model = $this->load->model("attachments", "system");
         $attachments = $model->setListLookUpConditions("attachment_owner", array($this->user->get("user_name_id")))
