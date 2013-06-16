@@ -17,8 +17,6 @@
 
 namespace Application\System\Controllers\Media;
 
-use Application\System\Controllers as System;
-
 /**
  * Photo CRUD action controller for system media 
  *
@@ -32,7 +30,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Photo extends System\Media {
+final class Photo extends Attachments {
 
     /**
      * Displays a gallery of media items. 

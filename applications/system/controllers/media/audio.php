@@ -16,7 +16,6 @@
  */
 namespace Application\System\Controllers\Media;
 
-use Application\System\Controllers as System;
 /**
  * Audio files management CRUD action controller for system media 
  *
@@ -30,7 +29,7 @@ use Application\System\Controllers as System;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Audio extends System\Media {
+final class Audio extends Attachments {
     
     
     /**
