@@ -170,6 +170,9 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     }
     .message-view{ position:absolute; left: 401px;  top:0; bottom:0; right:0; overflow-y: auto; overflow-x: hidden;}
 }
+.system-alert{
+    &~.messages-box{ top: 43px }
+}
 .section-header{ background: #f8f8f8; border-bottom: 1px solid #e5e5e5; height: 76px; padding: @gridGutterWidth  @gridGutterWidth; .box-sizing(border-box) }
 .section-timer{ border-bottom: 1px solid #363636; padding-bottom: 20px; time{color: gray; font-size: 32px; margin-top: 4px; display: inline-block;} .box-sizing(border-box) }
 .section-body{
