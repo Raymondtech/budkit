@@ -2924,26 +2924,26 @@ input[type="button"].btn-block {
 .btn-highlight.active {
   background-color: #196090 \9;
 }
-.btn-attention {
-  background-color: #e74c3c;
-  *background-color: #e43725;
+.btn-highlighted {
+  background-color: #2980b9;
+  *background-color: #2472a4;
   border: 0;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   color: #ffffff;
 }
-.btn-attention:hover,
-.btn-attention:focus,
-.btn-attention:active,
-.btn-attention.active,
-.btn-attention.disabled,
-.btn-attention[disabled] {
-  background-color: #d62c1a;
-  *background-color: #bf2718;
+.btn-highlighted:hover,
+.btn-highlighted:focus,
+.btn-highlighted:active,
+.btn-highlighted.active,
+.btn-highlighted.disabled,
+.btn-highlighted[disabled] {
+  background-color: #20638f;
+  *background-color: #1b557a;
   color: #ffffff;
 }
-.btn-attention:active,
-.btn-attention.active {
-  background-color: #a82315 \9;
+.btn-highlighted:active,
+.btn-highlighted.active {
+  background-color: #164666 \9;
 }
 .btn-captivate {
   background-color: #e74c3c;
@@ -4635,9 +4635,9 @@ input[type="submit"].btn.btn-mini {
   *border: 1px solid #999;
   /* IE6-7 */
 
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
   -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);

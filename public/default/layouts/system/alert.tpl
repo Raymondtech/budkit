@@ -2,7 +2,7 @@
     <tpl:loop data="alerts">
         <div class="system-alert alert alert-${alertType}">
             <a class="close" data-dismiss="alert" href="#">×</a>
-            <strong><tpl:element type="text" data="alertTitle" /></strong> <tpl:element type="text" data="alertBody" />
+            <strong><tpl:element type="text" data="alertTitle" /></strong> <tpl:element type="html" data="alertBody" />
         </div>
     </tpl:loop>
 </tpl:layout>

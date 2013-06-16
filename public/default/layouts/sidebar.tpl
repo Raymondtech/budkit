@@ -14,11 +14,21 @@
         <div class="section-timer margin-top" align="center">
             <time data-clock="timer">00:00:00</time>
         </div>
-        <div class="btn-toolbar padding margin-zero">                              
-            <a class="btn btn-highlight input-100pct" href="/system/media/create">Participate</a>
+        <div class="btn-toolbar padding margin-zero">
+            <div class="btn-group row-fluid">
+                <a class="btn btn-highlighted span3" data-target="#quickstatus" data-toggle="modal"><i class="icon-plus"></i></a>
+                <a class="btn btn-highlight span9" href="/system/media/create">Participate</a>
+            </div>
         </div>
         <tpl:menu id="dashboardmenu" type="nav-list" />
         <tpl:block data="page.block.side" />
+        <div id="quickstatus" class="modal hide fade" tabindex="-1" role="dialog">
+
+            <div class="modal-body">
+                <tpl:import layout="forms/status" app="system" />
+            </div>
+  
+        </div>
     </tpl:condition>
 </tpl:layout>
 
