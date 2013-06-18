@@ -16,8 +16,8 @@
         </div>
         <div class="btn-toolbar padding margin-zero">
             <div class="btn-group row-fluid">
-                <a class="btn btn-highlighted span3" data-target="#quickstatus" data-toggle="modal"><i class="icon-plus"></i></a>
                 <a class="btn btn-highlight span9" href="/system/media/create">Participate</a>
+                <a class="btn btn-highlighted span3" data-target="#quickstatus" data-toggle="modal"><i class="icon-plus"></i></a>
             </div>
         </div>
         <tpl:menu id="dashboardmenu" type="nav-list" />
