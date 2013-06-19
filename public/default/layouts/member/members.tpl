@@ -1,75 +1,51 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="padding">  
-        <div class="clearfix margin-bottom">
-            <h1 class="margin-zero pull-left"><tpl:element type="text" data="page.title" /></h1>
-            <div class="btn-group pull-right margin-right">
-                <a class="btn-important btn" href="/settings/member/privacy/groups" >Privacy Groups</a>
+    <div class="messages-box">
+        <div class="message-list">
+            <header class="section-header clearfix">
+                <div class="pull-left"><div class="page-header"><h1 class="margin-top-zero">People</h1></div></div> 
+                <tpl:condition data="gallery" test="isset" value="1">
+                    <ul class="nav nav-pills pull-right nav-mediagrid no-margin" id="memberstoggler">
+                        <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
+                        <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
+                    </ul>
+                </tpl:condition>
+            </header>
+            <div class="section-footer">
+                <tpl:menu id="peoplemenu" type="nav-pills" />
             </div>
-            <tpl:menu id="peoplemenu" type="nav-pills" class="pull-right margin-bottom-zero margin-top-zero margin-right-half" />
-        </div>
-        <tpl:condition data="gallery" test="isset" value="1">
-            <div class="widget">
-                <div class="widget-head">
-                    <span class="widget-title"><tpl:element type="text" data="gallery.title">Media Gallery</tpl:element></span>
-                    <tpl:condition data="gallery" test="isset" value="1">
-                        <ul class="nav nav-pills  pull-right nav-mediagrid no-margin" id="memberstoggler">
-                            <li class="active"><a data-target=".media-gallery"  data-toggle="media-grid" title="Grid"><i class="icon-th icon-16"></i></a></li>
-                            <li><a data-target=".media-gallery"  data-toggle="media-list" title="List"><i class="icon-th-list icon-16"></i></a></li>
-                        </ul>
-                    </tpl:condition>
-                </div>
-                <div class="widget-body">
-                    <ul class="media-grid media-gallery compensate-margins">
-                        <li class="mgrow-fluid grid-hide list-header">
-                            <div class="feature grid-hide mgcol2">
-                            </div>   
-                            <div class="name grid-hide mgcol4">
-                                <strong>Name</strong>
-                            </div>
-                            <div class="description grid-hide mgcol2">
-                                <strong>Status</strong>
-                            </div>
-                            <div class="modified grid-hide mgcol2">
-                                <strong>Joined</strong>
-                            </div>
-                            <div class="actions grid-hide mgcol2">
-
-                            </div>
-                        </li>
+            <div class="section-body">
+                <tpl:condition data="gallery" test="isset" value="1">
+                    <ul class="stream media-grid media-gallery compensate-margins">
                         <tpl:loop data="gallery.members" id="gallery-items">
                             <li class="mgrow-fluid">
-                                <div class="feature mgcol2">
-                                    <tpl:condition data="user_photo" test="isset" value="1">
-                                        <a href="/member:${user_name_id}/profile/information" class="profile-link">
-                                            <tpl:media uri="user_photo"  mode="icon" width="170" height="170" />
-                                        </a>
-                                    </tpl:condition>
+                                <div class="feature mgcol1 list-hide">
+                                    <tpl:media uri="user_photo" link="true" mode="detailed"  class="media-item" width="170" height="170" /> 
                                 </div>   
-                                <div class="name grid-hide mgcol4">
-                                    <strong><tpl:element type="text" data="user_first_name"/></strong> <tpl:element type="text" data="user_last_name"/>
-                                    <span class="help-block"><tpl:element type="text" data="user_email"/></span>
-                                    <a href="/member:${user_name_id}/profile/information"><tpl:element type="text" data="object_uri" formatting="sprintf" cdata="@%s"/></a>
-                                </div>
-                                <div class="description grid-hide mgcol2">
-                                    <tpl:element type="text" data="object_status"/>
-                                </div>
-                                <div class="modified grid-hide mgcol2">
-                                    <tpl:element type="time" data="object_created_on"/>
-                                </div>
-                                <div class="actions grid-hide mgcol2">
-                                    <a href="/member/network/relation/follow/${user_name_id}" class="btn btn-small">Follow</a>
-                                    <a href="#" class="btn btn-small">Message</a>
-                                </div>
+                                <!--<input type="checkbox" class="select" />-->
+                                <a href="#" class="grid-hide has-featured-img padding-bottom-zero padding-top-zero link ${message_status}">
+                                    <tpl:media uri="user_photo" mode="icon"  class="featured-img" width="65" height="65" /> 
+                                    <div class="title">
+                                        <span class="auhor"><strong><tpl:element type="text" data="user_first_name"/></strong> <tpl:element type="text" data="user_last_name"/></span>
+                                        <span class="time"><tpl:element type="text" data="object_status"/></span>    
+                                    </div>
+                                    <div class="content clearfix">
+                                        <tpl:element type="text" data="object_uri" formatting="sprintf" cdata="@%s"/>
+                                        <span class="help-block margin-zero"><tpl:element type="text" data="user_email"/></span>
+                                    </div>
+                                </a>
                             </li>
                         </tpl:loop>
-                    </ul>  
-                </div>
+                    </ul> 
+                </tpl:condition>
+                <tpl:condition data="gallery" test="isset" value="0">
+                    <p class="placeholder-text padding">There are no items to display in this gallery.</p>
+                </tpl:condition>
             </div>
-            <tpl:import layout="pagination" />
-        </tpl:condition>
-        <tpl:condition data="gallery" test="isset" value="0">
-                    <hr />
-            <p class="placeholder-text">There are no members to display in this list.</p>
-        </tpl:condition>
+        </div>
+        <div class="message-view">
+            <div class="stream-thread">              
+
+            </div>
+        </div>
     </div>
 </tpl:layout>

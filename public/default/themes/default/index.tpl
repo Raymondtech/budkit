@@ -32,7 +32,7 @@
         <body>
             <div id="wrap">
                 <div class="container-left">
-                    <tpl:menu id="dashboardmenu" type="nav-list" icons="true" />
+                    <tpl:menu id="dashboardmenu" type="nav-list" />
                 </div>
                 <div class="container-box has-left">
                     <div class="container-content">
