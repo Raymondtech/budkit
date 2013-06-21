@@ -723,7 +723,6 @@ class Session extends Object {
         //echo $namespace;
         //@TODO, check if the regitry is not locked before adding
         if (!$session->isLocked($namespace)) {
-
             $registry = $session->getNamespace($namespace);
             $registry->set($varname, $value);
         }

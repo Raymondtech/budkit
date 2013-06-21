@@ -312,7 +312,7 @@ use Authorize\Privacy;
         $credentials = array();
 
         //authentication;
-        $authhandler = $this->input->getString('auth_handler', NULL); //must be defined
+        $authhandler = $this->input->getString('handler', NULL); //must be defined
 
 
         if (!empty($authhandler)):
@@ -334,7 +334,7 @@ use Authorize\Privacy;
                     //2. Verify the username and the password
                     $authenticate = $authenticate::getInstance();
 
-                    if ($authenticate->attest($credentials, $this->input)) {
+                    if ($authenticate->attest($credentials, $this)) {
                         //get the user data
                         $this->user = User::getInstance();
 

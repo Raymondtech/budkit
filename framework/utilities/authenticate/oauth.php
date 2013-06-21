@@ -29,7 +29,6 @@ use Platform\Authenticate\OAuth;
 use Library;
 use Platform;
 
-
 /**
  * What is the purpose of this class, in one sentence?
  *
@@ -51,13 +50,13 @@ class OAuth extends Platform\Authenticate {
      * @var  string  OAuth compliance version
      */
     public static $version = '1.0';
-    
 
-    public static function provider($name, array $options = NULL) {   
+    public static function provider($name, array $options = NULL) {
         $name = ucfirst(strtolower($name));
         $class = 'Platform\Authenticate\OAuth\Provider\\' . $name;
-        
-        if(!class_exists($class)) return false;
+
+        if (!class_exists($class))
+            return false;
 
         return new $class($options);
     }
@@ -185,7 +184,7 @@ class OAuth extends Platform\Authenticate {
         // Encode the parameter keys and values
         $keys = OAuth::urlencode(array_keys($params));
         $values = OAuth::urlencode(array_values($params));
-        
+
         // Recombine the parameters
         $params = array_combine($keys, $values);
 
@@ -292,30 +291,64 @@ class OAuth extends Platform\Authenticate {
      * @param type $credentials
      * @param type $input
      */
-    public function attest( $credentials , $input) {
-        
+    public function attest($credentials, $action) {
+
         //authentication;
-        $credentials = NULL; //we do not need usernames and passwords here;
-        $provider    = $input->getString('auth_provider', NULL); //must be defined
-        $server      = $this->provider( $provider );
-        
-        
-        print_R($provider);
-        die;
-        
-        //1. Prepare the Provider
+        $credentials= NULL; //we do not need usernames and passwords here;
+        $input      = $action->input;
+        $provider   = $input->getString('provider', NULL); //must be defined
+        $server     = $this->provider($provider); //Load the provider;
         //if no provider or provider not supported throw an error;
-        if(empty($provider) OR !$server):
+        if (empty($provider) OR !$server):
             $this->setError(_t('Undefined OAuth Provider or Provider Not Supported. Unable to Authenticate'));
             return false;
         endif;
-        //Callbacks?
-        //2. Prepare the Consumer
-        echo 'Now Instantiate Your Consumer';
-        
-        
-        die;
 
+        //1. Instantiate the consumer
+        $session    = Library\Session::getInstance();
+        $key        = Library\Config::getParam("consumer-key", "", $provider);
+        $Secret     = Library\Config::getParam("consumer-secret", "", $provider);
+        $callback   = Library\Uri::internal("/system/authenticate/login/handler:oauth/provider:{$provider}");
+        
+        //Create the consumer providing a Key and secret from config;
+        $consumer   = $this->consumer(array($key, $Secret));
+    
+        //@TODO check that we have a valid consumer created; else, through an error;
+        if (!$input->getString("oauth_token")):
+            //Add the callback URL to the consumer;
+            $consumer->callback($callback);
+            //Get a Request Token from the consumer;
+            $token = $provider->requestToken($consumer);           
+            //Store the token and Redirect for authorization
+            $session->set('oauth_token', $token, "auth"); //session class automatically serializes this data;
+            $action->redirect($provider->authorize($token, array('oauth_callback'=>$callback)));
+        else:
+            //Recover the request token from session;
+            $token = $session->get('oauth_token', "auth");
+            if(!empty($token) && $token->accessToken !== $input->getString('oauth_token')):
+                 $this->setError(_t('Unverifiable request token does not match source. Unable to Authenticate'));
+                return false;
+            endif;
+            //Get the verifieer;
+            $verifier = $input->getString('oauth_verifier');
+            //Store the verifier in the token
+            $token->verifier($verifier);
+            //Exchange the Request Token for an access token
+            $token->accessToken($consumer, $token);
+            
+            //get user info and load into credentials;
+            
+        endif;
+
+        if(empty($credentials)):
+            $this->setError(_t('Could not authenticate the user with the credentials supplied'));
+            return false;
+        endif;
+        
+        //Check user credentials against database; if not exists, create one;
+        //Populate the authenticated class
+        return true;
+        
     }
 
     /**

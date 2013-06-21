@@ -37,6 +37,20 @@
 
                                         <div class="startup-body"> 
                                             <form id="form" name="login_form" method="post" class="margin-bottom-zero" action="/system/authenticate/login">  
+                                                <tpl:condition data="alternatives" test="isset" value="1">
+                                                    <div class="control-group">
+                                                        <span class="help-block margin-bottom-half">Sign In with..</span>
+                                                        <div class="controls row-fluid margin-bottom">
+                                                            <tpl:loop data="alternatives" id="login-alt">
+                                                                <tpl:condition data="link" test="isset" value="1">
+                                                                    <a href="${link}" class="btn btn-${uid} btn-medium margin-bottom-half span6"><tpl:element type="text" data="title" /></a>
+                                                                </tpl:condition>
+                                                            </tpl:loop>
+                                                        </div>
+                                                    </div>
+<!--                                                    <hr />-->
+                                                </tpl:condition>
+
                                                 <div class="control-group">
                                                     <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>
                                                     <div class="controls row-fluid">
@@ -50,28 +64,19 @@
                                                     </div>
                                                 </div>
                                                 <ul class="unstyled margin-top margin-bottom-zero nav nav-pills">
-                                                    
+
                                                     <li class="pull-right"><a href="/index.php">Forgot your password?</a></li>
                                                     <li>
-                                                        <button type="submit" class="btn btn-primary margin-bottom-zero" ><i class="icon-lock"></i> Log In</button>
+                                                        <button type="submit" class="btn margin-bottom-zero" >Sign In</button>
                                                     </li>
                                                 </ul>
-                                                <input type="hidden" name="auth_handler" value="dbauth" />
+                                                <input type="hidden" name="handler" value="dbauth" />
                                                 <input type="hidden" name="redirect" value="${lasturl}" />
 
                                                 <div class="clearfix">                                                  
 
                                                 </div>
                                             </form>
-                                            <tpl:condition data="alternatives" test="isset" value="1">
-                                                <div class="row-fluid margin-bottom">
-                                                    <tpl:loop data="alternatives" id="login-alt">
-                                                        <tpl:condition data="link" test="isset" value="1">
-                                                            <a href="${link}" class="btn btn-${uid} btn-medium margin-bottom-half span6"><tpl:element type="text" data="title" /></a>
-                                                        </tpl:condition>
-                                                    </tpl:loop>
-                                                </div>
-                                            </tpl:condition>
                                         </div>
                                         <tpl:condition test="boolean" data="config|general.site-allow-registration" value="1">
                                             <div class="startup-alternatives bottom">

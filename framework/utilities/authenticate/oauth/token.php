@@ -56,7 +56,7 @@ abstract class Token {
     public static function forge($name, array $options = NULL) {
 
         $name = ucfirst(strtolower($name));
-        $class = 'Token\\' . $name;
+        $class = '\Platform\Authenticate\OAuth\Token\\' . $name;
         return new $class($options);
     }
 

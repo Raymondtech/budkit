@@ -58,7 +58,7 @@ class Request {
     public static function forge($type, $method, $url = NULL, array $params = NULL) {
         
         $type = ucfirst(strtolower($type));
-        $class = 'Request\\' . $type;
+        $class = '\Platform\Authenticate\OAuth\Request\\' . $type;
 
         return new $class($method, $url, $params);
     }

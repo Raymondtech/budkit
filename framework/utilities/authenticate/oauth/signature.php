@@ -57,7 +57,7 @@ abstract class Signature {
         $name = str_replace('-', '_', $name);
 
         // Create the class name as a base of this class
-        $class = 'Signature\\' . $name;
+        $class = '\Platform\Authenticate\OAuth\Signature\\' . $name;
 
         class_exists($class);
 

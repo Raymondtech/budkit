@@ -21,7 +21,28 @@
 
 /**
  * Custom menu Items
- * 
- * 
  */
 \Library\Event::register('beforeRenderMenu', '\Application\System\Models\Menu::media');
+
+/**
+ * Custom Login Links
+ * OAuth Providers
+ */
+\Library\Event::register('beforeLoginFormDisplay', function(&$alternatives = array()) {
+            //@TODO get oauth providers from config
+            //Twitter OAuth
+            if (!is_array($alternatives))
+                return;
+
+            $alternatives = array_merge($alternatives, array(
+                "twitter" => array(
+                    "link" => Library\Uri::internal('/sign-in/handler:oauth/provider:twitter/'),
+                    "title" => "twitter",
+                    "uid" => "twitter"
+                ),
+                "fgoogle" => array(
+                    "link" => Library\Uri::internal('/sign-in/handler:oauth/provider:google/'),
+                    "title" => "google",
+                    "uid" => "google"
+            )));
+        });

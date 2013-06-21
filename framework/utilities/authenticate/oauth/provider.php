@@ -94,7 +94,7 @@ abstract class Provider {
 
         if (!$this->name) {
             // Attempt to guess the name from the class name
-            $this->name = strtolower(substr(get_class($this), strlen('Provider_')));
+            $this->name = strtolower(substr(get_class($this)));
         }
     }
 
