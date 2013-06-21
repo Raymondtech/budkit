@@ -162,7 +162,6 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 .stream-object{
     margin-left: 115px;
 }
-
 .messages-box{
     position:absolute; left:0; right:0; bottom:0; top:@navbarHeight;
     .message-list{ 
@@ -171,6 +170,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     }
     .message-view{ position:absolute; left: 401px;  top:0; bottom:0; right:0; overflow-y: auto; overflow-x: hidden;}
 }
+
 .system-alert{
     &~.messages-box{ top: 43px }
 }
@@ -192,6 +192,10 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     &~.section-body{ top: 76px; }
 }
 
+.message-view{
+    .section-header{ background: none;}
+}
+
 .section-footer{
     position: absolute;
     bottom: 0;
@@ -204,6 +208,8 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     .box-sizing(border-box);
     &~.section-body{ bottom: 40px; }
 }   
+
+
 //***** ACCORDION MENUS ***/
 
 .accordion-nav{

@@ -6466,6 +6466,9 @@ input.search-query {
 .section-header ~ .section-body {
   top: 76px;
 }
+.message-view .section-header {
+  background: none;
+}
 .section-footer {
   position: absolute;
   bottom: 0;
