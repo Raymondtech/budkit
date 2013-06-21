@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * oauth.php
+ * ldap.php
  *
  * Requires PHP version 5.3
  *
@@ -18,14 +18,15 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/ldap
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
 
-namespace Library\Authenticate\Oauth;
+namespace Platform\Authenticate;
 
 use Library;
+use Platform;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -37,37 +38,35 @@ use Library;
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/ldap
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Consumer {
-
-    public $key;
-    public $secret;
-
-    public function __construct($key, $secret, $callback_url = NULL) {
-        $this->key = $key;
-        $this->secret = $secret;
-        $this->callback_url = $callback_url;
-    }
-
-    public function __toString() {
-        return "OAuthConsumer[key=$this->key,secret=$this->secret]";
-    }
+class Ldap extends Platform\Authenticate {
+    
+    /**
+     * Validates a user LDAP login credentials
+     *
+     * @param type $credentials 
+     */
+    public function attest( $credentials ){}
 
     /**
-     * Returns an instance of the oauth class
+     * Returns an instance of the LDAP class
      * 
      * @staticvar self $instance
      * @param type $id
      * @return self 
      */
-    public static function getInstance($id = null) {
+    public static function getInstance($id=null) {
+
         static $instance;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
+
         $instance = new self();
+
         return $instance;
     }
+
 }

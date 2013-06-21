@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * oauth.php
+ * request.php
  *
  * Requires PHP version 5.3
  *
@@ -13,7 +13,7 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  *
- * @category   Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
@@ -23,51 +23,45 @@
  * 
  */
 
-namespace Library\Authenticate\Oauth;
+namespace Platform\Authenticate\OAuth\Token;
 
-use Library;
+use Platform\Authenticate\OAuth;
 
 /**
  * What is the purpose of this class, in one sentence?
  *
  * How does this class achieve the desired purpose?
  *
- * @category   Library
+ * @category   Utility
+ * @author     Phil Sturgeon (Original Author)
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @license    http://philsturgeon.co.uk/code/dbad-license
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Server {
+class Request extends OAuth\Token {
 
-    public $key;
-    public $secret;
-
-    public function __construct($key, $secret, $callback_url = NULL) {
-        $this->key = $key;
-        $this->secret = $secret;
-        $this->callback_url = $callback_url;
-    }
-
-    public function __toString() {
-        return "OAuthConsumer[key=$this->key,secret=$this->secret]";
-    }
+    protected $name = 'request';
 
     /**
-     * Returns an instance of the oauth class
-     * 
-     * @staticvar self $instance
-     * @param type $id
-     * @return self 
+     * @var  string  request token verifier
      */
-    public static function getInstance($id = null) {
-        static $instance;
-        //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
-        $instance = new self();
-        return $instance;
+    protected $verifier;
+
+    /**
+     * Change the token verifier.
+     *
+     *     $token->verifier($key);
+     *
+     * @param   string   new verifier
+     * @return  $this
+     */
+    public function verifier($verifier) {
+        $this->verifier = $verifier;
+
+        return $this;
     }
 }

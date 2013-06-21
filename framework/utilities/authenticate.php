@@ -13,7 +13,7 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  *
- * @category   Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
@@ -23,16 +23,16 @@
  * 
  */
 
-namespace Library;
+namespace Platform;
+use Library;
 
-use Library\Auth;
 
 /**
  * What is the purpose of this class, in one sentence?
  *
  * How does this class achieve the desired purpose?
  *
- * @category   Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
@@ -40,7 +40,7 @@ use Library\Auth;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Authenticate extends Object {
+class Authenticate extends Library\Object {
 
     /**
      * 

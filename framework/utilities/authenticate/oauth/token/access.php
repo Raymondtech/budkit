@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * ldap.php
+ * access.php
  *
  * Requires PHP version 5.3
  *
@@ -13,59 +13,37 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  *
- * @category   Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/ldap
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
 
-namespace Library\Authenticate;
+namespace Platform\Authenticate\OAuth\Token;
 
-use Library;
+use Platform\Authenticate\OAuth;
 
 /**
  * What is the purpose of this class, in one sentence?
  *
  * How does this class achieve the desired purpose?
  *
- * @category   Library
+ * @category   Utility
+ * @author     Phil Sturgeon (Original Author)
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @license    http://philsturgeon.co.uk/code/dbad-license
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/ldap
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Ldap extends \Library\Authenticate {
-    
-    /**
-     * Validates a user LDAP login credentials
-     *
-     * @param type $credentials 
-     */
-    public function attest( $credentials ){}
+class Access extends OAuth\Token {
 
-    /**
-     * Returns an instance of the LDAP class
-     * 
-     * @staticvar self $instance
-     * @param type $id
-     * @return self 
-     */
-    public static function getInstance($id=null) {
-
-        static $instance;
-        //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
-
-        $instance = new self();
-
-        return $instance;
-    }
+    protected $name = 'access';
 
 }

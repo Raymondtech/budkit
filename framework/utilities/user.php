@@ -100,7 +100,7 @@ class User extends Library\Object {
         //Authenticate
         $authenticate = Library\Session::getInstance()->get("handler", "auth");
 
-        if (is_a($authenticate, "Library\Authenticate")) {
+        if (is_a($authenticate, "\Platform\Authenticate")) {
             if ($authenticate->authenticated) {
                 $this->authenticated = true;
                 if (empty($userid) || $userid === (int) $authenticate->get("user_id")) {

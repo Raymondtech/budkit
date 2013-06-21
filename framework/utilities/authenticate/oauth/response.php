@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * oauth.php
+ * response.php
  *
  * Requires PHP version 5.3
  *
@@ -13,7 +13,7 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  *
- * @category   Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
@@ -23,49 +23,52 @@
  * 
  */
 
-namespace Library\Authenticate;
+namespace Platform\Authenticate\OAuth;
 
-use Library;
+use Platform\Authenticate;
 
 /**
  * What is the purpose of this class, in one sentence?
  *
  * How does this class achieve the desired purpose?
  *
- * @category   Library
+ * @category   Utility
+ * @author     Phil Sturgeon (Original Author)
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @license    http://philsturgeon.co.uk/code/dbad-license
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Oauth extends \Library\Authenticate {
-    
-    /**
-     * Validates a user oauth credentials
-     * 
-     * @param type $credentials 
-     */
-    public function attest($credentials){}
+class Response {
 
     /**
-     * Returns an instance of the oauth class
-     * 
-     * @staticvar self $instance
-     * @param type $id
-     * @return self 
+     * @var   array   response parameters
      */
-    public static function getInstance($id=null) {
+    protected $params = array();
 
-        static $instance;
-        //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
-
-        $instance = new self();
-
-        return $instance;
+    public function __construct($body = NULL) {
+        if ($body) {
+            $this->params = Authenticate\OAuth::parseParams($body);
+        }
     }
 
+    /**
+     * Return the value of any protected class variable.
+     *
+     *     // Get the response parameters
+     *     $params = $response->params;
+     *
+     * @param   string  variable name
+     * @return  mixed
+     */
+    public function __get($key) {
+        return $this->$key;
+    }
+
+    public function param($name, $default = NULL) {
+        return isset($this->params[$name]) ? $this->params[$name] : $default;
+    }
 }

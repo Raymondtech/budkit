@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * location.php
+ * credentials.php
  *
  * Requires PHP version 5.3
  *
@@ -18,15 +18,14 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/location
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
 
-namespace Platform\Authorize\Type;
+namespace Platform\Authenticate\OAuth\Request;
 
-use Library;
-use Platform\Authorize;
+use Platform\Authenticate\OAuth;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -34,33 +33,16 @@ use Platform\Authorize;
  * How does this class achieve the desired purpose?
  *
  * @category   Utility
+ * @author     Phil Sturgeon (Original Author)
  * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @license    http://philsturgeon.co.uk/code/dbad-license
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/authorize/type/location
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Location extends Platform\Authorize\Permission {
+class Credentials extends OAuth\Request {
 
-    /**
-     * Return an instance of the authorize class
-     * 
-     * @staticvar self $instance
-     * @return self 
-     */
-    final public static function getInstance() {
 
-        static $instance;
-        //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
-
-        //@TODO. Look into the possibility of implied authorities
-        $instance = new self();
-
-        return $instance;
-    }
-
-}
-
+} 

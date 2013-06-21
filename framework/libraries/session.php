@@ -201,7 +201,7 @@ class Session extends Object {
 
         //update the cookie with the expiry time
         //Create the authenticated namespace and lock it!
-        $authenticate = Authenticate::getInstance($splash);
+        $authenticate = Platform\Authenticate::getInstance($splash);
 
         $self->set("handler", $authenticate, "auth");
 
@@ -220,7 +220,7 @@ class Session extends Object {
 
         //$authority = \Platform\Authorize::getInstance();
 
-        if (is_a($auth, "Library\Authenticate")) {
+        if (is_a($auth, "\Platform\Authenticate")) {
             if (isset($auth->authenticated)) {
                 //Read Rights if we have a userId
                 //$self->authority = $authority->getPermissions($auth);
@@ -241,7 +241,7 @@ class Session extends Object {
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
         $auth = $self->get("handler", "auth");
 
-        if (is_a($auth, "Library\Authenticate")) {
+        if (is_a($auth, "\Platform\Authenticate")) {
             if (isset($auth->authenticated)) {
                 return (bool) $auth->authenticated;
             }
