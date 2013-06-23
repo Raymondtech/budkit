@@ -7,7 +7,6 @@
                     <li>
                         <div class="btn-group">
                             <a href="/system/message/refresh" class="btn"><i class="icon-rotate-left"/></a>
-                            <a href="/system/message/create" class="btn">Compose</a>
                         </div>
                     </li>
                 </ul>
@@ -48,16 +47,29 @@
         <div class="message-view">
             <div class="stream-thread">              
                 <div class="stream-body">
-                    <tpl:condition test="isset" data="activities.items" value="1">
-                        <div class="stream-view">
-                            <div class="stream-thread">              
+
+                    <div class="stream-view">
+                        <div class="stream-thread">
+                            <tpl:condition test="isset" data="activities.items" value="0">
+                                <header class="section-header clearfix">
+                                    <ul class="nav nav-pills no-margin">
+                                        <li>
+                                            <div class="btn-group">
+                                                <a href="/system/message/create" class="btn btn-important   ">Compose</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </header>
+                            </tpl:condition>
+                            <tpl:condition test="isset" data="activities.items" value="1">              
                                 <div class="stream-body padding" id="timeline">            
                                     <tpl:import layout="media/timeline" />
                                     <tpl:import layout="input" />   
                                 </div>
-                            </div>
+                            </tpl:condition>
                         </div>
-                    </tpl:condition>
+                    </div>
+
                 </div>
             </div>
         </div>
