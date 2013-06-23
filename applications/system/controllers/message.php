@@ -67,6 +67,7 @@ final class Message extends \Platform\Controller {
                     $activity->setPagination(); //Set the pagination vars
                     $this->set("mediatarget", $object->getObjectUri());
                     $this->set("mediaverb", "message");
+                    $this->set("mediamessage", $object->getPropertyData());
                     if ((int) $activities["totalItems"] > 0):
                         $this->set("activities", $activities);
                     endif;

@@ -14,7 +14,7 @@
         <div class="section-timer margin-top" align="center">
             <time data-clock="timer">00:00:00</time>
         </div>
-        <div class="btn-toolbar padding margin-zero">
+        <div class="btn-toolbar padding-half padding-top margin-zero">
             <div class="btn-group row-fluid">
                 <a class="btn btn-highlight span9" href="/system/media/create">Participate</a>
                 <a class="btn btn-highlighted span3" data-target="#quickstatus" data-toggle="modal"><i class="icon-plus"></i></a>
@@ -23,11 +23,17 @@
         <tpl:menu id="dashboardmenu" type="nav-list" />
         <tpl:block data="page.block.side" />
         <div id="quickstatus" class="modal hide fade" tabindex="-1" role="dialog">
-
             <div class="modal-body">
                 <tpl:import layout="forms/status" app="system" />
             </div>
-  
+        </div>
+        <div class="section-tools">
+            <a href="/system/notifications/list" class="btn btn-inverse"><i class="icon-bell-alt"></i></a>
+            <a href="/settings/member/account" class="btn btn-inverse"><i class="icon-cog"></i> </a>
+            <tpl:condition data="config|server.error-console" test="boolean" value="1">
+                <a class="btn btn-inverse" data-target="#systemconsole" data-toggle="modal"><i class="icon-fire"></i></a>
+            </tpl:condition>
+            <a href="/system/authenticate/logout" class="btn btn-inverse" title="Log-Out"><i class="icon-off"></i></a>
         </div>
     </tpl:condition>
 </tpl:layout>

@@ -66,11 +66,11 @@ abstract class View extends \Library\Object {
         
         //Displays the editor;
         $formlist =  array(
-            array("id"=>"status","title"=>"Idea","layout"=>"forms/status","app"=>"system","icon-class"=>"icon-lightbulb color-sun-flower","hint"=>"What is on your mind?"),
-            array("id"=>"drop","title"=>"Upload","layout"=>"forms/drop","app"=>"system","icon-class"=>"icon-cloud-upload color-turquoise", "hint"=>"Videos, Audio, Images e.t.c."), 
-            array("id"=>"record","title"=>"Record","layout"=>"forms/snap","app"=>"system","icon-class"=>"icon-facetime-video color-amethyst", "hint"=>"Use your webcam and mic to snap"), 
-            array("id"=>"editor","title"=>"Article","layout"=>"forms/editor","app"=>"system","icon-class"=>"icon-edit color-belize-hole","hint"=>"Publish a titled article or blog"), 
-            array("id"=>"import","title"=>"Import","layout"=>"forms/import","app"=>"system","icon-class"=>"icon-upload-alt color-nephritis", "hint"=>"Dropbox, Google+")
+            array("id"=>"status","title"=>"Share an Idea","layout"=>"forms/status","app"=>"system","icon-class"=>"icon-lightbulb","hint"=>"What is on your mind?"),
+            array("id"=>"editor","title"=>"Publish an Article","layout"=>"forms/editor","app"=>"system","icon-class"=>"icon-edit","hint"=>"Publish a titled article or blog"), 
+            array("id"=>"drop","title"=>"Upload Files","layout"=>"forms/drop","app"=>"system","icon-class"=>"icon-cloud-upload", "hint"=>"Videos, Audio, Images e.t.c."), 
+            array("id"=>"record","title"=>"Record a Podcast or Webcast","layout"=>"forms/snap","app"=>"system","icon-class"=>"icon-facetime-video", "hint"=>"Use your webcam and mic to record"),  
+            array("id"=>"import","title"=>"Import Files","layout"=>"forms/import","app"=>"system","icon-class"=>"icon-upload-alt", "hint"=>"Dropbox, Google+")
         );
         \Library\Event::trigger("beforeEditorDisplay", $formlist);
         

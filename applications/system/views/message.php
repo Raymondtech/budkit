@@ -62,7 +62,7 @@ class Message extends \Platform\View {
         $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
         
-        $this->output->addMenuGroupToPosition("aside", "messagesmenu", "nav-list", array(), false, false);
+        //$this->output->addMenuGroupToPosition("aside", "messagesmenu", "nav-list", array(), false, false);
         $this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );

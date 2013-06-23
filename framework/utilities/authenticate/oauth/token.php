@@ -114,10 +114,9 @@ abstract class Token {
      */
     public static function factory($name = 'access', array $options = null) {
         
-        $name = ucfirst(strtolower($name));
-        
+        $name = ucfirst(strtolower($name));     
         $class = '\Platform\Authenticate\OAuth\Token\\' . $name;
-        
+               
         return new $class($options);
     }
 

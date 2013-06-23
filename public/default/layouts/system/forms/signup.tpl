@@ -14,7 +14,7 @@
                     <div class="controls row-fluid">
 
                         <div class="span12">
-                            <img src="${tempauth.image}" class="pull-left margin-right-half"  />
+                            <img src="${tempauth.image}" class="max-width-100 pull-left margin-right-half"  />
                             <span class="help-block"><tpl:element type="text" formatting="sprintf" cdata="Create an account to pair with this %s account." data="tempauth.provider" /></span> 
                         </div>
                     </div>

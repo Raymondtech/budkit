@@ -211,7 +211,7 @@ abstract class Provider {
         ));
     }
 
-        /**
+    /**
      * Parameter getter and setter. Setting the value to `NULL` will remove it.
      *
      *     // Set the "oauth_consumer_key" to a new value
@@ -266,7 +266,7 @@ abstract class Provider {
 
         return $this;
     }
-    
+
     /**
      * Get the authorization URL for the request token.
      *
@@ -301,7 +301,7 @@ abstract class Provider {
                 'state' => $state,
                 'scope' => is_array($this->scope) ? implode($this->scopeSeperator, $this->scope) : $this->scope,
                 'response_type' => 'code',
-                'approval_prompt' => 'force' // - google force-recheck
+                'approval_prompt' => 'auto' // - google force-recheck
             );
 
             $params = array_merge($params, $this->params);
@@ -320,8 +320,8 @@ abstract class Provider {
 
     public function access($code, $options = array()) {
         $params = array(
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret,
+            'client_id' => trim($this->clientId),
+            'client_secret' => trim($this->clientSecret),
             'grant_type' => isset($options['grant_type']) ? $options['grant_type'] : 'authorization_code',
         );
 
@@ -330,7 +330,7 @@ abstract class Provider {
         switch ($params['grant_type']) {
             case 'authorization_code':
                 $params['code'] = $code;
-                $params['redirect_uri'] = isset($options['redirect_uri']) ? $options['redirect_uri'] :  $this->redirectUri;
+                $params['redirect_uri'] = isset($options['redirect_uri']) ? $options['redirect_uri'] : $this->redirectUri;
                 break;
 
             case 'refresh_token':
@@ -340,7 +340,7 @@ abstract class Provider {
 
         $response = null;
         $url = $this->urlAccessToken();
-        
+
         switch ($this->method) {
             case 'GET':
 
@@ -352,13 +352,25 @@ abstract class Provider {
 
             case 'POST':
                 //NOTE this is a faking the post data; but is actually sending via GET;
-                $remote  = $url;
-                $return = Authenticate\OAuth::remote($remote, array(
-                    CURLOPT_SSL_VERIFYPEER =>false , 
-                    CURLOPT_POST => true, //POST DATA
-                    CURLOPT_POSTFIELDS => $params
-                ));
+                //$remote  = $url;
+                //$params['redirect_uri']  = Authenticate\OAuth::urlencode( $params['redirect_uri'] );
+                //$params['client_secret'] = $this->clientSecret;
+                $post =  Authenticate\OAuth::normalizeParams($params);
 
+                $response = Authenticate\OAuth::remote($url, array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_SSL_VERIFYPEER => false,
+                    CURLOPT_FAILONERROR => false,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POST => true, //POST DATA
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/x-www-form-urlencoded'
+                    ),
+                    CURLOPT_POSTFIELDS => $post
+                ));
+                $return = json_decode($response, true);
+                
+                break;
             default:
                 throw new \Platform\Exception("Method '{$this->method}' must be either GET or POST");
         }
@@ -367,15 +379,16 @@ abstract class Provider {
             throw new \Platform\Exception($return);
         }
 
-        switch ($params['grant_type']) {
+        switch (trim($params['grant_type'])) {
             case 'authorization_code':
-                return Token::factory('access', $return);
+                $token = Token::factory('access', $return);
                 break;
-
             case 'refresh_token':
-                return Token::factory('refresh', $return);
+                $token = Token::factory('refresh', $return);
                 break;
         }
+        
+        return $token;
     }
 
     /**

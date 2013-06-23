@@ -19,6 +19,7 @@
     }
 }
 .max-width{ max-width: 1180px; }
+.max-width-100{ max-width: 100px; }
 .padding-top{ padding-top: @gridGutterWidth !important; }
 .padding{ padding : @gridGutterWidth!important; }
 .padding-half{ padding : @gridGutterWidth * 0.5 }
@@ -48,37 +49,10 @@
 .margin-right{ margin-right : @gridGutterWidth }
 .margin-right-half{ margin-right : @gridGutterWidth * 0.5 }
 .margin-right-zero{ margin-right: 0 !important;  }
+.margin-left-zero{ margin-left: 0 !important;  }
 .scroll-y{ overflow-y: scroll }
 .display-block{display: block}
 
-// Warning appears are orange
-.btn-green {
-  .buttonBackground(#99CC00,#669900);
-}
-// Danger and error appear as red
-.btn-red {
-  .buttonBackground(@btnDangerBackground, @btnDangerBackgroundHighlight);
-}
-// Success appears as green
-.btn-orange {
-  .buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
-}
-// Info appears as a neutral blue
-.btn-purple {
-  .buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
-}
-// Inverse appears as dark gray
-.btn-twitter{
-    .buttonBackground(#1AB9F0, #229AE1);
-}
-
-.btn-facebook{
-    .buttonBackground(#5771A7, #3B5998);
-}
-
-.btn-google {
-  .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
-}
 .btn-medium{padding: 6px;}
 
 .usermenu { 
@@ -128,20 +102,22 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 .stream{
     margin: 0; padding:0; list-style: none;
     li{
-        
         position: relative;        
         .link{ 
-            text-decoration: none; padding: @gridGutterWidth ; display: block; font-size: @baseFontSize; border-left: 3px solid transparent;
+            text-decoration: none; padding: @gridGutterWidth ; display: block; font-size: @baseFontSize; border-right: 3px solid transparent; min-height: 65px;
             &.unread{ background: #d9edf7}
-            &.open{ background: #f8f8f8; border-left: 3px solid @linkColor;}
+            &.open{ background: #f8f8f8; border-right: 3px solid @linkColor;}
             &.has-featured-img{ padding: @gridGutterWidth  @gridGutterWidth  @gridGutterWidth  50px+@gridGutterWidth*2; min-height: 50px+@gridGutterWidth*0.5;}
-        }
-        
+            &:hover{ background: #f9f9f9 }
+        }     
         .featured-img{
             min-height: 50px;
             max-width: 70px;
             position: absolute; left:@gridGutterWidth; top:@gridGutterWidth;
             //img{ .border-radius(50%); }
+            &.btn{
+                width: 60px;height: 60px;text-align: center;vertical-align: middle;line-height:65px;.box-sizing(border-box); color: @grayLight;
+            }
         }
         .select{ position:absolute; top:@gridGutterWidth*1.1; left:@gridGutterWidth;  &~.link{ display: block; padding-left: @gridGutterWidth*2.5} &:checked{  &~.link {background: #fcf8e3 } } }
         .title{
@@ -179,6 +155,7 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 .section-body{
     overflow-y: auto; overflow-x: hidden; position: absolute; top:0; bottom:0; right:0; left:0;
 }
+.section-tools{position: absolute; bottom: 0; left: 0; right: 0; padding: @gridGutterWidth*0.5; text-align: center;}
 .section-header{
     h1{
         margin: 0px;
@@ -563,3 +540,5 @@ video{max-width: 100%}
 
 .search-form{ background: lighten(@grayLight,32%); padding: 5px; display: inline-block}
 .inline-block{display: inline-block}
+
+.login-alternatives{ li{ display: inline-block} }

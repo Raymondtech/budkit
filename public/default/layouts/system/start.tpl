@@ -13,11 +13,7 @@
                                 <i class="icon-cog"></i>
                             </a>
                         </div>
-                        <div class="btn-group">
-                            <a href="/system/authenticate/logout" class="btn">
-                                Log out
-                            </a>
-                        </div>
+
                     </li>
                 </ul>
             </header>
@@ -32,8 +28,21 @@
         <div class="message-view">
             <div class="stream-thread">  
                 <header class="section-header clearfix">   
-                    <form class="margin-bottom-zero form-vertical inline-block row-fluid" action="/system/search/graph" method="post"> 
-                        <div class="controls input-append margin-bottom-zero row-fluid span12">
+                    <ul class="nav nav-pills pull-left no-margin">
+                        <li>
+                            <div class="btn-group">
+                                <a href="/system/media/create" class="btn btn-important">Share Something..</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="/system/media/create/drop" class="btn">Upload Files</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="/system/media/create/record" class="btn">Record</a>
+                            </div>                                          
+                        </li>
+                    </ul>
+                    <form class="margin-bottom-zero pull-right form-vertical inline-block span5" action="/system/search/graph" method="post"> 
+                        <div class="controls input-append margin-bottom-zero row-fluid">
                             <input type="text" class="span12" name="query" placeholder="Search for people, documents, groups or anything else" value="${query}" />
                         </div>
                     </form>

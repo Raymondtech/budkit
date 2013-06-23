@@ -72,13 +72,27 @@ class Google extends OAuth\Provider {
         // Now make sure we have the default scope to get user data
         empty($options['scope']) and $options['scope'] = array(
             'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
+            'https://www.googleapis.com/auth/userinfo.email',
+            'https://www.googleapis.com/auth/drive'
         );
 
         // Array it if its string
         $options['scope'] = (array) $options['scope'];
 
         parent::__construct($options);
+    }
+    
+    /**
+     * Adds parameters to the authorize call
+     * 
+     * @param \Platform\Authenticate\OAuth\Provider\Token\Request $token
+     * @param array $options
+     */
+    public function authorize(Token\Request $token = NULL, array $options = NULL){
+        //Adds additional params for the OAuth Access request;
+        $this->params( array("access_type"=>"offline"));
+        
+        return parent::authorize($token, $options);
     }
 
     /*
@@ -89,8 +103,6 @@ class Google extends OAuth\Provider {
      */
 
     public function access($code, $options = array()) {
-        
-        //$this->params = array('approval_prompt'=>'force'); //force prompt
         
         if ($code === null) {
             throw new \Platform\Exception('Expected Authorization Code from ' . ucfirst($this->name) . ' is missing');
@@ -106,13 +118,13 @@ class Google extends OAuth\Provider {
             throw new \Platform\Exception('First Argument Passed to getUserInfo must be of type OAuth\Token\Access');
 
         $url = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&' . http_build_query(array(
-                    'access_token' => $token->accessToken,
+            'access_token' => $token->accessToken,
         ));
 
         $user = json_decode(file_get_contents($url), true);
         return array(
             'uid' => $user['id'],
-            'nickname' => url_title($user['name'], '_', true),
+            'nickname' => strtolower(str_replace(" ", ".", $user['name']) ),
             'name' => $user['name'],
             'first_name' => $user['given_name'],
             'last_name' => $user['family_name'],

@@ -54,14 +54,14 @@
                                     <ul class="nav nav-pills no-margin">
                                         <li>
                                             <div class="btn-group">
+                                                <a href="/system/media/create" class="btn btn-important">Share Something..</a>
+                                            </div>
+                                            <div class="btn-group">
                                                 <a href="/system/media/create/drop" class="btn">Upload Files</a>
                                              </div>
                                             <div class="btn-group">
                                                 <a href="/system/media/create/record" class="btn">Record</a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <a href="/system/media/create" class="btn">Create...</a>
-                                            </div>
+                                            </div>                                          
                                         </li>
                                     </ul>
                                 </header>

@@ -9,6 +9,11 @@
                             <a href="/system/message/refresh" class="btn"><i class="icon-rotate-left"/></a>
                         </div>
                     </li>
+                    <li>
+                        <div class="btn-group">
+                            <a href="/system/message/create" class="btn btn-important   ">Compose</a>
+                        </div>
+                    </li>
                 </ul>
             </header>
             <div class="section-footer">Some Items</div>
@@ -47,21 +52,14 @@
         <div class="message-view">
             <div class="stream-thread">              
                 <div class="stream-body">
-
                     <div class="stream-view">
                         <div class="stream-thread">
-                            <tpl:condition test="isset" data="activities.items" value="0">
-                                <header class="section-header clearfix">
-                                    <ul class="nav nav-pills no-margin">
-                                        <li>
-                                            <div class="btn-group">
-                                                <a href="/system/message/create" class="btn btn-important   ">Compose</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </header>
-                            </tpl:condition>
-                            <tpl:condition test="isset" data="activities.items" value="1">              
+                            <tpl:condition test="isset" data="activities.items" value="1">      
+                                <tpl:condition test="isset" data="mediamessage.message_subject" value="1">
+                                    <header class="section-header clearfix">
+                                         <div class="page-header"><h1 class="margin-top-zero"><tpl:element type="text" data="mediamessage.message_subject" /></h1></div>
+                                    </header>
+                                </tpl:condition>
                                 <div class="stream-body padding" id="timeline">            
                                     <tpl:import layout="media/timeline" />
                                     <tpl:import layout="input" />   

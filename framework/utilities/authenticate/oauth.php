@@ -97,7 +97,7 @@ class OAuth extends Platform\Authenticate {
 
         // Get the response
         $response = curl_exec($remote);
-
+        
         // Get the response information
         $code = curl_getinfo($remote, CURLINFO_HTTP_CODE);
 
@@ -329,7 +329,7 @@ class OAuth extends Platform\Authenticate {
                         $token          = $server->access($action->input->getString("code"));
                         $user           = $server->getUserInfo($token);                       
                         if(!empty($user)):
-                            $credentials = array($provider=>array("token"=>$token->accessToken, "user"=>$user) );
+                            $credentials = array($provider=>array("token"=>$action->output->serialize($token), "user"=>$user) );
                         endif;
                     } catch (\Platform\Exception $e) {
                         $this->setError(_( 'Could not authenticate you using this method: ' . $e) );
@@ -469,7 +469,7 @@ class OAuth extends Platform\Authenticate {
             $user = $server->getUserInfo($consumer, $atoken);
 
             if(!empty($user)):
-                $credentials  = array($provider=>array("token"=>$atoken->accessToken, "user"=>$user));
+                $credentials  = array($provider=>array("token"=>$action->output->serialize($atoken), "user"=>$user));
             endif;
         endif;
 

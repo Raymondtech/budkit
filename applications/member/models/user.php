@@ -49,10 +49,12 @@ class User extends \Platform\Entity {
             "user_locale" => array("Locale", "varchar", 10),
             "user_verification" => array("Verification Code", "varchar", 50),
             "user_photo" => array("Profile Photo", "mediumtext", 10, 'placeholder'),
-            "user_twitter_uid" => array("Twitter userid", "mediumtext", 50),
-            "user_facebook_uid" => array("Facebook userid", "mediumtext", 50),
-            "user_twitter_token" => array("Twitter accessToken", "varchar", 2000),
-            "user_facebook_token" => array("Facebook accessToken", "varchar", 2000),
+            "user_twitter_uid" => array("Twitter Account Id", "mediumtext", 50),
+            "user_facebook_uid" => array("Facebook Account Id", "mediumtext", 50),
+            "user_twitter_token" => array("Twitter AccessToken", "varchar", 2000),
+            "user_facebook_token" => array("Facebook AccessToken", "varchar", 2000),
+            "user_google_uid" => array("Google Account Id", "mediumtext", 50),
+            "user_google_token" => array("Google AccessToken", "varchar", 2000),
                 ), "user"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models

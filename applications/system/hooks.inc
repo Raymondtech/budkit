@@ -44,5 +44,11 @@
                     "link" => Library\Uri::internal('/sign-in/handler:oauth/version:2.0/provider:facebook/'),
                     "title" => "facebook",
                     "uid" => "facebook"
-                )));
+                ),
+                "google" => array(
+                    "link" => Library\Uri::internal('/sign-in/handler:oauth/version:2.0/provider:google/'),
+                    "title" => "google",
+                    "uid" => "google"
+                ))
+            );
         });

@@ -1,12 +1,6 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
-    <div class="padding">  
-        <div class="clearfix">   
-            <h1 class="margin-bottom-zero pull-left"><tpl:element type="text" data="page.title" /></h1>
-            <ul class="nav nav-pills pull-right no-margin">
-                <li><a href="/settings/system/server" class="btn-important" >Mail Server Settings</a></li>
-            </ul>
-        </div>
-        <hr />
+    <tpl:import layout="title" app="settings" />
+    <div class="padding">    
         <div class="widget">
             <div class="widget-head"><span class="widget-title">Email Settings and Templates</span></div>
             <div class="widget-body">

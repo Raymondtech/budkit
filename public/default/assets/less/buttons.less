@@ -160,8 +160,8 @@ input[type="button"] {
 .btn-highlighted {
   .buttonBackground(@belize-hole, darken(@belize-hole, 10%), @white);
 }
-.btn-captivate {
-  .buttonBackground(@alizarin, darken(@alizarin, 10%), @white);
+.btn-google {
+  .buttonBackground(@pomegranate, darken(@pomegranate, 10%), @white);
 }
 // Success appears as green
 .btn-success {
@@ -175,6 +175,32 @@ input[type="button"] {
 .btn-inverse {
   .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight, @btnInverseText);
 }
+
+// Warning appears are orange
+.btn-green {
+  .buttonBackground(#99CC00,#669900);
+}
+// Danger and error appear as red
+.btn-red {
+  .buttonBackground(@btnDangerBackground, @btnDangerBackgroundHighlight);
+}
+// Success appears as green
+.btn-orange {
+  .buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
+}
+// Info appears as a neutral blue
+.btn-purple {
+  .buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
+}
+// Inverse appears as dark gray
+.btn-twitter{
+    .buttonBackground(#1AB9F0, #229AE1);
+}
+
+.btn-facebook{
+    .buttonBackground(#5771A7, #3B5998);
+}
+
 
 // Cross-browser Jank
 // --------------------------------------------------

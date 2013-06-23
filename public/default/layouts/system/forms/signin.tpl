@@ -6,13 +6,13 @@
                     <div class="control-group heading background-${tempauth.provider}">
                         <label class="control-label margin-bottom-half"><strong><tpl:element type="text" formatting="sprintf" cdata="Hello %s" data="tempauth.name" /></strong><a href="/system/authenticate/login/cleartemp:1/" class="pull-right" >Not You?</a> </label>
                         <div class="controls row-fluid">
-                           
+
                             <div class="span12">
-                                <img src="${tempauth.image}" class="pull-left margin-right-half"  />
+                                <img src="${tempauth.image}" class="max-width-100 pull-left margin-right-half"  />
                                 <span class="help-block"><tpl:element type="text" formatting="sprintf" cdata="Pair an existing account with this %s account" data="tempauth.provider" /></span>                            
                             </div>
                         </div>
-                           
+
                         <input name="user_${tempauth.provider}" value="${tempauth.token}" type="hidden" />
                     </div>
                 </tpl:condition>
@@ -40,12 +40,14 @@
                 <tpl:condition data="alternatives" test="isset" value="1">
                     <div class="control-group margin-top margin-bottom-zero">
                         <span class="help-block margin-bottom-half">Sign In with..</span>
-                        <div class="controls row-fluid margin-bottom-zero">
-                            <tpl:loop data="alternatives" id="login-alt">
-                                <tpl:condition data="link" test="isset" value="1">
-                                    <a href="${link}" class="btn btn-${uid} btn-medium margin-bottom-half span6"><tpl:element type="text" data="title" /></a>
-                                </tpl:condition>
-                            </tpl:loop>
+                        <div class="controls margin-bottom-zero">
+                            <ul class="unstyled no-margin row-fluid">
+                                <tpl:loop data="alternatives" id="login-alt">
+                                    <tpl:condition data="link" test="isset" value="1">
+                                        <li class="inline-block span6 margin-left-zero"><a href="${link}" class="btn btn-medium margin-bottom-half  btn-${uid} span12"><tpl:element type="text" data="title" /></a></li>
+                                    </tpl:condition>
+                                </tpl:loop>
+                            </ul>
                         </div>
                     </div>
                 </tpl:condition>
