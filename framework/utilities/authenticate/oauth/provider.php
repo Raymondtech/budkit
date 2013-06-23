@@ -55,6 +55,16 @@ abstract class Provider {
     protected $signature = 'HMAC-SHA1';
 
     /**
+     * @var  string  additional request parameters to be used for remote requests
+     */
+    public $callback;
+
+    /**
+     * @var  string  the method to use when requesting tokens
+     */
+    protected $method = 'GET';
+
+    /**
      * @var  string  uid key name
      */
     public $uidKey = 'uid';
@@ -82,20 +92,38 @@ abstract class Provider {
      * @return  void
      */
     public function __construct(array $options = NULL) {
-        if (isset($options['signature'])) {
-            // Set the signature method name or object
-            $this->signature = $options['signature'];
-        }
-
-        if (!is_object($this->signature)) {
-            // Convert the signature name into an object
-            $this->signature = Signature::forge($this->signature);
-        }
 
         if (!$this->name) {
             // Attempt to guess the name from the class name
-            $this->name = strtolower(substr(get_class($this)));
+            $this->name = strtolower(get_class($this));
         }
+
+        //The required options are different for OAuth versions
+        if (version_compare(Authenticate\OAuth::$version . ".0", "2.0.0", "<")): //So if using OAuth version lessthan 2 check signatures;
+
+            if (isset($options['signature'])) {
+                // Set the signature method name or object
+                $this->signature = $options['signature'];
+            }
+
+            if (!is_object($this->signature)):
+                // Convert the signature name into an object
+                $this->signature = Signature::forge($this->signature);
+            endif;
+        else:
+            if (empty($options['id'])) {
+                throw new \Platform\Exception('Required option not provided: id');
+            }
+
+            $this->clientId = $options['id'];
+
+            isset($options['callback']) and $this->callback = $options['callback'];
+            isset($options['secret']) and $this->clientSecret = $options['secret'];
+            isset($options['scope']) and $this->scope = $options['scope'];
+
+            $this->redirectUri = \Library\Uri::externalize("/system/authenticate/login/handler:oauth/version:2.0/provider:{$this->name}/");
+
+        endif;
     }
 
     /**
@@ -145,7 +173,7 @@ abstract class Provider {
      *
      * @return  string
      */
-    abstract public function getUserInfo(Consumer $consumer, Token $token);
+    abstract public function getUserInfo();
 
     /**
      * Ask for a request token from the OAuth provider.
@@ -183,6 +211,62 @@ abstract class Provider {
         ));
     }
 
+        /**
+     * Parameter getter and setter. Setting the value to `NULL` will remove it.
+     *
+     *     // Set the "oauth_consumer_key" to a new value
+     *     $request->param('oauth_consumer_key', $key);
+     *
+     *     // Get the "oauth_consumer_key" value
+     *     $key = $request->param('oauth_consumer_key');
+     *
+     * @param   string   parameter name
+     * @param   mixed    parameter value
+     * @param   boolean  allow duplicates?
+     * @return  mixed    when getting
+     * @return  $this    when setting
+     * @uses    Arr::get
+     */
+    public function param($name, $value = NULL, $duplicate = FALSE) {
+        if ($value === NULL) {
+            // Get the parameter
+            return isset($this->params[$name]) ? $this->params[$name] : null;
+        }
+
+        if (isset($this->params[$name]) AND $duplicate) {
+            if (!is_array($this->params[$name])) {
+                // Convert the parameter into an array
+                $this->params[$name] = array($this->params[$name]);
+            }
+
+            // Add the duplicate value
+            $this->params[$name][] = $value;
+        } else {
+            // Set the parameter value
+            $this->params[$name] = $value;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set multiple parameters.
+     *
+     *     $request->params($params);
+     *
+     * @param   array    parameters
+     * @param   boolean  allow duplicates?
+     * @return  $this
+     * @uses    Request::param
+     */
+    public function params(array $params, $duplicate = FALSE) {
+        foreach ($params as $name => $value) {
+            $this->param($name, $value, $duplicate);
+        }
+
+        return $this;
+    }
+    
     /**
      * Get the authorization URL for the request token.
      *
@@ -192,18 +276,106 @@ abstract class Provider {
      * @param   array                additional request parameters
      * @return  string
      */
-    public function authorize(Token\Request $token, array $params = NULL) {
-        // Create a new GET request for a request token with the required parameters
-        $request = Request::forge('authorize', 'GET', $this->urlAuthorize(), array(
-                    'oauth_token' => $token->access_token,
-        ));
+    public function authorize(Token\Request $token = NULL, array $options = NULL) {
 
-        if ($params) {
-            // Load user parameters
-            $request->params($params);
+        //The required options are different for OAuth versions
+        if (version_compare(Authenticate\OAuth::$version . ".0", "2.0.0", "<")):
+            //So if using OAuth version lessthan 2 check signatures;
+            //Create a new GET request for a request token with the required parameters
+            $request = Request::forge('authorize', 'GET', $this->urlAuthorize(), array(
+                        'oauth_token' => $token->accessToken,
+            ));
+            if ($options) {
+                // Load user parameters
+                $request->params($options);
+            }
+            return $request->asUrl();
+
+        else:
+            $state = md5(uniqid(rand(), true));
+            \Library\Session::set('state', $state, "auth");
+
+            $params = array(
+                'client_id' => $this->clientId,
+                'redirect_uri' => isset($options['redirect_uri']) ? $options['redirect_uri'] : $this->redirectUri,
+                'state' => $state,
+                'scope' => is_array($this->scope) ? implode($this->scopeSeperator, $this->scope) : $this->scope,
+                'response_type' => 'code',
+                'approval_prompt' => 'force' // - google force-recheck
+            );
+
+            $params = array_merge($params, $this->params);
+
+            //@TODO Return the authorize URL, Handler will need to redirect
+            return $this->urlAuthorize() . '?' . http_build_query($params);
+        endif;
+    }
+
+    /*
+     * Get access to the API
+     *
+     * @param	string	The access code
+     * @return	object	Success or failure along with the response details
+     */
+
+    public function access($code, $options = array()) {
+        $params = array(
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'grant_type' => isset($options['grant_type']) ? $options['grant_type'] : 'authorization_code',
+        );
+
+        $params = array_merge($params, $this->params);
+
+        switch ($params['grant_type']) {
+            case 'authorization_code':
+                $params['code'] = $code;
+                $params['redirect_uri'] = isset($options['redirect_uri']) ? $options['redirect_uri'] :  $this->redirectUri;
+                break;
+
+            case 'refresh_token':
+                $params['refresh_token'] = $code;
+                break;
         }
 
-        return $request->asUrl();
+        $response = null;
+        $url = $this->urlAccessToken();
+        
+        switch ($this->method) {
+            case 'GET':
+
+                // Need to switch to Request library, but need to test it on one that works
+                $url .= '?' . http_build_query($params);
+                $response = file_get_contents($url);
+                parse_str($response, $return);
+                break;
+
+            case 'POST':
+                //NOTE this is a faking the post data; but is actually sending via GET;
+                $remote  = $url;
+                $return = Authenticate\OAuth::remote($remote, array(
+                    CURLOPT_SSL_VERIFYPEER =>false , 
+                    CURLOPT_POST => true, //POST DATA
+                    CURLOPT_POSTFIELDS => $params
+                ));
+
+            default:
+                throw new \Platform\Exception("Method '{$this->method}' must be either GET or POST");
+        }
+
+        if (!empty($return['error'])) {
+            throw new \Platform\Exception($return);
+        }
+
+        switch ($params['grant_type']) {
+            case 'authorization_code':
+                return Token::factory('access', $return);
+                break;
+
+            case 'refresh_token':
+                return Token::factory('refresh', $return);
+                break;
+        }
     }
 
     /**
@@ -220,7 +392,7 @@ abstract class Provider {
         // Create a new GET request for a request token with the required parameters
         $request = Request::forge('access', 'GET', $this->urlAccessToken(), array(
                     'oauth_consumer_key' => $consumer->key,
-                    'oauth_token' => $token->access_token,
+                    'oauth_token' => $token->accessToken,
                     'oauth_verifier' => $token->verifier,
         ));
 

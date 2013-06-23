@@ -40,9 +40,9 @@
                     "title" => "twitter",
                     "uid" => "twitter"
                 ),
-                "fgoogle" => array(
-                    "link" => Library\Uri::internal('/sign-in/handler:oauth/provider:google/'),
-                    "title" => "google",
-                    "uid" => "google"
-            )));
+                "facebook" => array(
+                    "link" => Library\Uri::internal('/sign-in/handler:oauth/version:2.0/provider:facebook/'),
+                    "title" => "facebook",
+                    "uid" => "facebook"
+                )));
         });

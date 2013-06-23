@@ -119,7 +119,7 @@ class Request {
 
         // Separate the URL and query string, which will be used as additional
         // default parameters
-        list ($url, $default) = Authenticate\OAuth::parse_url($url);
+        list ($url, $default) = Authenticate\OAuth::parseUrl($url);
 
         // Set the request URL
         $this->url = $url;
@@ -190,8 +190,7 @@ class Request {
      * @uses    Text::random
      */
     public function nonce() {
-        get_instance()->load->helper('string');
-        return random_string('alnum', 40);
+        return \Platform\Framework::getRandomString(40);
     }
 
     /**
@@ -219,7 +218,7 @@ class Request {
         return implode('&', array(
             $this->method,
             Authenticate\OAuth::urlencode($url),
-            Authenticate\OAuth::urlencode(Authenticate\OAuth::normalize_params($params)),
+            Authenticate\OAuth::urlencode(Authenticate\OAuth::normalizeParams($params)),
         ));
     }
 
@@ -385,7 +384,7 @@ class Request {
             }
         }
 
-        return $as_string ? Authenticate\OAuth::normalize_params($params) : $params;
+        return $as_string ? Authenticate\OAuth::normalizeParams($params) : $params;
     }
 
     /**
@@ -466,9 +465,9 @@ class Request {
             $options[CURLOPT_CONNECTTIMEOUT] = $this->timeout;
         }
 
-        if (ENVIRONMENT === 'development') {
-            $options[CURLOPT_SSL_VERIFYPEER] = false;
-        }
+//        if (ENVIRONMENT === 'development') {
+//            $options[CURLOPT_SSL_VERIFYPEER] = false;
+//        }
 
         if ($this->sendHeader) {
             // Get the the current headers

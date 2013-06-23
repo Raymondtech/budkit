@@ -52,6 +52,7 @@ class OAuth extends Platform\Authenticate {
     public static $version = '1.0';
 
     public static function provider($name, array $options = NULL) {
+
         $name = ucfirst(strtolower($name));
         $class = 'Platform\Authenticate\OAuth\Provider\\' . $name;
 
@@ -91,7 +92,7 @@ class OAuth extends Platform\Authenticate {
 
         // Set connection options
         if (!curl_setopt_array($remote, $options)) {
-            throw new Exception('Failed to set CURL options, check CURL documentation: http://php.net/curl_setopt_array');
+            throw new \Platform\Exception('Failed to set CURL options, check CURL documentation: http://php.net/curl_setopt_array');
         }
 
         // Get the response
@@ -110,7 +111,7 @@ class OAuth extends Platform\Authenticate {
         curl_close($remote);
 
         if (isset($error)) {
-            throw new Exception(sprintf('Error fetching remote %s [ status %s ] %s', $url, $code, $error));
+            throw new \Platform\Exception(sprintf('Error fetching remote %s [ status %s ] %s', $url, $code, $error));
         }
 
         return $response;
@@ -132,7 +133,7 @@ class OAuth extends Platform\Authenticate {
     public static function urlencode($input) {
         if (is_array($input)) {
             // Encode the values of the array
-            return array_map(array('OAuth', 'urlencode'), $input);
+            return array_map(array(__CLASS__, 'urlencode'), $input);
         }
 
         // Encode the input
@@ -157,7 +158,7 @@ class OAuth extends Platform\Authenticate {
     public static function urldecode($input) {
         if (is_array($input)) {
             // Decode the values of the array
-            return array_map(array('OAuth', 'urldecode'), $input);
+            return array_map(array(__CLASS__, 'urldecode'), $input);
         }
 
         // Decode the input
@@ -294,10 +295,137 @@ class OAuth extends Platform\Authenticate {
     public function attest($credentials, $action) {
 
         //authentication;
-        $credentials= NULL; //we do not need usernames and passwords here;
-        $input      = $action->input;
-        $provider   = $input->getString('provider', NULL); //must be defined
-        $server     = $this->provider($provider); //Load the provider;
+        $credentials = array(); //we do not need usernames and passwords here;
+        $version = $action->input->getString('version', '1.0');
+
+        switch ($version) {
+            case "1.0":
+                static::$version = "1.0";
+                $credentials = $this->attestOld($credentials, $action);
+                break;
+            case "2.0":
+
+                static::$version = "2.0";
+                //Provision the provider                
+                $provider = $action->input->getString('provider', NULL); //must be defined
+                $id = Library\Config::getParam("client-id", "", $provider);
+                $secret = Library\Config::getParam("client-secret", "", $provider);
+                //if no provider or provider not supported throw an error;
+                if (empty($provider) OR empty($id) OR empty($secret)):
+                    $this->setError(_t('Undefined OAuth Provider or Provider Not Supported. Unable to Authenticate'));
+                    return false;
+                endif;
+
+                //Create the server;
+                $server = $this->provider($provider, array(
+                    'id' => $id,
+                    'secret' => $secret,
+                )); //Load the provider;
+                //@TODO can we modify the callback?
+                if (!$action->input->getString("code")):
+                    $action->redirect($server->authorize());
+                else:
+                    try {
+                        $token          = $server->access($action->input->getString("code"));
+                        $user           = $server->getUserInfo($token);                       
+                        if(!empty($user)):
+                            $credentials = array($provider=>array("token"=>$token->accessToken, "user"=>$user) );
+                        endif;
+                    } catch (\Platform\Exception $e) {
+                        $this->setError(_( 'Could not authenticate you using this method: ' . $e) );
+                        return false;
+                    }
+                endif;
+                break;
+            default:
+                throw new \Platform\Exception("Unsupported OAuth Version {$version}");
+                break;
+        }
+        
+        if(!is_array($credentials)||empty($credentials)):
+            $this->setError(_t("Could not authenticate via the suggested method"));
+            return false;
+        endif;
+        
+        $provider   = array_shift(array_keys($credentials));
+        $credential = array_shift($credentials); 
+        
+        //Match credentials and prepare
+        if(!$this->matchCredentials($provider, $credential)){
+            //@TODO Save Provider details to session and 
+            $session = Library\Session::getInstance();
+            
+            $session->set('tmp_auth', array($provider=>$credential ) ); //Store the temporary authentication settings
+            $message = sprintf('We have been unable to match a registered user with the %s credentials provided. Please sign in with an existing account to pair your %s details or register a new account', $provider, $provider);
+            $action->alert( $message, "", "info");
+            
+            return false;
+        }
+        
+        //Check user credentials against database; if not exists, create one;
+        //Populate the authenticated class
+        return true;
+    }
+    
+    protected function matchCredentials($provider, array $credentials){
+        
+        //We need at least the token;
+        if(!isset($credentials['token'])) return false;
+        
+        //Prepare to search user_objects
+        $objects   = \Platform\Entity::getInstance();   
+        $objects->defineValueGroup("user"); 
+        
+        $statement     = $objects->getObjectsByPropertyValueMatch( array("user_{$provider}_uid"), array( $credentials['user']['uid'] ) , array("user_name_id", "user_email","user_first_name","user_last_name","user_middle_name"));
+        $result        = $statement->execute();
+        
+        //If we did not find any user with this id or password;
+        if ((int) $result->getAffectedRows() < 1) {
+            return false;
+        }
+
+        //Get the user object;
+        $userobject = $result->fetchObject();
+        
+        //Gets an instance of the session object
+        $session = Library\Session::getInstance();
+        $authenticate = Platform\Authenticate::getInstance();
+
+        //Destroy this session
+        //$session->gc($session->getId());
+        $authenticate->authenticated = true;
+        $authenticate->type = 'oauth';
+        $authenticate->user_id = $userobject->object_id;
+        $authenticate->user_name_id = $userobject->user_name_id;
+        $authenticate->user_email = $userobject->user_email;
+        $authenticate->user_first_name = $userobject->user_first_name;
+        $authenticate->user_last_name = $userobject->user_last_name;
+        $authenticate->user_full_name    = implode(' ', array($userobject->user_first_name, $userobject->user_middle_name, $userobject->user_last_name) );
+
+        //Update
+        $session->set("handler", $authenticate, "auth");
+        $session->lock("auth");
+        $session->update($session->getId());
+
+        return true;
+        
+    }
+
+    /**
+     * An Attest Method for OAuth1.0
+     * 
+     * @param type $credentials
+     * @param type $action
+     * @deprecated since release;
+     * 
+     */
+    protected function attestOld($credentials, $action) {
+        //authentication;
+        $credentials = array(); //we do not need usernames and passwords here;
+        $input = $action->input;
+        $provider = $input->getString('provider', NULL); //must be defined
+
+        $server = $this->provider($provider); //Load the provider;
         //if no provider or provider not supported throw an error;
         if (empty($provider) OR !$server):
             $this->setError(_t('Undefined OAuth Provider or Provider Not Supported. Unable to Authenticate'));
@@ -305,28 +433,29 @@ class OAuth extends Platform\Authenticate {
         endif;
 
         //1. Instantiate the consumer
-        $session    = Library\Session::getInstance();
-        $key        = Library\Config::getParam("consumer-key", "", $provider);
-        $Secret     = Library\Config::getParam("consumer-secret", "", $provider);
-        $callback   = Library\Uri::internal("/system/authenticate/login/handler:oauth/provider:{$provider}");
-        
+        $session = Library\Session::getInstance();
+        $key = Library\Config::getParam("consumer-key", "", $provider);
+        $secret = Library\Config::getParam("consumer-secret", "", $provider);
+        $callback = Library\Uri::externalize("/system/authenticate/login/handler:oauth/provider:{$provider}/");
+
         //Create the consumer providing a Key and secret from config;
-        $consumer   = $this->consumer(array($key, $Secret));
-    
+        $consumer = $this->consumer(array("key" => $key, "secret" => $secret));
+
         //@TODO check that we have a valid consumer created; else, through an error;
         if (!$input->getString("oauth_token")):
             //Add the callback URL to the consumer;
             $consumer->callback($callback);
             //Get a Request Token from the consumer;
-            $token = $provider->requestToken($consumer);           
+            $token = $server->requestToken($consumer);
+
             //Store the token and Redirect for authorization
             $session->set('oauth_token', $token, "auth"); //session class automatically serializes this data;
-            $action->redirect($provider->authorize($token, array('oauth_callback'=>$callback)));
+            $action->redirect($server->authorize($token, array('oauth_callback' => $callback)));
         else:
             //Recover the request token from session;
             $token = $session->get('oauth_token', "auth");
-            if(!empty($token) && $token->accessToken !== $input->getString('oauth_token')):
-                 $this->setError(_t('Unverifiable request token does not match source. Unable to Authenticate'));
+            if (!empty($token) && $token->accessToken !== $input->getString('oauth_token')):
+                $this->setError(_t('Unverifiable request token does not match source. Unable to Authenticate'));
                 return false;
             endif;
             //Get the verifieer;
@@ -334,21 +463,22 @@ class OAuth extends Platform\Authenticate {
             //Store the verifier in the token
             $token->verifier($verifier);
             //Exchange the Request Token for an access token
-            $token->accessToken($consumer, $token);
-            
+            $atoken = $server->accessToken($consumer, $token);
+
             //get user info and load into credentials;
-            
+            $user = $server->getUserInfo($consumer, $atoken);
+
+            if(!empty($user)):
+                $credentials  = array($provider=>array("token"=>$atoken->accessToken, "user"=>$user));
+            endif;
         endif;
 
-        if(empty($credentials)):
+        if (empty($credentials)):
             $this->setError(_t('Could not authenticate the user with the credentials supplied'));
             return false;
         endif;
-        
-        //Check user credentials against database; if not exists, create one;
-        //Populate the authenticated class
-        return true;
-        
+
+        return $credentials;
     }
 
     /**

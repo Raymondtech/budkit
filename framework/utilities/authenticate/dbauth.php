@@ -72,7 +72,7 @@ class DbAuth extends Platform\Authenticate {
         
         $objects->defineValueGroup("user"); //Means we are getting the data from the users value proxy table;
         
-        $object     = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password", "user_name_id", "user_email","user_first_name","user_last_name","user_middle_name"));
+        //$object     = $objects->getObjectsByPropertyValueMatch( array("user_email"), array( $usernameid ) , array("user_password", "user_name_id", "user_email","user_first_name","user_last_name","user_middle_name"));
         
 
         if ($validate->email($credentials['usernameid'])) {

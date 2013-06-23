@@ -45,22 +45,6 @@ use Library;
 abstract class Token {
 
     /**
-     * Create a new token object.
-     *
-     *     $token = Token::forge($name);
-     *
-     * @param   string  token type
-     * @param   array   token options
-     * @return  Token
-     */
-    public static function forge($name, array $options = NULL) {
-
-        $name = ucfirst(strtolower($name));
-        $class = '\Platform\Authenticate\OAuth\Token\\' . $name;
-        return new $class($options);
-    }
-
-    /**
      * @var  string  token type name: request, access
      */
     protected $name;
@@ -87,6 +71,7 @@ abstract class Token {
      * @return  void
      */
     public function __construct(array $options = NULL) {
+        
         if (!isset($options['access_token'])) {
             throw new \Platform\Exception('Required option not passed: access_token');
         }
@@ -96,11 +81,44 @@ abstract class Token {
         }
 
         $this->accessToken = $options['access_token'];
-
         $this->secret = $options['secret'];
 
         // If we have a uid lets use it
         isset($options['uid']) and $this->uid = $options['uid'];
+    }
+
+    /**
+     * Create a new token object.
+     *
+     *     $token = Token::forge($name);
+     *
+     * @param   string  token type
+     * @param   array   token options
+     * @return  Token
+     */
+    public static function forge($name, array $options = NULL) {
+
+        $name = ucfirst(strtolower($name));
+        $class = '\Platform\Authenticate\OAuth\Token\\' . $name;
+        return new $class($options);
+    }
+
+    /**
+     * Alias for Token::forge. Create a new token object.
+     *
+     *     $token = Token::factory($name);
+     *
+     * @param   string  $name     token type
+     * @param   array   $options  token options
+     * @return  OAuth2_Token
+     */
+    public static function factory($name = 'access', array $options = null) {
+        
+        $name = ucfirst(strtolower($name));
+        
+        $class = '\Platform\Authenticate\OAuth\Token\\' . $name;
+        
+        return new $class($options);
     }
 
     /**

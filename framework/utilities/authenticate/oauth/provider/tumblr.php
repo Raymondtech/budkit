@@ -64,11 +64,21 @@ class Tumblr extends OAuth\Provider {
         return 'http://www.tumblr.com/oauth/access_token';
     }
 
-    public function getUserInfo(OAuth\Consumer $consumer, OAuth\Token $token) {
+    public function getUserInfo() {
+        
+        $consumer = func_get_arg(0); //Consumer 
+        $token = func_get_arg(1); //Token;
+      
+        if (!is_a($consumer, '\Platform\Authenticate\OAuth\Consumer'))
+            throw new \Platform\Exception('First Argument Passed to getUserInfo must be of type OAuth\Consumer');
+        if (!is_a($token, '\Platform\Authenticate\OAuth\Token'))
+            throw new \Platform\Exception('Second Argument Passed to getUserInfo must be of type OAuth\Token');
+
+        
         // Create a new GET request with the required parameters
         $request = OAuth\Request::forge('resource', 'GET', 'http://api.tumblr.com/v2/user/info', array(
                     'oauth_consumer_key' => $consumer->key,
-                    'oauth_token' => $token->access_token,
+                    'oauth_token' => $token->accessToken,
         ));
 
         // Sign the request using the consumer and token

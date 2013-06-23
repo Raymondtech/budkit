@@ -94,7 +94,7 @@ abstract class Signature {
      * @uses    OAuth::urlencode
      */
     public function key(Consumer $consumer, Token $token = NULL) {
-        $key = OAuth::urlencode($consumer->secret) . '&';
+        $key = Authenticate\OAuth::urlencode($consumer->secret) . '&';
 
         if ($token) {
             $key .= Authenticate\OAuth::urlencode($token->secret);

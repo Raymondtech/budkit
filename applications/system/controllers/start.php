@@ -67,7 +67,9 @@ class Start extends \Platform\Controller {
             $this->output->addToPosition("dashwidgets", $widget);
         else:
             $drop = $this->output->layout("forms/drop");
-            $this->output->addToPosition("dashwidgets", $drop);
+            $this->output->set("widget", array("body"=>$drop) );
+            $widget = $this->output->layout("widget");
+            $this->output->addToPosition("dashwidgets", $widget);
         endif;
         
         \Library\Event::trigger('beforeDashboardDisplay', $this);

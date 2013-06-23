@@ -43,28 +43,38 @@ class Authenticate extends \Platform\View {
      */
     public function userLoginForm() {
 
+
+        //Temporary authentication details
+        $session = \Library\Session::getInstance();
+        $temp = $session->getNamespace();
+        $temp = $session->get('tmp_auth'); //Gets the details of any temporary authentication performed by a 3rdParty Provider;
+
+        if (!empty($temp) && is_array($temp)):
+            $provider = array_shift(array_keys($temp));
+            $tempauth = array("provider" => $provider, $temp[$provider]);
+            
+            $tempauth = array_merge( array("provider" => $provider, "token"=>$temp[$provider]["token"]) , $temp[$provider]["user"] ); //flatten
+            
+            $this->output->set("tempauth", $tempauth);
+        endif;
+
         $this->output->setPageTitle("Login to account");
         //Here is how to add alternative login options to the login form
-        $alternatives = array(
-//            array(
-//                "link" => "/somelink/to/login",
-//                "title" => "login title something",
-//                "uid" => "unique id"
-//            )
-        );
+        $alternatives = array();
         $fields = array(); //Additional fields
-        
         //@TODO Should we Allow onBeforeDispatch to modify $this->task?
         \Library\Event::trigger('beforeLoginFormDisplay', $alternatives, $fields);
 
         $this->output->set("alternatives", $alternatives);
-        $this->output->set("fields", $fields );
+        $this->output->set("fields", $fields);
 
         //The default installation box;
+        $form = $this->output->layout('forms/signin');
         //$this->output->setFormat("raw");
-        $this->output->setLayout("signin");
+        $this->output->addToPosition("body", $form);
+        $this->output->setLayout("authenticate");
 
-        //$this->output->addToPosition("body",   $body);
+        //
     }
 
     /**
@@ -75,14 +85,20 @@ class Authenticate extends \Platform\View {
         //To set the pate title use
         $this->output->setPageTitle("Create a new Account");
 
-        //parse Layout Demo;
-        $sidebar = $this->output->layout("index_sidebar", "system");
-        $body = $this->output->layout("default_form_create");
-
+        $session = \Library\Session::getInstance();
+        $temp = $session->get('tmp_auth'); //Gets the details of any temporary authentication performed by a 3rdParty Provider;
+        
+        if (!empty($temp) && is_array($temp)):
+            $provider = array_shift(array_keys($temp));
+            $tempauth = array_merge( array("provider" => $provider, "token"=>$temp[$provider]["token"]) , $temp[$provider]["user"] ); //flatten
+            $this->output->set("tempauth", $tempauth);
+        endif;
 
         //The default installation box;
+        $form = $this->output->layout('forms/signup', 'system');
         //$this->output->setFormat("raw");
-        $this->output->setLayout("signup");
+        $this->output->addToPosition("body", $form);
+        $this->output->setLayout("authenticate");
     }
 
     /*

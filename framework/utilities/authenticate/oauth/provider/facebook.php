@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * twitter.php
+ * facebook.php
  *
  * Requires PHP version 5.3
  *
@@ -42,56 +42,52 @@ use Platform\Authenticate\OAuth;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/authenticate/oauth
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Twitter extends OAuth\Provider {
+class Facebook extends OAuth\Provider {
 
-    public $name = 'twitter';
-    public $uidKey = 'user_id';
+    protected $scope = array('offline_access', 'email', 'read_stream');
+    
+    public $name = 'facebook';
 
     public function urlRequestToken() {
-        return 'https://api.twitter.com/oauth/request_token';
+        //Not Needed for OAuth2.0;
     }
 
     public function urlAuthorize() {
-        return 'https://api.twitter.com/oauth/authenticate';
+        return 'https://www.facebook.com/dialog/oauth';
     }
 
     public function urlAccessToken() {
-        return 'https://api.twitter.com/oauth/access_token';
+        return 'https://graph.facebook.com/oauth/access_token';
     }
 
     public function getUserInfo() {
 
-        $consumer = func_get_arg(0); //Consumer 
-        $token = func_get_arg(1); //Token;
-      
-        if (!is_a($consumer, '\Platform\Authenticate\OAuth\Consumer'))
-            throw new \Platform\Exception('First Argument Passed to getUserInfo must be of type OAuth\Consumer');
-        if (!is_a($token, '\Platform\Authenticate\OAuth\Token'))
-            throw new \Platform\Exception('Second Argument Passed to getUserInfo must be of type OAuth\Token');
+        $token =& func_get_arg(0); //Consumer 
 
-        // Create a new GET request with the required parameters
-        $request = OAuth\Request::forge('resource', 'GET', 'http://api.twitter.com/1.1/users/lookup.json', array(
-                    'oauth_consumer_key' => $consumer->key,
-                    'oauth_token' => $token->accessToken,
-                    'user_id' => $token->uid,
+        if (!is_a($token, '\Platform\Authenticate\OAuth\Token\Access'))
+            throw new \Platform\Exception('First Argument Passed to getUserInfo must be of type OAuth\Token\Access');
+
+        $url = 'https://graph.facebook.com/me?' . http_build_query(array(
+              'access_token' => $token->accessToken,
         ));
+        
+        //Get long lived token;
 
-        // Sign the request using the consumer and token
-        $request->sign($this->signature, $consumer, $token);
-
-        $user = current(json_decode($request->execute()));
+        $user = json_decode( file_get_contents($url) );
 
         // Create a response from the request
         return array(
-            'uid' => $token->uid,
-            'nickname' => $user->screen_name,
-            'name' => $user->name ? $user->name : $user->screen_name,
-            'location' => $user->location,
-            'image' => $user->profile_image_url,
-            'description' => $user->description,
+            'uid' => $user->id,
+            'nickname' => isset($user->username) ? $user->username : null,
+            'name' => $user->name,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => isset($user->email) ? $user->email : null,
+            'location' => isset($user->hometown->name) ? $user->hometown->name : null,
+            'description' => isset($user->bio) ? $user->bio : null,
+            'image' => 'https://graph.facebook.com/me/picture?type=normal&access_token=' . $token->accessToken,
             'urls' => array(
-                'Website' => $user->url,
-                'Twitter' => 'http://twitter.com/' . $user->screen_name,
+                'Facebook' => $user->link,
             ),
         );
     }

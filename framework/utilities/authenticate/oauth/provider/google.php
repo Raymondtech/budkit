@@ -51,55 +51,74 @@ class Google extends OAuth\Provider {
      */
     public $scopeSeperator = ' ';
 
-    public function urlRequestToken() {
-        return 'https://www.google.com/accounts/OAuthGetRequestToken';
-    }
+    /**
+     * @var  string  the method to use when requesting tokens
+     */
+    public $method = 'POST';
 
     public function urlAuthorize() {
-        return 'https://www.google.com/accounts/OAuthAuthorizeToken';
+        return 'https://accounts.google.com/o/oauth2/auth';
     }
 
     public function urlAccessToken() {
-        return 'https://www.google.com/accounts/OAuthGetAccessToken';
+        return 'https://accounts.google.com/o/oauth2/token';
     }
 
+    public function urlRequestToken() {
+       //Not Needed for OAuth2.0;
+    }
+    
     public function __construct(array $options = array()) {
         // Now make sure we have the default scope to get user data
-        $options['scope'] = \Arr::merge(
-                        // We need this default feed to get the authenticated users basic information
-                        // array('https://www.googleapis.com/auth/plus.me'),
-                        array('https://www.google.com/m8/feeds'),
-                        // And take either a string and array it, or empty array to merge into
-                        (array) \Arr::get($options, 'scope', array())
+        empty($options['scope']) and $options['scope'] = array(
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
         );
+
+        // Array it if its string
+        $options['scope'] = (array) $options['scope'];
 
         parent::__construct($options);
     }
 
-    public function getUserInfo(OAuth\Consumer $consumer, OAuth\Token $token) {
-        // Create a new GET request with the required parameters
-        $request = Request::forge('resource', 'GET', 'https://www.google.com/m8/feeds/contacts/default/full?max-results=1&alt=json', array(
-                    'oauth_consumer_key' => $consumer->key,
-                    'oauth_token' => $token->access_token,
+    /*
+     * Get access to the API
+     *
+     * @param	string	The access code
+     * @return	object	Success or failure along with the response details
+     */
+
+    public function access($code, $options = array()) {
+        
+        //$this->params = array('approval_prompt'=>'force'); //force prompt
+        
+        if ($code === null) {
+            throw new \Platform\Exception('Expected Authorization Code from ' . ucfirst($this->name) . ' is missing');
+        }
+        return parent::access($code, $options);
+    }
+
+    public function getUserInfo() {
+        
+        $token = func_get_arg(0); //Consumer 
+
+        if (!is_a($token, '\Platform\Authenticate\OAuth\Token\Access'))
+            throw new \Platform\Exception('First Argument Passed to getUserInfo must be of type OAuth\Token\Access');
+
+        $url = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&' . http_build_query(array(
+                    'access_token' => $token->accessToken,
         ));
 
-        // Sign the request using the consumer and token
-        $request->sign($this->signature, $consumer, $token);
-
-        $response = json_decode($request->execute(), true);
-
-        // Fetch data parts
-        $email = \Arr::get($response, 'feed.id.$t');
-        $name = \Arr::get($response, 'feed.author.0.name.$t');
-        $name == '(unknown)' and $name = $email;
-
+        $user = json_decode(file_get_contents($url), true);
         return array(
-            'uid' => $email,
-            'nickname' => \Inflector::friendly_title($name),
-            'name' => $name,
-            'email' => $email,
+            'uid' => $user['id'],
+            'nickname' => url_title($user['name'], '_', true),
+            'name' => $user['name'],
+            'first_name' => $user['given_name'],
+            'last_name' => $user['family_name'],
+            'email' => $user['email'],
             'location' => null,
-            'image' => null,
+            'image' => (isset($user['picture'])) ? $user['picture'] : null,
             'description' => null,
             'urls' => array(),
         );

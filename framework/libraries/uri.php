@@ -41,59 +41,57 @@ namespace Library;
  */
 final class Uri extends Object {
 
-    /**  
+    /**
      * Host 
      * @var string 
      */
     private $host;
-    
+
     /**
      * Protocol
      * @var string 
      */
     private $scheme = "http";
-    
+
     /**
      * Path
      * @var string 
      */
     protected $path = "/";
-    
+
     /**
      * The Request script
      * 
      * @var string
      */
     private $file = "index.php";
-    
+
     /**
      * Resource
      * @var string 
      */
     private $resource;
-    
+
     /**
      * Authentication credentials
      * 
      * @var string 
      */
     private $credentials;
-    
+
     /**
      * Auto determined parts
      * 
      * @var string 
      */
     private $parts;
-    
+
     /**
      * Fragment
      * 
      * @var string 
      */
     private $fragment;
-    
-    
     private $variables;
 
     /**
@@ -101,7 +99,7 @@ final class Uri extends Object {
      * 
      * @return void
      */
-    public function __construct($parts=array()) {
+    public function __construct($parts = array()) {
 
         if (!empty($parts) && isset($parts['host'])) {
             //Set the URI ;
@@ -196,7 +194,7 @@ final class Uri extends Object {
      * @param string $url THe Url to internalize
      * @return string A well formed internalized URL
      */
-    public static function internal($url ='') {
+    public static function internal($url = '') {
 
         //Are we dealing with an array of parts?
         if (is_array($url)) {
@@ -204,41 +202,69 @@ final class Uri extends Object {
         }
 
         //@TODO make sure that this url does not have the scheme
-        if( preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url) ) return $url;
+        if (preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url))
+            return $url;
         //@TODO make sure that this url does not have the host already
         //@TODO make sure we are internalizing a path and nothing else
         //die;
-
         //Do we have the path info included?
         $sPath = Config::getParam("path", "/");
-        
-        if (!empty($url) && $sPath<> "/") {
 
-            $parts    = explode("/", $sPath);
+        if (!empty($url) && $sPath <> "/") {
+
+            $parts = explode("/", $sPath);
             $segments = explode("/", $url);
-            
+
             //Remove all empty elements
             $segments = array_filter($segments, 'strlen');
-            $parts    = array_filter($parts, 'strlen');
+            $parts = array_filter($parts, 'strlen');
             //die;
-            
             //This is in case we have a system deep in multiple supdirectories
             array_unshift($parts, null);
             $fragment = implode("/", $parts);
-            
-            if (is_array($segments)) {   
-               
+
+            if (is_array($segments)) {
+
                 array_unshift($segments, null); //Adds the / to the start of the url
                 $url = implode("/", $segments);
-                
+
                 //now look for $fragment at the start of $url
                 $pos = strpos($url, $fragment);
-                if( $pos!==0 || $pos===FALSE){
-                    $url = $fragment.$url;
+                if ($pos !== 0 || $pos === FALSE) {
+                    $url = $fragment . $url;
                 }
             }
         }
         return $url;
+    }
+
+    /**
+     * Adds the schema, host and path to an internal url 'path'
+     * 
+     * @param type $path
+     */
+    public static function externalize($path, $schema = "http") {
+        
+        if (!is_array($path)):
+            //If already has a schema, return
+            if (preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $path))
+                return $path;
+        endif;
+
+        $sHost = config::getParam("host", NULL);
+        $path = $schema . "://" . $sHost . static::internalize($path);
+
+        return $path;
+    }
+
+    /**
+     * Alias for internalize
+     * 
+     * @param type $url
+     * @return type
+     */
+    public static function internalize($url) {
+        return static::internal($url);
     }
 
     /**
@@ -248,7 +274,7 @@ final class Uri extends Object {
      * @param mixed $default
      * @return boolean false if not found, credential if found
      */
-    public function getCredentials($paramname="userinfo", $default='', $decode=false) {
+    public function getCredentials($paramname = "userinfo", $default = '', $decode = false) {
 
         $param = false;
 
@@ -269,12 +295,12 @@ final class Uri extends Object {
     public function getQuery() {
         return self::buildQueryString();
     }
-    
+
     /**
      * Returns all variables found in the request query
      * @return type
      */
-    public function getQueryVariables(){
+    public function getQueryVariables() {
         return $this->variables;
     }
 
@@ -302,22 +328,22 @@ final class Uri extends Object {
      * @param string $routeid
      * @param array $params 
      */
-    public function getURL($routeid='index', $params=array()) {
+    public function getURL($routeid = 'index', $params = array()) {
 
         //routeid can't be empty
         if (empty($routeid)) {
             $routeid = 'index';
         }
         //Get the routeMap;
-        $router     = Router::getInstance();
-        $route      = $router->getRoute($routeid);
-        $path       = $route['path'];
+        $router = Router::getInstance();
+        $route = $router->getRoute($routeid);
+        $path = $route['path'];
 
         if (is_array($route)) {
             if (isset($route['dynamic'])) {
-                
+
                 $dynamic = $route['dynamic'];
-                
+
                 foreach ($dynamic as $ph => $segment) {
 
                     if (is_array($params) && isset($params[$segment])) {
@@ -328,8 +354,8 @@ final class Uri extends Object {
                 }
             }
         }
-        
-        return self::internal( $path );
+
+        return self::internal($path);
         //if routeid is a valid url
     }
 
@@ -370,7 +396,7 @@ final class Uri extends Object {
      * @staticvar Uri $instance
      * @return Uri 
      */
-    public static function getInstance($resource=null) {
+    public static function getInstance($resource = null) {
 
         static $instance;
 
@@ -414,26 +440,26 @@ final class Uri extends Object {
             $format = null;
             $segments = explode("/", $path);
             $variables = array();
-            foreach($segments as $key=> $segment):
+            foreach ($segments as $key => $segment):
                 if (( stripos($segment, ":") ) !== FALSE) {
-                    $variable = explode(":",$segments[$key], 2);
+                    $variable = explode(":", $segments[$key], 2);
                     //If this segment has a dot?
                     $value = end($variable);
-                    if(stripos($value,'.') !==FALSE){
-                        $parts = explode('.',$value,2);
-                        $format = ".".end($parts);
+                    if (stripos($value, '.') !== FALSE) {
+                        $parts = explode('.', $value, 2);
+                        $format = "." . end($parts);
                     }
-                    
-                    $variables[reset($variable)]= $value;
+
+                    $variables[reset($variable)] = $value;
                     unset($segments[$key]);
                 }
             endforeach;
-            $path = implode("/",$segments).$format;
+            $path = implode("/", $segments) . $format;
             //echo "<br />".$path.$format; die;
             $link['variables'] = $variables;
             //3. The [query]#[fragment]
             $path = $link['path'] = empty($path) ? "/" : $path;
-            
+
             //4. The username and password;
             //5. Compile the resource
             $resource = $scheme . "://" . $host . $path;
@@ -475,4 +501,5 @@ final class Uri extends Object {
 
         return $instance[$link['path']];
     }
+
 }

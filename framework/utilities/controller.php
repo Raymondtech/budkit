@@ -299,6 +299,12 @@ use Authorize\Privacy;
         $lastURL = \Library\Session::get("lastRequestURL");
         $this->set("lasturl", $lastURL);
 
+        //If user has indicated its not them, clear the temp auth details;
+        $cleartemp = $this->input->getInt("cleartemp");
+        if ($cleartemp):
+            \Library\Session::remove("tmp_auth");
+        endif;
+
         //Oauth? 
         //1. load Authenticate\oAuth, Get Request Token
         //2. Redirect to Provider Authorize. On Authorize POST back to controller/login with 
@@ -316,7 +322,7 @@ use Authorize\Privacy;
 
 
         if (!empty($authhandler)):
-            
+
             $credentials['usernameid'] = $this->input->getString('user_name_id', '', 'post'); //usernameid will only be obtained from POST data
             $credentials['usernamepass'] = $this->input->getString('user_password', '', 'post'); //unsernamepassword will only be obtained from POST data
 
@@ -337,14 +343,27 @@ use Authorize\Privacy;
                     if ($authenticate->attest($credentials, $this)) {
                         //get the user data
                         $this->user = User::getInstance();
-
+                        //Store the provider details;
+                        $session = \Library\Session::getInstance();
+                        $temp = $session->get('tmp_auth'); //Gets the details of any temporary authentication performed by a 3rdParty Provider;
+                        if (!empty($temp) && is_array($temp)):
+                            $provider = array_shift(array_keys($temp));
+                            //Store the user OAuth credentials for future use;
+                            $user = $this->load->model("user", "member");
+                            if(!$user->update($this->user->get("user_name_id"), array("user_{$provider}_token"=>$temp[$provider]["token"],"user_{$provider}_uid"=>$temp[$provider]["user"]["uid"]))){
+                                $this->alert(sprintf("Could not store your %s credentials",$provider)); 
+                            }
+                            $session->remove("temp_auth"); //Clear temporary authentication;
+                        endif;
+                        
                         $this->alert(_t('Welcome back '), sprintf(_t('Howdy %s,'), $this->user->user_full_name), "success");
                         $this->redirect($this->uri->getURL("index"));
-                        
                     } else {
                         //if not show the form...with messages maybe?;
                         $error = $authenticate->getError();
-                        $this->alert(empty($error)?$failure:$error, _t("We were unable to log you in"), "error");
+                        if (!empty($error)):
+                            $this->alert($error, _t("We were unable to log you in"), "error");
+                        endif;
                     }
                 }
             }

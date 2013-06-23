@@ -48,7 +48,11 @@ class User extends \Platform\Entity {
             "user_timezone" => array("Timezone", "varchar", 10),
             "user_locale" => array("Locale", "varchar", 10),
             "user_verification" => array("Verification Code", "varchar", 50),
-            "user_photo" => array("Profile Photo", "mediumtext", 10, 'placeholder')
+            "user_photo" => array("Profile Photo", "mediumtext", 10, 'placeholder'),
+            "user_twitter_uid" => array("Twitter userid", "mediumtext", 50),
+            "user_facebook_uid" => array("Facebook userid", "mediumtext", 50),
+            "user_twitter_token" => array("Twitter accessToken", "varchar", 2000),
+            "user_facebook_token" => array("Facebook accessToken", "varchar", 2000),
                 ), "user"
         );
         //$this->definePropertyModel( $dataModel ); use this to set a new data models
@@ -126,10 +130,10 @@ class User extends \Platform\Entity {
             $words = explode(' ', $query);
             foreach ($words as $word) {
                 $_results =
-                    $users->setListLookUpConditions("user_first_name", $word, 'OR')
-                    ->setListLookUpConditions("user_last_name", $word, 'OR')
-                    ->setListLookUpConditions("user_middle_name", $word, 'OR')
-                    ->setListLookUpConditions("user_name_id", $word, 'OR');
+                        $users->setListLookUpConditions("user_first_name", $word, 'OR')
+                        ->setListLookUpConditions("user_last_name", $word, 'OR')
+                        ->setListLookUpConditions("user_middle_name", $word, 'OR')
+                        ->setListLookUpConditions("user_name_id", $word, 'OR');
             }
 
             $_results = $users->getObjectsList("user");

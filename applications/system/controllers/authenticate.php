@@ -41,6 +41,12 @@ final class Authenticate extends \Platform\Controller {
      * @return void
      */
     public function create(){
+        //If user has indicated its not them, clear the temp auth details;
+        $cleartemp  = $this->input->getInt("cleartemp");
+        if($cleartemp):
+            \Library\Session::remove("tmp_auth");
+        endif;
+        
         $view = $this->load->view("authenticate");
         //Get the member account controller;
         if($this->input->methodIs('post')):
