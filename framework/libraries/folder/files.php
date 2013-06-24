@@ -133,9 +133,9 @@ class Files extends \Library\Folder {
      * @param type $file
      * @param type $content 
      */
-    public static function write($file, $content = "") {
+    public static function write($file, $content = "", $mode="w+") {
 
-        $stream = static::getFileStream($file);
+        $stream = static::getFileStream($file, $mode);
 
         //Write the contents
         fwrite($stream, $content);
@@ -173,7 +173,6 @@ class Files extends \Library\Folder {
 
         $return = false;
         if (!file_exists($filepath)):
-            //die;
             $return = !$file;
         else:
             $return = is_file($filepath) ? $file : !$file;
