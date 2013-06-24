@@ -355,7 +355,8 @@ use Authorize\Privacy;
                             }
                             $session->remove("temp_auth"); //Clear temporary authentication;
                         endif;
-                        
+                        //Send a tick to say we have recieved a user login event, maybe trigger an onLoginEvent;
+                        Tick::record("login");
                         $this->alert(_t('Welcome back '), sprintf(_t('Howdy %s,'), $this->user->user_full_name), "success");
                         $this->redirect($this->uri->getURL("index"));
                     } else {
