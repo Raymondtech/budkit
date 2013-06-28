@@ -1,5 +1,9 @@
 #wrap{ position: relative;  min-height: 100%; .clearfix(); overflow: hidden; background: #E9E9E9  }
-
+.navbar-inner{padding-top: 5px}
+.navbar~#wrap{ top: 0px }
+.navbar-brand{ width: 195px }
+.navbar-tools{ width: 400px;}
+.navbar-time{font-size: 24px; line-height: 55px; color: @grayLight; padding-left: 20px}
 @containerColumnWidth: 195px;
   @containerGutterWidth: 0px;
   @containerLeftWidth :  (@containerColumnWidth * 1) + (@containerGutterWidth * (1 - 1));
@@ -69,7 +73,7 @@
               border-right: 3px solid transparent;
                 color: @grayLight;
   
-              .absolute-right{ position: absolute; right: @gridGutterWidth*0.25; top: @gridGutterWidth*0.75}
+              .absolute-right{ position: absolute; right: @gridGutterWidth*0.75; top: @gridGutterWidth*0.75}
                   &:hover{
                     background: #363636;
                     border-right: 3px solid @peter-river;

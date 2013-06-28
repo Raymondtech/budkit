@@ -29,7 +29,6 @@
                 </header>
                 <div class="section-body">
                     <ul class="stream">
-
                         <tpl:loop id="form-launchers" data="editor_forms">
                             <li class="stream-item bottom-border">
                                 <a href="/system/media/create/${id}" class="grid-hide has-featured-img link">

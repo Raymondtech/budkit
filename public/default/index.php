@@ -34,6 +34,7 @@
             <tpl:utility type="head" />
         </head>
         <body>
+            <tpl:import layout="navbar" />
             <div id="wrap">            
                 <div class="container-left">                 
                     <tpl:import layout="sidebar" />
@@ -48,7 +49,6 @@
 
                         <div class="container-content">
                             <div class="container-bucket">
-<!--                                <tpl:import layout="navbar" />-->
                                 <tpl:block data="page.block.alerts" /> 
                                 <tpl:block data="page.block.body" />
                                 <tpl:import layout="footer" />

@@ -320,7 +320,6 @@ abstract class ActiveRecord extends \Library\Object {
                 if (!in_array($part, $this->arrayAliasedTables)) {
                     $part = $this->identifiers(trim($part));
                 }
-
                 $temp[] = $part;
             }
 

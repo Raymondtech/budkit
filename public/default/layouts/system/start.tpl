@@ -41,11 +41,6 @@
                             </div>                                          
                         </li>
                     </ul>
-                    <form class="margin-bottom-zero pull-right form-vertical inline-block span5" action="/system/search/graph" method="post"> 
-                        <div class="controls input-append margin-bottom-zero row-fluid">
-                            <input type="text" class="span12" name="query" placeholder="Search for people, documents, groups or anything else" value="${query}" />
-                        </div>
-                    </form>
                 </header>
                 <div class="stream-body stream-box row-fluid media-box">
                     <div class="stream-view">    

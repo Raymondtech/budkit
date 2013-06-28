@@ -17,12 +17,12 @@
                 <tpl:condition data="gallery" test="isset" value="1">
                     <ul class="stream media-grid media-gallery compensate-margins">
                         <tpl:loop data="gallery.members" id="gallery-items">
-                            <li class="mgrow-fluid">
+                            <li class="mgrow-fluid padding-zero">
                                 <div class="feature mgcol1 list-hide">
                                     <tpl:media uri="user_photo" link="true" mode="detailed"  class="media-item" width="170" height="170" /> 
                                 </div>   
                                 <!--<input type="checkbox" class="select" />-->
-                                <a href="#" class="grid-hide has-featured-img padding-bottom-zero padding-top-zero link ${message_status}">
+                                <a href="#" class="grid-hide has-featured-img link ${message_status}">
                                     <tpl:media uri="user_photo" mode="icon"  class="featured-img" width="65" height="65" /> 
                                     <div class="title">
                                         <span class="auhor"><strong><tpl:element type="text" data="user_first_name"/></strong> <tpl:element type="text" data="user_last_name"/></span>
