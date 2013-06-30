@@ -34,7 +34,7 @@
             <tpl:utility type="head" />
         </head>
         <body>
-            <tpl:import layout="navbar" />
+<!--            <tpl:import layout="navbar" />-->
             <div id="wrap">            
                 <div class="container-left">                 
                     <tpl:import layout="sidebar" />
