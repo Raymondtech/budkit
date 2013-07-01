@@ -6516,22 +6516,29 @@ input.search-query {
 .message-view .section-header {
   background: none;
 }
-.section-footer {
+.section-menu {
   position: absolute;
-  bottom: 0;
-  padding: 2px 2px;
+  top: 75px;
+  padding: 1px;
   left: 0;
   background: #f8f8f8;
   right: 0;
   max-height: 40px;
   border-top: 1px solid #e5e5e5;
-  font-size: 11.200000000000001px;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 12.6px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.section-footer ~ .section-body {
-  bottom: 40px;
+.section-menu ~ .section-body {
+  top: 118px;
+}
+.section-menu .label,
+.section-menu .badge {
+  padding: 0px 2px;
+  margin-left: 5px;
+  font-size: 12.6px;
 }
 .accordion-nav .accordion-group {
   margin-bottom: 0px;

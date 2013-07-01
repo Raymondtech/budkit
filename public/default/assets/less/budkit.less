@@ -174,17 +174,19 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
     .section-header{ background: none;}
 }
 
-.section-footer{
+.section-menu{
     position: absolute;
-    bottom: 0;
-    padding: 2px 2px;
+    top: 75px;
+    padding: 1px;
     left: 0; background: #f8f8f8;
     right: 0;
     max-height: 40px;
     border-top: 1px solid #e5e5e5; 
-    font-size: @baseFontSize * 0.8;
+    border-bottom: 1px solid #e5e5e5; 
+    font-size: @baseFontSize * 0.9;
     .box-sizing(border-box);
-    &~.section-body{ bottom: 40px; }
+    &~.section-body{ top: 118px; }
+    .label, .badge{ padding: 0px 2px; margin-left: 5px; font-size:@baseFontSize * 0.9}
 }   
 
 

@@ -4,7 +4,7 @@
             <tpl:condition data="gallery.hideheader" test="boolean" value="0">
                 <tpl:import layout="media/gallery/title" />
             </tpl:condition>
-            <div class="section-footer">
+            <div class="section-menu">
                 <tpl:menu id="mediamenu" type="nav-pills" />
             </div>
             <div class="section-body">
@@ -19,7 +19,7 @@
         <div class="message-view">
             <div class="stream-thread">              
                 <tpl:condition test="isset" data="activities.items" value="0">
-                    <tpl:import layout="forms/form" app="system" /> 
+                    <div class="stream-body padding"><tpl:import layout="forms/form" app="system" /></div>
                 </tpl:condition>
                 <tpl:condition test="isset" data="activities.items" value="1">
                     <div class="stream-body padding" id="timeline"> 

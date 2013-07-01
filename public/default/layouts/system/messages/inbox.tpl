@@ -16,7 +16,6 @@
                     </li>
                 </ul>
             </header>
-            <div class="section-footer">Some Items</div>
             <div class="section-body">
                 <div class="widget naked no-margin">
                     <div class="widget-body padding-zero">

@@ -49,24 +49,7 @@
                 <div class="stream-body">
                     <div class="stream-view">
                         <div class="stream-thread"> 
-                            <tpl:condition test="isset" data="activities.items" value="0">
-                                <header class="section-header clearfix">
-                                    <ul class="nav nav-pills no-margin">
-                                        <li>
-                                            <div class="btn-group">
-                                                <a href="/system/media/create" class="btn btn-important">Share Something..</a>
-                                            </div>
-                                            <div class="btn-group">
-                                                <a href="/system/media/create/drop" class="btn">Upload Files</a>
-                                             </div>
-                                            <div class="btn-group">
-                                                <a href="/system/media/create/record" class="btn">Record</a>
-                                            </div>                                          
-                                        </li>
-                                    </ul>
-                                </header>
-                                <!--<tpl:import layout="forms/form" app="system" />--> 
-                            </tpl:condition>
+                            
                             <tpl:condition test="isset" data="activities.items" value="1">
                                 <div class="stream-body padding" id="timeline"> 
                                     <tpl:import layout="media/timeline" />                             

@@ -10,7 +10,7 @@
                     </ul>
                 </tpl:condition>
             </header>
-            <div class="section-footer">
+            <div class="section-menu">
                 <tpl:menu id="peoplemenu" type="nav-pills" />
             </div>
             <div class="section-body">
