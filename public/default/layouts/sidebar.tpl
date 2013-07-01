@@ -14,7 +14,7 @@
         <div class="section-timer margin-top" align="center">
             <time data-clock="timer">00:00:00</time>
         </div>
-        <div class="btn-toolbar padding-half padding-top margin-zero">
+        <div class="btn-toolbar padding padding-top margin-top-zero margin-bottom-zero">
             <div class="btn-group row-fluid">
                 <a class="btn btn-highlight span9" href="/system/media/create">Participate</a>
                 <a class="btn btn-highlighted span3" data-target="#quickstatus" data-toggle="modal"><i class="icon-plus"></i></a>
