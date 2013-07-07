@@ -1,34 +1,11 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://budkit.org/tpl">
     <div class="messages-box">
-        <div class="message-list">
-            <header class="section-header clearfix">
-                <div class="message-header pull-left"><div class="page-header"><h1 class="margin-top-zero"><tpl:element type="text" formatting="sprintf" cdata="Hi %s" data="user.user_first_name"  /></h1></div></div> 
-                <ul class="nav nav-pills no-margin pull-right">
-                    <li>
-                        <div class="btn-group">
-                            <a href="/system/notifications/list" class="btn">
-                                <i class="icon-bell-alt"></i>
-                            </a>
-                            <a href="/settings/member/account" class="btn">
-                                <i class="icon-cog"></i>
-                            </a>
-                        </div>
-
-                    </li>
-                </ul>
-            </header>
-            <div class="widget naked">
-                <div class="widget-body padding-zero">
-                    <ul class="stream">             
-                        <li class="stream-item padding">Something urgent</li>                  
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
         <div class="message-view">
             <div class="stream-thread">  
                 <header class="section-header clearfix">   
-                    <ul class="nav nav-pills pull-left no-margin">
+                    <div class="message-header pull-left"><div class="page-header"><h1 class="margin-top-zero"><tpl:element type="text" formatting="sprintf" cdata="Hi %s" data="user.user_first_name"  /></h1></div></div> 
+                    <ul class="nav nav-pills pull-right no-margin">
                         <li>
                             <div class="btn-group">
                                 <a href="/system/media/create" class="btn btn-important">Share Something..</a>

@@ -27,14 +27,24 @@
             <!-- jQuery here because if placed at bottom, in-line scripts (i.e script tags in .tpl files) won't work -->
             <script type="text/javaScript" src="/${config|design.template}/assets/js/jquery.js"></script>
             <script type="text/javaScript" src="/${config|design.template}/assets/js/budkit.js"></script>
-            <tpl:utility type="head" />
+        <tpl:utility type="head" />
         </head>
         <body>
-            <div id="wrap">
-                <div class="container-left">
-                    <tpl:menu id="dashboardmenu" type="nav-list" />
+        <tpl:import layout="navbar" />
+        <div id="wrap">  
+            <tpl:condition data="page.block.side" test="isset" value="1">
+                <div class="container-left active">                 
+                    <tpl:import layout="sidebar" />
                 </div>
-                <div class="container-box has-left">
+            </tpl:condition>
+            <tpl:condition data="page.block.aside" test="isset" value="1">
+                <div class="container-aside">
+                    <tpl:block data="page.block.aside" />
+                </div>
+            </tpl:condition>
+            <div class="container-box">       
+                <div class="container-right">
+
                     <div class="container-content">
                         <div class="container-bucket">
                             <div class="left-contain container">
@@ -57,22 +67,23 @@
                     </div>
                 </div>
             </div>
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="/${config|design.template}/assets/js/bootstrap-transition.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-alert.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-modal.js"></script>
-            <script src="/${config|design.template}/assets/js/budkit-container.js"></script>
-            <script src="/${config|design.template}/assets/js/budkit-mediagrid.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-dropdown.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-scrollspy.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-tab.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-affix.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-tooltip.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-popover.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-button.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-collapse.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-carousel.js"></script>
-            <script src="/${config|design.template}/assets/js/bootstrap-typeahead.js"></script>
+        </div>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="/${config|design.template}/assets/js/bootstrap-transition.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-alert.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-modal.js"></script>
+        <script src="/${config|design.template}/assets/js/budkit-container.js"></script>
+        <script src="/${config|design.template}/assets/js/budkit-mediagrid.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-dropdown.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-scrollspy.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-tab.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-affix.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-tooltip.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-popover.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-button.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-collapse.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-carousel.js"></script>
+        <script src="/${config|design.template}/assets/js/bootstrap-typeahead.js"></script>
         </body>
     </html>
 </tpl:layout>

@@ -1,6 +1,6 @@
 body{ position: relative; }
 #wrap{ position: absolute; top:0; left:0; bottom:0; right:0;  .clearfix(); overflow: hidden; background: #E9E9E9  }
-.navbar-inner{padding-top: 10px; .box-sizing(border-box)}
+.navbar-inner{.box-sizing(border-box)}
 .navbar-brand{ width: 195px }
 .navbar-tools{ width: 400px;}
 .navbar-time{font-size: 30px; line-height: 30px; padding-top: 5px; color: @grayLight; }
@@ -106,20 +106,20 @@ body{ position: relative; }
               border-top: none;
               position: relative;
               .box-sizing(border-box);
-              border-right: 3px solid transparent;
+              border-left: 3px solid transparent;
                 color: @grayLight;
   
               .absolute-right{ position: absolute; right: @gridGutterWidth*0.75; top: @gridGutterWidth*0.75}
                   &:hover{
                     background: #363636;
-                    border-right: 3px solid @peter-river;
+                    border-left: 3px solid @peter-river;
                   }
             }
             &.nav-header{ display: none }
             &.active{
                & > a, & > a:hover, & > a:focus{
                    background: #363636;
-                   border-right: 3px solid @belize-hole;
+                   border-left: 3px solid @belize-hole;
                 }   
             }
         }

@@ -664,7 +664,6 @@ body {
   clear: both;
 }
 .navbar-inner {
-  padding-top: 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -787,7 +786,7 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
   color: #999999;
 }
 .container-left .nav-list > li > a .absolute-right {
@@ -797,7 +796,7 @@ body {
 }
 .container-left .nav-list > li > a:hover {
   background: #363636;
-  border-right: 3px solid #3498db;
+  border-left: 3px solid #3498db;
 }
 .container-left .nav-list > li.nav-header {
   display: none;
@@ -806,7 +805,7 @@ body {
 .container-left .nav-list > li.active > a:hover,
 .container-left .nav-list > li.active > a:focus {
   background: #363636;
-  border-right: 3px solid #2980b9;
+  border-left: 3px solid #2980b9;
 }
 .container-left.active {
   display: block;
@@ -843,7 +842,7 @@ body {
 .container-menu-box {
   float: left;
   position: absolute;
-  top: 55px;
+  top: 38px;
   bottom: 0px;
   width: 75px;
   left: 0;
@@ -877,7 +876,7 @@ body {
 }
 .container-box .container-right .container-content .toggler {
   position: absolute;
-  margin-top: 0px;
+  margin-top: -8.5px;
   bottom: 5px;
   text-decoration: none;
   color: #999999;
@@ -3923,7 +3922,7 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 24px;
 }
 .navbar-inner {
-  min-height: 55px;
+  min-height: 38px;
   padding-left: 10px;
   padding-right: 10px;
   background: #2f2f2f;
@@ -3947,7 +3946,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar .brand {
   display: block;
-  padding: 15.5px 10px 15.5px;
+  padding: 7px 10px 7px;
   margin-left: 5px;
   font-size: 20px;
   font-weight: 200;
@@ -3959,8 +3958,8 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-text {
   margin-bottom: 0;
-  padding: 7.75px 14px;
-  margin-top: 3.5px;
+  padding: 3.5px 14px;
+  margin-top: -5px;
   color: #999999;
 }
 .navbar-link {
@@ -3971,14 +3970,14 @@ input[type="submit"].btn.btn-mini {
   color: #ffffff;
 }
 .navbar .divider-vertical {
-  height: 55px;
+  height: 38px;
   margin: 0 9px;
   border-left: 1px solid #2f2f2f;
   border-right: 1px solid #2f2f2f;
 }
 .navbar .btn,
 .navbar .btn-group {
-  margin-top: 12.5px;
+  margin-top: 4px;
 }
 .navbar .btn-group .btn,
 .navbar .input-prepend .btn,
@@ -4004,7 +4003,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-form select,
 .navbar-form .radio,
 .navbar-form .checkbox {
-  margin-top: 12.5px;
+  margin-top: 4px;
 }
 .navbar-form input,
 .navbar-form select,
@@ -4029,7 +4028,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-search {
   position: relative;
   float: left;
-  margin-top: 8.25px;
+  margin-top: 5.700000000000001px;
   margin-bottom: 0;
 }
 .navbar-search .add-on {
@@ -4154,8 +4153,8 @@ input[type="submit"].btn.btn-mini {
   color: #999999;
   text-decoration: none;
   cursor: pointer;
-  padding: 7.75px 14px;
-  margin: 7.75px 0;
+  padding: 3.5px 14px;
+  margin: 3.5px 0;
 }
 .navbar .nav .dropdown-toggle .caret {
   margin-top: 8px;
@@ -4165,7 +4164,7 @@ input[type="submit"].btn.btn-mini {
   background-color: transparent;
   color: #ffffff;
   text-decoration: none;
-  margin: 7.75px 0;
+  margin: 3.5px 0;
 }
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
@@ -4173,7 +4172,7 @@ input[type="submit"].btn.btn-mini {
   color: #333333;
   text-decoration: none;
   background-color: #222222;
-  margin: 7.75px 0;
+  margin: 3.5px 0;
   -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
   -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
@@ -4432,7 +4431,7 @@ input[type="submit"].btn.btn-mini {
   text-decoration: none;
   font-weight: 400;
   min-width: 250px;
-  padding: 15.5px 1px 8px;
+  padding: 7px 1px 8px;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   color: #ffffff;
 }
@@ -6359,7 +6358,6 @@ input.search-query {
   right: 0;
   bottom: 0;
   min-height: 100%;
-  max-width: 1290px;
 }
 .stream-box .stream-list {
   position: absolute;
@@ -6378,9 +6376,6 @@ input.search-query {
 }
 .stream-box .stream-list ~ .stream-view {
   margin-right: 170px;
-}
-.stream-box .stream-view {
-  max-width: 1270px;
 }
 .stream-box .stream-alerts,
 .stream-box .stream-more,
@@ -6402,7 +6397,7 @@ input.search-query {
   padding: 20px;
   display: block;
   font-size: 14px;
-  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
   min-height: 65px;
 }
 .stream li .link.unread {
@@ -6410,7 +6405,7 @@ input.search-query {
 }
 .stream li .link.open {
   background: #f8f8f8;
-  border-right: 3px solid #3498db;
+  border-left: 3px solid #3498db;
 }
 .stream li .link.has-featured-img {
   padding: 20px 20px 20px 90px;
@@ -6999,7 +6994,7 @@ video {
   position: fixed;
   background: #ffffff;
   z-index: 100000;
-  top: 55px;
+  top: 38px;
   left: 195px;
   right: 0;
   bottom: 0;
