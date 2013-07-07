@@ -34,11 +34,13 @@
             <tpl:utility type="head" />
         </head>
         <body>
-<!--            <tpl:import layout="navbar" />-->
-            <div id="wrap">            
-                <div class="container-left">                 
-                    <tpl:import layout="sidebar" />
-                </div>
+            <tpl:import layout="navbar" />
+            <div id="wrap">  
+                <tpl:condition data="page.block.side" test="isset" value="1">
+                    <div class="container-left active">                 
+                        <tpl:import layout="sidebar" />
+                    </div>
+                </tpl:condition>
                 <tpl:condition data="page.block.aside" test="isset" value="1">
                     <div class="container-aside">
                         <tpl:block data="page.block.aside" />

@@ -669,9 +669,6 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.navbar ~ #wrap {
-  top: 55px;
-}
 .navbar-brand {
   width: 195px;
 }
@@ -683,6 +680,49 @@ body {
   line-height: 30px;
   padding-top: 5px;
   color: #999999;
+}
+.navbar-vertical {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0px;
+  width: 50px;
+  background: #262626;
+}
+.navbar-vertical .nav-list {
+  padding: 5px;
+}
+.navbar-vertical .nav-list:first-child {
+  margin-bottom: 8px;
+}
+.navbar-vertical .nav-list > li .tooltip {
+  z-index: 10000000000;
+  position: fixed;
+}
+.navbar-vertical .nav-list > li.nav-header {
+  display: none;
+}
+.navbar-vertical .nav-list > li > a {
+  padding: 5px;
+  text-align: center;
+  margin: 0px 0px 5px 0px;
+}
+.navbar-vertical .nav-list > li > a:hover {
+  background: #373737;
+}
+.navbar-vertical .nav-list > li.active > a,
+.navbar-vertical .nav-list > li.active > a:hover,
+.navbar-vertical .nav-list > li.active > a:focus {
+  padding: 5px 10px 5px 5px;
+  margin-right: -5px;
+  background: #393939;
+}
+.navbar-vertical .dashboardmenu {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+.navbar-vertical ~ #wrap {
+  left: 50px;
 }
 .container-left,
 .container-aside {
@@ -733,7 +773,8 @@ body {
 }
 .container-left {
   float: left;
-  background: #2f2f2f;
+  display: none;
+  background: #393939;
   width: 195px;
   *width: 195px;
 }
@@ -767,7 +808,10 @@ body {
   background: #363636;
   border-right: 3px solid #2980b9;
 }
-.container-left ~ .container-box {
+.container-left.active {
+  display: block;
+}
+.container-left.active ~ .container-box {
   left: 195px;
 }
 .container-aside {
@@ -6434,6 +6478,15 @@ input.search-query {
   bottom: 0;
   top: 0;
 }
+.messages-box .message-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .messages-box .message-list {
   position: absolute;
   left: 0;
@@ -6447,14 +6500,8 @@ input.search-query {
 .messages-box .message-list .media-grid {
   margin: 20px 0 0 20px;
 }
-.messages-box .message-view {
-  position: absolute;
+.messages-box .message-list ~ .message-view {
   left: 401px;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 .system-alert ~ .messages-box {
   top: 43px;
@@ -8109,10 +8156,6 @@ ul.media-item-actions li a:hover .rating {
 .nav-icon:before {
   content: "\f0c8";
 }
-.icon-timeline {
-  background: #2ecc71;
-  border-color: #27ad60;
-}
 .icon-timeline:before {
   content: "\f017";
 }
@@ -8128,8 +8171,11 @@ ul.media-item-actions li a:hover .rating {
 .icon-photos:before {
   content: "\f03e";
 }
-.icon-my-documents:before {
-  content: "\f0f6";
+.icon-documents:before {
+  content: "\f0f2";
+}
+.icon-messages:before {
+  content: "\f01c";
 }
 .icon-compose,
 .icon-text-editor {
@@ -8146,6 +8192,9 @@ ul.media-item-actions li a:hover .rating {
 }
 .icon-external-drive:before {
   content: "\f0ed";
+}
+.icon-menu:before {
+  content: "\f0c9";
 }
 .icon-notifications:before {
   content: "\f069";
@@ -8165,8 +8214,8 @@ ul.media-item-actions li a:hover .rating {
 .icon-settings:before {
   content: "\f0ad";
 }
-.icon-workspaces:before {
-  content: "\f0ae";
+.icon-groups:before {
+  content: "\f0ac";
 }
 .icon-view-profile:before,
 .icon-account:before {
@@ -8179,7 +8228,7 @@ ul.media-item-actions li a:hover .rating {
   content: "\f08b";
 }
 .nav > li.active > a .nav-icon {
-  color: #333333;
+  color: #ffffff;
   background: transparent;
 }
 /*!

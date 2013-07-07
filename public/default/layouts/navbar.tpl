@@ -1,30 +1,34 @@
 <tpl:layout name="navbar" xmlns:tpl="http://budkit.org/tpl">
-    <div class="navbar" id="navbar">
-        <div class="navbar-inner padding-left-zero">
-            <div class="nav-collapse collapse" >  
-                <div class="navbar-brand pull-left">
-                    xy
-                </div>
-                <div class="navbar-tools padding-left-zero pull-left">
-                    <tpl:condition  data="user.isauthenticated" test="boolean" value="1">
-                        <ul class="nav pull-right" id="menubartabs">
-                            <li><a href="/system/notifications/list" class="margin-zero"><i class="icon-bell-alt"></i></a></li>
-                            <li><a href="/settings/member/account" class="margin-zero"><i class="icon-cog"></i></a></li>   
-                            <li><a href="/system/authenticate/logout"  class="margin-zero" title="Log-Out"><i class="icon-off"></i></a></li>                                                                              
-                        </ul>
-                    </tpl:condition>
-                    <time data-clock="timer" class="navbar-time pull-left">00:00:00</time>
-                </div>
-                <div class="navbar-searchbox pull-left padding-left"><tpl:import layout="forms/search" app="system" /> </div>
-                <tpl:condition  data="user.isauthenticated" test="boolean" value="1">
-                    <div class="btn-toolbar margin-zero pull-right" align="center">
-                        <div class="btn-group margin-zero">
-                            <a class="btn btn-highlight" data-target="#quickstatus" data-toggle="modal"><i class="icon-plus"></i></a>
-                            <a class="btn btn-highlighted" href="/system/media/create">Participate</a>
-                        </div>
-                    </div>
-                </tpl:condition>
-            </div><!--/.nav-collapse -->
+    <div class="navbar-vertical" align="center">
+        <tpl:condition data="page.block.side" test="isset" value="1">
+            <ul icons="true" label="false" class="nav nav-list margin-top-half">
+                <li><a data-toggle="container-left"><i class="nav-icon icon-menu"></i></a></li>
+            </ul>
+        </tpl:condition>
+        <tpl:condition data="page.block.side" test="isset" value="0">
+            <ul icons="true" label="false" class="nav nav-list margin-top-half">
+                <li><a data-target="#quickstatus" data-toggle="modal"><i class="nav-icon icon-plus"></i></a></li>
+            </ul>
+        </tpl:condition>
+        <tpl:menu id="dashboardmenu" type="nav-list" icons="true" label="false" />
+        <ul icons="true" label="false" class="nav nav-list">
+            <li><a href="/system/notifications/list" data-toggle="tooltip" data-placement="right" title="Notifications" data-original-title="Notifications"><i class="nav-icon icon-bell-alt"></i></a></li>
+            <li><a href="/settings/member/account" data-toggle="tooltip" data-placement="right" title="Settings" data-original-title="Settings"><i class="nav-icon icon-cog"></i></a></li>
+            <tpl:condition data="config|server.error-console" test="boolean" value="1">
+                <li><a data-target="#systemconsole" data-toggle="modal"><i class="nav-icon icon-fire"></i></a></li>
+            </tpl:condition>
+            <li><a href="/system/authenticate/logout" data-toggle="tooltip" data-placement="right" title="Logout" data-original-title="Log-Out"><i class="nav-icon icon-off"></i></a></li>
+        </ul>
+        <div id="quickstatus" class="modal hide fade" tabindex="-1" role="dialog">
+            <div class="modal-body">
+                <tpl:import layout="forms/status" app="system" />
+            </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).on('click.container.data-api', '[data-toggle="container-left"]', function(e) {
+        e.preventDefault();
+        $('.container-left').toggleClass('active');
+        });
+    </script>
 </tpl:layout>

@@ -4,9 +4,6 @@
             <tpl:condition data="gallery.hideheader" test="boolean" value="0">
                 <tpl:import layout="media/gallery/title" />
             </tpl:condition>
-            <div class="section-menu">
-                <tpl:menu id="mediamenu" type="nav-pills" />
-            </div>
             <div class="section-body">
                 <tpl:condition data="gallery" test="isset" value="1">
                     <tpl:import layout="media/gallery/widget" />

@@ -63,7 +63,7 @@ final class Appointments extends \Platform\View{
         //$rightaside     = $this->output->layout( "cpanel"  );
         
         //$this->output->addMenuGroupToPosition("side", "dashboardmenu");
-        $this->output->addToPosition("side", $sidebar);
+        //$this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );
         

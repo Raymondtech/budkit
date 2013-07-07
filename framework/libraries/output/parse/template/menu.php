@@ -69,6 +69,7 @@ class Menu extends Parse\Template {
         $menuPosition = (isset($tag['POSITION'])) ? trim($tag['POSITION']) : "";
         $menuDepth = (isset($tag['LEVEL'])) ? trim($tag['LEVEL']) : 2;
         $menuIcons = (isset($tag['ICONS'])) ? true : false;
+        $menuLabel =  (isset($tag['LABEL'])) ? trim(strtolower($tag['LABEL']) ) : "";
 
         //$database = Library\Database::getInstance();
         $uniqueId = $tag['ID'];
@@ -93,7 +94,7 @@ class Menu extends Parse\Template {
         if (empty($menuItems))
             return null;
 
-        $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuPosition, true, $menuIcons);
+        $tag['CHILDREN'] = static::element((array) $menuItems, $menuType, $menuDepth, $menuPosition, true, $menuIcons, $menuLabel);
 
         //print_R($tag);
         //Always return the modified element
@@ -106,7 +107,7 @@ class Menu extends Parse\Template {
      * @param type $menuItems
      * @return type 
      */
-    public static function element($menuItems, $menuType = "nav", $menuDepth = 2, $menuPosition = '', $menuLevelParent = true, $menuIcons = true) {
+    public static function element($menuItems, $menuType = "nav", $menuDepth = 2, $menuPosition = '', $menuLevelParent = true, $menuIcons = true, $menuLabel="") {
 
         $li = array();
         $parent = 0;
@@ -167,6 +168,11 @@ class Menu extends Parse\Template {
                     array("ELEMENT" => "span", "CDATA" => $item['menu_title'])
                 )
             );
+
+            if((strtolower($menuLabel) === "false")):    
+                $anchor['CHILDREN'] = array();
+            endif;
+            
             if ($menuIcons) {
                 //If we have a menu count
                 $icons =  array("ELEMENT" => "i", "CLASS" => "nav-icon icon-{$class}");
@@ -190,7 +196,7 @@ class Menu extends Parse\Template {
                 $link['CLASS'] .= ' nav-header';
                 $link['CDATA'] = $item['menu_title'];
                 unset($link['CHILDREN']);
-                $children = static::element((array) $item['children'], $menuType, $menuDepth, $menuPosition, false, $menuIcons);
+                $children = static::element((array) $item['children'], $menuType, $menuDepth, $menuPosition, false, $menuIcons, $menuLabel);
                 //if this menu has no children, remove it
                 if (!empty($children)):
                     $li[] = $link;

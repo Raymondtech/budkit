@@ -69,7 +69,6 @@
 }
 input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 
-
 /****MESSAGES****/
 .stream-box{
     position: relative;
@@ -140,11 +139,12 @@ input.search-query { width: 160px; .border-radius(0); padding: 4px 5px; }
 }
 .messages-box{
     position:absolute; left:0; right:0; bottom:0; top:0;
+    .message-view{ position:absolute; left: 0;  top:0; bottom:0; right:0; overflow-y: auto; overflow-x: hidden;}    
     .message-list{ 
         position:absolute; left:0; width: 400px; top:0; bottom:0; overflow:hidden; border-right:1px solid #e5e5e5; background: #fdfdfd; 
         .media-grid{ margin: @gridGutterWidth 0 0 @gridGutterWidth; }
+        &~.message-view{left: 401px;}
     }
-    .message-view{ position:absolute; left: 401px;  top:0; bottom:0; right:0; overflow-y: auto; overflow-x: hidden;}
 }
 
 .system-alert{

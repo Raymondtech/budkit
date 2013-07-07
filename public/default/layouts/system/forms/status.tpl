@@ -10,12 +10,12 @@
                 </textarea>
             </div> 
             <div class="status-bucket margin-top-half" data-src="${config|general.path}system/media/attachments/"></div>
-            <div class="btn-toolbar margin-bottom-zero"> 
+            <div class="btn-toolbar margin-bottom-zero clearfix"> 
                 <div class="btn-group pull-right">
                     <button type="submit" class="btn" href="#">Publish</button>  
                     <tpl:import layout="privacylist" />
                 </div>   
-                <div class="btn-group no-margin">
+                <div class="btn-group pull-left no-margin">
                     <input type="file" name="mediaobjects[]" multiple="" data-target="budkit-uploader" data-display=".status-bucket" data-label="Upload Files" autoload="" />
                     <!--                            <a class="btn">Chose from existing</a>-->
                 </div>

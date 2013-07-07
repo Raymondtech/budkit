@@ -58,8 +58,8 @@ final class Network extends \Platform\View{
         $sidebar = null;
         //$rightaside     = $this->output->layout( "cpanel"  );
         
-        //$this->output->addMenuGroupToPosition("side", "peoplemenu"); 
-        $this->output->addToPosition("side", $sidebar);
+        $this->output->addMenuGroupToPosition("side", "peoplemenu", "nav-list", array(), false, false); 
+        //$this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );      
     }

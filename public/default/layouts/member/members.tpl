@@ -10,9 +10,6 @@
                     </ul>
                 </tpl:condition>
             </header>
-            <div class="section-menu">
-                <tpl:menu id="peoplemenu" type="nav-pills" />
-            </div>
             <div class="section-body">
                 <tpl:condition data="gallery" test="isset" value="1">
                     <ul class="stream media-grid media-gallery compensate-margins">

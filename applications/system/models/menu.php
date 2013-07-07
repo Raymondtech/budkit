@@ -46,10 +46,10 @@ class Menu extends \Platform\Model {
             case "dashboardmenu":
                 //Counts
                 $attachments = Attachments::getInstance();
-                $mycount = $attachments->setListLookUpConditions("attachment_owner", array($username))->getObjectsListCount("attachment");
+                //$mycount = $attachments->setListLookUpConditions("attachment_owner", array($username))->getObjectsListCount("attachment");
 
-                if (empty($mycount))
-                    $mycount = NULL;
+                //if (empty($mycount))
+               $mycount = NULL;
 
                 //Display bookmarks
                 $bookmarks = array(
@@ -57,7 +57,7 @@ class Menu extends \Platform\Model {
                     "children" => array(
                         array("menu_title" => "Timeline", "menu_url" => "/system/media/timeline"),
                         array("menu_title" => "Messages", "menu_url" => "/system/messages/inbox"),
-                        array("menu_title" => "Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount),    
+                        array("menu_title" => "Documents", "menu_url" => "/system/media/attachments/gallery", "menu_count" => $mycount ),  // 
                         array("menu_title" => "People", "menu_url" => "/member/network/directory"),
                     )
                 );

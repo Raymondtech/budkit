@@ -20,21 +20,7 @@
                 <a class="btn btn-highlighted span3" data-target="#quickstatus" data-toggle="modal"><i class="icon-plus"></i></a>
             </div>
         </div>
-        <tpl:menu id="dashboardmenu" type="nav-list" />
         <tpl:block data="page.block.side" />
-        <div id="quickstatus" class="modal hide fade" tabindex="-1" role="dialog">
-            <div class="modal-body">
-                <tpl:import layout="forms/status" app="system" />
-            </div>
-        </div>
-        <div class="section-tools">
-            <a href="/system/notifications/list" class="btn btn-inverse"><i class="icon-bell-alt"></i></a>
-            <a href="/settings/member/account" class="btn btn-inverse"><i class="icon-cog"></i> </a>
-            <tpl:condition data="config|server.error-console" test="boolean" value="1">
-                <a class="btn btn-inverse" data-target="#systemconsole" data-toggle="modal"><i class="icon-fire"></i></a>
-            </tpl:condition>
-            <a href="/system/authenticate/logout" class="btn btn-inverse" title="Log-Out"><i class="icon-off"></i></a>
-        </div>
     </tpl:condition>
 </tpl:layout>
 

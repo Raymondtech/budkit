@@ -1,7 +1,6 @@
 body{ position: relative; }
 #wrap{ position: absolute; top:0; left:0; bottom:0; right:0;  .clearfix(); overflow: hidden; background: #E9E9E9  }
 .navbar-inner{padding-top: 10px; .box-sizing(border-box)}
-.navbar~#wrap{ top: @navbarHeight }
 .navbar-brand{ width: 195px }
 .navbar-tools{ width: 400px;}
 .navbar-time{font-size: 30px; line-height: 30px; padding-top: 5px; color: @grayLight; }
@@ -11,6 +10,41 @@ body{ position: relative; }
   @_containerLeftWidth : @containerLeftWidth;
   @containerAsideWidth : (@containerColumnWidth * 1) + (@containerGutterWidth * (1 - 1));
   @_containerAsideWidth : @containerAsideWidth ;
+
+.navbar-vertical{ 
+    position: absolute; left: 0; top: 0; bottom: 0px; width: @navbarVerticalWidth; 
+    background: mix(@navbarBackground, black, 80%);
+    .nav-list{ 
+        padding: 5px;
+        &:first-child{margin-bottom: 8px;  }
+    }
+    .nav-list > li{
+        .tooltip{z-index:10000000000; position: fixed}
+     }
+    .nav-list > li.nav-header{ display: none  }
+    .nav-list > li {
+        & > a {
+            padding: 5px;
+            //text-indent: -9999em;
+            //border-bottom: 1px solid rgb(44, 44, 44);
+            //border-top: 1px solid rgb(56, 54, 54);
+            //color: lighten(@gray, 10%);
+            text-align: center;
+            margin: 0px 0px 5px 0px;
+            &:hover{
+              background: darken(#e9e9e9, 70%);
+            }
+        }
+        &.active{
+            & > a, & > a:hover, & > a:focus{ padding: 5px 10px 5px 5px; margin-right: -5px; background: mix(@navbarBackground, white, 95%);}   
+         }
+    }
+    .dashboardmenu{border-top: 1px solid; border-bottom: 1px solid}
+    &~#wrap{ left: @navbarVerticalWidth }
+}
+
+
+
 .container-left, .container-aside{
     overflow-y: auto;
     //overflow-x: hidden;
@@ -60,7 +94,8 @@ body{ position: relative; }
 //Specifically for nav-lists
 .container-left{
     float: left;
-    background: #2f2f2f;
+    display: none;
+    background: mix(@navbarBackground, white, 95%);
     width: @leftBarWidth;
     *width: @leftBarWidth;
        .nav-list > li {
@@ -88,8 +123,11 @@ body{ position: relative; }
                 }   
             }
         }
-    &~.container-box{
-       left: @leftBarWidth;
+    &.active{
+        display: block;
+        &~.container-box{
+           left: @leftBarWidth;
+        }
     }
  }
 .container-aside{
