@@ -43,8 +43,8 @@ Class Media extends \Platform\Controller {
 
     public function edit($form = NULL) {
         
-        $this->output->setPageTitle(_("Add New Media"));        
-        $this->view = $this->load->view('media');
+        $this->output->setPageTitle(_("Add New.."));        
+        $this->view = $this->load->view('index');
         
 
 
