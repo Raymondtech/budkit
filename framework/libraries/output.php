@@ -25,8 +25,8 @@
 
 namespace Library;
 
+use Library\Router;
 use Library\Output;
-use Library\Output\Format;
 
 /**
  * What is the purpose of this class, in one sentence?
