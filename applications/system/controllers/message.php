@@ -27,7 +27,7 @@ namespace Application\System\Controllers;
  * @since     Jan 14, 2012 4:54:37 PM
  * @author    Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
  */
-final class Message extends \Platform\Controller {
+class Message extends \Platform\Controller {
 
     /**
      * Messages index action

@@ -13,8 +13,8 @@
  * the GPL License and are unable to obtain it through the web, please
  * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
  */
-namespace Application\System\Views;
 
+namespace Application\System\Views;
 
 /**
  * Index view
@@ -30,7 +30,6 @@ namespace Application\System\Views;
  * 
  */
 class Message extends \Platform\View {
-    
 
     /**
      * The default system view
@@ -46,10 +45,8 @@ class Message extends \Platform\View {
         //$this->output->setPageTitle("Welcome to diddat");
         //to add some js file
         //$this->output->addScript("some.js");
-
         //to add some js file
         //$this->output->addStyle("some.css");
-
         //to output just the layout use
         //$this->output->raw();
         //to output just the xml use
@@ -60,9 +57,16 @@ class Message extends \Platform\View {
         //$sidebar      = $this->output->layout( "index_sidebar" );
         $dashboard = $this->output->layout("dashboard");
         $sidebar = null;
-        //$rightaside     = $this->output->layout( "cpanel"  );
-        
-        //$this->output->addMenuGroupToPosition("aside", "messagesmenu", "nav-list", array(), false, false);
+        //Adds a button to the sidebar
+        $this->output->set("action", array(
+            "button" => array(
+                "link" => "/system/message/create",
+                "text" => "Compose",
+                "class" => "btn-important span12"
+            )
+        ));
+
+        $this->output->addMenuGroupToPosition("side", "messagesmenu", "nav-list", array(), false, false);
         //$this->output->addToPosition("side", $sidebar);
         $this->output->addToPosition("body", $dashboard);
         //$this->output->addToPosition("aside",   $rightaside );

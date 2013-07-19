@@ -37,15 +37,15 @@ class Menu extends \Platform\Model {
      */
     public static function media(&$menuId, &$menuItems) {
 
-        $user = \Platform\User::getInstance();
-        $username = $user->get("user_name_id");
+        //$user = \Platform\User::getInstance();
+        //$username = $user->get("user_name_id");
 
         //Add the default upload links
         switch ($menuId):
 
             case "dashboardmenu":
                 //Counts
-                $attachments = Attachments::getInstance();
+                //$attachments = Attachments::getInstance();
                 //$mycount = $attachments->setListLookUpConditions("attachment_owner", array($username))->getObjectsListCount("attachment");
 
                 //if (empty($mycount))
@@ -66,7 +66,18 @@ class Menu extends \Platform\Model {
             case "messagesmenu":
                 $startHere = & reset($menuItems);
                 //Add Timeline;
-                array_unshift($startHere['children'], array("menu_title" => "Compose", "menu_url" => "/system/message/create"));
+                array_unshift($startHere['children'], array("menu_title" => "Inbox", "menu_url" => "/system/messages/inbox" , "menu_count" => 2));
+                //Display bookmarks
+                $bookmarks = array(
+                    "menu_title" => "Bookmarks",
+                    "children" => array(
+                        array("menu_title" => "Forums", "menu_url" => "/system/messages/forums"),
+                        array("menu_title" => "Sent", "menu_url" => "/system/messages/sent"),  // 
+                        array("menu_title" => "Trash", "menu_url" => "/system/messages/trash"),
+                    )
+                );
+                $menuItems[] = $bookmarks;
+                
                 array_shift($menuItems);
                 array_unshift($menuItems, $startHere);
                 break;
