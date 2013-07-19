@@ -9,11 +9,6 @@
                             <a href="/system/message/refresh" class="btn"><i class="icon-rotate-left"/></a>
                         </div>
                     </li>
-                    <li>
-                        <div class="btn-group">
-                            <a href="/system/message/create" class="btn btn-important   ">Compose</a>
-                        </div>
-                    </li>
                 </ul>
             </header>
             <div class="section-body">
